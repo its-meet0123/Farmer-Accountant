@@ -49,8 +49,8 @@ export const AuthProvider = ({ children }) => {
 
   const loginComplete = (userData) =>
     setAuthState({
-      isLoggedIn: true,
-      user: userData,
+      isLoggedIn: userData.isLoggedIn,
+      user: userData.user,
     });
 
   const logout = async () => {

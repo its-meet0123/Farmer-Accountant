@@ -12,11 +12,28 @@ async function handleUserSignUp(req, res) {
   const { userName, userId, password } = req.body;
   const existingUser = await User.findOne({ userId, password });
   if (existingUser) {
-    return res.json({
-      status: "success",
-      message: "User already exists",
-      isSignedUp: true,
-    });
+    const token = jwt.sign(
+      { id: existingUser.userId, password: existingUser.password },
+      JWT_SECRET,
+      {
+        expiresIn: "1h",
+      },
+    );
+    return res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      })
+      .json({
+        status: "success",
+        message: "User already exists",
+        isSignedUp: true,
+        isLoggedIn: true,
+        user: existingUser,
+      });
   }
   await User.create({
     userName,

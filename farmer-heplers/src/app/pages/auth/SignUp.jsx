@@ -14,7 +14,7 @@ const validateMessages = {
 
 const SignUp = () => {
   const [form] = Form.useForm();
-  const { signupComplete } = useAuth();
+  const { signupComplete, loginComplete } = useAuth();
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -33,15 +33,21 @@ const SignUp = () => {
       showSuccess(text);
     }
     const res = await postUserDataForSignUp(values);
-    console.log(res.data);
+    const data = await res.data;
+    console.log(data);
     if (!res) {
       const text = "Data not fetching";
       showSuccess(text);
     }
-    if (res.data.status === "success") {
-      signupComplete();
-      navigate("/login");
-      message.success(res.data.message);
+    if (data.status === "success") {
+      if (data.isLoggedIn === true) {
+        loginComplete(data);
+        message.success(data.message);
+      } else {
+        signupComplete();
+        navigate("/login");
+        message.success(data.message);
+      }
     }
   };
 

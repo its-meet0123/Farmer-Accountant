@@ -44,7 +44,7 @@ const LogIn = () => {
       showError(text);
     }
     if (data.status === "success") {
-      loginComplete(data.user);
+      loginComplete(data);
       message.success(data.message);
     } else {
       showError(data.message);
