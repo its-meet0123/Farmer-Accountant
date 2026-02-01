@@ -15,7 +15,7 @@ const PORT = process.env.PORT;
 app.use(cookieParser());
 app.use(express.json());
 
-connectMongoDB(`mongodb://${process.env.DATA_BASE_URL}`).then(() =>
+connectMongoDB(`mongodb+srv://${process.env.DATA_BASE_URL}`).then(() =>
   console.log("Connected to MongoDB"),
 );
 
