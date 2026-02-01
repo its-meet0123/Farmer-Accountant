@@ -1,5 +1,5 @@
-const express = require("express");
 require("dotenv").config();
+const express = require("express");
 const { connectMongoDB } = require("./connection/connect");
 const integratedRouter = require("./routes/integrated");
 const intShopeRouter = require("./routes/integratedData");
