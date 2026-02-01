@@ -17,9 +17,12 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get("/api/user/status", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://farmer-accoutant-backend.onrender.com/user/status",
+          {
+            withCredentials: true,
+          },
+        );
         const data = await res.data;
         console.log(data);
         if (data.isLoggedIn) {
