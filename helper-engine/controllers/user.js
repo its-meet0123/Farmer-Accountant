@@ -1,4 +1,3 @@
-require("dotenv").config();
 const User = require("../models/user");
 const EntData = require("../models/integrated");
 const IndData = require("../models/integratedData");
@@ -6,6 +5,7 @@ const EndDate = require("../models/endDate");
 const WorkerData = require("../models/worker");
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
+require("dotenv").config();
 
 const JWT_SECRET = process.env.SECRET_KEY;
 

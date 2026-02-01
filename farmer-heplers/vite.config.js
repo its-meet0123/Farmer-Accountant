@@ -9,6 +9,7 @@ export default defineConfig({
       "/api": {
         target: "http://localhost:4001", // Aapka backend port
         changeOrigin: true,
+        secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
