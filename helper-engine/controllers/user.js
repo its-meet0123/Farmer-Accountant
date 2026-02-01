@@ -1,3 +1,4 @@
+require("dotenv").config();
 const User = require("../models/user");
 const EntData = require("../models/integrated");
 const IndData = require("../models/integratedData");
@@ -6,7 +7,7 @@ const WorkerData = require("../models/worker");
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 
-const JWT_SECRET = "#96%meet$kaur@2026";
+const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleUserSignUp(req, res) {
   const { userName, userId, password } = req.body;

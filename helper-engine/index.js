@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const { connectMongoDB } = require("./connection/connect");
 const integratedRouter = require("./routes/integrated");
 const intShopeRouter = require("./routes/integratedData");
@@ -9,11 +10,12 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const PORT = 4001;
+const PORT = process.env.PORT || 4000;
+
 app.use(cookieParser());
 app.use(express.json());
 
-connectMongoDB("mongodb://127.0.0.1:27017/farmer-account").then(() =>
+connectMongoDB(`mongodb://${process.env.DATA_BASE_URL}`).then(() =>
   console.log("Connected to MongoDB"),
 );
 

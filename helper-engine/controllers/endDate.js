@@ -1,6 +1,7 @@
+require("dotenv").config();
 const InterestDate = require("../models/endDate");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "#96%meet$kaur@2026";
+const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleGetInterestDate(req, res) {
   const token = req.cookies.token;

@@ -1,6 +1,7 @@
+require("dotenv").config();
 const entData = require("../models/integrated");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "#96%meet$kaur@2026";
+const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleGetAllEntData(req, res) {
   const token = req.cookies.token;

@@ -1,8 +1,9 @@
+require("dotenv").config();
 const WorkerData = require("../models/worker");
 const InterestDate = require("../models/endDate");
 const jwt = require("jsonwebtoken");
 const { calculateAutoInterst } = require("../components/calculator");
-const JWT_SECRET = "#96%meet$kaur@2026";
+const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleAddWorker(req, res) {
   try {
