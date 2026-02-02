@@ -51,11 +51,11 @@ const AppLayout = ({ children }) => {
         {authState.isLoggedIn && (
           <Profile userName={authState.user.userName} screen={screen} />
         )}
-
         <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={pathname}
+          defaultOpenKeys={"/home"}
           items={Menus}
           style={{ flex: 1, minWidth: 0 }}
           onClick={({ key }) => {
