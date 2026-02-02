@@ -11,7 +11,7 @@ const { useBreakpoint } = Grid;
 const Menus = [...primeryMenu, ...moreMenu];
 
 const AppLayout = ({ children }) => {
-  const { authState, logout } = useAuth();
+  const { authState, logout, goToSignUP } = useAuth();
   const location = useLocation();
   const screen = useBreakpoint();
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ const AppLayout = ({ children }) => {
         openType={openType}
         setOpenType={setOpenType}
         user={authState.user}
-        logout={logout}
+        goToSignUP={goToSignUP}
       />
     </Layout>
   );

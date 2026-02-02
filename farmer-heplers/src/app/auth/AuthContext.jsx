@@ -91,6 +91,7 @@ export const AuthProvider = ({ children }) => {
         loginComplete,
         logout,
         setIsSignedUp,
+        goToSignUP,
       }}>
       {children}
     </AuthContext.Provider>
