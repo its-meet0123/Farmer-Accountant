@@ -14,7 +14,7 @@ const validateMessages = {
 
 const SignUp = () => {
   const [form] = Form.useForm();
-  const { signupComplete, loginComplete } = useAuth();
+  const { signupComplete } = useAuth();
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -40,15 +40,10 @@ const SignUp = () => {
       showSuccess(text);
     }
     if (data.status === "success") {
-      if (data.isLoggedIn === true) {
-        signupComplete();
-        loginComplete(data);
-        message.success(data.message);
-      } else {
-        signupComplete();
-        navigate("/login");
-        message.success(data.message);
-      }
+      message.success(data.message);
+      signupComplete();
+      navigate("/login");
+      message.success(data.message);
     }
   };
 
@@ -103,6 +98,7 @@ const SignUp = () => {
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
+            or <a onClick={() => navigate("/login")}>Log In</a>
           </Form.Item>
         </Form>
       </Card>
