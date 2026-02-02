@@ -10,7 +10,6 @@ const Profile = ({ userName, screen }) => {
         style={{
           color: "#222222",
           border: "5px ",
-          minWidth: 0,
           height: "40px",
           alignItems: "center",
           margin: "20px 10px 20px 0px",
