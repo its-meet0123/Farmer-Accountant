@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Card, Checkbox, Flex, Form, Input, message } from "antd";
+import { Button, Card, Flex, Form, Input, message } from "antd";
 import { postUserDataForLoggedIn } from "../../service/auth";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -11,13 +11,6 @@ const LogIn = () => {
   const navigate = useNavigate();
   const [openType, setOpenType] = useState(null);
 
-  const showSuccess = (text) => {
-    messageApi.open({
-      type: "success",
-      content: text,
-      duration: 3,
-    });
-  };
   const showError = (text) => {
     messageApi.open({
       type: "error",
@@ -83,9 +76,6 @@ const LogIn = () => {
           </Form.Item>
           <Form.Item>
             <Flex justify="space-between" align="center">
-              {/* <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item> */}
               <a onClick={() => setPassword()}>Forgot password</a>
             </Flex>
           </Form.Item>

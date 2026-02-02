@@ -29,7 +29,6 @@ const plainOptions = [
 ];
 
 const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
-  const { token } = theme.useToken();
   const { authState } = useAuth();
   const [workerInfoForm] = Form.useForm();
   const [transactionForm] = Form.useForm();

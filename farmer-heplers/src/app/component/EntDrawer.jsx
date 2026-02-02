@@ -16,10 +16,9 @@ import {
   message,
   Row,
   Space,
-  Spin,
 } from "antd";
 import { useEffect, useState } from "react";
-import { postEntData, updateEntData } from "../service/Ent";
+import { postEntData, updateEntData } from "../service/ent";
 import { postIntShopeInitailData, UpdateIndDataById } from "../service/ind";
 import dayjs from "dayjs";
 const { useBreakpoint } = Grid;
@@ -88,9 +87,7 @@ const EntDrawer = ({
           shopeAccount: indData[0]?.shopeAccount,
         };
         const Id = indData[0]?._id;
-        console.log(Id, indDatas);
         const indRes = await UpdateIndDataById(Id, indDatas);
-        console.log(indRes);
         if (entRes.status === 200 || indRes.status === 200) {
           const text = "Industry data update successfully";
           showSuccess(text);
@@ -128,7 +125,6 @@ const EntDrawer = ({
           };
           return shopeDataObj;
         });
-        console.log(shopeDataArray);
         const indRes = await postIntShopeInitailData(shopeDataArray);
         if (entRes.status === 201 && indRes.status === 201) {
           const text = `${allValues.nameInd} Created Successfully.`;

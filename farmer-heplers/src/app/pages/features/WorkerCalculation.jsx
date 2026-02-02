@@ -39,7 +39,6 @@ const WorkerCalculation = () => {
   const [fetch, setFetch] = useState();
   const today = dayjs();
   const [modalOpen, setModalOpen] = useState(false);
-  console.log(state);
 
   const setDate = async () => {
     if (id == null || id == "" || id == undefined) {
@@ -88,7 +87,6 @@ const WorkerCalculation = () => {
         if (state) {
           const res = await getWorkerTransaction(state.id);
           const data = await res.data.data;
-          console.log(data);
           setWorker(data);
         }
       } catch (err) {
@@ -103,11 +101,9 @@ const WorkerCalculation = () => {
       try {
         if (fetch != "del") {
           const dateRes = await getEndDate();
-          console.log(dateRes);
           const data = await dateRes.data.data;
           const workerEndDate =
             data.filter((date) => date.dateType === "worker") || [];
-          console.log(workerEndDate);
           setEndDate(workerEndDate);
           setId(workerEndDate[0]._id);
         }
@@ -115,7 +111,7 @@ const WorkerCalculation = () => {
           endDate: endDate.length > 0 ? dayjs(endDate[0].endDate) : today,
         });
       } catch (err) {
-        console.log(err, "date not fetching in worker");
+        message.error(err.message);
         setFetch("del");
       }
     }

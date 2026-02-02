@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Button, Flex, Form, Input, message, Modal, Space } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
+import { Button, Flex, Form, Input, message, Modal } from "antd";
+
 import {
   changeUserPassword,
   deleteUserAccount,
@@ -33,7 +33,7 @@ const UserActionModel = ({ openType, setOpenType, user, logout }) => {
 
   const setUser = async () => {
     const userId = { id: passwordForm.getFieldValue("userId") };
-    console.log(userId);
+
     if (userId.id) {
       const res = await getUserData(userId);
 
@@ -51,7 +51,6 @@ const UserActionModel = ({ openType, setOpenType, user, logout }) => {
   const setPassword = async () => {
     const userPassword = passwordForm.getFieldValue("password");
     const length = userPassword[0].again.length;
-    console.log(userPassword, length);
 
     if (length >= 6 && userPassword[0].once === userPassword[0].again) {
       const user = {
@@ -84,9 +83,9 @@ const UserActionModel = ({ openType, setOpenType, user, logout }) => {
         userId: formValues.userId,
         password: formValues.password,
       };
-      console.log(user);
+
       const res = await deleteUserAccount(user);
-      console.log(res);
+
       if (res.status === 200) {
         message.warning(res.data.message);
         setOpenType(null);

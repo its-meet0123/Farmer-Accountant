@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
   const data = shope.shopeAccount ? shope.shopeAccount : [];
-  console.log(shope);
+
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
   let totalOfReturnLoanAmount = 0;
@@ -218,7 +218,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
 };
 const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
   const data = worker.account ? worker.account : [];
-  console.log(worker);
+
   let totalOfAmount = 0;
   let totalOfAmountInterest = 0;
   let totalOfReturnAmount = 0;

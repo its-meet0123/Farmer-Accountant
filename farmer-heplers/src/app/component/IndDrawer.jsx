@@ -11,17 +11,10 @@ import {
   message,
   Row,
   Space,
-  Spin,
 } from "antd";
-import { useEffect, useState } from "react";
-import { postEntData, updateEntData } from "../service/Ent";
-import {
-  postIntShopeInitailData,
-  pushIndShopeAccountById,
-  updateIndShopeAccount,
-} from "../service/ind";
+import { useState } from "react";
+import { pushIndShopeAccountById, updateIndShopeAccount } from "../service/ind";
 import dayjs from "dayjs";
-import { useWatch } from "antd/es/form/Form";
 
 const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
   const [addForm] = Form.useForm();

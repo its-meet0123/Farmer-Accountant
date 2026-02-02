@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Form, Input, InputNumber, message } from "antd";
+import { Button, Card, Form, Input, message } from "antd";
 import { postUserDataForSignUp } from "../../service/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
@@ -34,7 +34,7 @@ const SignUp = () => {
     }
     const res = await postUserDataForSignUp(values);
     const data = await res.data;
-    console.log(data);
+
     if (!res) {
       const text = "Data not fetching";
       showSuccess(text);

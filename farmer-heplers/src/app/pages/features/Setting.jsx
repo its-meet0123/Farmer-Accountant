@@ -1,9 +1,5 @@
-import {
-  LogoutOutlined,
-  SettingOutlined,
-  UserDeleteOutlined,
-} from "@ant-design/icons";
-import { Dropdown, Flex, message } from "antd";
+import { LogoutOutlined, UserDeleteOutlined } from "@ant-design/icons";
+import { Dropdown, message } from "antd";
 import { useAuth } from "../../auth/AuthContext";
 import { useState } from "react";
 import UserActionModel from "../../component/UserIdActionModel";

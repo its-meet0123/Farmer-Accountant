@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { userLoggedOut } from "../service/auth";
+import { Alert, Spin } from "antd";
 
 const AuthContext = createContext();
 
@@ -68,7 +69,18 @@ export const AuthProvider = ({ children }) => {
     setIsSignedUp(false);
   };
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <>
+        <Spin tip="Loading...">
+          <Alert
+            title="Wait for loanding"
+            description="Hang tight! We're loading your data."
+            type="info"
+          />
+        </Spin>
+      </>
+    );
 
   return (
     <AuthContext.Provider

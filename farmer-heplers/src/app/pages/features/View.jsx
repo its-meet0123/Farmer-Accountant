@@ -1,10 +1,6 @@
 import { Button, Card, Flex, Form, message, Popconfirm, Table } from "antd";
 import { useEffect, useState } from "react";
-import {
-  deleteIndShopeAccountData,
-  getAllIndShopes,
-  getIndShopeAccountById,
-} from "../../service/ind";
+import { deleteIndShopeAccountData, getAllIndShopes } from "../../service/ind";
 import {
   DeleteOutlined,
   EditOutlined,
@@ -30,7 +26,6 @@ const ViewPage = () => {
     navigate("/view/calc", {
       state: { id: account._id },
     });
-    console.log(account._id);
   };
 
   const showSuccess = (text) => {
@@ -126,7 +121,7 @@ const ViewPage = () => {
         const data = await res.data.data;
         setAllInd(data);
       } catch {
-        console.error("All Ind Shopes data not fecthing");
+        message.error("All Ind Shopes data not fecthing");
       }
 
       setFetch("");
@@ -145,9 +140,6 @@ const ViewPage = () => {
       dataIndex: "serialNo",
       width: 100,
       key: "sno",
-      // render: (text, record) => {
-      //   return <a onClick={() => calcView(record)}>{text}</a>;
-      // },
     },
     {
       title: "Ind. Name",

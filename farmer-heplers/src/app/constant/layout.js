@@ -1,5 +1,3 @@
-import Setting from "../pages/features/Setting";
-
 function getItem(label, key, children, icon) {
   return {
     label,

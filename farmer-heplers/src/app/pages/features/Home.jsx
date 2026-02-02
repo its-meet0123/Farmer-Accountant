@@ -1,10 +1,5 @@
 import { Button, Card, Flex, Form, message, Popconfirm, Table } from "antd";
 import { useEffect, useMemo, useState } from "react";
-import {
-  deleteEntDataById,
-  getAllEntData,
-  getEntDataById,
-} from "../../service/Ent";
 import { SHOPS_COLUMNS } from "../../constant/Extracolumns";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import EntDrawer from "../../component/EntDrawer";
@@ -12,6 +7,11 @@ import { deleteIndDataByIds, getAllIndShopes } from "../../service/ind";
 import dayjs from "dayjs";
 import AlertText from "../../component/Text";
 import { useAuth } from "../../auth/AuthContext";
+import {
+  deleteEntDataById,
+  getAllEntData,
+  getEntDataById,
+} from "../../service/ent";
 
 const HomePage = () => {
   const [form] = Form.useForm();
@@ -86,13 +86,9 @@ const HomePage = () => {
     async function getData() {
       try {
         const entRes = await getAllEntData();
-
         const entData = entRes?.data?.data;
-        // console.log(entData);
         setEntData(entData);
-
         const indRes = await getAllIndShopes();
-
         const indData = await indRes?.data?.data;
         setIndData(indData);
       } catch (err) {
@@ -128,7 +124,6 @@ const HomePage = () => {
       key: "firstName",
       width: 150,
       render: (record) => {
-        //console.log(record);
         return (
           record?.indFounder?.firstName + " " + record.indFounder?.lastName
         );

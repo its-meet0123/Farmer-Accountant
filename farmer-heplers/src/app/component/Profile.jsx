@@ -2,7 +2,6 @@ import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Flex } from "antd";
 
 const Profile = ({ userName }) => {
-  console.log(userName);
   return (
     <>
       <Flex
