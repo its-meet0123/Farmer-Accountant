@@ -45,7 +45,7 @@ const AppLayout = ({ children }) => {
     <Layout
       style={{
         height: screen.md ? "100%" : "200%",
-        width: screen.md ? "100%" : "60%",
+        width: screen.md ? "100%" : "70%",
       }}>
       <Header style={{ display: "flex", alignItems: "center" }}>
         {authState.isLoggedIn && <Profile userName={authState.user.userName} />}
