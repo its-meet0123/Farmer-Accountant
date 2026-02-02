@@ -19,7 +19,12 @@ const Profile = ({ userName, screen }) => {
           backgroundColor: "#FCF5EE",
         }}>
         <Avatar size={24} icon={<UserOutlined />} />
-        <p style={{ overflow: anywhere }}>
+        <p
+          style={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}>
           {userName.firstName} {userName.lastName}
         </p>
       </Flex>
