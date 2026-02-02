@@ -21,7 +21,8 @@ connectMongoDB(`${process.env.MONGO_URI}`).then(() =>
 
 app.use(
   cors({
-    origin: ["http://10.61.113.103:5173", "http://localhost:5173"],
+    origin: "https://farmer-accoutant.onrender.com",
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     credentials: true,
   }),
 );
