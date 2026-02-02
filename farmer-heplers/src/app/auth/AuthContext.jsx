@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }) => {
   };
   const goToSignUP = () => {
     localStorage.setItem("hasAccount", "false");
+    logout();
     setIsSignedUp(false);
   };
 

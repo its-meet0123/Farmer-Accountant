@@ -40,7 +40,6 @@ const SignUp = () => {
       showSuccess(text);
     }
     if (data.status === "success") {
-      message.success(data.message);
       signupComplete();
       navigate("/login");
       message.success(data.message);

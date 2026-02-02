@@ -7,7 +7,7 @@ import {
   getUserData,
 } from "../service/auth";
 
-const UserActionModel = ({ openType, setOpenType, user, goToSignUP }) => {
+const UserActionModel = ({ openType, setOpenType, user, logout }) => {
   const [passwordForm] = Form.useForm();
   const [deleteForm] = Form.useForm();
   const [findUser, setfindUser] = useState({});
@@ -89,7 +89,7 @@ const UserActionModel = ({ openType, setOpenType, user, goToSignUP }) => {
       if (res.status === 200) {
         message.warning(res.data.message);
         setOpenType(null);
-        goToSignUP();
+        logout();
       }
     }
   };
