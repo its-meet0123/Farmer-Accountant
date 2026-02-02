@@ -55,7 +55,7 @@ const AppLayout = ({ children }) => {
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={pathname}
-          defaultOpenKeys={"/home"}
+          defaultOpenKeys={["/home"]}
           items={Menus}
           style={{ flex: 1, minWidth: 0 }}
           onClick={({ key }) => {
