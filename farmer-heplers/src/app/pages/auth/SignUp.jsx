@@ -41,6 +41,7 @@ const SignUp = () => {
     }
     if (data.status === "success") {
       if (data.isLoggedIn === true) {
+        signupComplete();
         loginComplete(data);
         message.success(data.message);
       } else {
