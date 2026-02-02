@@ -22,7 +22,7 @@ const AppLayout = ({ children }) => {
   } = theme.useToken();
 
   useEffect(() => {
-    if (location.pathname) {
+    if (location.pathname !== "/") {
       setPathname(location.pathname);
     } else {
       setPathname("/home");
