@@ -52,7 +52,9 @@ const AppLayout = ({ children }) => {
         width: screen.md ? "100%" : "70%",
       }}>
       <Header style={{ display: "flex", alignItems: "center" }}>
-        {authState.isLoggedIn && <Profile userName={authState.user.userName} />}
+        {authState.isLoggedIn && (
+          <Profile userName={authState.user.userName} screen={screen} />
+        )}
         (
         <Menu
           theme="dark"

@@ -1,7 +1,7 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Flex } from "antd";
 
-const Profile = ({ userName }) => {
+const Profile = ({ userName, screen }) => {
   return (
     <>
       <Flex
@@ -19,7 +19,7 @@ const Profile = ({ userName }) => {
           backgroundColor: "#FCF5EE",
         }}>
         <Avatar size={24} icon={<UserOutlined />} />
-        <p>
+        <p style={{ fontSize: screen.md ? "11px" : "6px" }}>
           {userName.firstName} {userName.lastName}
         </p>
       </Flex>
