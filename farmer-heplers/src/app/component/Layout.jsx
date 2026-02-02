@@ -51,7 +51,7 @@ const AppLayout = ({ children }) => {
         {authState.isLoggedIn && (
           <Profile userName={authState.user.userName} screen={screen} />
         )}
-        (
+
         <Menu
           theme="dark"
           mode="horizontal"
@@ -62,7 +62,6 @@ const AppLayout = ({ children }) => {
             openMenus(key);
           }}
         />
-        )
       </Header>
       <Content style={{ padding: "0 48px" }}>
         <div
