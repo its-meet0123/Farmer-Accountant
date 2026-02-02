@@ -95,10 +95,16 @@ const SignUp = () => {
             <Input />
           </Form.Item>
           <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
+            <Button block type="primary" htmlType="submit">
               Submit
             </Button>
-            or <a onClick={() => navigate("/login")}>Log In</a>
+            or{" "}
+            <a
+              onClick={() => {
+                (navigate("/login"), signupComplete());
+              }}>
+              Log In
+            </a>
           </Form.Item>
         </Form>
       </Card>
