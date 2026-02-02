@@ -22,7 +22,11 @@ const AppLayout = ({ children }) => {
   } = theme.useToken();
 
   useEffect(() => {
-    setPathname(location.pathname);
+    if (location.pathname) {
+      setPathname(location.pathname);
+    } else {
+      setPathname("/home");
+    }
   }, [location.pathname]);
 
   const openMenus = (key) => {
