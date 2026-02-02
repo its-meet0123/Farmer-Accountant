@@ -5,7 +5,7 @@ import { logInRoutes, signUpRoutes } from "./public";
 
 export const AppRoutes = () => {
   const { authState, isSignedUp } = useAuth();
-  console.log(authState);
+  console.log(authState, isSignedUp);
 
   if (authState.user) {
     const element = useRoutes(protectedRoutes);
