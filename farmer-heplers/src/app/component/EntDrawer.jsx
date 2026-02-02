@@ -104,6 +104,7 @@ const EntDrawer = ({
     if (open === "add") {
       const allValues = addForm.getFieldsValue();
       if (
+        allValues?.shopes[1] &&
         allValues?.shopes[0]?.shopeNumber === allValues?.shopes[1]?.shopeNumber
       ) {
         message.error("Shope Numbers are same");
