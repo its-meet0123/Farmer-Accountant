@@ -16,7 +16,7 @@ const AppLayout = ({ children }) => {
   const screen = useBreakpoint();
   const navigate = useNavigate();
   const [openType, setOpenType] = useState(null);
-  const [pathname, setPathname] = useState(location.pathname);
+  const [pathname, setPathname] = useState();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
