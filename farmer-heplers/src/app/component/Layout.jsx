@@ -16,13 +16,13 @@ const AppLayout = ({ children }) => {
   const screen = useBreakpoint();
   const navigate = useNavigate();
   const [openType, setOpenType] = useState(null);
-  const [pathname, setPathname] = useState();
+  const [pathname, setPathname] = useState(location.pathname);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   useEffect(() => {
-    if (location.pathname !== "/") {
+    if (pathname !== "/") {
       setPathname(location.pathname);
     } else {
       setPathname("/home");

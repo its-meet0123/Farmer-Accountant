@@ -5,7 +5,6 @@ import ViewPage from "../pages/features/View";
 import CalcPage from "../pages/features/Calculator";
 import WorkersData from "../pages/features/Worker";
 import WorkerCalculation from "../pages/features/WorkerCalculation";
-import Setting from "../pages/features/Setting";
 
 export const protectedRoutes = [
   {
