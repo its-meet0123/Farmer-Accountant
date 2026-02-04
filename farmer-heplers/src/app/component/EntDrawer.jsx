@@ -107,8 +107,9 @@ const EntDrawer = ({
       console.log(editFormValues);
       const id = editFormValues.id;
       if (
-        editFormValues.shopes[0].shopeNumber ===
-        editFormValues.shopes[1].shopeNumber
+        editFormValues?.shopes[1] &&
+        editFormValues?.shopes[0]?.shopeNumber ===
+          editFormValues?.shopes[1]?.shopeNumber
       ) {
         message.error("Shope Numbers are same");
       } else {
@@ -308,7 +309,7 @@ const EntDrawer = ({
                   ]}>
                   <Input placeholder="first name" />
                 </Form.Item>
-                <Form.Item label="Last Name" name="lastName">
+                <Form.Item label="Last Name" name="aLastName">
                   <Input placeholder="last name" />
                 </Form.Item>
                 <Form.Item
