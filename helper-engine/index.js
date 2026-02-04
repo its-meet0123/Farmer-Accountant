@@ -29,7 +29,7 @@ app.use(
 );
 
 app.options(
-  "*",
+  "(.*)",
   cors({
     origin: "https://farmer-accoutant.onrender.com",
     methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
