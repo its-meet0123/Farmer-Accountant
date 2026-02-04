@@ -111,13 +111,14 @@ const EntDrawer = ({
       } else {
         const newEntData = {
           userId: user.userId,
-          nameInd: allValues.nameInd || "",
-          firstName: allValues.firstName || "",
+          nameInd: allValues.nameInd,
+          firstName: allValues.firstName,
           lastName: allValues.lastName || "",
           contact: allValues.indContact,
           shopes: allValues.shopes,
           startDate: allValues.startDate,
         };
+        console.log(newEntData);
         const entRes = await postEntData(newEntData);
         const shopeDataArray = allValues.shopes.map((shope) => {
           const shopeDataObj = {
