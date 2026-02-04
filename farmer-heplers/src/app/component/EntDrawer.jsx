@@ -62,27 +62,30 @@ const EntDrawer = ({
   };
   const handleSubmit = async () => {
     if (open === "edit" && edit === true) {
-      const allValues = form.getFieldsValue();
-      console.log(allValues);
-      const id = allValues.id;
-      if (allValues.shopes[0].shopeNumber === allValues.shopes[1].shopeNumber) {
+      const editFormValues = form.getFieldsValue();
+      console.log(editFormValues);
+      const id = editFormValues.id;
+      if (
+        editFormValues.shopes[0].shopeNumber ===
+        editFormValues.shopes[1].shopeNumber
+      ) {
         message.error("Shope Numbers are same");
       } else {
         const entData = {
-          nameInd: allValues.nameInd,
+          nameInd: editFormValues.nameInd,
           indFounder: {
-            firstName: allValues.firstName,
-            lastName: allValues.lastName,
+            firstName: editFormValues.firstName,
+            lastName: editFormValues.lastName,
           },
-          indContact: allValues.indContact,
-          shopes: allValues.shopes,
-          startDate: allValues.startDate,
+          indContact: editFormValues.indContact,
+          shopes: editFormValues.shopes,
+          startDate: editFormValues.startDate,
         };
         const entRes = await updateEntData(id, entData);
         console.log(entRes);
         console.log(indData);
         const indDatas = {
-          nameInd: allValues.nameInd || indData[0]?.nameInd,
+          nameInd: editFormValues.nameInd || indData[0]?.nameInd,
           shopeNumber: rowData?.shopeNumber || indData[0]?.shopeNumber,
           shopeAccount: indData[0]?.shopeAccount,
         };
