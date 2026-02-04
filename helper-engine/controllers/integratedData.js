@@ -24,105 +24,116 @@ async function handleGetAllIndData(req, res) {
 }
 
 async function handleGetIndShopeAccountById(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const { id } = req.params;
-  if (!id) {
-    res.status(404).json({
+  try {
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const { id } = req.params;
+    if (!id) {
+      res.status(404).json({
+        status: "fail",
+        message: "ID is required",
+      });
+    }
+    const indDataBySNo = await Industries.findById({
+      _id: id,
+      userId: currentUserId,
+    });
+    const dates = await InterestDate.find({ userId: currentUserId });
+    const endDate = dates[0]?.endDate;
+
+    if (!indDataBySNo) {
+      return res
+        .status(404)
+        .json({ status: "Error", msg: "Ind Data not found" });
+    }
+    const updateIndData = {
+      shopeNumber: indDataBySNo.shopeNumber,
+      shopeAccount: indDataBySNo?.shopeAccount?.map((account) => {
+        const loanAmount = account.loan.amount;
+        const buyBillAmount = account.indBuy.billAmount;
+        const sellBillAmount = account.indSell.billAmount;
+        const dieselBillAmount = account.diesel.billAmount;
+        const rate = account.rate;
+        const startDate = account.startDate;
+
+        const loanAmountResult = calculateAutoInterst(
+          loanAmount,
+          startDate,
+          rate,
+          endDate,
+        );
+        const buyBillAmountResult = calculateAutoInterst(
+          buyBillAmount,
+          startDate,
+          rate,
+          endDate,
+        );
+        const sellBillAmountResult = calculateAutoInterst(
+          sellBillAmount,
+          startDate,
+          rate,
+          endDate,
+        );
+        const dieselBillAmountResult = calculateAutoInterst(
+          dieselBillAmount,
+          startDate,
+          rate,
+          endDate,
+        );
+        return {
+          startDate: account.startDate,
+          loan: {
+            amount: account.loan.amount,
+            amountType: account.loan.amountType,
+            interest: Number(loanAmountResult.interst),
+            totalAmount: Number(loanAmountResult.totalAmount),
+            days: loanAmountResult.days,
+            months: loanAmountResult.months,
+          },
+          indBuy: {
+            billAmount: account.indBuy.billAmount,
+            bill: account.indBuy.bill,
+            interest: Number(buyBillAmountResult.interst),
+            brief: account.indBuy.brief,
+            totalAmount: Number(buyBillAmountResult.totalAmount),
+            days: buyBillAmountResult.days,
+            months: buyBillAmountResult.months,
+          },
+          indSell: {
+            crop: account.indSell.crop,
+            brief: account.indSell.brief,
+            billAmount: account.indSell.billAmount,
+            bill: account.indSell.bill,
+            interest: Number(sellBillAmountResult.interst),
+            days: sellBillAmountResult.days,
+            months: sellBillAmountResult.months,
+            totalAmount: Number(sellBillAmountResult.totalAmount),
+          },
+          diesel: {
+            qty: account.diesel.qty,
+            billAmount: account.diesel.billAmount,
+            rate: account.diesel.rate,
+            bill: account.diesel.bill,
+            interest: Number(dieselBillAmountResult.interst),
+            totalAmount: Number(dieselBillAmountResult.totalAmount),
+            days: dieselBillAmountResult.days,
+            months: dieselBillAmountResult.months,
+          },
+        };
+      }),
+    };
+    return res.status(200).json({
+      status: "Success",
+      message: "Ind Data founded",
+      data: updateIndData,
+    });
+  } catch (err) {
+    return res.status(500).json({
       status: "fail",
-      message: "ID is required",
+      message: err.message,
     });
   }
-  const indDataBySNo = await Industries.findById({
-    _id: id,
-    userId: currentUserId,
-  });
-  const dates = await InterestDate.find({ userId: currentUserId });
-  const endDate = dates[0]?.endDate;
-
-  if (!indDataBySNo) {
-    return res.status(404).json({ status: "Error", msg: "Ind Data not found" });
-  }
-  const updateIndData = {
-    shopeNumber: indDataBySNo.shopeNumber,
-    shopeAccount: indDataBySNo?.shopeAccount?.map((account) => {
-      const loanAmount = account.loan.amount;
-      const buyBillAmount = account.indBuy.billAmount;
-      const sellBillAmount = account.indSell.billAmount;
-      const dieselBillAmount = account.diesel.billAmount;
-      const rate = account.rate;
-      const startDate = account.startDate;
-
-      const loanAmountResult = calculateAutoInterst(
-        loanAmount,
-        startDate,
-        rate,
-        endDate,
-      );
-      const buyBillAmountResult = calculateAutoInterst(
-        buyBillAmount,
-        startDate,
-        rate,
-        endDate,
-      );
-      const sellBillAmountResult = calculateAutoInterst(
-        sellBillAmount,
-        startDate,
-        rate,
-        endDate,
-      );
-      const dieselBillAmountResult = calculateAutoInterst(
-        dieselBillAmount,
-        startDate,
-        rate,
-        endDate,
-      );
-      return {
-        startDate: account.startDate,
-        loan: {
-          amount: account.loan.amount,
-          amountType: account.loan.amountType,
-          interest: Number(loanAmountResult.interst),
-          totalAmount: Number(loanAmountResult.totalAmount),
-          days: loanAmountResult.days,
-          months: loanAmountResult.months,
-        },
-        indBuy: {
-          billAmount: account.indBuy.billAmount,
-          bill: account.indBuy.bill,
-          interest: Number(buyBillAmountResult.interst),
-          brief: account.indBuy.brief,
-          totalAmount: Number(buyBillAmountResult.totalAmount),
-          days: buyBillAmountResult.days,
-          months: buyBillAmountResult.months,
-        },
-        indSell: {
-          crop: account.indSell.crop,
-          brief: account.indSell.brief,
-          billAmount: account.indSell.billAmount,
-          bill: account.indSell.bill,
-          interest: Number(sellBillAmountResult.interst),
-          days: sellBillAmountResult.days,
-          months: sellBillAmountResult.months,
-          totalAmount: Number(sellBillAmountResult.totalAmount),
-        },
-        diesel: {
-          qty: account.diesel.qty,
-          billAmount: account.diesel.billAmount,
-          rate: account.diesel.rate,
-          bill: account.diesel.bill,
-          interest: Number(dieselBillAmountResult.interst),
-          totalAmount: Number(dieselBillAmountResult.totalAmount),
-          days: dieselBillAmountResult.days,
-          months: dieselBillAmountResult.months,
-        },
-      };
-    }),
-  };
-  return res
-    .status(200)
-    .json({ status: "Success", msg: "Ind Data founded", data: updateIndData });
 }
 
 async function handleUpdateIndDataById(req, res) {
