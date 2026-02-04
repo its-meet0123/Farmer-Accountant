@@ -113,6 +113,8 @@ const EntDrawer = ({
       ) {
         message.error("Shope Numbers are same");
       } else {
+        const allValues = addForm.getFieldsValue();
+        console.log(allValues);
         const newEntData = {
           userId: user.userId,
           nameInd: allValues.nameInd,
