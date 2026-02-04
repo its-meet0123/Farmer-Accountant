@@ -61,6 +61,47 @@ const EntDrawer = ({
     setRowData(obj);
   };
   const handleSubmit = async () => {
+    if (open === "add") {
+      const allValues = addForm.getFieldsValue();
+      console.log(allValues);
+      if (
+        allValues?.aShopes[1] &&
+        allValues?.aShopes[0]?.shopeNumber ===
+          allValues?.aShopes[1]?.shopeNumber
+      ) {
+        message.error("Shope Numbers are same");
+      } else {
+        const newEntData = {
+          userId: user.userId,
+          nameInd: allValues.aNameInd,
+          firstName: allValues.aFirstName,
+          lastName: allValues.aLastName || "",
+          contact: allValues.aIndContact,
+          shopes: allValues.aShopes,
+          startDate: allValues.aStartDate,
+        };
+        console.log(newEntData);
+        const entRes = await postEntData(newEntData);
+        const shopeDataArray = allValues.shopes.map((shope) => {
+          const shopeDataObj = {
+            userId: user.userId,
+            nameInd: allValues.nameInd,
+            shopeNumber: shope.shopeNumber,
+            shopeAccount: [],
+          };
+          return shopeDataObj;
+        });
+        const indRes = await postIntShopeInitailData(shopeDataArray);
+        if (entRes.status === 201 && indRes.status === 201) {
+          const text = `${allValues.nameInd} Created Successfully.`;
+          showSuccess(text);
+          setFetch("allValues");
+          onClose();
+        } else {
+          message.error("Indusrty not created");
+        }
+      }
+    }
     if (open === "edit" && edit === true) {
       const editFormValues = form.getFieldsValue();
       console.log(editFormValues);
@@ -104,48 +145,6 @@ const EntDrawer = ({
       message.info("No changes detected");
       onClose();
     }
-    if (open === "add") {
-      const allValues = addForm.getFieldsValue();
-      console.log(allValues);
-      if (
-        allValues?.shopes[1] &&
-        allValues?.shopes[0]?.shopeNumber === allValues?.shopes[1]?.shopeNumber
-      ) {
-        message.error("Shope Numbers are same");
-      } else {
-        const allValues = addForm.getFieldsValue();
-        console.log(allValues);
-        const newEntData = {
-          userId: user.userId,
-          nameInd: allValues.nameInd,
-          firstName: allValues.firstName,
-          lastName: allValues.lastName || "",
-          contact: allValues.indContact,
-          shopes: allValues.shopes,
-          startDate: allValues.startDate,
-        };
-        console.log(newEntData);
-        const entRes = await postEntData(newEntData);
-        const shopeDataArray = allValues.shopes.map((shope) => {
-          const shopeDataObj = {
-            userId: user.userId,
-            nameInd: allValues.nameInd,
-            shopeNumber: shope.shopeNumber,
-            shopeAccount: [],
-          };
-          return shopeDataObj;
-        });
-        const indRes = await postIntShopeInitailData(shopeDataArray);
-        if (entRes.status === 201 && indRes.status === 201) {
-          const text = `${allValues.nameInd} Created Successfully.`;
-          showSuccess(text);
-          setFetch("allValues");
-          onClose();
-        } else {
-          message.error("Indusrty not created");
-        }
-      }
-    }
   };
 
   return (
@@ -160,9 +159,6 @@ const EntDrawer = ({
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            {/* {open === "edit" && edit === false && (
-              <Button onClick={() => setEdit(true)}>Edit</Button>
-            )} */}
           </Space>
         }>
         {open === "edit" && (
@@ -292,7 +288,7 @@ const EntDrawer = ({
               <Col span={12}>
                 <Form.Item
                   label="Industry Name"
-                  name="nameInd"
+                  name="aNameInd"
                   rules={[
                     {
                       required: true,
@@ -303,7 +299,7 @@ const EntDrawer = ({
                 </Form.Item>
                 <Form.Item
                   label="First Name"
-                  name="firstName"
+                  name="aFirstName"
                   rules={[
                     {
                       required: true,
@@ -317,7 +313,7 @@ const EntDrawer = ({
                 </Form.Item>
                 <Form.Item
                   label="Contact"
-                  name="indContact"
+                  name="aIndContact"
                   rules={[
                     {
                       required: true,
@@ -340,12 +336,12 @@ const EntDrawer = ({
                   ]}>
                   <Input placeholder="contact" />
                 </Form.Item>
-                <Form.Item label="Date" name="startDate" initialValue={date}>
+                <Form.Item label="Date" name="aStartDate" initialValue={date}>
                   <DatePicker />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.List name="shopes">
+                <Form.List name="aShopes">
                   {(fields, { add, remove }) => (
                     <>
                       {fields.map(({ key, name }) => (
