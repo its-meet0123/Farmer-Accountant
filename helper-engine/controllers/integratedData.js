@@ -2,8 +2,8 @@ require("dotenv").config();
 const { calculateAutoInterst } = require("../components/calculator");
 const Industries = require("../models/integratedData");
 const InterestDate = require("../models/endDate");
-
 const jwt = require("jsonwebtoken");
+
 const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleGetAllIndData(req, res) {

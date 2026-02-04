@@ -14,7 +14,9 @@ export async function getAllIndShopes() {
 }
 
 export async function getIndShopeAccountById(id) {
-  return await axios.get(`${API}/intshope/${id}`);
+  return await axios.get(`${API}/intshope/${id}`, {
+    withCredentials: true,
+  });
 }
 
 export async function UpdateIndDataById(Id, indDatas) {
