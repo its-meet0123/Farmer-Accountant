@@ -103,6 +103,7 @@ const EntDrawer = ({
     }
     if (open === "add") {
       const allValues = addForm.getFieldsValue();
+      console.log(allValues);
       if (
         allValues?.shopes[1] &&
         allValues?.shopes[0]?.shopeNumber === allValues?.shopes[1]?.shopeNumber
