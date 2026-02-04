@@ -28,16 +28,6 @@ app.use(
   }),
 );
 
-app.options(
-  "/:any*",
-  cors({
-    origin: "https://farmer-accoutant.onrender.com",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
-
 app.use("/user", userRouter);
 app.use("/int", integratedRouter);
 app.use("/intshope", intShopeRouter);
