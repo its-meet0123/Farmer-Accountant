@@ -82,10 +82,10 @@ const EntDrawer = ({
         };
         console.log(newEntData);
         const entRes = await postEntData(newEntData);
-        const shopeDataArray = allValues.shopes.map((shope) => {
+        const shopeDataArray = allValues.aShopes.map((shope) => {
           const shopeDataObj = {
             userId: user.userId,
-            nameInd: allValues.nameInd,
+            nameInd: allValues.aNameInd,
             shopeNumber: shope.shopeNumber,
             shopeAccount: [],
           };
@@ -93,7 +93,7 @@ const EntDrawer = ({
         });
         const indRes = await postIntShopeInitailData(shopeDataArray);
         if (entRes.status === 201 && indRes.status === 201) {
-          const text = `${allValues.nameInd} Created Successfully.`;
+          const text = `${allValues.aNameInd} Created Successfully.`;
           showSuccess(text);
           setFetch("allValues");
           onClose();
@@ -282,7 +282,7 @@ const EntDrawer = ({
           <Form
             form={addForm}
             variant="filled"
-            initialValues={{ shopes: [""] }}
+            initialValues={{ aShopes: [""] }}
             onFinish={handleSubmit}>
             <Row gutter={24}>
               <Col span={12}>
