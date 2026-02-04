@@ -27,7 +27,13 @@ async function handleGetIndShopeAccountById(req, res) {
   const token = req.cookies.token;
   const decoded = jwt.verify(token, JWT_SECRET);
   const currentUserId = decoded.id;
-  const id = req.params.id;
+  const { id } = req.params;
+  if (!id) {
+    res.status(404).json({
+      status: "fail",
+      message: "ID is required",
+    });
+  }
   const indDataBySNo = await Industries.findById({
     _id: id,
     userId: currentUserId,

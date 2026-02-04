@@ -111,7 +111,8 @@ const CalcPage = () => {
         const allData = await res.data.data;
         setShope(allData);
       } catch (err) {
-        console.log(err, "data not fetching in calculator");
+        message.error(err.message);
+        console.log(err.message);
       }
     }
     getData();
