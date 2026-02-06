@@ -5,7 +5,7 @@ const Profile = ({ userName, screen }) => {
   return (
     <>
       <Flex
-        gap="small"
+        gap="2px"
         horizontal
         style={{
           color: "#222222",
