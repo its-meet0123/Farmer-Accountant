@@ -10,6 +10,7 @@ const Profile = ({ userName, screen }) => {
         style={{
           color: "#222222",
           border: "5px ",
+          width: "fit-content",
           height: "40px",
           alignItems: "center",
           margin: "20px 10px 20px 0px",
@@ -18,9 +19,10 @@ const Profile = ({ userName, screen }) => {
           fontWeight: "bold",
           backgroundColor: "#FCF5EE",
         }}>
-        <Avatar size={24} icon={<UserOutlined />} />
+        <Avatar size={screen.md ? 24 : 18} icon={<UserOutlined />} />
         <p
           style={{
+            fontSize: screen.md ? 14 : 8,
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
