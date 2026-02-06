@@ -90,7 +90,7 @@ const TableFooterForViewCalc = ({ data }) => {
   let totalOfReturnDieselBillAmount = 0;
 
   data.forEach(({ loan, indBuy, indSell, diesel }) => {
-    totalOfLoanAmount += Number(loan.amount || 0);
+    totalOfLoanAmount += Number(loan.amount || 0).toFixed(2);
     totalOfLoanAmountInterest += Number(loan.interest || 0);
     totalOfReturnLoanAmount += Number(loan.totalAmount || 0);
 
@@ -107,12 +107,13 @@ const TableFooterForViewCalc = ({ data }) => {
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
 
-  const grandTotal = Number(
+  const oAT = Number(
     totalOfReturnSellBillAmount -
       totalOfReturnLoanAmount +
       totalOfReturnBuyBillAmount +
       totalOfReturnDieselBillAmount,
-  ).toFixed(2);
+  );
+  const grandTotal = Number(oAT).toFixed(2);
   return (
     <>
       <Table.Summary fixed="bottom">

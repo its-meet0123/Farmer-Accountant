@@ -41,6 +41,7 @@ const ViewPage = () => {
     form.setFieldsValue({
       id: record._id,
       startDate: date,
+      rate: record.rate,
       amount: record?.loan?.amount,
       amountType: record?.loan?.amountType,
       bBillAmount: record?.indBuy?.billAmount,
