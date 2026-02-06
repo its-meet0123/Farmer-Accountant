@@ -14,7 +14,7 @@ const Profile = ({ userName, screen }) => {
           height: "fit-content",
           alignItems: "center",
           margin: "20px 10px 20px 0px",
-          padding: "5px",
+          padding: "1px",
           borderRadius: "10px",
           fontWeight: "bold",
           backgroundColor: "#FCF5EE",
