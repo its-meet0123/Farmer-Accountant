@@ -85,7 +85,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
           brief: allValues.bBrief,
         },
         indSell: {
-          crop: allValues.crop,
+          crop: allValues.crops,
           billAmount: allValues.sBillAmount,
           bill: allValues.sBill,
           brief: allValues.sBrief,
@@ -233,7 +233,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
           <Form
             form={addForm}
             variant="filled"
-            initialValues={{ crop: [""] }}
+            initialValues={{ crops: [""] }}
             onFinish={handleSubmit}>
             <Row gutter={24}>
               <Col span={8}>
@@ -302,7 +302,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
               </Col>
             </Row>
             <Row>
-              <Form.List name="crop">
+              <Form.List name="crops">
                 {(fields, { add, remove }) => (
                   <>
                     {fields.map(({ key, name }) => (
@@ -325,7 +325,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
 
                         <Col span={6}>
                           <Form.Item label="Total" name={[name, "total"]}>
-                            <InputNumber placeholder="Total of crop" readOnly />
+                            <InputNumber placeholder="Total of crop" />
                           </Form.Item>
                         </Col>
 
