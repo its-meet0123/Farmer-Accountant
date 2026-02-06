@@ -190,7 +190,7 @@ const WorkersData = () => {
           expandable={{
             expandedRowRender: (record) => ExpandedRow(record),
           }}
-          scroll={{ x: 300 }}
+          scroll={{ x: 500 }}
         />
         <WorkerDrawer
           open={openType}
