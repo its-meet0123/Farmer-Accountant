@@ -232,6 +232,8 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
         {open === "add" && (
           <Form
             form={addForm}
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 18 }}
             variant="filled"
             initialValues={{ crops: [""] }}
             onFinish={handleSubmit}>
@@ -323,7 +325,10 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                           <InputNumber placeholder="Total of crop" />
                         </Form.Item>
 
-                        <MinusCircleOutlined onClick={() => remove(name)} />
+                        <MinusCircleOutlined
+                          onClick={() => remove(name)}
+                          style={{ margin: "1rem" }}
+                        />
                       </Row>
                     ))}
                     <PlusCircleOutlined onClick={() => add()} />
