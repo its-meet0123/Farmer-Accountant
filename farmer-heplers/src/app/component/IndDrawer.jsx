@@ -130,65 +130,69 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
         {open === "edit" && (
           <Form
             form={form}
+            labelCol={{ span: 12 }}
+            wrapperCol={{ span: 15 }}
             variant="filled"
             initialValues={{ crop: [""] }}
             onFinish={handleSubmit}>
             <Row gutter={24}>
-              <Col span={8}>
-                <Form.Item
-                  label="Date"
-                  name="startDate"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter date",
-                    },
-                  ]}>
-                  <DatePicker />
-                </Form.Item>
+              <Form.Item
+                label="Date"
+                name="startDate"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter date",
+                  },
+                ]}>
+                <DatePicker />
+              </Form.Item>
+              <Form.Item label="Interest Rate" name="rate">
+                <InputNumber placeholder="interest rate" />
+              </Form.Item>
+              <Row gutter={24}>
                 <Form.Item label="Loan Amount" name="amount">
                   <InputNumber placeholder="amount" />
-                </Form.Item>
-                <Form.Item label="BBA" name="bBillAmount">
-                  <InputNumber placeholder="Buy item bill amount" />
-                </Form.Item>
-                <Form.Item label="DBA" name="dBillAmount">
-                  <InputNumber placeholder="Diesel bill amount" />
-                </Form.Item>
-                <Form.Item label="SBA" name="sBillAmount">
-                  <InputNumber placeholder="Sell item bill amount" />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item label="Interest Rate" name="rate">
-                  <InputNumber placeholder="interest rate" />
                 </Form.Item>
                 <Form.Item label="Type" name="amountType">
                   <Input placeholder="Amount Type" />
                 </Form.Item>
+              </Row>
+              <Row gutter={24}>
+                <Form.Item label="BBA" name="bBillAmount">
+                  <InputNumber placeholder="Buy item bill amount" />
+                </Form.Item>
                 <Form.Item label="BB" name="bBill">
                   <Input placeholder="Buy item bill " />
+                </Form.Item>
+                <Form.Item label="B.brief" name="bBrief">
+                  <Input placeholder="Buy item brief" />
+                </Form.Item>
+              </Row>
+              <Row gutter={24}>
+                <Form.Item label="DBA" name="dBillAmount">
+                  <InputNumber placeholder="Diesel bill amount" />
                 </Form.Item>
                 <Form.Item label="D.Qty." name="dQty">
                   <InputNumber placeholder="Diesel Qty." />
                 </Form.Item>
-                <Form.Item label="SB" name="sBill">
-                  <Input placeholder="Sell item bill" />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item name="id"></Form.Item>
-                <Form.Item></Form.Item>
-                <Form.Item label="B.brief" name="bBrief">
-                  <Input placeholder="Buy item brief" />
-                </Form.Item>
                 <Form.Item label="D.Rate" name="dRate">
                   <InputNumber placeholder="Diesel Rate" />
+                </Form.Item>
+              </Row>
+              <Row gutter={24}>
+                <Form.Item label="SBA" name="sBillAmount">
+                  <InputNumber placeholder="Sell item bill amount" />
+                </Form.Item>
+                <Form.Item label="SB" name="sBill">
+                  <Input placeholder="Sell item bill" />
                 </Form.Item>
                 <Form.Item label="S.brief" name="sBrief">
                   <Input placeholder="Sell item brief" />
                 </Form.Item>
-              </Col>
+              </Row>
+              <Form.Item name="id"></Form.Item>
+              <Form.Item></Form.Item>
             </Row>
             <Row>
               <Form.List name="crop">
@@ -232,8 +236,8 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
         {open === "add" && (
           <Form
             form={addForm}
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 18 }}
+            labelCol={{ span: 12 }}
+            wrapperCol={{ span: 15 }}
             variant="filled"
             initialValues={{ crops: [""] }}
             onFinish={handleSubmit}>
