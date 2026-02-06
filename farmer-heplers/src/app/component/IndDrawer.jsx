@@ -236,70 +236,70 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
             initialValues={{ crops: [""] }}
             onFinish={handleSubmit}>
             <Row gutter={24}>
-              <Col span={8}>
-                <Form.Item
-                  label="Date"
-                  name="startDate"
-                  initialValue={date}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter date",
-                    },
-                  ]}>
-                  <DatePicker />
-                </Form.Item>
-                <Form.Item label="Loan Amount" name="amount">
-                  <InputNumber placeholder="amount" />
-                </Form.Item>
-                <Form.Item label="BBA" name="bBillAmount">
-                  <InputNumber placeholder="Buy item bill amount" />
-                </Form.Item>
-                <Form.Item label="DBA" name="dBillAmount">
-                  <InputNumber placeholder="Diesel bill amount" />
-                </Form.Item>
-                <Form.Item label="SBA" name="sBillAmount">
-                  <InputNumber placeholder="Sell item bill amount" />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item
-                  label="Interest Rate"
-                  name="rate"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter date",
-                    },
-                  ]}>
-                  <InputNumber placeholder="interest rate" />
-                </Form.Item>
-                <Form.Item label="Type" name="amountType">
-                  <Input placeholder="Amount Type" />
-                </Form.Item>
-                <Form.Item label="BB" name="bBill">
-                  <Input placeholder="Buy item bill " />
-                </Form.Item>
-                <Form.Item label="D.Qty." name="dQty">
-                  <InputNumber placeholder="Diesel Qty." />
-                </Form.Item>
-                <Form.Item label="SB" name="sBill">
-                  <Input placeholder="Sell item bill" />
-                </Form.Item>
-              </Col>
-              <Col span={8}>
-                <Form.Item></Form.Item>
-                <Form.Item></Form.Item>
-                <Form.Item label="B.brief" name="bBrief">
-                  <Input placeholder="Buy item brief" />
-                </Form.Item>
-                <Form.Item label="D.Rate" name="dRate">
-                  <InputNumber placeholder="Diesel Rate" />
-                </Form.Item>
-                <Form.Item label="S.brief" name="sBrief">
-                  <Input placeholder="Sell item brief" />
-                </Form.Item>
-              </Col>
+              <Form.Item
+                label="Date"
+                name="startDate"
+                initialValue={date}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter date",
+                  },
+                ]}>
+                <DatePicker />
+              </Form.Item>
+              <Form.Item
+                label="Interest Rate"
+                name="rate"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter date",
+                  },
+                ]}>
+                <InputNumber placeholder="interest rate" />
+              </Form.Item>
+            </Row>
+            <Row gutter={24}>
+              <Form.Item label="Loan Amount" name="amount">
+                <InputNumber placeholder="amount" />
+              </Form.Item>
+              <Form.Item label="Type" name="amountType">
+                <Input placeholder="Amount Type" />
+              </Form.Item>
+            </Row>
+            <Row gutter={24}>
+              <Form.Item label="BBA" name="bBillAmount">
+                <InputNumber placeholder="Buy item bill amount" />
+              </Form.Item>
+              <Form.Item label="BB" name="bBill">
+                <Input placeholder="Buy item bill " />
+              </Form.Item>
+              <Form.Item label="B.brief" name="bBrief">
+                <Input placeholder="Buy item brief" />
+              </Form.Item>
+            </Row>
+            <Row gutter={24}>
+              <Form.Item label="DBA" name="dBillAmount">
+                <InputNumber placeholder="Diesel bill amount" />
+              </Form.Item>
+              <Form.Item label="D.Qty." name="dQty">
+                <InputNumber placeholder="Diesel Qty." />
+              </Form.Item>
+              <Form.Item label="D.Rate" name="dRate">
+                <InputNumber placeholder="Diesel Rate" />
+              </Form.Item>
+            </Row>
+            <Row>
+              <Form.Item label="SBA" name="sBillAmount">
+                <InputNumber placeholder="Sell item bill amount" />
+              </Form.Item>
+              <Form.Item label="SB" name="sBill">
+                <Input placeholder="Sell item bill" />
+              </Form.Item>
+              <Form.Item label="S.brief" name="sBrief">
+                <Input placeholder="Sell item brief" />
+              </Form.Item>
             </Row>
             <Row>
               <Form.List name="crops">
@@ -307,27 +307,21 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                   <>
                     {fields.map(({ key, name }) => (
                       <Row gutter={24} key={key}>
-                        <Col span={6}>
-                          <Form.Item label="Crop" name={[name, "name"]}>
-                            <Input placeholder="" />
-                          </Form.Item>
-                        </Col>
-                        <Col span={6}>
-                          <Form.Item label="Qty." name={[name, "qty"]}>
-                            <InputNumber placeholder="Crop Qty." />
-                          </Form.Item>
-                        </Col>
-                        <Col span={6}>
-                          <Form.Item label="Rate" name={[name, "rate"]}>
-                            <InputNumber placeholder="Rate of crop" />
-                          </Form.Item>
-                        </Col>
+                        <Form.Item label="Crop" name={[name, "name"]}>
+                          <Input placeholder="" />
+                        </Form.Item>
 
-                        <Col span={6}>
-                          <Form.Item label="Total" name={[name, "total"]}>
-                            <InputNumber placeholder="Total of crop" />
-                          </Form.Item>
-                        </Col>
+                        <Form.Item label="Qty." name={[name, "qty"]}>
+                          <InputNumber placeholder="Crop Qty." />
+                        </Form.Item>
+
+                        <Form.Item label="Rate" name={[name, "rate"]}>
+                          <InputNumber placeholder="Rate of crop" />
+                        </Form.Item>
+
+                        <Form.Item label="Total" name={[name, "total"]}>
+                          <InputNumber placeholder="Total of crop" />
+                        </Form.Item>
 
                         <MinusCircleOutlined onClick={() => remove(name)} />
                       </Row>
