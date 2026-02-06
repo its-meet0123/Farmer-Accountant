@@ -40,6 +40,7 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     dataIndex: "startDate",
     key: "startDate",
     width: 150,
+    fixed: "left",
     render: (startDate) => {
       const date = formattedDate(startDate);
       return date;
