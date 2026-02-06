@@ -1,6 +1,18 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Flex, Input, Popconfirm } from "antd";
 
+const formattedDate = (date) => {
+  const rawDate = date ? new Date(date) : new Date();
+  const DateTimeFormat = new Intl.DateTimeFormat("en-GB", {
+    weekday: "long",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(rawDate);
+
+  return DateTimeFormat;
+};
+
 export const SHOPS_COLUMNS = [
   {
     title: "Shope No.",
@@ -28,6 +40,10 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     dataIndex: "startDate",
     key: "startDate",
     width: 150,
+    render: (startDate) => {
+      const date = formattedDate(startDate);
+      return date;
+    },
   },
   {
     title: "Loan",
@@ -213,6 +229,10 @@ export const BASE_COLUMNS = [
     key: "startDate",
     width: 100,
     fixed: "left",
+    render: (startDate) => {
+      const date = formattedDate(startDate);
+      return date;
+    },
   },
   {
     title: "Loan",
@@ -454,6 +474,10 @@ export const Worker_List_Columns = [
     dataIndex: ["workerDetail", "date"],
     key: "date",
     width: 150,
+    render: (date) => {
+      const wDate = formattedDate(date);
+      return wDate;
+    },
   },
   {
     title: "Name",
@@ -490,6 +514,10 @@ export const Worker_Transaction_Columns = [
     dataIndex: "date",
     key: "date",
     width: 100,
+    render: (date) => {
+      const wDate = formattedDate(date);
+      return wDate;
+    },
   },
   {
     title: "Gives",
@@ -637,6 +665,10 @@ export const WORKER_TRANSACTION_CALC_COLUMNS = [
     dataIndex: "date",
     key: "date",
     width: 150,
+    render: (date) => {
+      const workerDate = formattedDate(date);
+      return workerDate;
+    },
   },
   {
     title: "Gives",
