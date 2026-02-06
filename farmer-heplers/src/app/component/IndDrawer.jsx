@@ -11,6 +11,7 @@ import {
   message,
   Row,
   Space,
+  Typography,
 } from "antd";
 import { useState } from "react";
 import { pushIndShopeAccountById, updateIndShopeAccount } from "../service/ind";
@@ -241,6 +242,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
             variant="filled"
             initialValues={{ crops: [""] }}
             onFinish={handleSubmit}>
+            <Typography.Title level={5}>Mandatory fields</Typography.Title>
             <Row gutter={24}>
               <Form.Item
                 label="Date"
@@ -266,6 +268,9 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                 <InputNumber placeholder="interest rate" />
               </Form.Item>
             </Row>
+            <Typography.Title level={5}>
+              Cash amount/ Account amount
+            </Typography.Title>
             <Row gutter={24}>
               <Form.Item label="Loan Amount" name="amount">
                 <InputNumber placeholder="amount" />
@@ -274,6 +279,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                 <Input placeholder="Amount Type" />
               </Form.Item>
             </Row>
+            <Typography.Title level={5}>For buy itmes</Typography.Title>
             <Row gutter={24}>
               <Form.Item label="BBA" name="bBillAmount">
                 <InputNumber placeholder="Buy item bill amount" />
@@ -285,6 +291,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                 <Input placeholder="Buy item brief" />
               </Form.Item>
             </Row>
+            <Typography.Title level={5}>For diesel</Typography.Title>
             <Row gutter={24}>
               <Form.Item label="DBA" name="dBillAmount">
                 <InputNumber placeholder="Diesel bill amount" />
@@ -296,7 +303,8 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                 <InputNumber placeholder="Diesel Rate" />
               </Form.Item>
             </Row>
-            <Row>
+            <Typography.Title level={5}>For sell amount</Typography.Title>
+            <Row gutter={24}>
               <Form.Item label="SBA" name="sBillAmount">
                 <InputNumber placeholder="Sell item bill amount" />
               </Form.Item>
