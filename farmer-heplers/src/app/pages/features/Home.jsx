@@ -81,6 +81,20 @@ const HomePage = () => {
   const handleAddData = () => {
     setOpenType("add");
   };
+  const formattedDate = (date) => {
+    const rawDate = date ? new Date(date) : new Date();
+    const DateTimeFormat = new Intl.DateTimeFormat("en-GB", {
+      weekday: "long",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }).format(rawDate);
+
+    return DateTimeFormat;
+  };
 
   useEffect(() => {
     async function getData() {
@@ -141,6 +155,10 @@ const HomePage = () => {
       dataIndex: "startDate",
       key: "startDate",
       width: 100,
+      render: (startDate) => {
+        const date = formattedDate(startDate);
+        return date;
+      },
     },
     {
       title: "Action",

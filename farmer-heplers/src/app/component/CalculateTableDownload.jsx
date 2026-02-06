@@ -112,75 +112,91 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
             </thead>
             {data.map((account, index) => (
               <tbody key={account._id}>
-                <tr style={{ color: "#9e3b3b" }} key={account._id}>
-                  <td style={{ padding: "5px" }}>{index + 1}</td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(account.startDate)}
-                  </td>
-                  <td style={{ padding: "5px" }}>{account.loan.amount}</td>
-                  <td style={{ padding: "5px" }}>{account.loan.days}</td>
-                  <td style={{ padding: "5px" }}>{account.loan.months}</td>
-                  <td style={{ padding: "5px" }}>{account.loan.interest}</td>
-                  <td style={{ padding: "5px" }}>{account.loan.totalAmount}</td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(endDate[0]?.endDate)}
-                  </td>
-                </tr>
+                {account.loan.amount > 0 && (
+                  <tr style={{ color: "#9e3b3b" }} key={account._id}>
+                    <td style={{ padding: "5px" }}>{index + 1}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(account.startDate)}
+                    </td>
+                    <td style={{ padding: "5px" }}>{account.loan.amount}</td>
+                    <td style={{ padding: "5px" }}>{account.loan.days}</td>
+                    <td style={{ padding: "5px" }}>{account.loan.months}</td>
+                    <td style={{ padding: "5px" }}>{account.loan.interest}</td>
+                    <td style={{ padding: "5px" }}>
+                      {account.loan.totalAmount}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(endDate[0]?.endDate)}
+                    </td>
+                  </tr>
+                )}
 
-                <tr style={{ color: "#9e3b3b" }} key={account._id}>
-                  <td style={{ padding: "5px" }}>{index + 1}</td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(account.startDate)}
-                  </td>
-                  <td style={{ padding: "5px" }}>
-                    {account.indBuy.billAmount}
-                  </td>
-                  <td style={{ padding: "5px" }}>{account.indBuy.days}</td>
-                  <td style={{ padding: "5px" }}>{account.indBuy.months}</td>
-                  <td style={{ padding: "5px" }}>{account.indBuy.interest}</td>
-                  <td style={{ padding: "5px" }}>
-                    {account.indBuy.totalAmount}
-                  </td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(endDate[0]?.endDate)}
-                  </td>
-                </tr>
-                <tr style={{ color: "#296374" }} key={account._id}>
-                  <td style={{ padding: "5px" }}>{index + 1}</td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(account.startDate)}
-                  </td>
-                  <td style={{ padding: "5px" }}>
-                    {account.diesel.billAmount}
-                  </td>
-                  <td style={{ padding: "5px" }}>{account.diesel.days}</td>
-                  <td style={{ padding: "5px" }}>{account.diesel.months}</td>
-                  <td style={{ padding: "5px" }}>{account.diesel.interest}</td>
-                  <td style={{ padding: "5px" }}>
-                    {account.diesel.totalAmount}
-                  </td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(endDate[0]?.endDate)}
-                  </td>
-                </tr>
-                <tr style={{ color: "#84944f" }} key={account._id}>
-                  <td style={{ padding: "5px" }}>{index + 1}</td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(account.startDate)}
-                  </td>
-                  <td style={{ padding: "5px" }}>
-                    {account.indSell.billAmount}
-                  </td>
-                  <td style={{ padding: "5px" }}>{account.indSell.days}</td>
-                  <td style={{ padding: "5px" }}>{account.indSell.months}</td>
-                  <td style={{ padding: "5px" }}>{account.indSell.interest}</td>
-                  <td style={{ padding: "5px" }}>
-                    {account.indSell.totalAmount}
-                  </td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(endDate[0]?.endDate)}
-                  </td>
-                </tr>
+                {account.indBuy.billAmount > 0 && (
+                  <tr style={{ color: "#9e3b3b" }} key={account._id}>
+                    <td style={{ padding: "5px" }}>{index + 1}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(account.startDate)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.indBuy.billAmount}
+                    </td>
+                    <td style={{ padding: "5px" }}>{account.indBuy.days}</td>
+                    <td style={{ padding: "5px" }}>{account.indBuy.months}</td>
+                    <td style={{ padding: "5px" }}>
+                      {account.indBuy.interest}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.indBuy.totalAmount}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(endDate[0]?.endDate)}
+                    </td>
+                  </tr>
+                )}
+                {account.diesel.billAmount > 0 && (
+                  <tr style={{ color: "#296374" }} key={account._id}>
+                    <td style={{ padding: "5px" }}>{index + 1}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(account.startDate)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.diesel.billAmount}
+                    </td>
+                    <td style={{ padding: "5px" }}>{account.diesel.days}</td>
+                    <td style={{ padding: "5px" }}>{account.diesel.months}</td>
+                    <td style={{ padding: "5px" }}>
+                      {account.diesel.interest}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.diesel.totalAmount}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(endDate[0]?.endDate)}
+                    </td>
+                  </tr>
+                )}
+                {account.indSell.billAmount > 0 && (
+                  <tr style={{ color: "#84944f" }} key={account._id}>
+                    <td style={{ padding: "5px" }}>{index + 1}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(account.startDate)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.indSell.billAmount}
+                    </td>
+                    <td style={{ padding: "5px" }}>{account.indSell.days}</td>
+                    <td style={{ padding: "5px" }}>{account.indSell.months}</td>
+                    <td style={{ padding: "5px" }}>
+                      {account.indSell.interest}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.indSell.totalAmount}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(endDate[0]?.endDate)}
+                    </td>
+                  </tr>
+                )}
               </tbody>
             ))}
             <tfoot>
@@ -303,37 +319,43 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
             </thead>
             {data.map((account, index) => (
               <tbody key={account._id}>
-                <tr style={{ color: "#9e3b3b" }} key={account._id}>
-                  <td style={{ padding: "5px" }}>{index + 1}</td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(account.date)}
-                  </td>
-                  <td style={{ padding: "5px" }}>{account.give.amount}</td>
-                  <td style={{ padding: "5px" }}>{account.give.days}</td>
-                  <td style={{ padding: "5px" }}>{account.give.months}</td>
-                  <td style={{ padding: "5px" }}>{account.give.interest}</td>
-                  <td style={{ padding: "5px" }}>{account.give.totalAmount}</td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(endDate[1]?.endDate)}
-                  </td>
-                </tr>
+                {account.give.amount > 0 && (
+                  <tr style={{ color: "#9e3b3b" }} key={account._id}>
+                    <td style={{ padding: "5px" }}>{index + 1}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(account.date)}
+                    </td>
+                    <td style={{ padding: "5px" }}>{account.give.amount}</td>
+                    <td style={{ padding: "5px" }}>{account.give.days}</td>
+                    <td style={{ padding: "5px" }}>{account.give.months}</td>
+                    <td style={{ padding: "5px" }}>{account.give.interest}</td>
+                    <td style={{ padding: "5px" }}>
+                      {account.give.totalAmount}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(endDate[1]?.endDate)}
+                    </td>
+                  </tr>
+                )}
 
-                <tr style={{ color: "#84944f" }} key={account._id}>
-                  <td style={{ padding: "5px" }}>{index + 1}</td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(account.date)}
-                  </td>
-                  <td style={{ padding: "5px" }}>{account.take.payment}</td>
-                  <td style={{ padding: "5px" }}>{account.take.days}</td>
-                  <td style={{ padding: "5px" }}>{account.take.months}</td>
-                  <td style={{ padding: "5px" }}>{account.take.interest}</td>
-                  <td style={{ padding: "5px" }}>
-                    {account.take.totalPayment}
-                  </td>
-                  <td style={{ padding: "5px" }}>
-                    {formattedDate(endDate[1]?.endDate)}
-                  </td>
-                </tr>
+                {account.take.payment > 0 && (
+                  <tr style={{ color: "#84944f" }} key={account._id}>
+                    <td style={{ padding: "5px" }}>{index + 1}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(account.date)}
+                    </td>
+                    <td style={{ padding: "5px" }}>{account.take.payment}</td>
+                    <td style={{ padding: "5px" }}>{account.take.days}</td>
+                    <td style={{ padding: "5px" }}>{account.take.months}</td>
+                    <td style={{ padding: "5px" }}>{account.take.interest}</td>
+                    <td style={{ padding: "5px" }}>
+                      {account.take.totalPayment}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formattedDate(endDate[1]?.endDate)}
+                    </td>
+                  </tr>
+                )}
               </tbody>
             ))}
             <tfoot>
