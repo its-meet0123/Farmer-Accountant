@@ -303,7 +303,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                 <InputNumber placeholder="Diesel Rate" />
               </Form.Item>
             </Row>
-            <Typography.Title level={5}>For sell amount</Typography.Title>
+            <Typography.Title level={5}>For sell crops</Typography.Title>
             <Row gutter={24}>
               <Form.Item label="SBA" name="sBillAmount">
                 <InputNumber placeholder="Sell item bill amount" />
@@ -315,7 +315,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                 <Input placeholder="Sell item brief" />
               </Form.Item>
             </Row>
-            <Row>
+            <Row gutter={24}>
               <Form.List name="crops">
                 {(fields, { add, remove }) => (
                   <>
