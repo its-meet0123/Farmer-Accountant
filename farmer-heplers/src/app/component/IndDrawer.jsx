@@ -86,7 +86,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
           brief: allValues.bBrief,
         },
         indSell: {
-          crop: allValues.crops,
+          crop: allValues.crops || [],
           billAmount: allValues.sBillAmount,
           bill: allValues.sBill,
           brief: allValues.sBrief,

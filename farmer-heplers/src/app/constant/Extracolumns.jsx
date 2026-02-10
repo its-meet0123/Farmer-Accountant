@@ -24,7 +24,7 @@ const showModal = ({ crop, title }) => {
             <Input
               value={i?.name}
               type="string"
-              name="Crop Name"
+              title="Crop Name"
               style={{
                 color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
               }}
@@ -33,7 +33,7 @@ const showModal = ({ crop, title }) => {
             <Input
               value={i?.rate}
               type="number"
-              name="Crop Rate"
+              title="Crop Rate"
               style={{
                 color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
               }}
@@ -42,7 +42,7 @@ const showModal = ({ crop, title }) => {
             <Input
               value={i?.qty}
               type="number"
-              name="Crop Qty"
+              title="Qty."
               style={{
                 color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
               }}
@@ -51,7 +51,7 @@ const showModal = ({ crop, title }) => {
             <Input
               value={i?.amount || i?.total}
               type="number"
-              name="Total"
+              title="Total"
               style={{
                 color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
               }}
