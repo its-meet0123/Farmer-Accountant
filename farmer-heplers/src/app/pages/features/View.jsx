@@ -23,7 +23,7 @@ import dayjs from "dayjs";
 import AlertText from "../../component/Text";
 
 const ViewPage = () => {
-  const [isLoanding, setIsLoanding] = useEffect(false);
+  const [isLoanding, setIsLoanding] = useState(false);
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [allInd, setAllInd] = useState([]);
@@ -134,6 +134,7 @@ const ViewPage = () => {
         setIsLoanding(false);
         setAllInd(data);
       } catch (err) {
+        setIsLoanding(true);
         message.error(err.message);
       }
 
@@ -256,8 +257,8 @@ const ViewPage = () => {
   };
   return (
     <>
-      {contextHolder}
       {isLoanding && <Spin size="larze" />}
+      {contextHolder}
       <Card title="Accounts" extra={""}>
         <Table
           columns={columns}
