@@ -139,7 +139,6 @@ const WorkerCalculation = () => {
 
   return (
     <>
-      {isLoanding && <Spin size="large" />}
       <Card
         title={
           worker?.workerName &&
@@ -155,37 +154,43 @@ const WorkerCalculation = () => {
             </Flex>
           </>
         }>
-        <Flex horizontal>
-          <Form form={form} layout="inline" onFinish={setDate}>
-            <Form.Item label="End Date" name="endDate">
-              <DatePicker disabled={id && fetch !== "edit"} />
-            </Form.Item>
-            {(id == null || fetch === "edit" || fetch === "delete") && (
-              <Form.Item>
-                <Button htmlType="submit">Set</Button>
-              </Form.Item>
-            )}
-            {id && (
-              <Radio.Group
-                block
-                defaultValue={fetch}
-                options={options}
-                optionType="button"
-                onChange={(e) => {
-                  setFetch(e.target.value);
-                }}
-              />
-            )}
-          </Form>
-        </Flex>
-        <Table
-          columns={WORKER_TRANSACTION_CALC_COLUMNS}
-          dataSource={tableData}
-          bordered
-          rowKey="serialNo"
-          scroll={{ x: 500 }}
-          summary={(currentData) => setFooter(currentData)}
-        />
+        {isLoanding ? (
+          <Spin size="large" />
+        ) : (
+          <>
+            <Flex horizontal>
+              <Form form={form} layout="inline" onFinish={setDate}>
+                <Form.Item label="End Date" name="endDate">
+                  <DatePicker disabled={id && fetch !== "edit"} />
+                </Form.Item>
+                {(id == null || fetch === "edit" || fetch === "delete") && (
+                  <Form.Item>
+                    <Button htmlType="submit">Set</Button>
+                  </Form.Item>
+                )}
+                {id && (
+                  <Radio.Group
+                    block
+                    defaultValue={fetch}
+                    options={options}
+                    optionType="button"
+                    onChange={(e) => {
+                      setFetch(e.target.value);
+                    }}
+                  />
+                )}
+              </Form>
+            </Flex>
+            <Table
+              columns={WORKER_TRANSACTION_CALC_COLUMNS}
+              dataSource={tableData}
+              bordered
+              rowKey="serialNo"
+              scroll={{ x: 500 }}
+              summary={(currentData) => setFooter(currentData)}
+            />
+          </>
+        )}
       </Card>
       <DownloadTable2
         modelOpen={modalOpen}

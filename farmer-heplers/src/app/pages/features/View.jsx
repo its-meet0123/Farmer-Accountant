@@ -257,19 +257,22 @@ const ViewPage = () => {
   };
   return (
     <>
-      {isLoanding && <Spin size="larze" />}
       {contextHolder}
       <Card title="Accounts" extra={""}>
-        <Table
-          columns={columns}
-          dataSource={tableData}
-          rowKey="_id"
-          expandable={{
-            expandedRowRender: (record) => ExpandedRow(record),
-          }}
-          pagination={false}
-          scroll={{ x: 700 }}
-        />
+        {isLoanding ? (
+          <Spin size="large" />
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={tableData}
+            rowKey="_id"
+            expandable={{
+              expandedRowRender: (record) => ExpandedRow(record),
+            }}
+            pagination={false}
+            scroll={{ x: 700 }}
+          />
+        )}
       </Card>
       <IndDrawer
         open={openType}

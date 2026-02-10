@@ -214,7 +214,7 @@ const HomePage = () => {
   return (
     <>
       {contextHolder}
-      {isLoanding && <Spin size="large" />}
+
       <Card
         extra={
           <Button type="primary" onClick={() => handleAddData()}>
@@ -222,16 +222,20 @@ const HomePage = () => {
           </Button>
         }
         size={20}>
-        <Table
-          size="small"
-          columns={ENT_COLUMNS}
-          dataSource={tableData}
-          rowKey="_id"
-          expandable={{
-            expandedRowRender: (record) => ExpandedRow(record),
-          }}
-          scroll={{ x: 200 }}
-        />
+        {isLoanding ? (
+          <Spin size="large" />
+        ) : (
+          <Table
+            size="small"
+            columns={ENT_COLUMNS}
+            dataSource={tableData}
+            rowKey="_id"
+            expandable={{
+              expandedRowRender: (record) => ExpandedRow(record),
+            }}
+            scroll={{ x: 200 }}
+          />
+        )}
       </Card>
       <EntDrawer
         open={openType}

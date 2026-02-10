@@ -172,7 +172,6 @@ const WorkersData = () => {
   };
   return (
     <>
-      {isLoanding && <Spin size="large" />}
       <Card
         title="Worker List"
         extra={
@@ -186,16 +185,20 @@ const WorkersData = () => {
             </Button>
           </div>
         }>
-        <Table
-          columns={columns}
-          dataSource={tableData}
-          bordered
-          rowKey="_id"
-          expandable={{
-            expandedRowRender: (record) => ExpandedRow(record),
-          }}
-          scroll={{ x: 500 }}
-        />
+        {isLoanding ? (
+          <Spin size="large" />
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={tableData}
+            bordered
+            rowKey="_id"
+            expandable={{
+              expandedRowRender: (record) => ExpandedRow(record),
+            }}
+            scroll={{ x: 500 }}
+          />
+        )}
         <WorkerDrawer
           open={openType}
           setOpen={setOpenType}

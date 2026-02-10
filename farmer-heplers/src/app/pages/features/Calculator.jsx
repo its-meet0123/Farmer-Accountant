@@ -163,7 +163,6 @@ const CalcPage = () => {
 
   return (
     <>
-      {isLoanding && <Spin size="large" />}
       {contextHolder}
       <Card
         title={`Calc View : ${shope.shopeNumber}`}
@@ -181,39 +180,45 @@ const CalcPage = () => {
             </Flex>
           </>
         }>
-        <Flex horizontal>
-          <Form form={form} layout="inline" onFinish={setDate}>
-            <Form.Item label="End Date" name="endDate">
-              <DatePicker disabled={id && fetch !== "edit"} />
-            </Form.Item>
-            {(id == null || fetch === "edit" || fetch === "delete") && (
-              <Form.Item>
-                <Button htmlType="submit">Set</Button>
-              </Form.Item>
-            )}
-            {id && (
-              <Radio.Group
-                block
-                defaultValue={fetch}
-                options={options}
-                optionType="button"
-                onChange={(e) => {
-                  setFetch(e.target.value);
-                }}
-              />
-            )}
-          </Form>
-        </Flex>
-        <Table
-          id="view-table"
-          columns={BASE_COLUMNS}
-          dataSource={tableData}
-          rowKey="serialNo"
-          summary={(currentData) => setFooter(currentData)}
-          bordered
-          scroll={{ x: 500 }}
-          sticky
-        />
+        {isLoanding ? (
+          <Spin size="large" />
+        ) : (
+          <>
+            <Flex horizontal>
+              <Form form={form} layout="inline" onFinish={setDate}>
+                <Form.Item label="End Date" name="endDate">
+                  <DatePicker disabled={id && fetch !== "edit"} />
+                </Form.Item>
+                {(id == null || fetch === "edit" || fetch === "delete") && (
+                  <Form.Item>
+                    <Button htmlType="submit">Set</Button>
+                  </Form.Item>
+                )}
+                {id && (
+                  <Radio.Group
+                    block
+                    defaultValue={fetch}
+                    options={options}
+                    optionType="button"
+                    onChange={(e) => {
+                      setFetch(e.target.value);
+                    }}
+                  />
+                )}
+              </Form>
+            </Flex>
+            <Table
+              id="view-table"
+              columns={BASE_COLUMNS}
+              dataSource={tableData}
+              rowKey="serialNo"
+              summary={(currentData) => setFooter(currentData)}
+              bordered
+              scroll={{ x: 500 }}
+              sticky
+            />
+          </>
+        )}
       </Card>
       <DownloadTable1
         isModalOpen={isModalOpen}
