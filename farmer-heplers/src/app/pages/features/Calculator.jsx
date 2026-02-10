@@ -6,6 +6,7 @@ import {
   Form,
   message,
   Radio,
+  Spin,
   Table,
 } from "antd";
 import { useEffect, useState } from "react";
@@ -28,6 +29,7 @@ const CalcPage = () => {
   const { authState } = useAuth();
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [isLoanding, setIsLoanding] = useState(false);
   const [shope, setShope] = useState({});
   const [endDate, setEndDate] = useState([]);
   const [id, setId] = useState();
@@ -107,10 +109,13 @@ const CalcPage = () => {
   useEffect(() => {
     async function getData() {
       try {
+        setIsLoanding(true);
         const res = await getIndShopeAccountById(state.id);
         const allData = await res.data.data;
+        setIsLoanding(false);
         setShope(allData);
       } catch (err) {
+        setIsLoanding(true);
         message.error(err.message);
         console.log(err.message);
       }
@@ -122,8 +127,10 @@ const CalcPage = () => {
     async function getData() {
       try {
         if (fetch != "del") {
+          setIsLoanding(true);
           const dateRes = await getEndDate();
           const data = await dateRes.data.data;
+          setIsLoanding(false);
           const viewEndDate =
             data.filter((date) => date.dateType === "view") || [];
           console.log(viewEndDate);
@@ -134,6 +141,7 @@ const CalcPage = () => {
           endDate: endDate?.length > 0 ? dayjs(endDate[0]?.endDate) : today,
         });
       } catch (err) {
+        setIsLoanding(true);
         console.log(err, "date not fetching in calculator");
         setFetch("del");
       }
@@ -155,6 +163,7 @@ const CalcPage = () => {
 
   return (
     <>
+      {isLoanding && <Spin size="large" />}
       {contextHolder}
       <Card
         title={`Calc View : ${shope.shopeNumber}`}

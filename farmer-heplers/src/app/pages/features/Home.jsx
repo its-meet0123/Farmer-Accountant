@@ -1,4 +1,13 @@
-import { Button, Card, Flex, Form, message, Popconfirm, Table } from "antd";
+import {
+  Button,
+  Card,
+  Flex,
+  Form,
+  message,
+  Popconfirm,
+  Spin,
+  Table,
+} from "antd";
 import { useEffect, useMemo, useState } from "react";
 import { SHOPS_COLUMNS } from "../../constant/Extracolumns";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
@@ -16,6 +25,7 @@ import {
 const HomePage = () => {
   const [form] = Form.useForm();
   const [entData, setEntData] = useState([]);
+  const [isLoanding, setIsLoanding] = useState(false);
   const [indData, setIndData] = useState([]);
   const [openType, setOpenType] = useState(null);
   const [fetch, setFetch] = useState();
@@ -58,23 +68,28 @@ const HomePage = () => {
   };
 
   const editFunction = async (id) => {
-    const res = await getEntDataById(id);
-    if (res.status === 200) {
-      const data = await res.data.data;
-      const date = dayjs(data.startDate);
-      form.setFieldsValue({
-        id: data._id,
-        nameInd: data?.nameInd,
-        firstName: data.indFounder?.firstName,
-        lastName: data.indFounder?.lastName,
-        indContact: data.indContact,
-        shopes: data.shopes,
-        startDate: date,
-      });
-      setFetch(data);
-      setOpenType("edit");
-    } else {
-      message.error("Industry data not founded");
+    try {
+      setIsLoanding(true);
+      const res = await getEntDataById(id);
+      setIsLoanding(false);
+      if (res.status === 200) {
+        const data = await res.data.data;
+        const date = dayjs(data.startDate);
+
+        form.setFieldsValue({
+          id: data._id,
+          nameInd: data?.nameInd,
+          firstName: data.indFounder?.firstName,
+          lastName: data.indFounder?.lastName,
+          indContact: data.indContact,
+          shopes: data.shopes,
+          startDate: date,
+        });
+        setFetch(data);
+        setOpenType("edit");
+      }
+    } catch (err) {
+      message.error(err.message);
     }
   };
 
@@ -96,13 +111,16 @@ const HomePage = () => {
   useEffect(() => {
     async function getData() {
       try {
+        setIsLoanding(true);
         const entRes = await getAllEntData();
         const entData = entRes?.data?.data;
+        setIsLoanding(false);
         setEntData(entData);
         const indRes = await getAllIndShopes();
         const indData = await indRes?.data?.data;
         setIndData(indData);
       } catch (err) {
+        setIsLoanding(ture);
         console.error("All Ent data not fetching", err);
       }
       setFetch("");
@@ -196,6 +214,7 @@ const HomePage = () => {
   return (
     <>
       {contextHolder}
+      {isLoanding && <Spin size="large" />}
       <Card
         extra={
           <Button type="primary" onClick={() => handleAddData()}>

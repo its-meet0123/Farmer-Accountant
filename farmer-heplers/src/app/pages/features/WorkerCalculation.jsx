@@ -6,6 +6,7 @@ import {
   Form,
   message,
   Radio,
+  Spin,
   Table,
 } from "antd";
 import { useEffect, useState } from "react";
@@ -32,6 +33,7 @@ const options = [
 const WorkerCalculation = () => {
   const { state } = useLocation();
   const { authState } = useAuth();
+  const [isLoanding, setIsLoanding] = useState(false);
   const [worker, setWorker] = useState({});
   const [id, setId] = useState();
   const [endDate, setEndDate] = useState([]);
@@ -85,12 +87,15 @@ const WorkerCalculation = () => {
     async function getData() {
       try {
         if (state) {
+          setIsLoanding(true);
           const res = await getWorkerTransaction(state.id);
           const data = await res.data.data;
+          setIsLoanding(false);
           setWorker(data);
         }
       } catch (err) {
         message.error(err.message);
+        setIsLoanding(true);
       }
     }
     getData();
@@ -100,8 +105,10 @@ const WorkerCalculation = () => {
     async function getData() {
       try {
         if (fetch != "del") {
+          setIsLoanding(true);
           const dateRes = await getEndDate();
           const data = await dateRes.data.data;
+          setIsLoanding(false);
           const workerEndDate =
             data.filter((date) => date.dateType === "worker") || [];
           setEndDate(workerEndDate);
@@ -111,6 +118,7 @@ const WorkerCalculation = () => {
           endDate: endDate.length > 0 ? dayjs(endDate[0].endDate) : today,
         });
       } catch (err) {
+        setIsLoanding(true);
         message.error(err.message);
         setFetch("del");
       }
@@ -131,6 +139,7 @@ const WorkerCalculation = () => {
 
   return (
     <>
+      {isLoanding && <Spin size="large" />}
       <Card
         title={
           worker?.workerName &&

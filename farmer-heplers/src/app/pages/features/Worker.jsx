@@ -1,4 +1,4 @@
-import { Button, Card, Flex, message, Popconfirm, Table } from "antd";
+import { Button, Card, Flex, message, Popconfirm, Spin, Table } from "antd";
 import { useEffect, useState } from "react";
 import {
   deleteWorkerById,
@@ -20,6 +20,7 @@ import AlertText from "../../component/Text";
 import { useNavigate } from "react-router-dom";
 
 const WorkersData = () => {
+  const [isLoanding, setIsLoanding] = useState(false);
   const [workerList, setWorkerList] = useState();
   const [worker, setWorker] = useState({});
   const [openType, setOpenType] = useState(null);
@@ -78,12 +79,14 @@ const WorkersData = () => {
   useEffect(() => {
     async function getData() {
       try {
+        setIsLoanding(true);
         const res = await getAllWorkers();
-
         const data = await res.data.data;
+        setIsLoanding(false);
         setWorkerList(data);
       } catch (err) {
         message.destroy(err.message);
+        setIsLoanding(true);
       }
     }
     getData();
@@ -169,6 +172,7 @@ const WorkersData = () => {
   };
   return (
     <>
+      {isLoanding && <Spin size="large" />}
       <Card
         title="Worker List"
         extra={

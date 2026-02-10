@@ -1,4 +1,13 @@
-import { Button, Card, Flex, Form, message, Popconfirm, Table } from "antd";
+import {
+  Button,
+  Card,
+  Flex,
+  Form,
+  message,
+  Popconfirm,
+  Spin,
+  Table,
+} from "antd";
 import { useEffect, useState } from "react";
 import { deleteIndShopeAccountData, getAllIndShopes } from "../../service/ind";
 import {
@@ -14,6 +23,7 @@ import dayjs from "dayjs";
 import AlertText from "../../component/Text";
 
 const ViewPage = () => {
+  const [isLoanding, setIsLoanding] = useEffect(false);
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [allInd, setAllInd] = useState([]);
@@ -118,11 +128,13 @@ const ViewPage = () => {
   useEffect(() => {
     async function getData() {
       try {
+        setIsLoanding(true);
         const res = await getAllIndShopes();
         const data = await res.data.data;
+        setIsLoanding(false);
         setAllInd(data);
-      } catch {
-        message.error("All Ind Shopes data not fecthing");
+      } catch (err) {
+        message.error(err.message);
       }
 
       setFetch("");
@@ -245,6 +257,7 @@ const ViewPage = () => {
   return (
     <>
       {contextHolder}
+      {isLoanding && <Spin size="larze" />}
       <Card title="Accounts" extra={""}>
         <Table
           columns={columns}
