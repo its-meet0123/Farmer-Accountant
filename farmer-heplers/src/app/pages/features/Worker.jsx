@@ -182,8 +182,7 @@ const WorkersData = () => {
             }}>
             Add Worker
           </Button>
-        }
-        style={{ width: "fit-content" }}>
+        }>
         {isLoanding ? (
           <Spin size="large" />
         ) : (
