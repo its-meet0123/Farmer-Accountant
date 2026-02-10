@@ -175,16 +175,15 @@ const WorkersData = () => {
       <Card
         title="Worker List"
         extra={
-          <div style={{ marginTop: 16 }}>
-            <Button
-              type="primary"
-              onClick={() => {
-                setOpenType("aw");
-              }}>
-              Open
-            </Button>
-          </div>
-        }>
+          <Button
+            type="primary"
+            onClick={() => {
+              setOpenType("aw");
+            }}>
+            Add Worker
+          </Button>
+        }
+        style={{ width: "fit-content" }}>
         {isLoanding ? (
           <Spin size="large" />
         ) : (
