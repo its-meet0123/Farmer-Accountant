@@ -1,5 +1,6 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Flex, Input, Popconfirm } from "antd";
+import { Button, Flex, Input, Modal, Popconfirm } from "antd";
+import { useState } from "react";
 
 const formattedDate = (date) => {
   const rawDate = date ? new Date(date) : new Date();
@@ -11,6 +12,48 @@ const formattedDate = (date) => {
   }).format(rawDate);
 
   return DateTimeFormat;
+};
+
+const showModal = ({ crop, title }) => {
+  Modal.success({
+    title: title,
+    content: (
+      <>
+        {crop?.map((i) => (
+          <Flex key={i.id} horizontal>
+            <Input
+              value={i?.name}
+              type="string"
+              name="Crop Name"
+              style={{ color: "#8ABB6C", width: 70 }}
+              readOnly
+            />
+            <Input
+              value={i?.rate}
+              type="number"
+              name="Crop Rate"
+              style={{ color: "#8ABB6C", width: 70 }}
+              readOnly
+            />
+            <Input
+              value={i?.qty}
+              type="number"
+              name="Crop Qty"
+              style={{ color: "#8ABB6C", width: 70 }}
+              readOnly
+            />
+            <Input
+              value={i?.amount}
+              type="number"
+              name="Total"
+              style={{ color: "#8ABB6C", width: 70 }}
+              readOnly
+            />
+          </Flex>
+        ))}
+      </>
+    ),
+  });
 };
 
 export const SHOPS_COLUMNS = [
@@ -613,43 +656,17 @@ export const Worker_Transaction_Columns = [
         title: <p style={{ color: "#8ABB6C" }}>Crops [npqt]</p>,
         dataIndex: ["take", "crop"],
         key: "takeCrop",
-        width: 300,
-        render: (crop) => (
-          <>
-            {crop?.map((i) => (
-              <Flex key={i.id} horizontal>
-                <Input
-                  value={i?.name}
-                  type="string"
-                  name="Crop Name"
-                  style={{ color: "#8ABB6C", width: 70 }}
-                  readOnly
-                />
-                <Input
-                  value={i?.rate}
-                  type="number"
-                  name="Crop Rate"
-                  style={{ color: "#8ABB6C", width: 70 }}
-                  readOnly
-                />
-                <Input
-                  value={i?.qty}
-                  type="number"
-                  name="Crop Qty"
-                  style={{ color: "#8ABB6C", width: 70 }}
-                  readOnly
-                />
-                <Input
-                  value={i?.amount}
-                  type="number"
-                  name="Total"
-                  style={{ color: "#8ABB6C", width: 70 }}
-                  readOnly
-                />
-              </Flex>
-            ))}
-          </>
-        ),
+        width: 100,
+        render: (crop) => {
+          const title = "Take Crop";
+          return (
+            <>
+              <Button type="link" onClick={() => showModal({ crop, title })}>
+                View
+              </Button>
+            </>
+          );
+        },
       },
     ],
   },
