@@ -27,7 +27,6 @@ const showModal = ({ crop, title }) => {
               name="Crop Name"
               style={{
                 color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
-                width: 70,
               }}
               readOnly
             />
@@ -36,8 +35,7 @@ const showModal = ({ crop, title }) => {
               type="number"
               name="Crop Rate"
               style={{
-                color: (title = "Give Crop" ? "#D73535" : "#8ABB6C"),
-                width: 70,
+                color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
               }}
               readOnly
             />
@@ -46,8 +44,7 @@ const showModal = ({ crop, title }) => {
               type="number"
               name="Crop Qty"
               style={{
-                color: (title = "Give Crop" ? "#D73535" : "#8ABB6C"),
-                width: 70,
+                color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
               }}
               readOnly
             />
@@ -56,8 +53,7 @@ const showModal = ({ crop, title }) => {
               type="number"
               name="Total"
               style={{
-                color: (title = "Give Crop" ? "#D73535" : "#8ABB6C"),
-                width: 70,
+                color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
               }}
               readOnly
             />
