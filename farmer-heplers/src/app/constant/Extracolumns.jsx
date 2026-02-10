@@ -26,7 +26,7 @@ const showModal = ({ crop, title }) => {
               type="string"
               name="Crop Name"
               style={{
-                color: (title = "Give Crop" ? "#D73535" : "#8ABB6C"),
+                color: title === "Give Crop" ? "#D73535" : "#8ABB6C",
                 width: 70,
               }}
               readOnly
@@ -191,7 +191,7 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         dataIndex: ["indSell", "crop"],
         key: "crop",
         render: (crop) => {
-          if (crop.length == 0 || crop.length > 0) {
+          if (crop.length > 0) {
             const title = "Sell Crop";
             return (
               <Button type="link" onClick={() => showModal({ crop, title })}>
@@ -577,7 +577,7 @@ export const Worker_Transaction_Columns = [
         key: "giveCrop",
         width: 100,
         render: (crop) => {
-          if (crop.length == 0 || crop.length > 0) {
+          if (crop.length > 0) {
             const title = "Give Crop";
             return (
               <Button type="link" onClick={() => showModal({ crop, title })}>
@@ -614,7 +614,7 @@ export const Worker_Transaction_Columns = [
         key: "takeCrop",
         width: 100,
         render: (crop) => {
-          if (crop.length == 0 || crop.length > 0) {
+          if (crop.length > 0) {
             const title = "Take Crop";
             return (
               <Button type="link" onClick={() => showModal({ crop, title })}>
