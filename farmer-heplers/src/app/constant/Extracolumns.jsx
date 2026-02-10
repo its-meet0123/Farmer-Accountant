@@ -550,34 +550,34 @@ export const Worker_Transaction_Columns = [
         title: <p style={{ color: "#D73535" }}>Crop [npqt]</p>,
         dataIndex: ["give", "crop"],
         key: "giveCrop",
-        width: 100,
+        width: 300,
         render: (crop) => (
           <>
             {crop?.map((i) => (
               <Flex key={i.id} horizontal>
                 <Input
-                  value={i.name}
+                  value={i?.name}
                   type="string"
                   name="Crop Name"
                   style={{ color: "#D73535", width: 70 }}
                   readOnly
                 />
                 <Input
-                  value={i.rate}
+                  value={i?.rate}
                   type="number"
                   name="Crop Rate"
                   style={{ color: "#D73535", width: 70 }}
                   readOnly
                 />
                 <Input
-                  value={i.qty}
+                  value={i?.qty}
                   type="number"
                   name="Crop Qty"
                   style={{ color: "#D73535", width: 70 }}
                   readOnly
                 />
                 <Input
-                  value={i.amount}
+                  value={i?.amount}
                   type="number"
                   name="Total"
                   style={{ color: "#D73535", width: 70 }}
@@ -613,33 +613,34 @@ export const Worker_Transaction_Columns = [
         title: <p style={{ color: "#8ABB6C" }}>Crops [npqt]</p>,
         dataIndex: ["take", "crop"],
         key: "takeCrop",
+        width: 300,
         render: (crop) => (
           <>
             {crop?.map((i) => (
               <Flex key={i.id} horizontal>
                 <Input
-                  value={i.name}
+                  value={i?.name}
                   type="string"
                   name="Crop Name"
                   style={{ color: "#8ABB6C", width: 70 }}
                   readOnly
                 />
                 <Input
-                  value={i.rate}
+                  value={i?.rate}
                   type="number"
                   name="Crop Rate"
                   style={{ color: "#8ABB6C", width: 70 }}
                   readOnly
                 />
                 <Input
-                  value={i.qty}
+                  value={i?.qty}
                   type="number"
                   name="Crop Qty"
                   style={{ color: "#8ABB6C", width: 70 }}
                   readOnly
                 />
                 <Input
-                  value={i.amount}
+                  value={i?.amount}
                   type="number"
                   name="Total"
                   style={{ color: "#8ABB6C", width: 70 }}
