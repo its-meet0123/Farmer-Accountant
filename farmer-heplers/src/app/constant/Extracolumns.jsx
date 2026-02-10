@@ -190,6 +190,7 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         title: <p style={{ color: "#8ABB6C" }}>Crop</p>,
         dataIndex: ["indSell", "crop"],
         key: "crop",
+        width: 100,
         render: (crop) => {
           if (crop.length > 0) {
             const title = "Sell Crop";
