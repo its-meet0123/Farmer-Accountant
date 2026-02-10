@@ -25,28 +25,40 @@ const showModal = ({ crop, title }) => {
               value={i?.name}
               type="string"
               name="Crop Name"
-              style={{ color: "#8ABB6C", width: 70 }}
+              style={{
+                color: (title = "Give Crop" ? "#D73535" : "#8ABB6C"),
+                width: 70,
+              }}
               readOnly
             />
             <Input
               value={i?.rate}
               type="number"
               name="Crop Rate"
-              style={{ color: "#8ABB6C", width: 70 }}
+              style={{
+                color: (title = "Give Crop" ? "#D73535" : "#8ABB6C"),
+                width: 70,
+              }}
               readOnly
             />
             <Input
               value={i?.qty}
               type="number"
               name="Crop Qty"
-              style={{ color: "#8ABB6C", width: 70 }}
+              style={{
+                color: (title = "Give Crop" ? "#D73535" : "#8ABB6C"),
+                width: 70,
+              }}
               readOnly
             />
             <Input
               value={i?.amount}
               type="number"
               name="Total"
-              style={{ color: "#8ABB6C", width: 70 }}
+              style={{
+                color: (title = "Give Crop" ? "#D73535" : "#8ABB6C"),
+                width: 70,
+              }}
               readOnly
             />
           </Flex>
@@ -179,42 +191,12 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         dataIndex: ["indSell", "crop"],
         key: "crop",
         render: (crop) => {
-          if ((crop.length = 0)) {
+          if (crop.length == 0 || crop.length > 0) {
+            const title = "Sell Crop";
             return (
-              <>
-                {crop?.map((i) => (
-                  <Flex key={i.id} horizontal>
-                    <Input
-                      value={i.name}
-                      type="string"
-                      name="Crop Name"
-                      style={{ color: "#8ABB6C", width: 70 }}
-                      readOnly
-                    />
-                    <Input
-                      value={i.rate}
-                      type="number"
-                      name="Crop Rate"
-                      style={{ color: "#8ABB6C", width: 70 }}
-                      readOnly
-                    />
-                    <Input
-                      value={i.qty}
-                      type="number"
-                      name="Crop Qty"
-                      style={{ color: "#8ABB6C", width: 70 }}
-                      readOnly
-                    />
-                    <Input
-                      value={i.amount}
-                      type="number"
-                      name="Total"
-                      style={{ color: "#8ABB6C", width: 70 }}
-                      readOnly
-                    />
-                  </Flex>
-                ))}
-              </>
+              <Button type="link" onClick={() => showModal({ crop, title })}>
+                View
+              </Button>
             );
           }
         },
@@ -593,43 +575,17 @@ export const Worker_Transaction_Columns = [
         title: <p style={{ color: "#D73535" }}>Crop [npqt]</p>,
         dataIndex: ["give", "crop"],
         key: "giveCrop",
-        width: 300,
-        render: (crop) => (
-          <>
-            {crop?.map((i) => (
-              <Flex key={i.id} horizontal>
-                <Input
-                  value={i?.name}
-                  type="string"
-                  name="Crop Name"
-                  style={{ color: "#D73535", width: 70 }}
-                  readOnly
-                />
-                <Input
-                  value={i?.rate}
-                  type="number"
-                  name="Crop Rate"
-                  style={{ color: "#D73535", width: 70 }}
-                  readOnly
-                />
-                <Input
-                  value={i?.qty}
-                  type="number"
-                  name="Crop Qty"
-                  style={{ color: "#D73535", width: 70 }}
-                  readOnly
-                />
-                <Input
-                  value={i?.amount}
-                  type="number"
-                  name="Total"
-                  style={{ color: "#D73535", width: 70 }}
-                  readOnly
-                />
-              </Flex>
-            ))}
-          </>
-        ),
+        width: 100,
+        render: (crop) => {
+          if (crop.length == 0 || crop.length > 0) {
+            const title = "Give Crop";
+            return (
+              <Button type="link" onClick={() => showModal({ crop, title })}>
+                View
+              </Button>
+            );
+          }
+        },
       },
     ],
   },
@@ -658,14 +614,14 @@ export const Worker_Transaction_Columns = [
         key: "takeCrop",
         width: 100,
         render: (crop) => {
-          const title = "Take Crop";
-          return (
-            <>
+          if (crop.length == 0 || crop.length > 0) {
+            const title = "Take Crop";
+            return (
               <Button type="link" onClick={() => showModal({ crop, title })}>
                 View
               </Button>
-            </>
-          );
+            );
+          }
         },
       },
     ],
