@@ -49,7 +49,7 @@ const showModal = ({ crop, title }) => {
               readOnly
             />
             <Input
-              value={i?.amount}
+              value={i?.amount || i?.total}
               type="number"
               name="Total"
               style={{
