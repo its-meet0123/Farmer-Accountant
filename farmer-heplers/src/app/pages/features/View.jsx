@@ -99,13 +99,16 @@ const ViewPage = () => {
       shopeId: data[0]._id,
       transactionIds: [record._id],
     };
-    const res = await deleteIndShopeAccountData(ids);
-    if (res.status === 200) {
-      const text = `Transaction Deleted Successfully for Shop No. ${record.shopeNumber}`;
-      showSuccess(text);
-      setFetch("delete transaction");
-    } else {
+    try {
+      const res = await deleteIndShopeAccountData(ids);
+      if (res.status === 200) {
+        const text = `Transaction Deleted Successfully for Shop No. ${record.shopeNumber}`;
+        showSuccess(text);
+        setFetch("delete transaction");
+      }
+    } catch (err) {
       message.error("Trnasaction not deleted");
+      console.log(err.message);
     }
   };
 
@@ -115,13 +118,16 @@ const ViewPage = () => {
       shopeId: record._id,
       transactionIds: transactionIds,
     };
-    const res = await deleteIndShopeAccountData(ids);
-    if (res.status === 200) {
-      const text = `Transactions Deleted All transaction records for Shop No. ${record.shopeNumber} have been successfully removed from the system.`;
-      showSuccess(text);
-      setFetch("delete all transaction");
-    } else {
+    try {
+      const res = await deleteIndShopeAccountData(ids);
+      if (res.status === 200) {
+        const text = `Deleted All transaction records for Shop No. ${record.shopeNumber} have been successfully removed from the system.`;
+        showSuccess(text);
+        setFetch("delete all transaction");
+      }
+    } catch (err) {
       message.error("All transactions not deleted");
+      console.log(err.message);
     }
   };
 
@@ -135,7 +141,8 @@ const ViewPage = () => {
         setAllInd(data);
       } catch (err) {
         setIsLoanding(true);
-        message.error(err.message);
+        message.error("Data not fetched ");
+        console.log(err.message);
       }
 
       setFetch("");

@@ -18,9 +18,9 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
-  const showSuccess = (text) => {
+  const showSuccess = (text, type) => {
     messageApi.open({
-      type: "success",
+      type: type,
       content: text,
       duration: 3,
     });
@@ -29,16 +29,25 @@ const SignUp = () => {
   const onFinish = async (values) => {
     console.log(values);
     if (!values) {
+      const type = "error";
       const text = "Values not defined";
-      showSuccess(text);
+      showSuccess(text, type);
     }
-    const res = await postUserDataForSignUp(values);
-    const data = await res.data;
+    try {
+      const res = await postUserDataForSignUp(values);
+      const data = await res.data;
+      if (data.status === "success") {
+        const type = "success";
+        const text = data.message;
+        showSuccess(text, type);
+      }
+    } catch (err) {
+      const type = "error";
+      const text = "User data not posted";
+      showSuccess(text, type);
+      console.log(err.message);
+    }
 
-    if (!res) {
-      const text = "Data not fetching";
-      showSuccess(text);
-    }
     if (data.status === "success") {
       signupComplete();
       navigate("/login");
@@ -60,7 +69,7 @@ const SignUp = () => {
           <Form.Item
             name={["userName", "firstName"]}
             label="First Name"
-            rules={[{ required: true }]}>
+            rules={[{ required: true, message: "User name is required" }]}>
             <Input />
           </Form.Item>
           <Form.Item name={["userName", "lastName"]} label="Last Name">
@@ -70,12 +79,12 @@ const SignUp = () => {
             name="userId"
             label="User Id"
             rules={[
-              { required: true },
+              { required: true, message: "Please create your userId" },
               { min: 5, message: "Min 5 characters" },
               { max: 15, message: "Max 15 characters" },
               {
                 pattern: /^@[a-z0-9_]+$/,
-                message: "Lowercase letters only",
+                message: "Start with [@...] and Lowercase letters only",
               },
             ]}>
             <Input />
@@ -84,7 +93,7 @@ const SignUp = () => {
             name="password"
             label="Password"
             rules={[
-              { required: true },
+              { required: true, message: "Please set your password" },
               { min: 6, message: "Min 6 characters" },
               {
                 pattern: /^[a-z0-9]+$/,

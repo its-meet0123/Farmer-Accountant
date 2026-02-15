@@ -262,7 +262,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter date",
+                    message: "Please enter interest rate",
                   },
                 ]}>
                 <InputNumber placeholder="interest rate" />

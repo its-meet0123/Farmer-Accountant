@@ -52,9 +52,14 @@ const WorkerCalculation = () => {
         userId: authState.user.userId,
         dateType: "worker",
       };
-      const res = await postEndDate(data);
-      message.success(res.data.message);
-      setFetch("post");
+      try {
+        const res = await postEndDate(data);
+        message.success(res.data.message);
+        setFetch("post");
+      } catch (err) {
+        message.error("End date not posted");
+        console.log(err.message);
+      }
     }
     if (id) {
       if (fetch === "edit") {

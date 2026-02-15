@@ -91,6 +91,8 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           message.success(res.data.message);
           setFetchData("addT");
           onClose();
+        } else {
+          message.error("Faild to upload the Worker transaction");
         }
       }
       if (action === "take") {
@@ -114,6 +116,8 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           message.success(res.data.message);
           setFetchData("addT");
           onClose();
+        } else {
+          message.error("Faild to upload the Worker transaction");
         }
       }
       if (action === "none") {
@@ -137,6 +141,8 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           message.success(res.data.message);
           setFetchData("addT");
           onClose();
+        } else {
+          message.error("faild to upload the Worker transaction");
         }
       }
     }

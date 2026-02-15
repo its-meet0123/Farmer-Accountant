@@ -36,10 +36,15 @@ const WorkersData = () => {
 
   const deleteWorker = async (record) => {
     if (record._id) {
-      const res = await deleteWorkerById(record._id);
-      if (res.status === 200) {
-        message.success(res.data.message);
-        setFetchData("delete");
+      try {
+        const res = await deleteWorkerById(record._id);
+        if (res.status === 200) {
+          message.success(res.data.message);
+          setFetchData("delete");
+        }
+      } catch (err) {
+        console.log(err.message);
+        message.error("worker data not deleted");
       }
     }
   };
@@ -85,7 +90,8 @@ const WorkersData = () => {
         setIsLoanding(false);
         setWorkerList(data);
       } catch (err) {
-        message.destroy(err.message);
+        message.error("Worker list not found.");
+        console.log(err.message);
         setIsLoanding(true);
       }
     }

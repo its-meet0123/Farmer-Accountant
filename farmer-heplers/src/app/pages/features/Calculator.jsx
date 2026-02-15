@@ -75,9 +75,14 @@ const CalcPage = () => {
         userId: authState.user.userId,
         dateType: "view",
       };
-      const res = await postEndDate(data);
-      showMessage(res.data.message);
-      setFetch("post");
+      try {
+        const res = await postEndDate(data);
+        showMessage(res.data.message);
+        setFetch("post");
+      } catch (err) {
+        message.error("End Date not posted");
+        console.log(err.message);
+      }
     }
     if (id) {
       if (fetch === "edit") {
@@ -89,19 +94,29 @@ const CalcPage = () => {
           userId: authState.user.userId,
           dateType: "view",
         };
-        const res = await editEndDate(id, data);
-        setEndDate(res.data.data);
-        showMessage(res.data);
-        setFetch("patch");
+        try {
+          const res = await editEndDate(id, data);
+          setEndDate(res.data.data);
+          showMessage(res.data);
+          setFetch("patch");
+        } catch (err) {
+          message.error("The date has not changed");
+          console.log(err.message);
+        }
       }
       if (fetch === "delete") {
-        const res = await deleteEndDate(id);
-        setId(null);
-        form.setFieldsValue({
-          endDate: null,
-        });
-        showMessage(res.data);
-        setFetch("del");
+        try {
+          const res = await deleteEndDate(id);
+          setId(null);
+          form.setFieldsValue({
+            endDate: null,
+          });
+          showMessage(res.data);
+          setFetch("del");
+        } catch (err) {
+          message.error("The date field cannot be deleted");
+          console.log(err.message);
+        }
       }
     }
   };
@@ -116,7 +131,7 @@ const CalcPage = () => {
         setShope(allData);
       } catch (err) {
         setIsLoanding(true);
-        message.error(err.message);
+        message.error("Shope Account not fetched");
         console.log(err.message);
       }
     }
@@ -142,7 +157,8 @@ const CalcPage = () => {
         });
       } catch (err) {
         setIsLoanding(true);
-        console.log(err, "date not fetching in calculator");
+        message.error("date not fetching in calculator");
+        console.log(err.message);
         setFetch("del");
       }
     }

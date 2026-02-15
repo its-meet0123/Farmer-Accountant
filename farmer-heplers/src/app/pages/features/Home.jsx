@@ -52,18 +52,23 @@ const HomePage = () => {
         (shope) => shope.shopeNumber === ind.shopeNumber,
       );
     });
-    const ids = data.map((data) => data._id);
-    const entRes = await deleteEntDataById(record._id);
-    const indRes = await deleteIndDataByIds(ids);
-    if (
-      entRes.status === 200 ||
-      (entRes.status === 204 && indRes.status === 201)
-    ) {
-      const text = `${record.nameInd} Deleted Successfully.`;
-      showSuccess(text);
-      setFetch("res");
-    } else {
-      message.error("Delete operation not successfull");
+    try {
+      const ids = data.map((data) => data._id);
+      const entRes = await deleteEntDataById(record._id);
+      const indRes = await deleteIndDataByIds(ids);
+      if (
+        entRes.status === 200 ||
+        (entRes.status === 204 && indRes.status === 201)
+      ) {
+        const text = `${record.nameInd} Deleted Successfully.`;
+        showSuccess(text);
+        setFetch("res");
+      }
+    } catch (err) {
+      message.error(
+        "The system is not allowing the Industry data to be removed",
+      );
+      console.log(err.message);
     }
   };
 
@@ -89,7 +94,8 @@ const HomePage = () => {
         setOpenType("edit");
       }
     } catch (err) {
-      message.error(err.message);
+      message.error("Industry Data not fetched by Id");
+      console.log(err.message);
     }
   };
 
@@ -121,7 +127,8 @@ const HomePage = () => {
         setIndData(indData);
       } catch (err) {
         setIsLoanding(ture);
-        console.error("All Ent data not fetching", err);
+        message.error("All Ent data not fetching");
+        console.error(err.message);
       }
       setFetch("");
     }

@@ -1,0 +1,462 @@
+{
+  "authcontext": {
+    "spinAlertTitle": "डेटा लोड हो रहा है",
+    "spinAlertText": "धैर्य रखें! हम आपका डेटा लोड कर रहे हैं।"
+  },
+  "loginPage": {
+    "formSubmitErrorText": "लॉग इन यूजर के लिए डेटा नहीं मिल रहा है",
+    "cardTitle": "लॉगिन फॉर्म",
+    "formUserIdInput": {
+      "text": "यूजर आईडी",
+      "requiredText": "कृपया अपनी आईडी दर्ज करें!",
+      "checkText": "कृपया वैध यूजर आईडी दर्ज करें"
+    },
+    "formPasswordInput": {
+      "text": "पासवर्ड",
+      "requiredText": "कृपया अपना पासवर्ड दर्ज करें!",
+      "checkText": "कृपया वैध पासवर्ड दर्ज करें"
+    },
+    "formSubmitButtonText": "सबमिट",
+    "formForgotPasswordButtonText": "पासवर्ड भूल गए",
+    "formGoToSignUpButtonText": "साइन अप करें!"
+  },
+  "signUpPage": {
+    "formSubmitErrorText1": "वैल्यू परिभाषित नहीं हैं",
+    "formSubmitErrorText2": "यूजर डेटा अपलोड नहीं किया गया है",
+    "cardTitle": "साइनअप फॉर्म",
+    "formUserNameInputs": {
+      "firstNameText": "पहला नाम",
+      "lastNameText": "अंतिम नाम",
+      "requiredText": "यूजर का नाम अनिवार्य है"
+    },
+    "formUserIdInput": {
+      "text": "यूजर आईडी",
+      "requiredText": "कृपया अपनी आईडी बनाएं!",
+      "minText": "न्यूनतम 5 अक्षर",
+      "maxText": "अधिकतम 15 अक्षर",
+      "patternCheckText": "कृपया अपनी यूजर आईडी \"@\" से शुरू करें और केवल छोटे अक्षरों का उपयोग करें।"
+    },
+    "formPasswordInput": {
+      "text": "पासवर्ड",
+      "requiredText": "कृपया अपना पासवर्ड सेट करें!",
+      "patternCheckText": "केवल छोटे अक्षर (Lowercase)"
+    },
+    "formValidateMessage": "${label} अनिवार्य है!",
+    "formSubmitButtonText": "सबमिट",
+    "formGoToLogInButtonText": "लॉग इन"
+  },
+  "homePage": {
+    "deleteFunctionMessages": {
+      "successMessage": "सफलतापूर्वक हटा दिया गया",
+      "errorMessage": "सिस्टम इंडस्ट्री डेटा को हटाने की अनुमति नहीं दे रहा है"
+    },
+    "editFunctionMessages": {
+      "errorMessage": "आईडी द्वारा इंडस्ट्री डेटा नहीं मिला"
+    },
+    "fetchDataErrorMessage": "सभी इंडस्ट्रीज का डेटा लोड नहीं हो रहा है",
+    "tableColumns": {
+      "serialNoTitleText": "क्र.सं.",
+      "IndustryNameTitleText": "इंडस्ट्री का नाम",
+      "founderTitleText": "संस्थापक",
+      "contactTitleText": "संपर्क",
+      "dateTitleText": "तारीख",
+      "actionTitleText": "कार्रवाई",
+      "actionPopAlertText": "क्या आप वाकई इस इंडस्ट्री को हटाना चाहते हैं? सभी संबंधित डेटा और दुकानें स्थायी रूप से हटा दी जाएंगी",
+      "extandTableColumns": {
+        "ShopeNoText": "दुकान नं.",
+        "AddressText": "पता"
+      }
+    }
+  },
+  "ViewPage": {
+    "deleteTransFunctionMessages": {
+      "successMessage1": "दुकान नं. के लिए लेनदेन सफलतापूर्वक हटा दिया गया: ",
+      "successMessage2": "इस दुकान नं. के सभी लेनदेन रिकॉर्ड सिस्टम से सफलतापूर्वक हटा दिए गए हैं।",
+      "errorMessage1": "इंडस्ट्री दुकान खाते का लेनदेन नहीं हटाया गया।",
+      "errorMessage2": "सभी लेनदेन नहीं हटाए गए"
+    },
+    "editFunctionMessages": {
+      "errorMessage": "आईडी द्वारा इंडस्ट्री डेटा नहीं मिला।"
+    },
+    "fetchDataErrorMessage": "सभी इंडस्ट्रीज के दुकान खाते का डेटा लोड नहीं हो रहा है",
+    "tableColumns": {
+      "serialNoTitleText": "क्र.सं.",
+      "IndustryNameTitleText": "इंडस्ट्री का नाम",
+      "ShopeNoText": "दुकान नं.",
+      "actionTitleText": "कार्रवाई",
+      "actionPopAlertText": "क्या आप दुकान नं. के लिए सभी लेनदेन मिटाना चाहते हैं?",
+      "extandTableColumns": {
+        "transNoTitleText": "लेनदेन नं.",
+        "dateTitleText": "तारीख",
+        "loan": {
+          "titleText": "ऋण (Loan)",
+          "amountText": "राशि",
+          "amountTypeText": "प्रकार"
+        },
+        "buyItem": {
+          "billAmountText": "राशि",
+          "billText": "बिल",
+          "briefText": "संक्षिप्त विवरण"
+        },
+        "sellItem": {
+          "billAmountText": "राशि",
+          "billText": "बिल",
+          "BriefText": "संक्षिप्त विवरण",
+          "Crops": {
+            "buttonText": "देखें",
+            "cropNameText": "फसल का नाम",
+            "cropRateText": "फसल की दर",
+            "cropQtyText": "मात्रा",
+            "cropTotalText": "कुल"
+          }
+        },
+        "diesel": {
+          "billAmountText": "राशि",
+          "billText": "बिल",
+          "qtyText": "मात्रा",
+          "rateText": "दर"
+        },
+        "actionTitleText": "कार्रवाई",
+        "actionPopAlertText": "क्या आप लेनदेन नं. को मिटाना चाहते हैं?"
+      }
+    },
+    "cardTitle": "खाते"
+  },
+  "calculationPage": {
+    "setDateMessages": {
+      "postError": "अंतिम तिथि पोस्ट नहीं की गई",
+      "editError": "तारीख बदली नहीं गई है",
+      "deleteError": "तारीख फ़ील्ड को हटाया नहीं जा सकता"
+    },
+    "fetchDataErrorMessage": "दुकान का खाता नहीं मिला",
+    "fetchDateErrorMessage": "कैलकुलेटर पेज में आईडी द्वारा तारीख नहीं मिल रही है।",
+    "cardTitle": "गणना दृश्य (Calc View)",
+    "form": {
+      "inputLabel": "अंतिम तिथि",
+      "setButtonText": "सेट करें",
+      "editButtonText": "बदलें",
+      "deleteButtonText": "हटाएं"
+    },
+    "tableColumns": {
+      "serialNoTitleText": "क्र.सं.",
+      "transNoTitleText": "लेनदेन नं.",
+      "dateTitleText": "तारीख",
+      "loan": {
+        "titleText": "ऋण",
+        "amountText": "राशि",
+        "daysText": "दिन",
+        "monthsText": "महीने",
+        "interestText": "ब्याज",
+        "totalText": "कुल",
+        "amountTypeText": "प्रकार"
+      },
+      "buyItem": {
+        "billAmountText": "राशि",
+        "daysText": "दिन",
+        "monthsText": "महीने",
+        "interestText": "ब्याज",
+        "totalText": "कुल"
+      },
+      "sellItem": {
+        "billAmountText": "राशि",
+        "daysText": "दिन",
+        "monthsText": "महीने",
+        "interestText": "ब्याज",
+        "totalText": "कुल"
+      },
+      "diesel": {
+        "billAmountText": "राशि",
+        "daysText": "दिन",
+        "monthsText": "महीने",
+        "interestText": "ब्याज",
+        "totalText": "कुल"
+      },
+      "grandTotalText": "कुल योग (Grand Total)",
+      "actionTitleText": "कार्रवाई",
+      "actionPopAlertText": "क्या आप लेनदेन नं. को मिटाना चाहते हैं?"
+    }
+  },
+  "workerPage": {
+    "deleteFunctionMessage": {
+      "errorMessage1": "टेबल में कर्मचारी नहीं मिला"
+    },
+    "fetchDataErrorMessage": "कर्मचारियों की सूची नहीं मिली।",
+    "tableColumns": {
+      "serialNoTextTitle": "क्र.सं.",
+      "dateText": "तारीख",
+      "workerDetails": {
+        "workerNameText": "नाम",
+        "workerIdProofText": "आईडी प्रमाण",
+        "workerContect": "संपर्क"
+      },
+      "actionText": "कार्रवाई",
+      "actionPopAlertText": "क्या आप वाकई इस कर्मचारी को हटाना चाहते हैं? उससे संबंधित सारा डेटा स्थायी रूप से हटा दिया जाएगा",
+      "extandTableColumns": {
+        "serialNoTextTitle": "क्र.सं.",
+        "dateText": "तारीख",
+        "gives": {
+          "amountText": "राशि",
+          "amountTypeText": "प्रकार",
+          "briefText": "संक्षिप्त विवरण",
+          "Crops": {
+            "buttonText": "देखें",
+            "cropNameText": "फसल का नाम",
+            "cropQtyText": "मात्रा",
+            "cropRateText": "दर",
+            "cropTotalText": "कुल"
+          }
+        },
+        "takes": {
+          "paymentText": "राशि",
+          "paymentType": "भुगतान प्रकार",
+          "Crops": {
+            "buttonText": "देखें",
+            "cropNameText": "फसल का नाम",
+            "cropQtyText": "मात्रा",
+            "cropRateText": "दर",
+            "cropTotalText": "कुल"
+          }
+        },
+        "actionText": "कार्रवाई",
+        "actionPopAlertText": "क्या आप वाकई इस लेनदेन को हटाना चाहते हैं?"
+      }
+    },
+    "cardTitle": "कर्मचारी सूची",
+    "cardButtonText": "कर्मचारी जोड़ें"
+  },
+  "workerCalcPage": {
+    "setDateMessages": {
+      "postError": "अंतिम तिथि पोस्ट नहीं की गई",
+      "editError": "तारीख बदली नहीं गई है",
+      "deleteError": "तारीख फ़ील्ड को हटाया नहीं जा सकता"
+    },
+    "fetchDataErrorMessage": "आईडी द्वारा कर्मचारी लेनदेन नहीं मिले",
+    "fetchDateErrorMessage": "workerCalc पेज में आईडी द्वारा तारीख नहीं मिल रही है।",
+    "tableColumns": {
+      "serialNoTextTitle": "क्र.सं.",
+      "dateText": "तारीख",
+      "gives": {
+        "amountText": "राशि",
+        "amountTypeText": "प्रकार",
+        "daysText": "दिन",
+        "monthsText": "महीने",
+        "interestText": "ब्याज",
+        "totalText": "कुल राशि"
+      },
+      "takes": {
+        "paymentText": "राशि",
+        "paymentType": "भुगतान प्रकार",
+        "daysText": "दिन",
+        "monthsText": "महीने",
+        "interestText": "ब्याज",
+        "totalText": "कुल भुगतान"
+      },
+      "grandTotalText": "कुल योग"
+    },
+    "cardTitle": "लेनदेन दृश्य"
+  },
+  "settingPage": {
+    "logoutText": "लॉग आउट",
+    "deleteText": "खाता हटाएं",
+    "logoutSuccess": "यूजर सफलतापूर्वक लॉग आउट हो गया"
+  },
+  "entDrawer": {
+    "submitFunction": {
+      "sameShopeNoError": "दुकान नंबर समान हैं",
+      "successMessageforCreate": "इंडस्ट्री सफलतापूर्वक बनाई गई",
+      "errorMessageforCreate": "सर्वर त्रुटि के कारण इंडस्ट्री डेटा जमा नहीं हो सका।",
+      "successMessageforEdit": "इंडस्ट्री डेटा सफलतापूर्वक अपडेट किया गया",
+      "errorMessageforEdit": "सर्वर त्रुटि के कारण इंडस्ट्री डेटा अपडेट विफल रहा।",
+      "withoutChangeMessage": "कोई बदलाव नहीं पाया गया"
+    },
+    "drawerForm": {
+      "titleText1": "बदलें",
+      "titleText2": "जोड़ें",
+      "nameInput": {
+        "fnText": "पहला नाम",
+        "fnpt": "पहला नाम",
+        "fnrText": "नाम अनिवार्य है",
+        "lnText": "अंतिम नाम",
+        "lnpt": "अंतिम नाम",
+        "indnText": "इंडस्ट्री का नाम",
+        "indnrText": "इंडस्ट्री का नाम अनिवार्य है",
+        "indnpt": "इंडस्ट्री का नाम.."
+      },
+      "contactInput": {
+        "text": "संपर्क",
+        "rm": "कृपया मोबाइल नंबर दर्ज करें",
+        "vt": "कृपया वैध 10 अंकों का नंबर दर्ज करें",
+        "pt": "संपर्क..."
+      },
+      "dateInput": {
+        "text": "तारीख",
+        "rm": "तारीख अनिवार्य है"
+      },
+      "shopeInputs": {
+        "snt": "दुकान नं.",
+        "rm": "दुकान नंबर अनिवार्य है",
+        "vt": "यह दुकान नंबर आपके डेटाबेस में पहले से मौजूद है",
+        "snpt": "दुकान नंबर दर्ज करें",
+        "at": "पता",
+        "apt": "पता"
+      },
+      "button": {
+        "sbt": "सबमिट",
+        "cbt": "रद्द करें"
+      }
+    }
+  },
+  "indDrawer": {
+    "submitFunction": {
+      "successMessageforCreate": "लेनदेन सफलतापूर्वक जोड़ा गया",
+      "errorMessageforCreate": "नया लेनदेन अपलोड करने में विफल।",
+      "successMessageforEdit": "लेनदेन अपडेट किया गया!",
+      "errorMessageforEdit": "सिस्टम त्रुटि के कारण लेनदेन संपादित नहीं किया जा सका।"
+    },
+    "drawerForm": {
+      "titleText1": "बदलें",
+      "titleText2": "जोड़ें",
+      "ttt1": "अनिवार्य फ़ील्ड",
+      "dateInput": {
+        "text": "तारीख",
+        "rm": "तारीख अनिवार्य है",
+        "pt": "तारीख चुनें"
+      },
+      "interestInput": {
+        "text": "ब्याज दर",
+        "rm": "ब्याज दर अनिवार्य है",
+        "pt": "ब्याज दर दर्ज करें"
+      },
+      "ttt2": "नकद/खाता राशि",
+      "loanInput": {
+        "text1": "ऋण राशि",
+        "text2": "प्रकार",
+        "pt1": "राशि दर्ज करें",
+        "pt2": "प्रकार चुनें"
+      },
+      "ttt3": "खरीदी गई वस्तुओं के लिए",
+      "buyItemInput": {
+        "text1": "BBA (खरीद बिल राशि)",
+        "pt1": "खरीद बिल राशि",
+        "text2": "BB (खरीद बिल)",
+        "pt2": "खरीद बिल",
+        "text3": "B.brief (खरीद विवरण)",
+        "pt3": "खरीद संक्षिप्त विवरण"
+      },
+      "ttt4": "डीजल के लिए",
+      "dieselInput": {
+        "text1": "DBA (डीजल बिल राशि)",
+        "pt1": "डीजल बिल राशि",
+        "text2": "D.Qty (डीजल मात्रा)",
+        "pt2": "डीजल मात्रा",
+        "text3": "D.Rate (डीजल दर)",
+        "pt3": "डीजल दर"
+      },
+      "ttt5": "फसल बिक्री के लिए",
+      "sellItemInput": {
+        "text1": "SBA (बिक्री बिल राशि)",
+        "pt1": "बिक्री बिल राशि",
+        "text2": "SB (बिक्री बिल)",
+        "pt2": "बिक्री बिल नंबर",
+        "text3": "S.brief (बिक्री विवरण)",
+        "pt3": "बिक्री संक्षिप्त विवरण",
+        "crops": {
+          "cnt": "फसल",
+          "cqt": "मात्रा",
+          "crt": "दर",
+          "ctt": "कुल"
+        }
+      }
+    },
+    "button": {
+      "sbt": "सबमिट",
+      "cbt": "रद्द करें"
+    }
+  },
+  "alertText": "चेतावनी",
+  "userIdActionModal": {
+    "mttr": "पासवर्ड रीसेट करें",
+    "mttd": "आईडी हटाने की पुष्टि के लिए 'Ok' दबाएं",
+    "modalForm": {
+      "uiit": "यूजर आईडी",
+      "uiirm": "कृपया वैध यूजर आईडी दर्ज करें",
+      "uiipt": "यूजर आईडी दर्ज करें",
+      "pit1": "नया पासवर्ड",
+      "pipt1": "नया पासवर्ड दर्ज करें",
+      "pirm": "न्यूनतम 6 अक्षर",
+      "pit2": "पासवर्ड की पुष्टि करें",
+      "pipt2": "पासवर्ड दोबारा दर्ज करें"
+    },
+    "button": "खोजें (Find)"
+  },
+  "workerDrawer": {
+    "submitFunction": {
+      "successMessageforCreate1": "कर्मचारी डेटा सफलतापूर्वक बनाया गया",
+      "errorMessageforCreate1": "कर्मचारी डेटा अपलोड करने में विफल।",
+      "successMessageforCreate2": "लेनदेन सफलतापूर्वक जोड़ा गया",
+      "errorMessageforCreate2": "कर्मचारी लेनदेन अपलोड करने में विफल",
+      "successMessageforEdit": "लेनदेन अपडेट किया गया",
+      "errorMessageforEdit": "लेनदेन विवरण अपडेट करने में विफल।"
+    },
+    "detailInput": {
+      "fnt": "पहला नाम",
+      "fnrm": "कृपया कर्मचारी का नाम दर्ज करें",
+      "fnpt": "पहला नाम दर्ज करें",
+      "lnt": "अंतिम नाम",
+      "lnpt": "अंतिम नाम दर्ज करें",
+      "nnt": "निक नेम (घर का नाम)",
+      "nnpt": "घर का नाम दर्ज करें",
+      "idpt": "आईडी प्रमाण",
+      "idprm": "आईडी प्रमाण अनिवार्य है",
+      "idpvm": "यह आईडी आपके डेटाबेस में पहले से मौजूद है",
+      "idppt": "आईडी प्रमाण दर्ज करें",
+      "ct": "संपर्क",
+      "crm": "कृपया मोबाइल नंबर दर्ज करें",
+      "cvm": "कृपया वैध 10 अंकों का नंबर दर्ज करें",
+      "cpt": "मोबाइल नंबर दर्ज करें",
+      "dt": "तारीख"
+    },
+    "awDrawerTitle": "कर्मचारी जोड़ें",
+    "awtDrawerTitle": "कर्मचारी लेनदेन जोड़ें",
+    "transactionInput": {
+      "at": "राशि",
+      "apt": "राशि दर्ज करें",
+      "att": "प्रकार",
+      "atpt": "राशि प्रकार चुनें",
+      "bt": "विवरण",
+      "plt": "भुगतान",
+      "plpt": "भुगतान दर्ज करें",
+      "ptt": "प्रकार",
+      "ptpt": "भुगतान प्रकार चुनें",
+      "transType": {
+        "gives": "दिया (Gives)",
+        "takes": "लिया (Takes)",
+        "none": "कोई नहीं"
+      },
+      "crops": {
+        "cnt": "फसल",
+        "cqt": "मात्रा",
+        "crt": "दर",
+        "ctt": "कुल"
+      },
+      "dt": "तारीख",
+      "drm": "तारीख अनिवार्य है",
+      "button": {
+        "sbt": "सबमिट",
+        "cbt": "रद्द करें"
+      }
+    }
+  },
+  "layout": {
+    "ft1": "किसान अकाउंटेंट",
+    "ft2": "सुख रामगढ़िया द्वारा निर्मित",
+    "menu": {
+      "home": "होम",
+      "view": "देखें",
+      "worker": "कर्मचारी",
+      "setting": "सेटिंग",
+      "logout": "लॉग आउट",
+      "delete": "हटाएं"
+    }
+  }
+}

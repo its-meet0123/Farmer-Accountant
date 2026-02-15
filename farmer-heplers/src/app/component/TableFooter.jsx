@@ -42,7 +42,9 @@ const TableFooterForWorkerCalc = ({ data }) => {
               </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={7}>
-              <h4 style={{ color: "#D73535" }}>{totalOfReturnAmount}</h4>
+              <h4 style={{ color: "#D73535" }}>
+                {totalOfReturnAmount.toFixed(2)}
+              </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={8}>
               <h4 style={{ color: "#8ABB6C" }}>{totalOfPayment}</h4>
@@ -56,7 +58,9 @@ const TableFooterForWorkerCalc = ({ data }) => {
               </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={13}>
-              <h4 style={{ color: "#8ABB6C" }}>{totalOfReturnPayment}</h4>
+              <h4 style={{ color: "#8ABB6C" }}>
+                {totalOfReturnPayment.toFixed(2)}
+              </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={14}>
               {grandTotal > 0 ? (
@@ -128,7 +132,9 @@ const TableFooterForViewCalc = ({ data }) => {
           <Table.Summary.Cell index={3}></Table.Summary.Cell>
           <Table.Summary.Cell index={4}></Table.Summary.Cell>
           <Table.Summary.Cell index={5}>
-            <h4 style={{ color: "#3e0703" }}>{totalOfLoanAmountInterest}</h4>
+            <h4 style={{ color: "#3e0703" }}>
+              {totalOfLoanAmountInterest.toFixed(2)}
+            </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={6}>
             <h4 style={{ color: "#3e0703" }}>
@@ -141,7 +147,9 @@ const TableFooterForViewCalc = ({ data }) => {
           <Table.Summary.Cell index={8}></Table.Summary.Cell>
           <Table.Summary.Cell index={9}></Table.Summary.Cell>
           <Table.Summary.Cell index={10}>
-            <h4 style={{ color: "#D73535" }}>{totalOfBuyBillAmountInterest}</h4>
+            <h4 style={{ color: "#D73535" }}>
+              {totalOfBuyBillAmountInterest.toFixed(2)}
+            </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={11}>
             <h4 style={{ color: "#D73535" }}>
@@ -155,7 +163,7 @@ const TableFooterForViewCalc = ({ data }) => {
           <Table.Summary.Cell index={14}></Table.Summary.Cell>
           <Table.Summary.Cell index={15}>
             <h4 style={{ color: "#8ABB6C" }}>
-              {totalOfSellBillAmountInterest}
+              {totalOfSellBillAmountInterest.toFixed(2)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={16}>
@@ -170,7 +178,7 @@ const TableFooterForViewCalc = ({ data }) => {
           <Table.Summary.Cell index={19}></Table.Summary.Cell>
           <Table.Summary.Cell index={20}>
             <h4 style={{ color: "#075b5e" }}>
-              {totalOfDieselBillAmountInterest}
+              {totalOfDieselBillAmountInterest.toFixed(2)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={21}>

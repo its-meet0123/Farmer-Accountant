@@ -30,17 +30,18 @@ const LogIn = () => {
 
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
-    const res = await postUserDataForLoggedIn(values);
-    const data = await res.data;
-    if (!data) {
+    try {
+      const res = await postUserDataForLoggedIn(values);
+      const data = await res.data;
+      if (data.status === "success") {
+        loginComplete(data);
+        message.success(data.message);
+      } else {
+      }
+    } catch (err) {
       const text = "Data not fetching for loggedIn";
       showError(text);
-    }
-    if (data.status === "success") {
-      loginComplete(data);
-      message.success(data.message);
-    } else {
-      showError(data.message);
+      console.log(err.message);
     }
   };
   return (

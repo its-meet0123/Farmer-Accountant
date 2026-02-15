@@ -1,0 +1,470 @@
+{
+  "authcontext": {
+    "spinAlertTitle": "Data Loading",
+    "spinAlertText": "Hang tight! We're loading your data."
+  },
+  "loginPage": {
+    "formSubmitErrorText": "Data not fetching for loggedIn",
+    "cardTitle": "LogIn Form",
+    "formUserIdInput": {
+      "text": "User ID",
+      "requiredText": "Please enter your ID!",
+      "checkText": "Please enter valid userId"
+    },
+    "formPasswordInput": {
+      "text": "Password",
+      "requiredText": "Please enter your Password!",
+      "checkText": "Please enter valid password"
+    },
+    "formSubmitButtonText": "Submit",
+    "formForgotPasswordButtonText": "Forgot Password",
+    "formGoToSignUpButtonText": "Sign Up!"
+  },
+
+  "signUpPage": {
+    "formSubmitErrorText1": "Values not defined",
+    "formSubmitErrorText2": "User data has not been uploaded",
+    "cardTitle": "SignUp Form",
+    "formUserNameInputs": {
+      "firstNameText": "First Name",
+      "lastNameText": "Last Name",
+      "requiredText": "User name is required"
+    },
+    "formUserIdInput": {
+      "text": "User ID",
+      "requiredText": "Please create your ID!",
+      "minText": "Min 5 characters",
+      "maxText": "Max 15 charcters",
+      "patternCheckText": "Please start your User ID with \"@\" and use lowercase only."
+    },
+    "formPasswordInput": {
+      "text": "Password",
+      "requiredText": "Please set your Password!",
+      "patternCheckText": "Lowercase letters only"
+    },
+    "formValidateMessage": "${label} is required!",
+    "formSubmitButtonText": "Submit",
+    "formGoToLogInButtonText": "Log In"
+  },
+
+  "homePage": {
+    "deleteFunctionMessages": {
+      "successMessage": "Deleted Successfully",
+      "errorMessage": "The system is not allowing the Industry data to be removed"
+    },
+    "editFunctionMessages": {
+      "errorMessage": "Industry data not fetched by Id"
+    },
+    "fetchDataErrorMessage": "All Industries data not fetching",
+    "tableColumns": {
+      "serialNoTitleText": "S.No.",
+      "IndustryNameTitleText": "Industry Name",
+      "founderTitleText": "Founder",
+      "contactTitleText": "Contact",
+      "dateTitleText": "Date",
+      "actionTitleText": "Action",
+      "actionPopAlertText": "Are you sure you want to delete this Industry? All associated data and shops will be permanently removed",
+      "extandTableColumns": {
+        "ShopeNoText": "Shope No.",
+        "AddressText": "Address"
+      }
+    }
+  },
+
+  "ViewPage": {
+    "deleteTransFunctionMessages": {
+      "successMessage1": "Transaction deleted successfully for shope No. ",
+      "successMessage2": "Deleted all transaction records for this Shope No. have been successfully from the system. ",
+      "errorMessage1": "Industry shope account transaction not deleted.",
+      "errorMessage2": "All transactions not deleted"
+    },
+    "editFunctionMessages": {
+      "errorMessage": "Industry data not fetched by Id."
+    },
+    "fetchDataErrorMessage": "All Industries shope account data not fetching",
+    "tableColumns": {
+      "serialNoTitleText": "S.No.",
+      "IndustryNameTitleText": "Industry Name",
+      "ShopeNoText": "Shope No.",
+      "actionTitleText": "Action",
+      "actionPopAlertText": "Do you want to clear all transactions for Shope No.",
+      "extandTableColumns": {
+        "transNoTitleText": "Trans. No.",
+        "dateTitleText": "Date",
+        "loan": {
+          "titleText": "Loan",
+          "amountText": "Amount",
+          "amountTypeText": "Type"
+        },
+        "buyItem": {
+          "billAmountText": "Amount",
+          "billText": "Bill",
+          "briefText": "Brief"
+        },
+        "sellItem": {
+          "billAmountText": "Amount",
+          "billText": "Bill",
+          "BriefText": "Brief",
+          "Crops": {
+            "buttonText": "View",
+            "cropNameText": "Crop Name",
+            "cropRateText": "Crop Rate",
+            "cropQtyText": "Qty.",
+            "cropTotalText": "Total"
+          }
+        },
+        "diesel": {
+          "billAmountText": "Amount",
+          "billText": "Bill",
+          "qtyText": "Qty.",
+          "rateText": "Rate"
+        },
+        "actionTitleText": "Action",
+        "actionPopAlertText": "Do you want to clear Transaction No."
+      }
+    },
+    "cardTitle": "Accounts"
+  },
+
+  "calculationPage": {
+    "setDateMessages": {
+      "postError": "End Date not posted",
+      "editError": "The date has not changed",
+      "deleteError": "The date  field cannot be deleted"
+    },
+    "fetchDataErrorMessage": "Shope Account not fetched",
+    "fetchDateErrorMessage": "Date not fetching by Id in calculator page.",
+    "cardTitle": "Calc View",
+    "form": {
+      "inputLabel": "End Date",
+      "setButtonText": "Set",
+      "editButtonText": "Edit",
+      "deleteButtonText": "Delete"
+    },
+    "tableColumns": {
+      "serialNoTitleText": "S.No.",
+      "transNoTitleText": "Trans. No.",
+      "dateTitleText": "Date",
+      "loan": {
+        "titleText": "Loan",
+        "amountText": "Amount",
+        "daysText": "Days",
+        "monthsText": "Months",
+        "interestText": "Interest",
+        "totalText": "Total",
+        "amountTypeText": "Type"
+      },
+      "buyItem": {
+        "billAmountText": "Amount",
+        "daysText": "Days",
+        "monthsText": "Months",
+        "interestText": "Interest",
+        "totalText": "Total"
+      },
+      "sellItem": {
+        "billAmountText": "Amount",
+        "daysText": "Days",
+        "monthsText": "Months",
+        "interestText": "Interest",
+        "totalText": "Total"
+      },
+      "diesel": {
+        "billAmountText": "Amount",
+        "daysText": "Days",
+        "monthsText": "Months",
+        "interestText": "Interest",
+        "totalText": "Total"
+      },
+      "grandTotalText": "Grand Total",
+      "actionTitleText": "Action",
+      "actionPopAlertText": "Do you want to clear Transaction No."
+    }
+  },
+
+  "workerPage": {
+    "deleteFunctionMessage": {
+      "errorMessage1": "Worker not found from table"
+    },
+    "fetchDataErrorMessage": "Worker list not found.",
+    "tableColumns": {
+      "serialNoTextTitle": "Sr. No.",
+      "dateText": "Date",
+      "workerDetails": {
+        "workerNameText": "Name",
+        "workerIdProofText": "ID Proof",
+        "workerContect": "Contect"
+      },
+      "actionText": "Action",
+      "actionPopAlertText": "Are you sure want to delete this Worker? All associated data with that will be pemanently removed",
+      "extandTableColumns": {
+        "serialNoTextTitle": "Sr. No.",
+        "dateText": "Date",
+        "gives": {
+          "amountText": "Amount",
+          "amountTypeText": "Type",
+          "briefText": "Brief",
+          "Crops": {
+            "buttonText": "View",
+            "cropNameText": "Crop Name",
+            "cropQtyText": "Qty.",
+            "cropRateText": "Crop Rate",
+            "cropTotalText": "Total"
+          }
+        },
+        "takes": {
+          "paymentText": "Amount",
+          "paymentType": "Payment Type",
+          "Crops": {
+            "buttonText": "View",
+            "cropNameText": "Crop Name",
+            "cropQtyText": "Qty.",
+            "cropRateText": "Crop Rate",
+            "cropTotalText": "Total"
+          }
+        },
+        "actionText": "Action",
+        "actionPopAlertText": "Are you sure you want to delete this Transaction?"
+      }
+    },
+    "cardTitle": "Worker List",
+    "cardButtonText": "Add Worker"
+  },
+
+  "workerCalcPage": {
+    "setDateMessages": {
+      "postError": "End Date not posted",
+      "editError": "The date has not changed",
+      "deleteError": "The date field cannot be deleted"
+    },
+    "fetchDataErrorMessage": "Worker Transactions not fteched by Id ",
+    "fetchDateErrorMessage": "Date not fetching by Id in workerCalc page.",
+    "tableColumns": {
+      "serialNoTextTitle": "Sr. No.",
+      "dateText": "Date",
+      "gives": {
+        "amountText": "Amount",
+        "amountTypeText": "Type",
+        "daysText": "Days",
+        "monthsText": "Months",
+        "interestText": "Interest",
+        "totalText": "Total Amount"
+      },
+      "takes": {
+        "paymentText": "Amount",
+        "paymentType": "Payment Type",
+        "daysText": "Days",
+        "monthsText": "Months",
+        "interestText": "Interest",
+        "totalText": "Total Payment"
+      },
+      "grandTotalText": "Grand Total"
+    },
+    "cardTitle": "Transaction view for"
+  },
+
+  "settingPage": {
+    "logoutText": "Log Out",
+    "deleteText": "Delete Account",
+    "logoutSuccess": "User logout successfully"
+  },
+
+  "entDrawer": {
+    "submitFunction": {
+      "sameShopeNoError": "Shope Numbers are same",
+      "successMessageforCreate": "Industry Created Successfully",
+      "errorMessageforCreate": "Industry data submission failed due to a server error.",
+      "successMessageforEdit": "Industry data update successfully",
+      "errorMessageforEdit": "Industry data update failed due to a server error.",
+      "withoutChangeMessage": "No changes detected"
+    },
+    "drawerForm": {
+      "titleText1": "Edit",
+      "titleText2": "Add",
+      "nameInput": {
+        "fnText": "First Name",
+        "fnpt": "first name",
+        "fnrText": "Name is required",
+        "lnText": "Last Name",
+        "lnpt": "last name",
+        "indnText": "Industry Name",
+        "indnrText": "Industry Name is required",
+        "indnpt": "Industry name .."
+      },
+      "contactInput": {
+        "text": "Contact",
+        "rm": "Please enter the mob number",
+        "vt": "Please enter vaild 10 digits number",
+        "pt": "contact..."
+      },
+      "dateInput": {
+        "text": "Date",
+        "rm": "Date is required"
+      },
+      "shopeInputs": {
+        "snt": "Shope No",
+        "rm": "Shope number is required",
+        "vt": "This Shope Number is already exist in your data base",
+        "snpt": "enter shope number",
+        "at": "Address",
+        "apt": "address"
+      },
+      "button": {
+        "sbt": "Submit",
+        "cbt": "Cancel"
+      }
+    }
+  },
+  "indDrawer": {
+    "submitFunction": {
+      "successMessageforCreate": "Transaction Added Successfully",
+      "errorMessageforCreate": "Faild to upload the new transaction.",
+      "successMessageforEdit": "Transaction updated!",
+      "errorMessageforEdit": "Transaction could not be edited due to a system error."
+    },
+    "drawerForm": {
+      "titleText1": "Edit",
+      "titleText2": "Add",
+      "ttt1": "Mandatory fields",
+      "dateInput": {
+        "text": "Date",
+        "rm": "Date is required",
+        "pt": "Select date"
+      },
+      "interestInput": {
+        "text": "Interest Rate",
+        "rm": "Interest rate is required",
+        "pt": "Enter interest rate"
+      },
+      "ttt2": "Cash/Account amount",
+      "loanInput": {
+        "text1": "Loan Amount",
+        "text2": "Type",
+        "pt1": "Enter amount",
+        "pt2": "Select type"
+      },
+      "ttt3": "For buy items",
+      "buyItemInput": {
+        "text1": "BBA",
+        "pt1": "Buy item bill amount",
+        "text2": "BB",
+        "pt2": "Buy item bill",
+        "text3": "B.brief",
+        "pt3": "Buy item brief"
+      },
+      "ttt4": "For diesel",
+      "dieselInput": {
+        "text1": "DBA",
+        "pt1": "Diesel bill amount",
+        "text2": "D.Qty",
+        "pt2": "Diesel quantity",
+        "text3": "D.Rate",
+        "pt3": "Diesel rate"
+      },
+      "ttt5": "For sell crops",
+      "sellItemInput": {
+        "text1": "SBA",
+        "pt1": "Sell item bill amount",
+        "text2": "SB",
+        "pt2": "Sell item bill number",
+        "text3": "S.brief",
+        "pt3": "Sell item brief",
+        "crops": {
+          "cnt": "Crop",
+          "cqt": "Qty.",
+          "crt": "Rate",
+          "ctt": "Total"
+        }
+      }
+    },
+    "button": {
+      "sbt": "Submit",
+      "cbt": "Cancel"
+    }
+  },
+  "alertText": "WARNING",
+  "userIdActionModal": {
+    "mttr": "Reset Password",
+    "mttd": "Press 'Ok' to confirm ID deletion",
+    "modalForm": {
+      "uiit": "User ID",
+      "uiirm": "Please enter vaild userId",
+      "uiipt": "Enter user ID",
+      "pit1": "New Password",
+      "pipt1": "Enter new password",
+      "pirm": "Min 6 characters",
+      "pit2": "Confirm Password",
+      "pipt2": "Enter again password"
+    },
+    "button": "find"
+  },
+  "workerDrawer": {
+    "submitFunction": {
+      "successMessageforCreate1": "",
+      "errorMessageforCreate1": "Faild to upload the Worker data.",
+      "successMessageforCreate2": "",
+      "errorMessageforCreate2": "Faild to upload the Worker transaction",
+      "successMessageforEdit": "",
+      "errorMessageforEdit": "Faild to update transaction details."
+    },
+    "detailInput": {
+      "fnt": "First Name",
+      "fnrm": "Please enter worker name",
+      "fnpt": "enter first name",
+      "lnt": "Last Name",
+      "lnpt": "enter last name",
+      "nnt": "Nick Name",
+      "nnpt": "enter home name",
+      "idpt": "Id Proof",
+      "idprm": "ID proof is required",
+      "idpvm": "This Id is already exist in your data base",
+      "idppt": "enter Id proof",
+      "ct": "Contact",
+      "crm": "Please enter the mob number",
+      "cvm": "Please enter vaild 10 digits number",
+      "cpt": "enter mob no",
+      "dt": "Date"
+    },
+    "awDrawerTitle": "Add Worker",
+    "awtDrawerTitle": "Add Worker Transaction",
+    "transactionInput": {
+      "at": "Amount",
+      "apt": "enter amount",
+      "att": "Type",
+      "atpt": "select amount type",
+      "bt": "Brief",
+      "plt": "Payment",
+      "plpt": "enter payment",
+      "ptt": "Type",
+      "ptpt": "select payment type",
+      "transType": {
+        "gives": "Gives",
+        "takes": "Takes",
+        "none": "None"
+      },
+      "crops": {
+        "cnt": "Crop",
+        "cqt": "Qty.",
+        "crt": "Rate",
+        "ctt": "Total"
+      },
+      "dt": "Date",
+      "drm": "Date is required",
+      "button": {
+        "sbt": "Submit",
+        "cbt": "Cancel"
+      }
+    }
+  },
+  "layout": {
+    "ft1": "Farmer Accountant",
+    "ft2": "Created by Sukh Ramghria",
+    "menu": {
+      "home": "Home",
+      "view": "View",
+      "worker": "Worker",
+      "setting": "Setting",
+      "logout": "Logout",
+      "delete": "Delete"
+    }
+  }
+}
