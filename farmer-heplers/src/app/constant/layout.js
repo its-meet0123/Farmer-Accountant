@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 function getItem(label, key, children, icon) {
+  const { t } = useTranslation();
   return {
-    label,
+    label: t(label),
     key,
     children,
     icon,
