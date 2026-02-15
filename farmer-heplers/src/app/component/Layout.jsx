@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import Profile from "./Profile";
 import UserActionModel from "./UserIdActionModel";
-import { useTranslation } from "react-i18next";
+
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
 
 const { Header, Content, Footer } = Layout;
@@ -21,7 +21,6 @@ function getItem(label, key, children, icon) {
 }
 
 const AppLayout = ({ children }) => {
-  const { t } = useTranslation();
   const { authState, logout, goToSingUp } = useAuth();
   const location = useLocation();
   const screen = useBreakpoint();
