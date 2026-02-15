@@ -10,7 +10,15 @@ import LanguageChangeDropDown from "./LanguageChangeDropdown";
 
 const { Header, Content, Footer } = Layout;
 const { useBreakpoint } = Grid;
-const Menus = [...primeryMenu, ...moreMenu];
+
+function getItem(label, key, children, icon) {
+  return {
+    label,
+    key,
+    children,
+    icon,
+  };
+}
 
 const AppLayout = ({ children }) => {
   const { t } = useTranslation();
@@ -23,6 +31,16 @@ const AppLayout = ({ children }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const Menu = [
+    getItem(`${t("layout.menu.home")}`, "/home"),
+    getItem(`${t("layout.menu.view")}`, "/view"),
+    getItem("Worker", "/worker"),
+    getItem("Setting", "/setting", [
+      getItem("Logout", "/logout"),
+      getItem("Delete", "/delete"),
+    ]),
+  ];
 
   useEffect(() => {
     setPathname(location.pathname);
@@ -58,7 +76,7 @@ const AppLayout = ({ children }) => {
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={pathname}
-          items={Menus}
+          items={Menu}
           style={{ flex: 1, minWidth: 0 }}
           onClick={({ key }) => {
             openMenus(key);
