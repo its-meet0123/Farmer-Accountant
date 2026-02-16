@@ -1,37 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Space } from "antd";
 import i18n from "i18next";
-const items = [
-  {
-    key: "1",
-    label: <a onClick={() => i18n.changeLanguage("en")}>En</a>,
-  },
-  {
-    key: "2",
-    label: <a onClick={() => i18n.changeLanguage("hi")}>Hi</a>,
-  },
-  {
-    key: "3",
-    label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.luohanacademy.com">
-        3rd menu item (disabled)
-      </a>
-    ),
-    disabled: true,
-  },
-  {
-    key: "4",
-    danger: true,
-    label: "a danger item",
-  },
-];
-const LanguageChangeDropDown = () => (
-  <Dropdown menu={{ items }}>
-    <Button>Lang</Button>
-  </Dropdown>
-);
+const LanguageChangeDropDown = () => {
+  const [buttonText, setButtonText] = useState("Eng");
+  const items = [
+    {
+      key: "1",
+      label: (
+        <a
+          onClick={() => {
+            (i18n.changeLanguage("en"), setButtonText("Eng"));
+          }}>
+          En
+        </a>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <a
+          onClick={() => {
+            (i18n.changeLanguage("hi"), setButtonText("Hin"));
+          }}>
+          Hi
+        </a>
+      ),
+    },
+  ];
+  return (
+    <Dropdown menu={{ items }}>
+      <Button>{buttonText}</Button>
+    </Dropdown>
+  );
+};
 export default LanguageChangeDropDown;
