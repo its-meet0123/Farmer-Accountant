@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { userLoggedOut } from "../service/auth";
 import { Alert, Spin } from "antd";
+import { useTranslation } from "react-i18next";
 
 const AuthContext = createContext();
 
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn: false,
     user: null,
   });
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -75,8 +77,8 @@ export const AuthProvider = ({ children }) => {
       <>
         <Spin tip="Loading...">
           <Alert
-            title="Wait for loanding"
-            description="Hang tight! We're loading your data."
+            title={t("authcontext.spinAlertTitle")}
+            description={t("authcontext.spinAlertText")}
             type="info"
           />
         </Spin>
@@ -93,6 +95,8 @@ export const AuthProvider = ({ children }) => {
         logout,
         setIsSignedUp,
         goToSignUP,
+        t,
+        i18n,
       }}>
       {children}
     </AuthContext.Provider>

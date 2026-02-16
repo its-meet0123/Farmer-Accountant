@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import Profile from "./Profile";
 import UserActionModel from "./UserIdActionModel";
-import { useTranslation } from "react-i18next";
+
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
 
 const { Header, Content, Footer } = Layout;
@@ -20,7 +20,7 @@ function getItem(label, key, children, icon) {
 }
 
 const AppLayout = ({ children }) => {
-  const { authState, logout, goToSingUp } = useAuth();
+  const { authState, logout, goToSingUp, t } = useAuth();
   const location = useLocation();
   const screen = useBreakpoint();
   const navigate = useNavigate();
@@ -29,15 +29,14 @@ const AppLayout = ({ children }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  const { t } = useTranslation();
 
   const Menus = [
     getItem(`${t("layout.menu.home")}`, "/home"),
-    getItem("View", "/view"),
-    getItem("Worker", "/worker"),
-    getItem("Setting", "/setting", [
-      getItem("Logout", "/logout"),
-      getItem("Delete", "/delete"),
+    getItem(`${t("layout.menu.view")}`, "/view"),
+    getItem(`${t("layout.menu.worker")}`, "/worker"),
+    getItem(`${t("layout.menu.setting")}`, "/setting", [
+      getItem(`${t("layout.menu.logout")}`, "/logout"),
+      getItem(`${t("layout.menu.delete")}`, "/delete"),
     ]),
   ];
 
