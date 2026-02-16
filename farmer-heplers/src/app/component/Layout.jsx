@@ -1,6 +1,5 @@
 import { Grid, Layout, Menu, message, theme } from "antd";
 import { useEffect, useState } from "react";
-import { moreMenu, primeryMenu } from "../constant/layout";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import Profile from "./Profile";
