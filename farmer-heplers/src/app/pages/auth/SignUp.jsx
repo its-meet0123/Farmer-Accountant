@@ -8,13 +8,10 @@ const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
 };
-const validateMessages = {
-  required: "${label} is required!",
-};
 
 const SignUp = () => {
   const [form] = Form.useForm();
-  const { signupComplete } = useAuth();
+  const { signupComplete, t } = useAuth();
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -26,11 +23,15 @@ const SignUp = () => {
     });
   };
 
+  const validateMessages = {
+    required: t("signUpPage.formValidateMessage"),
+  };
+
   const onFinish = async (values) => {
     console.log(values);
     if (!values) {
       const type = "error";
-      const text = "Values not defined";
+      const text = `${t("signUpPage.formSubmitErrorText1")}`;
       showSuccess(text, type);
     }
     try {
@@ -43,7 +44,7 @@ const SignUp = () => {
       }
     } catch (err) {
       const type = "error";
-      const text = "User data not posted";
+      const text = `${t("signUpPage.formSubmitErrorText2")}`;
       showSuccess(text, type);
       console.log(err.message);
     }
@@ -58,7 +59,7 @@ const SignUp = () => {
   return (
     <>
       {contextHolder}
-      <Card title="SignUp Form">
+      <Card title={t("signUpPage.cardTitle")}>
         <Form
           {...layout}
           name="SignUp Form"
@@ -68,50 +69,63 @@ const SignUp = () => {
           validateMessages={validateMessages}>
           <Form.Item
             name={["userName", "firstName"]}
-            label="First Name"
-            rules={[{ required: true, message: "User name is required" }]}>
+            label={t("signUpPage.formUserNameInputs.firstNameText")}
+            rules={[
+              {
+                required: true,
+                message: t("signUpPage.formUserNameInputs.requiredText"),
+              },
+            ]}>
             <Input />
           </Form.Item>
-          <Form.Item name={["userName", "lastName"]} label="Last Name">
+          <Form.Item
+            name={["userName", "lastName"]}
+            label={t("signUpPage.formUserNameInputs.lastNameText")}>
             <Input />
           </Form.Item>
           <Form.Item
             name="userId"
-            label="User Id"
+            label={t("signUpPage.formUserIdInput.text")}
             rules={[
-              { required: true, message: "Please create your userId" },
-              { min: 5, message: "Min 5 characters" },
-              { max: 15, message: "Max 15 characters" },
+              {
+                required: true,
+                message: t("signUpPage.formUserIdInput.requiredText"),
+              },
+              { min: 5, message: t("signUpPage.formUserIdInput.miniText") },
+              { max: 15, message: t("signUpPage.formUserIdInput.maxLText") },
               {
                 pattern: /^@[a-z0-9_]+$/,
-                message: "Start with [@...] and Lowercase letters only",
+                message: t("signUpPage.formUserIdInput.patternCheckText"),
               },
             ]}>
             <Input />
           </Form.Item>
           <Form.Item
             name="password"
-            label="Password"
+            label={t("signUpPage.formPasswordInput.text")}
             rules={[
-              { required: true, message: "Please set your password" },
+              {
+                required: true,
+                message: t("signUpPage.formPasswordInput.requiredText"),
+              },
               { min: 6, message: "Min 6 characters" },
               {
                 pattern: /^[a-z0-9]+$/,
-                message: "Lowercase letters only",
+                message: t("signUpPage.formPasswordInput.patternCheckText"),
               },
             ]}>
             <Input />
           </Form.Item>
           <Form.Item label={null}>
             <Button block type="primary" htmlType="submit">
-              Submit
+              {t("signUpPage.formSubmitButtonText")}
             </Button>
             or{" "}
             <a
               onClick={() => {
                 (navigate("/login"), signupComplete());
               }}>
-              Log In
+              {t("signUpPage.formGoToLogInButtonText")}
             </a>
           </Form.Item>
         </Form>

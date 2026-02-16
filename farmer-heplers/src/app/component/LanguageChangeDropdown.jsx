@@ -41,9 +41,7 @@ const LanguageChangeDropDown = () => {
   ];
   return (
     <Dropdown menu={{ items }}>
-      <Button color="default" variant="text">
-        {buttonText}
-      </Button>
+      <Button variant="text">{buttonText}</Button>
     </Dropdown>
   );
 };

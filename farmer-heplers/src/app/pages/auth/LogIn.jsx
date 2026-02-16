@@ -5,9 +5,10 @@ import { postUserDataForLoggedIn } from "../../service/auth";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import UserActionModel from "../../component/UserIdActionModel";
+import LanguageChangeDropDown from "../../component/LanguageChangeDropdown";
 
 const LogIn = () => {
-  const { loginComplete, setIsSignedUp } = useAuth();
+  const { loginComplete, setIsSignedUp, t } = useAuth();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const [openType, setOpenType] = useState(null);
@@ -40,7 +41,7 @@ const LogIn = () => {
       } else {
       }
     } catch (err) {
-      const text = "Data not fetching for loggedIn";
+      const text = `${t("loginPage.formSubmitErrorText")}`;
       showError(text);
       console.log(err.message);
     }
@@ -48,7 +49,7 @@ const LogIn = () => {
   return (
     <>
       {contextHolder}
-      <Card title="LogIn Form">
+      <Card title={t("loginPage.cardTitle")} extra={<LanguageChangeDropDown />}>
         <Form
           name="login"
           initialValues={{ remember: true }}
@@ -57,36 +58,51 @@ const LogIn = () => {
           <Form.Item
             name="userId"
             rules={[
-              { required: true, message: "Please input your ID!" },
-              { min: 5, message: "Please enter valid userId" },
-              { max: 15, message: "Please enter valid userId" },
+              {
+                required: true,
+                message: t("loginPage.formUserIdInput.requiredText"),
+              },
+              { min: 5, message: t("loginPage.formUserIdInput.checkText") },
+              { max: 15, message: t("loginPage.formUserIdInput.checkText") },
             ]}>
-            <Input prefix={<UserOutlined />} placeholder="User ID" allowClear />
+            <Input
+              prefix={<UserOutlined />}
+              placeholder={t("loginPage.formUserIdInput.text")}
+              allowClear
+            />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[
-              { required: true, message: "Please input your Password!" },
-              { min: 6, message: "Please enter vailed password" },
+              {
+                required: true,
+                message: t("loginPage.formPasswordInput.requiredText"),
+              },
+              { min: 6, message: t("loginPage.formPasswordInput.checkText") },
             ]}>
             <Input
               prefix={<LockOutlined />}
               type="password"
-              placeholder="Password"
+              placeholder={t("loginPage.formPasswordInput.text")}
               allowClear
             />
           </Form.Item>
           <Form.Item>
             <Flex justify="space-between" align="center">
-              <a onClick={() => setPassword()}>Forgot password</a>
+              <a onClick={() => setPassword()}>
+                {t("loginPage.formForgotPasswordButtonText")}
+              </a>
             </Flex>
           </Form.Item>
 
           <Form.Item>
             <Button block type="primary" htmlType="submit">
-              Log in
+              {t("loginPage.formSubmitButtonText")}
             </Button>
-            or <a onClick={() => goToSignUP()}>Sign Up!</a>
+            or{" "}
+            <a onClick={() => goToSignUP()}>
+              {t("loginPage.formGoToSignUpButtonText")}
+            </a>
           </Form.Item>
         </Form>
       </Card>

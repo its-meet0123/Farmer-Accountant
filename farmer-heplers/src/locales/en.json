@@ -16,7 +16,7 @@
       "requiredText": "Please enter your Password!",
       "checkText": "Please enter valid password"
     },
-    "formSubmitButtonText": "Submit",
+    "formSubmitButtonText": "Log In",
     "formForgotPasswordButtonText": "Forgot Password",
     "formGoToSignUpButtonText": "Sign Up!"
   },

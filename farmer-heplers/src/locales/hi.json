@@ -16,7 +16,7 @@
       "requiredText": "कृपया अपना पासवर्ड दर्ज करें!",
       "checkText": "कृपया वैध पासवर्ड दर्ज करें"
     },
-    "formSubmitButtonText": "सबमिट",
+    "formSubmitButtonText": "लॉग इन",
     "formForgotPasswordButtonText": "पासवर्ड भूल गए",
     "formGoToSignUpButtonText": "साइन अप करें!"
   },
