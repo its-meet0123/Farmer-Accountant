@@ -32,8 +32,8 @@ const AppLayout = ({ children }) => {
   } = theme.useToken();
 
   const Menu = [
-    getItem(`Home`, "/home"),
-    getItem(`View`, "/view"),
+    getItem("Home", "/home"),
+    getItem("View", "/view"),
     getItem("Worker", "/worker"),
     getItem("Setting", "/setting", [
       getItem("Logout", "/logout"),
