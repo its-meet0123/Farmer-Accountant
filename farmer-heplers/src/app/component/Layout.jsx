@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import Profile from "./Profile";
 import UserActionModel from "./UserIdActionModel";
-
+import { useTranslation } from "react-i18next";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
 
 const { Header, Content, Footer } = Layout;
@@ -29,9 +29,10 @@ const AppLayout = ({ children }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+  const { t } = useTranslation();
 
   const Menus = [
-    getItem("Home", "/home"),
+    getItem(`${t("layout.menu.home")}`, "/home"),
     getItem("View", "/view"),
     getItem("Worker", "/worker"),
     getItem("Setting", "/setting", [
