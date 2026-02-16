@@ -1,0 +1,462 @@
+{
+  "authcontext": {
+    "spinAlertTitle": "ਡੇਟਾ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
+    "spinAlertText": "ਸਬਰ ਰੱਖੋ! ਅਸੀਂ ਤੁਹਾਡਾ ਡੇਟਾ ਲੋਡ ਕਰ ਰਹੇ ਹਾਂ।"
+  },
+  "loginPage": {
+    "formSubmitErrorText": "ਲੌਗਇਨ ਕੀਤੇ ਯੂਜ਼ਰ ਲਈ ਡੇਟਾ ਨਹੀਂ ਮਿਲ ਰਿਹਾ",
+    "cardTitle": "ਲੌਗਇਨ ਫਾਰਮ",
+    "formUserIdInput": {
+      "text": "ਯੂਜ਼ਰ ਆਈਡੀ",
+      "requiredText": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਆਈਡੀ ਦਰਜ ਕਰੋ!",
+      "checkText": "ਕਿਰਪਾ ਕਰਕੇ ਵੈਧ ਯੂਜ਼ਰ ਆਈਡੀ ਦਰਜ ਕਰੋ"
+    },
+    "formPasswordInput": {
+      "text": "ਪਾਸਵਰਡ",
+      "requiredText": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ!",
+      "checkText": "ਕਿਰਪਾ ਕਰਕੇ ਵੈਧ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ"
+    },
+    "formSubmitButtonText": "ਸਬਮਿਟ",
+    "formForgotPasswordButtonText": "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ",
+    "formGoToSignUpButtonText": "ਸਾਈਨ ਅੱਪ ਕਰੋ!"
+  },
+  "signUpPage": {
+    "formSubmitErrorText1": "ਵੈਲਯੂ ਪ੍ਰਭਾਸ਼ਿਤ ਨਹੀਂ ਹਨ",
+    "formSubmitErrorText2": "ਯੂਜ਼ਰ ਡੇਟਾ ਅਪਲੋਡ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ",
+    "cardTitle": "ਸਾਈਨਅੱਪ ਫਾਰਮ",
+    "formUserNameInputs": {
+      "firstNameText": "ਪਹਿਲਾ ਨਾਮ",
+      "lastNameText": "ਆਖਰੀ ਨਾਮ",
+      "requiredText": "ਯੂਜ਼ਰ ਦਾ ਨਾਮ ਜ਼ਰੂਰੀ ਹੈ"
+    },
+    "formUserIdInput": {
+      "text": "ਯੂਜ਼ਰ ਆਈਡੀ",
+      "requiredText": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਆਈਡੀ ਬਣਾਓ!",
+      "minText": "ਘੱਟੋ-ਘੱਟ 5 ਅੱਖਰ",
+      "maxText": "ਵੱਧ ਤੋਂ ਵੱਧ 15 ਅੱਖਰ",
+      "patternCheckText": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਯੂਜ਼ਰ ਆਈਡੀ \"@\" ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ ਅਤੇ ਸਿਰਫ਼ ਛੋਟੇ ਅੱਖਰਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ।"
+    },
+    "formPasswordInput": {
+      "text": "ਪਾਸਵਰਡ",
+      "requiredText": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਪਾਸਵਰਡ ਸੈੱਟ ਕਰੋ!",
+      "patternCheckText": "ਸਿਰਫ਼ ਛੋਟੇ ਅੱਖਰ (Lowercase)"
+    },
+    "formValidateMessage": "${label} ਜ਼ਰੂਰੀ ਹੈ!",
+    "formSubmitButtonText": "ਸਬਮਿਟ",
+    "formGoToLogInButtonText": "ਲੌਗ ਇਨ"
+  },
+  "homePage": {
+    "deleteFunctionMessages": {
+      "successMessage": "ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ",
+      "errorMessage": "ਸਿਸਟਮ ਇੰਡਸਟਰੀ ਡੇਟਾ ਨੂੰ ਹਟਾਉਣ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਦੇ ਰਿਹਾ"
+    },
+    "editFunctionMessages": {
+      "errorMessage": "ਆਈਡੀ ਦੁਆਰਾ ਇੰਡਸਟਰੀ ਡੇਟਾ ਨਹੀਂ ਮਿਲਿਆ"
+    },
+    "fetchDataErrorMessage": "ਸਾਰੀਆਂ ਇੰਡਸਟਰੀਆਂ ਦਾ ਡੇਟਾ ਲੋਡ ਨਹੀਂ ਹੋ ਰਿਹਾ",
+    "tableColumns": {
+      "serialNoTitleText": "ਲੜੀ ਨੰ.",
+      "IndustryNameTitleText": "ਇੰਡਸਟਰੀ ਦਾ ਨਾਮ",
+      "founderTitleText": "ਸੰਸਥਾਪਕ",
+      "contactTitleText": "ਸੰਪਰਕ",
+      "dateTitleText": "ਮਿਤੀ",
+      "actionTitleText": "ਕਾਰਵਾਈ",
+      "actionPopAlertText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਇੰਡਸਟਰੀ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਸਾਰਾ ਸਬੰਧਤ ਡੇਟਾ ਅਤੇ ਦੁਕਾਨਾਂ ਸਥਾਈ ਤੌਰ 'ਤੇ ਹਟਾ ਦਿੱਤੀਆਂ ਜਾਣਗੀਆਂ",
+      "extandTableColumns": {
+        "ShopeNoText": "ਦੁਕਾਨ ਨੰ.",
+        "AddressText": "ਪਤਾ"
+      }
+    }
+  },
+  "ViewPage": {
+    "deleteTransFunctionMessages": {
+      "successMessage1": "ਦੁਕਾਨ ਨੰ. ਲਈ ਲੈਣ-ਦੇਣ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤਾ ਗਿਆ: ",
+      "successMessage2": "ਇਸ ਦੁਕਾਨ ਨੰ. ਦੇ ਸਾਰੇ ਲੈਣ-ਦੇਣ ਰਿਕਾਰਡ ਸਿਸਟਮ ਤੋਂ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੇ ਗਏ ਹਨ।",
+      "errorMessage1": "ਇੰਡਸਟਰੀ ਦੁਕਾਨ ਖਾਤੇ ਦਾ ਲੈਣ-ਦੇਣ ਨਹੀਂ ਹਟਾਇਆ ਗਿਆ।",
+      "errorMessage2": "ਸਾਰੇ ਲੈਣ-ਦੇਣ ਨਹੀਂ ਹਟਾਏ ਗਏ"
+    },
+    "editFunctionMessages": {
+      "errorMessage": "ਆਈਡੀ ਦੁਆਰਾ ਇੰਡਸਟਰੀ ਡੇਟਾ ਨਹੀਂ ਮਿਲਿਆ।"
+    },
+    "fetchDataErrorMessage": "ਸਾਰੀਆਂ ਇੰਡਸਟਰੀਆਂ ਦੇ ਦੁਕਾਨ ਖਾਤਿਆਂ ਦਾ ਡੇਟਾ ਲੋਡ ਨਹੀਂ ਹੋ ਰਿਹਾ",
+    "tableColumns": {
+      "serialNoTitleText": "ਲੜੀ ਨੰ.",
+      "IndustryNameTitleText": "ਇੰਡਸਟਰੀ ਦਾ ਨਾਮ",
+      "ShopeNoText": "ਦੁਕਾਨ ਨੰ.",
+      "actionTitleText": "ਕਾਰਵਾਈ",
+      "actionPopAlertText": "ਕੀ ਤੁਸੀਂ ਦੁਕਾਨ ਨੰ. ਲਈ ਸਾਰੇ ਲੈਣ-ਦੇਣ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+      "extandTableColumns": {
+        "transNoTitleText": "ਲੈਣ-ਦੇਣ ਨੰ.",
+        "dateTitleText": "ਮਿਤੀ",
+        "loan": {
+          "titleText": "ਕਰਜ਼ਾ (Loan)",
+          "amountText": "ਰਕਮ",
+          "amountTypeText": "ਕਿਸਮ"
+        },
+        "buyItem": {
+          "billAmountText": "ਰਕਮ",
+          "billText": "ਬਿੱਲ",
+          "briefText": "ਸੰਖੇਪ ਵੇਰਵਾ"
+        },
+        "sellItem": {
+          "billAmountText": "ਰਕਮ",
+          "billText": "ਬਿੱਲ",
+          "BriefText": "ਸੰਖੇਪ ਵੇਰਵਾ",
+          "Crops": {
+            "buttonText": "ਦੇਖੋ",
+            "cropNameText": "ਫਸਲ ਦਾ ਨਾਮ",
+            "cropRateText": "ਫਸਲ ਦਾ ਭਾਅ",
+            "cropQtyText": "ਮਾਤਰਾ",
+            "cropTotalText": "ਕੁੱਲ"
+          }
+        },
+        "diesel": {
+          "billAmountText": "ਰਕਮ",
+          "billText": "ਬਿੱਲ",
+          "qtyText": "ਮਾਤਰਾ",
+          "rateText": "ਭਾਅ"
+        },
+        "actionTitleText": "ਕਾਰਵਾਈ",
+        "actionPopAlertText": "ਕੀ ਤੁਸੀਂ ਲੈਣ-ਦੇਣ ਨੰ. ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+      }
+    },
+    "cardTitle": "ਖਾਤੇ"
+  },
+  "calculationPage": {
+    "setDateMessages": {
+      "postError": "ਆਖਰੀ ਮਿਤੀ ਪੋਸਟ ਨਹੀਂ ਕੀਤੀ ਗਈ",
+      "editError": "ਮਿਤੀ ਬਦਲੀ ਨਹੀਂ ਗਈ",
+      "deleteError": "ਮਿਤੀ ਫੀਲਡ ਨੂੰ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ"
+    },
+    "fetchDataErrorMessage": "ਦੁਕਾਨ ਦਾ ਖਾਤਾ ਨਹੀਂ ਮਿਲਿਆ",
+    "fetchDateErrorMessage": "ਕੈਲਕੁਲੇਟਰ ਪੇਜ ਵਿੱਚ ਆਈਡੀ ਦੁਆਰਾ ਮਿਤੀ ਨਹੀਂ ਮਿਲ ਰਹੀ।",
+    "cardTitle": "ਹਿਸਾਬ-ਕਿਤਾਬ (Calc View)",
+    "form": {
+      "inputLabel": "ਆਖਰੀ ਮਿਤੀ",
+      "setButtonText": "ਸੈੱਟ ਕਰੋ",
+      "editButtonText": "ਬਦਲੋ",
+      "deleteButtonText": "ਹਟਾਓ"
+    },
+    "tableColumns": {
+      "serialNoTitleText": "ਲੜੀ ਨੰ.",
+      "transNoTitleText": "ਲੈਣ-ਦੇਣ ਨੰ.",
+      "dateTitleText": "ਮਿਤੀ",
+      "loan": {
+        "titleText": "ਕਰਜ਼ਾ",
+        "amountText": "ਰਕਮ",
+        "daysText": "ਦਿਨ",
+        "monthsText": "ਮਹੀਨੇ",
+        "interestText": "ਵਿਆਜ",
+        "totalText": "ਕੁੱਲ",
+        "amountTypeText": "ਕਿਸਮ"
+      },
+      "buyItem": {
+        "billAmountText": "ਰਕਮ",
+        "daysText": "ਦਿਨ",
+        "monthsText": "ਮਹੀਨੇ",
+        "interestText": "ਵਿਆਜ",
+        "totalText": "ਕੁੱਲ"
+      },
+      "sellItem": {
+        "billAmountText": "ਰਕਮ",
+        "daysText": "ਦਿਨ",
+        "monthsText": "ਮਹੀਨੇ",
+        "interestText": "ਵਿਆਜ",
+        "totalText": "ਕੁੱਲ"
+      },
+      "diesel": {
+        "billAmountText": "ਰਕਮ",
+        "daysText": "ਦਿਨ",
+        "monthsText": "ਮਹੀਨੇ",
+        "interestText": "ਵਿਆਜ",
+        "totalText": "ਕੁੱਲ"
+      },
+      "grandTotalText": "ਕੁੱਲ ਜੋੜ (Grand Total)",
+      "actionTitleText": "ਕਾਰਵਾਈ",
+      "actionPopAlertText": "ਕੀ ਤੁਸੀਂ ਲੈਣ-ਦੇਣ ਨੰ. ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+    }
+  },
+  "workerPage": {
+    "deleteFunctionMessage": {
+      "errorMessage1": "ਟੇਬਲ ਵਿੱਚ ਕਾਮਾ ਨਹੀਂ ਮਿਲਿਆ"
+    },
+    "fetchDataErrorMessage": "ਕਾਮਿਆਂ ਦੀ ਸੂਚੀ ਨਹੀਂ ਮਿਲੀ।",
+    "tableColumns": {
+      "serialNoTextTitle": "ਲੜੀ ਨੰ.",
+      "dateText": "ਮਿਤੀ",
+      "workerDetails": {
+        "workerNameText": "ਨਾਮ",
+        "workerIdProofText": "ਆਈਡੀ ਪਰੂਫ਼",
+        "workerContect": "ਸੰਪਰਕ"
+      },
+      "actionText": "ਕਾਰਵਾਈ",
+      "actionPopAlertText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਕਾਮੇ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਉਸ ਨਾਲ ਸਬੰਧਤ ਸਾਰਾ ਡੇਟਾ ਸਥਾਈ ਤੌਰ 'ਤੇ ਹਟਾ ਦਿੱਤਾ ਜਾਵੇਗਾ",
+      "extandTableColumns": {
+        "serialNoTextTitle": "ਲੜੀ ਨੰ.",
+        "dateText": "ਮਿਤੀ",
+        "gives": {
+          "amountText": "ਰਕਮ",
+          "amountTypeText": "ਕਿਸਮ",
+          "briefText": "ਸੰਖੇਪ ਵੇਰਵਾ",
+          "Crops": {
+            "buttonText": "ਦੇਖੋ",
+            "cropNameText": "ਫਸਲ ਦਾ ਨਾਮ",
+            "cropQtyText": "ਮਾਤਰਾ",
+            "cropRateText": "ਭਾਅ",
+            "cropTotalText": "ਕੁੱਲ"
+          }
+        },
+        "takes": {
+          "paymentText": "ਰਕਮ",
+          "paymentType": "ਭੁਗਤਾਨ ਦੀ ਕਿਸਮ",
+          "Crops": {
+            "buttonText": "ਦੇਖੋ",
+            "cropNameText": "ਫਸਲ ਦਾ ਨਾਮ",
+            "cropQtyText": "ਮਾਤਰਾ",
+            "cropRateText": "ਭਾਅ",
+            "cropTotalText": "ਕੁੱਲ"
+          }
+        },
+        "actionText": "ਕਾਰਵਾਈ",
+        "actionPopAlertText": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਲੈਣ-ਦੇਣ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+      }
+    },
+    "cardTitle": "ਕਾਮਿਆਂ ਦੀ ਸੂਚੀ",
+    "cardButtonText": "ਕਾਮਾ ਜੋੜੋ"
+  },
+  "workerCalcPage": {
+    "setDateMessages": {
+      "postError": "ਆਖਰੀ ਮਿਤੀ ਪੋਸਟ ਨਹੀਂ ਕੀਤੀ ਗਈ",
+      "editError": "ਮਿਤੀ ਬਦਲੀ ਨਹੀਂ ਗਈ",
+      "deleteError": "ਮਿਤੀ ਫੀਲਡ ਨੂੰ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ"
+    },
+    "fetchDataErrorMessage": "ਆਈਡੀ ਦੁਆਰਾ ਕਾਮੇ ਦੇ ਲੈਣ-ਦੇਣ ਨਹੀਂ ਮਿਲੇ",
+    "fetchDateErrorMessage": "workerCalc ਪੇਜ ਵਿੱਚ ਆਈਡੀ ਦੁਆਰਾ ਮਿਤੀ ਨਹੀਂ ਮਿਲ ਰਹੀ।",
+    "tableColumns": {
+      "serialNoTextTitle": "ਲੜੀ ਨੰ.",
+      "dateText": "ਮਿਤੀ",
+      "gives": {
+        "amountText": "ਰਕਮ",
+        "amountTypeText": "ਕਿਸਮ",
+        "daysText": "ਦਿਨ",
+        "monthsText": "ਮਹੀਨੇ",
+        "interestText": "ਵਿਆਜ",
+        "totalText": "ਕੁੱਲ ਰਕਮ"
+      },
+      "takes": {
+        "paymentText": "ਰਕਮ",
+        "paymentType": "ਭੁਗਤਾਨ ਦੀ ਕਿਸਮ",
+        "daysText": "ਦਿਨ",
+        "monthsText": "ਮਹੀਨੇ",
+        "interestText": "ਵਿਆਜ",
+        "totalText": "ਕੁੱਲ ਭੁਗਤਾਨ"
+      },
+      "grandTotalText": "ਕੁੱਲ ਜੋੜ"
+    },
+    "cardTitle": "ਲੈਣ-ਦੇਣ ਦਾ ਵੇਰਵਾ"
+  },
+  "settingPage": {
+    "logoutText": "ਲੌਗ ਆਊਟ",
+    "deleteText": "ਖਾਤਾ ਹਟਾਓ",
+    "logoutSuccess": "ਯੂਜ਼ਰ ਸਫਲਤਾਪੂਰਵਕ ਲੌਗ ਆਊਟ ਹੋ ਗਿਆ"
+  },
+  "entDrawer": {
+    "submitFunction": {
+      "sameShopeNoError": "ਦੁਕਾਨ ਨੰਬਰ ਇਕੋ ਜਿਹੇ ਹਨ",
+      "successMessageforCreate": "ਇੰਡਸਟਰੀ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਈ ਗਈ",
+      "errorMessageforCreate": "ਸਰਵਰ ਦੀ ਗਲਤੀ ਕਾਰਨ ਇੰਡਸਟਰੀ ਡੇਟਾ ਜਮ੍ਹਾ ਨਹੀਂ ਹੋ ਸਕਿਆ।",
+      "successMessageforEdit": "ਇੰਡਸਟਰੀ ਡੇਟਾ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਹੋ ਗਿਆ",
+      "errorMessageforEdit": "ਸਰਵਰ ਦੀ ਗਲਤੀ ਕਾਰਨ ਇੰਡਸਟਰੀ ਡੇਟਾ ਅਪਡੇਟ ਨਹੀਂ ਹੋ ਸਕਿਆ।",
+      "withoutChangeMessage": "ਕੋਈ ਬਦਲਾਅ ਨਹੀਂ ਪਾਇਆ ਗਿਆ"
+    },
+    "drawerForm": {
+      "titleText1": "ਬਦਲੋ",
+      "titleText2": "ਜੋੜੋ",
+      "nameInput": {
+        "fnText": "ਪਹਿਲਾ ਨਾਮ",
+        "fnpt": "ਪਹਿਲਾ ਨਾਮ",
+        "fnrText": "ਨਾਮ ਜ਼ਰੂਰੀ ਹੈ",
+        "lnText": "ਆਖਰੀ ਨਾਮ",
+        "lnpt": "ਆਖਰੀ ਨਾਮ",
+        "indnText": "ਇੰਡਸਟਰੀ ਦਾ ਨਾਮ",
+        "indnrText": "ਇੰਡਸਟਰੀ ਦਾ ਨਾਮ ਜ਼ਰੂਰੀ ਹੈ",
+        "indnpt": "ਇੰਡਸਟਰੀ ਦਾ ਨਾਮ.."
+      },
+      "contactInput": {
+        "text": "ਸੰਪਰਕ",
+        "rm": "ਕਿਰਪਾ ਕਰਕੇ ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+        "vt": "ਕਿਰਪਾ ਕਰਕੇ 10 ਅੰਕਾਂ ਦਾ ਵੈਧ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+        "pt": "ਸੰਪਰਕ..."
+      },
+      "dateInput": {
+        "text": "ਮਿਤੀ",
+        "rm": "ਮਿਤੀ ਜ਼ਰੂਰੀ ਹੈ"
+      },
+      "shopeInputs": {
+        "snt": "ਦੁਕਾਨ ਨੰ.",
+        "rm": "ਦੁਕਾਨ ਨੰਬਰ ਜ਼ਰੂਰੀ ਹੈ",
+        "vt": "ਇਹ ਦੁਕਾਨ ਨੰਬਰ ਤੁਹਾਡੇ ਡੇਟਾਬੇਸ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ",
+        "snpt": "ਦੁਕਾਨ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+        "at": "ਪਤਾ",
+        "apt": "ਪਤਾ"
+      },
+      "button": {
+        "sbt": "ਸਬਮਿਟ",
+        "cbt": "ਰੱਦ ਕਰੋ"
+      }
+    }
+  },
+  "indDrawer": {
+    "submitFunction": {
+      "successMessageforCreate": "ਲੈਣ-ਦੇਣ ਸਫਲਤਾਪੂਰਵਕ ਜੋੜਿਆ ਗਿਆ",
+      "errorMessageforCreate": "ਨਵਾਂ ਲੈਣ-ਦੇਣ ਅਪਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ।",
+      "successMessageforEdit": "ਲੈਣ-ਦੇਣ ਅਪਡੇਟ ਹੋ ਗਿਆ!",
+      "errorMessageforEdit": "ਸਿਸਟਮ ਦੀ ਗਲਤੀ ਕਾਰਨ ਲੈਣ-ਦੇਣ ਸੋਧਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।"
+    },
+    "drawerForm": {
+      "titleText1": "ਬਦਲੋ",
+      "titleText2": "ਜੋੜੋ",
+      "ttt1": "ਜ਼ਰੂਰੀ ਜਾਣਕਾਰੀ",
+      "dateInput": {
+        "text": "ਮਿਤੀ",
+        "rm": "ਮਿਤੀ ਜ਼ਰੂਰੀ ਹੈ",
+        "pt": "ਮਿਤੀ ਚੁਣੋ"
+      },
+      "interestInput": {
+        "text": "ਵਿਆਜ ਦਰ",
+        "rm": "ਵਿਆਜ ਦਰ ਜ਼ਰੂਰੀ ਹੈ",
+        "pt": "ਵਿਆਜ ਦਰ ਦਰਜ ਕਰੋ"
+      },
+      "ttt2": "ਨਕਦ/ਖਾਤਾ ਰਕਮ",
+      "loanInput": {
+        "text1": "ਕਰਜ਼ਾ ਰਕਮ",
+        "text2": "ਕਿਸਮ",
+        "pt1": "ਰਕਮ ਦਰਜ ਕਰੋ",
+        "pt2": "ਕਿਸਮ ਚੁਣੋ"
+      },
+      "ttt3": "ਖਰੀਦੀਆਂ ਵਸਤੂਆਂ ਲਈ",
+      "buyItemInput": {
+        "text1": "ਬਿੱਲ ਰਕਮ (BBA)",
+        "pt1": "ਖਰੀਦ ਬਿੱਲ ਦੀ ਰਕਮ",
+        "text2": "ਬਿੱਲ (BB)",
+        "pt2": "ਖਰੀਦ ਬਿੱਲ",
+        "text3": "ਵੇਰਵਾ (B.brief)",
+        "pt3": "ਖਰੀਦ ਦਾ ਸੰਖੇਪ ਵੇਰਵਾ"
+      },
+      "ttt4": "ਡੀਜ਼ਲ ਲਈ",
+      "dieselInput": {
+        "text1": "ਡੀਜ਼ਲ ਬਿੱਲ ਰਕਮ (DBA)",
+        "pt1": "ਡੀਜ਼ਲ ਬਿੱਲ ਦੀ ਰਕਮ",
+        "text2": "ਮਾਤਰਾ (D.Qty)",
+        "pt2": "ਡੀਜ਼ਲ ਦੀ ਮਾਤਰਾ",
+        "text3": "ਰੇਟ (D.Rate)",
+        "pt3": "ਡੀਜ਼ਲ ਦਾ ਭਾਅ"
+      },
+      "ttt5": "ਫਸਲ ਵੇਚਣ ਲਈ",
+      "sellItemInput": {
+        "text1": "ਵੇਚ ਬਿੱਲ ਰਕਮ (SBA)",
+        "pt1": "ਵੇਚ ਬਿੱਲ ਦੀ ਰਕਮ",
+        "text2": "ਬਿੱਲ (SB)",
+        "pt2": "ਵੇਚ ਬਿੱਲ ਨੰਬਰ",
+        "text3": "ਵੇਰਵਾ (S.brief)",
+        "pt3": "ਵੇਚ ਦਾ ਸੰਖੇਪ ਵੇਰਵਾ",
+        "crops": {
+          "cnt": "ਫਸਲ",
+          "cqt": "ਮਾਤਰਾ",
+          "crt": "ਭਾਅ",
+          "ctt": "ਕੁੱਲ"
+        }
+      }
+    },
+    "button": {
+      "sbt": "ਸਬਮਿਟ",
+      "cbt": "ਰੱਦ ਕਰੋ"
+    }
+  },
+  "alertText": "ਚੇਤਾਵਨੀ",
+  "userIdActionModal": {
+    "mttr": "ਪਾਸਵਰਡ ਰੀਸੈੱਟ ਕਰੋ",
+    "mttd": "ਆਈਡੀ ਹਟਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਲਈ 'Ok' ਦਬਾਓ",
+    "modalForm": {
+      "uiit": "ਯੂਜ਼ਰ ਆਈਡੀ",
+      "uiirm": "ਕਿਰਪਾ ਕਰਕੇ ਵੈਧ ਯੂਜ਼ਰ ਆਈਡੀ ਦਰਜ ਕਰੋ",
+      "uiipt": "ਯੂਜ਼ਰ ਆਈਡੀ ਦਰਜ ਕਰੋ",
+      "pit1": "ਨਵਾਂ ਪਾਸਵਰਡ",
+      "pipt1": "ਨਵਾਂ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
+      "pirm": "ਘੱਟੋ-ਘੱਟ 6 ਅੱਖਰ",
+      "pit2": "ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ",
+      "pipt2": "ਪਾਸਵਰਡ ਦੁਬਾਰਾ ਦਰਜ ਕਰੋ"
+    },
+    "button": "ਲੱਭੋ (Find)"
+  },
+  "workerDrawer": {
+    "submitFunction": {
+      "successMessageforCreate1": "ਕਾਮੇ ਦਾ ਡੇਟਾ ਸਫਲਤਾਪੂਰਵਕ ਬਣਾਇਆ ਗਿਆ",
+      "errorMessageforCreate1": "ਕਾਮੇ ਦਾ ਡੇਟਾ ਅਪਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ।",
+      "successMessageforCreate2": "ਲੈਣ-ਦੇਣ ਸਫਲਤਾਪੂਰਵਕ ਜੋੜਿਆ ਗਿਆ",
+      "errorMessageforCreate2": "ਕਾਮੇ ਦਾ ਲੈਣ-ਦੇਣ ਅਪਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ",
+      "successMessageforEdit": "ਲੈਣ-ਦੇਣ ਅਪਡੇਟ ਹੋ ਗਿਆ",
+      "errorMessageforEdit": "ਲੈਣ-ਦੇਣ ਦਾ ਵੇਰਵਾ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ।"
+    },
+    "detailInput": {
+      "fnt": "ਪਹਿਲਾ ਨਾਮ",
+      "fnrm": "ਕਿਰਪਾ ਕਰਕੇ ਕਾਮੇ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "fnpt": "ਪਹਿਲਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "lnt": "ਆਖਰੀ ਨਾਮ",
+      "lnpt": "ਆਖਰੀ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "nnt": "ਨਿੱਕ ਨੇਮ (ਘਰ ਦਾ ਨਾਮ)",
+      "nnpt": "ਘਰ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
+      "idpt": "ਆਈਡੀ ਪਰੂਫ਼",
+      "idprm": "ਆਈਡੀ ਪਰੂਫ਼ ਜ਼ਰੂਰੀ ਹੈ",
+      "idpvm": "ਇਹ ਆਈਡੀ ਤੁਹਾਡੇ ਡੇਟਾਬੇਸ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ",
+      "idppt": "ਆਈਡੀ ਪਰੂਫ਼ ਦਰਜ ਕਰੋ",
+      "ct": "ਸੰਪਰਕ",
+      "crm": "ਕਿਰਪਾ ਕਰਕੇ ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+      "cvm": "ਕਿਰਪਾ ਕਰਕੇ 10 ਅੰਕਾਂ ਦਾ ਵੈਧ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+      "cpt": "ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+      "dt": "ਮਿਤੀ"
+    },
+    "awDrawerTitle": "ਕਾਮਾ ਜੋੜੋ",
+    "awtDrawerTitle": "ਕਾਮੇ ਦਾ ਲੈਣ-ਦੇਣ ਜੋੜੋ",
+    "transactionInput": {
+      "at": "ਰਕਮ",
+      "apt": "ਰਕਮ ਦਰਜ ਕਰੋ",
+      "att": "ਕਿਸਮ",
+      "atpt": "ਰਕਮ ਦੀ ਕਿਸਮ ਚੁਣੋ",
+      "bt": "ਵੇਰਵਾ",
+      "plt": "ਭੁਗਤਾਨ",
+      "plpt": "ਭੁਗਤਾਨ ਦਰਜ ਕਰੋ",
+      "ptt": "ਕਿਸਮ",
+      "ptpt": "ਭੁਗਤਾਨ ਦੀ ਕਿਸਮ ਚੁਣੋ",
+      "transType": {
+        "gives": "ਦਿੱਤਾ (Gives)",
+        "takes": "ਲਿਆ (Takes)",
+        "none": "ਕੋਈ ਨਹੀਂ"
+      },
+      "crops": {
+        "cnt": "ਫਸਲ",
+        "cqt": "ਮਾਤਰਾ",
+        "crt": "ਭਾਅ",
+        "ctt": "ਕੁੱਲ"
+      },
+      "dt": "ਮਿਤੀ",
+      "drm": "ਮਿਤੀ ਜ਼ਰੂਰੀ ਹੈ",
+      "button": {
+        "sbt": "ਸਬਮਿਟ",
+        "cbt": "ਰੱਦ ਕਰੋ"
+      }
+    }
+  },
+  "layout": {
+    "ft1": "ਕਿਸਾਨ ਅਕਾਊਂਟੈਂਟ",
+    "ft2": "ਸੁੱਖ ਰਾਮਗੜ੍ਹੀਆ ਦੁਆਰਾ ਬਣਾਇਆ ਗਿਆ",
+    "menu": {
+      "home": "ਹੋਮ",
+      "view": "ਵੇਖੋ",
+      "worker": "ਕਾਮਾ",
+      "setting": "ਸੈਟਿੰਗ",
+      "logout": "ਲੌਗ ਆਊਟ",
+      "delete": "ਹਟਾਓ"
+    }
+  }
+}

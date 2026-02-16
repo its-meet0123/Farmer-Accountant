@@ -3,16 +3,16 @@ import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Space } from "antd";
 import i18n from "i18next";
 const LanguageChangeDropDown = () => {
-  const [buttonText, setButtonText] = useState("Eng");
+  const [buttonText, setButtonText] = useState("English");
   const items = [
     {
       key: "1",
       label: (
         <a
           onClick={() => {
-            (i18n.changeLanguage("en"), setButtonText("Eng"));
+            (i18n.changeLanguage("en"), setButtonText("English"));
           }}>
-          En
+          English
         </a>
       ),
     },
@@ -21,16 +21,29 @@ const LanguageChangeDropDown = () => {
       label: (
         <a
           onClick={() => {
-            (i18n.changeLanguage("hi"), setButtonText("Hin"));
+            (i18n.changeLanguage("hi"), setButtonText("हिंदी"));
           }}>
-          Hi
+          हिंदी
+        </a>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <a
+          onClick={() => {
+            (i18n.changeLanguage("pu"), setButtonText("ਪੰਜਾਬੀ"));
+          }}>
+          ਪੰਜਾਬੀ
         </a>
       ),
     },
   ];
   return (
     <Dropdown menu={{ items }}>
-      <Button>{buttonText}</Button>
+      <Button color="default" variant="solid">
+        {buttonText}
+      </Button>
     </Dropdown>
   );
 };
