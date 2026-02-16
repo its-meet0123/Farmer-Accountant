@@ -30,7 +30,7 @@ const AppLayout = ({ children }) => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const Menu = [
+  const Menus = [
     getItem("Home", "/home"),
     getItem("View", "/view"),
     getItem("Worker", "/worker"),
@@ -74,7 +74,7 @@ const AppLayout = ({ children }) => {
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={pathname}
-          items={Menu}
+          items={Menus}
           style={{ flex: 1, minWidth: 0 }}
           onClick={({ key }) => {
             openMenus(key);
