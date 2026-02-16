@@ -37,6 +37,7 @@ const AppLayout = ({ children }) => {
     getItem(`${t("layout.menu.setting")}`, "/setting", [
       getItem(`${t("layout.menu.logout")}`, "/logout"),
       getItem(`${t("layout.menu.delete")}`, "/delete"),
+      getItem(<LanguageChangeDropDown />, "/lang"),
     ]),
   ];
 
@@ -45,7 +46,12 @@ const AppLayout = ({ children }) => {
   }, [location.pathname]);
 
   const openMenus = (key) => {
-    if (key === "/setting" || key === "/delete" || key === "/logout") {
+    if (
+      key === "/setting" ||
+      key === "/delete" ||
+      key === "/logout" ||
+      key === "/lang"
+    ) {
       if (key === "/logout") {
         message.info(
           `User : ${authState.user.userName.firstName} ${authState.user.userName.lastName} logout `,
@@ -80,7 +86,6 @@ const AppLayout = ({ children }) => {
             openMenus(key);
           }}
         />
-        <LanguageChangeDropDown />
       </Header>
       <Content style={{ padding: "0 48px" }}>
         <div
