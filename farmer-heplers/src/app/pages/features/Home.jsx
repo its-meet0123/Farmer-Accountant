@@ -31,7 +31,7 @@ const HomePage = () => {
   const [fetch, setFetch] = useState();
   const [shopeNo, setShopeNo] = useState();
   const [messageApi, contextHolder] = message.useMessage();
-  const { authState } = useAuth();
+  const { authState, t } = useAuth();
 
   const filltredIndData = useMemo(() => {
     if (shopeNo) {
@@ -60,14 +60,12 @@ const HomePage = () => {
         entRes.status === 200 ||
         (entRes.status === 204 && indRes.status === 201)
       ) {
-        const text = `${record.nameInd} Deleted Successfully.`;
+        const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
         showSuccess(text);
         setFetch("res");
       }
     } catch (err) {
-      message.error(
-        "The system is not allowing the Industry data to be removed",
-      );
+      message.error(t("homePage.deleteFunctionMessages.errorMessage"));
       console.log(err.message);
     }
   };
@@ -94,7 +92,7 @@ const HomePage = () => {
         setOpenType("edit");
       }
     } catch (err) {
-      message.error("Industry Data not fetched by Id");
+      message.error(t("homePage.editFunctionMessages.errorMessage"));
       console.log(err.message);
     }
   };
@@ -127,7 +125,7 @@ const HomePage = () => {
         setIndData(indData);
       } catch (err) {
         setIsLoanding(ture);
-        message.error("All Ent data not fetching");
+        message.error(t("homePage.fetchDataErrorMessage"));
         console.error(err.message);
       }
       setFetch("");
@@ -141,7 +139,7 @@ const HomePage = () => {
   }));
   const ENT_COLUMNS = [
     {
-      title: "S.No.",
+      title: t("homePage.tableColumns.serialNoTitleText"),
       dataIndex: "serialNo",
       key: "serialNO",
       width: 50,
@@ -150,13 +148,13 @@ const HomePage = () => {
       },
     },
     {
-      title: "Industry Name",
+      title: t("homePage.tableColumns.InsustryNameTitleText"),
       dataIndex: "nameInd",
       key: "nameInd",
       width: 200,
     },
     {
-      title: "Founder",
+      title: t("homePage.tableColumns.founderTitleText"),
       key: "firstName",
       width: 150,
       render: (record) => {
@@ -166,14 +164,14 @@ const HomePage = () => {
       },
     },
     {
-      title: "Contact",
+      title: t("homePage.tableColumns.contactTitleText"),
       dataIndex: "indContact",
       key: "indContact",
       width: 100,
     },
 
     {
-      title: "Date",
+      title: t("homePage.tableColumns.dateTitleText"),
       dataIndex: "startDate",
       key: "startDate",
       width: 100,
@@ -183,7 +181,7 @@ const HomePage = () => {
       },
     },
     {
-      title: "Action",
+      title: t("homePage.tableColumns.actionTitleText"),
       width: 100,
       key: "x",
       fixed: "end",
@@ -197,9 +195,7 @@ const HomePage = () => {
           />
           <Popconfirm
             title={
-              <AlertText
-                text={`Are you sure you want to delete this Industry:${record.nameInd}? All associated data and shops will be permanently removed `}
-              />
+              <AlertText text={t("homePage.tableColumns.actionPopAlertText")} />
             }
             onConfirm={() => deleteFunction(record)}
             okText="Yes"
@@ -225,7 +221,7 @@ const HomePage = () => {
       <Card
         extra={
           <Button type="primary" onClick={() => handleAddData()}>
-            Add
+            {t("homePage.buttonText")}
           </Button>
         }
         size={20}>

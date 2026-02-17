@@ -1,5 +1,6 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Flex, Input, Modal, Popconfirm } from "antd";
+import { t } from "i18next";
 import { useState } from "react";
 
 const formattedDate = (date) => {
@@ -66,13 +67,13 @@ const showModal = ({ crop, title }) => {
 
 export const SHOPS_COLUMNS = [
   {
-    title: "Shope No.",
+    title: t("homePage.tableColumns.extandTableColumns.ShopeNoText"),
     dataIndex: "shopeNumber",
     key: "shopeNumber",
     width: 50,
   },
   {
-    title: "Address",
+    title: t("homePage.tableColumns.extandTableColumns.AddressText"),
     dataIndex: "shopeAddress",
     key: "shopeAddress",
     width: 100,
@@ -81,13 +82,13 @@ export const SHOPS_COLUMNS = [
 
 export const SHOPE_ACCOUNT_BASE_COLUMNS = [
   {
-    title: "Trans. No",
+    title: t("ViewPage.tableColumns.extandTableColumns.transNoTitleText"),
     dataIndex: "serialNo",
 
     width: 50,
   },
   {
-    title: "Date",
+    title: t("ViewPage.tableColumns.extandTableColumns.dateTitleText"),
     dataIndex: "startDate",
     key: "startDate",
     width: 150,
@@ -98,10 +99,14 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     },
   },
   {
-    title: "Loan",
+    title: t("ViewPage.tableColumns.extandTableColumns.loan.titleText"),
     children: [
       {
-        title: <p style={{ color: "#3E0703" }}>Amount</p>,
+        title: (
+          <p style={{ color: "#3E0703" }}>
+            {t("ViewPage.tableColumns.extandTableColumns.loan.amountText")}
+          </p>
+        ),
         dataIndex: ["loan", "amount"],
         key: "amount",
         width: 100,
@@ -110,7 +115,11 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#3E0703" }}>Type</p>,
+        title: (
+          <p style={{ color: "#3E0703" }}>
+            {t("ViewPage.tableColumns.extandTableColumns.loan.amountTypeText")}
+          </p>
+        ),
         dataIndex: ["loan", "amountType"],
         key: "amountType",
         width: 70,
@@ -121,10 +130,16 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     ],
   },
   {
-    title: "Buy",
+    title: t("ViewPage.tableColumns.extandTableColumns.buyItem.titleText"),
     children: [
       {
-        title: <p style={{ color: "#D73535" }}>Amount</p>,
+        title: (
+          <p style={{ color: "#D73535" }}>
+            {t(
+              "ViewPage.tableColumns.extandTableColumns.buyItem.billAmountText",
+            )}
+          </p>
+        ),
         dataIndex: ["indBuy", "billAmount"],
         key: "billAmount",
         width: 100,
@@ -133,7 +148,11 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#D73535" }}>Bill</p>,
+        title: (
+          <p style={{ color: "#D73535" }}>
+            {t("ViewPage.tableColumns.extandTableColumns.buyItem.billText")}
+          </p>
+        ),
         dataIndex: ["indBuy", "bill"],
         key: "bill",
         width: 70,
@@ -142,7 +161,11 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#D73535" }}>Brief</p>,
+        title: (
+          <p style={{ color: "#D73535" }}>
+            {t("ViewPage.tableColumns.extandTableColumns.buyItem.briefText")}
+          </p>
+        ),
         dataIndex: ["indBuy", "brief"],
         key: "brief",
         width: 70,
@@ -153,10 +176,16 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     ],
   },
   {
-    title: "Sell",
+    title: t("ViewPage.tableColumns.extandTableColumns.sellItem.titleText"),
     children: [
       {
-        title: <p style={{ color: "#8ABB6C" }}>Amount</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {t(
+              "ViewPage.tableColumns.extandTableColumns.sellItem.billAmountText",
+            )}
+          </p>
+        ),
         dataIndex: ["indSell", "billAmount"],
         key: "amount",
         width: 100,
@@ -165,7 +194,11 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#8ABB6C" }}>Bill</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {t("ViewPage.tableColumns.extandTableColumns.sellItem.billText")}
+          </p>
+        ),
         dataIndex: ["indSell", "bill"],
         key: "bill",
         width: 70,
@@ -174,7 +207,11 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#8ABB6C" }}>Brief</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {t("ViewPage.tableColumns.extandTableColumns.sellItem.BriefText")}
+          </p>
+        ),
         dataIndex: ["indSell", "brief"],
         key: "brief",
         width: 70,
@@ -183,7 +220,13 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#8ABB6C" }}>Crop</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {t(
+              "ViewPage.tableColumns.extandTableColumns.sellItem.Crops.titleText",
+            )}
+          </p>
+        ),
         dataIndex: ["indSell", "crop"],
         key: "crop",
         width: 100,
@@ -192,7 +235,9 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
             const title = "Sell Crop";
             return (
               <Button type="link" onClick={() => showModal({ crop, title })}>
-                View
+                {t(
+                  "ViewPage.tableColumns.extandTableColumns.sellItem.buttonText",
+                )}
               </Button>
             );
           }
@@ -201,10 +246,16 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     ],
   },
   {
-    title: "Diesel",
+    title: t("ViewPage.tableColumns.extandTableColumns.diesel.titleText"),
     children: [
       {
-        title: <p style={{ color: "#075B5E" }}>Amount</p>,
+        title: (
+          <p style={{ color: "#075B5E" }}>
+            {t(
+              "ViewPage.tableColumns.extandTableColumns.diesel.billAmountText",
+            )}
+          </p>
+        ),
         dataIndex: ["diesel", "billAmount"],
         key: "amount",
         width: 100,
@@ -213,10 +264,18 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#075B5E" }}>Bill</p>,
+        title: (
+          <p style={{ color: "#075B5E" }}>
+            {t("ViewPage.tableColumns.extandTableColumns.diesel.billText")}
+          </p>
+        ),
         children: [
           {
-            title: <p style={{ color: "#075B5E" }}>Qty.</p>,
+            title: (
+              <p style={{ color: "#075B5E" }}>
+                {t("ViewPage.tableColumns.extandTableColumns.diesel.qtyText")}
+              </p>
+            ),
             dataIndex: ["diesel", "qty"],
             key: "abill",
             width: 70,
@@ -225,7 +284,11 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
             },
           },
           {
-            title: <p style={{ color: "#075B5E" }}>Rate</p>,
+            title: (
+              <p style={{ color: "#075B5E" }}>
+                {t("ViewPage.tableColumns.extandTableColumns.diesel.rateText")}
+              </p>
+            ),
             dataIndex: ["diesel", "rate"],
             key: "abill",
             width: 100,

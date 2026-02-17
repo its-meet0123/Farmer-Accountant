@@ -3,6 +3,7 @@ import { Button, Card, Form, Input, message } from "antd";
 import { postUserDataForSignUp } from "../../service/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
+import LanguageChangeDropDown from "../../component/LanguageChangeDropdown";
 
 const layout = {
   labelCol: { span: 8 },
@@ -59,7 +60,9 @@ const SignUp = () => {
   return (
     <>
       {contextHolder}
-      <Card title={t("signUpPage.cardTitle")}>
+      <Card
+        title={t("signUpPage.cardTitle")}
+        extra={<LanguageChangeDropDown />}>
         <Form
           {...layout}
           name="SignUp Form"

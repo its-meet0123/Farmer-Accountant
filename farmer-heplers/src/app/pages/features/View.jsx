@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import IndDrawer from "../../component/IndDrawer";
 import dayjs from "dayjs";
 import AlertText from "../../component/Text";
+import { t } from "i18next";
 
 const ViewPage = () => {
   const [isLoanding, setIsLoanding] = useState(false);
@@ -102,12 +103,12 @@ const ViewPage = () => {
     try {
       const res = await deleteIndShopeAccountData(ids);
       if (res.status === 200) {
-        const text = `Transaction Deleted Successfully for Shop No. ${record.shopeNumber}`;
+        const text = `${t("ViewPage.deleteTransFunctionMessages.successMessage1")}`;
         showSuccess(text);
         setFetch("delete transaction");
       }
     } catch (err) {
-      message.error("Trnasaction not deleted");
+      message.error(t("ViewPage.deleteTransFunctionMessages.errorMessage1"));
       console.log(err.message);
     }
   };
@@ -121,12 +122,12 @@ const ViewPage = () => {
     try {
       const res = await deleteIndShopeAccountData(ids);
       if (res.status === 200) {
-        const text = `Deleted All transaction records for Shop No. ${record.shopeNumber} have been successfully removed from the system.`;
+        const text = `${t("ViewPage.deleteTransFunctionMessages.successMessage2")}`;
         showSuccess(text);
         setFetch("delete all transaction");
       }
     } catch (err) {
-      message.error("All transactions not deleted");
+      message.error(t("ViewPage.deleteTransFunctionMessages.errorMessage2"));
       console.log(err.message);
     }
   };
@@ -141,7 +142,7 @@ const ViewPage = () => {
         setAllInd(data);
       } catch (err) {
         setIsLoanding(true);
-        message.error("Data not fetched ");
+        message.error(t("ViewPage.fetchDataErrorMessage"));
         console.log(err.message);
       }
 
@@ -157,25 +158,25 @@ const ViewPage = () => {
 
   const columns = [
     {
-      title: "S.No",
+      title: t("ViewPage.tableColumns.serialNoTitleText"),
       dataIndex: "serialNo",
       width: 100,
       key: "sno",
     },
     {
-      title: "Ind. Name",
+      title: t("ViewPage.tableColumns..IndustryNameTitleText"),
       dataIndex: "nameInd",
       width: 100,
       key: "nameInd",
     },
     {
-      title: "Shope No.",
+      title: t("ViewPage.tableColumns.ShopeNoText"),
       dataIndex: "shopeNumber",
       width: 100,
       key: "shopeNumber",
     },
     {
-      title: "Action",
+      title: t("ViewPage.tableColumns.actionTitleText"),
       dataIndex: "",
       width: 100,
       key: "a",
@@ -196,7 +197,7 @@ const ViewPage = () => {
             <Popconfirm
               title={
                 <AlertText
-                  text={`Do you want to clear all transactions for Shope No. ${record.shopeNumber}?`}
+                  text={`${t("ViewPage.tableColumns.actionPopAlertText")}`}
                 />
               }
               onConfirm={() => deleteAllTransaction(record)}
@@ -222,7 +223,7 @@ const ViewPage = () => {
     const SHOPE_ACCOUNT_COLUMNS = [
       ...SHOPE_ACCOUNT_BASE_COLUMNS,
       {
-        title: "Action",
+        title: t("ViewPage.tableColumns.actionTitleText"),
         dataIndex: "",
         key: "x",
         width: 100,
@@ -237,7 +238,7 @@ const ViewPage = () => {
                 onClick={() => editFunction(record)}
               />
               <Popconfirm
-                title={`Do you want to clear Transaction No. ${record.serialNo}?`}
+                title={`${t("ViewPage.tableColumns.extandTableColumns.actionPopAlertText")}`}
                 onConfirm={() => deleteTransaction(record)}
                 okText="Yes"
                 cancelText="No"

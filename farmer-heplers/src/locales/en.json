@@ -68,7 +68,8 @@
         "ShopeNoText": "Shope No.",
         "AddressText": "Address"
       }
-    }
+    },
+    "buttonText": "Add Industry"
   },
 
   "ViewPage": {
@@ -97,15 +98,18 @@
           "amountTypeText": "Type"
         },
         "buyItem": {
+          "titleText": "Bought item",
           "billAmountText": "Amount",
           "billText": "Bill",
           "briefText": "Brief"
         },
         "sellItem": {
+          "titleText": "Sold crop",
           "billAmountText": "Amount",
           "billText": "Bill",
           "BriefText": "Brief",
           "Crops": {
+            "titleText": "Crops",
             "buttonText": "View",
             "cropNameText": "Crop Name",
             "cropRateText": "Crop Rate",
@@ -114,6 +118,7 @@
           }
         },
         "diesel": {
+          "titleText": "Diesel",
           "billAmountText": "Amount",
           "billText": "Bill",
           "qtyText": "Qty.",
@@ -155,6 +160,7 @@
         "amountTypeText": "Type"
       },
       "buyItem": {
+        "titleText": "Bought item",
         "billAmountText": "Amount",
         "daysText": "Days",
         "monthsText": "Months",
@@ -162,6 +168,7 @@
         "totalText": "Total"
       },
       "sellItem": {
+        "titleText": "Sold crop",
         "billAmountText": "Amount",
         "daysText": "Days",
         "monthsText": "Months",
@@ -169,6 +176,7 @@
         "totalText": "Total"
       },
       "diesel": {
+        "titleText": "Diesel",
         "billAmountText": "Amount",
         "daysText": "Days",
         "monthsText": "Months",
@@ -200,10 +208,12 @@
         "serialNoTextTitle": "Sr. No.",
         "dateText": "Date",
         "gives": {
+          "titleText": "Gave",
           "amountText": "Amount",
           "amountTypeText": "Type",
           "briefText": "Brief",
           "Crops": {
+            "titleText": "Crops",
             "buttonText": "View",
             "cropNameText": "Crop Name",
             "cropQtyText": "Qty.",
@@ -212,9 +222,11 @@
           }
         },
         "takes": {
+          "titleText": "Took",
           "paymentText": "Amount",
           "paymentType": "Payment Type",
           "Crops": {
+            "titleText": "Crops",
             "buttonText": "View",
             "cropNameText": "Crop Name",
             "cropQtyText": "Qty.",
@@ -242,6 +254,7 @@
       "serialNoTextTitle": "Sr. No.",
       "dateText": "Date",
       "gives": {
+        "titleText": "Gave",
         "amountText": "Amount",
         "amountTypeText": "Type",
         "daysText": "Days",
@@ -250,6 +263,7 @@
         "totalText": "Total Amount"
       },
       "takes": {
+        "titleText": "Took",
         "paymentText": "Amount",
         "paymentType": "Payment Type",
         "daysText": "Days",

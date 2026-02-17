@@ -66,7 +66,8 @@
         "ShopeNoText": "दुकान नं.",
         "AddressText": "पता"
       }
-    }
+    },
+    "buttonText": "इंडस्ट्री जोड़ें"
   },
   "ViewPage": {
     "deleteTransFunctionMessages": {
@@ -94,15 +95,18 @@
           "amountTypeText": "प्रकार"
         },
         "buyItem": {
+          "titleText": "खरीदी गई वस्तुएं",
           "billAmountText": "राशि",
           "billText": "बिल",
           "briefText": "संक्षिप्त विवरण"
         },
         "sellItem": {
+          "titleText": "बेची गई फसलें",
           "billAmountText": "राशि",
           "billText": "बिल",
           "BriefText": "संक्षिप्त विवरण",
           "Crops": {
+            "titleText": "फसलें",
             "buttonText": "देखें",
             "cropNameText": "फसल का नाम",
             "cropRateText": "फसल की दर",
@@ -111,6 +115,7 @@
           }
         },
         "diesel": {
+          "titleText": "डीजल",
           "billAmountText": "राशि",
           "billText": "बिल",
           "qtyText": "मात्रा",
@@ -151,6 +156,7 @@
         "amountTypeText": "प्रकार"
       },
       "buyItem": {
+        "titleText": "खरीदी गई वस्तुएं",
         "billAmountText": "राशि",
         "daysText": "दिन",
         "monthsText": "महीने",
@@ -158,6 +164,7 @@
         "totalText": "कुल"
       },
       "sellItem": {
+        "titleText": "बेची गई फसलें",
         "billAmountText": "राशि",
         "daysText": "दिन",
         "monthsText": "महीने",
@@ -165,6 +172,7 @@
         "totalText": "कुल"
       },
       "diesel": {
+        "titleText": "डीजल",
         "billAmountText": "राशि",
         "daysText": "दिन",
         "monthsText": "महीने",
@@ -195,10 +203,12 @@
         "serialNoTextTitle": "क्र.सं.",
         "dateText": "तारीख",
         "gives": {
+          "titleText": "दिया (Gives)",
           "amountText": "राशि",
           "amountTypeText": "प्रकार",
           "briefText": "संक्षिप्त विवरण",
           "Crops": {
+            "titleText": "फसलें",
             "buttonText": "देखें",
             "cropNameText": "फसल का नाम",
             "cropQtyText": "मात्रा",
@@ -207,6 +217,7 @@
           }
         },
         "takes": {
+          "titleText": "लिया (Takes)",
           "paymentText": "राशि",
           "paymentType": "भुगतान प्रकार",
           "Crops": {
@@ -236,6 +247,7 @@
       "serialNoTextTitle": "क्र.सं.",
       "dateText": "तारीख",
       "gives": {
+        "titleText": "दिया (Gives)",
         "amountText": "राशि",
         "amountTypeText": "प्रकार",
         "daysText": "दिन",
@@ -244,6 +256,7 @@
         "totalText": "कुल राशि"
       },
       "takes": {
+        "titleText": "लिया (Takes)",
         "paymentText": "राशि",
         "paymentType": "भुगतान प्रकार",
         "daysText": "दिन",
