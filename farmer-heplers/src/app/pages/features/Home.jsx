@@ -148,7 +148,7 @@ const HomePage = () => {
       },
     },
     {
-      title: t("homePage.tableColumns.InsustryNameTitleText"),
+      title: t("homePage.tableColumns.IndustryNameTitleText"),
       dataIndex: "nameInd",
       key: "nameInd",
       width: 200,

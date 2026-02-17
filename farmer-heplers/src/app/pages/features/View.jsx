@@ -164,7 +164,7 @@ const ViewPage = () => {
       key: "sno",
     },
     {
-      title: t("ViewPage.tableColumns..IndustryNameTitleText"),
+      title: t("ViewPage.tableColumns.IndustryNameTitleText"),
       dataIndex: "nameInd",
       width: 100,
       key: "nameInd",
