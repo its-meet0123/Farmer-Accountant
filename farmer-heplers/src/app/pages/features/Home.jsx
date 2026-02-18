@@ -9,7 +9,10 @@ import {
   Table,
 } from "antd";
 import { useEffect, useMemo, useState } from "react";
-import { SHOPS_COLUMNS } from "../../constant/Extracolumns";
+import {
+  getColumnsForHomepage,
+  SHOPS_COLUMNS,
+} from "../../constant/Extracolumns";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import EntDrawer from "../../component/EntDrawer";
 import { deleteIndDataByIds, getAllIndShopes } from "../../service/ind";
@@ -211,6 +214,7 @@ const HomePage = () => {
 
   const ExpandedRow = (record) => {
     const shops = record ? record.shopes : [];
+    const SHOPS_COLUMNS = getColumnsForHomepage(t);
 
     return <Table columns={SHOPS_COLUMNS} dataSource={shops} rowKey="_id" />;
   };

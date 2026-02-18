@@ -44,7 +44,7 @@ const WorkersData = () => {
         }
       } catch (err) {
         console.log(err.message);
-        message.error("worker data not deleted");
+        message.error(t("workerPage.deleteFunctionMessage.errorMessage1"));
       }
     }
   };

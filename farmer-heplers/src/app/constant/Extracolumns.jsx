@@ -1,6 +1,5 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Flex, Input, Modal, Popconfirm } from "antd";
-import i18next from "i18next";
 import { useState } from "react";
 
 const formattedDate = (date) => {
@@ -65,20 +64,23 @@ const showModal = ({ crop, title }) => {
   });
 };
 
-export const SHOPS_COLUMNS = [
-  {
-    title: i18next.t("homePage.tableColumns.extandTableColumns.ShopeNoText"),
-    dataIndex: "shopeNumber",
-    key: "shopeNumber",
-    width: 50,
-  },
-  {
-    title: i18next.t("homePage.tableColumns.extandTableColumns.AddressText"),
-    dataIndex: "shopeAddress",
-    key: "shopeAddress",
-    width: 100,
-  },
-];
+const getColumnsForHomepage = (t) => {
+  const SHOPS_COLUMNS = [
+    {
+      title: t("homePage.tableColumns.extandTableColumns.ShopeNoText"),
+      dataIndex: "shopeNumber",
+      key: "shopeNumber",
+      width: 50,
+    },
+    {
+      title: t("homePage.tableColumns.extandTableColumns.AddressText"),
+      dataIndex: "shopeAddress",
+      key: "shopeAddress",
+      width: 100,
+    },
+  ];
+  return SHOPS_COLUMNS;
+};
 
 export const SHOPE_ACCOUNT_BASE_COLUMNS = [
   {
@@ -918,3 +920,5 @@ export const WORKER_TRANSACTION_CALC_COLUMNS = [
     key: "a",
   },
 ];
+
+export { getColumnsForHomepage };
