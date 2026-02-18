@@ -3,24 +3,23 @@ import { Dropdown, message } from "antd";
 import { useAuth } from "../../auth/AuthContext";
 import { useState } from "react";
 import UserActionModel from "../../component/UserIdActionModel";
-import { t } from "i18next";
-
-const items = [
-  {
-    label: t("settingPage.logoutText"),
-    key: "1",
-    icon: <LogoutOutlined />,
-  },
-  {
-    label: t("settingPage.deleteText"),
-    key: "2",
-    icon: <UserDeleteOutlined />,
-  },
-];
 
 const Setting = () => {
-  const { logout, authState } = useAuth();
+  const { logout, authState, t } = useAuth();
   const [openType, setOpenType] = useState(null);
+
+  const items = [
+    {
+      label: t("settingPage.logoutText"),
+      key: "1",
+      icon: <LogoutOutlined />,
+    },
+    {
+      label: t("settingPage.deleteText"),
+      key: "2",
+      icon: <UserDeleteOutlined />,
+    },
+  ];
 
   const handleMenuClick = (e) => {
     if (e.key === "1") {
