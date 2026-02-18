@@ -1,6 +1,7 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Flex, Input, Modal, Popconfirm } from "antd";
 import { useState } from "react";
+import i18next from "i18next";
 
 const formattedDate = (date) => {
   const rawDate = date ? new Date(date) : new Date();
