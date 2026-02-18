@@ -185,7 +185,8 @@
   },
   "workerPage": {
     "deleteFunctionMessage": {
-      "errorMessage1": "ਟੇਬਲ ਵਿੱਚ ਕਾਮਾ ਨਹੀਂ ਮਿਲਿਆ"
+      "errorMessage1": "ਟੇਬਲ ਵਿੱਚ ਕਾਮਾ ਨਹੀਂ ਮਿਲਿਆ",
+      "errorMessage2": "ਮਾਫ ਕਰਨਾ! ਇਸ ਵੇਲੇ ਡਿਲੀਟ ਕਰਨ ਦੀ ਪ੍ਰਕਿਰਿਆ ਪੂਰੀ ਨਹੀਂ ਹੋ ਸਕੀ। ਅਸੀਂ ਇਸਨੂੰ ਠੀਕ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਹੇ ਹਾਂ।"
     },
     "fetchDataErrorMessage": "ਕਾਮਿਆਂ ਦੀ ਸੂਚੀ ਨਹੀਂ ਮਿਲੀ।",
     "tableColumns": {

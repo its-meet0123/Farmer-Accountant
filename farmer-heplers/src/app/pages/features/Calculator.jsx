@@ -18,7 +18,7 @@ import {
   getIndShopeAccountById,
   postEndDate,
 } from "../../service/ind";
-import { BASE_COLUMNS } from "../../constant/Extracolumns";
+import { getColumnsForCalulationPage } from "../../constant/Extracolumns";
 import { DownloadOutlined, RollbackOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { useAuth } from "../../auth/AuthContext";
@@ -165,6 +165,8 @@ const CalcPage = () => {
     getData();
   }, [fetch, state]);
   console.log(fetch);
+
+  const BASE_COLUMNS = getColumnsForCalulationPage(t);
 
   const tableData = shope.shopeAccount
     ? shope.shopeAccount.map((item, index) => ({

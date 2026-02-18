@@ -12,7 +12,10 @@ import {
 import { useEffect, useState } from "react";
 import { data, useLocation } from "react-router-dom";
 import { getWorkerTransaction } from "../../service/worker";
-import { WORKER_TRANSACTION_CALC_COLUMNS } from "../../constant/Extracolumns";
+import {
+  getColumnsForWorkerCalcPage,
+  WORKER_TRANSACTION_CALC_COLUMNS,
+} from "../../constant/Extracolumns";
 import { TableFooterForWorkerCalc } from "../../component/TableFooter";
 import {
   deleteEndDate,
@@ -32,7 +35,7 @@ const options = [
 
 const WorkerCalculation = () => {
   const { state } = useLocation();
-  const { authState } = useAuth();
+  const { authState, t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(false);
   const [worker, setWorker] = useState({});
   const [id, setId] = useState();
@@ -130,6 +133,8 @@ const WorkerCalculation = () => {
     }
     getData();
   }, [fetch]);
+
+  const WORKER_TRANSACTION_CALC_COLUMNS = getColumnsForWorkerCalcPage(t);
 
   const tableData = worker.account
     ? worker.account.map((data, index) => ({

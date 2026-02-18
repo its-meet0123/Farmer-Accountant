@@ -6,8 +6,8 @@ import {
   getAllWorkers,
 } from "../../service/worker";
 import {
-  Worker_List_Columns,
-  Worker_Transaction_Columns,
+  getWorkerListColumnsForWorkerPage,
+  getWorkerTransactionColumnsForWorkerPage,
 } from "../../constant/Extracolumns";
 import WorkerDrawer from "../../component/WorkerDrawer";
 import {
@@ -18,8 +18,10 @@ import {
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth/AuthContext";
 
 const WorkersData = () => {
+  const { t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(false);
   const [workerList, setWorkerList] = useState();
   const [worker, setWorker] = useState({});
@@ -44,7 +46,7 @@ const WorkersData = () => {
         }
       } catch (err) {
         console.log(err.message);
-        message.error(t("workerPage.deleteFunctionMessage.errorMessage1"));
+        message.error(t("workerPage.deleteFunctionMessage.errorMessage2"));
       }
     }
   };
@@ -68,7 +70,7 @@ const WorkersData = () => {
       }))
       .filter((mainObj) => mainObj.account.length > 0);
     if (!filltredWorker || !record) {
-      message.error("Worker not found from table");
+      message.error(t("workerPage.deleteFunctionMessage.errorMessage1"));
     }
     const workerId = filltredWorker[0]._id;
     const accountIds = [record._id];
@@ -90,7 +92,7 @@ const WorkersData = () => {
         setIsLoanding(false);
         setWorkerList(data);
       } catch (err) {
-        message.error("Worker list not found.");
+        message.error(t("workerPage.fetchDataErrorMessage"));
         console.log(err.message);
         setIsLoanding(true);
       }
@@ -105,10 +107,12 @@ const WorkersData = () => {
       }))
     : [];
 
+  const Worker_List_Columns = getWorkerListColumnsForWorkerPage(t);
+
   const columns = [
     ...Worker_List_Columns,
     {
-      title: "Action",
+      title: t("workerPage.tableColumns.actionText"),
       dataIndex: "",
       width: 100,
       fixed: "end",
@@ -127,7 +131,7 @@ const WorkersData = () => {
           <Popconfirm
             title={
               <AlertText
-                text={`Are you sure you want to delete this Worker: ${record.workerDetail.workerName.nickName}?  All associated data with that will be permanently removed `}
+                text={`${t("workerPage.tableColumns.actionPopAlertText")}`}
               />
             }
             onConfirm={() => deleteWorker(record)}
@@ -143,10 +147,12 @@ const WorkersData = () => {
 
   const ExpandedRow = (record) => {
     const transaction = record?.account || [];
+    const Worker_Transaction_Columns =
+      getWorkerTransactionColumnsForWorkerPage(t);
     const columns = [
       ...Worker_Transaction_Columns,
       {
-        title: "Action",
+        title: t("workerPage.tableColumns.extandTableColumns.actionText"),
         dataIndex: "",
         fixed: "end",
         render: (_, record) => (
@@ -156,7 +162,9 @@ const WorkersData = () => {
               icon={<EditOutlined />}
               onClick={() => editWorkerTransaction(record)}></Button>
             <Popconfirm
-              title={`Are you sure you want to delete this Transaction? `}
+              title={t(
+                "workerPage.tableColumns.extandTableColumns.actionPopAlertText",
+              )}
               onConfirm={() => deleteWorkerTransaction(record)}
               okText="Yes"
               cancelText="No"
@@ -179,7 +187,7 @@ const WorkersData = () => {
   return (
     <>
       <Card
-        title="Worker List"
+        title={t("workerPage.cardTitle")}
         extra={
           <Button
             type="primary"

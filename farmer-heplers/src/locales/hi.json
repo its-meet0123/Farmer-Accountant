@@ -186,7 +186,8 @@
   },
   "workerPage": {
     "deleteFunctionMessage": {
-      "errorMessage1": "टेबल में कर्मचारी नहीं मिला"
+      "errorMessage1": "टेबल में कर्मचारी नहीं मिला",
+      "errorMessage2": "क्षमा करें! अभी डिलीट करने की प्रक्रिया पूरी नहीं हो पाई। हम इसे ठीक करने की कोशिश कर रहे हैं।"
     },
     "fetchDataErrorMessage": "कर्मचारियों की सूची नहीं मिली।",
     "tableColumns": {

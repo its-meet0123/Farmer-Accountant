@@ -191,7 +191,8 @@
 
   "workerPage": {
     "deleteFunctionMessage": {
-      "errorMessage1": "Worker not found from table"
+      "errorMessage1": "Worker not found from table",
+      "errorMessage2": "Oops! We couldn't complete the deletion right now. We're working to fix this."
     },
     "fetchDataErrorMessage": "Worker list not found.",
     "tableColumns": {

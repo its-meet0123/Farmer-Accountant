@@ -16,14 +16,15 @@ import {
   EyeOutlined,
   FileAddOutlined,
 } from "@ant-design/icons";
-import { SHOPE_ACCOUNT_BASE_COLUMNS } from "../../constant/Extracolumns";
+import { getColumnsForViewPage } from "../../constant/Extracolumns";
 import { useNavigate } from "react-router-dom";
 import IndDrawer from "../../component/IndDrawer";
 import dayjs from "dayjs";
 import AlertText from "../../component/Text";
-import { t } from "i18next";
+import { useAuth } from "../../auth/AuthContext";
 
 const ViewPage = () => {
+  const { t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(false);
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -219,6 +220,8 @@ const ViewPage = () => {
           serialNo: index + 1,
         }))
       : [];
+
+    const SHOPE_ACCOUNT_BASE_COLUMNS = getColumnsForViewPage(t);
 
     const SHOPE_ACCOUNT_COLUMNS = [
       ...SHOPE_ACCOUNT_BASE_COLUMNS,

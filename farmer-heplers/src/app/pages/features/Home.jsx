@@ -9,10 +9,7 @@ import {
   Table,
 } from "antd";
 import { useEffect, useMemo, useState } from "react";
-import {
-  getColumnsForHomepage,
-  SHOPS_COLUMNS,
-} from "../../constant/Extracolumns";
+import { getColumnsForHomepage } from "../../constant/Extracolumns";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import EntDrawer from "../../component/EntDrawer";
 import { deleteIndDataByIds, getAllIndShopes } from "../../service/ind";
