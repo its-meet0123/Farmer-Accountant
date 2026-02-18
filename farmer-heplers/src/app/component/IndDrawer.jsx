@@ -12,13 +12,12 @@ import {
   Row,
   Space,
   Typography,
-  t,
 } from "antd";
 import { useState } from "react";
 import { pushIndShopeAccountById, updateIndShopeAccount } from "../service/ind";
 import dayjs from "dayjs";
 
-const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess }) => {
+const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
   const [addForm] = Form.useForm();
   const [edit, setEdit] = useState(false);
   const date = dayjs(new Date());
