@@ -244,6 +244,12 @@
     },
     "fetchDataErrorMessage": "आईडी द्वारा कर्मचारी लेनदेन नहीं मिले",
     "fetchDateErrorMessage": "workerCalc पेज में आईडी द्वारा तारीख नहीं मिल रही है।",
+    "form": {
+      "inputLabel": "अंतिम तिथि",
+      "setButtonText": "सेट करें",
+      "editButtonText": "बदलें",
+      "deleteButtonText": "हटाएं"
+    },
     "tableColumns": {
       "serialNoTextTitle": "क्र.सं.",
       "dateText": "तारीख",

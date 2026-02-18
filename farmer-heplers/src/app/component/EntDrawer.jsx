@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { postEntData, updateEntData } from "../service/ent";
 import { postIntShopeInitailData, UpdateIndDataById } from "../service/ind";
 import dayjs from "dayjs";
+import { useAuth } from "../auth/AuthContext";
 const { useBreakpoint } = Grid;
 
 const EntDrawer = ({
@@ -34,6 +35,7 @@ const EntDrawer = ({
   user,
   data,
 }) => {
+  const { t } = useAuth();
   const [addForm] = Form.useForm();
   const [edit, setEdit] = useState(false);
   const [activeRow, setActiveRow] = useState(null);
@@ -69,7 +71,7 @@ const EntDrawer = ({
         allValues?.aShopes[0]?.shopeNumber ===
           allValues?.aShopes[1]?.shopeNumber
       ) {
-        message.error("Shope Numbers are same");
+        message.error(t("entDrawer.submitFunction.sameShopeNoError"));
       } else {
         const newEntData = {
           userId: user.userId,
@@ -93,12 +95,12 @@ const EntDrawer = ({
         });
         const indRes = await postIntShopeInitailData(shopeDataArray);
         if (entRes.status === 201 && indRes.status === 201) {
-          const text = `${allValues.aNameInd} Created Successfully.`;
+          const text = `${t("entDrawer.submitFunction.successMessageforCreate")}`;
           showSuccess(text);
           setFetch("allValues");
           onClose();
         } else {
-          message.error("Indusrty not created");
+          message.error(t("entDrawer.submitFunction.errorMessageforCreate"));
         }
       }
     }
@@ -111,7 +113,7 @@ const EntDrawer = ({
         editFormValues?.shopes[0]?.shopeNumber ===
           editFormValues?.shopes[1]?.shopeNumber
       ) {
-        message.error("Shope Numbers are same");
+        message.error(t("entDrawer.submitFunction.sameShopeNoError"));
       } else {
         const entData = {
           nameInd: editFormValues.nameInd,
@@ -134,16 +136,16 @@ const EntDrawer = ({
         const Id = indData[0]?._id;
         const indRes = await UpdateIndDataById(Id, indDatas);
         if (entRes.status === 200 || indRes.status === 200) {
-          const text = "Industry data update successfully";
+          const text = `${t("entDrawer.submitFunction.successMessageforEdit")}`;
           showSuccess(text);
           setFetch("allValues");
           onClose();
         } else {
-          message.error("Industry data not updated");
+          message.error(t("entDrawer.submitFunction.errorMessageforEdit"));
         }
       }
     } else {
-      message.info("No changes detected");
+      message.info(t("entDrawer.submitFunction.withoutChangeMessage"));
       onClose();
     }
   };
@@ -151,7 +153,10 @@ const EntDrawer = ({
   return (
     <>
       <Drawer
-        title={(open === "edit" && "Edit") || (open === "add" && "Add")}
+        title={
+          (open === "edit" && t("entDrawer.drawerForm.titleText1")) ||
+          (open === "add" && t("entDrawer.drawerForm.titleText2"))
+        }
         getContainer={false}
         placement="right"
         size={screens.md ? "large" : "default"}
@@ -159,7 +164,9 @@ const EntDrawer = ({
         open={open !== null}
         extra={
           <Space>
-            <Button onClick={onClose}>Cancel</Button>
+            <Button onClick={onClose}>
+              {t("entDrawer.drawerForm.button.cbt")}
+            </Button>
           </Space>
         }>
         {open === "edit" && (
@@ -171,26 +178,38 @@ const EntDrawer = ({
             <Row gutter={24}>
               <Col span={12}>
                 <Form.Item
-                  label="First Name"
+                  label={t("entDrawer.drawerForm.nameInput.fnText")}
                   name="firstName"
-                  rules={[{ required: true, message: "Name is required" }]}>
-                  <Input placeholder="first name" />
+                  rules={[
+                    {
+                      required: true,
+                      message: t("entDrawer.drawerForm.nameInput.fnrText"),
+                    },
+                  ]}>
+                  <Input
+                    placeholder={t("entDrawer.drawerForm.nameInput.fnpt")}
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="Industry Name"
+                  label={t("entDrawer.drawerForm.nameInput.indnText")}
                   name="nameInd"
                   rules={[
-                    { required: true, message: "Industry Name is required" },
+                    {
+                      required: true,
+                      message: t("entDrawer.drawerForm.nameInput.indnrText"),
+                    },
                   ]}>
-                  <Input />
+                  <Input
+                    placeholder={t("entDrawer.drawerForm.nameInput.indnpt")}
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="Contact"
+                  label={t("entDrawer.drawerForm.contactInput.text")}
                   name="indContact"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter the mob number",
+                      message: t("entDrawer.drawerForm.contactInput.rm"),
                     },
                     {
                       validator: (_, value) => {
@@ -202,24 +221,37 @@ const EntDrawer = ({
                           return Promise.resolve();
                         }
                         return Promise.reject(
-                          new Error("Please enter vaild 10 digits number"),
+                          new Error(t("entDrawer.drawerForm.contactInput.vt")),
                         );
                       },
                     },
                   ]}>
-                  <Input placeholder="contact" type="tel" maxLength={10} />
+                  <Input
+                    placeholder={t("entDrawer.drawerForm.contactInput.pt")}
+                    type="tel"
+                    maxLength={10}
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="Date"
+                  label={t("entDrawer.drawerForm.dateInput.text")}
                   name="startDate"
-                  rules={[{ required: true, message: "Date is required" }]}>
+                  rules={[
+                    {
+                      required: true,
+                      message: t("entDrawer.drawerForm.dateInput.rm"),
+                    },
+                  ]}>
                   <DatePicker />
                 </Form.Item>
                 <Form.Item name="id"></Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Last Name" name="lastName">
-                  <Input placeholder="last name" />
+                <Form.Item
+                  label={t("entDrawer.drawerform.nameInput.lnText")}
+                  name="lastName">
+                  <Input
+                    placeholder={t("entDrawer.drawerform.nameInput.lnpt")}
+                  />
                 </Form.Item>
                 <Form.List name="shopes">
                   {(fields) => (
@@ -232,20 +264,34 @@ const EntDrawer = ({
                           <Flex gap="middle" horizontal key={key}>
                             <Flex gap="small" vertical>
                               <Form.Item
-                                label="Shope No"
+                                label={t(
+                                  "entDrawer.drawerForm.shopeInputs.snt",
+                                )}
                                 name={[name, "shopeNumber"]}
                                 rules={[
                                   {
                                     required: true,
-                                    message: "Shope number is required",
+                                    message: t(
+                                      "entDrawer.drawerForm.shopeInputs.rm",
+                                    ),
                                   },
                                 ]}>
-                                <Input placeholder="" disabled={!isEditable} />
+                                <Input
+                                  placeholder={t(
+                                    "entDrawer.drawerForm.shopeInputs.snpt",
+                                  )}
+                                  disabled={!isEditable}
+                                />
                               </Form.Item>
                               <Form.Item
-                                label="Address"
+                                label={t("entDrawer.drawerForm.shopeInputs.at")}
                                 name={[name, "shopeAddress"]}>
-                                <Input placeholder="" disabled={!isEditable} />
+                                <Input
+                                  placeholder={t(
+                                    "entDrawer.drawerForm.shopeInputs.apt",
+                                  )}
+                                  disabled={!isEditable}
+                                />
                               </Form.Item>
                             </Flex>
                             {isEditable ? (
@@ -272,7 +318,7 @@ const EntDrawer = ({
                     type="primary"
                     htmlType="submit"
                     disabled={activeRow !== null}>
-                    Submit
+                    {t("entDrawer.drawerForm.button.sbt")}
                   </Button>
                 </Form.Item>
               </Col>
@@ -288,37 +334,45 @@ const EntDrawer = ({
             <Row gutter={24}>
               <Col span={12}>
                 <Form.Item
-                  label="Industry Name"
+                  label={t("entDrawer.drawerForm.nameInput.indnText")}
                   name="aNameInd"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter the Industry name",
+                      message: t("entDrawer.drawerForm.nameInput.indnrText"),
                     },
                   ]}>
-                  <Input />
+                  <Input
+                    placeholder={t("entDrawer.drawerForm.nameInput.indnpt")}
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="First Name"
+                  label={t("entDrawer.drawerForm.nameInput.fnText")}
                   name="aFirstName"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter first name",
+                      message: t("entDrawer.drawerForm.nameInput.fnrText"),
                     },
                   ]}>
-                  <Input placeholder="first name" />
-                </Form.Item>
-                <Form.Item label="Last Name" name="aLastName">
-                  <Input placeholder="last name" />
+                  <Input
+                    placeholder={t("entDrawer.drawerForm.nameInput.fnpt")}
+                  />
                 </Form.Item>
                 <Form.Item
-                  label="Contact"
+                  label={t("entDrawer.drawerForm.nameInput.lnText")}
+                  name="aLastName">
+                  <Input
+                    placeholder={t("entDrawer.ddrawerForm.nameInput.lnpt")}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label={t("entDrawer.drawerForm.contactInput.text")}
                   name="aIndContact"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter the mob number",
+                      message: t("entDrawer.drawerForm.contactInput.rm"),
                     },
                     {
                       validator: (_, value) => {
@@ -330,14 +384,25 @@ const EntDrawer = ({
                           return Promise.resolve();
                         }
                         return Promise.reject(
-                          new Error("Please enter vaild 10 digits number"),
+                          new Error(t("entDrawer.drawerForm.contactInput.vt")),
                         );
                       },
                     },
                   ]}>
-                  <Input placeholder="contact" />
+                  <Input
+                    placeholder={t("entDrawer.drawerForm.contactInput.pt")}
+                  />
                 </Form.Item>
-                <Form.Item label="Date" name="aStartDate" initialValue={date}>
+                <Form.Item
+                  label={t("entDrawer.drawerForm.dateInput.text")}
+                  name="aStartDate"
+                  initialValue={date}
+                  rules={[
+                    {
+                      required: true,
+                      message: t("entDrawer.drawerForm.dateInput.rm"),
+                    },
+                  ]}>
                   <DatePicker />
                 </Form.Item>
               </Col>
@@ -349,12 +414,14 @@ const EntDrawer = ({
                         <Flex gap="middle" horizontal key={key}>
                           <Flex gap="small" vertical>
                             <Form.Item
-                              label="Shope No"
+                              label={t("entDrawer.drawerForm.shopeInputs.snt")}
                               name={[name, "shopeNumber"]}
                               rules={[
                                 {
                                   required: true,
-                                  message: "Shope number is required",
+                                  message: t(
+                                    "entDrawer.drawerForm.shopeInputs.rm",
+                                  ),
                                 },
                                 {
                                   validator: (_, value) => {
@@ -374,7 +441,9 @@ const EntDrawer = ({
                                     if (isEntDuplicate || isIndDuplicate) {
                                       return Promise.reject(
                                         new Error(
-                                          "This Shope Number is already exist in your data base",
+                                          t(
+                                            "entDrawer.drawerForm.shopeInputs.vt",
+                                          ),
                                         ),
                                       );
                                     }
@@ -382,12 +451,20 @@ const EntDrawer = ({
                                   },
                                 },
                               ]}>
-                              <Input placeholder="" />
+                              <Input
+                                placeholder={t(
+                                  "entDrawer.drawerForm.shopeInputs.snpt",
+                                )}
+                              />
                             </Form.Item>
                             <Form.Item
-                              label="Address"
+                              label={t("entDrawer.drawerForm.shopeInputs.at")}
                               name={[name, "shopeAddress"]}>
-                              <Input placeholder="" />
+                              <Input
+                                placeholder={t(
+                                  "entDrawer.drawerForm.shopeInputs.apt",
+                                )}
+                              />
                             </Form.Item>
                           </Flex>
                           <Flex vertical align="bottom">
@@ -404,7 +481,7 @@ const EntDrawer = ({
             <Flex justify="flex-end" horizontal>
               <Form.Item>
                 <Button type="primary" htmlType="submit">
-                  Submit
+                  {t("entDrawer.drawerForm.button.sbt")}
                 </Button>
               </Form.Item>
             </Flex>

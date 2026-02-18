@@ -3,15 +3,16 @@ import { Dropdown, message } from "antd";
 import { useAuth } from "../../auth/AuthContext";
 import { useState } from "react";
 import UserActionModel from "../../component/UserIdActionModel";
+import { t } from "i18next";
 
 const items = [
   {
-    label: "Log Out",
+    label: t("settingPage.logoutText"),
     key: "1",
     icon: <LogoutOutlined />,
   },
   {
-    label: "Delete Account",
+    label: t("settingPage.deleteText"),
     key: "2",
     icon: <UserDeleteOutlined />,
   },
@@ -24,9 +25,7 @@ const Setting = () => {
   const handleMenuClick = (e) => {
     if (e.key === "1") {
       logout();
-      message.info(
-        `User : ${authState.user.userName.firstName} ${authState.user.userName.lastName} logout `,
-      );
+      message.info(`${t("settingPage.logoutSuccess")}`);
     }
 
     if (e.key === "2") {

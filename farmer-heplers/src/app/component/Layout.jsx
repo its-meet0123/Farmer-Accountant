@@ -99,7 +99,7 @@ const AppLayout = ({ children }) => {
         </div>
       </Content>
       <Footer style={{ textAlign: "center" }}>
-        Farmer Accountant ©{new Date().getFullYear()} Created by Sukh Ramghria
+        {`${t("layout.ft1")} ©${new Date().getFullYear()} ${t("layout.ft2")}`}
       </Footer>
       <UserActionModel
         openType={openType}

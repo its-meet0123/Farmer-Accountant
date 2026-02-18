@@ -29,8 +29,8 @@ import { DownloadTable2 } from "../../component/CalculateTableDownload";
 import { DownloadOutlined } from "@ant-design/icons";
 
 const options = [
-  { label: "Edit", value: "edit" },
-  { label: "Delete", value: "delete" },
+  { label: t("workerCalcPage.form.editButtonText"), value: "edit" },
+  { label: t("workerCalcPage.form.deleteButtonText"), value: "delete" },
 ];
 
 const WorkerCalculation = () => {
@@ -60,7 +60,7 @@ const WorkerCalculation = () => {
         message.success(res.data.message);
         setFetch("post");
       } catch (err) {
-        message.error("End date not posted");
+        message.error(t("workerCalcPage.setDateMessages.postError"));
         console.log(err.message);
       }
     }
@@ -74,36 +74,47 @@ const WorkerCalculation = () => {
           userId: authState.user.userId,
           dateType: "worker",
         };
-        const res = await editEndDate(id, data);
-        setEndDate(res.data.data);
-        message.success(res.data.message);
-        setFetch("patch");
+        try {
+          const res = await editEndDate(id, data);
+          setEndDate(res.data.data);
+          message.success(res.data.message);
+          setFetch("patch");
+        } catch (err) {
+          message.error(t("workerCalcPage.setDateMessages.editError"));
+          console.log(err.message);
+        }
       }
       if (fetch === "delete") {
-        const res = await deleteEndDate(id);
-        setId(null);
-        form.setFieldsValue({
-          endDate: null,
-        });
-        message.success(res.data.message);
-        setFetch("del");
+        try {
+          const res = await deleteEndDate(id);
+          setId(null);
+          form.setFieldsValue({
+            endDate: null,
+          });
+          message.success(res.data.message);
+          setFetch("del");
+        } catch (err) {
+          message.error(t("workerCalcPage.setDateMessages.deleteError"));
+          console.log(err.message);
+        }
       }
     }
   };
 
   useEffect(() => {
     async function getData() {
-      try {
-        if (state) {
+      if (state) {
+        try {
           setIsLoanding(true);
           const res = await getWorkerTransaction(state.id);
           const data = await res.data.data;
           setIsLoanding(false);
           setWorker(data);
+        } catch (err) {
+          message.error(t("workerCalcPage.fetchDataErrorMessage"));
+          console.error(err.message);
+          setIsLoanding(true);
         }
-      } catch (err) {
-        message.error(err.message);
-        setIsLoanding(true);
       }
     }
     getData();
@@ -127,7 +138,8 @@ const WorkerCalculation = () => {
         });
       } catch (err) {
         setIsLoanding(true);
-        message.error(err.message);
+        message.error(t("workerCalcPage.fetchDateErrorMessage"));
+        console.error(err.message);
         setFetch("del");
       }
     }
@@ -152,7 +164,7 @@ const WorkerCalculation = () => {
       <Card
         title={
           worker?.workerName &&
-          `Transaction view for ${worker?.workerName?.nickName}`
+          `${t("workerCalcPage.cardTitle")} ${worker?.workerName?.nickName}`
         }
         extra={
           <>
@@ -170,12 +182,16 @@ const WorkerCalculation = () => {
           <>
             <Flex horizontal>
               <Form form={form} layout="inline" onFinish={setDate}>
-                <Form.Item label="End Date" name="endDate">
+                <Form.Item
+                  label={t("workerCalcPage.form.inputLabel")}
+                  name="endDate">
                   <DatePicker disabled={id && fetch !== "edit"} />
                 </Form.Item>
                 {(id == null || fetch === "edit" || fetch === "delete") && (
                   <Form.Item>
-                    <Button htmlType="submit">Set</Button>
+                    <Button htmlType="submit">
+                      {t("WorkerCalcPage.form.setButtonText")}
+                    </Button>
                   </Form.Item>
                 )}
                 {id && (

@@ -244,6 +244,12 @@
     },
     "fetchDataErrorMessage": "ਆਈਡੀ ਦੁਆਰਾ ਕਾਮੇ ਦੇ ਲੈਣ-ਦੇਣ ਨਹੀਂ ਮਿਲੇ",
     "fetchDateErrorMessage": "workerCalc ਪੇਜ ਵਿੱਚ ਆਈਡੀ ਦੁਆਰਾ ਮਿਤੀ ਨਹੀਂ ਮਿਲ ਰਹੀ।",
+    "form": {
+      "inputLabel": "ਆਖਰੀ ਮਿਤੀ",
+      "setButtonText": "ਸੈੱਟ ਕਰੋ",
+      "editButtonText": "ਬਦਲੋ",
+      "deleteButtonText": "ਹਟਾਓ"
+    },
     "tableColumns": {
       "serialNoTextTitle": "ਲੜੀ ਨੰ.",
       "dateText": "ਮਿਤੀ",

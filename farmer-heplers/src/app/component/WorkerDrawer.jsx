@@ -23,13 +23,13 @@ import {
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 const plainOptions = [
-  { label: "Give", value: "give" },
-  { label: "None", value: "none" },
-  { label: "Take", value: "take" },
+  { label: t("workerDrawer.transactionInput.transType.gives"), value: "give" },
+  { label: t("workerDrawer.transactionInput.transType.none"), value: "none" },
+  { label: t("workerDrawer.transactionInput.transType.takes"), value: "take" },
 ];
 
 const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
-  const { authState } = useAuth();
+  const { authState, t } = useAuth();
   const [workerInfoForm] = Form.useForm();
   const [transactionForm] = Form.useForm();
   const [editTransactionForm] = Form.useForm();
@@ -63,7 +63,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
       setOpen(null);
       setFetchData("add");
     } else {
-      message.error("Worker not added");
+      message.error(t("workerDrawer.submitFunction.errorMessageforCreate1"));
     }
   };
 
@@ -92,7 +92,9 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           setFetchData("addT");
           onClose();
         } else {
-          message.error("Faild to upload the Worker transaction");
+          message.error(
+            t("workerDrawer.submitFunction.errorMessageforCreate2"),
+          );
         }
       }
       if (action === "take") {
@@ -117,7 +119,9 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           setFetchData("addT");
           onClose();
         } else {
-          message.error("Faild to upload the Worker transaction");
+          message.error(
+            t("workerDrawer.submitLFunction.errorMessageforCreate2"),
+          );
         }
       }
       if (action === "none") {
@@ -142,7 +146,9 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           setFetchData("addT");
           onClose();
         } else {
-          message.error("faild to upload the Worker transaction");
+          message.error(
+            t("workerDrawer.submitFunction.errorMessageforCreate2"),
+          );
         }
       }
     }
@@ -176,7 +182,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           message.success(res.data.message);
           onClose();
         } else {
-          message.error("Transaction not edit");
+          message.error(t("workerDrawer.submitFunction.errorMessageforEdit"));
         }
       }
     }
@@ -203,7 +209,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
   return (
     <>
       <Drawer
-        title="Add Worker"
+        title={t("workerDrawer.awDrawerTitle")}
         placement="right"
         closable={false}
         onClose={onClose}
@@ -211,7 +217,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         extra={
           <Form form={workerInfoForm} onFinish={handleSubmitInfoForm}>
             <Row style={{ gap: "8px" }}>
-              <Button onClick={onClose}>Cancel</Button>
+              <Button onClick={onClose}>{t("workerDrawer.button.cbt")}</Button>
               <Form.Item label={null}>
                 <Button type="primary" htmlType="submit">
                   OK
@@ -228,26 +234,32 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           onFinish={handleSubmitInfoForm}>
           <Row gutter={24}>
             <Form.Item
-              label="First Name"
+              label={t("workerDrawer.detailInput.fnt")}
               name="firstName"
-              rules={[{ required: true, message: "Please enter worker name" }]}>
-              <Input placeholder="Enter first name" />
+              rules={[
+                { required: true, message: t("workerDrawer.detailInput.fnrm") },
+              ]}>
+              <Input placeholder={t("workerDrawer.detailInput.fnpt")} />
             </Form.Item>
-            <Form.Item label="Last Name" name="lastName">
-              <Input placeholder="Enter last name" />
+            <Form.Item
+              label={t("workerDrawer.detailInput.lnt")}
+              name="lastName">
+              <Input placeholder={t("workerDrawer.detailInput.lnpt")} />
             </Form.Item>
           </Row>
           <Row gutter={24}>
-            <Form.Item label="Nick Name" name="nickName">
-              <Input placeholder="Enter home name" />
+            <Form.Item
+              label={t("workerDrawer.detailInput.nnt")}
+              name="nickName">
+              <Input placeholder={t("workerDrawer.detailInput.nnpt")} />
             </Form.Item>
             <Form.Item
-              label="Id Proof"
+              label={t("workerDrawer.detailInput.idpt")}
               name="idProof"
               rules={[
                 {
                   required: true,
-                  message: "Proof is required",
+                  message: t("workerDrawer.detailInput.idprm"),
                 },
                 {
                   validator: (_, value) => {
@@ -259,24 +271,27 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                     );
                     if (isDuplicateId) {
                       return Promise.reject(
-                        new Error("This ID is already exist in your data base"),
+                        new Error(t("workerDrawer.detailInput.idpvm")),
                       );
                     }
                     return Promise.resolve();
                   },
                 },
               ]}>
-              <Input placeholder="Enter Id proof" maxLength={12} />
+              <Input
+                placeholder={t("workerDrawer.detailInput.idppt")}
+                maxLength={12}
+              />
             </Form.Item>
           </Row>
           <Row gutter={24}>
             <Form.Item
-              label="Contact"
+              label={t("workerDrawer.detailInput.ct")}
               name="contect"
               rules={[
                 {
                   required: true,
-                  message: "Please enter the mob number",
+                  message: t("workerDrawer.detailInput.crm"),
                 },
                 {
                   validator: (_, value) => {
@@ -288,14 +303,21 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                       return Promise.resolve();
                     }
                     return Promise.reject(
-                      new Error("Please enter vaild 10 digits number"),
+                      new Error(t("workerDrawer.detailInput.cvm")),
                     );
                   },
                 },
               ]}>
-              <Input type="tel" maxLength={10} placeholder="Enter Mob no" />
+              <Input
+                type="tel"
+                maxLength={10}
+                placeholder={t("workerDrawer.detailInput.cpt")}
+              />
             </Form.Item>
-            <Form.Item label="Date" name="date" initialValue={today}>
+            <Form.Item
+              label={t("workerDrawer.detailInput.dt")}
+              name="date"
+              initialValue={today}>
               <DatePicker />
             </Form.Item>
           </Row>
@@ -303,12 +325,14 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
       </Drawer>
 
       <Drawer
-        title="Add Worker Transaction"
+        title={t("workerDrawer.awtDrawerTitle")}
         placement="top"
         closable={false}
         onClose={onClose}
         open={open === "at" || open === "ewt"}
-        extra={<Button onClick={onClose}>Cancel</Button>}>
+        extra={
+          <Button onClick={onClose}>{t("workerDrawer.button.cbt")}</Button>
+        }>
         {open === "at" && (
           <Form
             labelCol={{ span: 10 }}
@@ -317,25 +341,38 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
             initialValues={{ corp: [""] }}
             onFinish={handleSubmitTransactionForm}>
             <Row gutter={24}>
-              <Form.Item label="Amount" name="amount">
+              <Form.Item
+                label={t("workerDrawer.transactionInput.at")}
+                name="amount">
                 <InputNumber
-                  placeholder="Enter gives amount"
+                  placeholder={t("workerDrawer.transactionInput.apt")}
                   controls={false}
                 />
               </Form.Item>
-              <Form.Item label="Type" name="amountType">
-                <Input placeholder="Enter amount type" />
+              <Form.Item
+                label={t("workerDrawer.transactionInput.att")}
+                name="amountType">
+                <Input placeholder={t("workerDrawer.transactionInput.atpt")} />
               </Form.Item>
-              <Form.Item label="Brief" name="brief">
-                <Input placeholder="Enter amount brief" />
+              <Form.Item
+                label={t("workerDrawer.transactionInput.bt")}
+                name="brief">
+                <Input placeholder={t("workerDrawer.transactionInput.bt")} />
               </Form.Item>
             </Row>
             <Row gutter={24}>
-              <Form.Item label="Payment" name="payment">
-                <InputNumber placeholder="Enter payment" controls={false} />
+              <Form.Item
+                label={t("workerDrawer.transactionInput.plt")}
+                name="payment">
+                <InputNumber
+                  placeholder={t("workerDrawer.transactionInput.plpt")}
+                  controls={false}
+                />
               </Form.Item>
-              <Form.Item label="Type" name="paymentType">
-                <Input placeholder="Enter payment type" />
+              <Form.Item
+                label={t("workerDrawer.transactionInput.ptt")}
+                name="paymentType">
+                <Input placeholder={t("workerDrawer.transactionInput.ptpt")} />
               </Form.Item>
             </Row>
             <Form.Item>
@@ -354,22 +391,30 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                     {fields.map(({ key, name }) => (
                       <Row gutter={24} key={key}>
                         <Col span={5}>
-                          <Form.Item label="Crop" name={[name, "name"]}>
+                          <Form.Item
+                            label={t("workerDrawer.transactionInput.crops.cnt")}
+                            name={[name, "name"]}>
                             <Input placeholder="Crop Name" />
                           </Form.Item>
                         </Col>
                         <Col span={5}>
-                          <Form.Item label="Qty." name={[name, "qty"]}>
+                          <Form.Item
+                            label={t("workerDrawer.transactionInput.crops.cqt")}
+                            name={[name, "qty"]}>
                             <InputNumber placeholder="Crop Qty." />
                           </Form.Item>
                         </Col>
                         <Col span={5}>
-                          <Form.Item label="Rate" name={[name, "rate"]}>
+                          <Form.Item
+                            label={t("workerDrawer.transactionInput.crops.crt")}
+                            name={[name, "rate"]}>
                             <InputNumber placeholder="Rate of crop" />
                           </Form.Item>
                         </Col>
                         <Col span={5}>
-                          <Form.Item label="Total" name={[name, "amount"]}>
+                          <Form.Item
+                            label={t("workerDrawer.transactionInput.crops.ctt")}
+                            name={[name, "amount"]}>
                             <InputNumber placeholder="Total of crop" />
                           </Form.Item>
                         </Col>
@@ -386,15 +431,20 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
             )}
             <Row gutter={24}>
               <Form.Item
-                label="Date"
+                label={t("workerDrawer.transactionInput.dt")}
                 name="date"
                 initialValue={today}
-                rules={[{ required: true, message: "Date is required" }]}>
+                rules={[
+                  {
+                    required: true,
+                    message: t("workerDrawer.transactionInput.drm"),
+                  },
+                ]}>
                 <DatePicker />
               </Form.Item>
               <Form.Item label={null}>
                 <Button type="primary" htmlType="submit">
-                  Submit
+                  {t("workerDrawer.transactionInput.button.sbt")}
                 </Button>
               </Form.Item>
             </Row>
@@ -408,25 +458,38 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
             form={editTransactionForm}
             onFinish={handleSubmitTransactionForm}>
             <Row gutter={24}>
-              <Form.Item label="Amount" name="amount">
+              <Form.Item
+                label={t("workerDrawer.transactionInput.at")}
+                name="amount">
                 <InputNumber
-                  placeholder="Enter gives amount"
+                  placeholder={t("workerDrawer.transactionInput.apt")}
                   controls={false}
                 />
               </Form.Item>
-              <Form.Item label="Type" name="amountType">
-                <Input placeholder="Enter amount type" />
+              <Form.Item
+                label={t("workerDrawer.transactionInput.att")}
+                name="amountType">
+                <Input placeholder={t("workerDrawer.transactionInput.atpt")} />
               </Form.Item>
-              <Form.Item label="Brief" name="brief">
-                <Input placeholder="Enter amount brief" />
+              <Form.Item
+                label={t("workerDrawer.transactionInput.bt")}
+                name="brief">
+                <Input placeholder={t("workerDrawer.transactionInput.bt")} />
               </Form.Item>
             </Row>
             <Row gutter={24}>
-              <Form.Item label="Payment" name="payment">
-                <InputNumber placeholder="Enter payment" controls={false} />
+              <Form.Item
+                label={t("workerDrawer.transactionInput.plt")}
+                name="payment">
+                <InputNumber
+                  placeholder={t("workerDrawer.transactionInput.plpt")}
+                  controls={false}
+                />
               </Form.Item>
-              <Form.Item label="Type" name="paymentType">
-                <Input placeholder="Enter payment type" />
+              <Form.Item
+                label={t("workerDrawer.transactionInput.ptt")}
+                name="paymentType">
+                <Input placeholder={t("workerDrawer.transactionInput.ptpt")} />
               </Form.Item>
             </Row>
 
@@ -436,22 +499,34 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                   {fields.map(({ key, name }) => (
                     <Row gutter={24} key={key}>
                       <Col span={6}>
-                        <Form.Item label="Crop" name={[name, "name"]}>
-                          <Input placeholder="Crop Name" />
+                        <Form.Item
+                          label={t("workerDrawer.transactionInput.crops.cnt")}
+                          name={[name, "name"]}>
+                          <Input
+                            placeholder={t(
+                              "workerDrawer.transactionInput.crops.cnt",
+                            )}
+                          />
                         </Form.Item>
                       </Col>
                       <Col span={6}>
-                        <Form.Item label="Qty." name={[name, "qty"]}>
+                        <Form.Item
+                          label={t("workerDrawer.transactionInput.crops.cqt")}
+                          name={[name, "qty"]}>
                           <InputNumber placeholder="Crop Qty." />
                         </Form.Item>
                       </Col>
                       <Col span={6}>
-                        <Form.Item label="Rate" name={[name, "rate"]}>
+                        <Form.Item
+                          label={t("workerDrawer.transactionInput.crops.crt")}
+                          name={[name, "rate"]}>
                           <InputNumber placeholder="Rate of crop" />
                         </Form.Item>
                       </Col>
                       <Col span={6}>
-                        <Form.Item label="Total" name={[name, "amount"]}>
+                        <Form.Item
+                          label={t("workerDrawer.transactionInput.crops.ctt")}
+                          name={[name, "amount"]}>
                           <InputNumber placeholder="Total of crop" />
                         </Form.Item>
                       </Col>
@@ -466,22 +541,30 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                   {fields.map(({ key, name }) => (
                     <Row gutter={24} key={key}>
                       <Col span={6}>
-                        <Form.Item label="Crop" name={[name, "name"]}>
+                        <Form.Item
+                          label={t("workerDrawer.transactionInput.crops.cnt")}
+                          name={[name, "name"]}>
                           <Input placeholder="Crop Name" />
                         </Form.Item>
                       </Col>
                       <Col span={6}>
-                        <Form.Item label="Qty." name={[name, "qty"]}>
+                        <Form.Item
+                          label={t("workerDrawer.transactionInput.crops.cqt")}
+                          name={[name, "qty"]}>
                           <InputNumber placeholder="Crop Qty." />
                         </Form.Item>
                       </Col>
                       <Col span={6}>
-                        <Form.Item label="Rate" name={[name, "rate"]}>
+                        <Form.Item
+                          label={t("workerDrawer.transactionInput.crops.crt")}
+                          name={[name, "rate"]}>
                           <InputNumber placeholder="Rate of crop" />
                         </Form.Item>
                       </Col>
                       <Col span={6}>
-                        <Form.Item label="Total" name={[name, "amount"]}>
+                        <Form.Item
+                          label={t("workerDrawer.transactionInput.crops.ctt")}
+                          name={[name, "amount"]}>
                           <InputNumber placeholder="Total of crop" />
                         </Form.Item>
                       </Col>
@@ -492,14 +575,19 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
             </Form.List>
             <Row gutter={24}>
               <Form.Item
-                label="Date"
+                label={t("workerDrawer.trnasactionInput.dt")}
                 name="date"
-                rules={[{ required: true, message: "Date is required" }]}>
+                rules={[
+                  {
+                    required: true,
+                    message: t("workerDrawer.trnasactionInput.drm"),
+                  },
+                ]}>
                 <DatePicker />
               </Form.Item>
               <Form.Item label={null}>
                 <Button type="primary" htmlType="submit">
-                  Submit
+                  {t("workerDrawer.transactionInput.button.sbt")}
                 </Button>
               </Form.Item>
             </Row>

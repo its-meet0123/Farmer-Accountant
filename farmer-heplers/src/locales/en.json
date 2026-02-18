@@ -251,6 +251,12 @@
     },
     "fetchDataErrorMessage": "Worker Transactions not fteched by Id ",
     "fetchDateErrorMessage": "Date not fetching by Id in workerCalc page.",
+    "form": {
+      "inputLabel": "End Date",
+      "setButtonText": "Set",
+      "editButtonText": "Edit",
+      "deleteButtonText": "Delete"
+    },
     "tableColumns": {
       "serialNoTextTitle": "Sr. No.",
       "dateText": "Date",

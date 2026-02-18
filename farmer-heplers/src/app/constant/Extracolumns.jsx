@@ -14,7 +14,7 @@ const formattedDate = (date) => {
   return DateTimeFormat;
 };
 
-const showModal = ({ crop, title }) => {
+const showModal = ({ crop, title, t }) => {
   Modal.success({
     title: title,
     content: (
@@ -247,7 +247,9 @@ const getColumnsForViewPage = (t) => {
             if (crop.length > 0) {
               const title = "Sell Crop";
               return (
-                <Button type="link" onClick={() => showModal({ crop, title })}>
+                <Button
+                  type="link"
+                  onClick={() => showModal({ crop, title, t })}>
                   {t(
                     "ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonText",
                   )}
@@ -648,7 +650,7 @@ const getColumnsForCalulationPage = (t) => {
   return BASE_COLUMNS;
 };
 
-const getWorkerListColumnsForWorkerPage = () => {
+const getWorkerListColumnsForWorkerPage = (t) => {
   const Worker_List_Columns = [
     {
       title: t("workerPage.tableColumns.serialNoTextTitle"),
@@ -766,7 +768,9 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
             if (crop.length > 0) {
               const title = "Give Crop";
               return (
-                <Button type="link" onClick={() => showModal({ crop, title })}>
+                <Button
+                  type="link"
+                  onClick={() => showModal({ crop, title, t })}>
                   {t(
                     "workerPage.tableColumns.extandTableColumns.gives.Crops.buttonText",
                   )}
@@ -823,7 +827,9 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
             if (crop.length > 0) {
               const title = "Take Crop";
               return (
-                <Button type="link" onClick={() => showModal({ crop, title })}>
+                <Button
+                  type="link"
+                  onClick={() => showModal({ crop, title, t })}>
                   {t(
                     "workerPage.tableColumns.extandTableColumns.takes.Crops.buttonText",
                   )}
