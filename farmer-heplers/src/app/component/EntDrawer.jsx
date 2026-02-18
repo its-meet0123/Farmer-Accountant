@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { postEntData, updateEntData } from "../service/ent";
 import { postIntShopeInitailData, UpdateIndDataById } from "../service/ind";
 import dayjs from "dayjs";
-import { useAuth } from "../auth/AuthContext";
+
 const { useBreakpoint } = Grid;
 
 const EntDrawer = ({
@@ -34,8 +34,8 @@ const EntDrawer = ({
   showSuccess,
   user,
   data,
+  t,
 }) => {
-  const { t } = useAuth();
   const [addForm] = Form.useForm();
   const [edit, setEdit] = useState(false);
   const [activeRow, setActiveRow] = useState(null);

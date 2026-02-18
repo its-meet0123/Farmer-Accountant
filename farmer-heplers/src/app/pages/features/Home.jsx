@@ -251,6 +251,7 @@ const HomePage = () => {
         showSuccess={showSuccess}
         user={authState.user}
         data={{ entData, indData }}
+        t={t}
       />
     </>
   );

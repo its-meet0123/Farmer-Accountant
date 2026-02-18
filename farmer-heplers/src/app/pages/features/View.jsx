@@ -292,6 +292,7 @@ const ViewPage = () => {
         form={form}
         setFetch={setFetch}
         showSuccess={showSuccess}
+        t={t}
       />
     </>
   );
