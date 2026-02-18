@@ -1,6 +1,6 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Flex, Input, Modal, Popconfirm } from "antd";
-import { t } from "i18next";
+import i18next from "i18next";
 import { useState } from "react";
 
 const formattedDate = (date) => {
@@ -67,13 +67,13 @@ const showModal = ({ crop, title }) => {
 
 export const SHOPS_COLUMNS = [
   {
-    title: t("homePage.tableColumns.extandTableColumns.ShopeNoText"),
+    title: i18next.t("homePage.tableColumns.extandTableColumns.ShopeNoText"),
     dataIndex: "shopeNumber",
     key: "shopeNumber",
     width: 50,
   },
   {
-    title: t("homePage.tableColumns.extandTableColumns.AddressText"),
+    title: i18next.t("homePage.tableColumns.extandTableColumns.AddressText"),
     dataIndex: "shopeAddress",
     key: "shopeAddress",
     width: 100,
@@ -82,13 +82,15 @@ export const SHOPS_COLUMNS = [
 
 export const SHOPE_ACCOUNT_BASE_COLUMNS = [
   {
-    title: t("ViewPage.tableColumns.extandTableColumns.transNoTitleText"),
+    title: i18next.t(
+      "ViewPage.tableColumns.extandTableColumns.transNoTitleText",
+    ),
     dataIndex: "serialNo",
 
     width: 50,
   },
   {
-    title: t("ViewPage.tableColumns.extandTableColumns.dateTitleText"),
+    title: i18next.t("ViewPage.tableColumns.extandTableColumns.dateTitleText"),
     dataIndex: "startDate",
     key: "startDate",
     width: 150,
@@ -99,12 +101,14 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     },
   },
   {
-    title: t("ViewPage.tableColumns.extandTableColumns.loan.titleText"),
+    title: i18next.t("ViewPage.tableColumns.extandTableColumns.loan.titleText"),
     children: [
       {
         title: (
           <p style={{ color: "#3E0703" }}>
-            {t("ViewPage.tableColumns.extandTableColumns.loan.amountText")}
+            {i18next.t(
+              "ViewPage.tableColumns.extandTableColumns.loan.amountText",
+            )}
           </p>
         ),
         dataIndex: ["loan", "amount"],
@@ -117,7 +121,9 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
       {
         title: (
           <p style={{ color: "#3E0703" }}>
-            {t("ViewPage.tableColumns.extandTableColumns.loan.amountTypeText")}
+            {i18next.t(
+              "ViewPage.tableColumns.extandTableColumns.loan.amountTypeText",
+            )}
           </p>
         ),
         dataIndex: ["loan", "amountType"],
@@ -130,12 +136,14 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     ],
   },
   {
-    title: t("ViewPage.tableColumns.extandTableColumns.buyItem.titleText"),
+    title: i18next.t(
+      "ViewPage.tableColumns.extandTableColumns.buyItem.titleText",
+    ),
     children: [
       {
         title: (
           <p style={{ color: "#D73535" }}>
-            {t(
+            {i18next.t(
               "ViewPage.tableColumns.extandTableColumns.buyItem.billAmountText",
             )}
           </p>
@@ -150,7 +158,9 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
       {
         title: (
           <p style={{ color: "#D73535" }}>
-            {t("ViewPage.tableColumns.extandTableColumns.buyItem.billText")}
+            {i18next.t(
+              "ViewPage.tableColumns.extandTableColumns.buyItem.billText",
+            )}
           </p>
         ),
         dataIndex: ["indBuy", "bill"],
@@ -163,7 +173,9 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
       {
         title: (
           <p style={{ color: "#D73535" }}>
-            {t("ViewPage.tableColumns.extandTableColumns.buyItem.briefText")}
+            {i18next.t(
+              "ViewPage.tableColumns.extandTableColumns.buyItem.briefText",
+            )}
           </p>
         ),
         dataIndex: ["indBuy", "brief"],
@@ -176,12 +188,14 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     ],
   },
   {
-    title: t("ViewPage.tableColumns.extandTableColumns.sellItem.titleText"),
+    title: i18next.t(
+      "ViewPage.tableColumns.extandTableColumns.sellItem.titleText",
+    ),
     children: [
       {
         title: (
           <p style={{ color: "#8ABB6C" }}>
-            {t(
+            {i18next.t(
               "ViewPage.tableColumns.extandTableColumns.sellItem.billAmountText",
             )}
           </p>
@@ -196,7 +210,9 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
       {
         title: (
           <p style={{ color: "#8ABB6C" }}>
-            {t("ViewPage.tableColumns.extandTableColumns.sellItem.billText")}
+            {i18next.t(
+              "ViewPage.tableColumns.extandTableColumns.sellItem.billText",
+            )}
           </p>
         ),
         dataIndex: ["indSell", "bill"],
@@ -209,7 +225,9 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
       {
         title: (
           <p style={{ color: "#8ABB6C" }}>
-            {t("ViewPage.tableColumns.extandTableColumns.sellItem.BriefText")}
+            {i18next.t(
+              "ViewPage.tableColumns.extandTableColumns.sellItem.BriefText",
+            )}
           </p>
         ),
         dataIndex: ["indSell", "brief"],
@@ -222,7 +240,7 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
       {
         title: (
           <p style={{ color: "#8ABB6C" }}>
-            {t(
+            {i18next.t(
               "ViewPage.tableColumns.extandTableColumns.sellItem.Crops.titleText",
             )}
           </p>
@@ -235,8 +253,8 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
             const title = "Sell Crop";
             return (
               <Button type="link" onClick={() => showModal({ crop, title })}>
-                {t(
-                  "ViewPage.tableColumns.extandTableColumns.sellItem.buttonText",
+                {i18next.t(
+                  "ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonText",
                 )}
               </Button>
             );
@@ -246,12 +264,14 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
     ],
   },
   {
-    title: t("ViewPage.tableColumns.extandTableColumns.diesel.titleText"),
+    title: i18next.t(
+      "ViewPage.tableColumns.extandTableColumns.diesel.titleText",
+    ),
     children: [
       {
         title: (
           <p style={{ color: "#075B5E" }}>
-            {t(
+            {i18next.t(
               "ViewPage.tableColumns.extandTableColumns.diesel.billAmountText",
             )}
           </p>
@@ -266,14 +286,18 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
       {
         title: (
           <p style={{ color: "#075B5E" }}>
-            {t("ViewPage.tableColumns.extandTableColumns.diesel.billText")}
+            {i18next.t(
+              "ViewPage.tableColumns.extandTableColumns.diesel.billText",
+            )}
           </p>
         ),
         children: [
           {
             title: (
               <p style={{ color: "#075B5E" }}>
-                {t("ViewPage.tableColumns.extandTableColumns.diesel.qtyText")}
+                {i18next.t(
+                  "ViewPage.tableColumns.extandTableColumns.diesel.qtyText",
+                )}
               </p>
             ),
             dataIndex: ["diesel", "qty"],
@@ -286,7 +310,9 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
           {
             title: (
               <p style={{ color: "#075B5E" }}>
-                {t("ViewPage.tableColumns.extandTableColumns.diesel.rateText")}
+                {i18next.t(
+                  "ViewPage.tableColumns.extandTableColumns.diesel.rateText",
+                )}
               </p>
             ),
             dataIndex: ["diesel", "rate"],
@@ -304,13 +330,13 @@ export const SHOPE_ACCOUNT_BASE_COLUMNS = [
 
 export const BASE_COLUMNS = [
   {
-    title: "Sr.No",
+    title: i18next.t("calculationPage.tableColumns.serialNoTitleText"),
     dataIndex: "serialNo",
     key: "serialNo",
     width: 50,
   },
   {
-    title: "Date",
+    title: i18next.t("calculationPage.tableColumns.dateTitleText"),
     dataIndex: "startDate",
     key: "startDate",
     width: 100,
@@ -321,10 +347,14 @@ export const BASE_COLUMNS = [
     },
   },
   {
-    title: "Loan",
+    title: i18next.t("calculationPage.tableColumns.loan.titleText"),
     children: [
       {
-        title: <p style={{ color: "#3E0703" }}>Amount</p>,
+        title: (
+          <p style={{ color: "#3E0703" }}>
+            {i18next.t("calculationPage.tableColumns.loan.amountText")}
+          </p>
+        ),
         dataIndex: ["loan", "amount"],
         key: "amount",
         width: 100,
@@ -334,7 +364,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#3E0703" }}>Days</p>,
+        title: (
+          <p style={{ color: "#3E0703" }}>
+            {i18next.t("calculationPage.tableColumns.loan.daysText")}
+          </p>
+        ),
         dataIndex: ["loan", "days"],
         key: "days",
         width: 100,
@@ -344,7 +378,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#3E0703" }}>Months</p>,
+        title: (
+          <p style={{ color: "#3E0703" }}>
+            {i18next.t("calculationPage.tableColumns.loan.monthsText")}
+          </p>
+        ),
         dataIndex: ["loan", "months"],
         key: "days",
         width: 100,
@@ -354,7 +392,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#3E0703" }}>Interest</p>,
+        title: (
+          <p style={{ color: "#3E0703" }}>
+            {"calculationPage.tableColumns.loan.interestText"}
+          </p>
+        ),
         dataIndex: ["loan", "interest"],
         key: "interest",
         width: 100,
@@ -364,7 +406,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#3E0703" }}>Total</p>,
+        title: (
+          <p style={{ color: "#3E0703" }}>
+            {i18next.t("calculationPage.tableColumns.loan.totalText")}
+          </p>
+        ),
         dataIndex: ["loan", "totalAmount"],
         key: "totalAmount",
         width: 100,
@@ -376,10 +422,14 @@ export const BASE_COLUMNS = [
     ],
   },
   {
-    title: "Buy",
+    title: i18next.t("calculationPage.tableColumns.buyItem.titleText"),
     children: [
       {
-        title: <p style={{ color: "#D73535" }}>Amount</p>,
+        title: (
+          <p style={{ color: "#D73535" }}>
+            {i18next.t("calculationPage.tableColumns.buyItem.billAmountText")}
+          </p>
+        ),
         dataIndex: ["indBuy", "billAmount"],
         key: "billAmount",
         width: 100,
@@ -389,7 +439,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#D73535" }}>Days</p>,
+        title: (
+          <p style={{ color: "#D73535" }}>
+            {i18next.t("calculationPage.tableColumns.buyItem.daysText")}
+          </p>
+        ),
         dataIndex: ["indBuy", "days"],
         key: "days",
         width: 100,
@@ -399,7 +453,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#D73535" }}>Months</p>,
+        title: (
+          <p style={{ color: "#D73535" }}>
+            {i18next.t("calculationPage.tableColumns.buyItem.monthsText")}
+          </p>
+        ),
         dataIndex: ["indBuy", "months"],
         key: "days",
         width: 100,
@@ -409,7 +467,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#D73535" }}>Interest</p>,
+        title: (
+          <p style={{ color: "#D73535" }}>
+            {i18next.t("calculationPage.tableColumns.buyItem.interestText")}
+          </p>
+        ),
         dataIndex: ["indBuy", "interest"],
         key: "interest",
         width: 100,
@@ -419,7 +481,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#D73535" }}>Total</p>,
+        title: (
+          <p style={{ color: "#D73535" }}>
+            {i18next.t("calculationPage.tableColumns.buyItem.totalText")}
+          </p>
+        ),
         dataIndex: ["indBuy", "totalAmount"],
         key: "totalAmount",
         width: 100,
@@ -431,10 +497,14 @@ export const BASE_COLUMNS = [
     ],
   },
   {
-    title: "Sell",
+    title: i18next.t("calculationPage.tableColumns.sellItem.titleText"),
     children: [
       {
-        title: <p style={{ color: "#8ABB6C" }}>Amount</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {i18next.t("calculationPage.tableColumns.settItem.billAmountText")}
+          </p>
+        ),
         dataIndex: ["indSell", "billAmount"],
         key: "amount",
         width: 100,
@@ -444,7 +514,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#8ABB6C" }}>Days</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {i18next.t("calculationPage.tableColumns.sellItem.daysText")}
+          </p>
+        ),
         dataIndex: ["indSell", "days"],
         key: "days",
         width: 100,
@@ -454,7 +528,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#8ABB6C" }}>Months</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {i18next.t("calculationPage.tableColumns.sellItem.monthsText")}
+          </p>
+        ),
         dataIndex: ["indSell", "months"],
         key: "days",
         width: 100,
@@ -464,7 +542,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#8ABB6C" }}>Interest</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {i18next.t("calculationPage.tableColumns.sellItem.interestText")}
+          </p>
+        ),
         dataIndex: ["indSell", "interest"],
         key: "interest",
         width: 100,
@@ -474,7 +556,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#8ABB6C" }}>Total</p>,
+        title: (
+          <p style={{ color: "#8ABB6C" }}>
+            {i18next.t("calculationPage.tableColumns.sellItem.totalText")}
+          </p>
+        ),
         dataIndex: ["indSell", "totalAmount"],
         key: "totalAmount",
         width: 100,
@@ -486,10 +572,14 @@ export const BASE_COLUMNS = [
     ],
   },
   {
-    title: "Diesel",
+    title: i18next.t("calculationPage.tableColumns.diesel.titleText"),
     children: [
       {
-        title: <p style={{ color: "#075B5E" }}>Amount</p>,
+        title: (
+          <p style={{ color: "#075B5E" }}>
+            {i18next.t("calculationPage.tableColumns.diesel.billAmountText")}
+          </p>
+        ),
         dataIndex: ["diesel", "billAmount"],
         key: "amount",
         width: 100,
@@ -499,7 +589,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#075B5E" }}>Days</p>,
+        title: (
+          <p style={{ color: "#075B5E" }}>
+            {i18next.t("calculationPage.tableColumns.diesel.daysText")}
+          </p>
+        ),
         dataIndex: ["diesel", "days"],
         key: "days",
         width: 100,
@@ -509,7 +603,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#075B5E" }}>Months</p>,
+        title: (
+          <p style={{ color: "#075B5E" }}>
+            {i18next.t("calculationPage.tableColumns.diesel.monthsText")}
+          </p>
+        ),
         dataIndex: ["diesel", "months"],
         key: "days",
         width: 100,
@@ -519,7 +617,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#075B5E" }}>Interest</p>,
+        title: (
+          <p style={{ color: "#075B5E" }}>
+            {i18next.t("calculationPage.tableColumns.diesel.interestText")}
+          </p>
+        ),
         dataIndex: ["diesel", "interest"],
         key: "interest",
         width: 100,
@@ -529,7 +631,11 @@ export const BASE_COLUMNS = [
         },
       },
       {
-        title: <p style={{ color: "#075B5E" }}>Total</p>,
+        title: (
+          <p style={{ color: "#075B5E" }}>
+            {i18next.t("calculationPage.tableColumns.diesel.interestText")}
+          </p>
+        ),
         dataIndex: ["diesel", "totalAmount"],
         key: "totalAmount",
         width: 100,
@@ -541,7 +647,7 @@ export const BASE_COLUMNS = [
     ],
   },
   {
-    title: "Grand Total",
+    title: i18next.t("calculationPage.tableColumns.grandTotalText"),
     dataIndex: "",
     width: 120,
     key: "gt",
@@ -550,13 +656,13 @@ export const BASE_COLUMNS = [
 
 export const Worker_List_Columns = [
   {
-    title: "Sr. No.",
+    title: i18next.t("workerPage.tableColumns.serialNoTextTitle"),
     dataIndex: "serialNo",
     key: "serialNo",
     width: 50,
   },
   {
-    title: "Date",
+    title: i18next.t("workerPage.tableColumns.dateText"),
     dataIndex: ["workerDetail", "date"],
     key: "date",
     width: 150,
@@ -566,7 +672,7 @@ export const Worker_List_Columns = [
     },
   },
   {
-    title: "Name",
+    title: i18next.t("workerPage.tableColumns.workerDetails.workerNameText"),
     dataIndex: ["workerDetail", "workerName"],
     key: "workerName",
     width: 250,
@@ -575,13 +681,13 @@ export const Worker_List_Columns = [
     },
   },
   {
-    title: "ID Proof",
+    title: i18next.t("workerPage.tableColumns.workerDetails.workerIdProofText"),
     dataIndex: ["workerDetail", "idProof"],
     key: "idProof",
     width: 250,
   },
   {
-    title: "Contect",
+    title: i18next.t("workerPage.tableColumns.workerDetails.workerContect"),
     dataIndex: ["workerDetail", "contect"],
     key: "contect",
     width: 200,

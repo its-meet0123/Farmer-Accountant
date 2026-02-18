@@ -266,7 +266,7 @@ const ViewPage = () => {
   return (
     <>
       {contextHolder}
-      <Card title="Accounts" extra={""}>
+      <Card title={t("ViewPage.cardTitle")} extra={""}>
         {isLoanding ? (
           <Spin size="large" />
         ) : (

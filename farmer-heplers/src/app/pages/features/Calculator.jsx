@@ -26,7 +26,7 @@ import { TableFooterForViewCalc } from "../../component/TableFooter";
 import { DownloadTable1 } from "../../component/CalculateTableDownload";
 
 const CalcPage = () => {
-  const { authState } = useAuth();
+  const { authState, t } = useAuth();
   const { state } = useLocation();
   const navigate = useNavigate();
   const [isLoanding, setIsLoanding] = useState(false);
@@ -57,8 +57,8 @@ const CalcPage = () => {
     }
   };
   const options = [
-    { label: "Edit", value: "edit" },
-    { label: "Delete", value: "delete" },
+    { label: t("calculationPage.form.editButtonText"), value: "edit" },
+    { label: t("calculationPage.form.deleteButtonText"), value: "delete" },
   ];
 
   const returnBack = () => {
@@ -80,7 +80,7 @@ const CalcPage = () => {
         showMessage(res.data.message);
         setFetch("post");
       } catch (err) {
-        message.error("End Date not posted");
+        message.error(t("calculationPage.setDateMessages.postError"));
         console.log(err.message);
       }
     }
@@ -100,7 +100,7 @@ const CalcPage = () => {
           showMessage(res.data);
           setFetch("patch");
         } catch (err) {
-          message.error("The date has not changed");
+          message.error(t("calculationPage.setDateMessages.editError"));
           console.log(err.message);
         }
       }
@@ -114,7 +114,7 @@ const CalcPage = () => {
           showMessage(res.data);
           setFetch("del");
         } catch (err) {
-          message.error("The date field cannot be deleted");
+          message.error(t("calculationPage.setDateMessages.deleteError"));
           console.log(err.message);
         }
       }
@@ -131,7 +131,7 @@ const CalcPage = () => {
         setShope(allData);
       } catch (err) {
         setIsLoanding(true);
-        message.error("Shope Account not fetched");
+        message.error(t("calculationPage.fetchDataErrorMessage"));
         console.log(err.message);
       }
     }
@@ -157,7 +157,7 @@ const CalcPage = () => {
         });
       } catch (err) {
         setIsLoanding(true);
-        message.error("date not fetching in calculator");
+        message.error(t("calculationPage.fetchDateErrorMessage"));
         console.log(err.message);
         setFetch("del");
       }
@@ -181,7 +181,7 @@ const CalcPage = () => {
     <>
       {contextHolder}
       <Card
-        title={`Calc View : ${shope.shopeNumber}`}
+        title={`${t("calculationPage.cardTitle")}: ${shope.shopeNumber}`}
         extra={
           <>
             <Flex gap="small" horizontal>
@@ -202,12 +202,16 @@ const CalcPage = () => {
           <>
             <Flex horizontal>
               <Form form={form} layout="inline" onFinish={setDate}>
-                <Form.Item label="End Date" name="endDate">
+                <Form.Item
+                  label={t("calculationPage.form.inputLabel")}
+                  name="endDate">
                   <DatePicker disabled={id && fetch !== "edit"} />
                 </Form.Item>
                 {(id == null || fetch === "edit" || fetch === "delete") && (
                   <Form.Item>
-                    <Button htmlType="submit">Set</Button>
+                    <Button htmlType="submit">
+                      {t("calculationPage.form.setButtonText")}
+                    </Button>
                   </Form.Item>
                 )}
                 {id && (
