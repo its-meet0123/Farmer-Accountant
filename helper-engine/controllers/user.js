@@ -107,6 +107,7 @@ async function handleUserLogOut(req, res) {
       secure: true,
       sameSite: "none",
       path: "/",
+      expires: new Date(0),
     })
     .json({
       status: "success",
