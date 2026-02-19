@@ -42,18 +42,14 @@ const SignUp = () => {
         const type = "success";
         const text = data.message;
         showSuccess(text, type);
+        signupComplete();
+        navigate("/login");
       }
     } catch (err) {
       const type = "error";
       const text = `${t("signUpPage.formSubmitErrorText2")}`;
       showSuccess(text, type);
       console.log(err.message);
-    }
-
-    if (data.status === "success") {
-      signupComplete();
-      navigate("/login");
-      message.success(data.message);
     }
   };
 
