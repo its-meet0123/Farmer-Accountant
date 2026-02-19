@@ -224,7 +224,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           <Form form={workerInfoForm} onFinish={handleSubmitInfoForm}>
             <Row style={{ gap: "8px" }}>
               <Button onClick={onClose}>
-                {t("workerDrawer.tansactionInput.button.cbt")}
+                {t("workerDrawer.transactionInput.button.cbt")}
               </Button>
               <Form.Item label={null}>
                 <Button type="primary" htmlType="submit">
