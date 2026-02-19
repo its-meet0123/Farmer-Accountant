@@ -247,10 +247,10 @@ const EntDrawer = ({
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label={t("entDrawer.drawerform.nameInput.lnText")}
+                  label={t("entDrawer.drawerForm.nameInput.lnText")}
                   name="lastName">
                   <Input
-                    placeholder={t("entDrawer.drawerform.nameInput.lnpt")}
+                    placeholder={t("entDrawer.drawerForm.nameInput.lnpt")}
                   />
                 </Form.Item>
                 <Form.List name="shopes">
