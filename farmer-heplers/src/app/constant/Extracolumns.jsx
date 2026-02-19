@@ -765,10 +765,11 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
           dataIndex: ["give", "crop"],
           key: "giveCrop",
           width: 100,
-          render: (crop) => {
-            if (crop.length > 0) {
-              const title = `${t("workerPage.tableColumns.extandTableColumns.gives.Crops.buttonTitle")}`;
-              return (
+          render: (_, record) => {
+            const crop = record.give.crop;
+            const title = `${t("workerPage.tableColumns.extandTableColumns.gives.Crops.buttonTitle")}`;
+            return (
+              record.give.amount > 0 && (
                 <Button
                   type="link"
                   onClick={() => showModal({ crop, title, t })}>
@@ -776,8 +777,8 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
                     "workerPage.tableColumns.extandTableColumns.gives.Crops.buttonText",
                   )}
                 </Button>
-              );
-            }
+              )
+            );
           },
         },
       ],
@@ -824,13 +825,11 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
           dataIndex: ["take", "crop"],
           key: "takeCrop",
           width: 100,
-          render: (crop) => {
-            if (crop.length == 0) {
-              return null;
-            }
-            if (crop.length > 0) {
-              const title = `${t("workerPage.tableColumns.extandTableColumns.takes.Crops.buttonTitle")}`;
-              return (
+          render: (_, record) => {
+            const crop = record.take.crop;
+            const title = `${t("workerPage.tableColumns.extandTableColumns.takes.Crops.buttonTitle")}`;
+            return (
+              record.take.payment > 0 && (
                 <Button
                   type="link"
                   onClick={() => showModal({ crop, title, t })}>
@@ -838,8 +837,8 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
                     "workerPage.tableColumns.extandTableColumns.takes.Crops.buttonText",
                   )}
                 </Button>
-              );
-            }
+              )
+            );
           },
         },
       ],
