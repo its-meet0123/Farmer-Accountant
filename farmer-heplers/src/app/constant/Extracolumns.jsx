@@ -243,13 +243,11 @@ const getColumnsForViewPage = (t) => {
           dataIndex: ["indSell", "crop"],
           key: "crop",
           width: 100,
-          render: (crop) => {
-            if (crop.length == 0) {
-              return null;
-            }
-            if (crop.length > 0) {
-              const title = `${t("ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonTitle")}`;
-              return (
+          render: (_, record) => {
+            const crop = record.indSell.crop;
+            const title = `${t("ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonTitle")}`;
+            return (
+              record.billAmount > 0 && (
                 <Button
                   type="link"
                   onClick={() => showModal({ crop, title, t })}>
@@ -257,8 +255,8 @@ const getColumnsForViewPage = (t) => {
                     "ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonText",
                   )}
                 </Button>
-              );
-            }
+              )
+            );
           },
         },
       ],
