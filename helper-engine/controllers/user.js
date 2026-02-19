@@ -101,11 +101,19 @@ async function handleCheckAuthStatus(req, res) {
 }
 
 async function handleUserLogOut(req, res) {
-  return res.clearCookie("token").json({
-    status: "success",
-    message: "Logged out successfully",
-    isLoggedIn: false,
-  });
+  return res
+    .clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    })
+    .json({
+      status: "success",
+      message: "Logged out successfully",
+      isLoggedIn: false,
+    });
 }
 
 async function handleUserDeshbordData(req, res) {

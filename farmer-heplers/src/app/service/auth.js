@@ -14,7 +14,9 @@ export async function postUserDataForLoggedIn(user) {
 }
 
 export async function userLoggedOut() {
-  return await axios.post(`${API}/user/logout`);
+  return await axios.post(`${API}/user/logout`, {
+    withCredentials: true,
+  });
 }
 
 export async function getUserData(user) {

@@ -363,7 +363,7 @@ const EntDrawer = ({
                   label={t("entDrawer.drawerForm.nameInput.lnText")}
                   name="aLastName">
                   <Input
-                    placeholder={t("entDrawer.ddrawerForm.nameInput.lnpt")}
+                    placeholder={t("entDrawer.drawerForm.nameInput.lnpt")}
                   />
                 </Form.Item>
                 <Form.Item
