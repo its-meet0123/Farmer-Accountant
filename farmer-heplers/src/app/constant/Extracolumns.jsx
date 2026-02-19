@@ -245,7 +245,7 @@ const getColumnsForViewPage = (t) => {
           width: 100,
           render: (crop) => {
             if (crop.length > 0) {
-              const title = "Sell Crop";
+              const title = `${t("ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonTitle")}`;
               return (
                 <Button
                   type="link"
@@ -766,7 +766,7 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
           width: 100,
           render: (crop) => {
             if (crop.length > 0) {
-              const title = "Give Crop";
+              const title = `${t("workerPage.tableColumns.extandTableColumns.gives.Crops.buttonTitle")}`;
               return (
                 <Button
                   type="link"
@@ -825,7 +825,7 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
           width: 100,
           render: (crop) => {
             if (crop.length > 0) {
-              const title = "Take Crop";
+              const title = `${t("workerPage.tableColumns.extandTableColumns.takes.Crops.buttonTitle")}`;
               return (
                 <Button
                   type="link"

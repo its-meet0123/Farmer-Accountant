@@ -194,7 +194,7 @@ const WorkersData = () => {
             onClick={() => {
               setOpenType("aw");
             }}>
-            Add Worker
+            {t("workerPage.cardButtonText")}
           </Button>
         }>
         {isLoanding ? (

@@ -111,6 +111,7 @@
           "Crops": {
             "titleText": "Crops",
             "buttonText": "View",
+            "buttonTitle": "Sell Crops Details",
             "cropNameText": "Crop Name",
             "cropRateText": "Crop Rate",
             "cropQtyText": "Qty.",
@@ -216,6 +217,7 @@
           "Crops": {
             "titleText": "Crops",
             "buttonText": "View",
+            "buttonTitle": "Gave Crops Details",
             "cropNameText": "Crop Name",
             "cropQtyText": "Qty.",
             "cropRateText": "Crop Rate",
@@ -229,6 +231,7 @@
           "Crops": {
             "titleText": "Crops",
             "buttonText": "View",
+            "buttonTitle": "Took Crops Details",
             "cropNameText": "Crop Name",
             "cropQtyText": "Qty.",
             "cropRateText": "Crop Rate",

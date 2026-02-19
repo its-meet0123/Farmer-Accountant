@@ -108,6 +108,7 @@
           "Crops": {
             "titleText": "फसलें",
             "buttonText": "देखें",
+            "buttonTitle": "बेची गई फसल का विवरण देखें",
             "cropNameText": "फसल का नाम",
             "cropRateText": "फसल की दर",
             "cropQtyText": "मात्रा",
@@ -211,6 +212,7 @@
           "Crops": {
             "titleText": "फसलें",
             "buttonText": "देखें",
+            "buttonTitle": "प्रदान की गई फ़सल का विवरण",
             "cropNameText": "फसल का नाम",
             "cropQtyText": "मात्रा",
             "cropRateText": "दर",
@@ -223,6 +225,7 @@
           "paymentType": "भुगतान प्रकार",
           "Crops": {
             "buttonText": "देखें",
+            "buttonTitle": "प्राप्त की गई फ़सल का विवरण",
             "cropNameText": "फसल का नाम",
             "cropQtyText": "मात्रा",
             "cropRateText": "दर",

@@ -193,7 +193,7 @@ const WorkerCalculation = () => {
                 {(id == null || fetch === "edit" || fetch === "delete") && (
                   <Form.Item>
                     <Button htmlType="submit">
-                      {t("WorkerCalcPage.form.setButtonText")}
+                      {t("workerCalcPage.form.setButtonText")}
                     </Button>
                   </Form.Item>
                 )}

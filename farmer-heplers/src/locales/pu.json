@@ -106,6 +106,8 @@
           "billText": "ਬਿੱਲ",
           "BriefText": "ਸੰਖੇਪ ਵੇਰਵਾ",
           "Crops": {
+            "titleText": "ਫਸਲਾਂ",
+            "buttonTitle": "ਵੇਚੀ ਗਈ ਫਸਲ ਦਾ ਵੇਰਵਾ",
             "buttonText": "ਦੇਖੋ",
             "cropNameText": "ਫਸਲ ਦਾ ਨਾਮ",
             "cropRateText": "ਫਸਲ ਦਾ ਭਾਅ",
@@ -209,6 +211,7 @@
           "briefText": "ਸੰਖੇਪ ਵੇਰਵਾ",
           "Crops": {
             "titleText": "ਫਸਲਾਂ",
+            "buttonTitle": "ਪ੍ਰਦਾਨ ਕੀਤੀ ਫ਼ਸਲ ਦਾ ਵੇਰਵਾ",
             "buttonText": "ਦੇਖੋ",
             "cropNameText": "ਫਸਲ ਦਾ ਨਾਮ",
             "cropQtyText": "ਮਾਤਰਾ",
@@ -223,6 +226,7 @@
           "Crops": {
             "titleText": "ਫਸਲਾਂ",
             "buttonText": "ਦੇਖੋ",
+            "buttonTitle": "ਪ੍ਰਾਪਤ ਕੀਤੀ ਫ਼ਸਲ ਦਾ ਵੇਰਵਾ",
             "cropNameText": "ਫਸਲ ਦਾ ਨਾਮ",
             "cropQtyText": "ਮਾਤਰਾ",
             "cropRateText": "ਭਾਅ",
