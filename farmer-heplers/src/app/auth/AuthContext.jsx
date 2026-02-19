@@ -60,10 +60,11 @@ export const AuthProvider = ({ children }) => {
     });
 
   const logout = async () => {
-    await userLoggedOut();
+    const res = await userLoggedOut();
+    const data = await res.data;
     setAuthState({
-      isLoggedIn: false,
-      user: null,
+      isLoggedIn: data.isLoggedIn,
+      user: data.user,
     });
   };
   const goToSignUP = () => {
