@@ -28,11 +28,6 @@ import { useAuth } from "../../auth/AuthContext";
 import { DownloadTable2 } from "../../component/CalculateTableDownload";
 import { DownloadOutlined } from "@ant-design/icons";
 
-const options = [
-  { label: t("workerCalcPage.form.editButtonText"), value: "edit" },
-  { label: t("workerCalcPage.form.deleteButtonText"), value: "delete" },
-];
-
 const WorkerCalculation = () => {
   const { state } = useLocation();
   const { authState, t } = useAuth();
@@ -44,6 +39,11 @@ const WorkerCalculation = () => {
   const [fetch, setFetch] = useState();
   const today = dayjs();
   const [modalOpen, setModalOpen] = useState(false);
+
+  const options = [
+    { label: t("workerCalcPage.form.editButtonText"), value: "edit" },
+    { label: t("workerCalcPage.form.deleteButtonText"), value: "delete" },
+  ];
 
   const setDate = async () => {
     if (id == null || id == "" || id == undefined) {
