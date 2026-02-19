@@ -6,6 +6,11 @@ import Profile from "./Profile";
 import UserActionModel from "./UserIdActionModel";
 
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
+import {
+  DeleteOutlined,
+  GlobalOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 
 const { Header, Content, Footer } = Layout;
 const { useBreakpoint } = Grid;
@@ -35,9 +40,9 @@ const AppLayout = ({ children }) => {
     getItem(`${t("layout.menu.view")}`, "/view"),
     getItem(`${t("layout.menu.worker")}`, "/worker"),
     getItem(`${t("layout.menu.setting")}`, "/setting", [
-      getItem(`${t("layout.menu.logout")}`, "/logout"),
-      getItem(`${t("layout.menu.delete")}`, "/delete"),
-      getItem(<LanguageChangeDropDown />, "/lang"),
+      getItem(`${t("layout.menu.logout")}`, "/logout", <LogoutOutlined />),
+      getItem(`${t("layout.menu.delete")}`, "/delete", <DeleteOutlined />),
+      getItem(<LanguageChangeDropDown />, "/lang", <GlobalOutlined />),
     ]),
   ];
 

@@ -405,7 +405,13 @@
   "alertText": "WARNING",
   "userIdActionModal": {
     "mttr": "Reset Password",
-    "mttd": "Press 'Ok' to confirm ID deletion",
+    "mttd": "Press 'Ok' to confirm ID deletion!",
+    "submitFunction": {
+      "emsp1": "Unable to update password due to a server error.",
+      "emsp2": "Password must be at least 6 characters long.",
+      "esmp3": "Password do not match",
+      "duem": "Unable to delete the User due to a sever error."
+    },
     "modalForm": {
       "uiit": "User ID",
       "uiirm": "Please enter vaild userId",
