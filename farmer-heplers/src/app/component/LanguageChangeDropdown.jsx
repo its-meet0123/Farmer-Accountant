@@ -4,13 +4,19 @@ import { Button, Dropdown, Space } from "antd";
 import i18n from "i18next";
 const LanguageChangeDropDown = () => {
   const [buttonText, setButtonText] = useState("English");
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
+
   const items = [
     {
       key: "1",
       label: (
         <a
           onClick={() => {
-            (i18n.changeLanguage("en"), setButtonText("English"));
+            (changeLanguage("en"), setButtonText("English"));
           }}>
           English
         </a>
@@ -21,7 +27,7 @@ const LanguageChangeDropDown = () => {
       label: (
         <a
           onClick={() => {
-            (i18n.changeLanguage("hi"), setButtonText("हिंदी"));
+            (changeLanguage("hi"), setButtonText("हिंदी"));
           }}>
           हिंदी
         </a>
@@ -32,7 +38,7 @@ const LanguageChangeDropDown = () => {
       label: (
         <a
           onClick={() => {
-            (i18n.changeLanguage("pu"), setButtonText("ਪੰਜਾਬੀ"));
+            (changeLanguage("pu"), setButtonText("ਪੰਜਾਬੀ"));
           }}>
           ਪੰਜਾਬੀ
         </a>
