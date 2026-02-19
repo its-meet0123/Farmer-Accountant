@@ -22,12 +22,6 @@ import {
 } from "../service/worker";
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
-const plainOptions = [
-  { label: t("workerDrawer.transactionInput.transType.gives"), value: "give" },
-  { label: t("workerDrawer.transactionInput.transType.none"), value: "none" },
-  { label: t("workerDrawer.transactionInput.transType.takes"), value: "take" },
-];
-
 const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
   const { authState, t } = useAuth();
   const [workerInfoForm] = Form.useForm();
@@ -35,6 +29,18 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
   const [editTransactionForm] = Form.useForm();
   const today = dayjs();
   const [action, setAction] = useState("none");
+
+  const plainOptions = [
+    {
+      label: t("workerDrawer.transactionInput.transType.gives"),
+      value: "give",
+    },
+    { label: t("workerDrawer.transactionInput.transType.none"), value: "none" },
+    {
+      label: t("workerDrawer.transactionInput.transType.takes"),
+      value: "take",
+    },
+  ];
 
   const onClose = () => {
     setOpen(null);
