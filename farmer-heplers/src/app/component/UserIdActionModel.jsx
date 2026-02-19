@@ -7,7 +7,7 @@ import {
   getUserData,
 } from "../service/auth";
 
-const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
+const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
   const [passwordForm] = Form.useForm();
   const [deleteForm] = Form.useForm();
   const [findUser, setfindUser] = useState({});
@@ -35,16 +35,19 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
     const userId = { id: passwordForm.getFieldValue("userId") };
 
     if (userId.id) {
-      const res = await getUserData(userId);
+      try {
+        const res = await getUserData(userId);
 
-      setfindUser({ userId: userId, user: res.data.user });
-      showMessage(res.data);
-    } else {
-      const res = {
-        status: "fail",
-        message: "Please enter valid user Id",
-      };
-      showMessage(res);
+        setfindUser({ userId: userId, user: res.data.user });
+        showMessage(res.data);
+      } catch (err) {
+        console.log(err.message);
+        const res = {
+          status: "fail",
+          message: t("userIdActionModal.modalForm.uiirm"),
+        };
+        showMessage(res);
+      }
     }
   };
 
@@ -57,11 +60,15 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
         userId: findUser.user.userId,
         newPassword: userPassword[0].again,
       };
-      const res = await changeUserPassword(user);
-      if (res.status === 200) {
+      try {
+        const res = await changeUserPassword(user);
+
         showMessage(res.data);
         passwordForm.resetFields();
         setOpenType(null);
+      } catch (err) {
+        console.log(err.message);
+        message.error(t("userIdActionModal.submitFunction.emsp1"));
       }
     }
     if (length < 6 || userPassword[0].once !== userPassword[0].again) {
@@ -69,8 +76,8 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
         status: "fail",
         message:
           length < 6
-            ? "Password must be at least 6 characters."
-            : "Passwords do not match.",
+            ? t("userActionModal.submitFunction.emsp2")
+            : t("userActionModal.submitFunction.emsp3"),
       };
       showMessage(res);
     }
@@ -84,12 +91,17 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
         password: formValues.password,
       };
 
-      const res = await deleteUserAccount(user);
+      try {
+        const res = await deleteUserAccount(user);
 
-      if (res.status === 200) {
-        message.warning(res.data.message);
-        setOpenType(null);
-        goToSingUp();
+        if (res.status === 200) {
+          message.warning(res.data.message);
+          setOpenType(null);
+          goToSingUp();
+        }
+      } catch (err) {
+        console.log(err.message);
+        message.error(t("userIdActionModal.submitFunction.duem"));
       }
     }
   };
@@ -114,9 +126,9 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
       {contextHolder}
       <Modal
         title={
-          (openType === "password" && <h4>Reset Password</h4>) ||
+          (openType === "password" && <h4>{t("userIdActionModal.mttr")}</h4>) ||
           (openType === "delete" && (
-            <h4 style={{ color: "red" }}>Press "Ok" to confirm ID deletion!</h4>
+            <h4 style={{ color: "red" }}>{t("userIdActionModal.mttd")}</h4>
           ))
         }
         centered
@@ -133,13 +145,13 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
             autoComplete="off"
             initialValues={{ password: [{}] }}>
             <Form.Item
-              label="UserId"
+              label={t("userIdActionModal.modalForm.uiit")}
               name="userId"
               rules={[
                 { required: true },
-                { min: 6, message: "please enter valid userId" },
+                { min: 6, message: t("userIdActionModal.modalForm.uiirm") },
               ]}>
-              <Input placeholder="Enter User Id" />
+              <Input placeholder={t("userIdActionModal.modalForm.uiipt")} />
             </Form.Item>
             {findUser.userId && findUser.user && (
               <Form.List name="password">
@@ -158,29 +170,33 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
                         style={{ width: "auto" }}>
                         <Form.Item
                           {...resetField}
-                          label="New Password"
+                          label={t("userIdActionModal.modalForm.pit1")}
                           name={[name, "once"]}
                           rules={[
                             {
                               required: true,
                               min: 6,
-                              message: "Min 6 characters",
+                              message: t("userIdActionModal.modalForm.pirm"),
                             },
                           ]}>
-                          <Input.Password placeholder="Enter password" />
+                          <Input.Password
+                            placeholder={t("userIdActionModal.modalForm.pipt1")}
+                          />
                         </Form.Item>
                         <Form.Item
                           {...resetField}
-                          label="Confirm Password"
+                          label={t("userIdActionModal.modalForm.pit2")}
                           name={[name, "again"]}
                           rules={[
                             {
                               required: true,
                               min: 6,
-                              message: "Min 6 characters",
+                              message: t("userIdActionModal.modalForm.pirm"),
                             },
                           ]}>
-                          <Input.Password placeholder="Enter again password" />
+                          <Input.Password
+                            placeholder={t("userIdActionModal.modalForm.pipt2")}
+                          />
                         </Form.Item>
                       </Flex>
                     ))}
@@ -196,7 +212,7 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp }) => {
                     setUser();
                   }}
                   block>
-                  find
+                  {t("userIdActionModal.button")}
                 </Button>
               )}
             </Form.Item>

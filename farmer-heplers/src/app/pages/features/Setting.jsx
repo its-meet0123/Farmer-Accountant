@@ -49,6 +49,7 @@ const Setting = () => {
         setOpenType={setOpenType}
         user={authState.user}
         logout={logout}
+        t={t}
       />
     </>
   );

@@ -106,6 +106,7 @@ const AppLayout = ({ children }) => {
         setOpenType={setOpenType}
         user={authState.user}
         goToSingUp={goToSingUp}
+        t={t}
       />
     </Layout>
   );
