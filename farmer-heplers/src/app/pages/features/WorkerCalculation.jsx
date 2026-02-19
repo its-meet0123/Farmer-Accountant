@@ -185,7 +185,10 @@ const WorkerCalculation = () => {
                 <Form.Item
                   label={t("workerCalcPage.form.inputLabel")}
                   name="endDate">
-                  <DatePicker disabled={id && fetch !== "edit"} />
+                  <DatePicker
+                    disabled={id && fetch !== "edit"}
+                    format={"DD/MM/YYYY"}
+                  />
                 </Form.Item>
                 {(id == null || fetch === "edit" || fetch === "delete") && (
                   <Form.Item>

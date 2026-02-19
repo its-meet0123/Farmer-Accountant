@@ -149,7 +149,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                     message: t("indDrawer.drawerForm.dateInput.rm"),
                   },
                 ]}>
-                <DatePicker />
+                <DatePicker format={"DD/MM/YYYY"} />
               </Form.Item>
               <Form.Item
                 label={t("indDrawer.drawerForm.interestInput.text")}
@@ -325,6 +325,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 ]}>
                 <DatePicker
                   placeholder={t("indDrawer.drawerForm.dateInput.pt")}
+                  format={"DD/MM/YYYY"}
                 />
               </Form.Item>
               <Form.Item

@@ -324,7 +324,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
               label={t("workerDrawer.detailInput.dt")}
               name="date"
               initialValue={today}>
-              <DatePicker />
+              <DatePicker format={"DD/MM/YYYY"} />
             </Form.Item>
           </Row>
         </Form>
@@ -446,7 +446,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                     message: t("workerDrawer.transactionInput.drm"),
                   },
                 ]}>
-                <DatePicker />
+                <DatePicker format={"DD/MM/YYYY"} />
               </Form.Item>
               <Form.Item label={null}>
                 <Button type="primary" htmlType="submit">
@@ -589,7 +589,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                     message: t("workerDrawer.trnasactionInput.drm"),
                   },
                 ]}>
-                <DatePicker />
+                <DatePicker format={"DD/MM/YYYY"} />
               </Form.Item>
               <Form.Item label={null}>
                 <Button type="primary" htmlType="submit">
