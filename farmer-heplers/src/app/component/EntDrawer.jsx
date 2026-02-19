@@ -241,7 +241,7 @@ const EntDrawer = ({
                       message: t("entDrawer.drawerForm.dateInput.rm"),
                     },
                   ]}>
-                  <DatePicker />
+                  <DatePicker format={"DD/MM/YYYY"} />
                 </Form.Item>
                 <Form.Item name="id"></Form.Item>
               </Col>
