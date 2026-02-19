@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Space } from "antd";
 import i18n from "i18next";
 const LanguageChangeDropDown = () => {
-  const [buttonText, setButtonText] = useState("English");
+  const [buttonText, setButtonText] = useState();
+  const lang = localStorage.getItem("lang");
+
+  useEffect(() => {
+    if (lang == "en") {
+      setButtonText("English");
+    }
+    if (lang == "hi") {
+      setButtonText("हिंदी");
+    }
+    if (lang == "pu") {
+      setButtonText("ਪੰਜਾਬੀ");
+    }
+  }, [lang]);
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -16,7 +29,7 @@ const LanguageChangeDropDown = () => {
       label: (
         <a
           onClick={() => {
-            (changeLanguage("en"), setButtonText("English"));
+            changeLanguage("en");
           }}>
           English
         </a>
@@ -27,7 +40,7 @@ const LanguageChangeDropDown = () => {
       label: (
         <a
           onClick={() => {
-            (changeLanguage("hi"), setButtonText("हिंदी"));
+            changeLanguage("hi");
           }}>
           हिंदी
         </a>
@@ -38,7 +51,7 @@ const LanguageChangeDropDown = () => {
       label: (
         <a
           onClick={() => {
-            (changeLanguage("pu"), setButtonText("ਪੰਜਾਬੀ"));
+            changeLanguage("pu");
           }}>
           ਪੰਜਾਬੀ
         </a>
