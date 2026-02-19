@@ -223,7 +223,9 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         extra={
           <Form form={workerInfoForm} onFinish={handleSubmitInfoForm}>
             <Row style={{ gap: "8px" }}>
-              <Button onClick={onClose}>{t("workerDrawer.button.cbt")}</Button>
+              <Button onClick={onClose}>
+                {t("workerDrawer.tansactionInput.button.cbt")}
+              </Button>
               <Form.Item label={null}>
                 <Button type="primary" htmlType="submit">
                   OK
@@ -337,7 +339,9 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         onClose={onClose}
         open={open === "at" || open === "ewt"}
         extra={
-          <Button onClick={onClose}>{t("workerDrawer.button.cbt")}</Button>
+          <Button onClick={onClose}>
+            {t("workerDrawer.transactionInput.button.cbt")}
+          </Button>
         }>
         {open === "at" && (
           <Form
