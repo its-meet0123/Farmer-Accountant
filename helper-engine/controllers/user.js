@@ -107,7 +107,6 @@ async function handleUserLogOut(req, res) {
       secure: true,
       sameSite: "none",
       path: "/",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
     })
     .json({
       status: "success",
