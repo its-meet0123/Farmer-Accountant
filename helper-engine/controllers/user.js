@@ -46,7 +46,7 @@ async function handleUserLogin(req, res) {
     });
   }
   const token = jwt.sign({ id: userId, password: password }, JWT_SECRET, {
-    expiresIn: "1h",
+    expiresIn: "30d",
   });
   return res
     .cookie("token", token, {
