@@ -113,6 +113,7 @@ async function handleUserLogOut(req, res) {
       status: "success",
       message: "Logged out successfully",
       isLoggedIn: false,
+      user: null,
     });
 }
 
