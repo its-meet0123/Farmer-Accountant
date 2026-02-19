@@ -40,7 +40,7 @@ const EntDrawer = ({
   const [edit, setEdit] = useState(false);
   const [activeRow, setActiveRow] = useState(null);
   const [rowData, setRowData] = useState({});
-  const date = dayjs(new Date()).format("DD-MM-YYYY");
+  const date = dayjs(new Date());
   const screens = useBreakpoint();
 
   const onClose = () => {
@@ -403,7 +403,7 @@ const EntDrawer = ({
                       message: t("entDrawer.drawerForm.dateInput.rm"),
                     },
                   ]}>
-                  <DatePicker />
+                  <DatePicker format={"DD/MM/YYYY"} />
                 </Form.Item>
               </Col>
               <Col span={12}>
