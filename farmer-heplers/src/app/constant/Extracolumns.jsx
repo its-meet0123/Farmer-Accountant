@@ -244,6 +244,9 @@ const getColumnsForViewPage = (t) => {
           key: "crop",
           width: 100,
           render: (crop) => {
+            if (crop.length == 0) {
+              return null;
+            }
             if (crop.length > 0) {
               const title = `${t("ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonTitle")}`;
               return (
@@ -824,6 +827,9 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
           key: "takeCrop",
           width: 100,
           render: (crop) => {
+            if (crop.length == 0) {
+              return null;
+            }
             if (crop.length > 0) {
               const title = `${t("workerPage.tableColumns.extandTableColumns.takes.Crops.buttonTitle")}`;
               return (
