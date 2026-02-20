@@ -55,12 +55,12 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
 
   const setPassword = async () => {
     const userPassword = passwordForm.getFieldValue("password");
-    const length = userPassword[0].again.length;
+    const length = userPassword[0]?.again.length;
 
-    if (length >= 6 && userPassword[0].once === userPassword[0].again) {
+    if (length >= 6 && userPassword[0]?.once === userPassword[0]?.again) {
       const user = {
         userId: findUser.user.userId,
-        newPassword: userPassword[0].again,
+        newPassword: userPassword[0]?.again,
       };
       try {
         const res = await changeUserPassword(user);
@@ -73,7 +73,7 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
         message.error(t("userIdActionModal.submitFunction.emsp1"));
       }
     }
-    if (length < 6 || userPassword[0].once !== userPassword[0].again) {
+    if (length < 6 || userPassword[0]?.once !== userPassword[0]?.again) {
       const res = {
         status: "fail",
         message:
