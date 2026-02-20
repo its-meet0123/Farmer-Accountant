@@ -106,7 +106,7 @@ const LogIn = () => {
           </Form.Item>
         </Form>
       </Card>
-      <UserActionModel openType={openType} setOpenType={setOpenType} />
+      <UserActionModel openType={openType} setOpenType={setOpenType} t={t} />
     </>
   );
 };
