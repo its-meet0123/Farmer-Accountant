@@ -14,15 +14,6 @@ const SignUp = () => {
   const [form] = Form.useForm();
   const { signupComplete, t } = useAuth();
   const navigate = useNavigate();
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const showSuccess = (text, type) => {
-    messageApi.open({
-      type: type,
-      content: text,
-      duration: 3,
-    });
-  };
 
   const validateMessages = {
     required: t("signUpPage.formValidateMessage"),
@@ -39,23 +30,18 @@ const SignUp = () => {
       const res = await postUserDataForSignUp(values);
       const data = await res.data;
       if (data.status === "success") {
-        const type = "success";
-        const text = data.message;
-        showSuccess(text, type);
+        message.success(data.message);
         signupComplete();
         navigate("/login");
       }
     } catch (err) {
-      const type = "error";
-      const text = `${t("signUpPage.formSubmitErrorText2")}`;
-      showSuccess(text, type);
+      message.error(t("signUpPage.formSubmitErrorText2"));
       console.log(err.message);
     }
   };
 
   return (
     <>
-      {contextHolder}
       <Card
         title={t("signUpPage.cardTitle")}
         extra={<LanguageChangeDropDown />}>

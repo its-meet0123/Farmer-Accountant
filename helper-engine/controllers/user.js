@@ -15,7 +15,7 @@ async function handleUserSignUp(req, res) {
   if (existingUser) {
     res.json({
       status: "success",
-      message: "User already exists",
+      code: "USER_EXISTS",
       isSignedUp: true,
       isLoggedIn: false,
       user: existingUser,
@@ -28,7 +28,7 @@ async function handleUserSignUp(req, res) {
   });
   return res.status(201).json({
     status: "success",
-    message: "User created successfully",
+    code: "USER_CREATED",
     isSignedUp: true,
   });
 }
@@ -42,7 +42,7 @@ async function handleUserLogin(req, res) {
   if (!user) {
     return res.json({
       status: "fail",
-      message: "Invalid credentials",
+      code: "INVALID_CREDENTIALS",
     });
   }
   const token = jwt.sign({ id: userId, password: password }, JWT_SECRET, {
@@ -58,7 +58,7 @@ async function handleUserLogin(req, res) {
     })
     .json({
       status: "success",
-      message: "Login successful",
+      code: "USER-LOGIN",
       isLoggedIn: true,
       user: user,
     });
@@ -111,7 +111,7 @@ async function handleUserLogOut(req, res) {
     })
     .json({
       status: "success",
-      message: "Logged out successfully",
+      code: "USER_LOGOUT",
       isLoggedIn: false,
       user: null,
     });
@@ -138,12 +138,12 @@ async function handleGetSignUpUserData(req, res) {
   if (!user) {
     return res.json({
       status: "fail",
-      message: "User not found",
+      code: "USER_NOT_FOUND",
     });
   }
   return res.status(200).json({
     status: "success",
-    message: "User found",
+    code: "USER_FOUND",
     user: user,
   });
 }
@@ -158,12 +158,12 @@ async function handleSignUpUserUpdatePassword(req, res) {
   if (!user) {
     return res.status(404).json({
       status: "fail",
-      message: "User not found",
+      code: "USER_NOT_FOUND",
     });
   }
   return res.status(200).json({
     status: "success",
-    message: "Password updated successfully",
+    code: "PASSWORD_UPDATED",
   });
 }
 
@@ -182,7 +182,7 @@ async function handleSignUpUserDeleteAccount(req, res) {
 
     return res.status(200).json({
       status: "success",
-      message: "User account deleted successfully",
+      code: "USER_DELETED",
     });
   } catch (err) {
     return res.status(500).json({

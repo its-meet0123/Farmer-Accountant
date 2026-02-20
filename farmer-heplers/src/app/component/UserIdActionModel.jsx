@@ -6,10 +6,12 @@ import {
   deleteUserAccount,
   getUserData,
 } from "../service/auth";
+import { useNavigate } from "react-router-dom";
 
 const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
   const [passwordForm] = Form.useForm();
   const [deleteForm] = Form.useForm();
+  const navigate = useNavigate();
   const [findUser, setfindUser] = useState({});
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -93,12 +95,10 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
 
       try {
         const res = await deleteUserAccount(user);
-
-        if (res.status === 200) {
-          message.warning(res.data.message);
-          setOpenType(null);
-          goToSingUp();
-        }
+        message.warning(res.data.message);
+        setOpenType(null);
+        goToSingUp();
+        navigate("/signup");
       } catch (err) {
         console.log(err.message);
         message.error(t("userIdActionModal.submitFunction.duem"));
