@@ -58,7 +58,7 @@ async function handleUserLogin(req, res) {
     })
     .json({
       status: "success",
-      code: "USER-LOGIN",
+      code: "USER_LOGIN",
       isLoggedIn: true,
       user: user,
     });
