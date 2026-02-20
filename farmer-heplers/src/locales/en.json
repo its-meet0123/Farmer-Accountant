@@ -496,5 +496,14 @@
       "logout": "Logout",
       "delete": "Delete"
     }
-  }
+  },
+  "USER_EXISTS": "User already exists",
+  "USER_CREATED": "User created successfully",
+  "INVALID_CREDENTIALS": "Invalid credentials",
+  "USER_LOGIN": "Login successful",
+  "USER_LOGOUT": "Logged out successfully",
+  "USER_NOT_FOUND": "User not found",
+  "USER_FOUND": "User found",
+  "PASSWORD_UPDATED": "Password updated",
+  "USER_DELETED": "User account deleted successfully"
 }

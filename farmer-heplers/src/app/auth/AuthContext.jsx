@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { userLoggedOut } from "../service/auth";
-import { Alert, Spin } from "antd";
+import { Alert, message, Spin } from "antd";
 import { useTranslation } from "react-i18next";
 
 const AuthContext = createContext();
@@ -60,12 +60,17 @@ export const AuthProvider = ({ children }) => {
     });
 
   const logout = async () => {
-    const res = await userLoggedOut();
-    const data = await res.data;
-    setAuthState({
-      isLoggedIn: data.isLoggedIn,
-      user: data.user,
-    });
+    try {
+      const res = await userLoggedOut();
+      const data = await res.data;
+      setAuthState({
+        isLoggedIn: data.isLoggedIn,
+        user: data.user,
+      });
+      message.success(t(data.code));
+    } catch (err) {
+      console.log(err.message);
+    }
   };
   const goToSignUP = () => {
     localStorage.setItem("hasAccount", "false");

@@ -37,7 +37,7 @@ const LogIn = () => {
       const data = await res.data;
       if (data.status === "success") {
         loginComplete(data);
-        message.success(data.message);
+        message.success(t(data.code));
       } else {
       }
     } catch (err) {

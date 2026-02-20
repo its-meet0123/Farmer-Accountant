@@ -58,9 +58,6 @@ const AppLayout = ({ children }) => {
       key === "/lang"
     ) {
       if (key === "/logout") {
-        message.info(
-          `User : ${authState.user.userName.firstName} ${authState.user.userName.lastName} logout `,
-        );
         logout();
       }
       if (key === "/delete") {

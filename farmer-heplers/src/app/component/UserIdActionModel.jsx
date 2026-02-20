@@ -41,7 +41,7 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
         const res = await getUserData(userId);
 
         setfindUser({ userId: userId, user: res.data.user });
-        showMessage(res.data);
+        message.success(t(res.data.code));
       } catch (err) {
         console.log(err.message);
         const res = {
@@ -65,7 +65,7 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
       try {
         const res = await changeUserPassword(user);
 
-        showMessage(res.data);
+        message.success(res.data.code);
         passwordForm.resetFields();
         setOpenType(null);
       } catch (err) {
@@ -95,7 +95,7 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
 
       try {
         const res = await deleteUserAccount(user);
-        message.warning(res.data.message);
+        message.warning(t(res.data.code));
         setOpenType(null);
         goToSingUp();
         navigate("/signup");

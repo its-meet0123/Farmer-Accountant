@@ -30,7 +30,7 @@ const SignUp = () => {
       const res = await postUserDataForSignUp(values);
       const data = await res.data;
       if (data.status === "success") {
-        message.success(data.message);
+        message.success(t(data.code));
         signupComplete();
         navigate("/login");
       }
