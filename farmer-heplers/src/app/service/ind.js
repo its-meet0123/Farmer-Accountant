@@ -80,3 +80,16 @@ export async function deleteEndDate(id) {
     withCredentials: true,
   });
 }
+
+export async function dieselPrice() {
+  return await axios.get(
+    `https://daily-petrol-diesel-lpg-cng-fuel-prices-in-india.p.rapidapi.com/fuel-price-in-city?city=Jaipur`,
+    {
+      headers: {
+        "x-rapidapi-key": "87ab06b3dbmsh34e28f50b191024p1f9454jsn6e648f",
+        "x-rapidapi-host":
+          "daily-petrol-diesel-lpg-cng-fuel-prices-in-india.p.rapidapi.com",
+      },
+    },
+  );
+}
