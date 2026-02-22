@@ -125,7 +125,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
         console.log(data);
       } catch (err) {
         message.error("diesel Price not found");
-        cosole.log(err.message);
+        console.log(err.message);
       }
     }
     getData();
