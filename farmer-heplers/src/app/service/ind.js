@@ -83,12 +83,10 @@ export async function deleteEndDate(id) {
 
 export async function dieselPrice() {
   return await axios.get(
-    `https://daily-petrol-diesel-lpg-cng-fuel-prices-in-india.p.rapidapi.com/fuel-price-in-city?city=Jaipur`,
+    "https://fuel.indianapi.in/live_fuel_price?fuel_type=diesel&location_type=city",
     {
       headers: {
-        "x-rapidapi-key": "87ab06b3dbmsh34e28f50b191024p1f9454jsn6e648fcda6de",
-        "x-rapidapi-host":
-          "daily-petrol-diesel-lpg-cng-fuel-prices-in-india.p.rapidapi.com",
+        "x-api-key": "sk-live-3uSS4oZhipWKVuqO0WOBE1plA8viHqh4r2XDUTfU",
       },
     },
   );
