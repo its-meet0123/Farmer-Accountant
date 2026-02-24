@@ -86,7 +86,7 @@ export async function dieselPrice() {
     "https://fuel.indianapi.in/live_fuel_price?fuel_type=diesel&location_type=city",
     {
       headers: {
-        "x-api-key": "sk-live-3uSS4oZhipWKVuqO0WOBE1plA8viHqh4r2XDUTfU",
+        "x-api-key": "sk-live-3uSS4oZhipWKVuqO0WOBE1plA8vlHqh4r2XDUTfU",
       },
     },
   );
