@@ -55,6 +55,7 @@ const HomePage = () => {
     try {
       const ids = data.map((data) => data._id);
       const entRes = await deleteEntDataById(record._id);
+      console.log(ids);
       const indRes = await deleteIndDataByIds(ids);
       const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
       showSuccess(text);
