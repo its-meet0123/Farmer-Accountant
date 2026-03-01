@@ -118,7 +118,7 @@ const ViewPage = () => {
     const transactionIds = record.shopeAccount.map((shope) => shope._id);
     const ids = {
       shopeId: record._id,
-      transactionIds: transactionIds,
+      transactionIds: transactionIds || {},
     };
     try {
       const res = await deleteIndShopeAccountData(ids);

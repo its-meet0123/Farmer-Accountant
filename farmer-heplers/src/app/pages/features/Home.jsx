@@ -57,8 +57,8 @@ const HomePage = () => {
       const entRes = await deleteEntDataById(record._id);
       const indRes = await deleteIndDataByIds(ids);
       if (
-        entRes.status === 200 ||
-        (entRes.status === 204 && indRes.status === 201)
+        entRes.data.status === "Success" &&
+        indRes.data.status === "Success"
       ) {
         const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
         showSuccess(text);
