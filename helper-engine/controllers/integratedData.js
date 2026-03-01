@@ -160,6 +160,9 @@ async function handleUpdateIndDataById(req, res) {
 }
 
 async function handleDeleteManyIndData(req, res) {
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token, JWT_SECRET);
+  const currentUserId = decoded.id;
   const ids = req.body;
   if (!Array.isArray(ids) || ids.length === 0) {
     return res.status(400).json({ message: "Ids required" });

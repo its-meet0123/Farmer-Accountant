@@ -144,9 +144,8 @@ const EntDrawer = ({
           message.error(t("entDrawer.submitFunction.errorMessageforEdit"));
         }
       }
-    } else {
-      message.info(t("entDrawer.submitFunction.withoutChangeMessage"));
-      onClose();
+      // message.info(t("entDrawer.submitFunction.withoutChangeMessage"));
+      //onClose();
     }
   };
 
