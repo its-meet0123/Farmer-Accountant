@@ -56,14 +56,9 @@ const HomePage = () => {
       const ids = data.map((data) => data._id);
       const entRes = await deleteEntDataById(record._id);
       const indRes = await deleteIndDataByIds(ids);
-      if (
-        entRes.data.status === "Success" &&
-        indRes.data.status === "Success"
-      ) {
-        const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
-        showSuccess(text);
-        setFetch("res");
-      }
+      const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
+      showSuccess(text);
+      setFetch({ res1: entRes.data, res2: indRes.data });
     } catch (err) {
       message.error(t("homePage.deleteFunctionMessages.errorMessage"));
       console.log(err.message);
