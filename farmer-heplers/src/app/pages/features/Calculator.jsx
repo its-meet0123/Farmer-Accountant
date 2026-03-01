@@ -176,7 +176,8 @@ const CalcPage = () => {
     : [];
 
   const setFooter = (currentData) => {
-    return <TableFooterForViewCalc data={currentData} />;
+    const summeryData = tableData || currentData;
+    return <TableFooterForViewCalc data={summeryData} />;
   };
 
   return (
