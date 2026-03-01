@@ -164,16 +164,22 @@ async function handleDeleteManyIndData(req, res) {
   if (!Array.isArray(ids) || ids.length === 0) {
     return res.status(400).json({ message: "Ids required" });
   }
-  const indDataById = await Industries.deleteMany({
-    _id: { $in: ids },
-    userId: currentUserId,
-  });
-  if (!indDataById) {
-    return res.status(404).json({ status: "Error", msg: "Ind Data not found" });
+  try {
+    const indDataById = await Industries.deleteMany({
+      _id: { $in: ids },
+      userId: currentUserId,
+    });
+    if (!indDataById) {
+      return res
+        .status(404)
+        .json({ status: "Error", msg: "Ind Data not found" });
+    }
+    return res
+      .status(200)
+      .json({ status: "Success", msg: "Ind. Datas Deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ status: "Error", message: err.message });
   }
-  return res
-    .status(200)
-    .json({ status: "Success", msg: "Ind. Datas Deleted successfully" });
 }
 
 async function handlePushIndShopeAccountById(req, res) {

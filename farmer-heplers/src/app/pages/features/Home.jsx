@@ -53,17 +53,22 @@ const HomePage = () => {
       );
     });
     console.log(data);
-    try {
-      const ids = data.map((data) => data._id);
+    const ids = data.map((data) => data._id);
+    if (ids) {
+      const indRes = await deleteIndDataByIds(ids);
       const entRes = await deleteEntDataById(record._id);
       console.log(ids);
-      const indRes = await deleteIndDataByIds(ids);
-      const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
-      showSuccess(text);
-      setFetch({ res1: entRes.data, res2: indRes.data });
-    } catch (err) {
-      message.error(t("homePage.deleteFunctionMessages.errorMessage"));
-      console.log(err.message);
+      if (
+        entRes.data.status === "Success" &&
+        indRes.data.status === "Success"
+      ) {
+        const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
+        showSuccess(text);
+        setFetch({ res1: entRes.data, res2: indRes.data });
+      } else {
+        message.error(t("homePage.deleteFunctionMessages.errorMessage"));
+        console.log(indRes.data.message);
+      }
     }
   };
 
