@@ -97,7 +97,7 @@ const EntDrawer = ({
         if (entRes.status === 201 && indRes.status === 201) {
           const text = `${t("entDrawer.submitFunction.successMessageforCreate")}`;
           showSuccess(text);
-          setFetch("allValues");
+          setFetch(shopeDataArray);
           onClose();
         } else {
           message.error(t("entDrawer.submitFunction.errorMessageforCreate"));
@@ -138,7 +138,7 @@ const EntDrawer = ({
         if (entRes.status === 200 || indRes.status === 200) {
           const text = `${t("entDrawer.submitFunction.successMessageforEdit")}`;
           showSuccess(text);
-          setFetch("allValues");
+          setFetch(entData);
           onClose();
         } else {
           message.error(t("entDrawer.submitFunction.errorMessageforEdit"));

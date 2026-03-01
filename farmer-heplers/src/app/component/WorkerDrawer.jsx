@@ -67,7 +67,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
       message.success(res.data.message);
       workerInfoForm.resetFields();
       setOpen(null);
-      setFetchData("add");
+      setFetchData(formValues);
     } else {
       message.error(t("workerDrawer.submitFunction.errorMessageforCreate1"));
     }
@@ -95,7 +95,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         if (res.status === 200) {
           transactionForm.resetFields();
           message.success(res.data.message);
-          setFetchData("addT");
+          setFetchData(transactionBody);
           onClose();
         } else {
           message.error(
@@ -122,7 +122,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         if (res.status === 200) {
           transactionForm.resetFields();
           message.success(res.data.message);
-          setFetchData("addT");
+          setFetchData(transactionBody);
           onClose();
         } else {
           message.error(
@@ -149,7 +149,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         if (res.status === 200) {
           transactionForm.resetFields();
           message.success(res.data.message);
-          setFetchData("addT");
+          setFetchData(transactionBody);
           onClose();
         } else {
           message.error(
@@ -183,7 +183,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         console.log(transactionBody);
         const res = await updateWorkerTransactionById(ids, transactionBody);
         if (res.status === 200) {
-          setFetchData("editT");
+          setFetchData(transactionBody);
           editTransactionForm.resetFields();
           message.success(res.data.message);
           onClose();

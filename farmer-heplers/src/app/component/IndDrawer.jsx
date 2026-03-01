@@ -65,7 +65,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
       if (res.status === 200) {
         const text = `${t("indDrawer.submitMessageforEdit")}`;
         onClose();
-        setFetch("indData");
+        setFetch(transaction);
         showSuccess(text);
       } else {
         message.error(t("indDrawer.submitFunction.errorMessageforEdit"));
@@ -104,7 +104,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
         onClose();
         const text = `${t("indDrawer.submitFunction.successMessageforCreate")}`;
         showSuccess(text);
-        setFetch("indData");
+        setFetch(transaction);
       } else {
         message.error(t("indDrawer.submitFunction.errorMessageforCreate"));
       }
