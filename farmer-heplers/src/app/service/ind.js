@@ -80,14 +80,3 @@ export async function deleteEndDate(id) {
     withCredentials: true,
   });
 }
-
-export async function dieselPrice() {
-  return await axios.get(
-    "https://fuel.indianapi.in/live_fuel_price?fuel_type=diesel&location_type=city",
-    {
-      headers: {
-        "x-api-key": "sk-live-3uSS4oZhipWKVuqO0WOBE1plA8vlHqh4r2XDUTfU",
-      },
-    },
-  );
-}

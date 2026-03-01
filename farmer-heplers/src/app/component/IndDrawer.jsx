@@ -14,18 +14,13 @@ import {
   Typography,
 } from "antd";
 import { useEffect, useState } from "react";
-import {
-  dieselPrice,
-  pushIndShopeAccountById,
-  updateIndShopeAccount,
-} from "../service/ind";
+import { pushIndShopeAccountById, updateIndShopeAccount } from "../service/ind";
 import dayjs from "dayjs";
 
 const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
   const [addForm] = Form.useForm();
   const [edit, setEdit] = useState(false);
   const date = dayjs(new Date());
-  const [dieselRate, setDieselRate] = useState(0);
 
   const onClose = () => {
     addForm.resetFields();
@@ -115,21 +110,6 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
       }
     }
   };
-
-  useEffect(() => {
-    async function getData() {
-      try {
-        const res = await dieselPrice();
-        console.log(res);
-        const data = res.data;
-        console.log(data);
-      } catch (err) {
-        message.error("diesel Price not found");
-        console.log(err.message);
-      }
-    }
-    getData();
-  }, []);
 
   return (
     <>
