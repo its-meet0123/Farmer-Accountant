@@ -52,6 +52,7 @@ const HomePage = () => {
         (shope) => shope.shopeNumber === ind.shopeNumber,
       );
     });
+    console.log(data);
     try {
       const ids = data.map((data) => data._id);
       const entRes = await deleteEntDataById(record._id);
