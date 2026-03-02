@@ -67,10 +67,6 @@ const AppLayout = ({ children }) => {
       style={{
         height: screen.md ? "100%" : "200%",
         width: screen.md ? "100%" : "70%",
-        backgroundImage: `
-        radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
-        radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
-      `,
       }}>
       <Header style={{ display: "flex", alignItems: "center" }}>
         {authState.isLoggedIn && (
