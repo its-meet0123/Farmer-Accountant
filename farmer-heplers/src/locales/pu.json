@@ -3,9 +3,16 @@
     "spinAlertTitle": "ਡੇਟਾ ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
     "spinAlertText": "ਸਬਰ ਰੱਖੋ! ਅਸੀਂ ਤੁਹਾਡਾ ਡੇਟਾ ਲੋਡ ਕਰ ਰਹੇ ਹਾਂ।"
   },
+  "pageContainer": {
+    "logotext": "ਕਿਸਾਨ-ਮੁਨੀਮ (Farmer-Accountant)",
+    "sologntext1": "ਖੇਤੀ ਪ੍ਰਬੰਧਨ ਦੇ",
+    "sologntext2": "ਭਵਿੱਖ ਦੇ ਰਾਹ ਖੋਲ੍ਹੋ",
+    "keytext": "ਬਿਨਾਂ ਕਿਸੇ ਗਲਤੀ ਦੇ ਸਮਾਰਟ ਅਕਾਊਂਟਿੰਗ। ਖਰੀਦ ਤੋਂ ਲੈ ਕੇ ਵਿਕਰੀ ਤੱਕ ਹਰ ਲੈਣ-ਦੇਣ ਦੀ ਆਟੋਮੈਟਿਕ ਗਣਨਾ ਕਰੋ। ਆਪਣੇ ਕਿਸਾਨ ਰਿਕਾਰਡਾਂ ਨੂੰ ਪੂਰੀ ਸ਼ੁੱਧਤਾ ਨਾਲ ਮੈਨੇਜ ਕਰੋ।"
+  },
   "loginPage": {
     "formSubmitErrorText": "ਲੌਗਇਨ ਕੀਤੇ ਯੂਜ਼ਰ ਲਈ ਡੇਟਾ ਨਹੀਂ ਮਿਲ ਰਿਹਾ",
     "cardTitle": "ਲੌਗਇਨ ਫਾਰਮ",
+    "cardSubTitle": "ਅੱਗੇ ਵਧਣ ਲਈ ਆਪਣੀ ਯੂਜ਼ਰ ਆਈਡੀ ਅਤੇ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
     "formUserIdInput": {
       "text": "ਯੂਜ਼ਰ ਆਈਡੀ",
       "requiredText": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਆਈਡੀ ਦਰਜ ਕਰੋ!",
@@ -24,6 +31,7 @@
     "formSubmitErrorText1": "ਵੈਲਯੂ ਪ੍ਰਭਾਸ਼ਿਤ ਨਹੀਂ ਹਨ",
     "formSubmitErrorText2": "ਯੂਜ਼ਰ ਡੇਟਾ ਅਪਲੋਡ ਨਹੀਂ ਕੀਤਾ ਗਿਆ ਹੈ",
     "cardTitle": "ਸਾਈਨਅੱਪ ਫਾਰਮ",
+    "cardSubTitle": "ਆਪਣਾ ਖਾਤਾ ਬਣਾਉਣ ਲਈ ਆਪਣੇ ਵੇਰਵੇ ਦਰਜ ਕਰੋ",
     "formUserNameInputs": {
       "firstNameText": "ਪਹਿਲਾ ਨਾਮ",
       "lastNameText": "ਆਖਰੀ ਨਾਮ",

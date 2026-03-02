@@ -3,9 +3,16 @@
     "spinAlertTitle": "डेटा लोड हो रहा है",
     "spinAlertText": "धैर्य रखें! हम आपका डेटा लोड कर रहे हैं।"
   },
+  "pageContainer": {
+    "logotext": "किसान-मुनीम (Farmer-Accountant)",
+    "sologntext1": "खेती प्रबंधन के",
+    "sologntext2": "भविष्य को अनलॉक करें",
+    "keytext": "बिना किसी गलती के स्मार्ट अकाउंटिंग। खरीद से लेकर बिक्री तक हर लेनदेन की ऑटोमैटिक गणना करें। अपने किसान रिकॉर्ड को पूरी सटीकता के साथ मैनेज करें।"
+  },
   "loginPage": {
     "formSubmitErrorText": "लॉग इन यूजर के लिए डेटा नहीं मिल रहा है",
     "cardTitle": "लॉगिन फॉर्म",
+    "cardSubTitle": "आगे बढ़ने के लिए अपना यूजर आईडी और पासवर्ड दर्ज करें",
     "formUserIdInput": {
       "text": "यूजर आईडी",
       "requiredText": "कृपया अपनी आईडी दर्ज करें!",
@@ -24,6 +31,7 @@
     "formSubmitErrorText1": "वैल्यू परिभाषित नहीं हैं",
     "formSubmitErrorText2": "यूजर डेटा अपलोड नहीं किया गया है",
     "cardTitle": "साइनअप फॉर्म",
+    "cardSubTitle": "अपना अकाउंट बनाने के लिए अपना विवरण दर्ज करें",
     "formUserNameInputs": {
       "firstNameText": "पहला नाम",
       "lastNameText": "अंतिम नाम",

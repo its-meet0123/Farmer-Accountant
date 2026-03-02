@@ -5,6 +5,7 @@ const AuthContainer = ({
   children,
   title,
   subtitle,
+  t,
   showLangButton = true,
 }) => {
   // --- Enhanced Inline Style Objects ---
@@ -94,8 +95,6 @@ const AuthContainer = ({
 
   return (
     <div style={styles.overlay}>
-      {/* Language Selector */}
-
       <div style={styles.card}>
         {/* Branding Side */}
         <div style={styles.leftPanel}>
@@ -106,7 +105,7 @@ const AuthContainer = ({
               fontWeight: "bold",
               color: "#38BDF8",
             }}>
-            BrandLogo
+            {t("pageContainer.logotext")}
           </div>
           <h1
             style={{
@@ -115,15 +114,19 @@ const AuthContainer = ({
               marginBottom: "20px",
               lineHeight: "1.1",
             }}>
-            Unlock Your <span style={{ color: "#38BDF8" }}>Potential.</span>
+            {t("pageContainer.sologntext1")}{" "}
+            <span style={{ color: "#38BDF8" }}>
+              {t("pageContainer.sologntext2")}
+            </span>
           </h1>
-        </div>
-        <div style={styles.rightPanel}>
+          {/* Language Selector */}
           {showLangButton && (
             <div style={styles.langWrapper}>
               <LanguageChangeDropDown />
             </div>
           )}
+        </div>
+        <div style={styles.rightPanel}>
           <p
             style={{
               fontSize: "1.2rem",
@@ -131,9 +134,7 @@ const AuthContainer = ({
               opacity: 0.8,
               fontWeight: "300",
             }}>
-            Smart Accounting with Zero Margin for Error. Automatically calculate
-            every transaction from purchase to sale. Manage your farmer records
-            with absolute precision.
+            {t("pageContainer.keytext")}
           </p>
           <h2 style={styles.title}>{title}</h2>
           {subtitle && <p style={styles.subtitle}>{subtitle}</p>}

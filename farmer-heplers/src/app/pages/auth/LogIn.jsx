@@ -5,7 +5,6 @@ import { postUserDataForLoggedIn } from "../../service/auth";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import UserActionModel from "../../component/UserIdActionModel";
-import LanguageChangeDropDown from "../../component/LanguageChangeDropdown";
 import AuthContainer from "../../component/PageContainer";
 
 const LogIn = () => {
@@ -51,7 +50,8 @@ const LogIn = () => {
     <>
       <AuthContainer
         title={t("loginPage.cardTitle")}
-        subtitle="Enter your userId and Password to continue">
+        subtitle={t("loginPage.cardSubTitle")}
+        t={t}>
         {contextHolder}
         <Card>
           <Form

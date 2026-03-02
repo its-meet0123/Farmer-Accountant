@@ -3,9 +3,16 @@
     "spinAlertTitle": "Data Loading",
     "spinAlertText": "Hang tight! We're loading your data."
   },
+  "pageContainer": {
+    "logotext": "Farmer-Accountant",
+    "sologntext1": "Unlock the Future of",
+    "sologntext2": "Farm Management",
+    "keytext": "Smart Accounting with Zero Margin for Error. Automatically calculate every transaction from purchase to sale. Manage your farmer records with absolute precision."
+  },
   "loginPage": {
     "formSubmitErrorText": "Data not fetching for loggedIn",
     "cardTitle": "LogIn Form",
+    "cardSubTitle": "Enter your User ID and Password to continue",
     "formUserIdInput": {
       "text": "User ID",
       "requiredText": "Please enter your ID!",
@@ -25,6 +32,7 @@
     "formSubmitErrorText1": "Values not defined",
     "formSubmitErrorText2": "User data has not been uploaded",
     "cardTitle": "SignUp Form",
+    "cardSubTitle": "Enter your details to create an account",
     "formUserNameInputs": {
       "firstNameText": "First Name",
       "lastNameText": "Last Name",
