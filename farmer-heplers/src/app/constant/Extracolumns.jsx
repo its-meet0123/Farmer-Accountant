@@ -1017,7 +1017,7 @@ const getColumnsForWorkerCalcPage = (t) => {
       ],
     },
     {
-      title: t("workerCalcPage.tableColumns.cardTitle"),
+      title: t("workerCalcPage.tableColumns.grandTotalText"),
       dataIndex: "",
       key: "a",
     },
