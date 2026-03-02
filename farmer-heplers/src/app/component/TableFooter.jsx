@@ -113,8 +113,8 @@ const TableFooterForViewCalc = ({ data }) => {
 
   const oAT =
     totalOfReturnSellBillAmount -
-    totalOfReturnLoanAmount +
-    totalOfReturnBuyBillAmount +
+    totalOfReturnLoanAmount -
+    totalOfReturnBuyBillAmount -
     totalOfReturnDieselBillAmount;
   const grandTotal = Number(oAT).toFixed(2);
   return (
