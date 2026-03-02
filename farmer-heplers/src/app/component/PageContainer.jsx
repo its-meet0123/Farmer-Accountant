@@ -123,17 +123,25 @@ const AuthContainer = ({
             Unlock Your <span style={{ color: "#38BDF8" }}>Potential.</span>
           </h1>
         </div>
-        <p
-          style={{
-            fontSize: "1.2rem",
-            lineHeight: "1.7",
-            opacity: 0.8,
-            fontWeight: "300",
-          }}>
-          Smart Accounting with Zero Margin for Error. Automatically calculate
-          every transaction from purchase to sale. Manage your farmer records
-          with absolute precision.
-        </p>
+        <div style={styles.rightPanel}>
+          <p
+            style={{
+              fontSize: "1.2rem",
+              lineHeight: "1.7",
+              opacity: 0.8,
+              fontWeight: "300",
+            }}>
+            Smart Accounting with Zero Margin for Error. Automatically calculate
+            every transaction from purchase to sale. Manage your farmer records
+            with absolute precision.
+          </p>
+          <h2 style={styles.title}>{title}</h2>
+          {subtitle && <p style={styles.subtitle}>{subtitle}</p>}
+
+          {/* Form Content wrapped here */}
+          {children}
+        </div>
+
         <div
           style={{
             marginTop: "40px",
@@ -145,13 +153,6 @@ const AuthContainer = ({
       </div>
 
       {/* Form Side */}
-      <div style={styles.rightPanel}>
-        <h2 style={styles.title}>{title}</h2>
-        {subtitle && <p style={styles.subtitle}>{subtitle}</p>}
-
-        {/* Form Content wrapped here */}
-        {children}
-      </div>
     </div>
   );
 };
