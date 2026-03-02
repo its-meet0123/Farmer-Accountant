@@ -7,37 +7,150 @@ const AuthContainer = ({
   subtitle,
   showLangButton = true,
 }) => {
+  // --- Enhanced Inline Style Objects ---
+  const styles = {
+    overlay: {
+      minHeight: "100vh",
+      width: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "20px",
+      fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
+      position: "relative",
+
+      // *** UNIQUE BACKGROUND START ***
+      // 1. Base Gradient: A sophisticated deep teal to charcoal radial gradient
+      backgroundImage: `
+        radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
+        radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
+      `,
+      // 2. Subtle Pattern Overlay (SVG based, cross-browser safe)
+      // This creates a very light geometric texture over the gradient
+      maskImage:
+        "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E\")",
+      backgroundColor: "#011627", // Fallback color
+      // *** UNIQUE BACKGROUND END ***
+    },
+    langWrapper: {
+      position: "absolute",
+      top: "20px",
+      right: "20px",
+      zIndex: 10, // Ensures it's above the pattern
+    },
+    select: {
+      padding: "8px 12px",
+      borderRadius: "8px",
+      border: "1px solid rgba(255, 255, 255, 0.2)",
+      background: "rgba(255, 255, 255, 0.1)",
+      color: "white",
+      backdropFilter: "blur(10px)", // Nice frosted glass effect
+      cursor: "pointer",
+      outline: "none",
+      fontSize: "14px",
+    },
+    card: {
+      display: "flex",
+      width: "100%",
+      maxWidth: "960px", // Slightly wider for a better split
+      backgroundColor: "rgba(255, 255, 255, 0.95)", // Slightly translucent
+      borderRadius: "24px", // More rounded corners
+      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)", // Deeper shadow for pop
+      overflow: "hidden",
+      minHeight: "600px",
+      backdropFilter: "blur(5px)", // Subtle blur behind the card
+    },
+    leftPanel: {
+      flex: 1,
+      background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)", // Deep slate branding panel
+      padding: "60px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      color: "#F8FAFC",
+    },
+    rightPanel: {
+      flex: 1.2, // Gives the form side a bit more room
+      padding: "60px",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      backgroundColor: "#fff",
+    },
+    title: {
+      fontSize: "2.5rem",
+      fontWeight: "800",
+      color: "#0F172A",
+      margin: "0 0 10px 0",
+      letterSpacing: "-1px",
+    },
+    subtitle: {
+      fontSize: "1.1rem",
+      color: "#475569",
+      marginBottom: "40px",
+      fontWeight: "400",
+    },
+  };
+
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 p-4">
+    <div style={styles.overlay}>
+      {/* Language Selector */}
       {showLangButton && (
-        <div className="absolute top-6 right-6">
-          {/* <select className="bg-white/20 text-white border border-white/30 rounded-md px-3 py-1 outline-none cursor-pointer backdrop-blur-sm">
-            <option value="en">English</option>
-            <option value="hi">Hindi</option>
-            <option value="es">Spanish</option>
-          </select> */}
+        <div style={styles.langWrapper}>
           <LanguageChangeDropDown />
         </div>
       )}
 
-      <div className="bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row w-full max-w-4xl overflow-hidden min-h-[550px]">
-        <div className="hidden md:flex md:w-1/2 bg-indigo-700 p-12 flex-col justify-center text-white">
-          <h1 className="text-4xl font-bold mb-4 italic">Welcome Back!</h1>
-          <p className="text-indigo-100 text-lg">
-            Experience the most powerful workflow management tool. Start your
-            journey with us today.
-          </p>
-          <div className="mt-8 h-1 w-20 bg-white/30 rounded"></div>
-        </div>
-
-        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-white">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-800">{title}</h2>
-            {subtitle && <p className="text-gray-500 mt-2">{subtitle}</p>}
+      <div style={styles.card}>
+        {/* Branding Side */}
+        <div style={styles.leftPanel}>
+          <div
+            style={{
+              marginBottom: "30px",
+              fontSize: "1.5rem",
+              fontWeight: "bold",
+              color: "#38BDF8",
+            }}>
+            BrandLogo
           </div>
-
-          {children}
+          <h1
+            style={{
+              fontSize: "3rem",
+              fontWeight: "800",
+              marginBottom: "20px",
+              lineHeight: "1.1",
+            }}>
+            Unlock Your <span style={{ color: "#38BDF8" }}>Potential.</span>
+          </h1>
         </div>
+        <p
+          style={{
+            fontSize: "1.2rem",
+            lineHeight: "1.7",
+            opacity: 0.8,
+            fontWeight: "300",
+          }}>
+          Smart Accounting with Zero Margin for Error. Automatically calculate
+          every transaction from purchase to sale. Manage your farmer records
+          with absolute precision.
+        </p>
+        <div
+          style={{
+            marginTop: "40px",
+            height: "4px",
+            width: "60px",
+            background: "#38BDF8",
+            borderRadius: "2px",
+          }}></div>
+      </div>
+
+      {/* Form Side */}
+      <div style={styles.rightPanel}>
+        <h2 style={styles.title}>{title}</h2>
+        {subtitle && <p style={styles.subtitle}>{subtitle}</p>}
+
+        {/* Form Content wrapped here */}
+        {children}
       </div>
     </div>
   );
