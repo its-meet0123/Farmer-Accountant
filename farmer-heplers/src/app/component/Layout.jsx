@@ -90,10 +90,14 @@ const AppLayout = ({ children }) => {
       <Content style={{ padding: "0 48px" }}>
         <div
           style={{
-            background: colorBgContainer,
+            // background: colorBgContainer,
             minHeight: 280,
             padding: 24,
             borderRadius: borderRadiusLG,
+            backgroundImage: `
+        radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
+        radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
+      `,
           }}>
           {children}
         </div>
@@ -101,10 +105,6 @@ const AppLayout = ({ children }) => {
       <Footer
         style={{
           textAlign: "center",
-          backgroundImage: `
-        radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
-        radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
-      `,
         }}>
         {`${t("layout.ft1")} ©${new Date().getFullYear()} ${t("layout.ft2")}`}
       </Footer>
