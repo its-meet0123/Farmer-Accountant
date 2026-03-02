@@ -83,7 +83,7 @@ const AppLayout = ({ children }) => {
           }}
         />
       </Header>
-      <Content style={{ padding: "0 48px" }}>
+      <Content style={{ padding: "0 48px", alignContent: "center" }}>
         <div
           style={{
             // background: colorBgContainer,

@@ -111,12 +111,11 @@ const TableFooterForViewCalc = ({ data }) => {
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
 
-  const oAT = Number(
+  const oAT =
     totalOfReturnSellBillAmount -
-      totalOfReturnLoanAmount +
-      totalOfReturnBuyBillAmount +
-      totalOfReturnDieselBillAmount,
-  );
+    totalOfReturnLoanAmount +
+    totalOfReturnBuyBillAmount +
+    totalOfReturnDieselBillAmount;
   const grandTotal = Number(oAT).toFixed(2);
   return (
     <>
