@@ -26,7 +26,9 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
- 
+ background-image: 
+    radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
+    radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%);
   min-height: 100vh;
   padding: 0;
   width: 100%;
