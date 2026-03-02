@@ -95,11 +95,6 @@ const AuthContainer = ({
   return (
     <div style={styles.overlay}>
       {/* Language Selector */}
-      {showLangButton && (
-        <div style={styles.langWrapper}>
-          <LanguageChangeDropDown />
-        </div>
-      )}
 
       <div style={styles.card}>
         {/* Branding Side */}
@@ -124,6 +119,11 @@ const AuthContainer = ({
           </h1>
         </div>
         <div style={styles.rightPanel}>
+          {showLangButton && (
+            <div style={styles.langWrapper}>
+              <LanguageChangeDropDown />
+            </div>
+          )}
           <p
             style={{
               fontSize: "1.2rem",
@@ -142,14 +142,14 @@ const AuthContainer = ({
           {children}
         </div>
 
-        <div
+        {/* <div
           style={{
             marginTop: "40px",
             height: "4px",
             width: "60px",
             background: "#38BDF8",
             borderRadius: "2px",
-          }}></div>
+          }}></div> */}
       </div>
 
       {/* Form Side */}
