@@ -49,6 +49,11 @@ const LogIn = () => {
   return (
     <>
       <AuthContainer
+        sologntext={{
+          text1: t("pageContainer.logsologntext1"),
+          text2: t("pageContainer.logsologntext2"),
+        }}
+        keytext={t("pageContainer.keytext2")}
         title={t("loginPage.cardTitle")}
         subtitle={t("loginPage.cardSubTitle")}
         t={t}>

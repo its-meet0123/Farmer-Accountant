@@ -5,6 +5,8 @@ const AuthContainer = ({
   children,
   title,
   subtitle,
+  sologntext,
+  keytext,
   t,
   showLangButton = true,
 }) => {
@@ -114,10 +116,8 @@ const AuthContainer = ({
               marginBottom: "20px",
               lineHeight: "1.1",
             }}>
-            {t("pageContainer.sologntext1")}{" "}
-            <span style={{ color: "#38BDF8" }}>
-              {t("pageContainer.sologntext2")}
-            </span>
+            {sologntext.text1}{" "}
+            <span style={{ color: "#38BDF8" }}>{sologntext.text2}</span>
           </h1>
           {/* Language Selector */}
           {showLangButton && (
@@ -134,7 +134,7 @@ const AuthContainer = ({
               opacity: 0.8,
               fontWeight: "300",
             }}>
-            {t("pageContainer.keytext")}
+            {keytext}
           </p>
           <h2 style={styles.title}>{title}</h2>
           {subtitle && <p style={styles.subtitle}>{subtitle}</p>}

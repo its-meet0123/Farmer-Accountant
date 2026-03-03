@@ -5,9 +5,12 @@
   },
   "pageContainer": {
     "logotext": "Farmer-Accountant",
-    "sologntext1": "Unlock the Future of",
-    "sologntext2": "Farm Management",
-    "keytext": "Smart Accounting with Zero Margin for Error. Automatically calculate every transaction from purchase to sale. Manage your farmer records with absolute precision."
+    "supsologntext1": "Unlock the Future of",
+    "supsologntext2": "Farm Management",
+    "keytext": "Smart Accounting with Zero Margin for Error. Automatically calculate every transaction from purchase to sale. Manage your farmer records with absolute precision.",
+    "logsologntext1": "Back to Leading the Future of",
+    "logsologntex2": " Farming.",
+    "keytext2": "Access your error-free accounting dashboard and continue managing your farm’s financial health with absolute certainty."
   },
   "loginPage": {
     "formSubmitErrorText": "Data not fetching for loggedIn",
