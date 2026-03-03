@@ -156,10 +156,12 @@ const CalcPage = () => {
           endDate: endDate?.length > 0 ? dayjs(endDate[0]?.endDate) : today,
         });
       } catch (err) {
-        setIsLoanding(true);
-        message.error(t("calculationPage.fetchDateErrorMessage"));
-        console.log(err.message);
-        setFetch("del");
+        if (endDate.length > 0) {
+          setIsLoanding(true);
+          message.error(t("calculationPage.fetchDateErrorMessage"));
+          console.log(err.message);
+          setFetch("del");
+        }
       }
     }
     getData();

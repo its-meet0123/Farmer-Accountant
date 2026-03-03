@@ -103,18 +103,16 @@ const WorkerCalculation = () => {
 
   useEffect(() => {
     async function getData() {
-      if (state) {
-        try {
-          setIsLoanding(true);
-          const res = await getWorkerTransaction(state.id);
-          const data = await res.data.data;
-          setIsLoanding(false);
-          setWorker(data);
-        } catch (err) {
-          message.error(t("workerCalcPage.fetchDataErrorMessage"));
-          console.error(err.message);
-          setIsLoanding(true);
-        }
+      try {
+        setIsLoanding(true);
+        const res = await getWorkerTransaction(state.id);
+        const data = await res.data.data;
+        setIsLoanding(false);
+        setWorker(data);
+      } catch (err) {
+        message.error(t("workerCalcPage.fetchDataErrorMessage"));
+        console.error(err.message);
+        setIsLoanding(true);
       }
     }
     getData();
@@ -138,8 +136,10 @@ const WorkerCalculation = () => {
         });
       } catch (err) {
         setIsLoanding(true);
-        message.error(t("workerCalcPage.fetchDateErrorMessage"));
-        console.error(err.message);
+        if (endDate.length > 0) {
+          message.error(t("workerCalcPage.fetchDateErrorMessage"));
+          console.error(err.message);
+        }
         setFetch("del");
       }
     }
