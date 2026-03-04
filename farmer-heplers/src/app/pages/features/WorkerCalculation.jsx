@@ -27,6 +27,7 @@ import dayjs from "dayjs";
 import { useAuth } from "../../auth/AuthContext";
 import { DownloadTable2 } from "../../component/CalculateTableDownload";
 import { DownloadOutlined } from "@ant-design/icons";
+import { PageContainer } from "../../component/PageContainer";
 
 const WorkerCalculation = () => {
   const { state } = useLocation();
@@ -162,7 +163,7 @@ const WorkerCalculation = () => {
 
   return (
     <>
-      <Card
+      <PageContainer
         title={
           worker?.workerName &&
           `${t("workerCalcPage.cardTitle")} ${worker?.workerName?.nickName}`
@@ -221,7 +222,7 @@ const WorkerCalculation = () => {
             />
           </>
         )}
-      </Card>
+      </PageContainer>
       <DownloadTable2
         modelOpen={modalOpen}
         setModelOpen={setModalOpen}

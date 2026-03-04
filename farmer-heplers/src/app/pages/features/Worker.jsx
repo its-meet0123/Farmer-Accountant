@@ -19,6 +19,7 @@ import {
 import AlertText from "../../component/Text";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
+import { PageContainer } from "../../component/PageContainer";
 
 const WorkersData = () => {
   const { t } = useAuth();
@@ -186,7 +187,7 @@ const WorkersData = () => {
   };
   return (
     <>
-      <Card
+      <PageContainer
         title={t("workerPage.cardTitle")}
         extra={
           <Button
@@ -218,7 +219,7 @@ const WorkersData = () => {
           worker={worker}
           setFetchData={setFetchData}
         />
-      </Card>
+      </PageContainer>
     </>
   );
 };

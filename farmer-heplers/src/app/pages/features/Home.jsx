@@ -21,6 +21,7 @@ import {
   getAllEntData,
   getEntDataById,
 } from "../../service/ent";
+import { PageContainer } from "../../component/PageContainer";
 
 const HomePage = () => {
   const [form] = Form.useForm();
@@ -221,7 +222,8 @@ const HomePage = () => {
     <>
       {contextHolder}
 
-      <Card
+      <PageContainer
+        title={`Industry List`}
         extra={
           <Button type="primary" onClick={() => handleAddData()}>
             {t("homePage.buttonText")}
@@ -242,7 +244,7 @@ const HomePage = () => {
             scroll={{ x: 200 }}
           />
         )}
-      </Card>
+      </PageContainer>
       <EntDrawer
         open={openType}
         form={form}

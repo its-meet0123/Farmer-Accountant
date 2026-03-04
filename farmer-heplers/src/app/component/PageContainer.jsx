@@ -182,7 +182,18 @@ const PageContainer = ({ title, children, extra }) => {
         radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
       `,
       }}
-      title={title}
+      title={
+        <p
+          style={{
+            fontSize: "2.5rem",
+            fontWeight: "800",
+            color: "#0F172A",
+            margin: "0 0 10px 0",
+            letterSpacing: "-1px",
+          }}>
+          {title}
+        </p>
+      }
       extra={extra}>
       {children}
     </Card>

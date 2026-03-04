@@ -22,6 +22,7 @@ import IndDrawer from "../../component/IndDrawer";
 import dayjs from "dayjs";
 import AlertText from "../../component/Text";
 import { useAuth } from "../../auth/AuthContext";
+import { PageContainer } from "../../component/PageContainer";
 
 const ViewPage = () => {
   const { t } = useAuth();
@@ -269,7 +270,7 @@ const ViewPage = () => {
   return (
     <>
       {contextHolder}
-      <Card title={t("ViewPage.cardTitle")} extra={""}>
+      <PageContainer title={t("ViewPage.cardTitle")} extra={""}>
         {isLoanding ? (
           <Spin size="large" />
         ) : (
@@ -284,7 +285,7 @@ const ViewPage = () => {
             scroll={{ x: 700 }}
           />
         )}
-      </Card>
+      </PageContainer>
       <IndDrawer
         open={openType}
         setOpen={setOpenType}
