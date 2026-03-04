@@ -209,7 +209,7 @@ const CalcPage = () => {
         console.log(dieselAmount);
         console.log(sellAmount);
 
-        return total + (loanAmount + buyAmount + dieselAmount - sellAmount);
+        return loanAmount + buyAmount + dieselAmount - sellAmount;
       }
       return total;
     }, 0);
