@@ -3,7 +3,7 @@ import { Button, Card, Form, Input, message } from "antd";
 import { postUserDataForSignUp } from "../../service/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
-import AuthContainer from "../../component/PageContainer";
+import { AuthContainer } from "../../component/PageContainer";
 
 const layout = {
   labelCol: { span: 8 },

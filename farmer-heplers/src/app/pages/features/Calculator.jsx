@@ -24,6 +24,7 @@ import dayjs from "dayjs";
 import { useAuth } from "../../auth/AuthContext";
 import { TableFooterForViewCalc } from "../../component/TableFooter";
 import { DownloadTable1 } from "../../component/CalculateTableDownload";
+import { PageContainer } from "../../component/PageContainer";
 
 const CalcPage = () => {
   const { authState, t } = useAuth();
@@ -185,7 +186,7 @@ const CalcPage = () => {
   return (
     <>
       {contextHolder}
-      <Card
+      <PageContainer
         title={`${t("calculationPage.cardTitle")}: ${shope.shopeNumber}`}
         extra={
           <>
@@ -247,7 +248,7 @@ const CalcPage = () => {
             />
           </>
         )}
-      </Card>
+      </PageContainer>
       <DownloadTable1
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}

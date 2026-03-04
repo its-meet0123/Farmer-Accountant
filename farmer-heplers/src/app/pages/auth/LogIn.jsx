@@ -5,7 +5,7 @@ import { postUserDataForLoggedIn } from "../../service/auth";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 import UserActionModel from "../../component/UserIdActionModel";
-import AuthContainer from "../../component/PageContainer";
+import { AuthContainer } from "../../component/PageContainer";
 
 const LogIn = () => {
   const { loginComplete, setIsSignedUp, t } = useAuth();
