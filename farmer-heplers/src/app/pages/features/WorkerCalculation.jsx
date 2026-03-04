@@ -10,7 +10,7 @@ import {
   Table,
 } from "antd";
 import { useEffect, useState } from "react";
-import { data, useLocation } from "react-router-dom";
+import { data, useLocation, useNavigate } from "react-router-dom";
 import { getWorkerTransaction } from "../../service/worker";
 import {
   getColumnsForWorkerCalcPage,
@@ -26,11 +26,12 @@ import {
 import dayjs from "dayjs";
 import { useAuth } from "../../auth/AuthContext";
 import { DownloadTable2 } from "../../component/CalculateTableDownload";
-import { DownloadOutlined } from "@ant-design/icons";
+import { DownloadOutlined, RollbackOutlined } from "@ant-design/icons";
 import { PageContainer } from "../../component/PageContainer";
 
 const WorkerCalculation = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const { authState, t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(false);
   const [worker, setWorker] = useState({});
@@ -102,6 +103,10 @@ const WorkerCalculation = () => {
     }
   };
 
+  const returnBack = () => {
+    navigate("/worker");
+  };
+
   useEffect(() => {
     async function getData() {
       try {
@@ -171,6 +176,10 @@ const WorkerCalculation = () => {
         extra={
           <>
             <Flex gap="small" horizontal>
+              <Button
+                type="primary"
+                icon={<RollbackOutlined />}
+                onClick={returnBack}></Button>
               <Button
                 type="primary"
                 icon={<DownloadOutlined />}
