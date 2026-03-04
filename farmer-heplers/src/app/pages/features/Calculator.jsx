@@ -4,13 +4,14 @@ import {
   DatePicker,
   Flex,
   Form,
+  InputNumber,
   message,
   Radio,
   Spin,
   Table,
 } from "antd";
-import { useEffect, useState } from "react";
-import { data, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { data, useLocation, useMatch, useNavigate } from "react-router-dom";
 import {
   deleteEndDate,
   editEndDate,
@@ -33,6 +34,7 @@ const CalcPage = () => {
   const [isLoanding, setIsLoanding] = useState(false);
   const [shope, setShope] = useState({});
   const [endDate, setEndDate] = useState([]);
+  const [selectMonth, setSelectMonth] = useState(dayjs());
   const [id, setId] = useState();
   const [fetch, setFetch] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -183,6 +185,28 @@ const CalcPage = () => {
     return <TableFooterForViewCalc data={summeryData} />;
   };
 
+  const monthlyTotal = useMemo(() => {
+    if (!tableData) return 0;
+
+    return tableData.reduce((total, transaction) => {
+      const transactionDate = dayjs(transaction.startDate);
+
+      const isSameMonth =
+        transactionDate.month() === selectMonth.month() &&
+        transactionDate.year() === selectMonth.year();
+
+      if (isSameMonth) {
+        const loanAmount = total + Number(transaction.loan.amount);
+        const buyAmount = total + Number(transaction.indBuy.billAmount);
+        const dieselAmount = total + Number(transaction.diesel.billAmount);
+        const sellAmount = total + Number(transaction.indSell.billAmount);
+
+        return loanAmount + buyAmount + dieselAmount - sellAmount;
+      }
+      return total;
+    }, 0);
+  }, [tableData, selectMonth]);
+
   return (
     <>
       {contextHolder}
@@ -206,35 +230,44 @@ const CalcPage = () => {
           <Spin size="large" />
         ) : (
           <>
-            <Flex horizontal>
-              <Form form={form} layout="inline" onFinish={setDate}>
-                <Form.Item
-                  label={t("calculationPage.form.inputLabel")}
-                  name="endDate">
-                  <DatePicker
-                    disabled={id && fetch !== "edit"}
-                    format={"DD/MM/YYYY"}
-                  />
-                </Form.Item>
-                {(id == null || fetch === "edit" || fetch === "delete") && (
-                  <Form.Item>
-                    <Button htmlType="submit">
-                      {t("calculationPage.form.setButtonText")}
-                    </Button>
+            <Flex horizontal justify="space-between">
+              <Flex horizontal>
+                <Form form={form} layout="inline" onFinish={setDate}>
+                  <Form.Item
+                    label={t("calculationPage.form.inputLabel")}
+                    name="endDate">
+                    <DatePicker
+                      disabled={id && fetch !== "edit"}
+                      format={"DD/MM/YYYY"}
+                    />
                   </Form.Item>
-                )}
-                {id && (
-                  <Radio.Group
-                    block
-                    defaultValue={fetch}
-                    options={options}
-                    optionType="button"
-                    onChange={(e) => {
-                      setFetch(e.target.value);
-                    }}
-                  />
-                )}
-              </Form>
+                  {(id == null || fetch === "edit" || fetch === "delete") && (
+                    <Form.Item>
+                      <Button htmlType="submit">
+                        {t("calculationPage.form.setButtonText")}
+                      </Button>
+                    </Form.Item>
+                  )}
+                  {id && (
+                    <Radio.Group
+                      block
+                      defaultValue={fetch}
+                      options={options}
+                      optionType="button"
+                      onChange={(e) => {
+                        setFetch(e.target.value);
+                      }}
+                    />
+                  )}
+                </Form>
+              </Flex>
+              <Flex horizontal>
+                <DatePicker
+                  picker="month"
+                  onChange={(date) => setSelectMonth(date)}
+                />
+                <InputNumber value={monthlyTotal} readOnly />
+              </Flex>
             </Flex>
             <Table
               id="view-table"
