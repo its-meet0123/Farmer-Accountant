@@ -265,9 +265,10 @@ const CalcPage = () => {
                 </Form>
               </Flex>
               <Flex horizontal>
-                <p style={{ fontWeight: 600 }}>Monthy transaction:</p>
+                <p style={{ fontWeight: 600 }}>Monthly transaction:</p>
                 <DatePicker
                   picker="month"
+                  format="MM/YYYY"
                   onChange={(date) => setSelectMonth(date)}
                 />
                 <InputNumber value={monthlyTotal} readOnly />
