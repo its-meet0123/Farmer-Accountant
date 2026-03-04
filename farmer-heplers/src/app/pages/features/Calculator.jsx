@@ -265,7 +265,7 @@ const CalcPage = () => {
                 </Form>
               </Flex>
               <Flex horizontal>
-                <h5>Monthy transaction:</h5>
+                <p style={{ fontWeight: 600 }}>Monthy transaction:</p>
                 <DatePicker
                   picker="month"
                   onChange={(date) => setSelectMonth(date)}
