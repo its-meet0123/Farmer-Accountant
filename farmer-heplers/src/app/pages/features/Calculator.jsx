@@ -200,6 +200,10 @@ const CalcPage = () => {
         const buyAmount = total + Number(transaction.indBuy.billAmount);
         const dieselAmount = total + Number(transaction.diesel.billAmount);
         const sellAmount = total + Number(transaction.indSell.billAmount);
+        console.log(loanAmount);
+        console.log(buyAmount);
+        console.log(dieselAmount);
+        console.log(sellAmount);
 
         return loanAmount + buyAmount + dieselAmount - sellAmount;
       }
