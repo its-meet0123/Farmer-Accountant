@@ -10,7 +10,7 @@ import {
   Spin,
   Table,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { data, useLocation, useNavigate } from "react-router-dom";
 import { getWorkerTransaction } from "../../service/worker";
 import {
