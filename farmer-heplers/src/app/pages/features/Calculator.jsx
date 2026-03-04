@@ -187,6 +187,10 @@ const CalcPage = () => {
 
   const monthlyTotal = useMemo(() => {
     if (!tableData) return 0;
+    let loanAmount = 0;
+    let buyAmount = 0;
+    let dieselAmount = 0;
+    let sellAmount = 0;
 
     return tableData.reduce((total, transaction) => {
       const transactionDate = dayjs(transaction.startDate);
@@ -196,16 +200,16 @@ const CalcPage = () => {
         transactionDate.year() === selectMonth.year();
 
       if (isSameMonth) {
-        const loanAmount = total + Number(transaction.loan.amount);
-        const buyAmount = total + Number(transaction.indBuy.billAmount);
-        const dieselAmount = total + Number(transaction.diesel.billAmount);
-        const sellAmount = total + Number(transaction.indSell.billAmount);
+        loanAmount += Number(transaction.loan.amount);
+        buyAmount += Number(transaction.indBuy.billAmount);
+        dieselAmount += Number(transaction.diesel.billAmount);
+        sellAmount + Number(transaction.indSell.billAmount);
         console.log(loanAmount);
         console.log(buyAmount);
         console.log(dieselAmount);
         console.log(sellAmount);
 
-        return loanAmount + buyAmount + dieselAmount - sellAmount;
+        return total + (loanAmount + buyAmount + dieselAmount - sellAmount);
       }
       return total;
     }, 0);
