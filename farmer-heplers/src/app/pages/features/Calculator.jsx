@@ -204,11 +204,6 @@ const CalcPage = () => {
         buyAmount += Number(transaction.indBuy.billAmount);
         dieselAmount += Number(transaction.diesel.billAmount);
         sellAmount + Number(transaction.indSell.billAmount);
-        console.log(loanAmount);
-        console.log(buyAmount);
-        console.log(dieselAmount);
-        console.log(sellAmount);
-
         return loanAmount + buyAmount + dieselAmount - sellAmount;
       }
       return total;
@@ -270,6 +265,7 @@ const CalcPage = () => {
                 </Form>
               </Flex>
               <Flex horizontal>
+                <h5>Monthy transaction:</h5>
                 <DatePicker
                   picker="month"
                   onChange={(date) => setSelectMonth(date)}

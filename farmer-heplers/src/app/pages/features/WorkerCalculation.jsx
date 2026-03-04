@@ -4,6 +4,7 @@ import {
   DatePicker,
   Flex,
   Form,
+  InputNumber,
   message,
   Radio,
   Spin,
@@ -37,6 +38,7 @@ const WorkerCalculation = () => {
   const [worker, setWorker] = useState({});
   const [id, setId] = useState();
   const [endDate, setEndDate] = useState([]);
+  const [selectMonth, setSelectMonth] = useState(dayjs());
   const [form] = Form.useForm();
   const [fetch, setFetch] = useState();
   const today = dayjs();
@@ -166,6 +168,28 @@ const WorkerCalculation = () => {
     return <TableFooterForWorkerCalc data={accounts} />;
   };
 
+  const monthlyTotal = useMemo(() => {
+    if (!tableData) return 0;
+    let giveAmount = 0;
+    let takePayment = 0;
+
+    return tableData.reduce((total, transaction) => {
+      const transactionDate = dayjs(transaction.startDate);
+
+      const isSameMonth =
+        transactionDate.month() === selectMonth.month() &&
+        transactionDate.year() === selectMonth.year();
+
+      if (isSameMonth) {
+        giveAmount += Number(transaction.give.amount);
+        takePayment += Number(transaction.take.payment);
+
+        return giveAmount - takePayment;
+      }
+      return total;
+    }, 0);
+  }, [tableData, selectMonth]);
+
   return (
     <>
       <PageContainer
@@ -191,35 +215,45 @@ const WorkerCalculation = () => {
           <Spin size="large" />
         ) : (
           <>
-            <Flex horizontal>
-              <Form form={form} layout="inline" onFinish={setDate}>
-                <Form.Item
-                  label={t("workerCalcPage.form.inputLabel")}
-                  name="endDate">
-                  <DatePicker
-                    disabled={id && fetch !== "edit"}
-                    format={"DD/MM/YYYY"}
-                  />
-                </Form.Item>
-                {(id == null || fetch === "edit" || fetch === "delete") && (
-                  <Form.Item>
-                    <Button htmlType="submit">
-                      {t("workerCalcPage.form.setButtonText")}
-                    </Button>
+            <Flex horizontal justify="space-between">
+              <Flex horizontal>
+                <Form form={form} layout="inline" onFinish={setDate}>
+                  <Form.Item
+                    label={t("workerCalcPage.form.inputLabel")}
+                    name="endDate">
+                    <DatePicker
+                      disabled={id && fetch !== "edit"}
+                      format={"DD/MM/YYYY"}
+                    />
                   </Form.Item>
-                )}
-                {id && (
-                  <Radio.Group
-                    block
-                    defaultValue={fetch}
-                    options={options}
-                    optionType="button"
-                    onChange={(e) => {
-                      setFetch(e.target.value);
-                    }}
-                  />
-                )}
-              </Form>
+                  {(id == null || fetch === "edit" || fetch === "delete") && (
+                    <Form.Item>
+                      <Button htmlType="submit">
+                        {t("workerCalcPage.form.setButtonText")}
+                      </Button>
+                    </Form.Item>
+                  )}
+                  {id && (
+                    <Radio.Group
+                      block
+                      defaultValue={fetch}
+                      options={options}
+                      optionType="button"
+                      onChange={(e) => {
+                        setFetch(e.target.value);
+                      }}
+                    />
+                  )}
+                </Form>
+              </Flex>
+              <Flex horizontal>
+                <h5>Monthly transaction:</h5>
+                <DatePicker
+                  picker="month"
+                  onChange={(date) => setSelectMonth(date)}
+                />
+                <InputNumber value={monthlyTotal} readOnly />
+              </Flex>
             </Flex>
             <Table
               columns={WORKER_TRANSACTION_CALC_COLUMNS}
