@@ -33,6 +33,7 @@ import { PageContainer } from "../../component/PageContainer";
 const WorkerCalculation = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const today = dayjs();
   const { authState, t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(false);
   const [worker, setWorker] = useState({});
@@ -41,7 +42,6 @@ const WorkerCalculation = () => {
   const [selectMonth, setSelectMonth] = useState(dayjs());
   const [form] = Form.useForm();
   const [fetch, setFetch] = useState();
-  const today = dayjs();
   const [modalOpen, setModalOpen] = useState(false);
 
   const options = [
@@ -177,9 +177,10 @@ const WorkerCalculation = () => {
       const transactionDate = dayjs(transaction.date);
 
       const isSameMonth =
-        transactionDate.month() === selectMonth.month() &&
-        transactionDate.year() === selectMonth.year();
-
+        (transactionDate.month() === selectMonth.month() ||
+          transactionDate.month() === dayjs().month()) &&
+        (transactionDate.year() === selectMonth.year() ||
+          transactionDate.year() === dayjs().year());
       if (isSameMonth) {
         giveAmount += Number(transaction.give.amount);
         takePayment += Number(transaction.take.payment);
