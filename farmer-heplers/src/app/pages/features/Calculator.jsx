@@ -168,7 +168,7 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [fetch, state]);
+  }, [fetch]);
   console.log(fetch);
 
   const BASE_COLUMNS = getColumnsForCalulationPage(t);
