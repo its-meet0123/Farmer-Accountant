@@ -195,9 +195,11 @@ const CalcPage = () => {
     return tableData.reduce((total, transaction) => {
       const transactionDate = dayjs(transaction.startDate);
 
-      const isSameMonth =
-        transactionDate.month() === selectMonth.month() &&
-        transactionDate.year() === selectMonth.year();
+      const isSameMonth = selectMonth
+        ? transactionDate.month() === selectMonth.month() &&
+          transactionDate.year() === selectMonth.year()
+        : transactionDate.month() === today.month() &&
+          transactionDate.year() === today.year();
 
       if (isSameMonth) {
         loanAmount += Number(transaction.loan.amount);
