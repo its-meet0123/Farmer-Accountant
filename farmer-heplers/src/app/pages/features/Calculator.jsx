@@ -273,7 +273,6 @@ const CalcPage = () => {
                 </p>
                 <DatePicker
                   picker="month"
-                  value={selectMonth ? selectMonth.month() : today.month()}
                   format="MMM/YY"
                   onChange={(date) => setSelectMonth(date)}
                 />

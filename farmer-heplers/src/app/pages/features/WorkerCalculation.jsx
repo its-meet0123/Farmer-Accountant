@@ -250,7 +250,6 @@ const WorkerCalculation = () => {
                 <h5>{t("workerCalcPage.transInput")}</h5>
                 <DatePicker
                   picker="month"
-                  value={today.month()}
                   format="MM/YYYY"
                   onChange={(date) => setSelectMonth(date)}
                 />
