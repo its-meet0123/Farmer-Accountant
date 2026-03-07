@@ -67,6 +67,7 @@
       "errorMessage": "Industry data not fetched by Id"
     },
     "fetchDataErrorMessage": "All Industries data not fetching",
+    "cardTitle": "Industry List",
     "tableColumns": {
       "serialNoTitleText": "S.No.",
       "IndustryNameTitleText": "Industry Name",
@@ -152,6 +153,7 @@
     "fetchDataErrorMessage": "Shope Account not fetched",
     "fetchDateErrorMessage": "Date not fetching by Id in calculator page.",
     "cardTitle": "Calc View",
+    "transInput": "Monthly turnover",
     "form": {
       "inputLabel": "End Date",
       "setButtonText": "Set",
@@ -271,6 +273,7 @@
       "editButtonText": "Edit",
       "deleteButtonText": "Delete"
     },
+    "transInput": "Monthly turnover",
     "tableColumns": {
       "serialNoTextTitle": "Sr. No.",
       "dateText": "Date",

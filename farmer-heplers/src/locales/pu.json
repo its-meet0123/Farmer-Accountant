@@ -64,6 +64,7 @@
     "editFunctionMessages": {
       "errorMessage": "ਆਈਡੀ ਦੁਆਰਾ ਇੰਡਸਟਰੀ ਡੇਟਾ ਨਹੀਂ ਮਿਲਿਆ"
     },
+    "cardTitle": "ਉਦਯੋਗਾਂ ਦੀ ਸੂਚੀ",
     "fetchDataErrorMessage": "ਸਾਰੀਆਂ ਇੰਡਸਟਰੀਆਂ ਦਾ ਡੇਟਾ ਲੋਡ ਨਹੀਂ ਹੋ ਰਿਹਾ",
     "tableColumns": {
       "serialNoTitleText": "ਲੜੀ ਨੰ.",
@@ -148,6 +149,7 @@
     "fetchDataErrorMessage": "ਦੁਕਾਨ ਦਾ ਖਾਤਾ ਨਹੀਂ ਮਿਲਿਆ",
     "fetchDateErrorMessage": "ਕੈਲਕੁਲੇਟਰ ਪੇਜ ਵਿੱਚ ਆਈਡੀ ਦੁਆਰਾ ਮਿਤੀ ਨਹੀਂ ਮਿਲ ਰਹੀ।",
     "cardTitle": "ਹਿਸਾਬ-ਕਿਤਾਬ (Calc View)",
+    "transInput": "ਮਾਸਿਕ ਟਰਨਓਵਰ",
     "form": {
       "inputLabel": "ਆਖਰੀ ਮਿਤੀ",
       "setButtonText": "ਸੈੱਟ ਕਰੋ",
@@ -288,7 +290,8 @@
       },
       "grandTotalText": "ਕੁੱਲ ਜੋੜ"
     },
-    "cardTitle": "ਲੈਣ-ਦੇਣ ਦਾ ਵੇਰਵਾ"
+    "cardTitle": "ਲੈਣ-ਦੇਣ ਦਾ ਵੇਰਵਾ",
+    "transInput": "ਮਾਸਿਕ ਟਰਨਓਵਰ"
   },
   "settingPage": {
     "logoutText": "ਲੌਗ ਆਊਟ",

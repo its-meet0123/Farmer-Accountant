@@ -265,7 +265,9 @@ const CalcPage = () => {
                 </Form>
               </Flex>
               <Flex horizontal>
-                <p style={{ fontWeight: 600 }}>Monthly transaction:</p>
+                <p style={{ fontWeight: 600 }}>
+                  {t("calculationPage.transInput")}:
+                </p>
                 <DatePicker
                   picker="month"
                   format="MM/YYYY"

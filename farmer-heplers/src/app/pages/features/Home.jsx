@@ -223,7 +223,7 @@ const HomePage = () => {
       {contextHolder}
 
       <PageContainer
-        title={`Industry List`}
+        title={t("homePage.cardTitle")}
         extra={
           <Button type="primary" onClick={() => handleAddData()}>
             {t("homePage.buttonText")}

@@ -65,6 +65,7 @@
       "errorMessage": "आईडी द्वारा इंडस्ट्री डेटा नहीं मिला"
     },
     "fetchDataErrorMessage": "सभी इंडस्ट्रीज का डेटा लोड नहीं हो रहा है",
+    "cardTitle": "उद्योगों की सूची",
     "tableColumns": {
       "serialNoTitleText": "क्र.सं.",
       "IndustryNameTitleText": "इंडस्ट्री का नाम",
@@ -148,6 +149,7 @@
     "fetchDataErrorMessage": "दुकान का खाता नहीं मिला",
     "fetchDateErrorMessage": "कैलकुलेटर पेज में आईडी द्वारा तारीख नहीं मिल रही है।",
     "cardTitle": "गणना दृश्य (Calc View)",
+    "transInput": "मासिक टर्नओवर",
     "form": {
       "inputLabel": "अंतिम तिथि",
       "setButtonText": "सेट करें",
@@ -287,7 +289,8 @@
       },
       "grandTotalText": "कुल योग"
     },
-    "cardTitle": "लेनदेन दृश्य"
+    "cardTitle": "लेनदेन दृश्य",
+    "transInput": "मासिक टर्नओवर"
   },
   "settingPage": {
     "logoutText": "लॉग आउट",

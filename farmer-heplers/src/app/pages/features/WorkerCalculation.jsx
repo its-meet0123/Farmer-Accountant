@@ -247,7 +247,7 @@ const WorkerCalculation = () => {
                 </Form>
               </Flex>
               <Flex horizontal>
-                <h5>Monthly transaction:</h5>
+                <h5>{t("workerCalcPage.transInput")}</h5>
                 <DatePicker
                   picker="month"
                   format="MM/YYYY"
