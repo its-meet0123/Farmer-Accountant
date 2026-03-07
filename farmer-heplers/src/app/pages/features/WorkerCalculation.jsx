@@ -176,11 +176,11 @@ const WorkerCalculation = () => {
     return tableData.reduce((total, transaction) => {
       const transactionDate = dayjs(transaction.date);
 
-      const isSameMonth =
-        (transactionDate.month() === selectMonth.month() ||
-          transactionDate.month() === dayjs().month()) &&
-        (transactionDate.year() === selectMonth.year() ||
-          transactionDate.year() === dayjs().year());
+      const isSameMonth = selectMonth
+        ? transactionDate.month() === selectMonth.month() &&
+          transactionDate.year() === selectMonth.year()
+        : transactionDate.month() === dayjs.month() &&
+          transactionDate.year() === dayjs().month();
       if (isSameMonth) {
         giveAmount += Number(transaction.give.amount);
         takePayment += Number(transaction.take.payment);
