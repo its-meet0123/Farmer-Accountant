@@ -179,7 +179,7 @@ const WorkerCalculation = () => {
       const isSameMonth = selectMonth
         ? transactionDate.month() === selectMonth.month() &&
           transactionDate.year() === selectMonth.year()
-        : transactionDate.month() === dayjs.month() &&
+        : transactionDate.month() === dayjs().month() &&
           transactionDate.year() === dayjs().month();
       if (isSameMonth) {
         giveAmount += Number(transaction.give.amount);
