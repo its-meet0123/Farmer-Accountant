@@ -39,7 +39,7 @@ const WorkerCalculation = () => {
   const [worker, setWorker] = useState({});
   const [id, setId] = useState();
   const [endDate, setEndDate] = useState([]);
-  const [selectMonth, setSelectMonth] = useState(dayjs().month());
+  const [selectMonth, setSelectMonth] = useState(dayjs());
   const [form] = Form.useForm();
   const [fetch, setFetch] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -179,12 +179,11 @@ const WorkerCalculation = () => {
       const isSameMonth = selectMonth
         ? transactionDate.month() === selectMonth.month() &&
           transactionDate.year() === selectMonth.year()
-        : transactionDate.month() === dayjs().month() &&
-          transactionDate.year() === dayjs().month();
+        : transactionDate.month() === today.month() &&
+          transactionDate.year() === today.year();
       if (isSameMonth) {
         giveAmount += Number(transaction.give.amount);
         takePayment += Number(transaction.take.payment);
-
         return giveAmount - takePayment;
       }
       return total;
