@@ -154,10 +154,11 @@ const CalcPage = () => {
           console.log(viewEndDate);
           setEndDate(viewEndDate);
           setId(viewEndDate[0]._id);
+          form.setFieldsValue({
+            endDate:
+              viewEndDate?.length > 0 ? dayjs(viewEndDate[0]?.endDate) : today,
+          });
         }
-        form.setFieldsValue({
-          endDate: endDate?.length > 0 ? dayjs(endDate[0]?.endDate) : today,
-        });
       } catch (err) {
         if (endDate.length > 0) {
           setIsLoanding(true);
