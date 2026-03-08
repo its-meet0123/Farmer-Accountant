@@ -37,23 +37,27 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
         loan: {
           amount: allValues.amount,
           amountType: allValues.amountType,
+          handOver: allValues.handOver,
         },
         indBuy: {
           billAmount: allValues.bBillAmount,
           bill: allValues.bBill,
           brief: allValues.bBrief,
+          handOver: allValues.bHandOver,
         },
         indSell: {
           crop: allValues.crop,
           billAmount: allValues.sBillAmount,
           bill: allValues.sBill,
           brief: allValues.sBrief,
+          handOver: allValues.sHandOver,
         },
         diesel: {
           billAmount: allValues.dBillAmount,
           bill: allValues.dBill,
           qty: allValues.dQty,
           rate: allValues.dRate,
+          handOver: allValues.dHandOver,
         },
       };
 
@@ -79,23 +83,27 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
         loan: {
           amount: allValues.amount,
           amountType: allValues.amountType,
+          handOver: allValues.handOver,
         },
         indBuy: {
           billAmount: allValues.bBillAmount,
           bill: allValues.bBill,
           brief: allValues.bBrief,
+          handOver: allValues.bHandOver,
         },
         indSell: {
           crop: allValues.crops || [],
           billAmount: allValues.sBillAmount,
           bill: allValues.sBill,
           brief: allValues.sBrief,
+          handOver: allValues.sHandOver,
         },
         diesel: {
           billAmount: allValues.dBillAmount,
           bill: allValues.dBill,
           qty: allValues.dQty,
           rate: allValues.dRate,
+          handOver: allValues.dHandOver,
         },
       };
       const res = await pushIndShopeAccountById(Id.shopeId, transaction);
@@ -173,6 +181,13 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                     placeholder={t("indDrawer.drawerForm.loanInput.pt2")}
                   />
                 </Form.Item>
+                <Form.Item
+                  label={t("indDrawer.drawerForm.dieselInput.text4")}
+                  name="handOver">
+                  <InputNumber
+                    placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
+                  />
+                </Form.Item>
               </Row>
               <Row gutter={24}>
                 <Form.Item
@@ -194,6 +209,13 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                   name="bBrief">
                   <Input
                     placeholder={t("indDrawer.drawerForm.buyItemInput.pt3")}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label={t("indDrawer.drawerForm.buyItemInput.text4")}
+                  name="bHandOver">
+                  <Input
+                    placeholder={t("indDrawer.drawerForm.buyItemInput.pt4")}
                   />
                 </Form.Item>
               </Row>
@@ -219,6 +241,13 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                     placeholder={t("indDrawer.drawerForm.dieselInput.pt3")}
                   />
                 </Form.Item>
+                <Form.Item
+                  label={t("indDrawer.drawerForm.dieselInput.text4")}
+                  name="dHandOver">
+                  <InputNumber
+                    placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
+                  />
+                </Form.Item>
               </Row>
               <Row gutter={24}>
                 <Form.Item
@@ -240,6 +269,13 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                   name="sBrief">
                   <Input
                     placeholder={t("indDrawer.drawerForm.sellItemInput.pt3")}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label={t("indDrawer.drawerForm.dieselInput.text4")}
+                  name="sHandOver">
+                  <InputNumber
+                    placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
                   />
                 </Form.Item>
               </Row>
@@ -358,6 +394,11 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 name="amountType">
                 <Input placeholder={t("indDrawer.drawerForm.loanInput.pt2")} />
               </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.loanInput.text3")}
+                name="handOver">
+                <Input placeholder={t("indDrawer.drawerForm.loanInput.pt3")} />
+              </Form.Item>
             </Row>
             <Typography.Title level={5}>
               {t("indDrawer.drawerForm.ttt3")}
@@ -382,6 +423,13 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 name="bBrief">
                 <Input
                   placeholder={t("indDrawer.drawerForm.buyItemInput.pt3")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.buyItemInput.text4")}
+                name="bHandOver">
+                <Input
+                  placeholder={t("indDrawer.drawerForm.buyItemInput.pt4")}
                 />
               </Form.Item>
             </Row>
@@ -410,6 +458,13 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                   placeholder={t("indDrawer.drawerForm.dieselInput.pt3")}
                 />
               </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.dieselInput.text4")}
+                name="dHandOver">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
+                />
+              </Form.Item>
             </Row>
             <Typography.Title level={5}>
               {t("indDrawer.drawerForm.ttt5")}
@@ -434,6 +489,13 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 name="sBrief">
                 <Input
                   placeholder={t("indDrawer.drawerForm.sellItemInput.pt3")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.dieselInput.text4")}
+                name="sHandOver">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
                 />
               </Form.Item>
             </Row>

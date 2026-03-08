@@ -377,8 +377,10 @@
       "loanInput": {
         "text1": "Loan Amount",
         "text2": "Type",
+        "text3": "Via",
         "pt1": "Enter amount",
-        "pt2": "Select type"
+        "pt2": "Select type",
+        "pt3": "Enter name of person"
       },
       "ttt3": "For buy items",
       "buyItemInput": {
@@ -387,7 +389,9 @@
         "text2": "BB",
         "pt2": "Buy item bill",
         "text3": "B.brief",
-        "pt3": "Buy item brief"
+        "pt3": "Buy item brief",
+        "text4": "Via",
+        "pt4": "Enter name of person"
       },
       "ttt4": "For diesel",
       "dieselInput": {
@@ -396,7 +400,9 @@
         "text2": "D.Qty",
         "pt2": "Diesel quantity",
         "text3": "D.Rate",
-        "pt3": "Diesel rate"
+        "pt3": "Diesel rate",
+        "text4": "Via",
+        "pt4": "Enter name of person"
       },
       "ttt5": "For sell crops",
       "sellItemInput": {
@@ -406,6 +412,8 @@
         "pt2": "Sell item bill number",
         "text3": "S.brief",
         "pt3": "Sell item brief",
+        "text4": "Via",
+        "pt4": "Enter name of person",
         "crops": {
           "cnt": "Crop",
           "cqt": "Qty.",

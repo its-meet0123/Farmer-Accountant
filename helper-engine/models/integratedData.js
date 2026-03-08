@@ -11,6 +11,7 @@ shopeAccountSchema = new mongoose.Schema({
       default: 0,
     },
     amountType: String,
+    handOver: String,
   },
   indBuy: {
     billAmount: {
@@ -19,6 +20,7 @@ shopeAccountSchema = new mongoose.Schema({
     },
     bill: String,
     brief: String,
+    handOver: String,
   },
   indSell: {
     crop: [
@@ -30,6 +32,7 @@ shopeAccountSchema = new mongoose.Schema({
       },
     ],
     brief: String,
+    handOver: String,
     billAmount: {
       type: Number,
       default: 0,
@@ -43,6 +46,7 @@ shopeAccountSchema = new mongoose.Schema({
       default: 0,
     },
     rate: Number,
+    handOver: String,
   },
   rate: {
     type: Number,
