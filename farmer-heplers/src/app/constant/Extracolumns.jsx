@@ -140,6 +140,19 @@ const getColumnsForViewPage = (t) => {
             return <p style={{ color: "#3E0703" }}>{text}</p>;
           },
         },
+        {
+          title: (
+            <p style={{ color: "#3E0703" }}>
+              {t("ViewPage.tableColumns.extandTableColumns.loan.viaText")}
+            </p>
+          ),
+          dataIndex: ["loan", "handOver"],
+          key: "handOver",
+          width: 70,
+          render: (text) => {
+            return <p style={{ color: "#3E0703" }}>{text}</p>;
+          },
+        },
       ],
     },
     {
@@ -181,6 +194,19 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indBuy", "brief"],
           key: "brief",
+          width: 70,
+          render: (text) => {
+            return <p style={{ color: "#D73535" }}>{text}</p>;
+          },
+        },
+        {
+          title: (
+            <p style={{ color: "#D73535" }}>
+              {t("ViewPage.tableColumns.extandTableColumns.buyItem.viaText")}
+            </p>
+          ),
+          dataIndex: ["indBuy", "handOver"],
+          key: "handOver",
           width: 70,
           render: (text) => {
             return <p style={{ color: "#D73535" }}>{text}</p>;
@@ -259,6 +285,19 @@ const getColumnsForViewPage = (t) => {
             );
           },
         },
+        {
+          title: (
+            <p style={{ color: "#8ABB6C" }}>
+              {t("ViewPage.tableColumns.extandTableColumns.sellItem.viaText")}
+            </p>
+          ),
+          dataIndex: ["indSell", "handOver"],
+          key: "handOver",
+          width: 70,
+          render: (text) => {
+            return <p style={{ color: "#8ABB6C" }}>{text}</p>;
+          },
+        },
       ],
     },
     {
@@ -315,6 +354,19 @@ const getColumnsForViewPage = (t) => {
               },
             },
           ],
+        },
+        {
+          title: (
+            <p style={{ color: "#075B5E" }}>
+              {t("ViewPage.tableColumns.extandTableColumns.diesel.viaText")}
+            </p>
+          ),
+          dataIndex: ["diesel", "handOver"],
+          key: "handOver",
+          width: 100,
+          render: (text) => {
+            return <p style={{ color: "#075B5E" }}>{text}</p>;
+          },
         },
       ],
     },

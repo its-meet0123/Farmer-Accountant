@@ -104,12 +104,14 @@
         "loan": {
           "titleText": "ऋण (Loan)",
           "amountText": "राशि",
-          "amountTypeText": "प्रकार"
+          "amountTypeText": "प्रकार",
+          "viaText": "द्वारा"
         },
         "buyItem": {
           "titleText": "खरीदी गई वस्तुएं",
           "billAmountText": "राशि",
           "billText": "बिल",
+          "viaText": "द्वारा",
           "briefText": "संक्षिप्त विवरण"
         },
         "sellItem": {
@@ -117,6 +119,7 @@
           "billAmountText": "राशि",
           "billText": "बिल",
           "BriefText": "संक्षिप्त विवरण",
+          "viaText": "द्वारा",
           "Crops": {
             "titleText": "फसलें",
             "buttonText": "देखें",
@@ -132,7 +135,8 @@
           "billAmountText": "राशि",
           "billText": "बिल",
           "qtyText": "मात्रा",
-          "rateText": "दर"
+          "rateText": "दर",
+          "viaText": "द्वारा"
         },
         "actionTitleText": "कार्रवाई",
         "actionPopAlertText": "क्या आप लेनदेन नं. को मिटाना चाहते हैं?"

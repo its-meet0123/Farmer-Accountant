@@ -104,19 +104,22 @@
         "loan": {
           "titleText": "ਕਰਜ਼ਾ (Loan)",
           "amountText": "ਰਕਮ",
+          "viaText": "ਰਾਹੀਂ",
           "amountTypeText": "ਕਿਸਮ"
         },
         "buyItem": {
           "titleText": "ਖਰੀਦੀ ਗਈ ਚੀਜ਼ਾਂ",
           "billAmountText": "ਰਕਮ",
           "billText": "ਬਿੱਲ",
-          "briefText": "ਸੰਖੇਪ ਵੇਰਵਾ"
+          "briefText": "ਸੰਖੇਪ ਵੇਰਵਾ",
+          "viaText": "ਰਾਹੀਂ"
         },
         "sellItem": {
           "titleText": "ਵੇਚੀ ਗਈ ਫਸਲਾਂ",
           "billAmountText": "ਰਕਮ",
           "billText": "ਬਿੱਲ",
           "BriefText": "ਸੰਖੇਪ ਵੇਰਵਾ",
+          "viaText": "ਰਾਹੀਂ",
           "Crops": {
             "titleText": "ਫਸਲਾਂ",
             "buttonTitle": "ਵੇਚੀ ਗਈ ਫਸਲ ਦਾ ਵੇਰਵਾ",
@@ -132,7 +135,8 @@
           "billAmountText": "ਰਕਮ",
           "billText": "ਬਿੱਲ",
           "qtyText": "ਮਾਤਰਾ",
-          "rateText": "ਭਾਅ"
+          "rateText": "ਭਾਅ",
+          "viaText": "ਰਾਹੀਂ"
         },
         "actionTitleText": "ਕਾਰਵਾਈ",
         "actionPopAlertText": "ਕੀ ਤੁਸੀਂ ਲੈਣ-ਦੇਣ ਨੰ. ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"

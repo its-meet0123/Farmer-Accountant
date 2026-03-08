@@ -107,19 +107,22 @@
         "loan": {
           "titleText": "Loan",
           "amountText": "Amount",
-          "amountTypeText": "Type"
+          "amountTypeText": "Type",
+          "viaText": "Via"
         },
         "buyItem": {
           "titleText": "Bought item",
           "billAmountText": "Amount",
           "billText": "Bill",
-          "briefText": "Brief"
+          "briefText": "Brief",
+          "viaText": "Via"
         },
         "sellItem": {
           "titleText": "Sold crop",
           "billAmountText": "Amount",
           "billText": "Bill",
           "BriefText": "Brief",
+          "viaText": "Via",
           "Crops": {
             "titleText": "Crops",
             "buttonText": "View",
@@ -135,7 +138,8 @@
           "billAmountText": "Amount",
           "billText": "Bill",
           "qtyText": "Qty.",
-          "rateText": "Rate"
+          "rateText": "Rate",
+          "viaText": "Via"
         },
         "actionTitleText": "Action",
         "actionPopAlertText": "Do you want to clear Transaction No."
