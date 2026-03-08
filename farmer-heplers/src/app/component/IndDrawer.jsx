@@ -147,6 +147,9 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
             variant="filled"
             initialValues={{ crop: [""] }}
             onFinish={handleSubmit}>
+            <Typography.Title level={5}>
+              {t("indDrawer.drawerForm.ttt1")}
+            </Typography.Title>
             <Row gutter={24}>
               <Form.Item
                 label={t("indDrawer.drawerForm.dateInput.text")}
@@ -166,123 +169,129 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                   placeholder={t("indDrawer.drawerForm.interestInput.pt")}
                 />
               </Form.Item>
-              <Row gutter={24}>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.loanInput.text1")}
-                  name="amount">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.loanInput.pt1")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.loanInput.text2")}
-                  name="amountType">
-                  <Input
-                    placeholder={t("indDrawer.drawerForm.loanInput.pt2")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.dieselInput.text4")}
-                  name="handOver">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
-                  />
-                </Form.Item>
-              </Row>
-              <Row gutter={24}>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.buyItemInput.text1")}
-                  name="bBillAmount">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.buyItemInput.pt1")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.buyItemInput.text2")}
-                  name="bBill">
-                  <Input
-                    placeholder={t("indDrawer.drawerForm.buyItemInput.pt2")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.buyItemInput.text3")}
-                  name="bBrief">
-                  <Input
-                    placeholder={t("indDrawer.drawerForm.buyItemInput.pt3")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.buyItemInput.text4")}
-                  name="bHandOver">
-                  <Input
-                    placeholder={t("indDrawer.drawerForm.buyItemInput.pt4")}
-                  />
-                </Form.Item>
-              </Row>
-              <Row gutter={24}>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.dieselInput.text1")}
-                  name="dBillAmount">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.dieselInput.pt1")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.dieselInput.text2")}
-                  name="dQty">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.dieselInput.pt2")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.dieselInput.text3")}
-                  name="dRate">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.dieselInput.pt3")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.dieselInput.text4")}
-                  name="dHandOver">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
-                  />
-                </Form.Item>
-              </Row>
-              <Row gutter={24}>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.sellItemInput.text1")}
-                  name="sBillAmount">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.sellItemInput.pt1")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.sellItemInput.text2")}
-                  name="sBill">
-                  <Input
-                    placeholder={t("indDrawer.drawerForm.sellItemInput.pt2")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.sellItemInput.text3")}
-                  name="sBrief">
-                  <Input
-                    placeholder={t("indDrawer.drawerForm.sellItemInput.pt3")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("indDrawer.drawerForm.dieselInput.text4")}
-                  name="sHandOver">
-                  <InputNumber
-                    placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
-                  />
-                </Form.Item>
-              </Row>
-              <Form.Item name="id"></Form.Item>
-              <Form.Item></Form.Item>
             </Row>
-            <Row>
+            <Typography.Title level={5}>
+              {t("indDrawer.drawerForm.ttt2")}
+            </Typography.Title>
+            <Row gutter={24}>
+              <Form.Item
+                label={t("indDrawer.drawerForm.loanInput.text1")}
+                name="amount">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.loanInput.pt1")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.loanInput.text2")}
+                name="amountType">
+                <Input placeholder={t("indDrawer.drawerForm.loanInput.pt2")} />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.dieselInput.text4")}
+                name="handOver">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
+                />
+              </Form.Item>
+            </Row>
+            <Typography.Title level={5}>
+              {t("indDrawer.drawerForm.ttt3")}
+            </Typography.Title>
+            <Row gutter={24}>
+              <Form.Item
+                label={t("indDrawer.drawerForm.buyItemInput.text1")}
+                name="bBillAmount">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.buyItemInput.pt1")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.buyItemInput.text2")}
+                name="bBill">
+                <Input
+                  placeholder={t("indDrawer.drawerForm.buyItemInput.pt2")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.buyItemInput.text3")}
+                name="bBrief">
+                <Input
+                  placeholder={t("indDrawer.drawerForm.buyItemInput.pt3")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.buyItemInput.text4")}
+                name="bHandOver">
+                <Input
+                  placeholder={t("indDrawer.drawerForm.buyItemInput.pt4")}
+                />
+              </Form.Item>
+            </Row>
+            <Typography.Title level={5}>
+              {t("indDrawer.drawerForm.ttt4")}
+            </Typography.Title>
+            <Row gutter={24}>
+              <Form.Item
+                label={t("indDrawer.drawerForm.dieselInput.text1")}
+                name="dBillAmount">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.dieselInput.pt1")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.dieselInput.text2")}
+                name="dQty">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.dieselInput.pt2")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.dieselInput.text3")}
+                name="dRate">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.dieselInput.pt3")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.dieselInput.text4")}
+                name="dHandOver">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
+                />
+              </Form.Item>
+            </Row>
+            <Typography.Title level={5}>
+              {t("indDrawer.drawerForm.ttt5")}
+            </Typography.Title>
+            <Row gutter={24}>
+              <Form.Item
+                label={t("indDrawer.drawerForm.sellItemInput.text1")}
+                name="sBillAmount">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.sellItemInput.pt1")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.sellItemInput.text2")}
+                name="sBill">
+                <Input
+                  placeholder={t("indDrawer.drawerForm.sellItemInput.pt2")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.sellItemInput.text3")}
+                name="sBrief">
+                <Input
+                  placeholder={t("indDrawer.drawerForm.sellItemInput.pt3")}
+                />
+              </Form.Item>
+              <Form.Item
+                label={t("indDrawer.drawerForm.dieselInput.text4")}
+                name="sHandOver">
+                <InputNumber
+                  placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
+                />
+              </Form.Item>
               <Form.List name="crop">
                 {(fields) => (
                   <>
@@ -330,6 +339,8 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 )}
               </Form.List>
             </Row>
+            <Form.Item name="id"></Form.Item>
+            <Form.Item></Form.Item>
             <Flex justify="flex-end" horizontal style={{ padding: "1rem" }}>
               <Button type="primary" htmlType="submit">
                 {t("indDrawer.button.sbt")}
