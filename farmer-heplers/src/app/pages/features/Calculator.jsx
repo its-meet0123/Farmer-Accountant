@@ -206,7 +206,7 @@ const CalcPage = () => {
         loanAmount += Number(transaction.loan.amount);
         buyAmount += Number(transaction.indBuy.billAmount);
         dieselAmount += Number(transaction.diesel.billAmount);
-        sellAmount + Number(transaction.indSell.billAmount);
+        sellAmount += Number(transaction.indSell.billAmount);
         return loanAmount + buyAmount + dieselAmount - sellAmount;
       }
       return total;

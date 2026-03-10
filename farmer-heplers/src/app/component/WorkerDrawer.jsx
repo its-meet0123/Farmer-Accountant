@@ -168,13 +168,13 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
       const transactionBody = {
         date: new Date(formValues.date),
         give: {
-          corp: formValues.corpG,
+          corp: formValues.corpG || [],
           amount: formValues.amount,
           amountType: formValues.amountType,
           brief: formValues.brief,
         },
         take: {
-          crop: formValues.cropT,
+          crop: formValues.cropT || [],
           payment: formValues.payment,
           paymentType: formValues.paymentType,
         },
