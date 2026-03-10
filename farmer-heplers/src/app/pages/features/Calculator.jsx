@@ -274,6 +274,7 @@ const CalcPage = () => {
                 <DatePicker
                   picker="month"
                   format="MMM/YY"
+                  value={selectMonth ? selectMonth : today}
                   onChange={(date) => setSelectMonth(date)}
                 />
                 <InputNumber value={monthlyTotal} readOnly />
