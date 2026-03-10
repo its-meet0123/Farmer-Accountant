@@ -821,7 +821,7 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
             const crop = record.give.crop;
             const title = `${t("workerPage.tableColumns.extandTableColumns.gives.Crops.buttonTitle")}`;
             return (
-              record.give.crop[0].amount > 0 && (
+              record.give.crop.length > 0 && (
                 <Button
                   type="link"
                   onClick={() => showModal({ crop, title, t })}>
