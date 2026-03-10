@@ -251,6 +251,7 @@ const WorkerCalculation = () => {
                 <DatePicker
                   picker="month"
                   format="MM/YYYY"
+                  value={selectMonth ? selectMonth : today}
                   onChange={(date) => setSelectMonth(date)}
                 />
                 <InputNumber value={monthlyTotal} readOnly />

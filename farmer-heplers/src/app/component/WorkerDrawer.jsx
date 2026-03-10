@@ -585,7 +585,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
             </Form.List>
             <Row gutter={24}>
               <Form.Item
-                label={t("workerDrawer.trnasactionInput.dt")}
+                label={t("workerDrawer.transactionInput.dt")}
                 name="date"
                 rules={[
                   {
