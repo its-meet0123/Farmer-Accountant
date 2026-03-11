@@ -17,11 +17,11 @@ const TableFooterForWorkerCalc = ({ data }) => {
     totalOfPaymentInterest += Number(take.interest || 0);
     totalOfReturnPayment += Number(take.totalPayment || 0);
   });
-
-  const grandTotal = Number(totalOfReturnPayment - totalOfReturnAmount).toFixed(
-    2,
-  );
   const amountTex = Number(totalOfPayment) * (1 / 100);
+  const grandTotal = Number(
+    totalOfReturnPayment - (totalOfReturnAmount + amountTex),
+  ).toFixed(2);
+
   return (
     <>
       {
