@@ -371,7 +371,9 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}>{amount}</td>
                 <td style={{ padding: "5px" }}></td>
-                <td style={{ padding: "5px" }}></td>
+                <td style={{ padding: "5px" }}>
+                  {Number(amountTex).toFixed(2)}
+                </td>
                 <td style={{ padding: "5px" }}>{interest}</td>
                 {grandTotal > 0 ? (
                   <td style={{ padding: "5px", color: "#84994f" }}>
