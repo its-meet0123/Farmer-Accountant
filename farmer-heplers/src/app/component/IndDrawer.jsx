@@ -67,7 +67,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
         transaction,
       );
       if (res.status === 200) {
-        const text = `${t("indDrawer.submitMessageforEdit")}`;
+        const text = `${t("indDrawer.submitFunction.successMessageforEdit")}`;
         onClose();
         setFetch(transaction);
         showSuccess(text);

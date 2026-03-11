@@ -21,6 +21,7 @@ const TableFooterForWorkerCalc = ({ data }) => {
   const grandTotal = Number(totalOfReturnPayment - totalOfReturnAmount).toFixed(
     2,
   );
+  const amountTex = Number(totalOfPayment) * (1 / 100);
   return (
     <>
       {
@@ -49,7 +50,9 @@ const TableFooterForWorkerCalc = ({ data }) => {
             <Table.Summary.Cell index={8}>
               <h4 style={{ color: "#8ABB6C" }}>{totalOfPayment}</h4>
             </Table.Summary.Cell>
-            <Table.Summary.Cell index={9}></Table.Summary.Cell>
+            <Table.Summary.Cell index={9}>
+              {Number(amountTex).toFixed(2)}
+            </Table.Summary.Cell>
             <Table.Summary.Cell index={10}></Table.Summary.Cell>
             <Table.Summary.Cell index={11}></Table.Summary.Cell>
             <Table.Summary.Cell index={12}>
