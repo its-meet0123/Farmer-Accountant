@@ -258,9 +258,9 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
     totalOfPaymentInterest - (totalOfAmountInterest + amountTex),
   ).toFixed(2);
 
-  const grandTotal = Number(totalOfReturnPayment - totalOfReturnAmount).toFixed(
-    2,
-  );
+  const grandTotal = Number(
+    totalOfReturnPayment - (totalOfReturnAmount + amountTex),
+  ).toFixed(2);
 
   const formattedDate = (date) => {
     const rawDate = date ? new Date(date) : new Date();
