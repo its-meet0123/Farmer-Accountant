@@ -511,12 +511,26 @@
       }
     }
   },
-  "OE": {
-    "FW": {
-      "WNF": "Additional workers not found",
-      "WF": "Additional worker fetched successfully"
+  "casualLabor": {
+    "wtc": {
+      "sntt": "S. No.",
+      "dt": "Date",
+      "nt": "Worker Name",
+      "ct": "Contact",
+      "at": "Address",
+      "act": "Action"
+    },
+    "ttc": {
+      "sntt": "S. No.",
+      "dt": "Date",
+      "wt": "Wages/Day",
+      "dut": "Duration(total working day)",
+      "tt": "Total Wages",
+      "pt": "Pay",
+      "act": "Action"
     }
   },
+  "mechanizedHiring": {},
   "layout": {
     "ft1": "Farmer Accountant",
     "ft2": "Created by Sukh Ramghria",
@@ -526,7 +540,18 @@
       "worker": "Worker",
       "setting": "Setting",
       "logout": "Logout",
-      "delete": "Delete"
+      "delete": "Delete",
+      "othert": "Other Expense",
+      "other": {
+        "labor": "Casual Labor",
+        "hiring": "Mechanized Hiring"
+      }
+    }
+  },
+  "OE": {
+    "FW": {
+      "WNF": "Additional workers not found",
+      "WF": "Additional worker fetched successfully"
     }
   },
   "USER_EXISTS": "User already exists",

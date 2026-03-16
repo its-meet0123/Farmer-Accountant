@@ -5,7 +5,7 @@ import ViewPage from "../pages/features/View";
 import CalcPage from "../pages/features/Calculator";
 import WorkersData from "../pages/features/Worker";
 import WorkerCalculation from "../pages/features/WorkerCalculation";
-import OtherExpense from "../pages/features/Other";
+import CasualLabor from "../pages/features/CasualLabor";
 
 export const protectedRoutes = [
   {
@@ -38,8 +38,8 @@ export const protectedRoutes = [
         element: <WorkerCalculation />,
       },
       {
-        path: "/other",
-        element: <OtherExpense />,
+        path: "/other/labor",
+        element: <CasualLabor />,
       },
       { path: "*", element: <Navigate to="/home" /> },
     ],

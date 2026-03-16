@@ -1077,6 +1077,57 @@ const getColumnsForWorkerCalcPage = (t) => {
   return WORKER_TRANSACTION_CALC_COLUMNS;
 };
 
+const getColumnsForCasualLaborPage = (t) => {
+  return (TRANS_COLUMNS = [
+    {
+      title: t("casualLabor.ttc.sntt"),
+      dataIndex: "serialNo",
+      key: "serialNo",
+      width: 50,
+    },
+    {
+      title: t("casualLabor.ttc.dt"),
+      dataIndex: "startDate",
+      key: "date",
+      width: 100,
+    },
+    {
+      title: t("casualLabor.ttc.wt"),
+      dataIndex: "salary",
+      key: "salary",
+      width: 100,
+    },
+    {
+      title: t("casualLabor.ttc.dut"),
+      dataIndex: "duration",
+      key: "duration",
+      width: 100,
+    },
+    {
+      title: t("casualLabor.ttc.tt"),
+      dataIndex: "total",
+      key: "total",
+      width: 100,
+    },
+    {
+      title: t("casualLabor.ttc.pt"),
+      dataIndex: "pay",
+      key: "pay",
+      width: 100,
+    },
+    {
+      title: t("casualLabor.ttc.hot"),
+      dataIndex: "handOver",
+      key: "handOver",
+      render: (text, record) => (
+        <>
+          <h5>{record.transType}</h5>,<p>{text}</p>
+        </>
+      ),
+    },
+  ]);
+};
+
 export {
   getColumnsForHomepage,
   getColumnsForViewPage,
@@ -1084,4 +1135,5 @@ export {
   getWorkerListColumnsForWorkerPage,
   getWorkerTransactionColumnsForWorkerPage,
   getColumnsForWorkerCalcPage,
+  getColumnsForCasualLaborPage,
 };
