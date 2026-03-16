@@ -13,19 +13,19 @@ async function handleGetAllAdditionalWorkers(req, res) {
     return res.status(404).json({
       status: "Error",
       Code: "OE.FW.WNF",
+      check: {
+        worker: "Satname",
+        duration: 5,
+        salary: 500,
+        total: 2500,
+        pay: 1000,
+      },
     });
   }
   return res.status(200).json({
     status: "Success",
     data: allAdditionalWorker,
     Code: "OE.FW.WF",
-    check: {
-      worker: "Satname",
-      duration: 5,
-      salary: 500,
-      total: 2500,
-      pay: 1000,
-    },
   });
 }
 
