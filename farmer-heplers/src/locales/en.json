@@ -513,7 +513,8 @@
   },
   "OE": {
     "FW": {
-      "WNF": "Additional workers not found"
+      "WNF": "Additional workers not found",
+      "WF": "Additional worker fetched successfully"
     }
   },
   "layout": {

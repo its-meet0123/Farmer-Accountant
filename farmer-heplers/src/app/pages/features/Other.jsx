@@ -15,7 +15,7 @@ const OtherExpense = () => {
     async function getData() {
       const res = await getAllFieldWorkerData();
       const data = await res.data;
-      console.log(data.check);
+      console.log(data.data);
       message.success(t(data.Code));
     }
     getData();
