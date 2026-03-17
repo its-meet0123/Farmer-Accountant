@@ -104,7 +104,7 @@ const CasualLabor = () => {
           <Table
             dataSource={tableData}
             columns={columns}
-            //expandable={{ expandedRowRender: (record) => ExpandedRow(record) }}
+            expandable={{ expandedRowRender: (record) => ExpandedRow(record) }}
             scroll={{ x: 500 }}
           />
         )}
