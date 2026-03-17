@@ -9,16 +9,16 @@ const CasualLaborAddForm = ({ form }) => {
 
   const onFinish = async () => {
     const formValues = form.getFieldsValue();
-
+    console.log(formValues);
     const laberDetails = {
       ...formValues,
       userId: authState.user.userId,
       transactions: [],
     };
     console.log(laberDetails);
-    const response = await postFieldWorkerData(laberDetails);
-    const data = await response.data;
-    message.success(data.Code);
+    // const response = await postFieldWorkerData(laberDetails);
+    // const data = await response.data;
+    // message.success(data.Code);
   };
 
   return (
@@ -27,9 +27,9 @@ const CasualLaborAddForm = ({ form }) => {
         layout="inline"
         name="basic"
         form={form}
-        style={{ maxWidth: 600 }}
+        style={{ maxWidth: 800 }}
         labelCol={100}
-        wrapperCol={200}
+        wrapperCol={150}
         onFinish={onFinish}>
         <Row gutter={24}>
           <Form.Item label="Date" name="date" initialValue={today}>
@@ -60,6 +60,9 @@ const CasualLaborAddForm = ({ form }) => {
         </Row>
         <Row gutter={24}>
           <Form.Item label="Id Proof" name="idProof">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Transactions" name="transactions" hidden>
             <Input />
           </Form.Item>
 

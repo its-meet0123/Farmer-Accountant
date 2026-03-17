@@ -1,4 +1,4 @@
-import { Button, Flex, message, Popconfirm, Spin, Table } from "antd";
+import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
 import { PageContainer } from "../../component/PageContainer";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -15,19 +15,27 @@ import AlertText from "../../component/Text";
 
 const CasualLabor = () => {
   const { t } = useAuth();
+  const [laborForm] = Form.useForm();
   const [additonalWorker, setAdditonalWorker] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [laborDetails, setLaborDetails] = useState({});
   const [fetch, setFetch] = useState();
   const [openType, setOpenType] = useState(null);
-
   const handleAddLaborTransaction = async (record) => {
     console.log(record);
   };
 
   const editFunction = (record) => {
     setLaborDetails(record);
-
+    laborForm.setFieldsValue({
+      date: record?.date,
+      nickName: record?.serviceProvider?.nickName,
+      firstName: record?.serviceProvider?.firstName,
+      lastName: record?.serviceProvider?.lastName,
+      contact: record?.serviceProvider?.contact,
+      address: record?.serviceProvider?.address,
+      idProof: record?.serviceProvider?.idProof,
+      transactions: record?.transactions,
+    });
     setTimeout(() => {
       setOpenType("add");
     }, 3000);
@@ -163,7 +171,7 @@ const CasualLabor = () => {
       <LaborDrawer
         openType={openType}
         setOpenType={setOpenType}
-        laborDetails={laborDetails}
+        laborForm={laborForm}
         setFetch={setFetch}
       />
     </>

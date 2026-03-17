@@ -1,20 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Drawer, Form } from "antd";
 import CasualLaborAddForm from "./subcomponent/CasualLaborForm";
-const LaborDrawer = ({ openType, setOpenType, setFetch, laborDetails }) => {
-  const [laborForm] = Form.useForm();
+const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
   const [transactionForm] = Form.useForm();
-  useEffect(() => {
-    // laborForm.setFieldsValue({
-    //   date: laborDetails?.date,
-    //   nickName: laborDetails?.serviceProvider?.nickName,
-    //   firstName: laborDetails?.serviceProvider?.firstName,
-    //   lastName: laborDetails?.serviceProvider?.lastName,
-    //   contact: laborDetails?.serviceProvider?.contact,
-    //   address: laborDetails?.serviceProvider?.address,
-    //   idProof: laborDetails?.serviceProvider?.idProof,
-    // });
-  }, [laborDetails]);
   const onClose = () => {
     setOpenType(null);
   };
@@ -26,11 +14,7 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborDetails }) => {
         onClose={onClose}
         open={openType !== null}>
         {openType === "add" && (
-          <CasualLaborAddForm
-            form={laborForm}
-            setFetch={setFetch}
-            transactions={laborDetails.transactions}
-          />
+          <CasualLaborAddForm form={laborForm} setFetch={setFetch} />
         )}
         {openType === "edit" && <Form></Form>}
       </Drawer>
