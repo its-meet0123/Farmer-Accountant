@@ -27,7 +27,10 @@ const CasualLabor = () => {
 
   const editFunction = (record) => {
     setLaborDetails(record);
-    setOpenType("add");
+
+    setTimeout(() => {
+      setOpenType("add");
+    }, 3000);
   };
 
   const deleteLabor = async (record) => {

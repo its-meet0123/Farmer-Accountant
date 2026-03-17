@@ -8,11 +8,11 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborDetails }) => {
     laborForm.setFieldsValue({
       date: laborDetails?.date,
       nickName: laborDetails?.serviceProvider?.nickName,
-      firstName: laborDetails.serviceProvider?.firstName,
-      lastName: laborDetails.serviceProvider?.lastName,
-      contact: laborDetails.serviceProvider?.contact,
-      address: laborDetails.serviceProvider?.address,
-      idProof: laborDetails.serviceProvider?.idProof,
+      firstName: laborDetails?.serviceProvider?.firstName,
+      lastName: laborDetails?.serviceProvider?.lastName,
+      contact: laborDetails?.serviceProvider?.contact,
+      address: laborDetails?.serviceProvider?.address,
+      idProof: laborDetails?.serviceProvider?.idProof,
     });
   }, [laborDetails]);
   const onClose = () => {
