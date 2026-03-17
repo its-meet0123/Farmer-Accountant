@@ -1,4 +1,4 @@
-import { Button, message, Spin, Table } from "antd";
+import { Button, Flex, message, Popconfirm, Spin, Table } from "antd";
 import { PageContainer } from "../../component/PageContainer";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -6,13 +6,33 @@ import { getAllFieldWorkerData } from "../../service/other";
 import { useAuth } from "../../auth/AuthContext";
 import { getColumnsForCasualLaborPage } from "../../constant/Extracolumns";
 import LaborDrawer from "../../component/CasualLaborDrawer";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  FileAddOutlined,
+} from "@ant-design/icons";
+import AlertText from "../../component/Text";
 
 const CasualLabor = () => {
   const { t } = useAuth();
   const [additonalWorker, setAdditonalWorker] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [laborDetails, setLaborDetails] = useState({});
   const [fetch, setFetch] = useState();
   const [openType, setOpenType] = useState(null);
+
+  const handleAddLaborTransaction = async (record) => {
+    console.log(record);
+  };
+
+  const editFunction = (record) => {
+    setLaborDetails(record);
+    setOpenType("add");
+  };
+
+  const deleteLabor = async (record) => {
+    console.log(record);
+  };
 
   useEffect(() => {
     async function getData() {
@@ -72,6 +92,32 @@ const CasualLabor = () => {
     },
     {
       title: t("casualLabor.wtc.act"),
+      dataIndex: "",
+      key: "a",
+      render: (_, record) => {
+        return (
+          <Flex gap={2} horizontal>
+            <Button
+              type="link"
+              icon={<FileAddOutlined />}
+              onClick={() => handleAddLaborTransaction(record)}
+            />
+            <Button
+              type="link"
+              icon={<EditOutlined />}
+              onClick={() => editFunction(record)}
+            />
+            <Popconfirm
+              title={<AlertText text={`${t("CasualLabor.wtc.aptt")}`} />}
+              onConfirm={() => deleteLabor(record)}
+              okText="Yes"
+              cancelText="No"
+              placement="left">
+              <Button type="link" icon={<DeleteOutlined />} size="small" />
+            </Popconfirm>
+          </Flex>
+        );
+      },
     },
   ];
 
@@ -93,7 +139,7 @@ const CasualLabor = () => {
   return (
     <>
       <PageContainer
-        title={"Other Expense"}
+        title={t("casulaLabor.cardTitle")}
         extra={
           <Button type="primary" onClick={() => setOpenType("add")}>
             Add Labor
@@ -110,7 +156,12 @@ const CasualLabor = () => {
           />
         )}
       </PageContainer>
-      <LaborDrawer openType={openType} setOpenType={setOpenType} />
+      <LaborDrawer
+        openType={openType}
+        setOpenType={setOpenType}
+        laborDetails={laborDetails}
+        setFetch={setFetch}
+      />
     </>
   );
 };

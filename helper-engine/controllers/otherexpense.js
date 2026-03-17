@@ -258,7 +258,7 @@ async function postAdditionalWorker(req, res) {
       lastName: body.lastName,
       nickName: body.nickName,
       contact: body.contact,
-      Address: body.address,
+      address: body.address,
       idProof: body.idProof,
     },
     transactions: body.transactions,

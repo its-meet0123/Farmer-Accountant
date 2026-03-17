@@ -27,14 +27,16 @@ const CasualLaborAddForm = ({ form }) => {
         layout="inline"
         name="basic"
         form={form}
-        style={{ maxWidth: 800 }}
+        style={{ maxWidth: 600 }}
+        labelCol={100}
+        wrapperCol={200}
         onFinish={onFinish}>
         <Row gutter={24}>
           <Form.Item label="Date" name="date" initialValue={today}>
             <DatePicker format="DD/MM/YYYY" />
           </Form.Item>
           <Form.Item label="Nick Name" name="nickName">
-            <Input width={100} />
+            <Input />
           </Form.Item>
         </Row>
         <Row gutter={24}>
@@ -42,23 +44,23 @@ const CasualLaborAddForm = ({ form }) => {
             label="First Name"
             name="firstName"
             rules={[{ required: true, message: "Please enter name of labor" }]}>
-            <Input width={100} />
+            <Input />
           </Form.Item>
           <Form.Item label="Last Name" name="lastName">
-            <Input width={100} />
+            <Input />
           </Form.Item>
         </Row>
         <Row gutter={24}>
           <Form.Item label="Contact" name="contact">
-            <Input width={100} />
+            <Input />
           </Form.Item>
           <Form.Item label="Address" name="address">
-            <Input width={100} />
+            <Input />
           </Form.Item>
         </Row>
         <Row gutter={24}>
           <Form.Item label="Id Proof" name="idProof">
-            <Input width={100} />
+            <Input />
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
