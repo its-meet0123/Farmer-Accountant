@@ -1078,7 +1078,7 @@ const getColumnsForWorkerCalcPage = (t) => {
 };
 
 const getColumnsForCasualLaborPage = (t) => {
-  return (TRANS_COLUMNS = [
+  const TRANS_COLUMNS = [
     {
       title: t("casualLabor.ttc.sntt"),
       dataIndex: "serialNo",
@@ -1125,7 +1125,8 @@ const getColumnsForCasualLaborPage = (t) => {
         </>
       ),
     },
-  ]);
+  ];
+  return TRANS_COLUMNS;
 };
 
 export {
