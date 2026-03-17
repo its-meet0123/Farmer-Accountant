@@ -11,6 +11,7 @@ const CasualLabor = () => {
   const [additonalWorker, setAdditonalWorker] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetch, setFetch] = useState();
+  const [openType, setOpenType] = useState(null);
 
   useEffect(() => {
     async function getData() {
@@ -92,7 +93,11 @@ const CasualLabor = () => {
     <>
       <PageContainer
         title={"Other Expense"}
-        extra={<Button type="primary">Add Expense</Button>}>
+        extra={
+          <Button type="primary" onClick={() => setOpenType("add")}>
+            Add Labor
+          </Button>
+        }>
         {isLoading ? (
           <Spin size="small" />
         ) : (
@@ -104,6 +109,7 @@ const CasualLabor = () => {
           />
         )}
       </PageContainer>
+      <CasualLabor openType={openType} setOpenType={setOpenType} />
     </>
   );
 };
