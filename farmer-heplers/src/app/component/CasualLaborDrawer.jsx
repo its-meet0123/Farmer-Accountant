@@ -6,13 +6,13 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborDetails }) => {
   const [transactionForm] = Form.useForm();
   useEffect(() => {
     laborForm.setFieldsValue({
-      date: laborDetails.date,
-      nickName: laborDetails.serviceProvider.nickName,
-      firstName: laborDetails.serviceProvider.firstName,
-      lastName: laborDetails.serviceProvider.lastName,
-      contact: laborDetails.serviceProvider.contact,
-      address: laborDetails.serviceProvider.address,
-      idProof: laborDetails.serviceProvider.idProof,
+      date: laborDetails?.date,
+      nickName: laborDetails?.serviceProvider?.nickName,
+      firstName: laborDetails.serviceProvider?.firstName,
+      lastName: laborDetails.serviceProvider?.lastName,
+      contact: laborDetails.serviceProvider?.contact,
+      address: laborDetails.serviceProvider?.address,
+      idProof: laborDetails.serviceProvider?.idProof,
     });
   }, [laborDetails]);
   const onClose = () => {
@@ -25,7 +25,13 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborDetails }) => {
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}>
-        {openType === "add" && <CasualLaborAddForm form={laborForm} />}
+        {openType === "add" && (
+          <CasualLaborAddForm
+            form={laborForm}
+            setFetch={setFetch}
+            transactions={laborDetails.transactions}
+          />
+        )}
         {openType === "edit" && <Form></Form>}
       </Drawer>
     </>

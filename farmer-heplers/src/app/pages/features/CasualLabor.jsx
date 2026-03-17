@@ -76,7 +76,8 @@ const CasualLabor = () => {
       dataIndex: "serviceProvider",
       key: "name",
       width: 150,
-      render: (name) => `${name.firstName} ${name.lastName} [${name.nickName}]`,
+      render: (name) =>
+        `${name.firstName} ${name.lastName} [${name?.nickName}]`,
     },
     {
       title: t("casualLabor.wtc.ct"),
