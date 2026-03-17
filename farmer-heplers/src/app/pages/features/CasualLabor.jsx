@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { getAllFieldWorkerData } from "../../service/other";
 import { useAuth } from "../../auth/AuthContext";
 import { getColumnsForCasualLaborPage } from "../../constant/Extracolumns";
+import LaborDrawer from "../../component/CasualLaborDrawer";
 
 const CasualLabor = () => {
   const { t } = useAuth();
@@ -109,7 +110,7 @@ const CasualLabor = () => {
           />
         )}
       </PageContainer>
-      {/* <CasualLabor openType={openType} setOpenType={setOpenType} /> */}
+      <LaborDrawer openType={openType} setOpenType={setOpenType} />
     </>
   );
 };

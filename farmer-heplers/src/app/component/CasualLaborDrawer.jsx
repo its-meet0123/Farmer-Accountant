@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Drawer, Form } from "antd";
 import CasualLaborAddForm from "./subcomponent/CasualLaborForm";
-const CasualLabor = ({ openType, setOpenType }) => {
+const LaborDrawer = ({ openType, setOpenType }) => {
   const [laborForm] = Form.useForm();
   const [transactionForm] = Form.useForm();
   const onClose = () => {
@@ -20,4 +20,4 @@ const CasualLabor = ({ openType, setOpenType }) => {
     </>
   );
 };
-export default CasualLabor;
+export default LaborDrawer;
