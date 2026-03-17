@@ -252,7 +252,7 @@ async function postAdditionalWorker(req, res) {
   }
   const casualLaborDB = FieldWorker.create({
     userId: body.userId,
-    startDate: body.startDate,
+    date: body.date,
     serviceProvider: {
       firstName: body.firstName,
       lastName: body.lastName,
@@ -263,12 +263,17 @@ async function postAdditionalWorker(req, res) {
     },
     transactions: body.transactions,
   });
-  if (casualLaborDB) {
-    return res.status(201).json({
-      status: "Success",
-      Code: "CL.FW.PDSM",
+
+  if (!casualLaborDB) {
+    return res.status(400).json({
+      status: "Error",
+      Code: "CL.FW.WNF",
     });
   }
+  return res.status(201).json({
+    status: "Success",
+    Code: "CL.FW.PDSM",
+  });
 }
 
 module.exports = {

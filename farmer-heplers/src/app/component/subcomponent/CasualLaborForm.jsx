@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Row } from "antd";
+import { Button, DatePicker, Form, Input, message, Row } from "antd";
 import { useAuth } from "../../auth/AuthContext";
 import { postFieldWorkerData } from "../../service/other";
 
@@ -14,6 +14,8 @@ const CasualLaborAddForm = ({ form }) => {
     };
     console.log(laberDetails);
     const response = postFieldWorkerData(laberDetails);
+    const data = response.data;
+    message.success(data.Code);
   };
 
   return (
