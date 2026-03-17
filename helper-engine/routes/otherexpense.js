@@ -21,8 +21,8 @@ router
   .delete(handleDeleteAdditionalWorkerById);
 router
   .route("/labor/:workerId/transaction/:transactionId")
-  .put(updateAdditionalWorkerTransactionByIds)
-  .post(deleteAdditionalWorkerTransactionByIds);
+  .patch(updateAdditionalWorkerTransactionByIds)
+  .put(deleteAdditionalWorkerTransactionByIds);
 router.put("/labor/:id/transaction", handleAddAdditionalWorkerTransactionById);
 
 module.exports = router;
