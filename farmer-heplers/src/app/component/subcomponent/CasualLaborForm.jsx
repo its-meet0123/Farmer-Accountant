@@ -18,7 +18,12 @@ const CasualLaborAddForm = ({ form }) => {
 
   return (
     <>
-      <Form layout="inline" name="basic" form={form}>
+      <Form
+        layout="inline"
+        name="basic"
+        form={form}
+        style={{ maxWidth: 800 }}
+        onFinish={onFinish}>
         <Row gutter={24}>
           <Form.Item label="Date" name="date">
             <DatePicker />
