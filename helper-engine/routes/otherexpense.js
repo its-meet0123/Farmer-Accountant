@@ -17,12 +17,12 @@ router
   .post(postAdditionalWorker);
 router
   .route("/labor/:id")
-  .put(handleUpdateAdditionalWorkerById)
+  .patch(handleUpdateAdditionalWorkerById)
   .delete(handleDeleteAdditionalWorkerById);
 router
   .route("/labor/:workerId/transaction/:transactionId")
   .put(updateAdditionalWorkerTransactionByIds)
   .post(deleteAdditionalWorkerTransactionByIds);
-router.post("/labor/transaction", handleAddAdditionalWorkerTransactionById);
+router.put("/labor/:id/transaction", handleAddAdditionalWorkerTransactionById);
 
 module.exports = router;
