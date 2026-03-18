@@ -9,6 +9,7 @@ import LaborDrawer from "../../component/CasualLaborDrawer";
 import {
   DeleteOutlined,
   EditOutlined,
+  FallOutlined,
   FileAddOutlined,
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
@@ -20,23 +21,26 @@ const CasualLabor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [fetch, setFetch] = useState();
   const [openType, setOpenType] = useState(null);
+  const [buttonLoading, setButtonLoanding] = useState(false);
   const handleAddLaborTransaction = async (record) => {
     console.log(record);
   };
 
   const editFunction = (record) => {
-    laborForm.setFieldsValue({
-      date: record?.date || "",
-      nickName: record?.serviceProvider?.nickName || "",
-      firstName: record?.serviceProvider?.firstName || "",
-      lastName: record?.serviceProvider?.lastName || "",
-      contact: record?.serviceProvider?.contact || "",
-      address: record?.serviceProvider?.address || "",
-      idProof: record?.serviceProvider?.idProof || "",
-      transactions: record?.transactions || "",
-    });
+    // laborForm.setFieldsValue({
+    //   date: record?.date || "",
+    //   nickName: record?.serviceProvider?.nickName || "",
+    //   firstName: record?.serviceProvider?.firstName || "",
+    //   lastName: record?.serviceProvider?.lastName || "",
+    //   contact: record?.serviceProvider?.contact || "",
+    //   address: record?.serviceProvider?.address || "",
+    //   idProof: record?.serviceProvider?.idProof || "",
+    //   transactions: record?.transactions || "",
+    // });
+    setButtonLoanding(true);
     setTimeout(() => {
       setOpenType("laborEdit");
+      setButtonLoanding(false);
     }, 3000);
   };
 

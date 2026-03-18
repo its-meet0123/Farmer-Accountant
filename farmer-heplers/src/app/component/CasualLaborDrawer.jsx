@@ -18,7 +18,11 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
         onClose={onClose}
         open={openType !== null}>
         {(openType === "laborAdd" || openType === "laborEdit") && (
-          <CasualLaborAddForm form={laborForm} setFetch={setFetch} />
+          <CasualLaborAddForm
+            form={laborForm}
+            setFetch={setFetch}
+            openType={openType}
+          />
         )}
         {openType === "edit" && <Form></Form>}
       </Drawer>
