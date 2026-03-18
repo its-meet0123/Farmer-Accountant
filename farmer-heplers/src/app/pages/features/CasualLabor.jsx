@@ -23,9 +23,16 @@ const CasualLabor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [fetch, setFetch] = useState();
   const [openType, setOpenType] = useState(null);
+  const [laborDetails, setLaborDetails] = useState({});
   const [buttonLoading, setButtonLoanding] = useState(false);
+
   const handleAddLaborTransaction = async (record) => {
-    console.log(record);
+    setButtonLoanding(true);
+    setLaborDetails(record);
+    setTimeout(() => {
+      setOpenType("transAdd");
+      setButtonLoanding(false);
+    }, 1000);
   };
 
   const editFunction = async (details) => {

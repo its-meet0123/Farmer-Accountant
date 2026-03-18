@@ -37,7 +37,6 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
     if (openType === "laborEdit") {
       setButtonLoading(true);
       const formValues = form.getFieldsValue();
-      console.log(formValues);
       const { laborId, date, transactions, ...restOfformValues } = formValues;
       const updateLaborDetails = {
         date: date,
@@ -46,7 +45,6 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
         },
         transactions: transactions,
       };
-      console.log(updateLaborDetails);
       const res = await updateFieldWorkerData(laborId, updateLaborDetails);
       const data = await res.data;
 

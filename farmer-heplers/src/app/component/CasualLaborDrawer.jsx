@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Drawer, Form } from "antd";
 import CasualLaborAddForm from "./subcomponent/CasualLaborForm";
+import LaborTransForm from "./subcomponent/CasualLaborTransForm";
 const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
   const [transactionForm] = Form.useForm();
   const onClose = () => {
@@ -26,7 +27,9 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
             onClose={onClose}
           />
         )}
-        {openType === "edit" && <Form></Form>}
+        {openType === "transAdd" && (
+          <LaborTransForm form={transactionForm} openType={openType} />
+        )}
       </Drawer>
     </>
   );
