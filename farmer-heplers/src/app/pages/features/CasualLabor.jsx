@@ -11,8 +11,10 @@ import {
   EditOutlined,
   FallOutlined,
   FileAddOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
+import dayjs from "dayjs";
 
 const CasualLabor = () => {
   const { t } = useAuth();
@@ -26,17 +28,18 @@ const CasualLabor = () => {
     console.log(record);
   };
 
-  const editFunction = (record) => {
-    // laborForm.setFieldsValue({
-    //   date: record?.date || "",
-    //   nickName: record?.serviceProvider?.nickName || "",
-    //   firstName: record?.serviceProvider?.firstName || "",
-    //   lastName: record?.serviceProvider?.lastName || "",
-    //   contact: record?.serviceProvider?.contact || "",
-    //   address: record?.serviceProvider?.address || "",
-    //   idProof: record?.serviceProvider?.idProof || "",
-    //   transactions: record?.transactions || "",
-    // });
+  const editFunction = async (details) => {
+    const date = dayjs(details?.date);
+    laborForm.setFieldsValue({
+      date: date || "",
+      nickName: details?.serviceProvider?.nickName || "",
+      firstName: details?.serviceProvider?.firstName || "",
+      lastName: details?.serviceProvider?.lastName || "",
+      contact: details?.serviceProvider?.contact || "",
+      address: details?.serviceProvider?.address || "",
+      idProof: details?.serviceProvider?.idProof || "",
+      transactions: details?.transactions || [],
+    });
     setButtonLoanding(true);
     setTimeout(() => {
       setOpenType("laborEdit");
@@ -120,8 +123,11 @@ const CasualLabor = () => {
             <Button
               type="link"
               icon={<EditOutlined />}
-              onClick={() => editFunction(record)}
-            />
+              onClick={() => editFunction(record)}>
+              {buttonLoading && (
+                <Spin indicator={<LoadingOutlined spin />} size="small" />
+              )}
+            </Button>
             <Popconfirm
               title={<AlertText text={`${t("CasualLabor.wtc.aptt")}`} />}
               onConfirm={() => deleteLabor(record)}
