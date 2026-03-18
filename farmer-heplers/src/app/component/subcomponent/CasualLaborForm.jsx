@@ -18,7 +18,6 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
         userId: authState.user.userId,
         transactions: [],
       };
-      console.log(laberDetails);
       const response = await postFieldWorkerData(laberDetails);
       const data = await response.data;
 
@@ -32,6 +31,7 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
     }
     if (openType === "laborEdit") {
       const formValues = form.getFieldsValue();
+      console.log(formValues);
       const { laborId, ...restOfformValues } = formValues;
       const updateLaborDetails = {
         ...restOfformValues,
@@ -54,7 +54,10 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
     <>
       <Form
         layout="inline"
-        name="basic"
+        name={
+          (openType === "laborAdd" && "Add") ||
+          (openType === "laborEdit" && "Edit")
+        }
         form={form}
         style={{ maxWidth: 800 }}
         labelCol={100}
