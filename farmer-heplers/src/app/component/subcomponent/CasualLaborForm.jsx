@@ -111,7 +111,11 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
           <Button type="primary" htmlType="submit">
             Submit{" "}
             {buttonLoading && (
-              <Spin indicator={<LoadingOutlined spin />} size="small" />
+              <Spin
+                indicator={<LoadingOutlined spin />}
+                size="small"
+                style={{ color: "#fff" }}
+              />
             )}
           </Button>
         </Row>

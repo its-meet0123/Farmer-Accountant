@@ -19,8 +19,8 @@ export async function deleteFieldWorkerData(id) {
   });
 }
 
-export async function updateFieldWorkerData(id, updateWorker) {
-  return await axios.patch(`${API}/other/labor/${id}`, updateWorker, {
+export async function updateFieldWorkerData(id, updateLaborDetails) {
+  return await axios.patch(`${API}/other/labor/${id}`, updateLaborDetails, {
     withCredentials: true,
   });
 }
