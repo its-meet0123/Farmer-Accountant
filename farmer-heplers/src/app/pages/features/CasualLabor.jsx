@@ -25,7 +25,6 @@ const CasualLabor = () => {
   };
 
   const editFunction = (record) => {
-    setLaborDetails(record);
     laborForm.setFieldsValue({
       date: record?.date,
       nickName: record?.serviceProvider?.nickName,
