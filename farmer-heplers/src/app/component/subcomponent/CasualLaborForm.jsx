@@ -1,17 +1,21 @@
-import { Button, DatePicker, Form, Input, message, Row } from "antd";
+import { Button, DatePicker, Form, Input, message, Row, Spin } from "antd";
 import { useAuth } from "../../auth/AuthContext";
 import {
   postFieldWorkerData,
   updateFieldWorkerData,
 } from "../../service/other";
 import dayjs from "dayjs";
+import { useState } from "react";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
   const { authState } = useAuth();
   const today = dayjs();
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const onFinish = async () => {
     if (openType === "laborAdd") {
+      setButtonLoading(true);
       const formValues = form.getFieldsValue();
       const laberDetails = {
         ...formValues,
@@ -24,25 +28,28 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
       if (data.status === "Success") {
         setFetch(data.worker);
         message.success(data.Code);
+        setButtonLoading(false);
         onClose();
       } else {
         message.error(data.Code);
       }
     }
     if (openType === "laborEdit") {
+      setButtonLoading(true);
       const formValues = form.getFieldsValue();
       console.log(formValues);
       const { laborId, ...restOfformValues } = formValues;
       const updateLaborDetails = {
         ...restOfformValues,
       };
-
+      console.log(updateLaborDetails);
       const res = await updateFieldWorkerData(laborId, updateLaborDetails);
       const data = await res.data;
 
       if (data.status === "Success") {
         setFetch(data.worker);
         message.success(data.Code);
+        setButtonLoading(false);
         onClose();
       } else {
         message.error(data.Code);
@@ -102,7 +109,10 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
-            Submit
+            Submit{" "}
+            {buttonLoading && (
+              <Spin indicator={<LoadingOutlined spin />} size="small" />
+            )}
           </Button>
         </Row>
       </Form>
