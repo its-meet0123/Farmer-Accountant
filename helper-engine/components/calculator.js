@@ -19,4 +19,13 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   };
 }
 
-module.exports = { calculateAutoInterst };
+function autoTotalForOtherExpense(duration, measurment, salary, pay) {
+  const total = duration * salary || measurment * salary;
+  if (pay || total) {
+    const remainTotal = total - pay;
+
+    return remainTotal;
+  }
+}
+
+module.exports = { calculateAutoInterst, autoTotalForOtherExpense };

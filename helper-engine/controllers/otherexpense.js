@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { autoTotalForOtherExpense } = require("../components/calculator");
 const { FieldWorker, Harvest } = require("../models/otherexpense");
 const jwt = require("jsonwebtoken");
 
@@ -106,7 +107,17 @@ async function handleDeleteAdditionalWorkerById(req, res) {
 async function handleAddAdditionalWorkerTransactionById(req, res) {
   try {
     const id = req.params.id;
-    const transactions = req.body;
+    const body = req.body;
+    const total = autoTotalForOtherExpense(
+      body.duration,
+      0,
+      body.salary,
+      body.pay,
+    );
+    const transactions = {
+      ...body,
+      total: total,
+    };
     const token = req.cookies.token;
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
