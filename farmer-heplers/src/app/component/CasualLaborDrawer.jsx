@@ -22,6 +22,7 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
             form={laborForm}
             setFetch={setFetch}
             openType={openType}
+            onClose={onClose}
           />
         )}
         {openType === "edit" && <Form></Form>}

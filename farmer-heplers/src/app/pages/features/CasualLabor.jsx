@@ -31,6 +31,7 @@ const CasualLabor = () => {
   const editFunction = async (details) => {
     const date = dayjs(details?.date);
     laborForm.setFieldsValue({
+      laborId: details._id,
       date: date || "",
       nickName: details?.serviceProvider?.nickName || "",
       firstName: details?.serviceProvider?.firstName || "",
@@ -44,7 +45,7 @@ const CasualLabor = () => {
     setTimeout(() => {
       setOpenType("laborEdit");
       setButtonLoanding(false);
-    }, 3000);
+    }, 1000);
   };
 
   const deleteLabor = async (record) => {

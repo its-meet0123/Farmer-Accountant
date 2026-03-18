@@ -1,24 +1,53 @@
 import { Button, DatePicker, Form, Input, message, Row } from "antd";
 import { useAuth } from "../../auth/AuthContext";
-import { postFieldWorkerData } from "../../service/other";
+import {
+  postFieldWorkerData,
+  updateFieldWorkerData,
+} from "../../service/other";
 import dayjs from "dayjs";
 
-const CasualLaborAddForm = ({ form }) => {
+const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
   const { authState } = useAuth();
   const today = dayjs();
 
   const onFinish = async () => {
-    const formValues = form.getFieldsValue();
-    console.log(formValues);
-    const laberDetails = {
-      ...formValues,
-      userId: authState.user.userId,
-      transactions: [],
-    };
-    console.log(laberDetails);
-    // const response = await postFieldWorkerData(laberDetails);
-    // const data = await response.data;
-    // message.success(data.Code);
+    if (openType === "laborAdd") {
+      const formValues = form.getFieldsValue();
+      const laberDetails = {
+        ...formValues,
+        userId: authState.user.userId,
+        transactions: [],
+      };
+      console.log(laberDetails);
+      const response = await postFieldWorkerData(laberDetails);
+      const data = await response.data;
+
+      if (data.status === "Success") {
+        setFetch(data.worker);
+        message.success(data.Code);
+        onClose();
+      } else {
+        message.error(data.Code);
+      }
+    }
+    if (openType === "laborEdit") {
+      const formValues = form.getFieldsValue();
+      const { laborId, ...restOfformValues } = formValues;
+      const updateLaborDetails = {
+        ...restOfformValues,
+      };
+
+      const res = await updateFieldWorkerData(laborId, updateLaborDetails);
+      const data = await res.data;
+
+      if (data.status === "Success") {
+        setFetch(data.worker);
+        message.success(data.Code);
+        onClose();
+      } else {
+        message.error(data.Code);
+      }
+    }
   };
 
   return (
@@ -32,6 +61,9 @@ const CasualLaborAddForm = ({ form }) => {
         wrapperCol={150}
         onFinish={onFinish}>
         <Row gutter={24}>
+          <Form.Item label="ID" name="laborId" hidden>
+            <Input />
+          </Form.Item>
           <Form.Item label="Date" name="date" initialValue={today}>
             <DatePicker format="DD/MM/YYYY" />
           </Form.Item>

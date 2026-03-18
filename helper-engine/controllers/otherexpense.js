@@ -272,6 +272,7 @@ async function postAdditionalWorker(req, res) {
   }
   return res.status(201).json({
     status: "Success",
+    worker: casualLaborDB,
     Code: "CL.FW.PDSM",
   });
 }
