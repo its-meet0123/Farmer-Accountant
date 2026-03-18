@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Button, Drawer, Form } from "antd";
 import CasualLaborAddForm from "./subcomponent/CasualLaborForm";
 import LaborTransForm from "./subcomponent/CasualLaborTransForm";
-const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
-  const [transactionForm] = Form.useForm();
+const LaborDrawer = ({
+  openType,
+  setOpenType,
+  setFetch,
+  laborForm,
+  additionalWorker,
+  transactionForm,
+}) => {
   const onClose = () => {
     setOpenType(null);
   };
@@ -28,7 +34,11 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
           />
         )}
         {openType === "transAdd" && (
-          <LaborTransForm form={transactionForm} openType={openType} />
+          <LaborTransForm
+            form={transactionForm}
+            openType={openType}
+            laborDetials={additionalWorker}
+          />
         )}
       </Drawer>
     </>

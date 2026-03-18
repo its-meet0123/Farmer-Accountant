@@ -19,16 +19,19 @@ import dayjs from "dayjs";
 const CasualLabor = () => {
   const { t } = useAuth();
   const [laborForm] = Form.useForm();
+  const [transactionForm] = Form.useForm();
   const [additonalWorker, setAdditonalWorker] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [fetch, setFetch] = useState();
   const [openType, setOpenType] = useState(null);
-  const [laborDetails, setLaborDetails] = useState({});
   const [buttonLoading, setButtonLoanding] = useState(false);
 
   const handleAddLaborTransaction = async (record) => {
     setButtonLoanding(true);
-    setLaborDetails(record);
+    const date = dayjs(record?.date);
+    transactionForm.setFieldsValue({
+      laborId: record._id,
+    });
     setTimeout(() => {
       setOpenType("transAdd");
       setButtonLoanding(false);
@@ -126,8 +129,11 @@ const CasualLabor = () => {
             <Button
               type="link"
               icon={<FileAddOutlined />}
-              onClick={() => handleAddLaborTransaction(record)}
-            />
+              onClick={() => handleAddLaborTransaction(record)}>
+              {buttonLoading && (
+                <Spin indicator={<LoadingOutlined spin />} size="small" />
+              )}
+            </Button>
             <Button
               type="link"
               icon={<EditOutlined />}
@@ -190,6 +196,8 @@ const CasualLabor = () => {
         setOpenType={setOpenType}
         laborForm={laborForm}
         setFetch={setFetch}
+        transactionForm={transactionForm}
+        additionalWorker={additonalWorker}
       />
     </>
   );

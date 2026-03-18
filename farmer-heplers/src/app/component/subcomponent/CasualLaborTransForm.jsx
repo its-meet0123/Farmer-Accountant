@@ -1,13 +1,36 @@
 import { LoadingOutlined } from "@ant-design/icons";
-import { Button, DatePicker, Form, Input, InputNumber, Row, Spin } from "antd";
+import {
+  Button,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  Row,
+  Spin,
+} from "antd";
 import { useState } from "react";
+import { addTransactionForFieldWorker } from "../../service/other";
 
 const LaborTransForm = ({ form, openType }) => {
   const [buttonLoading, setButtonLoading] = useState(false);
 
   const onFinish = async () => {
-    const formValues = form.getFieldsValue();
-    console.log(formValues);
+    if (openType === "transAdd") {
+      setButtonLoading(true);
+      const formValues = form.getFieldsValue();
+      const { laborId, ...restOfformValues } = formValues;
+
+      const res = await addTransactionForFieldWorker(laborId, restOfformValues);
+      const data = await res.data;
+
+      if (data.status === "Success") {
+        message.success(data.Code);
+        setButtonLoading(false);
+      } else {
+        message.error(data.Code);
+      }
+    }
   };
 
   return (
@@ -24,8 +47,11 @@ const LaborTransForm = ({ form, openType }) => {
         wrapperCol={150}
         onFinish={onFinish}>
         <Row gutter={24}>
+          <Form.Item label="Labor ID" name="laborId" hidden>
+            <Input />
+          </Form.Item>
           <Form.Item label="Date" name="startDate">
-            <DatePicker />
+            <DatePicker format={"DD/MM/YYYY"} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
