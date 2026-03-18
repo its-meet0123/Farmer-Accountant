@@ -32,6 +32,7 @@ function autoTotalForOtherExpense(duration, measurment, salary, pay) {
     const remainsTransTotal = transTotal - pay;
     return remainsTransTotal;
   }
+  return total;
 }
 
 module.exports = { calculateAutoInterst, autoTotalForOtherExpense };
