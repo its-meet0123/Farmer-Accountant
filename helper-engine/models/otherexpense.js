@@ -6,7 +6,7 @@ const accountSchemaFW = new mongoose.Schema({
   },
   duration: { type: Number, default: 0 },
   salary: { type: Number, default: 0 },
-  total: { type: Number, default: 0 },
+  total: { type: Number },
   pay: { type: Number, default: 0 },
   transType: String,
   remaining: Number,
@@ -24,6 +24,7 @@ accountSchemaFW.pre("save", function (next) {
   if (this.pay > 0) {
     this.total = this.total - this.pay;
   }
+  next();
 });
 
 const fieldWorkerModel = new mongoose.Schema({
@@ -76,6 +77,7 @@ accountSchemaHF.pre("save", function (next) {
   if (this.pay > 0) {
     this.total = this.total - this.pay;
   }
+  next();
 });
 
 const harvestModel = new mongoose.Schema({
