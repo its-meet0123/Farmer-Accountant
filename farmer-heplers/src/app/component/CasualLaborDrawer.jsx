@@ -17,10 +17,9 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}>
-        {openType === "laborAdd" ||
-          (openType === "laborEdit" && (
-            <CasualLaborAddForm form={laborForm} setFetch={setFetch} />
-          ))}
+        {(openType === "laborAdd" || openType === "laborEdit") && (
+          <CasualLaborAddForm form={laborForm} setFetch={setFetch} />
+        )}
         {openType === "edit" && <Form></Form>}
       </Drawer>
     </>

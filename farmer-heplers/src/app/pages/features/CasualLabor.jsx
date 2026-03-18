@@ -26,14 +26,14 @@ const CasualLabor = () => {
 
   const editFunction = (record) => {
     laborForm.setFieldsValue({
-      date: record?.date,
-      nickName: record?.serviceProvider?.nickName,
-      firstName: record?.serviceProvider?.firstName,
-      lastName: record?.serviceProvider?.lastName,
-      contact: record?.serviceProvider?.contact,
-      address: record?.serviceProvider?.address,
-      idProof: record?.serviceProvider?.idProof,
-      transactions: record?.transactions,
+      date: record?.date || "",
+      nickName: record?.serviceProvider?.nickName || "",
+      firstName: record?.serviceProvider?.firstName || "",
+      lastName: record?.serviceProvider?.lastName || "",
+      contact: record?.serviceProvider?.contact || "",
+      address: record?.serviceProvider?.address || "",
+      idProof: record?.serviceProvider?.idProof || "",
+      transactions: record?.transactions || "",
     });
     setTimeout(() => {
       setOpenType("laborEdit");
