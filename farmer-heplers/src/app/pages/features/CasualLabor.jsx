@@ -37,7 +37,7 @@ const CasualLabor = () => {
       transactions: record?.transactions,
     });
     setTimeout(() => {
-      setOpenType("add");
+      setOpenType("laborEdit");
     }, 3000);
   };
 
@@ -153,7 +153,7 @@ const CasualLabor = () => {
       <PageContainer
         title={t("casulaLabor.cardTitle")}
         extra={
-          <Button type="primary" onClick={() => setOpenType("add")}>
+          <Button type="primary" onClick={() => setOpenType("laborAdd")}>
             Add Labor
           </Button>
         }>

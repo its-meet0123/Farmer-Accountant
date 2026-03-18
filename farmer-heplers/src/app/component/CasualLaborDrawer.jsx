@@ -9,13 +9,18 @@ const LaborDrawer = ({ openType, setOpenType, setFetch, laborForm }) => {
   return (
     <>
       <Drawer
-        title={(openType === "add" && "Add") || (openType === "edit" && "Edit")}
+        title={
+          ((openType === "laborAdd" || openType === "laborEdit") &&
+            "Labor Drawer") ||
+          (openType === "edit" && "Edit")
+        }
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}>
-        {openType === "add" && (
-          <CasualLaborAddForm form={laborForm} setFetch={setFetch} />
-        )}
+        {openType === "laborAdd" ||
+          (openType === "laborEdit" && (
+            <CasualLaborAddForm form={laborForm} setFetch={setFetch} />
+          ))}
         {openType === "edit" && <Form></Form>}
       </Drawer>
     </>
