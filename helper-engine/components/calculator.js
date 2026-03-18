@@ -1,3 +1,5 @@
+const { accountSchemaFW } = require("../models/otherexpense");
+
 function calculateAutoInterst(amount, startDate, rate, endDate) {
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
@@ -20,11 +22,15 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
 }
 
 function autoTotalForOtherExpense(duration, measurment, salary, pay) {
+  const transTotal = accountSchemaFW.total;
   const total = duration * salary || measurment * salary;
-  if (pay || total) {
-    const remainTotal = total - pay;
-
-    return remainTotal;
+  if (total > 0 && pay > 0) {
+    const remainsTotal = total - pay;
+    return remainsTotal;
+  }
+  if (transTotal > 0 && pay > 0) {
+    const remainsTransTotal = transTotal - pay;
+    return remainsTransTotal;
   }
 }
 

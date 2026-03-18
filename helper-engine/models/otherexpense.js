@@ -109,4 +109,4 @@ const harvestModel = new mongoose.Schema({
 const FieldWorker = mongoose.model("fieldWorker", fieldWorkerModel);
 const Harvest = mongoose.model("harvest", harvestModel);
 
-module.exports = { FieldWorker, Harvest };
+module.exports = { FieldWorker, Harvest, accountSchemaFW };
