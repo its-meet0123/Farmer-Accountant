@@ -39,6 +39,7 @@ async function handleUpdateAdditionalWorkerById(req, res) {
         Code: "CL.FW.UWDEM",
       });
     }
+    console.log(body);
     const updateAdditionalWorker = await FieldWorker.findOneAndUpdate(
       { _id: id, userId: currentUserId },
       { $set: body },
