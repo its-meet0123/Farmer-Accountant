@@ -1,4 +1,4 @@
-const { accountSchemaFW } = require("../models/otherexpense");
+const { FieldWorker, Harvest } = require("../models/otherexpense");
 
 function calculateAutoInterst(amount, startDate, rate, endDate) {
   const start = new Date(startDate);
@@ -21,8 +21,9 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   };
 }
 
-function autoTotalForOtherExpense(duration, measurment, salary, pay) {
-  const transTotal = accountSchemaFW.total;
+function autoTotalForOtherExpense(id, duration, measurment, salary, pay) {
+  const findTransaction = FieldWorker.findById(id);
+  const transTotal = findTransaction.total;
   const total = duration * salary || measurment * salary;
   if (total > 0 && pay > 0) {
     const remainsTotal = total - pay;

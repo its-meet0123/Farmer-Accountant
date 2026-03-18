@@ -109,6 +109,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
     const id = req.params.id;
     const body = req.body;
     const total = autoTotalForOtherExpense(
+      id,
       body.duration,
       0,
       body.salary,

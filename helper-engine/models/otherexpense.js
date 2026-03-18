@@ -13,20 +13,6 @@ const accountSchemaFW = new mongoose.Schema({
   handOver: String,
 });
 
-accountSchemaFW.pre("save", function (next) {
-  if (this.duration && this.salary) {
-    this.total = this.duration * this.salary;
-  }
-  next();
-});
-
-accountSchemaFW.pre("save", function (next) {
-  if (this.pay > 0) {
-    this.total = this.total - this.pay;
-  }
-  next();
-});
-
 const fieldWorkerModel = new mongoose.Schema({
   userId: {
     type: String,
@@ -64,22 +50,6 @@ const accountSchemaHF = new mongoose.Schema({
   handOver: String,
 });
 
-accountSchemaHF.pre("save", function (next) {
-  if (this.duration > 0 || (this.measurment > 0 && this.opratorCharge)) {
-    this.total =
-      this.duration * this.opratorCharge ||
-      this.measurment * this.opratorCharge;
-  }
-  next();
-});
-
-accountSchemaHF.pre("save", function (next) {
-  if (this.pay > 0) {
-    this.total = this.total - this.pay;
-  }
-  next();
-});
-
 const harvestModel = new mongoose.Schema({
   userId: {
     type: String,
@@ -109,4 +79,4 @@ const harvestModel = new mongoose.Schema({
 const FieldWorker = mongoose.model("fieldWorker", fieldWorkerModel);
 const Harvest = mongoose.model("harvest", harvestModel);
 
-module.exports = { FieldWorker, Harvest, accountSchemaFW };
+module.exports = { FieldWorker, Harvest };
