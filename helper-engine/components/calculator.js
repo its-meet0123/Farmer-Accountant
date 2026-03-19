@@ -21,10 +21,10 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   };
 }
 
-async function autoTotalForOtherExpense(id, duration, measurment, salary, pay) {
+async function autoTotalForOtherExpense(id, upComingTrans) {
   const workerDetails = await FieldWorker.findById(id);
 
-  if (!workerDetails) return 0;
+  if (!workerDetails) return {};
 
   const transaction = workerDetails.transactions || [];
 
@@ -32,21 +32,40 @@ async function autoTotalForOtherExpense(id, duration, measurment, salary, pay) {
     ? transaction[transaction.length - 1].total
     : 0;
 
-  const total = duration
-    ? duration * salary
-    : measurment
-      ? measurment * salary
+  const total = upComingTrans.duration
+    ? upComingTrans.duration * upComingTrans.salary
+    : upComingTrans.measurment
+      ? upComingTrans.measurment * upComingTrans.salary
       : 0;
 
-  if (total > 0 && pay > 0) {
-    return total - pay;
+  if (transTotal > 0 && total > 0 && upComingTrans.pay > 0) {
+    let bodyTotal = transTotal + total - upComingTrans.pay;
+    return {
+      ...upComingTrans,
+      total: bodyTotal,
+    };
   }
 
-  if (transTotal > 0 && pay > 0) {
-    return transTotal - pay;
+  if (total > 0 && upComingTrans.pay > 0) {
+    let bodyTotal = total - upComingTrans.pay;
+    return {
+      ...upComingTrans,
+      total: bodyTotal,
+    };
   }
 
-  return total;
+  if (transTotal > 0 && upComingTrans.pay > 0) {
+    let bodyTotal = transTotal - upComingTrans.pay;
+    return {
+      ...upComingTrans,
+      total: bodyTotal,
+    };
+  }
+
+  return {
+    ...upComingTrans,
+    total: total,
+  };
 }
 
 module.exports = { calculateAutoInterst, autoTotalForOtherExpense };

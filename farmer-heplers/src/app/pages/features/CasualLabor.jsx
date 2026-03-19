@@ -28,7 +28,6 @@ const CasualLabor = () => {
 
   const handleAddLaborTransaction = async (record) => {
     setButtonLoanding(true);
-    const date = dayjs(record?.date);
     transactionForm.setFieldsValue({
       laborId: record._id,
     });
@@ -60,6 +59,26 @@ const CasualLabor = () => {
 
   const deleteLabor = async (record) => {
     console.log(record);
+  };
+
+  const editTransFunction = async (record) => {
+    setButtonLoanding(true);
+    const startDate = dayjs(record.startDate);
+    transactionForm.setFieldsValue({
+      transId: record._id,
+      startDate: startDate,
+      duration: record.duration,
+      salary: record.salary,
+      pay: record.pay,
+      transType: record.transType,
+      handOver: record.handOver,
+    });
+    setTimeout(() => {
+      setOpenType("transEdit");
+      dd;
+      setButtonLoanding(false);
+    }, 1000);
+    dddd;
   };
 
   useEffect(() => {
@@ -163,6 +182,30 @@ const CasualLabor = () => {
       ...CASUAL_LABOR_TRANS_COLUMNS,
       {
         title: t("casualLabor.ttc.act"),
+        dataIndex: "",
+        key: "a",
+        render: (_, record) => {
+          return (
+            <Flex gap={2} horizontal>
+              <Button
+                type="link"
+                icon={<EditOutlined />}
+                onClick={() => editTransFunction(record)}>
+                {buttonLoading && (
+                  <Spin indicator={<LoadingOutlined spin />} size="small" />
+                )}
+              </Button>
+              <Popconfirm
+                title={<AlertText text={`${t("CasualLabor.wtc.aptt")}`} />}
+                onConfirm={() => deleteLaborTrans(record)}
+                okText="Yes"
+                cancelText="No"
+                placement="left">
+                <Button type="link" icon={<DeleteOutlined />} size="small" />
+              </Popconfirm>
+            </Flex>
+          );
+        },
       },
     ];
 

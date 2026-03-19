@@ -38,6 +38,8 @@ const LaborDrawer = ({
             form={transactionForm}
             openType={openType}
             laborDetials={additionalWorker}
+            setFetch={setFetch}
+            onClose={onClose}
           />
         )}
       </Drawer>

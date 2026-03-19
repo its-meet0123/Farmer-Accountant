@@ -12,25 +12,47 @@ import {
 import { useState } from "react";
 import { addTransactionForFieldWorker } from "../../service/other";
 
-const LaborTransForm = ({ form, openType }) => {
+const LaborTransForm = ({
+  form,
+  openType,
+  laborDetails,
+  setFetch,
+  onClose,
+}) => {
   const [buttonLoading, setButtonLoading] = useState(false);
 
   const onFinish = async () => {
     if (openType === "transAdd") {
-      setButtonLoading(true);
-      const formValues = form.getFieldsValue();
-      const { laborId, ...restOfformValues } = formValues;
+      try {
+        setButtonLoading(true);
+        const formValues = form.getFieldsValue();
+        const { laborId, ...restOfformValues } = formValues;
 
-      const res = await addTransactionForFieldWorker(laborId, restOfformValues);
-      const data = await res.data;
+        const res = await addTransactionForFieldWorker(
+          laborId,
+          restOfformValues,
+        );
+        const data = await res.data;
 
-      if (data.status === "Success") {
-        message.success(data.Code);
-        setButtonLoading(false);
+        if (data.status === "Success") {
+          message.success(data.Code);
+          setButtonLoading(false);
+        }
+      } catch (err) {
+        if (data.status === "Error") {
+          message.error(data.Code);
+          console.log(data.Message);
+        }
+        console.log(err.message);
       }
-      if (data.status === "Error") {
-        message.error(data.Code);
-        console.log(data.Message);
+    }
+
+    if (openType === "transEdit") {
+      try {
+        setButtonLoading(true);
+      } catch (err) {
+        console.log(err.message);
+        message.error();
       }
     }
   };
@@ -49,6 +71,9 @@ const LaborTransForm = ({ form, openType }) => {
         wrapperCol={150}
         onFinish={onFinish}>
         <Row gutter={24}>
+          <Form.Item label="Trans ID" name="transId" hidden>
+            <Input />
+          </Form.Item>
           <Form.Item label="Labor ID" name="laborId" hidden>
             <Input />
           </Form.Item>

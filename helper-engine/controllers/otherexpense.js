@@ -107,32 +107,22 @@ async function handleDeleteAdditionalWorkerById(req, res) {
 async function handleAddAdditionalWorkerTransactionById(req, res) {
   try {
     const id = req.params.id;
-    const body = req.body;
-    if (!id || !body) {
+    const trans = req.body;
+    if (!id || !trans) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.AWTEM",
       });
     }
-    const total = await autoTotalForOtherExpense(
-      id,
-      body.duration || 0,
-      0,
-      body.salary || 0,
-      body.pay || 0,
-    );
-    if (!total) {
+    const body = await autoTotalForOtherExpense(id, trans);
+    if (!body) {
       return res.status(500).json({
         status: "Error",
         Code: "CL.CTEM",
         Message: "Total not define",
-        total,
+        trans: body,
       });
     }
-    const transactions = {
-      ...body,
-      total: total,
-    };
     const token = req.cookies.token;
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
@@ -150,7 +140,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
       },
       {
         $push: {
-          transactions: transactions,
+          transactions: body,
         },
       },
     );
@@ -179,6 +169,15 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
   try {
     const { workerId, transactionId } = req.params;
     const updateTrans = req.body;
+    const body = await autoTotalForOtherExpense(workerId, updateTrans);
+    if (!body) {
+      return res.status(500).json({
+        status: "Error",
+        Code: "CL.CTEM",
+        Message: "Total not define",
+        trnas: body,
+      });
+    }
     const token = req.cookies.token;
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
@@ -197,7 +196,7 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
       },
       {
         $set: {
-          "transactions.$": updateTrans,
+          "transactions.$": body,
         },
       },
       { new: true },
