@@ -108,12 +108,18 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
   try {
     const id = req.params.id;
     const body = req.body;
-    const total = autoTotalForOtherExpense(
+    if (!id || !body) {
+      return res.status(400).json({
+        status: "Error",
+        Code: "CL.FW.AWTEM",
+      });
+    }
+    const total = await autoTotalForOtherExpense(
       id,
-      body.duration,
+      body.duration || 0,
       0,
-      body.salary,
-      body.pay,
+      body.salary || 0,
+      body.pay || 0,
     );
     if (!total) {
       return res.status(500).json({
@@ -130,7 +136,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
     const token = req.cookies.token;
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
-    if (!id || !transactions) {
+    if (!transactions) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.AWTEM",
@@ -213,6 +219,7 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
       status: "Error",
       Code: "CL.FW.UWTBIDSEM",
       worker: null,
+      Message: err.message,
     });
   }
 }
