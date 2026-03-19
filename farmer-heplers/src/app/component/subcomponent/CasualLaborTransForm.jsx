@@ -27,8 +27,10 @@ const LaborTransForm = ({ form, openType }) => {
       if (data.status === "Success") {
         message.success(data.Code);
         setButtonLoading(false);
-      } else {
+      }
+      if (data.status === "Error") {
         message.error(data.Code);
+        console.log(data.Message);
       }
     }
   };

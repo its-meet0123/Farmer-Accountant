@@ -119,6 +119,8 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
       return res.status(500).json({
         status: "Error",
         Code: "CL.CTEM",
+        Message: "Total not define",
+        total,
       });
     }
     const transactions = {
