@@ -21,26 +21,31 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   };
 }
 
-function autoTotalForOtherExpense(id, duration, measurment, salary, pay) {
-  const workerDetails = FieldWorker.findById(id);
-  console.log("Models", workerDetails);
-  const transaction = workerDetails.transactions;
-  console.log("Transactions", transaction);
-  const numOfTrans = transaction.length;
-  console.log("Num of trans", numOfTrans);
-  const existTrans = numOfTrans - 1;
-  console.log("exist trans", existTrans);
-  const transTotal = transaction[existTrans]?.total;
-  console.log("last transaction total", transTotal);
-  const total = duration * salary || measurment * salary;
+async function autoTotalForOtherExpense(id, duration, measurment, salary, pay) {
+  const workerDetails = await FieldWorker.findById(id);
+
+  if (!workerDetails) return 0;
+
+  const transaction = workerDetails.transactions || [];
+
+  const transTotal = transaction.length
+    ? transaction[transaction.length - 1].total
+    : 0;
+
+  const total = duration
+    ? duration * salary
+    : measurment
+      ? measurment * salary
+      : 0;
+
   if (total > 0 && pay > 0) {
-    const remainsTotal = total - pay;
-    return remainsTotal;
+    return total - pay;
   }
+
   if (transTotal > 0 && pay > 0) {
-    const remainsTransTotal = transTotal - pay;
-    return remainsTransTotal;
+    return transTotal - pay;
   }
+
   return total;
 }
 
