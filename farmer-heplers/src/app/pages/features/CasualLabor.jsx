@@ -75,10 +75,8 @@ const CasualLabor = () => {
     });
     setTimeout(() => {
       setOpenType("transEdit");
-      dd;
       setButtonLoanding(false);
     }, 1000);
-    dddd;
   };
 
   useEffect(() => {

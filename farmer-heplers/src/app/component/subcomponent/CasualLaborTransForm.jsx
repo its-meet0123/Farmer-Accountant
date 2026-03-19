@@ -50,6 +50,8 @@ const LaborTransForm = ({
     if (openType === "transEdit") {
       try {
         setButtonLoading(true);
+        const formValues = form.getFieldsValue();
+        const { laborId, transId, ...restOfformValues } = formValues;
       } catch (err) {
         console.log(err.message);
         message.error();
