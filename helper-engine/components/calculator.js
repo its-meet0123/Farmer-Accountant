@@ -22,8 +22,11 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
 }
 
 function autoTotalForOtherExpense(id, duration, measurment, salary, pay) {
-  const findTransaction = FieldWorker.findById(id);
-  const transTotal = findTransaction.total;
+  const workerDetails = FieldWorker.findById(id);
+  const transaction = workerDetails.transactions;
+  const numOfTrans = transaction.length;
+  const existTrans = numOfTrans - 1;
+  const transTotal = transaction[existTrans];
   const total = duration * salary || measurment * salary;
   if (total > 0 && pay > 0) {
     const remainsTotal = total - pay;

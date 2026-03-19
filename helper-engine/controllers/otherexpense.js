@@ -115,6 +115,12 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
       body.salary,
       body.pay,
     );
+    if (!total) {
+      return res.status(500).json({
+        status: "Error",
+        Code: "CL.CTEM",
+      });
+    }
     const transactions = {
       ...body,
       total: total,
