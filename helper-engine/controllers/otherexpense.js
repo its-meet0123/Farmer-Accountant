@@ -107,14 +107,14 @@ async function handleDeleteAdditionalWorkerById(req, res) {
 async function handleAddAdditionalWorkerTransactionById(req, res) {
   try {
     const id = req.params.id;
-    const trans = req.body;
-    if (!id || !trans) {
+    const upcomingTrans = req.body;
+    if (!id || !upcomingTrans) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.AWTEM",
       });
     }
-    const body = await autoTotalForOtherExpense(id, trans);
+    const body = await autoTotalForOtherExpense(id, upcomingTrans);
     if (!body) {
       return res.status(500).json({
         status: "Error",
@@ -168,14 +168,14 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
 async function updateAdditionalWorkerTransactionByIds(req, res) {
   try {
     const { workerId, transactionId } = req.params;
-    const updateTrans = req.body;
-    if ((!workerId && !transactionId) || !updateTrans) {
+    const upcomingTrans = req.body;
+    if ((!workerId && !transactionId) || !upcomingTrans) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.UWTEM",
       });
     }
-    const body = await autoTotalForOtherExpense(workerId, updateTrans);
+    const body = await autoTotalForOtherExpense(workerId, upcomingTrans);
     if (!body) {
       return res.status(500).json({
         status: "Error",

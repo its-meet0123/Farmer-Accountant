@@ -29,6 +29,7 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
         setFetch(data.worker);
         message.success(data.Code);
         setButtonLoading(false);
+        form.resetFields();
         onClose();
       } else {
         message.error(data.Code);
