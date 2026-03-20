@@ -79,6 +79,10 @@ const CasualLabor = () => {
     }, 1000);
   };
 
+  const deleteLaborTrans = (record) => {
+    console.log(record);
+  };
+
   useEffect(() => {
     async function getData() {
       try {
