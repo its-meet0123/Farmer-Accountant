@@ -126,12 +126,6 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
     const token = req.cookies.token;
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
-    if (!transactions) {
-      return res.status(400).json({
-        status: "Error",
-        Code: "CL.FW.AWTEM",
-      });
-    }
 
     const addAdditionalWorkerTransaction = await FieldWorker.findOneAndUpdate(
       {
