@@ -33,16 +33,15 @@ const LaborDrawer = ({
             onClose={onClose}
           />
         )}
-        {openType === "transAdd" ||
-          (openType === "transEdit" && (
-            <LaborTransForm
-              form={transactionForm}
-              openType={openType}
-              laborDetials={additionalWorker}
-              setFetch={setFetch}
-              onClose={onClose}
-            />
-          ))}
+        {(openType === "transAdd" || openType === "transEdit") && (
+          <LaborTransForm
+            form={transactionForm}
+            openType={openType}
+            laborDetials={additionalWorker}
+            setFetch={setFetch}
+            onClose={onClose}
+          />
+        )}
       </Drawer>
     </>
   );
