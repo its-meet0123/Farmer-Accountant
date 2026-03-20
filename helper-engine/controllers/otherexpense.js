@@ -169,6 +169,12 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
   try {
     const { workerId, transactionId } = req.params;
     const updateTrans = req.body;
+    if ((!workerId && !transactionId) || !updateTrans) {
+      return res.status(400).json({
+        status: "Error",
+        Code: "CL.FW.UWTEM",
+      });
+    }
     const body = await autoTotalForOtherExpense(workerId, updateTrans);
     if (!body) {
       return res.status(500).json({
@@ -182,17 +188,11 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
-    if ((!workerId && !transactionId) || !updateTrans) {
-      return res.status(400).json({
-        status: "Error",
-        Code: "CL.FW.UWTEM",
-      });
-    }
-    const updateAdditionalWorkerTransaction = await FieldWorker.updateMany(
+    const updateAdditionalWorkerTransaction = await FieldWorker.updateOne(
       {
         _id: workerId,
         userId: currentUserId,
-        "transactions._id": { $in: transactionId },
+        "transactions._id": transactionId,
       },
       {
         $set: {
@@ -201,11 +201,10 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
       },
       { new: true },
     );
-    if (!updateAdditionalWorkerTransaction) {
-      return res.status(400).json({
+    if (updateAdditionalWorkerTransaction.modifiedCount === 0) {
+      return res.status(404).json({
         status: "Error",
-        Code: "CL.FW.WNF",
-        worker: null,
+        Code: "CL.FW.UWTNF",
       });
     }
     return res.status(200).json({
@@ -214,6 +213,7 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
       workerTrans: updateAdditionalWorkerTransaction,
     });
   } catch (err) {
+    console.log(err.message);
     res.status(500).json({
       status: "Error",
       Code: "CL.FW.UWTBIDSEM",
