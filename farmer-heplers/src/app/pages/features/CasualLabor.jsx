@@ -24,20 +24,21 @@ const CasualLabor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [fetch, setFetch] = useState();
   const [openType, setOpenType] = useState(null);
-  const [buttonLoading, setButtonLoanding] = useState(false);
+  const [buttonLoading, setButtonLoanding] = useState(null);
 
   const handleAddLaborTransaction = async (record) => {
-    setButtonLoanding(true);
+    setButtonLoanding("alt");
     transactionForm.setFieldsValue({
       laborId: record._id,
     });
     setTimeout(() => {
       setOpenType("transAdd");
-      setButtonLoanding(false);
+      setButtonLoanding(null);
     }, 1000);
   };
 
   const editFunction = async (details) => {
+    setButtonLoanding("le");
     const date = dayjs(details?.date);
     laborForm.setFieldsValue({
       laborId: details._id,
@@ -50,10 +51,9 @@ const CasualLabor = () => {
       idProof: details?.serviceProvider?.idProof || "",
       transactions: details?.transactions || [],
     });
-    setButtonLoanding(true);
     setTimeout(() => {
       setOpenType("laborEdit");
-      setButtonLoanding(false);
+      setButtonLoanding(null);
     }, 1000);
   };
 
@@ -62,7 +62,7 @@ const CasualLabor = () => {
   };
 
   const editTransFunction = async (record) => {
-    setButtonLoanding(true);
+    setButtonLoanding("let");
     const startDate = dayjs(record.startDate);
     transactionForm.setFieldsValue({
       transId: record._id,
@@ -151,7 +151,7 @@ const CasualLabor = () => {
               type="link"
               icon={<FileAddOutlined />}
               onClick={() => handleAddLaborTransaction(record)}>
-              {buttonLoading && (
+              {buttonLoading === "alt" && (
                 <Spin indicator={<LoadingOutlined spin />} size="small" />
               )}
             </Button>
@@ -159,7 +159,7 @@ const CasualLabor = () => {
               type="link"
               icon={<EditOutlined />}
               onClick={() => editFunction(record)}>
-              {buttonLoading && (
+              {buttonLoading === "le" && (
                 <Spin indicator={<LoadingOutlined spin />} size="small" />
               )}
             </Button>
@@ -193,7 +193,7 @@ const CasualLabor = () => {
                 type="link"
                 icon={<EditOutlined />}
                 onClick={() => editTransFunction(record)}>
-                {buttonLoading && (
+                {buttonLoading === "let" && (
                   <Spin indicator={<LoadingOutlined spin />} size="small" />
                 )}
               </Button>

@@ -10,7 +10,10 @@ import {
   Spin,
 } from "antd";
 import { useState } from "react";
-import { addTransactionForFieldWorker } from "../../service/other";
+import {
+  addTransactionForFieldWorker,
+  updateFieldWorkerTransaction,
+} from "../../service/other";
 
 const LaborTransForm = ({
   form,
@@ -52,9 +55,16 @@ const LaborTransForm = ({
         setButtonLoading(true);
         const formValues = form.getFieldsValue();
         const { laborId, transId, ...restOfformValues } = formValues;
+        const ids = { workerId: laborId, transactionId: transId };
+        const res = await updateFieldWorkerTransaction(ids, restOfformValues);
+        const data = await res.data;
+        if (data.status === "Success") {
+          message.success(data.Code);
+          setButtonLoading(false);
+        }
       } catch (err) {
         console.log(err.message);
-        message.error();
+        message.error(data.Code);
       }
     }
   };
