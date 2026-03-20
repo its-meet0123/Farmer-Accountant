@@ -67,6 +67,7 @@ const LaborTransForm = ({
         message.error(data.Code);
       }
     }
+    form.resetFields();
   };
 
   return (

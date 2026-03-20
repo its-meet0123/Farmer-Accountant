@@ -156,6 +156,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
       worker: addAdditionalWorkerTransaction,
     });
   } catch (err) {
+    console.log(err.message);
     return res.status(500).json({
       status: "Error",
       Code: "CL.FW.AWTSEM",
