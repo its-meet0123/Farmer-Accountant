@@ -62,9 +62,16 @@ const CasualLabor = () => {
   };
 
   const editTransFunction = async (record) => {
+    const filterFieldWorkers = additonalWorker.filter((labor) => {
+      return labor.transactions.some((transaction) =>
+        Object.keys(record).every((key) => transaction[key] === record[key]),
+      );
+    });
+    const workerId = filterFieldWorkers[0]._id;
     setButtonLoanding("let");
     const startDate = dayjs(record.startDate);
     transactionForm.setFieldsValue({
+      laborId: workerId,
       transId: record._id,
       startDate: startDate,
       duration: record.duration,
