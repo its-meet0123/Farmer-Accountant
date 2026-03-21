@@ -21,11 +21,34 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   };
 }
 
-async function autoTotalForOtherExpense(id, upComingTrans) {
-  console.log(id, upComingTrans);
-  const workerDetails = await FieldWorker.findById(id);
-
+async function autoTotalForOtherExpense(ids, upComingTrans) {
+  console.log(ids.laborId, upComingTrans);
+  const workerDetails = await FieldWorker.findById(ids.laborId);
   if (!workerDetails) return {};
+  if (ids.transactionId) {
+    const getTransaction = workerDetails.filter((labor) => {
+      return labor.transactions.some(
+        (transaction) => transaction._id === ids.transactionId,
+      );
+    });
+    if (!getTransaction) {
+      return {};
+    }
+    if (getTransaction[0].total > 0 || upComingTrans.pay > 0) {
+      const total = upComingTrans.duration
+        ? upComingTrans.duration * upComingTrans.salary
+        : upComingTrans.measurment
+          ? upComingTrans.measurment * upComingTrans.salary
+          : getTransaction[0].total;
+
+      const bodyTotal = total - upComingTrans.pay;
+
+      return {
+        ...upComingTrans,
+        total: bodyTotal,
+      };
+    }
+  }
 
   const transaction = workerDetails.transactions || [];
 
@@ -39,32 +62,8 @@ async function autoTotalForOtherExpense(id, upComingTrans) {
       ? upComingTrans.measurment * upComingTrans.salary
       : 0;
 
-  if (transTotal > 0 && total > 0 && upComingTrans.pay > 0) {
-    let bodyTotal = transTotal + total - upComingTrans.pay;
-    return {
-      ...upComingTrans,
-      total: bodyTotal,
-    };
-  }
-
-  if (transTotal > 0 && total > 0) {
-    let bodyTotal = transTotal + total;
-    return {
-      ...upComingTrans,
-      total: bodyTotal,
-    };
-  }
-
-  if (total > 0 && upComingTrans.pay > 0) {
-    let bodyTotal = total - upComingTrans.pay;
-    return {
-      ...upComingTrans,
-      total: bodyTotal,
-    };
-  }
-
-  if (transTotal > 0 && upComingTrans.pay > 0) {
-    let bodyTotal = transTotal - upComingTrans.pay;
+  if (upComingTrans.pay > 0) {
+    let bodyTotal = transTotal + total - pay;
     return {
       ...upComingTrans,
       total: bodyTotal,

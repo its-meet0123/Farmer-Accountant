@@ -114,7 +114,8 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
         Code: "CL.FW.AWTEM",
       });
     }
-    const body = await autoTotalForOtherExpense(id, upcomingTrans);
+    const ids = { laborId: id, transactionId: "" };
+    const body = await autoTotalForOtherExpense(ids, upcomingTrans);
     if (!body) {
       return res.status(500).json({
         status: "Error",
@@ -163,6 +164,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
 async function updateAdditionalWorkerTransactionByIds(req, res) {
   try {
     const { workerId, transactionId } = req.params;
+    const ids = { laborId: workerId, transactionId: transactionId };
     const upcomingTrans = req.body;
     console.log("workerId:", workerId, "transactionId:", transactionId);
     if (!workerId && !transactionId && !upcomingTrans) {
@@ -171,7 +173,7 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
         Code: "CL.FW.UWTEM",
       });
     }
-    const body = await autoTotalForOtherExpense(workerId, upcomingTrans);
+    const body = await autoTotalForOtherExpense(ids, upcomingTrans);
     if (!body) {
       return res.status(500).json({
         status: "Error",
