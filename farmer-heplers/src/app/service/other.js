@@ -33,6 +33,7 @@ export async function addTransactionForFieldWorker(id, transaction) {
 
 export async function deleteFieldWorkerTransaction(ids) {
   const { workerId, transactionId } = ids;
+  console.log("workerId: ", workerId, "transactionId:", transactionId);
   return await axios.put(
     `${API}/other/labor/${workerId}/transaction/${transactionId}`,
     {

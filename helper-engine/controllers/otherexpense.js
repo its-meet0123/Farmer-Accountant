@@ -257,10 +257,12 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
       workerTrans: deleteAdditionalWorkerTransaction,
     });
   } catch (err) {
+    console.log(err.message);
     return res.status(500).json({
       status: "Error",
       Code: "CL.FW.DWTBIDSEM",
       workerTrans: null,
+      Message: err.message,
     });
   }
 }
