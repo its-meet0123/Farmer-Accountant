@@ -26,20 +26,24 @@ async function autoTotalForOtherExpense(ids, upComingTrans) {
   const workerDetails = await FieldWorker.findById(ids.laborId);
   if (!workerDetails) return {};
   if (ids.transactionId) {
-    const getTransaction = workerDetails.filter((labor) => {
-      return labor.transactions.some(
-        (transaction) => transaction._id === ids.transactionId,
-      );
-    });
+    const getTransaction = workerDetails
+      .map((labor) => {
+        const matchingId = labor.transactions.filter((transaction) => {
+          return transaction._id === ids.transactionId;
+        });
+        return { ...labor, transactions: matchingId };
+      })
+      .filter((labor) => labor.transactions.length > 0);
     if (!getTransaction) {
       return {};
     }
-    if (getTransaction[0].total > 0 || upComingTrans.pay > 0) {
+    const transTotal = getTransaction[0]?.transactions[0]?.total || 0;
+    if (transTotal > 0 || upComingTrans.pay > 0) {
       const total = upComingTrans.duration
         ? upComingTrans.duration * upComingTrans.salary
         : upComingTrans.measurment
           ? upComingTrans.measurment * upComingTrans.salary
-          : getTransaction[0].total;
+          : transTotal;
 
       const bodyTotal = total - upComingTrans.pay;
 
@@ -70,9 +74,10 @@ async function autoTotalForOtherExpense(ids, upComingTrans) {
     };
   }
 
+  const bodyTotal = transTotal + total;
   return {
     ...upComingTrans,
-    total: total,
+    total: bodyTotal,
   };
 }
 
