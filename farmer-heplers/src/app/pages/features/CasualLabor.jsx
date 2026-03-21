@@ -2,7 +2,10 @@ import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
 import { PageContainer } from "../../component/PageContainer";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getAllFieldWorkerData } from "../../service/other";
+import {
+  deleteFieldWorkerTransaction,
+  getAllFieldWorkerData,
+} from "../../service/other";
 import { useAuth } from "../../auth/AuthContext";
 import { getColumnsForCasualLaborPage } from "../../constant/Extracolumns";
 import LaborDrawer from "../../component/CasualLaborDrawer";
@@ -86,8 +89,27 @@ const CasualLabor = () => {
     }, 1000);
   };
 
-  const deleteLaborTrans = (record) => {
-    console.log(record);
+  const deleteLaborTrans = async (record) => {
+    try {
+      setButtonLoanding("delete");
+      const filterFieldWorkers = additonalWorker.filter((labor) => {
+        return labor.transactions.some((transaction) =>
+          Object.keys(record).every((key) => transaction[key] === record[key]),
+        );
+      });
+      const ids = {
+        workerId: record._id,
+        transactionId: filterFieldWorkers[0]._id,
+      };
+      const res = await deleteFieldWorkerTransaction(ids);
+      const data = await res.data;
+      if (data.status === "Success") {
+        message.success(data.Code);
+        setFetch(data.workerTrans);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   useEffect(() => {
