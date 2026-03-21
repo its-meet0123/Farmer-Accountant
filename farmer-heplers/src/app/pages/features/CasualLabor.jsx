@@ -91,7 +91,6 @@ const CasualLabor = () => {
 
   const deleteLaborTrans = async (record) => {
     try {
-      setButtonLoanding("delete");
       const filterFieldWorkers = additonalWorker.filter((labor) => {
         return labor.transactions.some((transaction) =>
           Object.keys(record).every((key) => transaction[key] === record[key]),
@@ -109,6 +108,7 @@ const CasualLabor = () => {
       }
     } catch (err) {
       console.log(err.message);
+      message.error(data.Code);
     }
   };
 

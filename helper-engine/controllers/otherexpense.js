@@ -240,15 +240,14 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
         userId: currentUserId,
       },
       {
-        $pull: { transactions: { _id: { $in: transactionId } } },
+        $pull: { transactions: { _id: transactionId } },
       },
     );
 
-    if (!deleteAdditionalWorkerTransaction) {
-      return res.status(400).json({
+    if (deleteAdditionalWorkerTransaction.modifiedCount === 0) {
+      return res.status(404).json({
         status: "Error",
-        Code: "CL.FW.WNF",
-        workerTrans: null,
+        Code: "Transaction not found or already deleted",
       });
     }
     return res.status(200).json({
