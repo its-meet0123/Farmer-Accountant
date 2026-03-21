@@ -164,7 +164,7 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
   try {
     const { workerId, transactionId } = req.params;
     const upcomingTrans = req.body;
-    if ((!workerId && !transactionId) || !upcomingTrans) {
+    if (!workerId && !transactionId && !upcomingTrans) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.UWTEM",
@@ -194,7 +194,6 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
           "transactions.$": body,
         },
       },
-      { new: true },
     );
     if (updateAdditionalWorkerTransaction.modifiedCount === 0) {
       return res.status(404).json({

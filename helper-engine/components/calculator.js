@@ -47,6 +47,14 @@ async function autoTotalForOtherExpense(id, upComingTrans) {
     };
   }
 
+  if (transTotal > 0 && total > 0) {
+    let bodyTotal = transTotal + total;
+    return {
+      ...upComingTrans,
+      total: bodyTotal,
+    };
+  }
+
   if (total > 0 && upComingTrans.pay > 0) {
     let bodyTotal = total - upComingTrans.pay;
     return {
