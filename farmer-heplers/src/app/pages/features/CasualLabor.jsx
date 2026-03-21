@@ -96,16 +96,17 @@ const CasualLabor = () => {
           Object.keys(record).every((key) => transaction[key] === record[key]),
         );
       });
-      const ids = {
-        workerId: record._id,
-        transactionId: filterFieldWorkers[0]._id,
-      };
-      const res = await deleteFieldWorkerTransaction(ids);
-      const data = await res.data;
-      if (data.status === "Success") {
-        message.success(data.Code);
-        setFetch(data.workerTrans);
-      }
+      // const ids = {
+      //   workerId: record._id,
+      //   transactionId: filterFieldWorkers[0]._id,
+      // };
+      // const res = await deleteFieldWorkerTransaction(ids);
+      // const data = await res.data;
+      // if (data.status === "Success") {
+      //   message.success(data.Code);
+      //   setFetch(data.workerTrans);
+      // }
+      console.log(filterFieldWorkers);
     } catch (err) {
       console.log(err.message);
       message.error(data.Code);
