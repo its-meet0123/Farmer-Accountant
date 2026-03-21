@@ -166,7 +166,6 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
     const { workerId, transactionId } = req.params;
     const ids = { laborId: workerId, transactionId: transactionId };
     const upcomingTrans = req.body;
-    console.log("workerId:", workerId, "transactionId:", transactionId);
     if (!workerId && !transactionId && !upcomingTrans) {
       return res.status(400).json({
         status: "Error",
@@ -228,13 +227,15 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
+    console.log("workerId:", workerId, "transactionId:", transactionId);
+
     if (!workerId && !transactionId) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.DWTEM",
       });
     }
-    const deleteAdditionalWorkerTransaction = await FieldWorker.updateMany(
+    const deleteAdditionalWorkerTransaction = await FieldWorker.updateOne(
       {
         _id: workerId,
         userId: currentUserId,
