@@ -164,6 +164,7 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
   try {
     const { workerId, transactionId } = req.params;
     const upcomingTrans = req.body;
+    console.log("workerId:", workerId, "transactionId:", transactionId);
     if (!workerId && !transactionId && !upcomingTrans) {
       return res.status(400).json({
         status: "Error",
