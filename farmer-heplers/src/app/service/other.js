@@ -32,8 +32,9 @@ export async function addTransactionForFieldWorker(id, transaction) {
 }
 
 export async function deleteFieldWorkerTransaction(ids) {
+  const { workerId, transactionId } = ids;
   return await axios.put(
-    `${API}/other/labor/${ids.workerId}/transaction/${ids.transactionId}`,
+    `${API}/other/labor/${workerId}/transaction/${transactionId}`,
     {
       withCredentials: true,
     },
@@ -41,8 +42,9 @@ export async function deleteFieldWorkerTransaction(ids) {
 }
 
 export async function updateFieldWorkerTransaction(ids, updatedTransaction) {
+  const { workerId, transactionId } = ids;
   return await axios.patch(
-    `${API}/other/labor/${ids.workerId}/transaction/${ids.transactionId}`,
+    `${API}/other/labor/${workerId}/transaction/${transactionId}`,
     updatedTransaction,
     {
       withCredentials: true,
