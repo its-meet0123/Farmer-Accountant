@@ -91,11 +91,19 @@ const CasualLabor = () => {
 
   const deleteLaborTrans = async (record) => {
     try {
-      const filterFieldWorkers = additonalWorker.filter((labor) => {
-        return labor.transactions.some((transaction) =>
-          Object.keys(record).every((key) => transaction[key] === record[key]),
-        );
-      });
+      const filterFieldWorkers = additonalWorker
+        .map((labor) => {
+          const matchingTransaction = labor.transactions.filter(
+            (transaction) => {
+              return Object.keys(record).every(
+                (key) => transaction[key] === record[key],
+              );
+            },
+          );
+          return { ...labor, transactions: matchingTransaction };
+        })
+        .filter((labor) => labor.transactions.length > 0);
+
       // const ids = {
       //   workerId: record._id,
       //   transactionId: filterFieldWorkers[0]._id,
