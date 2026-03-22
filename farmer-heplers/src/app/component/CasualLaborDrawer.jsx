@@ -12,6 +12,8 @@ const LaborDrawer = ({
 }) => {
   const onClose = () => {
     setOpenType(null);
+    transactionForm.resetFields();
+    laborForm.resetFields();
   };
   return (
     <>

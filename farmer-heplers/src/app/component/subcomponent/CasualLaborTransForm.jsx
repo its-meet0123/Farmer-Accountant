@@ -15,13 +15,7 @@ import {
   updateFieldWorkerTransaction,
 } from "../../service/other";
 
-const LaborTransForm = ({
-  form,
-  openType,
-  laborDetails,
-  setFetch,
-  onClose,
-}) => {
+const LaborTransForm = ({ form, openType, laborDetails, setFetch }) => {
   const [buttonLoading, setButtonLoading] = useState(false);
 
   const onFinish = async () => {
@@ -41,7 +35,6 @@ const LaborTransForm = ({
           message.success(data.Code);
           setButtonLoading(false);
           setFetch(data.worker);
-          onClose();
         }
       } catch (err) {
         if (data.status === "Error") {
@@ -64,7 +57,6 @@ const LaborTransForm = ({
           message.success(data.Code);
           setButtonLoading(false);
           setFetch(data.workerTrans);
-          onClose();
         }
       } catch (err) {
         console.log(err.message);
