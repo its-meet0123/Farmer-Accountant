@@ -32,6 +32,9 @@ async function autoTotalForOtherExpense(ids, upComingTrans) {
     if (!getTransaction) {
       return {};
     }
+
+    console.log(getTransaction);
+
     const transTotal = getTransaction?.total || 0;
     if (transTotal > 0 || upComingTrans.pay > 0) {
       const total = upComingTrans.duration
