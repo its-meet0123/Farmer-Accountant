@@ -6,7 +6,7 @@ const accountSchemaFW = new mongoose.Schema({
   },
   duration: { type: Number, default: 0 },
   salary: { type: Number, default: 0 },
-  total: { type: Number },
+  total: { type: Number, default: 0 },
   pay: { type: Number, default: 0 },
   transType: String,
   remaining: Number,

@@ -28,7 +28,7 @@ async function autoTotalForOtherExpense(ids, upComingTrans) {
   if (!workerDetails) return {};
   if (ids.transactionId) {
     const getTransaction = workerDetails.transactions.find((transaction) => {
-      return transaction._id === ids.transactionId;
+      return transaction._id.toString() === ids.transactionId.toString();
     });
     console.log("from Shema trans", getTransaction);
     if (!getTransaction) {
