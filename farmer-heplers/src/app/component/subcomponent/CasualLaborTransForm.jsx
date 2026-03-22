@@ -40,6 +40,8 @@ const LaborTransForm = ({
         if (data.status === "Success") {
           message.success(data.Code);
           setButtonLoading(false);
+          setFetch(data.worker);
+          onClose();
         }
       } catch (err) {
         if (data.status === "Error") {
@@ -61,6 +63,8 @@ const LaborTransForm = ({
         if (data.status === "Success") {
           message.success(data.Code);
           setButtonLoading(false);
+          setFetch(data.workerTrans);
+          onClose();
         }
       } catch (err) {
         console.log(err.message);
