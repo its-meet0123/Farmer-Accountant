@@ -67,7 +67,7 @@ async function autoTotalForOtherExpense(ids, upComingTrans) {
       : 0;
 
   if (upComingTrans.pay > 0) {
-    let bodyTotal = transTotal + total - pay;
+    let bodyTotal = transTotal + total - upComingTrans.pay;
     return {
       ...upComingTrans,
       total: bodyTotal,
