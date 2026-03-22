@@ -24,16 +24,16 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
 async function autoTotalForOtherExpense(ids, upComingTrans) {
   console.log("workerId:", ids, "upComingTrans: ", upComingTrans);
   const workerDetails = await FieldWorker.findById(ids.laborId);
+  console.log("form casual labor :", workerDetails);
   if (!workerDetails) return {};
   if (ids.transactionId) {
     const getTransaction = workerDetails.transactions.find((transaction) => {
       return transaction._id === ids.transactionId;
     });
+    console.log("from Shema trans", getTransaction);
     if (!getTransaction) {
       return {};
     }
-
-    console.log("from Shema", getTransaction);
 
     const transTotal = getTransaction?.total || 0;
     if (transTotal > 0 || upComingTrans?.pay > 0) {
