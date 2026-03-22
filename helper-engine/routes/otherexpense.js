@@ -22,7 +22,7 @@ router
 router
   .route("/labor/:workerId/transaction/:transactionId")
   .patch(updateAdditionalWorkerTransactionByIds)
-  .put(deleteAdditionalWorkerTransactionByIds);
+  .delete(deleteAdditionalWorkerTransactionByIds);
 router.put("/labor/:id/transaction", handleAddAdditionalWorkerTransactionById);
 
 module.exports = router;

@@ -229,7 +229,7 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
 
     console.log("workerId:", workerId, "transactionId:", transactionId);
 
-    if (!workerId && !transactionId) {
+    if (!workerId && !transactionId && !currentUserId) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.DWTEM",
