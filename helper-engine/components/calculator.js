@@ -22,22 +22,22 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
 }
 
 async function autoTotalForOtherExpense(ids, upComingTrans) {
-  console.log(ids.laborId, upComingTrans);
+  console.log("workerId:", ids, "upComingTrans: ", upComingTrans);
   const workerDetails = await FieldWorker.findById(ids.laborId);
   if (!workerDetails) return {};
   if (ids.transactionId) {
-    const getTransaction = workerDetails.transactions.find((labor) => {
-      return labor._id === ids.transactionId;
+    const getTransaction = workerDetails.transactions.find((transaction) => {
+      return transaction._id === ids.transactionId;
     });
     if (!getTransaction) {
       return {};
     }
 
-    console.log(getTransaction);
+    console.log("from Shema", getTransaction);
 
     const transTotal = getTransaction?.total || 0;
-    if (transTotal > 0 || upComingTrans.pay > 0) {
-      const total = upComingTrans.duration
+    if (transTotal > 0 || upComingTrans?.pay > 0) {
+      const total = upComingTrans?.duration
         ? upComingTrans.duration * upComingTrans.salary
         : upComingTrans.measurment
           ? upComingTrans.measurment * upComingTrans.salary
