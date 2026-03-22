@@ -26,18 +26,13 @@ async function autoTotalForOtherExpense(ids, upComingTrans) {
   const workerDetails = await FieldWorker.findById(ids.laborId);
   if (!workerDetails) return {};
   if (ids.transactionId) {
-    const getTransaction = workerDetails
-      .map((labor) => {
-        const matchingId = labor.transactions.filter((transaction) => {
-          return transaction._id === ids.transactionId;
-        });
-        return { ...labor, transactions: matchingId };
-      })
-      .filter((labor) => labor.transactions.length > 0);
+    const getTransaction = workerDetails.transactions.find((labor) => {
+      return labor._id === ids.transactionId;
+    });
     if (!getTransaction) {
       return {};
     }
-    const transTotal = getTransaction[0]?.transactions[0]?.total || 0;
+    const transTotal = getTransaction?.total || 0;
     if (transTotal > 0 || upComingTrans.pay > 0) {
       const total = upComingTrans.duration
         ? upComingTrans.duration * upComingTrans.salary
