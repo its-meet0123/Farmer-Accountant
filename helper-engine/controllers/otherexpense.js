@@ -5,8 +5,6 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.SECRET_KEY;
 
-// for field workers
-
 // 1. get worker list
 async function handleGetAllAdditionalWorkers(req, res) {
   const token = req.cookies.token;
@@ -32,7 +30,7 @@ async function handleGetAllHarvestList(req, res) {
     const token = req.cookies.token;
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
-    const harvestList = Harvest.find({ userId: currentUserId });
+    const harvestList = await Harvest.find({ userId: currentUserId });
 
     return res.status(200).json({
       status: "Success",
@@ -490,11 +488,6 @@ async function postAdditionalWorker(req, res) {
 // 7. post havrest data
 async function postHavrestData(req, res) {
   try {
-    const body = req.body;
-    const token = req.cookies.token;
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const currentUserId = decoded.id;
-
     const harvestDB = Harvest.create({
       userId: body.userId,
       date: body.date,

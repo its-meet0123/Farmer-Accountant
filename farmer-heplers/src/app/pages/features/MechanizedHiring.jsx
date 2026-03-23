@@ -68,7 +68,6 @@ const HarvesterData = () => {
   ];
   return (
     <>
-      {isLoading == "loading" && <Spin size="small" />}
       <PageContainer
         title={t("mechanizedal.cardTitle")}
         extra={
@@ -76,6 +75,7 @@ const HarvesterData = () => {
             Add Harvester
           </Button>
         }>
+        {isLoading == "loading" && <Spin size="large" />}
         <Table
           dataSource={tableData}
           columns={columns}
