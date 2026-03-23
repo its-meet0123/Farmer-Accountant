@@ -2,6 +2,7 @@ import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, DatePicker, Form, Input, Row } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
+import { useAuth } from "../../auth/AuthContext";
 
 const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
   const { authState } = useAuth();

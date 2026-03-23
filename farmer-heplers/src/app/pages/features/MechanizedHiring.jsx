@@ -75,12 +75,15 @@ const HarvesterData = () => {
             Add Harvester
           </Button>
         }>
-        {isLoading == "loading" && <Spin size="large" />}
-        <Table
-          dataSource={tableData}
-          columns={columns}
-          expandable={{ expandedRowRender: (record) => ExpanedRow(record) }}
-        />
+        {isLoading == "loading" ? (
+          <Spin size="large" />
+        ) : (
+          <Table
+            dataSource={tableData}
+            columns={columns}
+            expandable={{ expandedRowRender: (record) => ExpanedRow(record) }}
+          />
+        )}
       </PageContainer>
       <HarvestDrawer
         openType={openType}
