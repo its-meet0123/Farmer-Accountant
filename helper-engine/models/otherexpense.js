@@ -64,11 +64,13 @@ const harvestModel = new mongoose.Schema({
     contact: { type: String },
     idProof: { type: String },
   },
-  vehicalDetails: {
-    vehicalID: String,
-    vehicalType: String,
-    vehicalNumber: String,
-  },
+  vehicalDetails: [
+    {
+      vehicalID: String,
+      vehicalType: String,
+      vehicalNumber: String,
+    },
+  ],
   date: {
     type: Date,
     default: new Date(),

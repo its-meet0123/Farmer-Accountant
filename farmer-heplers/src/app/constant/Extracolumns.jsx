@@ -1129,6 +1129,124 @@ const getColumnsForCasualLaborPage = (t) => {
   return TRANS_COLUMNS;
 };
 
+const getColumnsForHarvestList = (t) => {
+  const showModal = ({ title, details }) => {
+    Modal.info({
+      title: title,
+      content: (
+        <>
+          <p>{details.vehicalNumber}</p>
+          <p>{details.vehicalType}</p>
+          <p>{details.vehicalId}</p>
+        </>
+      ),
+    });
+  };
+  const LIST_COLUMNS = [
+    { title: "S.No.", dataIndex: "serialNo", width: 50, key: "serialNo" },
+    { title: "Date", dataIndex: "date", width: 100, key: "date" },
+    {
+      title: "Name",
+      dataIndex: "serviceProvider",
+      width: 150,
+      key: "name",
+      render: (serviceProvider) => (
+        <>
+          <p>
+            <span>{serviceProvider.firstName}</span>{" "}
+            <span>{serviceProvider.lastName}</span>[
+            <span>{serviceProvider.nickName}</span>]
+          </p>
+        </>
+      ),
+    },
+    {
+      title: "Contact",
+      dataIndex: ["serviceProvider", "contact"],
+      width: 100,
+      key: "contact",
+    },
+    {
+      title: "ID Proof",
+      dataIndex: ["serviceProvider", "idProof"],
+      width: 100,
+      key: "idProof",
+    },
+    {
+      title: "Vehical Details",
+      dataIndex: "vehicalDetails",
+      width: 100,
+      key: "vehicalDetails",
+      render: (details) => {
+        details && (
+          <p onClick={() => showModal("Vehical Detail", details)}>view</p>
+        );
+      },
+    },
+  ];
+  return LIST_COLUMNS;
+};
+
+const getColumnsForHarvestTransaction = (t) => {
+  const TRANS_COLUMNS = [
+    {
+      title: t("mechanizedHiring.ttc.sntt"),
+      dataIndex: "serialNo",
+      key: "serialNo",
+      width: 50,
+    },
+    {
+      title: t("mechanizedHiring.ttc.dt"),
+      dataIndex: "startDate",
+      key: "date",
+      width: 100,
+    },
+    {
+      title: t("mechanizedHiring.ttc.wt"),
+      dataIndex: "salary",
+      key: "salary",
+      width: 100,
+    },
+    {
+      title: t("mechanizedHiring.ttc.dut"),
+      dataIndex: "",
+      key: "duration",
+      width: 100,
+      render: (_, record) => {
+        if (record.duration > 0) {
+          return <>{record.duration}</>;
+        }
+        if (record.measurment > 0) {
+          return <>{record.measurment}</>;
+        }
+      },
+    },
+    {
+      title: t("mechanizedHiring.ttc.tt"),
+      dataIndex: "total",
+      key: "total",
+      width: 100,
+    },
+    {
+      title: t("mechanizedHiring.ttc.pt"),
+      dataIndex: "pay",
+      key: "pay",
+      width: 100,
+    },
+    {
+      title: t("mechanizedHiring.ttc.hot"),
+      dataIndex: "handOver",
+      key: "handOver",
+      render: (text, record) => (
+        <>
+          <span>{record.transType}</span>,<span>{text}</span>
+        </>
+      ),
+    },
+  ];
+  return TRANS_COLUMNS;
+};
+
 export {
   getColumnsForHomepage,
   getColumnsForViewPage,
@@ -1137,4 +1255,6 @@ export {
   getWorkerTransactionColumnsForWorkerPage,
   getColumnsForWorkerCalcPage,
   getColumnsForCasualLaborPage,
+  getColumnsForHarvestList,
+  getColumnsForHarvestTransaction,
 };

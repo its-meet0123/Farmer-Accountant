@@ -6,6 +6,7 @@ import CalcPage from "../pages/features/Calculator";
 import WorkersData from "../pages/features/Worker";
 import WorkerCalculation from "../pages/features/WorkerCalculation";
 import CasualLabor from "../pages/features/CasualLabor";
+import HarvesterData from "../pages/features/MechanizedHiring";
 
 export const protectedRoutes = [
   {
@@ -41,6 +42,7 @@ export const protectedRoutes = [
         path: "/other/labor",
         element: <CasualLabor />,
       },
+      { path: "/other/harvesting", element: <HarvesterData /> },
       { path: "*", element: <Navigate to="/home" /> },
     ],
   },

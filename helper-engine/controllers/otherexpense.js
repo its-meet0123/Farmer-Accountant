@@ -506,11 +506,7 @@ async function postHavrestData(req, res) {
         contact: body.contact,
         idProof: body.idProof,
       },
-      vehicalDetails: {
-        vehicalID: body.vehicalID,
-        vehicalType: body.vehicalType,
-        vehicalNumber: body.vehicalNumber,
-      },
+      vehicalDetails: body.vehicalDetails,
       transactions: body.transactions,
     });
 
