@@ -42,7 +42,7 @@ export const protectedRoutes = [
         path: "/other/labor",
         element: <CasualLabor />,
       },
-      { path: "/other/harvesting", element: <HarvesterData /> },
+      { path: "/other/mechanized", element: <HarvesterData /> },
       { path: "*", element: <Navigate to="/home" /> },
     ],
   },
