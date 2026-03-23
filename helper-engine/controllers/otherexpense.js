@@ -26,6 +26,57 @@ async function handleGetAllAdditionalWorkers(req, res) {
   });
 }
 
+// 1. get harvest data
+async function handleGetAllHarvestList(req, res) {
+  try {
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const harvestList = Harvest.find({ userId: currentUserId });
+
+    return res.status(200).json({
+      status: "Success",
+      Code: "CL.HL.GHLSM",
+      data: harvestList,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      status: "Error",
+      Code: "CL.HL.GHLSEM",
+      message: err.message,
+    });
+  }
+}
+
+// 2. update harvest data by id
+async function handleUpdateHarvestDataById(req, res) {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+
+    const harvestData = await Harvest.findOneAndUpdate(
+      { _id: id, userId: currentUserId },
+      { $set: body },
+      { new: true },
+    );
+
+    return res.status(200).json({
+      status: "Success",
+      Code: "CL.HL.UHLBIDSM",
+      data: harvestData,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(500)
+      .json({ status: "Error", Code: "CL.HL.UHLBIDSEM", message: err.message });
+  }
+}
+
 // 2. update worker by id
 async function handleUpdateAdditionalWorkerById(req, res) {
   try {
@@ -93,6 +144,7 @@ async function handleDeleteAdditionalWorkerById(req, res) {
     return res.status(200).json({
       status: "Success",
       Code: "CL.FW.DWSM",
+      worker: deleteAdditionalWorker,
     });
   } catch (err) {
     return res.status(500).json({
@@ -103,7 +155,35 @@ async function handleDeleteAdditionalWorkerById(req, res) {
   }
 }
 
-// 4. update additional worker transaction by id
+// 3. delete harvest data by id
+async function handleDeleteHarvestDataById(req, res) {
+  try {
+    const { id } = req.params;
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+
+    const harvestData = await Harvest.findOneAndDelete({
+      _id: id,
+      userId: currentUserId,
+    });
+
+    return res.status(200).json({
+      status: "Success",
+      Code: "CL.HL.HDDSM",
+      data: harvestData,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      status: "Error",
+      Code: "CL.HL.HDDSEM",
+      message: err.message,
+    });
+  }
+}
+
+// 4. add additional worker transaction by id
 async function handleAddAdditionalWorkerTransactionById(req, res) {
   try {
     const id = req.params.id;
@@ -114,7 +194,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
         Code: "CL.FW.AWTEM",
       });
     }
-    const ids = { laborId: id, transactionId: "" };
+    const ids = { iD: id, transactionId: "" };
     const body = await autoTotalForOtherExpense(ids, upcomingTrans);
     if (!body) {
       return res.status(500).json({
@@ -160,11 +240,47 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
   }
 }
 
+// 4. add Harvester transaction by id
+async function handleAddHarvesterTransactionById(req, res) {
+  try {
+    const { id } = req.params;
+    const upComingTrans = req.body;
+
+    const ids = { iD: id, transactionId: "" };
+
+    const body = await autoTotalForOtherExpense(ids, upComingTrans);
+
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+
+    const addTransaction = await Harvest.findOneAndUpdate(
+      { _id: id, userId: currentUserId },
+      {
+        $push: { transactions: body },
+      },
+    );
+
+    return res.status(200).json({
+      status: "Success",
+      Code: "CL.HL.ATHLSM",
+      data: addTransaction,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      status: "Error",
+      Code: "CL.HL.ATHLSEM",
+      message: err.message,
+    });
+  }
+}
+
 // 5. update additional worker transaction by id
 async function updateAdditionalWorkerTransactionByIds(req, res) {
   try {
     const { workerId, transactionId } = req.params;
-    const ids = { laborId: workerId, transactionId: transactionId };
+    const ids = { iD: workerId, transactionId: transactionId };
     const upcomingTrans = req.body;
     if (!workerId && !transactionId && !upcomingTrans) {
       return res.status(400).json({
@@ -219,6 +335,44 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
   }
 }
 
+// 5. update harvester data transaction
+async function updateHarvesterTransactionByIds(req, res) {
+  try {
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+
+    const { harvestId, transactionId } = req.params;
+    const upComingTrans = req.body;
+
+    const ids = { iD: harvestId, transactionId: transactionId };
+
+    const body = await autoTotalForOtherExpense(ids, upComingTrans);
+
+    const harvestData = await Harvest.updateOne(
+      {
+        _id: harvestId,
+        userId: currentUserId,
+        "transactions._id": transactionId,
+      },
+      { $set: { "transactions.$": body } },
+    );
+
+    return res.status(200).json({
+      status: "Success",
+      Code: "CL.HL.UHLTBIDSM",
+      data: harvestData,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      status: "Error",
+      Code: "CL.HL.UHTBIDSEM",
+      message: err.message,
+    });
+  }
+}
+
 // 6. delete additional worker transaction by id
 async function deleteAdditionalWorkerTransactionByIds(req, res) {
   try {
@@ -267,6 +421,36 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
   }
 }
 
+// 6. delete Harvester transaction
+async function deleteHavresterTransactionByIds(req, res) {
+  try {
+    const { harvestId, transactionId } = req.params;
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+
+    const deleteHarvestTransaction = await Harvest.updateOne(
+      { _id: harvestId, userId: currentUserId },
+      {
+        $pull: { transactions: { _id: transactionId } },
+      },
+    );
+
+    return res.status(200).json({
+      status: "Success",
+      Code: "CL.HL.DHTSM",
+      data: deleteHarvestTransaction,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.json({
+      status: "Error",
+      Code: "CL.HL.DHLTSEM",
+      message: err.message,
+    });
+  }
+}
+
 // 7. post additional worker
 async function postAdditionalWorker(req, res) {
   const body = req.body;
@@ -303,12 +487,61 @@ async function postAdditionalWorker(req, res) {
   });
 }
 
+// 7. post havrest data
+async function postHavrestData(req, res) {
+  try {
+    const body = req.body;
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+
+    const harvestDB = Harvest.create({
+      userId: body.userId,
+      date: body.date,
+      serviceProvider: {
+        firstName: body.firstName,
+        lastName: body.lastName,
+        nickName: body.nickName,
+        Address: body.address,
+        contact: body.contact,
+        idProof: body.idProof,
+      },
+      vehicalDetails: {
+        vehicalID: body.vehicalID,
+        vehicalType: body.vehicalType,
+        vehicalNumber: body.vehicalNumber,
+      },
+      transactions: body.transactions,
+    });
+
+    return res.status(200).json({
+      status: "Success",
+      Code: "CL.HL.PHDSM",
+      data: harvestDB,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
+      status: "Error",
+      Code: "CL.HL.PHDSEM",
+      message: err.message,
+    });
+  }
+}
+
 module.exports = {
   handleGetAllAdditionalWorkers,
+  handleGetAllHarvestList,
   handleUpdateAdditionalWorkerById,
+  handleUpdateHarvestDataById,
   handleDeleteAdditionalWorkerById,
+  handleDeleteHarvestDataById,
   handleAddAdditionalWorkerTransactionById,
+  handleAddHarvesterTransactionById,
   updateAdditionalWorkerTransactionByIds,
+  updateHarvesterTransactionByIds,
   deleteAdditionalWorkerTransactionByIds,
+  deleteHavresterTransactionByIds,
   postAdditionalWorker,
+  postHavrestData,
 };

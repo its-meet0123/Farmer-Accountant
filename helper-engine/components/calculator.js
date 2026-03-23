@@ -22,8 +22,8 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
 }
 
 async function autoTotalForOtherExpense(ids, upComingTrans) {
-  console.log("workerId:", ids, "upComingTrans: ", upComingTrans);
-  const workerDetails = await FieldWorker.findById(ids.laborId);
+  console.log("IDS:", ids, "upComingTrans: ", upComingTrans);
+  const workerDetails = await FieldWorker.findById(ids.iD);
   console.log("form casual labor :", workerDetails);
   if (!workerDetails) return {};
   if (ids.transactionId) {

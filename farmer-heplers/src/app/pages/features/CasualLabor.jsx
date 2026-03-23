@@ -3,6 +3,7 @@ import { PageContainer } from "../../component/PageContainer";
 import { useState } from "react";
 import { useEffect } from "react";
 import {
+  deleteFieldWorkerData,
   deleteFieldWorkerTransaction,
   getAllFieldWorkerData,
 } from "../../service/other";
@@ -61,7 +62,19 @@ const CasualLabor = () => {
   };
 
   const deleteLabor = async (record) => {
-    console.log(record);
+    try {
+      const id = record._id;
+      const res = await deleteFieldWorkerData(id);
+      const data = await res.data;
+
+      if (data.status === "Success") {
+        message.success(data.Code);
+        setFetch(data.worker);
+      }
+    } catch (err) {
+      console.log(err.message);
+      message.error(t("CL.AW.DWSEM"));
+    }
   };
 
   const editTransFunction = async (record) => {
@@ -216,7 +229,11 @@ const CasualLabor = () => {
   ];
 
   const ExpandedRow = (record) => {
-    const transactions = record.transactions || [];
+    const transactions =
+      record?.transactions.map((transaction, index) => ({
+        ...transaction,
+        serialNo: index + 1,
+      })) || [];
     const CASUAL_LABOR_TRANS_COLUMNS = getColumnsForCasualLaborPage(t);
     const columns = [
       ...CASUAL_LABOR_TRANS_COLUMNS,
