@@ -1,6 +1,5 @@
 import {
   Button,
-  Card,
   DatePicker,
   Flex,
   Form,
@@ -11,12 +10,9 @@ import {
   Table,
 } from "antd";
 import { useEffect, useMemo, useState } from "react";
-import { data, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getWorkerTransaction } from "../../service/worker";
-import {
-  getColumnsForWorkerCalcPage,
-  WORKER_TRANSACTION_CALC_COLUMNS,
-} from "../../constant/Extracolumns";
+import { getColumnsForWorkerCalcPage } from "../../constant/Extracolumns";
 import { TableFooterForWorkerCalc } from "../../component/TableFooter";
 import {
   deleteEndDate,

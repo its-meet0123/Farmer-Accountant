@@ -10,8 +10,10 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
   const [buttonLoading, setButtonLoading] = useState(false);
 
   const onFinish = async () => {
+    setButtonLoading(true);
     const formValues = form.getFieldsValue();
-    console.log("harvest detail fields :", formValues);
+    console.log(formValues);
+    const { harvesterId, transactions, ...pendingData } = formValues;
   };
 
   return (
@@ -27,7 +29,7 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
         labelCol={100}
         wrapperCol={150}
         onFinish={onFinish}
-        initialValues={{ vehicalDetails: [" "] }}>
+        initialValues={{ vehicalDetails: [" "], transactions: [] }}>
         <Row gutter={24}>
           <Form.Item label="ID" name="harvesterId" hidden>
             <Input />
