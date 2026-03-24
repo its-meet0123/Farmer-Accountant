@@ -488,6 +488,7 @@ async function postAdditionalWorker(req, res) {
 // 7. post havrest data
 async function postHavrestData(req, res) {
   try {
+    const body = req.body;
     const harvestDB = Harvest.create({
       userId: body.userId,
       date: body.date,
