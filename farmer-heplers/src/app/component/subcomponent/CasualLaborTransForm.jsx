@@ -37,10 +37,7 @@ const LaborTransForm = ({ form, openType, laborDetails, setFetch }) => {
           setFetch(data.worker);
         }
       } catch (err) {
-        if (data.status === "Error") {
-          message.error(data.Code);
-          console.log(data.Message);
-        }
+        message.error("Labor transaction not added");
         console.log(err.message);
       }
     }
@@ -60,7 +57,7 @@ const LaborTransForm = ({ form, openType, laborDetails, setFetch }) => {
         }
       } catch (err) {
         console.log(err.message);
-        message.error(data.Code);
+        message.error("Labor transaction not updated");
       }
     }
     form.resetFields();

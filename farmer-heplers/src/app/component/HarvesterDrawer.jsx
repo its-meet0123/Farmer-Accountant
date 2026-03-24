@@ -30,7 +30,7 @@ const HarvestDrawer = ({
             onClose={onClose}
           />
         )}
-        {(openType === "addTrans" || openType === "editTrans") &&
+        {(openType === "addTrans" || openType === "editTrans") && (
           //   <LaborTransForm
           //     form={transactionForm}
           //     openType={openType}
@@ -38,7 +38,8 @@ const HarvestDrawer = ({
           //     setFetch={setFetch}
           //     onClose={onClose}
           //   />
-          Transactions}
+          <p>transaction</p>
+        )}
       </Drawer>
     </>
   );

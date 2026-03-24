@@ -16,7 +16,7 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
 
   const onFinish = async () => {
     setButtonLoading(true);
-    if (openType === "addDetial") {
+    if (openType === "addDetail") {
       const formValues = form.getFieldsValue();
       console.log("all values", formValues);
       const { harvesterId, ...restOfFormValues } = formValues;

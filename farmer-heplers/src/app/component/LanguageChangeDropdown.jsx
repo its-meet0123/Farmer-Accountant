@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { DownOutlined, SmileOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Space } from "antd";
+import { useEffect, useState } from "react";
+import { Button, Dropdown } from "antd";
 import i18n from "i18next";
 const LanguageChangeDropDown = () => {
   const [buttonText, setButtonText] = useState("Lang");

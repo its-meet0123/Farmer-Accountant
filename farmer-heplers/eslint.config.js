@@ -7,7 +7,7 @@ import importPlugin from "eslint-plugin-import";
 
 export default [
   js.configs.recommended, // 👈 direct use (NO extends)
-  react.configs.recommended,
+  // react.configs.recommended,
   {
     files: ["**/*.{js,jsx}"],
     plugins: {
@@ -34,6 +34,9 @@ export default [
       // 🟢 React rules
       "react/jsx-uses-react": "off",
       "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-vars": "error",
+      "react/jsx-key": "error",
+      "react/no-unknown-property": "error",
 
       // 🟢 Hooks rules
       "react-hooks/rules-of-hooks": "error",
@@ -41,9 +44,13 @@ export default [
 
       // 🟢 Clean code
       "no-unused-vars": ["warn", { vars: "all", args: "after-used" }],
+      //"no-console": "warn",
+      //eqeqeq: ["error", "always"],
+      "no-var": "error",
+      "prefer-const": "warn",
       "no-undef": "error",
       "no-duplicate-imports": "error",
-      "react/jsx-uses-vars": "error",
+      //"react/jsx-uses-vars": "error",
     },
   },
   //  {

@@ -1,4 +1,4 @@
-import { Button, Card, Flex, message, Popconfirm, Spin, Table } from "antd";
+import { Button, Flex, message, Popconfirm, Spin, Table } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import {
   deleteWorkerById,

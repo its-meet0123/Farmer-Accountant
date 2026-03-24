@@ -1,13 +1,4 @@
-import {
-  Button,
-  Card,
-  Flex,
-  Form,
-  message,
-  Popconfirm,
-  Spin,
-  Table,
-} from "antd";
+import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import { deleteIndShopeAccountData, getAllIndShopes } from "../../service/ind";
 import {
