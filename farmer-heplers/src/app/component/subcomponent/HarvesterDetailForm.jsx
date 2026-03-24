@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 
 const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
-  const { authState } = useAuth();
+  const { authState, t } = useAuth();
   const today = dayjs();
   const [buttonLoading, setButtonLoading] = useState(false);
 

@@ -33,7 +33,7 @@ ____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
 //    file using the link in the Quokka output or in the line hover message
 //    or quick action.
 
-const chest = require("quokka-treasure-chest");
+// const chest = require("quokka-treasure-chest");
 
 // 2) So, you have found an old chest, there may be some treasure inside it.
 //    You need to pass a correct string key to the "open" function.
@@ -41,4 +41,4 @@ const chest = require("quokka-treasure-chest");
 //    Add Quokka live comment at the end of the line to see the returned value:
 //    chest.open('paste_key_here') //?
 
-chest.open("paste_key_here");
+// chest.open("paste_key_here"); nm
