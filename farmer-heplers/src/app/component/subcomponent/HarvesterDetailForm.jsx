@@ -1,5 +1,9 @@
-import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import { Button, DatePicker, Form, Input, Row } from "antd";
+import {
+  LoadingOutlined,
+  MinusCircleOutlined,
+  PlusCircleOutlined,
+} from "@ant-design/icons";
+import { Button, DatePicker, Form, Input, Row, Spin } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
@@ -12,8 +16,9 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
   const onFinish = async () => {
     setButtonLoading(true);
     const formValues = form.getFieldsValue();
-    console.log(formValues);
+    console.log("all values", formValues);
     const { harvesterId, transactions, ...pendingData } = formValues;
+    console.log("Needed values", pendingData);
   };
 
   return (

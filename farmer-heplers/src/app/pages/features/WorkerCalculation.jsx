@@ -160,7 +160,7 @@ const WorkerCalculation = () => {
     : [];
 
   const setFooter = (currentData) => {
-    const accounts = tableData || currentData;
+    const accounts = tableData || currentData || [];
     return <TableFooterForWorkerCalc data={accounts} />;
   };
 
