@@ -26,7 +26,7 @@ const AppLayout = ({ children }) => {
   const [openType, setOpenType] = useState(null);
   const [pathname, setPathname] = useState(location.pathname);
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken();
 
   const Menus = [

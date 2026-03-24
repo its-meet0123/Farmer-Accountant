@@ -8,7 +8,7 @@ import {
   Spin,
   Table,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { deleteIndShopeAccountData, getAllIndShopes } from "../../service/ind";
 import {
   DeleteOutlined,
@@ -143,7 +143,6 @@ const ViewPage = () => {
         setIsLoanding(false);
         setAllInd(data);
       } catch (err) {
-        setIsLoanding(true);
         message.error(t("ViewPage.fetchDataErrorMessage"));
         console.log(err.message);
       }
@@ -151,12 +150,15 @@ const ViewPage = () => {
       setFetch("");
     }
     getData();
-  }, [fetch]);
+  }, [fetch, t]);
 
-  const tableData = allInd.map((item, index) => ({
-    ...item,
-    serialNo: index + 1,
-  }));
+  const tableData = useMemo(() => {
+    if (!allInd) return [];
+    return allInd.map((item, index) => ({
+      ...item,
+      serialNo: index + 1,
+    }));
+  }, [allInd]);
 
   const columns = [
     {
@@ -252,7 +254,6 @@ const ViewPage = () => {
             </>
           );
         },
-        fixed: "right",
       },
     ];
 

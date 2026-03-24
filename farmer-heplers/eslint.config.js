@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import react from "eslint-plugin-react";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -6,16 +7,17 @@ import importPlugin from "eslint-plugin-import";
 
 export default [
   js.configs.recommended, // 👈 direct use (NO extends)
-
+  react.configs.recommended,
   {
     files: ["**/*.{js,jsx}"],
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
       import: importPlugin,
+      react,
     },
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: "latest",
       sourceType: "module",
       globals: globals.browser,
       parserOptions: {
@@ -38,9 +40,10 @@ export default [
       "react-hooks/exhaustive-deps": "warn",
 
       // 🟢 Clean code
-      "no-unused-vars": ["warn", { varsIgnorePattern: "^[A-Z_]" }],
+      "no-unused-vars": ["warn", { vars: "all", args: "after-used" }],
       "no-undef": "error",
       "no-duplicate-imports": "error",
+      "react/jsx-uses-vars": "error",
     },
   },
   //  {

@@ -1,7 +1,6 @@
 import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
 import { PageContainer } from "../../component/PageContainer";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   deleteFieldWorkerData,
   deleteFieldWorkerTransaction,
@@ -130,7 +129,7 @@ const CasualLabor = () => {
       console.log(filterFieldWorkers);
     } catch (err) {
       console.log(err.message);
-      message.error(data.Code);
+      message.error("Labor transaction not deleted");
     }
   };
 
@@ -145,18 +144,19 @@ const CasualLabor = () => {
         message.success(t(data.Code));
       } catch (err) {
         console.log(err.message);
-        if (data.status === "Error") {
-          message.error(t(data.Code));
-        }
+        message.error("Casual Labor data not fetching");
       }
     }
     getData();
-  }, [fetch]);
+  }, [fetch, t]);
 
-  const tableData = additonalWorker.map((workers, index) => ({
-    ...workers,
-    serialNo: index + 1,
-  }));
+  const tableData = useMemo(() => {
+    if (!additonalWorker) return [];
+    return additonalWorker.map((workers, index) => ({
+      ...workers,
+      serialNo: index + 1,
+    }));
+  }, [additonalWorker]);
 
   const columns = [
     {

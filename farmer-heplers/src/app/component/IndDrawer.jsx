@@ -13,7 +13,7 @@ import {
   Space,
   Typography,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { pushIndShopeAccountById, updateIndShopeAccount } from "../service/ind";
 import dayjs from "dayjs";
 

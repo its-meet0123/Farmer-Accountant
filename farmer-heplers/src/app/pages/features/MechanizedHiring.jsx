@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PageContainer } from "../../component/PageContainer";
 import { Button, Form, message, Spin, Table } from "antd";
 import { getAllHarvestList } from "../../service/other";
@@ -54,10 +54,13 @@ const HarvesterData = () => {
     return <Table dataSource={transData} columns={TRANS_COLUMNS} />;
   };
 
-  const tableData = harvestList.map((list, index) => ({
-    ...list,
-    serialNo: index + 1,
-  }));
+  const tableData = useMemo(() => {
+    if (!harvestList) return [];
+    return harvestList.map((list, index) => ({
+      ...list,
+      serialNo: index + 1,
+    }));
+  }, [harvestList]);
 
   const LIST_COLUMNS = getColumnsForHarvestList(t);
   const columns = [

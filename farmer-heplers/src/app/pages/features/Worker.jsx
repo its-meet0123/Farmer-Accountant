@@ -1,5 +1,5 @@
 import { Button, Card, Flex, message, Popconfirm, Spin, Table } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   deleteWorkerById,
   deleteWorkerTransactionById,
@@ -24,7 +24,7 @@ import { PageContainer } from "../../component/PageContainer";
 const WorkersData = () => {
   const { t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(false);
-  const [workerList, setWorkerList] = useState();
+  const [workerList, setWorkerList] = useState([]);
   const [worker, setWorker] = useState({});
   const [openType, setOpenType] = useState(null);
   const [fetchData, setFetchData] = useState("");
@@ -99,14 +99,15 @@ const WorkersData = () => {
       }
     }
     getData();
-  }, [fetchData]);
+  }, [fetchData, t]);
 
-  const tableData = Array.isArray(workerList)
-    ? workerList.map((item, index) => ({
-        ...item,
-        serialNo: index + 1,
-      }))
-    : [];
+  const tableData = useMemo(() => {
+    if (!workerList) return [];
+    return workerList.map((item, index) => ({
+      ...item,
+      serialNo: index + 1,
+    }));
+  }, [workerList]);
 
   const Worker_List_Columns = getWorkerListColumnsForWorkerPage(t);
 

@@ -116,7 +116,6 @@ const WorkerCalculation = () => {
       } catch (err) {
         message.error(t("workerCalcPage.fetchDataErrorMessage"));
         console.error(err.message);
-        setIsLoanding(true);
       }
     }
     getData();
@@ -126,10 +125,9 @@ const WorkerCalculation = () => {
     async function getData() {
       try {
         if (fetch != "del") {
-          setIsLoanding(true);
           const dateRes = await getEndDate();
           const data = await dateRes.data.data;
-          setIsLoanding(false);
+
           const workerEndDate =
             data.filter((date) => date.dateType === "worker") || [];
           setEndDate(workerEndDate);
@@ -139,7 +137,6 @@ const WorkerCalculation = () => {
           endDate: endDate.length > 0 ? dayjs(endDate[0].endDate) : today,
         });
       } catch (err) {
-        setIsLoanding(true);
         if (endDate.length > 0) {
           message.error(t("workerCalcPage.fetchDateErrorMessage"));
           console.error(err.message);
@@ -158,7 +155,7 @@ const WorkerCalculation = () => {
       ...data,
       serialNo: index + 1,
     }));
-  }, [worker.account]);
+  }, [worker?.account]);
 
   const setFooter = (currentData) => {
     const accounts = tableData || currentData || [];

@@ -17,7 +17,7 @@ import {
   Row,
   Space,
 } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { postEntData, updateEntData } from "../service/ent";
 import { postIntShopeInitailData, UpdateIndDataById } from "../service/ind";
 import dayjs from "dayjs";
@@ -255,7 +255,7 @@ const EntDrawer = ({
                 <Form.List name="shopes">
                   {(fields) => (
                     <>
-                      {fields.map(({ key, name, ...resetField }) => {
+                      {fields.map(({ key, name }) => {
                         const isEditable = activeRow === name;
                         const isAnyEditable =
                           activeRow !== null && activeRow !== name;

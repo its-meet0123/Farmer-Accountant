@@ -1,6 +1,5 @@
 import {
   Button,
-  Card,
   DatePicker,
   Flex,
   Form,
@@ -11,7 +10,7 @@ import {
   Table,
 } from "antd";
 import { useEffect, useMemo, useState } from "react";
-import { data, useLocation, useMatch, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   deleteEndDate,
   editEndDate,
@@ -139,7 +138,7 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [fetch]);
+  }, [state, t]);
 
   useEffect(() => {
     async function getData() {
@@ -169,17 +168,17 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [fetch]);
-  console.log(fetch);
+  }, [fetch, endDate, t, today, form]);
 
   const BASE_COLUMNS = getColumnsForCalulationPage(t);
 
-  const tableData = shope.shopeAccount
-    ? shope.shopeAccount.map((item, index) => ({
-        ...item,
-        serialNo: index + 1,
-      }))
-    : [];
+  const tableData = useMemo(() => {
+    if (!shope.shopeAccount) return [];
+    return shope.shopeAccount.map((item, index) => ({
+      ...item,
+      serialNo: index + 1,
+    }));
+  }, [shope.shopeAccount]);
 
   const setFooter = (currentData) => {
     const summeryData = tableData || currentData;
