@@ -120,7 +120,7 @@ const WorkerCalculation = () => {
       }
     }
     getData();
-  }, [state]);
+  }, [state, t]);
 
   useEffect(() => {
     async function getData() {
@@ -148,16 +148,17 @@ const WorkerCalculation = () => {
       }
     }
     getData();
-  }, [fetch]);
+  }, [fetch, form, t, today, endDate]);
 
   const WORKER_TRANSACTION_CALC_COLUMNS = getColumnsForWorkerCalcPage(t);
 
-  const tableData = worker.account
-    ? worker.account.map((data, index) => ({
-        ...data,
-        serialNo: index + 1,
-      }))
-    : [];
+  const tableData = useMemo(() => {
+    if (!worker.account) return [];
+    return worker.account.map((data, index) => ({
+      ...data,
+      serialNo: index + 1,
+    }));
+  }, [worker.account]);
 
   const setFooter = (currentData) => {
     const accounts = tableData || currentData || [];
@@ -184,7 +185,7 @@ const WorkerCalculation = () => {
       }
       return total;
     }, 0);
-  }, [tableData, selectMonth]);
+  }, [tableData, selectMonth, today]);
 
   return (
     <>

@@ -3,10 +3,11 @@ import {
   MinusCircleOutlined,
   PlusCircleOutlined,
 } from "@ant-design/icons";
-import { Button, DatePicker, Form, Input, Row, Spin } from "antd";
+import { Button, DatePicker, Form, Input, message, Row, Spin } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
+import { postHarvestData } from "../../service/other";
 
 const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
   const { authState, t } = useAuth();
@@ -15,10 +16,29 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
 
   const onFinish = async () => {
     setButtonLoading(true);
-    const formValues = form.getFieldsValue();
-    console.log("all values", formValues);
-    const { harvesterId, transactions, ...pendingData } = formValues;
-    console.log("Needed values", pendingData);
+    if (openType === "addDetial") {
+      const formValues = form.getFieldsValue();
+      console.log("all values", formValues);
+      const { harvesterId, ...restOfFormValues } = formValues;
+      const harvesterDetails = {
+        ...restOfFormValues,
+        userId: authState.user.userId,
+      };
+      try {
+        const res = await postHarvestData(harvesterDetails);
+        const data = await res.data;
+
+        if (data.status === "Success") {
+          message.success(data.Code);
+          setFetch(data.data);
+          setButtonLoading(false);
+          onClose();
+        }
+      } catch (err) {
+        console.log(err.message);
+        message.error("Harvester Details not posted");
+      }
+    }
   };
 
   return (

@@ -39,7 +39,7 @@ const HomePage = () => {
       const data = indData.filter((ind) => ind.shopeNumber === shopeNo);
       return data;
     }
-  }, [shopeNo]);
+  }, [shopeNo, indData]);
   const showSuccess = (text) => {
     messageApi.open({
       type: "success",
@@ -127,14 +127,13 @@ const HomePage = () => {
         const indData = await indRes?.data?.data;
         setIndData(indData);
       } catch (err) {
-        setIsLoanding(ture);
         message.error(t("homePage.fetchDataErrorMessage"));
         console.error(err.message);
       }
       setFetch("");
     }
     getData();
-  }, [fetch]);
+  }, [fetch, t]);
 
   const tableData = entData.map((item, index) => ({
     ...item,

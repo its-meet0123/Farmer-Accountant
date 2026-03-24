@@ -211,7 +211,7 @@ const CalcPage = () => {
       }
       return total;
     }, 0);
-  }, [tableData, selectMonth]);
+  }, [tableData, selectMonth, today]);
 
   return (
     <>
