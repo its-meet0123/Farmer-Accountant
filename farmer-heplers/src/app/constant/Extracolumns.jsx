@@ -1130,7 +1130,7 @@ const getColumnsForCasualLaborPage = (t) => {
 };
 
 const getColumnsForHarvestList = (t) => {
-  const showModal = ({ title, details }) => {
+  const vehicleModal = ({ title, details }) => {
     Modal.info({
       title: title,
       content: (
@@ -1189,13 +1189,15 @@ const getColumnsForHarvestList = (t) => {
       width: 100,
       key: "vehicalDetails",
       render: (details) => {
-        details && (
-          <Button
-            type="text"
-            onClick={() => showModal("Vehical Detail", details)}>
-            view
-          </Button>
-        );
+        if (details.length > 0) {
+          return (
+            <Button
+              type="text"
+              onClick={() => vehicleModal("Vehical Detail", details)}>
+              view
+            </Button>
+          );
+        }
       },
     },
   ];
