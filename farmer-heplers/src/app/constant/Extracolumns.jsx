@@ -1129,6 +1129,7 @@ const getColumnsForCasualLaborPage = (t) => {
 
 const getColumnsForHarvestList = (t) => {
   const vehicleModal = ({ title, details }) => {
+    console.log("modalData", details);
     Modal.info({
       title: title,
       content: (
@@ -1187,6 +1188,7 @@ const getColumnsForHarvestList = (t) => {
       width: 100,
       key: "vehicalDetails",
       render: (details) => {
+        console.log("TableColumns", details);
         if (details.length > 0) {
           const title = "Vehical Detail";
           return (
