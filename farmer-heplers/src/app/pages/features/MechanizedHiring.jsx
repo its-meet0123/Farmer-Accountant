@@ -44,8 +44,10 @@ const HarvesterData = () => {
       vehicalDetails: record?.vehicalDetails,
       transactions: record?.transactions,
     });
-    setOpenType("editDetial");
-    setIsLoading(null);
+    setTimeout(() => {
+      setOpenType("editDetial");
+      setIsLoading(null);
+    }, 1000);
   };
 
   const deleteHarvester = (record) => {};
