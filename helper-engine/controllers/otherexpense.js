@@ -496,7 +496,7 @@ async function postHavrestData(req, res) {
         firstName: body.firstName,
         lastName: body.lastName,
         nickName: body.nickName,
-        Address: body.address,
+        address: body.address,
         contact: body.contact,
         idProof: body.idProof,
       },

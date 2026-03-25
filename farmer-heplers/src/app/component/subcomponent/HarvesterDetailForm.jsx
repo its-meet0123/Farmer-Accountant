@@ -7,7 +7,7 @@ import { Button, DatePicker, Form, Input, message, Row, Spin } from "antd";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
-import { postHarvestData } from "../../service/other";
+import { postHarvestData, updateHarvestData } from "../../service/other";
 
 const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
   const { authState, t } = useAuth();
@@ -18,7 +18,6 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
     setButtonLoading(true);
     if (openType === "addDetail") {
       const formValues = form.getFieldsValue();
-      console.log("all values", formValues);
       const { harvesterId, ...restOfFormValues } = formValues;
       const harvesterDetails = {
         ...restOfFormValues,
@@ -37,6 +36,26 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
       } catch (err) {
         console.log(err.message);
         message.error("Harvester Details not posted");
+      }
+    }
+
+    if (openType === "editDetail") {
+      const editValues = form.getFieldsValue();
+      console.log("Edit harvester data form values", editValues);
+      const { harvesterId, ...restOfFormValues } = editValues;
+
+      try {
+        const res = await updateHarvestData(harvesterId, restOfFormValues);
+        const data = await res.data;
+
+        if (data.status === "Success") {
+          message.success(data.Code);
+          setFetch(data.data);
+          onClose();
+        }
+      } catch (err) {
+        console.log(err.message);
+        message.error("Harvester data not edited");
       }
     }
   };

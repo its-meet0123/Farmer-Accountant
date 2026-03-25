@@ -12,7 +12,6 @@ import LaborDrawer from "../../component/CasualLaborDrawer";
 import {
   DeleteOutlined,
   EditOutlined,
-  FallOutlined,
   FileAddOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";

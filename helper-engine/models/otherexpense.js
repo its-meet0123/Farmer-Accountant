@@ -60,7 +60,7 @@ const harvestModel = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String },
     nickName: { type: String },
-    Address: { type: String },
+    address: { type: String },
     contact: { type: String },
     idProof: { type: String },
   },
