@@ -35,7 +35,7 @@ const CalcPage = () => {
   const [endDate, setEndDate] = useState([]);
   const [selectMonth, setSelectMonth] = useState(dayjs());
   const [id, setId] = useState();
-  const [fetch, setFetch] = useState();
+  const [fetch, setFetch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
@@ -138,7 +138,7 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [state, t]);
+  }, [state]);
 
   useEffect(() => {
     async function getData() {
@@ -168,7 +168,7 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [fetch, endDate, t, today, form]);
+  }, [fetch]);
 
   const BASE_COLUMNS = getColumnsForCalulationPage(t);
 

@@ -47,7 +47,7 @@ const HarvesterData = () => {
     setTimeout(() => {
       setOpenType("editDetial");
       setIsLoading(null);
-    }, 1000);
+    }, 2000);
   };
 
   const deleteHarvester = (record) => {};

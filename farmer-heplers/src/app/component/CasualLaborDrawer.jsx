@@ -18,11 +18,7 @@ const LaborDrawer = ({
   return (
     <>
       <Drawer
-        title={
-          ((openType === "laborAdd" || openType === "laborEdit") &&
-            "Labor Drawer") ||
-          (openType === "edit" && "Edit")
-        }
+        title={openType !== null && "Labor Drawer"}
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}

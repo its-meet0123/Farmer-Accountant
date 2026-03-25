@@ -17,11 +17,11 @@ const HarvestDrawer = ({
   return (
     <>
       <Drawer
-        title={openType !== null && "Harvest Data"}
+        title={openType !== null && "Harvest Drawer"}
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}
-        size="large">
+        size="medium">
         {(openType === "addDetail" || openType === "editDetail") && (
           <HarvesterDetailForm
             form={detailForm}

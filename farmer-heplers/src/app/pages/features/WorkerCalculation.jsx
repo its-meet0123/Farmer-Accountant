@@ -145,7 +145,7 @@ const WorkerCalculation = () => {
       }
     }
     getData();
-  }, [fetch, form, t, today, endDate]);
+  }, [fetch]);
 
   const WORKER_TRANSACTION_CALC_COLUMNS = getColumnsForWorkerCalcPage(t);
 
