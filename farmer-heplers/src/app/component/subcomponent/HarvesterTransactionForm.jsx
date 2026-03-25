@@ -1,7 +1,6 @@
-import { LoadingOutlined, ReadOutlined } from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 import {
   Button,
-  Checkbox,
   DatePicker,
   Form,
   Input,
@@ -9,7 +8,6 @@ import {
   message,
   Row,
   Spin,
-  Col,
   Radio,
 } from "antd";
 import { useState } from "react";
@@ -29,10 +27,6 @@ const HarvesterTransactionForm = ({
     { label: "Duration", value: "duration" },
     { label: "Measurement", value: "measurment" },
   ];
-
-  const onChange = (checkedValues) => {
-    setBaseOfRate(checkedValues);
-  };
 
   const onFinish = async () => {
     if (openType === "transAdd") {
@@ -119,7 +113,7 @@ const HarvesterTransactionForm = ({
 
         <Radio.Group
           options={options}
-          onChange={onChange}
+          onChange={(e) => setBaseOfRate(e.target.value)}
           value={baseOfRate}
           optionType="button"
         />
