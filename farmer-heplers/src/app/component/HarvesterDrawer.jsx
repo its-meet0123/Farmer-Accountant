@@ -1,5 +1,6 @@
 import { Drawer } from "antd";
 import HarvesterDetailForm from "./subcomponent/HarvesterDetailForm";
+import HarvesterTransactionForm from "./subcomponent/HarvesterTransactionForm";
 
 const HarvestDrawer = ({
   openType,
@@ -31,14 +32,13 @@ const HarvestDrawer = ({
           />
         )}
         {(openType === "addTrans" || openType === "editTrans") && (
-          //   <LaborTransForm
-          //     form={transactionForm}
-          //     openType={openType}
-          //     laborDetials={additionalWorker}
-          //     setFetch={setFetch}
-          //     onClose={onClose}
-          //   />
-          <p>transaction</p>
+          <HarvesterTransactionForm
+            form={transactionForm}
+            openType={openType}
+            harvesterList={harvesterList}
+            setFetch={setFetch}
+            onClose={onClose}
+          />
         )}
       </Drawer>
     </>

@@ -1,6 +1,7 @@
-import { LoadingOutlined } from "@ant-design/icons";
+import { LoadingOutlined, ReadOutlined } from "@ant-design/icons";
 import {
   Button,
+  Checkbox,
   DatePicker,
   Form,
   Input,
@@ -15,12 +16,17 @@ import { useAuth } from "../../auth/AuthContext";
 const HarvesterTransactionForm = ({
   form,
   openType,
-  harvesterDetails,
+  harvesterList,
   setFetch,
   onClose,
 }) => {
   const { authState, t } = useAuth();
   const [buttonLoading, setButtonLoading] = useState(false);
+  const [baseOfRate, setBaseOfRate] = useState("duration");
+
+  const onChange = (checkedValues) => {
+    setBaseOfRate(checkedValues);
+  };
 
   const onFinish = async () => {
     if (openType === "transAdd") {
@@ -28,7 +34,7 @@ const HarvesterTransactionForm = ({
         setButtonLoading(true);
         const formValues = form.getFieldsValue();
         const { harvesterId, ...restOfformValues } = formValues;
-
+        console.log("harvester trans form values", formValues);
         // TODO: Replace with actual API call
         // const res = await addTransactionForHarvester(
         //   harvesterId,
@@ -50,30 +56,29 @@ const HarvesterTransactionForm = ({
       }
     }
 
-    if (openType === "transEdit") {
-      try {
-        setButtonLoading(true);
-        const formValues = form.getFieldsValue();
-        const { harvesterId, transId, ...restOfformValues } = formValues;
-        const ids = { harvesterId: harvesterId, transactionId: transId };
+    // if (openType === "transEdit") {
+    //   try {
+    //     setButtonLoading(true);
+    //     const formValues = form.getFieldsValue();
+    //     const { harvesterId, transId, ...restOfformValues } = formValues;
+    //     const ids = { harvesterId: harvesterId, transactionId: transId };
 
-        // TODO: Replace with actual API call
-        // const res = await updateHarvesterTransaction(ids, restOfformValues);
-        // const data = await res.data;
-        // if (data.status === "Success") {
-        //   message.success(data.Code);
-        //   setButtonLoading(false);
-        //   setFetch(data.harvesterTrans);
-        // }
+    //     // TODO: Replace with actual API call
+    //     // const res = await updateHarvesterTransaction(ids, restOfformValues);
+    //     // const data = await res.data;
+    //     // if (data.status === "Success") {
+    //     //   message.success(data.Code);
+    //     //   setButtonLoading(false);
+    //     //   setFetch(data.harvesterTrans);
+    //     // }
 
-        message.info("API endpoint not yet implemented");
-        setButtonLoading(false);
-      } catch (err) {
-        console.log(err.message);
-        message.error("Harvester transaction not updated");
-      }
-    }
-    form.resetFields();
+    //     message.info("API endpoint not yet implemented");
+    //     setButtonLoading(false);
+    //   } catch (err) {
+    //     console.log(err.message);
+    //     message.error("Harvester transaction not updated");
+    //   }
+    // }
   };
 
   return (
@@ -99,23 +104,55 @@ const HarvesterTransactionForm = ({
           </Form.Item>
 
           <Form.Item
-            label="Amount"
-            name="amount"
-            rules={[{ required: true, message: "Please enter amount" }]}>
-            <InputNumber placeholder="Enter amount" />
-          </Form.Item>
-
-          <Form.Item
             label="Date"
-            name="date"
+            name="startDate"
             rules={[{ required: true, message: "Please select date" }]}>
             <DatePicker />
           </Form.Item>
+        </Row>
 
-          <Form.Item label="Description" name="description">
-            <Input placeholder="Enter description" />
+        <Checkbox.Group onChange={onChange}>
+          <Row>
+            <Col span={8}>
+              <Checkbox value="duration">Duration</Checkbox>
+            </Col>
+            <Col span={8}>
+              <Checkbox value="measurment">Measurement</Checkbox>
+            </Col>
+          </Row>
+        </Checkbox.Group>
+
+        <Row gutter={24}>
+          {baseOfRate == "duration" && (
+            <Form.Item label="Duration" name="duration">
+              <InputNumber placeholder="duration" />
+            </Form.Item>
+          )}
+
+          {baseOfRate == "measurment" && (
+            <Form.Item label="Measurement" name="measurment">
+              <InputNumber placeholder="measurment" />
+            </Form.Item>
+          )}
+
+          <Form.Item label="Harvesting Charge" name="salary">
+            <InputNumber placeholder="harvesting charge" />
+          </Form.Item>
+        </Row>
+        <Row gutter={24}>
+          <Form.Item label="Pay" name="pay">
+            <InputNumber />
           </Form.Item>
 
+          <Form.Item label="Transaction Type" name="transType">
+            <Input />
+          </Form.Item>
+
+          <Form.Item label="Handover" name="handOver">
+            <Input />
+          </Form.Item>
+        </Row>
+        <Row gutter={24}>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={buttonLoading}>
               {buttonLoading ? (

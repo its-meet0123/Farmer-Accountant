@@ -26,7 +26,16 @@ const HarvesterData = () => {
   const [detailForm] = Form.useForm();
   const [transactionForm] = Form.useForm();
 
-  const handleAddHarvesterTransaction = (record) => {};
+  const handleAddHarvesterTransaction = (record) => {
+    setIsLoading("aht");
+    transactionForm.setFieldsValue({
+      harvesterId: record._id,
+    });
+    setTimeout(() => {
+      setOpenType("addTrans");
+      setIsLoading(null);
+    }, 1000);
+  };
 
   const editFunction = (record) => {
     console.log("harvesterDateEdit", record);
