@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Flex, Input, Modal, Popconfirm } from "antd";
+import { Button, Flex, Input, Modal, Popconfirm, Row } from "antd";
 import { useState } from "react";
 
 const formattedDate = (date) => {
@@ -1135,9 +1135,20 @@ const getColumnsForHarvestList = (t) => {
       title: title,
       content: (
         <>
-          <p>{details.vehicalNumber}</p>
-          <p>{details.vehicalType}</p>
-          <p>{details.vehicalId}</p>
+          <table>
+            <tr>
+              <th>Vehicle Number</th>
+              <th>Vehicle Type</th>
+              <th>Vehicle ID</th>
+            </tr>
+            {details.map((vehicle) => {
+              <tr>
+                <td>{vehicle.vehicalNumber}</td>
+                <td>{vehicle.vehicalType}</td>
+                <td>{vehicle.vehicalID}</td>
+              </tr>;
+            })}
+          </table>
         </>
       ),
     });
@@ -1179,7 +1190,11 @@ const getColumnsForHarvestList = (t) => {
       key: "vehicalDetails",
       render: (details) => {
         details && (
-          <p onClick={() => showModal("Vehical Detail", details)}>view</p>
+          <Button
+            type="text"
+            onClick={() => showModal("Vehical Detail", details)}>
+            view
+          </Button>
         );
       },
     },
