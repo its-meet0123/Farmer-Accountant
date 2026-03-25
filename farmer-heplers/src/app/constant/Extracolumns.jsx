@@ -1134,19 +1134,23 @@ const getColumnsForHarvestList = (t) => {
       title: title,
       content: (
         <>
-          <table>
-            <tr>
-              <th>Vehicle Number</th>
-              <th>Vehicle Type</th>
-              <th>Vehicle ID</th>
-            </tr>
-            {details.map((vehicle) => {
-              <tr key={vehicle.vehicalID}>
-                <td>{vehicle.vehicalNumber}</td>
-                <td>{vehicle.vehicalType}</td>
-                <td>{vehicle.vehicalID}</td>
-              </tr>;
-            })}
+          <table border="1">
+            <thead>
+              <tr>
+                <th>Vehicle Number</th>
+                <th>Vehicle Type</th>
+                <th>Vehicle ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {details.map((vehicle) => (
+                <tr key={vehicle.vehicalID}>
+                  <td>{vehicle.vehicalNumber}</td>
+                  <td>{vehicle.vehicalType}</td>
+                  <td>{vehicle.vehicalID}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </>
       ),
