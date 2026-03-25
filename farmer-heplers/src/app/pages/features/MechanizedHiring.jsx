@@ -45,7 +45,7 @@ const HarvesterData = () => {
       transactions: record?.transactions,
     });
     setTimeout(() => {
-      setOpenType("editDetial");
+      setOpenType("editDetail");
       setIsLoading(null);
     }, 2000);
   };
