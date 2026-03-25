@@ -29,7 +29,7 @@ const HarvesterTransactionForm = ({
   ];
 
   const onFinish = async () => {
-    if (openType === "transAdd") {
+    if (openType === "addTrans") {
       try {
         setButtonLoading(true);
         const formValues = form.getFieldsValue();
@@ -56,7 +56,7 @@ const HarvesterTransactionForm = ({
       }
     }
 
-    // if (openType === "transEdit") {
+    // if (openType === "editTrans") {
     //   try {
     //     setButtonLoading(true);
     //     const formValues = form.getFieldsValue();
