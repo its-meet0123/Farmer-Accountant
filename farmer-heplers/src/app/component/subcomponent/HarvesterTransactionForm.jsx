@@ -10,6 +10,7 @@ import {
   Row,
   Spin,
   Col,
+  Radio,
 } from "antd";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
@@ -24,6 +25,10 @@ const HarvesterTransactionForm = ({
   const { authState, t } = useAuth();
   const [buttonLoading, setButtonLoading] = useState(false);
   const [baseOfRate, setBaseOfRate] = useState("duration");
+  const options = [
+    { label: "Duration", value: "duration" },
+    { label: "Measurement", value: "measurment" },
+  ];
 
   const onChange = (checkedValues) => {
     setBaseOfRate(checkedValues);
@@ -95,7 +100,7 @@ const HarvesterTransactionForm = ({
         labelCol={100}
         wrapperCol={150}
         onFinish={onFinish}>
-        <Row gutter={24}>
+        <Row gutter={12}>
           <Form.Item label="Harvester ID" name="harvesterId" hidden>
             <Input />
           </Form.Item>
@@ -112,18 +117,14 @@ const HarvesterTransactionForm = ({
           </Form.Item>
         </Row>
 
-        <Checkbox.Group onChange={onChange}>
-          <Row>
-            <Col span={8}>
-              <Checkbox value="duration">Duration</Checkbox>
-            </Col>
-            <Col span={8}>
-              <Checkbox value="measurment">Measurement</Checkbox>
-            </Col>
-          </Row>
-        </Checkbox.Group>
+        <Radio.Group
+          options={options}
+          onChange={onChange}
+          value={baseOfRate}
+          optionType="button"
+        />
 
-        <Row gutter={24}>
+        <Row gutter={12}>
           {baseOfRate == "duration" && (
             <Form.Item label="Duration" name="duration">
               <InputNumber placeholder="duration" />
@@ -140,7 +141,7 @@ const HarvesterTransactionForm = ({
             <InputNumber placeholder="harvesting charge" />
           </Form.Item>
         </Row>
-        <Row gutter={24}>
+        <Row gutter={12}>
           <Form.Item label="Pay" name="pay">
             <InputNumber />
           </Form.Item>
@@ -153,7 +154,7 @@ const HarvesterTransactionForm = ({
             <Input />
           </Form.Item>
         </Row>
-        <Row gutter={24}>
+        <Row gutter={12}>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={buttonLoading}>
               {buttonLoading ? (
