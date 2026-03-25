@@ -9,6 +9,7 @@ import {
   message,
   Row,
   Spin,
+  Col,
 } from "antd";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
