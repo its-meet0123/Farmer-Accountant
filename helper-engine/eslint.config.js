@@ -1,31 +1,21 @@
-//import unusedImports from "eslint-plugin-unused-imports";
-import importPlugin from "eslint-plugin-import";
-
 export default [
   {
     files: ["**/*.js"],
-
     languageOptions: {
       ecmaVersion: "latest",
-      sourceType: "script",
-
+      sourceType: "module", // Node.js ke liye
       globals: {
+        console: "readonly",
         require: "readonly",
         module: "readonly",
-        console: "readonly",
+        __dirname: "readonly",
+        process: "readonly",
       },
     },
 
-    plugins: {
-      //"unused-imports": unusedImports,
-      import: importPlugin,
-    },
-
     rules: {
-      "no-unused-vars": "off",
-      "unused-imports/no-unused-imports": "warn",
-      "unused-imports/no-unused-vars": "warn",
-      "no-undef": "error",
+      "no-undef": "error", // define nahi kiya variable use kiya → error
+      "no-unused-vars": "warn", // define kiya variable use nahi kiya → warning
     },
   },
 ];
