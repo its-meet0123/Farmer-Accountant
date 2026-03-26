@@ -103,7 +103,7 @@ const CasualLabor = () => {
   const deleteLaborTrans = async (record) => {
     try {
       const filterFieldWorkers = additonalWorker
-        .map((labor) => {
+        .find((labor) => {
           const matchingTransaction = labor.transactions.filter(
             (transaction) => {
               return Object.keys(transaction).every(

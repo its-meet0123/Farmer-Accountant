@@ -127,7 +127,7 @@ const HarvesterData = () => {
   };
 
   const deleteTrans = (record) => {
-    const forHarvesterId = harvestList.map((harvester) => {
+    const forHarvesterId = harvestList.find((harvester) => {
       const matchingTransaction = harvester.transactions.filter(
         (transaction) => {
           return Object.keys(transaction).every(
