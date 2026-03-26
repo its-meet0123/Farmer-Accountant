@@ -87,7 +87,9 @@ const CasualLabor = () => {
   const editTransFunction = async (record) => {
     const filterFieldWorkers = additonalWorker.find((labor) => {
       return labor.transactions.some((transaction) =>
-        Object.keys(record).every((key) => transaction[key] === record[key]),
+        Object.keys(transaction).every(
+          (key) => transaction[key] === record[key],
+        ),
       );
     });
     const workerId = filterFieldWorkers?._id;

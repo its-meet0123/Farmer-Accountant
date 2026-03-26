@@ -92,11 +92,13 @@ const HarvesterData = () => {
     setIsLoading("het");
     const forHarvesterId = harvestList.find((harvester) => {
       return harvester.transactions.some((transaction) =>
-        Object.keys(record).every((key) => transaction[key] === record[key]),
+        Object.keys(transaction).every(
+          (key) => transaction[key] === record[key],
+        ),
       );
     });
     console.log("edit transaction data", forHarvesterId);
-    const length = forHarvesterId.transactions.length;
+    const length = forHarvesterId?.transactions?.length;
     const harvesterId = forHarvesterId._id;
     const transId = record?._id;
     const date = dayjs(record?.startDate);
