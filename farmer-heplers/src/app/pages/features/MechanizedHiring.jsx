@@ -135,8 +135,7 @@ const HarvesterData = () => {
           );
         },
       );
-      const length = harvester.transactions.length;
-      return { ...harvester, transactions: matchingTransaction, lock: length };
+      return { ...harvester, transactions: matchingTransaction };
     });
 
     console.log(forHarvesterId);
