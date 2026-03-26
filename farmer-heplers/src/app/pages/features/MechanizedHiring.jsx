@@ -25,7 +25,6 @@ import {
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
 import dayjs from "dayjs";
-import { duration } from "html2canvas/dist/types/css/property-descriptors/duration";
 
 const HarvesterData = () => {
   const { t } = useAuth();
@@ -135,7 +134,12 @@ const HarvesterData = () => {
           );
         },
       );
-      return { ...harvester, transactions: matchingTransaction };
+      const transArraylen = harvester.transactions.length;
+      return {
+        ...harvester,
+        transactions: matchingTransaction,
+        transArraylen: transArraylen,
+      };
     });
 
     console.log(forHarvesterId);
