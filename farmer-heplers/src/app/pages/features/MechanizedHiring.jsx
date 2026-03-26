@@ -111,6 +111,7 @@ const HarvesterData = () => {
         });
         setIsLoading(null);
       }, 1000);
+      return;
     }
     transactionForm.setFieldsValue({
       harvesterId: harvesterId,
@@ -159,6 +160,7 @@ const HarvesterData = () => {
         placement: "topRight",
       });
       setIsLoading(null);
+      return;
     }
     try {
       const harvesterId = sepcificHarvester._id;
