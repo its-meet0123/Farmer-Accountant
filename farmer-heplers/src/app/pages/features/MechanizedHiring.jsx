@@ -10,7 +10,11 @@ import {
   Spin,
   Table,
 } from "antd";
-import { deleteHarvestData, getAllHarvestList } from "../../service/other";
+import {
+  deleteHarvestData,
+  deleteHarvestDataTransaction,
+  getAllHarvestList,
+} from "../../service/other";
 import {
   getColumnsForHarvestList,
   getColumnsForHarvestTransaction,
@@ -98,14 +102,15 @@ const HarvesterData = () => {
 
     if (length != record.serialNo) {
       setTimeout(() => {
-        setIsLoading(null);
+        setOpenType(null);
+
         notification.warning({
           message: "Edit Action not work",
           description:
             "You can only edit this transaction if it is the most recent one. Transactions preceding the last entry cannot be modified.",
           placement: "topRight",
         });
-        setOpenType(null);
+        setIsLoading(null);
       }, 1000);
     }
     transactionForm.setFieldsValue({
@@ -126,7 +131,7 @@ const HarvesterData = () => {
     }, 1000);
   };
 
-  const deleteTrans = (record) => {
+  const deleteTrans = async (record) => {
     const sepcificHarvester = harvestList.find((harvester) => {
       return harvester.transactions.some((transaction) =>
         Object.keys(transaction).every(
@@ -136,7 +141,6 @@ const HarvesterData = () => {
     });
 
     const length = sepcificHarvester.transactions.length;
-    const harvesterId = sepcificHarvester._id;
 
     const sepcificTransaction = sepcificHarvester.transactions.filter(
       (transaction) => {
@@ -146,8 +150,33 @@ const HarvesterData = () => {
       },
     );
 
-    console.log("harvester", sepcificHarvester, "length", length);
-    console.log("transaction", sepcificTransaction);
+    if (record.serialNo != length) {
+      setOpenType(null);
+
+      notification.warning({
+        message: "Delete Action not work",
+        description:
+          "You can only delete this transaction if it is the most recent one. Transactions preceding the last entry cannot be removed.",
+        placement: "topRight",
+      });
+      setIsLoading(null);
+    }
+    try {
+      const harvesterId = sepcificHarvester._id;
+      const transId = sepcificTransaction[0]?._id;
+
+      const ids = { harvestId: harvesterId, transactionId: transId };
+      const res = await deleteHarvestDataTransaction(ids);
+      const data = await res.data;
+
+      if (data.status === "Success") {
+        message.success(data.Code);
+        setFetch(data.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+      message.error("harvester transaction not deleted ");
+    }
   };
 
   useEffect(() => {
