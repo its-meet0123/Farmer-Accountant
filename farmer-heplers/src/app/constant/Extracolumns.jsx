@@ -403,9 +403,8 @@ const getColumnsForCalulationPage = (t) => {
           dataIndex: ["loan", "amount"],
           key: "amount",
           width: 100,
-          render: (text, record) => {
-            if (record.loan.amount > 0)
-              return <p style={{ color: "#3E0703" }}>{text}</p>;
+          render: (text) => {
+            if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
           },
         },
         {
@@ -417,9 +416,8 @@ const getColumnsForCalulationPage = (t) => {
           dataIndex: ["loan", "days"],
           key: "days",
           width: 100,
-          render: (text, record) => {
-            if (record.loan.amount > 0)
-              return <p style={{ color: "#3E0703" }}>{text}</p>;
+          render: (text) => {
+            if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
           },
         },
         {
@@ -431,9 +429,8 @@ const getColumnsForCalulationPage = (t) => {
           dataIndex: ["loan", "months"],
           key: "days",
           width: 100,
-          render: (text, record) => {
-            if (record.loan.amount > 0)
-              return <p style={{ color: "#3E0703" }}>{text}</p>;
+          render: (text) => {
+            if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
           },
         },
         {
@@ -445,9 +442,8 @@ const getColumnsForCalulationPage = (t) => {
           dataIndex: ["loan", "interest"],
           key: "interest",
           width: 100,
-          render: (text, record) => {
-            if (record.loan.amount > 0)
-              return <p style={{ color: "#3E0703" }}>{text}</p>;
+          render: (text) => {
+            if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
           },
         },
         {
@@ -459,9 +455,8 @@ const getColumnsForCalulationPage = (t) => {
           dataIndex: ["loan", "totalAmount"],
           key: "totalAmount",
           width: 100,
-          render: (text, record) => {
-            if (record.loan.amount > 0)
-              return <p style={{ color: "#3E0703" }}>{text}</p>;
+          render: (text) => {
+            if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
           },
         },
       ],
