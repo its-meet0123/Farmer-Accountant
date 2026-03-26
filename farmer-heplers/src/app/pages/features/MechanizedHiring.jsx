@@ -128,13 +128,11 @@ const HarvesterData = () => {
 
   const deleteTrans = (record) => {
     const forHarvesterId = harvestList.find((harvester) => {
-      const matchingTransaction = harvester.transactions.filter(
-        (transaction) => {
-          return Object.keys(transaction).every(
-            (key) => transaction[key] === record[key],
-          );
-        },
-      );
+      const matchingTransaction = harvester.transactions.some((transaction) => {
+        return Object.keys(transaction).every(
+          (key) => transaction[key] === record[key],
+        );
+      });
       const transArraylen = harvester.transactions.length;
       return {
         ...harvester,

@@ -84,8 +84,8 @@ const HarvesterTransactionForm = ({
       <Form
         layout="inline"
         name={
-          (openType === "transAdd" && "Add Transaction") ||
-          (openType === "transEdit" && "Edit Transaction")
+          (openType === "addTrans" && "Add Transaction") ||
+          (openType === "editTrans" && "Edit Transaction")
         }
         form={form}
         style={{ maxWidth: 800 }}
