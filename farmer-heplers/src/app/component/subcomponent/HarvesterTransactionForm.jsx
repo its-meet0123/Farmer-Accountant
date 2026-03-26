@@ -12,7 +12,10 @@ import {
 } from "antd";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
-import { addTransactionForHarvestData } from "../../service/other";
+import {
+  addTransactionForHarvestData,
+  updateHarvestDataTransaction,
+} from "../../service/other";
 
 const HarvesterTransactionForm = ({
   form,
@@ -47,39 +50,33 @@ const HarvesterTransactionForm = ({
           message.success(data.Code);
           setButtonLoading(false);
           setFetch(data.data);
+          onClose();
         }
-
-        message.success(data.Code);
-        setButtonLoading(false);
       } catch (err) {
         message.error("Harvester transaction not added");
         console.log(err.message);
       }
     }
 
-    // if (openType === "editTrans") {
-    //   try {
-    //     setButtonLoading(true);
-    //     const formValues = form.getFieldsValue();
-    //     const { harvesterId, transId, ...restOfformValues } = formValues;
-    //     const ids = { harvesterId: harvesterId, transactionId: transId };
+    if (openType === "editTrans") {
+      try {
+        setButtonLoading(true);
+        const formValues = form.getFieldsValue();
+        const { harvesterId, transId, ...restOfformValues } = formValues;
+        const ids = { harvesterId: harvesterId, transactionId: transId };
 
-    //     // TODO: Replace with actual API call
-    //     // const res = await updateHarvesterTransaction(ids, restOfformValues);
-    //     // const data = await res.data;
-    //     // if (data.status === "Success") {
-    //     //   message.success(data.Code);
-    //     //   setButtonLoading(false);
-    //     //   setFetch(data.harvesterTrans);
-    //     // }
-
-    //     message.info("API endpoint not yet implemented");
-    //     setButtonLoading(false);
-    //   } catch (err) {
-    //     console.log(err.message);
-    //     message.error("Harvester transaction not updated");
-    //   }
-    // }
+        const res = await updateHarvestDataTransaction(ids, restOfformValues);
+        const data = await res.data;
+        if (data.status === "Success") {
+          message.success(data.Code);
+          setButtonLoading(false);
+          setFetch(data.harvesterTrans);
+        }
+      } catch (err) {
+        console.log(err.message);
+        message.error("Harvester transaction not updated");
+      }
+    }
   };
 
   return (
@@ -152,11 +149,15 @@ const HarvesterTransactionForm = ({
         <Row gutter={12}>
           <Form.Item>
             <Button type="primary" htmlType="submit" loading={buttonLoading}>
-              {buttonLoading ? (
-                <Spin indicator={<LoadingOutlined />} />
+              {/* {buttonLoading ? (
+                <Spin
+                indicator={<LoadingOutlined spin />}
+                size="small"
+                style={{ color: "#fff" }}
+              />
               ) : (
                 t?.submit || "Submit"
-              )}
+              )} */}
             </Button>
           </Form.Item>
         </Row>

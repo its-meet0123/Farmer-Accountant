@@ -527,10 +527,22 @@
       "dut": "Duration(total working day)",
       "tt": "Total Wages",
       "pt": "Pay",
+      "hot": "Hand Over",
       "act": "Action"
     }
   },
-  "mechanizedHiring": {},
+  "mechanizedHiring": {
+    "ttc": {
+      "sntt": "S. No.",
+      "dt": "Date",
+      "wt": "Harvesting Charge",
+      "dut": "Duration/Measuremernt",
+      "tt": "Total/Remaing",
+      "pt": "Pay",
+      "hot": "Hand Over",
+      "act": "Action"
+    }
+  },
   "layout": {
     "ft1": "Farmer Accountant",
     "ft2": "Created by Sukh Ramghria",

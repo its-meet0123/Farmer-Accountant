@@ -1,7 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { PageContainer } from "../../component/PageContainer";
-import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
-import { getAllHarvestList } from "../../service/other";
+import {
+  Button,
+  Flex,
+  Form,
+  message,
+  notification,
+  Popconfirm,
+  Spin,
+  Table,
+} from "antd";
+import { deleteHarvestData, getAllHarvestList } from "../../service/other";
 import {
   getColumnsForHarvestList,
   getColumnsForHarvestTransaction,
@@ -16,6 +25,7 @@ import {
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
 import dayjs from "dayjs";
+import { duration } from "html2canvas/dist/types/css/property-descriptors/duration";
 
 const HarvesterData = () => {
   const { t } = useAuth();
@@ -59,11 +69,78 @@ const HarvesterData = () => {
     }, 2000);
   };
 
-  const deleteHarvester = (record) => {};
+  const deleteHarvester = async (record) => {
+    try {
+      const id = record._id;
+      const res = await deleteHarvestData(id);
+      const data = await res.data;
 
-  const editTransFunction = () => {};
+      if (data.status === "Success") {
+        message.success(data.Code);
+        setFetch(data.data);
+      }
+    } catch (err) {
+      console.log(err.message);
+      message.error("Harvester not deleted");
+    }
+  };
 
-  const deleteTrans = () => {};
+  const editTransFunction = (record) => {
+    setIsLoading("het");
+    const forHarvesterId = harvestList.filter((harvester) => {
+      return harvester.transactions.some((transaction) =>
+        Object.keys(record).every((key) => transaction[key] === record[key]),
+      );
+    });
+    const length = forHarvesterId[0]?.transactions.length;
+    const harvesterId = forHarvesterId[0]?._id;
+    const transId = record?._id;
+    const date = dayjs(record?.startDate);
+
+    if (length != record.serialNo) {
+      setTimeout(() => {
+        setIsLoading(null);
+        notification.warning({
+          message: "Edit Action not work",
+          description:
+            "You can only edit this transaction if it is the most recent one. Transactions preceding the last entry cannot be modified.",
+          placement: "topRight",
+        });
+      }, 1000);
+    }
+    transactionForm.setFieldsValue({
+      harvesterId: harvesterId,
+      transId: transId,
+      startDate: date,
+      duration: record?.duration,
+      measurment: record?.measurment,
+      salary: record?.salary,
+      pay: record?.pay,
+      transType: record?.transType,
+      handeOver: record?.handeOver,
+    });
+
+    setTimeout(() => {
+      setIsLoading(null);
+      setOpenType("editTrans");
+    }, 1000);
+  };
+
+  const deleteTrans = (record) => {
+    const forHarvesterId = harvestList.map((harvester) => {
+      const matchingTransaction = harvester.transactions.filter(
+        (transaction) => {
+          return Object.keys(record).every(
+            (key) => transaction[key] === record[key],
+          );
+        },
+      );
+      const length = harvester.transactions.length;
+      return { ...harvester, transactions: matchingTransaction, lock: length };
+    });
+
+    console.log(forHarvesterId);
+  };
 
   useEffect(() => {
     async function getData() {
@@ -104,7 +181,7 @@ const HarvesterData = () => {
                 type="link"
                 icon={<EditOutlined />}
                 onClick={() => editTransFunction(record)}>
-                {isLoading === "let" && (
+                {isLoading === "het" && (
                   <Spin indicator={<LoadingOutlined spin />} size="small" />
                 )}
               </Button>
