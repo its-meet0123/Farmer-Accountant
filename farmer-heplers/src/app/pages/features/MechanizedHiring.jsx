@@ -100,10 +100,9 @@ const HarvesterData = () => {
     const transId = record?._id;
     const date = dayjs(record?.startDate);
 
-    if (length != record.serialNo) {
+    if (length !== record.serialNo) {
+      setOpenType(null);
       setTimeout(() => {
-        setOpenType(null);
-
         notification.warning({
           message: "Edit Action not work",
           description:
@@ -150,7 +149,7 @@ const HarvesterData = () => {
       },
     );
 
-    if (record.serialNo != length) {
+    if (record.serialNo !== length) {
       setOpenType(null);
 
       notification.warning({
