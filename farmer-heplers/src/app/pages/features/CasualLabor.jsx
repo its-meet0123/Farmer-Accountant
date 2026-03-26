@@ -1,4 +1,13 @@
-import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
+import {
+  Button,
+  Flex,
+  Form,
+  message,
+  notification,
+  Popconfirm,
+  Spin,
+  Table,
+} from "antd";
 import { PageContainer } from "../../component/PageContainer";
 import { useState, useEffect, useMemo } from "react";
 import {
@@ -76,12 +85,12 @@ const CasualLabor = () => {
   };
 
   const editTransFunction = async (record) => {
-    const filterFieldWorkers = additonalWorker.filter((labor) => {
+    const filterFieldWorkers = additonalWorker.find((labor) => {
       return labor.transactions.some((transaction) =>
         Object.keys(record).every((key) => transaction[key] === record[key]),
       );
     });
-    const workerId = filterFieldWorkers[0]._id;
+    const workerId = filterFieldWorkers?._id;
     setButtonLoanding("let");
     const startDate = dayjs(record.startDate);
     transactionForm.setFieldsValue({
@@ -101,23 +110,42 @@ const CasualLabor = () => {
   };
 
   const deleteLaborTrans = async (record) => {
-    try {
-      const filterFieldWorkers = additonalWorker
-        .find((labor) => {
-          const matchingTransaction = labor.transactions.filter(
-            (transaction) => {
-              return Object.keys(transaction).every(
-                (key) => transaction[key] === record[key],
-              );
-            },
-          );
-          return { ...labor, transactions: matchingTransaction };
-        })
-        .filter((labor) => labor.transactions.length > 0);
+    const filterFieldWorkers = additonalWorker.find((worker) => {
+      return worker.transactions.some((transaction) =>
+        Object.keys(transaction).every(
+          (key) => transaction[key] === record[key],
+        ),
+      );
+    });
 
+    const length = filterFieldWorkers.transactions.length;
+
+    const sepcificTransaction = filterFieldWorkers.transactions.find(
+      (transaction) => {
+        return Object.keys(transaction).every(
+          (key) => transaction[key] === record[key],
+        );
+      },
+    );
+
+    if (record.serialNo !== length) {
+      setOpenType(null);
+      setTimeout(() => {
+        notification.warning({
+          message: "Delete Action not work",
+          description:
+            "You can only delete this transaction if it is the most recent one. Transactions preceding the last entry cannot be removed.",
+          placement: "topRight",
+        });
+        setIsLoading(null);
+      }, 1000);
+
+      return;
+    }
+    try {
       const ids = {
-        workerId: filterFieldWorkers[0]?._id,
-        transactionId: filterFieldWorkers[0]?.transactions[0]?._id,
+        workerId: filterFieldWorkers?._id,
+        transactionId: sepcificTransaction._id,
       };
       const res = await deleteFieldWorkerTransaction(ids);
       const data = await res.data;

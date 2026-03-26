@@ -90,15 +90,17 @@ const HarvesterData = () => {
 
   const editTransFunction = (record) => {
     setIsLoading("het");
-    const forHarvesterId = harvestList.filter((harvester) => {
+    const forHarvesterId = harvestList.find((harvester) => {
       return harvester.transactions.some((transaction) =>
         Object.keys(record).every((key) => transaction[key] === record[key]),
       );
     });
-    const length = forHarvesterId[0]?.transactions.length;
-    const harvesterId = forHarvesterId[0]?._id;
+    const length = forHarvesterId.transactions.length;
+    const harvesterId = forHarvesterId._id;
     const transId = record?._id;
     const date = dayjs(record?.startDate);
+    console.log("length :", length);
+    console.log("record :", record.serialNo);
 
     if (length !== record.serialNo) {
       setOpenType(null);
@@ -152,14 +154,16 @@ const HarvesterData = () => {
 
     if (record.serialNo !== length) {
       setOpenType(null);
+      setTimeout(() => {
+        notification.warning({
+          message: "Delete Action not work",
+          description:
+            "You can only delete this transaction if it is the most recent one. Transactions preceding the last entry cannot be removed.",
+          placement: "topRight",
+        });
+        setIsLoading(null);
+      }, 1000);
 
-      notification.warning({
-        message: "Delete Action not work",
-        description:
-          "You can only delete this transaction if it is the most recent one. Transactions preceding the last entry cannot be removed.",
-        placement: "topRight",
-      });
-      setIsLoading(null);
       return;
     }
     try {
