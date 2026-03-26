@@ -22,7 +22,7 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   };
 }
 
-async function autoTotalForOtherExpense(ids, upComingTrans) {
+async function autoTotalForCasualWorker(ids, upComingTrans) {
   console.log("IDS:", ids, "upComingTrans: ", upComingTrans);
   const workerDetails = await FieldWorker.findById(ids.iD);
   console.log("form casual labor :", workerDetails);
@@ -80,4 +80,69 @@ async function autoTotalForOtherExpense(ids, upComingTrans) {
   };
 }
 
-module.exports = { calculateAutoInterst, autoTotalForOtherExpense };
+async function autoTotalForHarvesterData(ids, upComingTrans) {
+  console.log("IDS:", ids, "upComingTrans: ", upComingTrans);
+  const harvesterDB = await Harvest.findById(ids.iD);
+  console.log("form harvester data :", harvesterDB);
+
+  if (!harvesterDB) return {};
+
+  if (ids.transactionId) {
+    const getTransaction = harvesterDB.transactions.find((transaction) => {
+      return transaction._id.toString() === ids.transactionId.toString();
+    });
+
+    console.log("from Shema trans", getTransaction);
+    if (!getTransaction) {
+      return {};
+    }
+
+    const transTotal = getTransaction?.total || 0;
+    if (transTotal > 0 || upComingTrans?.pay > 0) {
+      const total = upComingTrans?.duration
+        ? upComingTrans.duration * upComingTrans.salary
+        : upComingTrans.measurment
+          ? upComingTrans.measurment * upComingTrans.salary
+          : transTotal;
+
+      const bodyTotal = total - upComingTrans.pay;
+
+      return {
+        ...upComingTrans,
+        total: bodyTotal,
+      };
+    }
+  }
+
+  const transaction = harvesterDB.transactions || [];
+
+  const transTotal = transaction.length
+    ? transaction[transaction.length - 1].total
+    : 0;
+
+  const total = upComingTrans.duration
+    ? upComingTrans.duration * upComingTrans.salary
+    : upComingTrans.measurment
+      ? upComingTrans.measurment * upComingTrans.salary
+      : 0;
+
+  if (upComingTrans.pay > 0) {
+    let bodyTotal = transTotal + total - upComingTrans.pay;
+    return {
+      ...upComingTrans,
+      total: bodyTotal,
+    };
+  }
+
+  const bodyTotal = transTotal + total;
+  return {
+    ...upComingTrans,
+    total: bodyTotal,
+  };
+}
+
+module.exports = {
+  calculateAutoInterst,
+  autoTotalForCasualWorker,
+  autoTotalForHarvesterData,
+};

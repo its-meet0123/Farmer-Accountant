@@ -1,5 +1,8 @@
 require("dotenv").config();
-const { autoTotalForOtherExpense } = require("../components/calculator");
+const {
+  autoTotalForOtherExpense,
+  autoTotalForHarvesterData,
+} = require("../components/calculator");
 const { FieldWorker, Harvest } = require("../models/otherexpense");
 const jwt = require("jsonwebtoken");
 
@@ -246,7 +249,7 @@ async function handleAddHarvesterTransactionById(req, res) {
 
     const ids = { iD: id, transactionId: "" };
 
-    const body = await autoTotalForOtherExpense(ids, upComingTrans);
+    const body = await autoTotalForHarvesterData(ids, upComingTrans);
 
     const token = req.cookies.token;
     const decoded = jwt.verify(token, JWT_SECRET);
@@ -345,7 +348,7 @@ async function updateHarvesterTransactionByIds(req, res) {
 
     const ids = { iD: harvestId, transactionId: transactionId };
 
-    const body = await autoTotalForOtherExpense(ids, upComingTrans);
+    const body = await autoTotalForHarvesterData(ids, upComingTrans);
 
     const harvestData = await Harvest.updateOne(
       {
