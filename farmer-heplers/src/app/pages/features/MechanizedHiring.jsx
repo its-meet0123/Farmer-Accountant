@@ -95,10 +95,12 @@ const HarvesterData = () => {
         Object.keys(record).every((key) => transaction[key] === record[key]),
       );
     });
+    console.log("edit transaction data", forHarvesterId);
     const length = forHarvesterId.transactions.length;
     const harvesterId = forHarvesterId._id;
     const transId = record?._id;
     const date = dayjs(record?.startDate);
+
     console.log("length :", length);
     console.log("record :", record?.serialNo);
 
