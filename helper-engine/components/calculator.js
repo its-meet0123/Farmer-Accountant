@@ -1,6 +1,7 @@
 const { FieldWorker, Harvest } = require("../models/otherexpense");
 
 function calculateAutoInterst(amount, startDate, rate, endDate) {
+  if (amount === 0 || !amount) return {};
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 

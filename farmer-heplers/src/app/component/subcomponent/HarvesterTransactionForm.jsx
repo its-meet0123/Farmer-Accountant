@@ -12,6 +12,7 @@ import {
 } from "antd";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
+import { addTransactionForHarvestData } from "../../service/other";
 
 const HarvesterTransactionForm = ({
   form,
@@ -35,20 +36,20 @@ const HarvesterTransactionForm = ({
         const formValues = form.getFieldsValue();
         const { harvesterId, ...restOfformValues } = formValues;
         console.log("harvester trans form values", formValues);
-        // TODO: Replace with actual API call
-        // const res = await addTransactionForHarvester(
-        //   harvesterId,
-        //   restOfformValues,
-        // );
-        // const data = await res.data;
 
-        // if (data.status === "Success") {
-        //   message.success(data.Code);
-        //   setButtonLoading(false);
-        //   setFetch(data.harvester);
-        // }
+        const res = await addTransactionForHarvestData(
+          harvesterId,
+          restOfformValues,
+        );
+        const data = await res.data;
 
-        message.info("API endpoint not yet implemented");
+        if (data.status === "Success") {
+          message.success(data.Code);
+          setButtonLoading(false);
+          setFetch(data.data);
+        }
+
+        message.success(data.Code);
         setButtonLoading(false);
       } catch (err) {
         message.error("Harvester transaction not added");
