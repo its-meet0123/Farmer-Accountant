@@ -106,7 +106,7 @@ const CasualLabor = () => {
         .map((labor) => {
           const matchingTransaction = labor.transactions.filter(
             (transaction) => {
-              return Object.keys(record).every(
+              return Object.keys(transaction).every(
                 (key) => transaction[key] === record[key],
               );
             },

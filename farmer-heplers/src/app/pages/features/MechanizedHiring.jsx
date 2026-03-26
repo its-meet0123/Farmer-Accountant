@@ -105,6 +105,7 @@ const HarvesterData = () => {
             "You can only edit this transaction if it is the most recent one. Transactions preceding the last entry cannot be modified.",
           placement: "topRight",
         });
+        setOpenType(null);
       }, 1000);
     }
     transactionForm.setFieldsValue({
@@ -129,7 +130,7 @@ const HarvesterData = () => {
     const forHarvesterId = harvestList.map((harvester) => {
       const matchingTransaction = harvester.transactions.filter(
         (transaction) => {
-          return Object.keys(record).every(
+          return Object.keys(transaction).every(
             (key) => transaction[key] === record[key],
           );
         },
@@ -142,7 +143,7 @@ const HarvesterData = () => {
       };
     });
 
-    console.log(forHarvesterId);
+    console.log("delete trans action for machanized", forHarvesterId);
   };
 
   useEffect(() => {
