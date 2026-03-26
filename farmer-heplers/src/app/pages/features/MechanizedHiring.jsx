@@ -100,7 +100,7 @@ const HarvesterData = () => {
     const transId = record?._id;
     const date = dayjs(record?.startDate);
     console.log("length :", length);
-    console.log("record :", record.serialNo);
+    console.log("record :", record?.serialNo);
 
     if (length !== record.serialNo) {
       setOpenType(null);
