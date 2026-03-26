@@ -127,21 +127,27 @@ const HarvesterData = () => {
   };
 
   const deleteTrans = (record) => {
-    const forHarvesterId = harvestList.find((harvester) => {
-      const matchingTransaction = harvester.transactions.some((transaction) => {
+    const sepcificHarvester = harvestList.find((harvester) => {
+      return harvester.transactions.some((transaction) =>
+        Object.keys(transaction).every(
+          (key) => transaction[key] === record[key],
+        ),
+      );
+    });
+
+    const length = sepcificHarvester.transactions.length;
+    const harvesterId = sepcificHarvester._id;
+
+    const sepcificTransaction = sepcificHarvester.transactions.filter(
+      (transaction) => {
         return Object.keys(transaction).every(
           (key) => transaction[key] === record[key],
         );
-      });
-      const transArraylen = harvester.transactions.length;
-      return {
-        ...harvester,
-        transactions: matchingTransaction,
-        transArraylen: transArraylen,
-      };
-    });
+      },
+    );
 
-    console.log("delete trans action for machanized", forHarvesterId);
+    console.log("harvester", sepcificHarvester, "length", length);
+    console.log("transaction", sepcificTransaction);
   };
 
   useEffect(() => {
