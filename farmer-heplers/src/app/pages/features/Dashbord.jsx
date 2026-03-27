@@ -53,9 +53,11 @@ const DashBord = () => {
   return (
     <div style={styles.wrapper}>
       <header style={styles.header}>
-        <h1 style={styles.headerTitle}>FARMER-ACCOUNTANT</h1>
+        <h1 style={styles.headerTitle}>
+          FARMER-<span style={{ color: "#4da3ff" }}>ACCOUNTANT</span>
+        </h1>
         <p style={styles.headerSubtitle}>
-          Farming accounts, now digital and easy.
+          Back to Leading the Future of Farming.
         </p>
       </header>
 
@@ -80,7 +82,7 @@ const FeatureCard = ({ item }) => {
         setCurrentIndex((prevIndex) =>
           prevIndex === item.desc.length - 1 ? 0 : prevIndex + 1,
         );
-      }, 4500); // 4.5 seconds hold time
+      }, 4500);
 
       return () => clearInterval(timer);
     }
@@ -95,7 +97,6 @@ const FeatureCard = ({ item }) => {
             display: "flex",
             width: `${item.desc.length * 100}%`,
             transform: `translateX(-${(currentIndex * 100) / item.desc.length}%)`,
-            // Smooth Amazon-style transition
             transition: hasMultipleDesc
               ? "transform 0.9s cubic-bezier(0.4, 0, 0.2, 1)"
               : "none",
@@ -116,9 +117,9 @@ const FeatureCard = ({ item }) => {
               key={i}
               style={{
                 ...styles.dot,
-                width: currentIndex === i ? "12px" : "6px", // Active dot expand effect
+                width: currentIndex === i ? "12px" : "6px",
                 opacity: currentIndex === i ? 1 : 0.4,
-                backgroundColor: "white",
+                backgroundColor: "#4da3ff", // Light blue dots
               }}
             />
           ))}
@@ -130,59 +131,57 @@ const FeatureCard = ({ item }) => {
 
 const styles = {
   wrapper: {
-    backgroundColor: "#f3d0da",
+    // Image ke background jaisa dark teal gradient
+    background: "radial-gradient(circle, #1a4a5e 0%, #0d2836 100%)",
     minHeight: "100vh",
     width: "100%",
     fontFamily: '"Segoe UI", Roboto, Arial, sans-serif',
     paddingBottom: "60px",
   },
   header: {
-    backgroundColor: "#a3518f",
-    color: "white",
     textAlign: "center",
-    padding: "50px 20px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    padding: "60px 20px",
   },
   headerTitle: {
-    fontSize: "clamp(2rem, 8vw, 3.5rem)", // Responsive font size
+    fontSize: "clamp(2rem, 8vw, 3.5rem)",
     margin: 0,
+    color: "#ffffff",
     fontWeight: "800",
-    letterSpacing: "1px",
+    letterSpacing: "-1px",
   },
   headerSubtitle: {
     fontSize: "1.2rem",
-    fontStyle: "italic",
-    marginTop: "10px",
-    opacity: 0.9,
-    textDecoration: "underline",
+    color: "#ffffff",
+    marginTop: "15px",
+    opacity: 0.8,
+    fontWeight: "400",
   },
   mainGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
     gap: "30px",
     maxWidth: "1200px",
-    margin: "40px auto",
+    margin: "0 auto",
     padding: "0 25px",
   },
   card: {
-    height: "280px", // Slightly taller for better spacing
+    height: "280px",
     display: "flex",
     flexDirection: "column",
-    borderRadius: "16px",
+    borderRadius: "20px",
     overflow: "hidden",
-    backgroundColor: "#a3518f",
-    boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
-    transition: "transform 0.3s ease",
+    // Image ke left container jaisa dark blue
+    backgroundColor: "#161d2f",
+    border: "1px solid rgba(255,255,255,0.1)",
+    boxShadow: "0 15px 35px rgba(0,0,0,0.3)",
   },
   cardHeader: {
-    backgroundColor: "#e56b5f",
-    color: "white",
-    padding: "18px",
+    color: "#4da3ff", // Light blue from image text
+    padding: "25px 18px 10px 18px",
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: "1.1rem",
+    fontSize: "1.3rem",
     letterSpacing: "0.5px",
-    zIndex: 5,
   },
   scrollArea: {
     flex: 1,
@@ -194,7 +193,7 @@ const styles = {
   descSlide: {
     width: "100%",
     padding: "0 35px",
-    color: "white",
+    color: "#ffffff",
     fontSize: "1.05rem",
     lineHeight: "1.6",
     display: "flex",
@@ -208,9 +207,8 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: "15px",
+    padding: "20px",
     gap: "6px",
-    backgroundColor: "rgba(0,0,0,0.05)",
   },
   dot: {
     height: "6px",
@@ -218,8 +216,8 @@ const styles = {
     transition: "all 0.4s ease",
   },
   footerBar: {
-    height: "12px",
-    backgroundColor: "#e56b5f",
+    height: "6px",
+    backgroundColor: "#1b75ff", // Login button blue
     position: "fixed",
     bottom: 0,
     width: "100%",
