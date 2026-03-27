@@ -22,11 +22,12 @@ const HarvesterTransactionForm = ({
   openType,
   harvesterList,
   setFetch,
+  baseOfRate,
+  setBaseOfRate,
   onClose,
 }) => {
   const { t } = useAuth();
   const [buttonLoading, setButtonLoading] = useState(false);
-  const [baseOfRate, setBaseOfRate] = useState("duration");
   const options = [
     { label: t("harvestDrawer.ahtf.odt"), value: "duration" },
     { label: t("harvestDrawer.ahtf.omt"), value: "measurment" },

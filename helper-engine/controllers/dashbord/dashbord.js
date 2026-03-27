@@ -24,8 +24,14 @@ async function dashBordData(req, res) {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const Ind = await Industries.find({ userId: currentUserId });
+    if (!Ind) {
+      return res.status(400).json({
+        status: "Error",
+        message: "Ind data not found",
+      });
+    }
 
-    const allShopes = Ind.flatMap((shopes) => {
+    const allShopes = Ind.map((shopes) => {
       const shopeNumber = shopes?.shopeNumber;
       const shopeData = shopes.shopeAccount.map((transaction) => {
         const startDate = transaction?.startDate || "";

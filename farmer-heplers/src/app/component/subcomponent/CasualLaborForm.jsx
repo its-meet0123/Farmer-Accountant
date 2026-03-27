@@ -84,47 +84,47 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
             <Input />
           </Form.Item>
           <Form.Item
-            label={t("casualDrawer.af.df")}
+            label={t("casualDrawer.aclf.df")}
             name="date"
             initialValue={today}>
             <DatePicker
               format="DD/MM/YYYY"
-              placeholder={t("casualDrawer.af.dpt")}
+              placeholder={t("casualDrawer.aclf.dpt")}
             />
           </Form.Item>
-          <Form.Item label={t("casualDrawer.af.nnf")} name="nickName">
-            <Input placeholder={t("casualDrawer.af.nnplt")} />
+          <Form.Item label={t("casualDrawer.aclf.nnf")} name="nickName">
+            <Input placeholder={t("casualDrawer.aclf.nnplt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
           <Form.Item
-            label={t("casualDrawer.af.fnf")}
+            label={t("casualDrawer.aclf.fnf")}
             name="firstName"
-            rules={[{ required: true, message: t("casualDrawer.af.fnrmt") }]}>
-            <Input placeholder={t("casualDrawer.af.fnpt")} />
+            rules={[{ required: true, message: t("casualDrawer.aclf.fnrmt") }]}>
+            <Input placeholder={t("casualDrawer.aclf.fnpt")} />
           </Form.Item>
-          <Form.Item label={t("casualDrawer.af.lnf")} name="lastName">
-            <Input placeholder={t("casualDrawer.af.lnpt")} />
-          </Form.Item>
-        </Row>
-        <Row gutter={24}>
-          <Form.Item label={t("casualDrawer.af.cf")} name="contact">
-            <Input placeholder={t("casualDrawer.af.cfpt")} />
-          </Form.Item>
-          <Form.Item label={t("casualDrawer.af.lf")} name="address">
-            <Input placeholder={t("casualDrawer.af.lfpt")} />
+          <Form.Item label={t("casualDrawer.aclf.lnf")} name="lastName">
+            <Input placeholder={t("casualDrawer.aclf.lnpt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
-          <Form.Item label={t("casualDrawer.af.idpf")} name="idProof">
-            <Input placeholder={t("casualDrawer.af.idppt")} />
+          <Form.Item label={t("casualDrawer.aclf.cf")} name="contact">
+            <Input placeholder={t("casualDrawer.aclf.cfpt")} />
+          </Form.Item>
+          <Form.Item label={t("casualDrawer.aclf.lf")} name="address">
+            <Input placeholder={t("casualDrawer.aclf.lfpt")} />
+          </Form.Item>
+        </Row>
+        <Row gutter={24}>
+          <Form.Item label={t("casualDrawer.aclf.idpf")} name="idProof">
+            <Input placeholder={t("casualDrawer.aclf.idppt")} />
           </Form.Item>
           <Form.Item label="Transactions" name="transactions" hidden>
             <Input />
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
-            {t("casualDrawer.af.sbt")}{" "}
+            {t("casualDrawer.aclf.sbt")}{" "}
             {buttonLoading && (
               <Spin
                 indicator={<LoadingOutlined spin />}
