@@ -7,6 +7,7 @@ import WorkersData from "../pages/features/Worker";
 import WorkerCalculation from "../pages/features/WorkerCalculation";
 import CasualLabor from "../pages/features/CasualLabor";
 import HarvesterData from "../pages/features/MechanizedHiring";
+import DashBord from "../pages/features/Dashbord";
 
 export const protectedRoutes = [
   {
@@ -17,6 +18,11 @@ export const protectedRoutes = [
       </AppLayout>
     ),
     children: [
+      //default
+      {
+        index: true,
+        element: <DashBord />,
+      },
       //home
       {
         path: "/home",
