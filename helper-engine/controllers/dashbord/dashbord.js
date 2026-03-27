@@ -91,11 +91,12 @@ async function dashBordData(req, res) {
           return null;
         }
       });
+      console.log(shopeData);
 
-      const shopesTotal = overAllTotalOfAllShopes(shopeData);
+      //const shopesTotal = overAllTotalOfAllShopes(shopeData);
       return {
         shopeNumber: shopeNumber,
-        overAllTotal: shopesTotal,
+        overAllTotal: shopeData,
       };
     }).filter((item) => item !== null);
 
