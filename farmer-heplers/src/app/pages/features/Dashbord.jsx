@@ -23,42 +23,43 @@ const DashBord = () => {
   const features = [
     {
       title: "Shops & Inventory",
-      desc: dashbordData.shopes.map((shop) => {
+      desc: dashbordData?.shopes.map((shop) => {
         return {
-          name: shop.shopeNumber,
-          total: shop.overAllTotal,
+          name: shop.shopeNumber || "",
+          total: shop.overAllTotal || 0,
         };
       }),
     },
     {
       title: "Permanent Workers",
-      desc: dashbordData.workers.map((worker) => {
+      desc: dashbordData?.workers.map((worker) => {
         return {
-          name: worker.workerName,
-          total: worker.overAllTotal,
+          name: worker.workerName || "",
+          total: worker.overAllTotal || 0,
         };
       }),
     },
     {
       title: "Casual Labor",
-      desc: dashbordData.casualLabors.map((labor) => {
+      desc: dashbordData?.casualLabors.map((labor) => {
         return {
-          name: labor.laborName,
-          total: labor.pending,
+          name: labor.laborName || "",
+          total: labor.pending || 0,
         };
       }),
     },
     {
       title: "Harvester & Tools",
-      desc: dashbordData.harvester.map((harvest) => {
+      desc: dashbordData?.harvester.map((harvest) => {
         return {
-          name: harvest.opratorName,
-          total: harvest.pending,
+          name: harvest.opratorName || "",
+          total: harvest.pending || 0,
         };
       }),
     },
   ];
 
+  console.log(features);
   return (
     <div style={styles.wrapper}>
       <header style={styles.header}>
@@ -111,10 +112,23 @@ const FeatureCard = ({ item }) => {
               : "none",
             height: "100%",
           }}>
-          {item.desc.map((obj, i) => (
+          {item.desc.map((data, i) => (
             <div key={i} style={styles.descSlide}>
-              <p>{obj.name}</p>
-              <p style={{ margin: 0 }}>{obj.total}</p>
+              {/* Ab yahan hum object ki keys access karenge */}
+              <div style={{ textAlign: "center" }}>
+                <p
+                  style={{ margin: 0, fontSize: "1.2rem", fontWeight: "bold" }}>
+                  {data?.name}
+                </p>
+                <p
+                  style={{
+                    margin: "5px 0 0 0",
+                    color: "#4da3ff",
+                    fontSize: "1rem",
+                  }}>
+                  {data?.total}
+                </p>
+              </div>
             </div>
           ))}
         </div>
