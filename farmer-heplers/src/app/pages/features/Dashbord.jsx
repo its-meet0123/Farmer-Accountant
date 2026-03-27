@@ -27,47 +27,55 @@ const DashBord = () => {
     {
       title: "Shops & Inventory",
       desc:
-        dashbordData?.shopes?.map((shop) => {
-          return {
-            name: shop.shopeNumber || "",
-            total: shop.overAllTotal || 0,
-          };
-        }) || [],
+        dashbordData?.shopes && Array.isArray(dashbordData.shopes)
+          ? dashbordData.shopes.map((shop) => ({
+              name: shop.shopeNumber || "",
+              total: shop.overAllTotal || 0,
+            }))
+          : [],
     },
     {
       title: "Permanent Workers",
       desc:
-        dashbordData?.workers?.map((worker) => {
-          return {
-            name: worker.workerName || "",
-            total: worker.overAllTotal || 0,
-          };
-        }) || [],
+        dashbordData?.workers && Array.isArray(dashbordData.workers)
+          ? dashbordData.workers.map((worker) => ({
+              name: worker.workerName || "",
+              total: worker.overAllTotal || 0,
+            }))
+          : [],
     },
     {
       title: "Casual Labor",
       desc:
-        dashbordData?.casualLabors?.map((labor) => {
-          return {
-            name: labor.laborName || "",
-            total: labor.pending || 0,
-          };
-        }) || [],
+        dashbordData?.casualLabors && Array.isArray(dashbordData.casualLabors)
+          ? dashbordData.casualLabors.map((labor) => ({
+              name: labor.laborName || "",
+              total: labor.pending || 0,
+            }))
+          : [],
     },
     {
       title: "Harvester & Tools",
       desc:
-        dashbordData?.harvester?.map((harvest) => {
-          return {
-            name: harvest.opratorName || "",
-            total: harvest.pending || 0,
-          };
-        }) || [],
+        dashbordData?.harvester && Array.isArray(dashbordData.harvester)
+          ? dashbordData.harvester.map((harvest) => ({
+              name: harvest.opratorName || "",
+              total: harvest.pending || 0,
+            }))
+          : [],
     },
   ];
 
   console.log("Dashboard state:", dashbordData);
   console.log("Features array:", features);
+  features.forEach((feature, idx) => {
+    console.log(`Feature ${idx} (${feature.title}):`, {
+      hasDesc: !!feature.desc,
+      isArray: Array.isArray(feature.desc),
+      length: feature.desc?.length || 0,
+      desc: feature.desc,
+    });
+  });
   return (
     <div style={styles.wrapper}>
       <header style={styles.header}>
@@ -80,9 +88,17 @@ const DashBord = () => {
       </header>
 
       <div style={styles.mainGrid}>
-        {features.map((item, index) => (
-          <FeatureCard key={index} item={item} />
-        ))}
+        {features && Array.isArray(features) && features.length > 0 ? (
+          features.map((item, index) => {
+            if (!item || typeof item !== "object") {
+              console.warn("Invalid feature item:", item);
+              return null;
+            }
+            return <FeatureCard key={index} item={item} />;
+          })
+        ) : (
+          <div>No data available</div>
+        )}
       </div>
 
       <div style={styles.footerBar}></div>
@@ -92,19 +108,31 @@ const DashBord = () => {
 
 const FeatureCard = ({ item }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const hasMultipleDesc = item.desc.length > 1;
+
+  // Strict validation: ensure item.desc is always an array
+  const descArray = Array.isArray(item?.desc) ? item.desc : [];
+  console.log("FeatureCard item:", item);
+  console.log("FeatureCard descArray:", descArray);
+
+  const hasMultipleDesc = descArray.length > 1;
 
   useEffect(() => {
     if (hasMultipleDesc) {
       const timer = setInterval(() => {
         setCurrentIndex((prevIndex) =>
-          prevIndex === item.desc.length - 1 ? 0 : prevIndex + 1,
+          prevIndex === descArray.length - 1 ? 0 : prevIndex + 1,
         );
       }, 4500);
 
       return () => clearInterval(timer);
     }
-  }, [hasMultipleDesc, item.desc.length]);
+  }, [hasMultipleDesc, descArray.length]);
+
+  // Guard check after hooks - don't render if invalid item
+  if (!item || typeof item !== "object") {
+    console.warn("FeatureCard received invalid item:", item);
+    return null;
+  }
 
   return (
     <div style={styles.card}>
@@ -113,14 +141,14 @@ const FeatureCard = ({ item }) => {
         <div
           style={{
             display: "flex",
-            width: `${item.desc.length * 100}%`,
-            transform: `translateX(-${(currentIndex * 100) / item.desc.length}%)`,
+            width: `${descArray.length * 100}%`,
+            transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
             transition: hasMultipleDesc
               ? "transform 0.9s cubic-bezier(0.4, 0, 0.2, 1)"
               : "none",
             height: "100%",
           }}>
-          {item.desc.map((data, i) => (
+          {descArray.map((data, i) => (
             <div key={i} style={styles.descSlide}>
               {/* Ab yahan hum object ki keys access karenge */}
               <div style={{ textAlign: "center" }}>
@@ -144,7 +172,7 @@ const FeatureCard = ({ item }) => {
 
       {hasMultipleDesc && (
         <div style={styles.dotsContainer}>
-          {item.desc.map((_, i) => (
+          {descArray.map((_, i) => (
             <div
               key={i}
               style={{
