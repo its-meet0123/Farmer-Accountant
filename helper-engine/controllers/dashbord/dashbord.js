@@ -44,52 +44,56 @@ async function dashBordData(req, res) {
         const sellAmount = transaction?.indSell?.billAmount || 0;
         const dieselAmount = transaction?.diesel?.billAmount || 0;
         //loan
-        if (
-          loanAmount > 0 ||
-          buyAmount > 0 ||
-          sellAmount > 0 ||
-          dieselAmount > 0
-        ) {
-          const loanInterest = calculateAutoInterestForTakeAmount(
-            loanAmount,
-            startDate,
-            rate,
-            endDate,
-          );
-          //buy item
 
-          const buyInterest = calculateAutoInterestForBuyBillAmount(
-            buyAmount,
-            startDate,
-            rate,
-            endDate,
-          );
-          //sellItem
+        const loanInterest = calculateAutoInterestForTakeAmount(
+          loanAmount,
+          startDate,
+          rate,
+          endDate,
+        );
+        //buy item
 
-          const sellInterest = calculateAutoInterestForGiveAmount(
-            sellAmount,
-            startDate,
-            rate,
-            endDate,
-          );
-          //dieselAmount
+        const buyInterest = calculateAutoInterestForBuyBillAmount(
+          buyAmount,
+          startDate,
+          rate,
+          endDate,
+        );
+        //sellItem
 
-          const dieselInterest = calculateAutoInterestDieselBillAmount(
-            dieselAmount,
-            startDate,
-            rate,
-            endDate,
-          );
+        const sellInterest = calculateAutoInterestForGiveAmount(
+          sellAmount,
+          startDate,
+          rate,
+          endDate,
+        );
+        //dieselAmount
 
-          return {
+        const dieselInterest = calculateAutoInterestDieselBillAmount(
+          dieselAmount,
+          startDate,
+          rate,
+          endDate,
+        );
+
+        return {
+          loan: {
+            ...transaction?.loan,
             ...loanInterest,
+          },
+          indBuy: {
+            ...transaction?.indBuy,
             ...buyInterest,
+          },
+          indSell: {
+            ...transaction?.indSell,
             ...sellInterest,
+          },
+          diesel: {
+            ...transaction?.diesel,
             ...dieselInterest,
-          };
-        } else {
-          return null;
-        }
+          },
+        };
       });
       console.log(shopeData);
 

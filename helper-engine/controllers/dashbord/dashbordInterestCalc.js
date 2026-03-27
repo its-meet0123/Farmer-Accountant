@@ -13,7 +13,6 @@ function calculateAutoInterestForTakeAmount(amount, startDate, rate, endDate) {
   const interest = (amount * rate * days) / (100 * 365);
 
   return {
-    amount,
     days,
     months,
     interst: interest.toFixed(2),
@@ -40,7 +39,6 @@ function calculateAutoInterestForBuyBillAmount(
   const interest = (amount * rate * days) / (100 * 365);
 
   return {
-    amount,
     days,
     months,
     interst: interest.toFixed(2),
@@ -63,7 +61,6 @@ function calculateAutoInterestForGiveAmount(amount, startDate, rate, endDate) {
   const interest = (amount * rate * days) / (100 * 365);
 
   return {
-    amount,
     days,
     months,
     interst: interest.toFixed(2),
@@ -91,7 +88,6 @@ function calculateAutoInterestDieselBillAmount(
   const interest = (amount * rate * days) / (100 * 365);
 
   return {
-    amount,
     days,
     months,
     interst: interest.toFixed(2),
