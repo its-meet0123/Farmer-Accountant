@@ -4,10 +4,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.SECRET_KEY;
 // Dashboard controller imports
 const WorkerData = require("../../models/worker");
-const {
-  FieldWorker,
-  Harvest: Harvester,
-} = require("../../models/otherexpense");
+const { FieldWorker, Harvest } = require("../../models/otherexpense");
 const Industries = require("../../models/integratedData");
 const {
   calculateAutoInterestForTakeAmount,
@@ -15,7 +12,10 @@ const {
   calculateAutoInterestForGiveAmount,
   calculateAutoInterestDieselBillAmount,
 } = require("./dashbordInterestCalc");
-const { overAllTotalOfAllShopes } = require("./calculation");
+const {
+  overAllTotalOfAllShopes,
+  overAllTotalOfAllWorkers,
+} = require("./calculation");
 
 // Dashboard controller functions using map method
 
@@ -25,12 +25,9 @@ async function dashBordData(req, res) {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const Ind = await Industries.find({ userId: currentUserId });
-    if (!Ind) {
-      return res.status(400).json({
-        status: "Error",
-        message: "Ind data not found",
-      });
-    }
+    const workers = await WorkerData.find({ userId: currentUserId });
+    const allCasualLabor = await FieldWorker.find({ userId: currentUserId });
+    const allHarvests = await Harvest.find({ userId: currentUserId });
 
     const allShopes = Ind.map((shopes) => {
       const shopeNumber = shopes?.shopeNumber;
@@ -104,9 +101,83 @@ async function dashBordData(req, res) {
       };
     }).filter((item) => item !== null);
 
+    const workersList = workers
+      .map((worker) => {
+        const workerName = worker?.workerDetail?.workerName?.nickName;
+        const workerAccounts = worker?.account.map((transactions) => {
+          const startDate = transactions?.date;
+          const rate = transactions?.rate || 24;
+          const endDate = new Date();
+
+          const giveAmount = transactions?.give?.amount;
+          const takeAmount = transactions?.take?.payment;
+
+          const giveInterest = calculateAutoInterestForGiveAmount(
+            giveAmount,
+            startDate,
+            rate,
+            endDate,
+          );
+          const takeInterest = calculateAutoInterestForTakeAmount(
+            takeAmount,
+            startDate,
+            rate,
+            endDate,
+          );
+
+          return {
+            give: {
+              ...transactions?.give,
+              ...giveInterest,
+            },
+            take: {
+              ...transactions?.take,
+              ...takeInterest,
+            },
+          };
+        });
+        const Returns = overAllTotalOfAllWorkers(workerAccounts);
+        return {
+          workerName: workerName,
+          overAllTotal: Returns,
+        };
+      })
+      .filter((item) => item !== null);
+
+    const casualLaborList = allCasualLabor
+      .map((labors) => {
+        const laborName = labors?.serviceProvider?.nickName;
+        const lastTransaction = labors?.transactions.at(-1);
+
+        return {
+          laborName: laborName,
+          pending: lastTransaction?.total,
+        };
+      })
+      .filter((item) => item !== null);
+
+    const harvestList = allHarvests
+      .map((harvester) => {
+        const opratorName = harvester?.serviceProvider?.nickName;
+        const lastTransaction = harvester?.transactions.at(-1);
+
+        return {
+          opratorName: opratorName,
+          pending: lastTransaction?.total,
+        };
+      })
+      .filter((item) => item !== null);
+
+    const allCalculateData = {
+      shopes: allShopes,
+      workers: workersList,
+      casualLabors: casualLaborList,
+      harvesters: harvestList,
+    };
+
     return res.status(200).json({
       status: "Success",
-      data: allShopes,
+      data: allCalculateData,
       Code: "dashbord fetched successfully",
     });
   } catch (err) {
