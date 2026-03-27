@@ -23,117 +23,136 @@ const DashBord = () => {
   const features = [
     {
       title: "Vendor Ledger",
-      desc: "Track all your purchases from seed and fertilizer stores. Keep your credits and payments clear with every trader. Manage daily khata for all your trusted vendors in one place.",
+      desc: "Track all your purchases from seed and fertilizer stores. Keep your credits and payments clear with every trader. Manage daily khata for all your trusted vendors in one place. Digital records for seeds and fertilizers.",
     },
     {
       title: "Sharecropping",
-      desc: "Worker/Partner: Easily manage workers on share-basis (1/4th, 1/5th). Calculate their exact share from the total harvest after deducting expenses accurately.",
+      desc: "Worker/Partner: Easily manage workers on share-basis (1/4th, 1/5th). Calculate their exact share from the total harvest after deducting expenses accurately. No more manual share-basis confusion.",
     },
     {
       title: "Labor & Custom Hiring",
-      desc: "Track daily wages for casual labor and hiring costs for tractors or harvesters. Easily manage multiple workers and machine operators without any manual paperwork.",
+      desc: "Track daily wages for casual labor and hiring costs for tractors or harvesters. Easily manage multiple workers and machine operators without any manual paperwork. Real-time labor tracking.",
     },
     {
       title: "Farm P&L Tracker",
-      desc: "Total income minus all expenses. Get a clear picture of your seasonal savings or losses instantly with built-in automatic interest calculation for every transaction.",
+      desc: "Total income minus all expenses. Get a clear picture of your seasonal savings or losses instantly with built-in automatic interest calculation for every transaction. Digital Profit and Loss tracking.",
     },
   ];
 
-  // Vertical Scroll Animation
-  const verticalScroll = `
-    @keyframes scrollText {
+  // CSS Animation for Vertical Scroll
+  const scrollKeyframes = `
+    @keyframes scrollInsideCard {
       0% { transform: translateY(0); }
       100% { transform: translateY(-50%); }
     }
   `;
 
   const styles = {
-    container: {
+    wrapper: {
       backgroundColor: "#f3d0da",
       minHeight: "100vh",
-      fontFamily: "Arial, sans-serif",
-      padding: "20px",
+      width: "100%",
+      fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+      paddingBottom: "50px",
     },
     header: {
       backgroundColor: "#a3518f",
       color: "white",
       textAlign: "center",
-      padding: "40px 20px",
-      marginBottom: "40px",
-      borderRadius: "8px",
+      padding: "60px 20px",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
     },
-    grid: {
+    mainGrid: {
       display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-      gap: "20px",
-      maxWidth: "1200px",
-      margin: "0 auto",
+      // Responsive Grid: Mobile pe 1, Desktop pe 4 columns
+      gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+      gap: "25px",
+      maxWidth: "1300px",
+      margin: "50px auto",
+      padding: "0 20px",
     },
     card: {
-      borderRadius: "10px",
-      overflow: "hidden",
-      boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-      backgroundColor: "white",
-      height: "300px", // Fixed height for cards
+      height: "350px", // Fixed card height
       display: "flex",
       flexDirection: "column",
+      borderRadius: "12px",
+      overflow: "hidden",
+      boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+      backgroundColor: "#a3518f", // Dark background for the body
     },
     cardHeader: {
       backgroundColor: "#e56b5f",
       color: "white",
-      textAlign: "center",
       padding: "15px",
-      fontSize: "18px",
+      textAlign: "center",
       fontWeight: "bold",
-      zIndex: 2,
+      fontSize: "20px",
+      borderBottom: "2px solid rgba(255,255,255,0.1)",
+      zIndex: 10,
     },
-    cardBodyContainer: {
-      backgroundColor: "#a3518f",
+    scrollArea: {
       flex: 1,
-      overflow: "hidden", // Bahar ka data chhupane ke liye
-      position: "relative",
+      overflow: "hidden", // Scroll hone wala text bahar na dikhe
       padding: "20px",
+      position: "relative",
     },
-    scrollingText: {
+    movingContent: {
       color: "white",
-      fontSize: "16px",
-      lineHeight: "1.6",
-      display: "block",
-      animation: "scrollText 10s linear infinite", // Vertical scroll
+      fontSize: "17px",
+      lineHeight: "1.8",
+      animation: "scrollInsideCard 15s linear infinite",
+      cursor: "pointer",
+    },
+    footerBar: {
+      height: "12px",
+      backgroundColor: "#e56b5f",
+      position: "fixed",
+      bottom: 0,
+      width: "100%",
+      zIndex: 100,
     },
   };
 
   return (
-    <div style={styles.container}>
-      <style>{verticalScroll}</style>
+    <div style={styles.wrapper}>
+      {/* Vite/React ke liye CSS inject karna */}
+      <style>{scrollKeyframes}</style>
 
-      {/* Header */}
-      <div style={styles.header}>
-        <h1 style={{ margin: 0, fontSize: "36px" }}>FARMER-ACCOUTANT</h1>
-        <p style={{ fontStyle: "italic", textDecoration: "underline" }}>
+      {/* Hero Header */}
+      <header style={styles.header}>
+        <h1 style={{ fontSize: "3rem", margin: 0, letterSpacing: "2px" }}>
+          FARMER-ACCOUNTANT
+        </h1>
+        <p
+          style={{
+            fontSize: "1.2rem",
+            fontStyle: "italic",
+            marginTop: "10px",
+            opacity: 0.9,
+          }}>
           Farming accounts, now digital and easy.
         </p>
-      </div>
+      </header>
 
-      {/* Static Cards Grid */}
-      <div style={styles.grid}>
+      {/* Cards Section */}
+      <div style={styles.mainGrid}>
         {features.map((item, index) => (
           <div key={index} style={styles.card}>
+            {/* Static Header */}
             <div style={styles.cardHeader}>{item.title}</div>
 
-            <div style={styles.cardBodyContainer}>
-              {/* Is div ke andar ka text move karega */}
+            {/* Scrolling Content Area */}
+            <div style={styles.scrollArea}>
               <div
-                style={styles.scrollingText}
+                style={styles.movingContent}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.animationPlayState = "paused")
                 }
                 onMouseLeave={(e) =>
                   (e.currentTarget.style.animationPlayState = "running")
                 }>
-                <p>{item.desc}</p>
-                <br />
-                {/* Duplicate text taaki loop infinite lage */}
+                {/* Same text twice for seamless infinite loop */}
+                <p style={{ marginBottom: "40px" }}>{item.desc}</p>
                 <p>{item.desc}</p>
               </div>
             </div>
@@ -141,16 +160,7 @@ const DashBord = () => {
         ))}
       </div>
 
-      {/* Bottom Bar */}
-      <div
-        style={{
-          height: "8px",
-          backgroundColor: "#e56b5f",
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-        }}></div>
+      <div style={styles.footerBar}></div>
     </div>
   );
 };
