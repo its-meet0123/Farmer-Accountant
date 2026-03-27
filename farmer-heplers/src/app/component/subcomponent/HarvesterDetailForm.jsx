@@ -28,14 +28,14 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
         const data = await res.data;
 
         if (data.status === "Success") {
-          message.success(data.Code);
+          message.success(t(data.Code));
           setFetch(data.data);
           setButtonLoading(false);
           onClose();
         }
       } catch (err) {
         console.log(err.message);
-        message.error("Harvester Details not posted");
+        message.error(t("CL.HL.PHDSEM"));
       }
     }
 
@@ -49,13 +49,13 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
         const data = await res.data;
 
         if (data.status === "Success") {
-          message.success(data.Code);
+          message.success(t(data.Code));
           setFetch(data.data);
           onClose();
         }
       } catch (err) {
         console.log(err.message);
-        message.error("Harvester data not edited");
+        message.error(t("CL.HL.UHLBIDSEM"));
       }
     }
   };
@@ -78,30 +78,36 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
           <Form.Item label="ID" name="harvesterId" hidden>
             <Input />
           </Form.Item>
-          <Form.Item label="Date" name="date" initialValue={today}>
-            <DatePicker format="DD/MM/YYYY" />
+          <Form.Item
+            label={t("harvestDrawer.ahf.df")}
+            name="date"
+            initialValue={today}>
+            <DatePicker
+              format="DD/MM/YYYY"
+              placeholder={t("harvestDrawer.ahf.dpt")}
+            />
           </Form.Item>
-          <Form.Item label="Nick Name" name="nickName">
-            <Input />
+          <Form.Item label={t("harvestDrawer.ahf.nnf")} name="nickName">
+            <Input placeholder={t("harvestDrawer.ahf.nnpt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
           <Form.Item
-            label="First Name"
+            label={t("harvestDrawer.ahf.fnf")}
             name="firstName"
-            rules={[{ required: true, message: "Please enter name of labor" }]}>
-            <Input />
+            rules={[{ required: true, message: t("harvestDrawer.ahf.fnrmt") }]}>
+            <Input placeholder={t("harvestDrawer.ahf.fnpt")} />
           </Form.Item>
-          <Form.Item label="Last Name" name="lastName">
-            <Input />
+          <Form.Item label={t("harvestDrawer.ahf.lnf")} name="lastName">
+            <Input placeholder={t("harvestDrawer.ahf.lnpt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
-          <Form.Item label="Contact" name="contact">
-            <Input />
+          <Form.Item label={t("harvestDrawer.ahf.cf")} name="contact">
+            <Input placeholder={t("harvestDrawer.ahf.cfpt")} />
           </Form.Item>
-          <Form.Item label="Address" name="address">
-            <Input />
+          <Form.Item label={t("harvestDrawer.ahf.lf")} name="address">
+            <Input placeholder={t("harvestDrawer.ahf.lfpt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
@@ -111,21 +117,21 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
                 {fields.map(({ key, name }) => (
                   <Row gutter={24} key={key}>
                     <Form.Item
-                      label={t("harvest.fl.vn")}
+                      label={t("harvestDrawer.ahf.vd.vnf")}
                       name={[name, "vehicalNumber"]}>
-                      <Input placeholder="Number of Vehical" />
+                      <Input placeholder={t("harvestDrawer.ahf.vd.vnpt")} />
                     </Form.Item>
 
                     <Form.Item
-                      label={t("harvest.fl.vt")}
+                      label={t("harvestDrawer.ahf.vd.vtf")}
                       name={[name, "vehicalType"]}>
-                      <Input placeholder="Type of Vehical" />
+                      <Input placeholder={t("harvestDrawer.ahf.vd.vtpt")} />
                     </Form.Item>
 
                     <Form.Item
-                      label={t("harvest.fl.vid")}
+                      label={t("harvestDrawer.ahf.vd.vidf")}
                       name={[name, "vehicalID"]}>
-                      <Input placeholder="Vehical ID" />
+                      <Input placeholder={t("harvestDrawer.ahf.vd.vidpt")} />
                     </Form.Item>
 
                     <MinusCircleOutlined
@@ -140,15 +146,15 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
           </Form.List>
         </Row>
         <Row gutter={24}>
-          <Form.Item label="Id Proof" name="idProof">
-            <Input />
+          <Form.Item label={t("harvestDrawer.ahf.idpf")} name="idProof">
+            <Input placeholder={t("harvestDrawer.ahf.idppt")} />
           </Form.Item>
           <Form.Item label="Transactions" name="transactions" hidden>
             <Input />
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
-            Submit{" "}
+            {t("harvestDrawer.ahf.sbt")}{" "}
             {buttonLoading && (
               <Spin
                 indicator={<LoadingOutlined spin />}

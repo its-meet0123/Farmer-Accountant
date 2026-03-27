@@ -454,38 +454,48 @@ async function deleteHavresterTransactionByIds(req, res) {
 
 // 7. post additional worker
 async function postAdditionalWorker(req, res) {
-  const body = req.body;
-  if (!body) {
-    return res.status(400).json({
-      status: "Error",
-      Code: "CL.FW.PDEM",
+  try {
+    const body = req.body;
+    if (!body) {
+      return res.status(400).json({
+        status: "Error",
+        Code: "CL.FW.PDEM",
+      });
+    }
+    const casualLaborDB = FieldWorker.create({
+      userId: body.userId,
+      date: body.date,
+      serviceProvider: {
+        firstName: body.firstName,
+        lastName: body.lastName,
+        nickName: body.nickName,
+        contact: body.contact,
+        address: body.address,
+        idProof: body.idProof,
+      },
+      transactions: body.transactions,
     });
-  }
-  const casualLaborDB = FieldWorker.create({
-    userId: body.userId,
-    date: body.date,
-    serviceProvider: {
-      firstName: body.firstName,
-      lastName: body.lastName,
-      nickName: body.nickName,
-      contact: body.contact,
-      address: body.address,
-      idProof: body.idProof,
-    },
-    transactions: body.transactions,
-  });
 
-  if (!casualLaborDB) {
-    return res.status(400).json({
+    if (!casualLaborDB) {
+      return res.status(400).json({
+        status: "Error",
+        Code: "CL.FW.WNF",
+      });
+    }
+    return res.status(201).json({
+      status: "Success",
+      worker: casualLaborDB,
+      Code: "CL.FW.PDSM",
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
       status: "Error",
-      Code: "CL.FW.WNF",
+      message: err.message,
+      worker: null,
+      Code: "CL.FW.PDSEM",
     });
   }
-  return res.status(201).json({
-    status: "Success",
-    worker: casualLaborDB,
-    Code: "CL.FW.PDSM",
-  });
 }
 
 // 7. post havrest data

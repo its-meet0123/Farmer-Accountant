@@ -9,53 +9,59 @@ import { useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
-  const { authState } = useAuth();
+  const { authState, t } = useAuth();
   const today = dayjs();
   const [buttonLoading, setButtonLoading] = useState(false);
 
   const onFinish = async () => {
     if (openType === "laborAdd") {
-      setButtonLoading(true);
-      const formValues = form.getFieldsValue();
-      const laberDetails = {
-        ...formValues,
-        userId: authState.user.userId,
-        transactions: [],
-      };
-      const response = await postFieldWorkerData(laberDetails);
-      const data = await response.data;
+      try {
+        setButtonLoading(true);
+        const formValues = form.getFieldsValue();
+        const laberDetails = {
+          ...formValues,
+          userId: authState.user.userId,
+          transactions: [],
+        };
+        const response = await postFieldWorkerData(laberDetails);
+        const data = await response.data;
 
-      if (data.status === "Success") {
-        setFetch(data.worker);
-        message.success(data.Code);
-        setButtonLoading(false);
-        form.resetFields();
-        onClose();
-      } else {
-        message.error(data.Code);
+        if (data.status === "Success") {
+          setFetch(data.worker);
+          message.success(t(data.Code));
+          setButtonLoading(false);
+          form.resetFields();
+          onClose();
+        }
+      } catch (err) {
+        console.log(err.message);
+        message.error(t("CL.FW.PDSEM"));
       }
     }
     if (openType === "laborEdit") {
-      setButtonLoading(true);
-      const formValues = form.getFieldsValue();
-      const { laborId, date, transactions, ...restOfformValues } = formValues;
-      const updateLaborDetails = {
-        date: date,
-        serviceProvider: {
-          ...restOfformValues,
-        },
-        transactions: transactions,
-      };
-      const res = await updateFieldWorkerData(laborId, updateLaborDetails);
-      const data = await res.data;
+      try {
+        setButtonLoading(true);
+        const formValues = form.getFieldsValue();
+        const { laborId, date, transactions, ...restOfformValues } = formValues;
+        const updateLaborDetails = {
+          date: date,
+          serviceProvider: {
+            ...restOfformValues,
+          },
+          transactions: transactions,
+        };
+        const res = await updateFieldWorkerData(laborId, updateLaborDetails);
+        const data = await res.data;
 
-      if (data.status === "Success") {
-        setFetch(data.worker);
-        message.success(data.Code);
-        setButtonLoading(false);
-        onClose();
-      } else {
-        message.error(data.Code);
+        if (data.status === "Success") {
+          setFetch(data.worker);
+          message.success(data.Code);
+          setButtonLoading(false);
+          onClose();
+        }
+      } catch (err) {
+        console.log(err.message);
+        message.error("CL.FW.UWDSEM");
       }
     }
   };
@@ -77,42 +83,48 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
           <Form.Item label="ID" name="laborId" hidden>
             <Input />
           </Form.Item>
-          <Form.Item label="Date" name="date" initialValue={today}>
-            <DatePicker format="DD/MM/YYYY" />
+          <Form.Item
+            label={t("casualDrawer.af.df")}
+            name="date"
+            initialValue={today}>
+            <DatePicker
+              format="DD/MM/YYYY"
+              placeholder={t("casualDrawer.af.dpt")}
+            />
           </Form.Item>
-          <Form.Item label="Nick Name" name="nickName">
-            <Input />
+          <Form.Item label={t("casualDrawer.af.nnf")} name="nickName">
+            <Input placeholder={t("casualDrawer.af.nnplt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
           <Form.Item
-            label="First Name"
+            label={t("casualDrawer.af.fnf")}
             name="firstName"
-            rules={[{ required: true, message: "Please enter name of labor" }]}>
-            <Input />
+            rules={[{ required: true, message: t("casualDrawer.af.fnrmt") }]}>
+            <Input placeholder={t("casualDrawer.af.fnpt")} />
           </Form.Item>
-          <Form.Item label="Last Name" name="lastName">
-            <Input />
-          </Form.Item>
-        </Row>
-        <Row gutter={24}>
-          <Form.Item label="Contact" name="contact">
-            <Input />
-          </Form.Item>
-          <Form.Item label="Address" name="address">
-            <Input />
+          <Form.Item label={t("casualDrawer.af.lnf")} name="lastName">
+            <Input placeholder={t("casualDrawer.af.lnpt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
-          <Form.Item label="Id Proof" name="idProof">
-            <Input />
+          <Form.Item label={t("casualDrawer.af.cf")} name="contact">
+            <Input placeholder={t("casualDrawer.af.cfpt")} />
+          </Form.Item>
+          <Form.Item label={t("casualDrawer.af.lf")} name="address">
+            <Input placeholder={t("casualDrawer.af.lfpt")} />
+          </Form.Item>
+        </Row>
+        <Row gutter={24}>
+          <Form.Item label={t("casualDrawer.af.idpf")} name="idProof">
+            <Input placeholder={t("casualDrawer.af.idppt")} />
           </Form.Item>
           <Form.Item label="Transactions" name="transactions" hidden>
             <Input />
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
-            Submit{" "}
+            {t("casualDrawer.af.sbt")}{" "}
             {buttonLoading && (
               <Spin
                 indicator={<LoadingOutlined spin />}

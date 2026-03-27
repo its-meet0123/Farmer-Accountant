@@ -38,6 +38,7 @@ const HarvesterData = () => {
   const [openType, setOpenType] = useState(null);
   const [detailForm] = Form.useForm();
   const [transactionForm] = Form.useForm();
+  const [baseOfRate, setBaseOfRate] = useState("duration");
 
   const handleAddHarvesterTransaction = (record) => {
     setIsLoading("aht");
@@ -79,12 +80,12 @@ const HarvesterData = () => {
       const data = await res.data;
 
       if (data.status === "Success") {
-        message.success(data.Code);
+        message.success(t(data.Code));
         setFetch(data.data);
       }
     } catch (err) {
       console.log(err.message);
-      message.error("Harvester not deleted");
+      message.error(t("CL.HL.DHLTSM"));
     }
   };
 
@@ -110,14 +111,19 @@ const HarvesterData = () => {
       setOpenType(null);
       setTimeout(() => {
         notification.warning({
-          message: "Edit Action not work",
-          description:
-            "You can only edit this transaction if it is the most recent one. Transactions preceding the last entry cannot be modified.",
+          message: t("mechanizedHiring.card.etm"),
+          description: t("mechanizedHiring.card.etd"),
           placement: "topRight",
         });
         setIsLoading(null);
       }, 1000);
       return;
+    }
+    if (record?.duration > 0) {
+      setBaseOfRate("duration");
+    }
+    if (record?.measurment > 0) {
+      setBaseOfRate("measurment");
     }
     transactionForm.setFieldsValue({
       harvesterId: harvesterId,
@@ -160,9 +166,8 @@ const HarvesterData = () => {
       setOpenType(null);
       setTimeout(() => {
         notification.warning({
-          message: "Delete Action not work",
-          description:
-            "You can only delete this transaction if it is the most recent one. Transactions preceding the last entry cannot be removed.",
+          message: t("mechanizedHiring.card.dtm"),
+          description: t("mechanizedHiring.card.dtd"),
           placement: "topRight",
         });
         setIsLoading(null);
@@ -179,12 +184,12 @@ const HarvesterData = () => {
       const data = await res.data;
 
       if (data.status === "Success") {
-        message.success(data.Code);
+        message.success(t(data.Code));
         setFetch(data.data);
       }
     } catch (err) {
       console.log(err.message);
-      message.error("harvester transaction not deleted ");
+      message.error(t("CL.HL.DHTSM"));
     }
   };
 
@@ -196,12 +201,12 @@ const HarvesterData = () => {
         const data = await res.data;
         if (data.status == "Success") {
           setHarvestList(data.data);
-          message.success(data.Code);
+          message.success(t(data.Code));
           setIsLoading(null);
         }
       } catch (err) {
         console.log(err.message);
-        message.error("Data not fetched");
+        message.error(t("CL.HL.GHLSEM"));
       }
     }
     getData();
@@ -217,7 +222,7 @@ const HarvesterData = () => {
     const TRANS_COLUMNS = [
       ...transColumns,
       {
-        title: "Action",
+        title: t("mechanizedHiring.ttc.actiont"),
         dataIndex: "",
         key: "a",
         render: (_, record) => {
@@ -232,7 +237,7 @@ const HarvesterData = () => {
                 )}
               </Button>
               <Popconfirm
-                title={<AlertText text={`${t("CasualLabor.wtc.aptt")}`} />}
+                title={<AlertText text={`${t("mechanizedHiring.ttc.aptt")}`} />}
                 onConfirm={() => deleteTrans(record)}
                 okText="Yes"
                 cancelText="No"
@@ -260,7 +265,7 @@ const HarvesterData = () => {
   const columns = [
     ...LIST_COLUMNS,
     {
-      title: "Action",
+      title: t("mechanizedHiring.htc.actiont"),
       dataIndex: "",
       key: "a",
       render: (_, record) => {
@@ -283,7 +288,7 @@ const HarvesterData = () => {
               )}
             </Button>
             <Popconfirm
-              title={<AlertText text={`${t("CasualLabor.wtc.aptt")}`} />}
+              title={<AlertText text={`${t("mechanizedHiring.htc.aptt")}`} />}
               onConfirm={() => deleteHarvester(record)}
               okText="Yes"
               cancelText="No"
@@ -298,10 +303,10 @@ const HarvesterData = () => {
   return (
     <>
       <PageContainer
-        title={t("mechanizedal.cardTitle")}
+        title={t("mechanizedHiring.card.title")}
         extra={
           <Button type="primary" onClick={() => setOpenType("addDetail")}>
-            Add Harvester
+            {t("mechanizedHiring.card.bt")}
           </Button>
         }>
         {isLoading == "loading" ? (
@@ -321,6 +326,9 @@ const HarvesterData = () => {
         detailForm={detailForm}
         transactionForm={transactionForm}
         harvesterList={harvestList}
+        baseOfRate={baseOfRate}
+        setBaseOfRate={setBaseOfRate}
+        t={t}
       />
     </>
   );

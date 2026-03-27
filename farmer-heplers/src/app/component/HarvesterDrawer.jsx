@@ -9,6 +9,9 @@ const HarvestDrawer = ({
   detailForm,
   harvesterList,
   transactionForm,
+  baseOfRate,
+  setBaseOfRate,
+  t,
 }) => {
   const onClose = () => {
     setOpenType(null);
@@ -18,7 +21,7 @@ const HarvestDrawer = ({
   return (
     <>
       <Drawer
-        title={openType !== null && "Harvest Drawer"}
+        title={t("harvestDrawer.title")}
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}
@@ -38,6 +41,8 @@ const HarvestDrawer = ({
             harvesterList={harvesterList}
             setFetch={setFetch}
             onClose={onClose}
+            baseOfRate={baseOfRate}
+            setBaseOfRate={setBaseOfRate}
           />
         )}
       </Drawer>

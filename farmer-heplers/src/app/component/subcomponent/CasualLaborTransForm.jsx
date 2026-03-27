@@ -14,9 +14,19 @@ import {
   addTransactionForFieldWorker,
   updateFieldWorkerTransaction,
 } from "../../service/other";
+import { useAuth } from "../../auth/AuthContext";
+import dayjs from "dayjs";
 
-const LaborTransForm = ({ form, openType, laborDetails, setFetch }) => {
+const LaborTransForm = ({
+  form,
+  openType,
+  laborDetails,
+  setFetch,
+  onClose,
+}) => {
+  const { t } = useAuth();
   const [buttonLoading, setButtonLoading] = useState(false);
+  const today = dayjs();
 
   const onFinish = async () => {
     if (openType === "transAdd") {
@@ -32,12 +42,12 @@ const LaborTransForm = ({ form, openType, laborDetails, setFetch }) => {
         const data = await res.data;
 
         if (data.status === "Success") {
-          message.success(data.Code);
+          message.success(t(data.Code));
           setButtonLoading(false);
           setFetch(data.worker);
         }
       } catch (err) {
-        message.error("Labor transaction not added");
+        message.error(t("CL.FW.AWTSEM"));
         console.log(err.message);
       }
     }
@@ -51,16 +61,16 @@ const LaborTransForm = ({ form, openType, laborDetails, setFetch }) => {
         const res = await updateFieldWorkerTransaction(ids, restOfformValues);
         const data = await res.data;
         if (data.status === "Success") {
-          message.success(data.Code);
+          message.success(t(data.Code));
           setButtonLoading(false);
           setFetch(data.workerTrans);
         }
       } catch (err) {
         console.log(err.message);
-        message.error("Labor transaction not updated");
+        message.error(t("CL.FW.UWTBIDSEM"));
       }
     }
-    form.resetFields();
+    onClose();
   };
 
   return (
@@ -83,33 +93,39 @@ const LaborTransForm = ({ form, openType, laborDetails, setFetch }) => {
           <Form.Item label="Labor ID" name="laborId" hidden>
             <Input />
           </Form.Item>
-          <Form.Item label="Date" name="startDate">
-            <DatePicker format={"DD/MM/YYYY"} />
+          <Form.Item
+            label={t("casualDrawer.acltf.df")}
+            name="startDate"
+            initialValue={today}>
+            <DatePicker
+              format={"DD/MM/YYYY"}
+              placeholder={t("casualDrawer.acltf.dpt")}
+            />
           </Form.Item>
         </Row>
         <Row gutter={24}>
-          <Form.Item label="Wages/D" name="salary">
-            <InputNumber />
+          <Form.Item label={t("casualDrawer.acltf.wpdf")} name="salary">
+            <InputNumber placeholder={t("casualDrawer.acltf.wpdpt")} />
           </Form.Item>
-          <Form.Item label="Duration" name="duration">
-            <InputNumber />
-          </Form.Item>
-        </Row>
-        <Row gutter={24}>
-          <Form.Item label="Pay" name="pay">
-            <InputNumber />
-          </Form.Item>
-          <Form.Item label="PaymentType" name="transType">
-            <Input />
+          <Form.Item label={t("casualDrawer.acltf.durf")} name="duration">
+            <InputNumber placeholder={t("casualDrawer.acltf.durpt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
-          <Form.Item label="Hand Over" name="handOver">
-            <Input />
+          <Form.Item label={t("casualDrawer.acltf.payf")} name="pay">
+            <InputNumber placeholder={t("casualDrawer.acltf.paypt")} />
+          </Form.Item>
+          <Form.Item label={t("casualDrawer.acltf.paytf")} name="transType">
+            <Input placeholder={t("casualDrawer.acltf.paytpt")} />
+          </Form.Item>
+        </Row>
+        <Row gutter={24}>
+          <Form.Item label={t("casualDrawer.acltf.hof")} name="handOver">
+            <Input placeholder={t("casualDrawer.acltf.hopt")} />
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
-            Submit{" "}
+            {t("casualDrawer.acltf.sbt")}{" "}
             {buttonLoading && (
               <Spin
                 indicator={<LoadingOutlined spin />}

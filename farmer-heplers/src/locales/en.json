@@ -359,7 +359,7 @@
   "indDrawer": {
     "submitFunction": {
       "successMessageforCreate": "Transaction Added Successfully",
-      "errorMessageforCreate": "Faild to upload the new transaction.",
+      "errorMessageforCreate": "Failed to upload the new transaction.",
       "successMessageforEdit": "Transaction updated!",
       "errorMessageforEdit": "Transaction could not be edited due to a system error."
     },
@@ -456,11 +456,11 @@
   "workerDrawer": {
     "submitFunction": {
       "successMessageforCreate1": "",
-      "errorMessageforCreate1": "Faild to upload the Worker data.",
+      "errorMessageforCreate1": "Failed to upload the Worker data.",
       "successMessageforCreate2": "",
-      "errorMessageforCreate2": "Faild to upload the Worker transaction",
+      "errorMessageforCreate2": "Failed to upload the Worker transaction",
       "successMessageforEdit": "",
-      "errorMessageforEdit": "Faild to update transaction details."
+      "errorMessageforEdit": "Failed to update transaction details."
     },
     "detailInput": {
       "fnt": "First Name",
@@ -512,6 +512,14 @@
     }
   },
   "casualLabor": {
+    "card": {
+      "title": "Casual labor Data",
+      "bt": "Add Labor",
+      "dtm": "Delete action not work",
+      "dtd": "You can only delete this transaction if it is the must recent one. Transactions preceding the last entry cannot be modified.",
+      "etm": "Edit action not work",
+      "etd": "You can only edit this transaction if it is the must recent one. Transactions preceding the last entry cannot be modified."
+    },
     "wtc": {
       "sntt": "S. No.",
       "dt": "Date",
@@ -531,7 +539,51 @@
       "act": "Action"
     }
   },
+  "casualDrawer": {
+    "title": "Labor Drawer",
+    "aclf": {
+      "df": "Date",
+      "dpt": "Select date",
+      "nnf": "Nick Name",
+      "nnpt": "enter nick name",
+      "fnf": "First Name",
+      "fnpt": "enter first name",
+      "fnrmt": "First name is required",
+      "lnf": "Last Name",
+      "lnpt": "enter last name",
+      "cf": "Contact",
+      "cfpt": "vaild contact number",
+      "lf": "Address",
+      "lfpt": "enter address",
+      "idpf": "Id Proof",
+      "idppt": "enter Id proof",
+      "sbt": "Submit"
+    },
+    "acltf": {
+      "df": "Date",
+      "dpt": "Select date",
+      "wpdf": "Wages/D",
+      "wpdpt": "enter wages of worker",
+      "durf": "Duration",
+      "durpt": "enter working duration",
+      "payf": "Pay",
+      "paypt": "enter paying amount",
+      "paytf": "Transaction Type",
+      "paytpt": "enter trans way",
+      "hof": "Hande Over",
+      "hopt": "enter name of person",
+      "sbt": "Submit"
+    }
+  },
   "mechanizedHiring": {
+    "htc": {
+      "sntt": "S. No.",
+      "dt": "Date",
+      "nt": "Worker Name",
+      "ct": "Contact",
+      "at": "Address",
+      "act": "Action"
+    },
     "ttc": {
       "sntt": "S. No.",
       "dt": "Date",
@@ -541,6 +593,61 @@
       "pt": "Pay",
       "hot": "Hand Over",
       "act": "Action"
+    },
+    "card": {
+      "title": "Mechanized Hiring Data",
+      "bt": "New Harvest Entry",
+      "dtm": "Delete action not work",
+      "dtd": "You can only delete this transaction if it is the must recent one. Transactions preceding the last entry cannot be modified.",
+      "etm": "Edit action not work",
+      "etd": "You can only edit this transaction if it is the must recent one. Transactions preceding the last entry cannot be modified."
+    }
+  },
+  "harvestDrawer": {
+    "title": "Harvest Drawer",
+    "ahf": {
+      "df": "Date",
+      "dpt": "Select date",
+      "nnf": "Nick Name",
+      "nnpt": "enter nick name",
+      "fnf": "First Name",
+      "fnpt": "enter first name",
+      "fnrmt": "First name is required",
+      "lnf": "Last Name",
+      "lnpt": "enter last name",
+      "cf": "Contact",
+      "cfpt": "vaild contact number",
+      "lf": "Address",
+      "lfpt": "enter address",
+      "vd": {
+        "vnf": "Vehicle Number",
+        "vnpt": "enter vehicle number",
+        "vtf": "Vehicle Type",
+        "vtpt": "define the vehicle",
+        "vidf": "Vehicle ID",
+        "vidpt": "enter id of vehicle"
+      },
+      "idpf": "Id Proof",
+      "idppt": "enter Id proof",
+      "sbt": "Submit"
+    },
+    "ahtf": {
+      "df": "Date",
+      "dpt": "Select date",
+      "dfrmt": "date is required",
+      "durf": "Duration",
+      "durpt": "enter working duration",
+      "mf": "Measurement",
+      "mpt": "enter worked measurement",
+      "hcf": "Harvesting Charge",
+      "hcpt": "charge of harvest",
+      "payf": "Pay",
+      "paypt": "enter paying amount",
+      "paytf": "Transaction Type",
+      "paytpt": "enter trans way",
+      "hof": "Hande Over",
+      "hopt": "enter name of person",
+      "sbt": "Submit"
     }
   },
   "layout": {
@@ -560,10 +667,38 @@
       }
     }
   },
-  "OE": {
+  "CL": {
     "FW": {
-      "WNF": "Additional workers not found",
-      "WF": "Additional worker fetched successfully"
+      "WNF": "Casual worker not found",
+      "WF": "Casual workers list fetched successfully",
+      "UWDSM": "Casual worker details successfully updated !",
+      "UWDSE": "Failed to update Casual worker details",
+      "DWSM": "Casual worker data deleted successfully",
+      "DWSEM": "Failed to delete Casual worker data",
+      "AWTSM": "Casual worker transaction added successfully",
+      "AWTSEM": "Failed to delete Casual worker transaction",
+      "UWTBIDSM": "Casual worker transaction successfully updated !",
+      "UWTBIDSEM": "Failed to update Casual worker transaction",
+      "DWTBIDSM": "Casual worker transaction deleted successfully",
+      "DWTBIDSEM": "Failed to delete Casual worker transaction",
+      "PDSM": "Casual worker data posted successfully",
+      "PDSEM": "Failed to post Casual worker data"
+    },
+    "HL": {
+      "GHLSM": "Harvest list fetched successfully",
+      "GHLSEM": "Harvest list not fetched",
+      "UHLBIDSM": "Harvest data successfully updated !",
+      "UHLBIDSEM": "Failed to update Harvest details",
+      "HDDSM": "Harvest data deleted successfully",
+      "HDDSEM": "Failed to delete Harvest data",
+      "ATHLSM": "Harvester transaction added successfully",
+      "ATHLSEM": "Failed to add Harvester transaction",
+      "UHLTBIDSM": "Harvester transaction successfully updated !",
+      "UHTBIDSEM": "Failed to update Harvester transaction",
+      "DHTSM": "Harvester transaction deleted successfully",
+      "DHLTSEM": "Failed to delete Harvester transaction",
+      "PHDSM": "Harvester data posted successfully",
+      "PHDSEM": "Failed to post Harvest data"
     }
   },
   "USER_EXISTS": "User already exists",

@@ -85,6 +85,7 @@ const CasualLabor = () => {
   };
 
   const editTransFunction = async (record) => {
+    setButtonLoanding("let");
     const filterFieldWorkers = additonalWorker.find((labor) => {
       return labor.transactions.some((transaction) =>
         Object.keys(transaction).every(
@@ -93,7 +94,19 @@ const CasualLabor = () => {
       );
     });
     const workerId = filterFieldWorkers?._id;
-    setButtonLoanding("let");
+    const length = filterFieldWorkers?.transactions.length;
+    if (length !== record.serialNo) {
+      setOpenType(null);
+      setTimeout(() => {
+        setButtonLoanding(null);
+        notification.warning({
+          message: t("casualLabor.card.etm"),
+          description: t("casualLabor.card.etd"),
+          placement: "topRight",
+        });
+      }, 1000);
+      return;
+    }
     const startDate = dayjs(record.startDate);
     transactionForm.setFieldsValue({
       laborId: workerId,
@@ -134,9 +147,8 @@ const CasualLabor = () => {
       setOpenType(null);
       setTimeout(() => {
         notification.warning({
-          message: "Delete Action not work",
-          description:
-            "You can only delete this transaction if it is the most recent one. Transactions preceding the last entry cannot be removed.",
+          message: t("casualLabor.card.dtm"),
+          description: t("casualLabor.card.dtd"),
           placement: "topRight",
         });
         setIsLoading(null);
@@ -152,13 +164,13 @@ const CasualLabor = () => {
       const res = await deleteFieldWorkerTransaction(ids);
       const data = await res.data;
       if (data.status === "Success") {
-        message.success(data.Code);
+        message.success(t(data.Code));
         setFetch(data.workerTrans);
       }
       console.log(filterFieldWorkers);
     } catch (err) {
       console.log(err.message);
-      message.error("Labor transaction not deleted");
+      message.error(t("CL.FW.DWTBIDSEM"));
     }
   };
 
@@ -173,7 +185,7 @@ const CasualLabor = () => {
         message.success(t(data.Code));
       } catch (err) {
         console.log(err.message);
-        message.error("Casual Labor data not fetching");
+        message.error(t("CL.FW.WNF"));
       }
     }
     getData();
@@ -303,10 +315,10 @@ const CasualLabor = () => {
   return (
     <>
       <PageContainer
-        title={t("casulaLabor.cardTitle")}
+        title={t("casualLabor.card.title")}
         extra={
           <Button type="primary" onClick={() => setOpenType("laborAdd")}>
-            Add Labor
+            {t("casualLabor.card.bt")}
           </Button>
         }>
         {isLoading ? (
@@ -327,6 +339,7 @@ const CasualLabor = () => {
         setFetch={setFetch}
         transactionForm={transactionForm}
         additionalWorker={additonalWorker}
+        t={t}
       />
     </>
   );

@@ -1131,9 +1131,9 @@ const getColumnsForHarvestList = (t) => {
           <table border="1">
             <thead>
               <tr>
-                <th>Vehicle Number</th>
-                <th>Vehicle Type</th>
-                <th>Vehicle ID</th>
+                <th>{t("mechanizedHiring.htc.vd.vdmtvn")}</th>
+                <th>{t("mechanizedHiring.htc.vd.vdmtvt")}</th>
+                <th>{t("mechanizedHiring.htc.vd.vdmtvid")}</th>
               </tr>
             </thead>
             <tbody>
@@ -1151,10 +1151,20 @@ const getColumnsForHarvestList = (t) => {
     });
   };
   const LIST_COLUMNS = [
-    { title: "S.No.", dataIndex: "serialNo", width: 50, key: "serialNo" },
-    { title: "Date", dataIndex: "date", width: 100, key: "date" },
     {
-      title: "Name",
+      title: t("mechanizedHiring.htc.sntt"),
+      dataIndex: "serialNo",
+      width: 50,
+      key: "serialNo",
+    },
+    {
+      title: t("mechanizedHiring.htc.dt"),
+      dataIndex: "date",
+      width: 100,
+      key: "date",
+    },
+    {
+      title: t("mechanizedHiring.htc.nt"),
       dataIndex: "serviceProvider",
       width: 150,
       key: "name",
@@ -1169,25 +1179,25 @@ const getColumnsForHarvestList = (t) => {
       ),
     },
     {
-      title: "Contact",
+      title: t("mechanizedHiring.htc.ct"),
       dataIndex: ["serviceProvider", "contact"],
       width: 100,
       key: "contact",
     },
     {
-      title: "ID Proof",
-      dataIndex: ["serviceProvider", "idProof"],
+      title: t("mechanizedHiring.htc.at"),
+      dataIndex: ["serviceProvider", "address"],
       width: 100,
-      key: "idProof",
+      key: "address",
     },
     {
-      title: "Vehical Details",
+      title: t("mechanizedHiring.htc.vd.vdt"),
       dataIndex: "vehicalDetails",
       width: 100,
       key: "vehicalDetails",
       render: (details) => {
         if (details.length > 0) {
-          const title = "Vehical Detail";
+          const title = t("mechanizedHiring.htc.vd.vdmt");
           return (
             <Button
               type="text"

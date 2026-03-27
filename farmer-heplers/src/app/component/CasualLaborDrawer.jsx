@@ -9,6 +9,7 @@ const LaborDrawer = ({
   laborForm,
   additionalWorker,
   transactionForm,
+  t,
 }) => {
   const onClose = () => {
     setOpenType(null);
@@ -18,7 +19,7 @@ const LaborDrawer = ({
   return (
     <>
       <Drawer
-        title={openType !== null && "Labor Drawer"}
+        title={t("casualDrawer.title")}
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}

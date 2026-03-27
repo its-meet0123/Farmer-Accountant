@@ -24,12 +24,12 @@ const HarvesterTransactionForm = ({
   setFetch,
   onClose,
 }) => {
-  const { authState, t } = useAuth();
+  const { t } = useAuth();
   const [buttonLoading, setButtonLoading] = useState(false);
   const [baseOfRate, setBaseOfRate] = useState("duration");
   const options = [
-    { label: "Duration", value: "duration" },
-    { label: "Measurement", value: "measurment" },
+    { label: t("harvestDrawer.ahtf.odt"), value: "duration" },
+    { label: t("harvestDrawer.ahtf.omt"), value: "measurment" },
   ];
 
   const onFinish = async () => {
@@ -47,13 +47,13 @@ const HarvesterTransactionForm = ({
         const data = await res.data;
 
         if (data.status === "Success") {
-          message.success(data.Code);
+          message.success(t(data.Code));
           setButtonLoading(false);
           setFetch(data.data);
           onClose();
         }
       } catch (err) {
-        message.error("Harvester transaction not added");
+        message.error(t("CL.HL.ATHLSEM"));
         console.log(err.message);
       }
     }
@@ -68,13 +68,13 @@ const HarvesterTransactionForm = ({
         const res = await updateHarvestDataTransaction(ids, restOfformValues);
         const data = await res.data;
         if (data.status === "Success") {
-          message.success(data.Code);
+          message.success(t(data.Code));
           setButtonLoading(false);
           setFetch(data.harvesterTrans);
         }
       } catch (err) {
         console.log(err.message);
-        message.error("Harvester transaction not updated");
+        message.error(t("CL.HL.UHTBIDSEM"));
       }
     }
   };
@@ -102,10 +102,15 @@ const HarvesterTransactionForm = ({
           </Form.Item>
 
           <Form.Item
-            label="Date"
+            label={t("harvestDrawer.ahtf.df")}
             name="startDate"
-            rules={[{ required: true, message: "Please select date" }]}>
-            <DatePicker />
+            rules={[
+              { required: true, message: t("harvestDrawer.ahtf.dfrmt") },
+            ]}>
+            <DatePicker
+              format={"DD/MM/YYYY"}
+              placeholder={t("harvestDrawer.ahtf.dpt")}
+            />
           </Form.Item>
         </Row>
 
@@ -118,32 +123,32 @@ const HarvesterTransactionForm = ({
 
         <Row gutter={12}>
           {baseOfRate == "duration" && (
-            <Form.Item label="Duration" name="duration">
-              <InputNumber placeholder="duration" />
+            <Form.Item label={t("harvestDrawer.ahtf.durf")} name="duration">
+              <InputNumber placeholder={t("harvestDrawer.ahtf.durpt")} />
             </Form.Item>
           )}
 
           {baseOfRate == "measurment" && (
-            <Form.Item label="Measurement" name="measurment">
-              <InputNumber placeholder="measurment" />
+            <Form.Item label={t("harvestDrawer.ahtf.mf")} name="measurment">
+              <InputNumber placeholder={t("harvestDrawer.ahtf.mpt")} />
             </Form.Item>
           )}
 
-          <Form.Item label="Harvesting Charge" name="salary">
-            <InputNumber placeholder="harvesting charge" />
+          <Form.Item label={t("harvestDrawer.ahtf.hcf")} name="salary">
+            <InputNumber placeholder={t("harvestDrawer.ahtf.hcpt")} />
           </Form.Item>
         </Row>
         <Row gutter={12}>
-          <Form.Item label="Pay" name="pay">
-            <InputNumber />
+          <Form.Item label={t("harvestDrawer.ahtf.payf")} name="pay">
+            <InputNumber placeholder={t("harvestDrawer.ahtf.paypt")} />
           </Form.Item>
 
-          <Form.Item label="Transaction Type" name="transType">
-            <Input />
+          <Form.Item label={t("harvestDrawer.ahtf.paytf")} name="transType">
+            <Input placeholder={t("harvestDrawer.ahtf.paytpt")} />
           </Form.Item>
 
-          <Form.Item label="Handover" name="handOver">
-            <Input />
+          <Form.Item label={t("harvestDrawer.ahtf.hof")} name="handOver">
+            <Input placeholder={t("harvestDrawer.ahtf.hopt")} />
           </Form.Item>
         </Row>
         <Row gutter={12}>
@@ -158,6 +163,7 @@ const HarvesterTransactionForm = ({
               ) : (
                 t?.submit || "Submit"
               )} */}
+              {t("harvestDrawer.ahtf.sbt")}
             </Button>
           </Form.Item>
         </Row>
