@@ -82,10 +82,10 @@ async function dashBordData(req, res) {
           );
 
           return {
-            loan: loanInterest,
-            buy: buyInterest,
-            sell: sellInterest,
-            diesel: dieselInterest,
+            ...loanInterest,
+            ...buyInterest,
+            ...sellInterest,
+            ...dieselInterest,
           };
         } else {
           return null;
