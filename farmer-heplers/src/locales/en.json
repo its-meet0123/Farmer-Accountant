@@ -526,7 +526,8 @@
       "nt": "Worker Name",
       "ct": "Contact",
       "at": "Address",
-      "act": "Action"
+      "actiont": "Action",
+      "aptt": "Deleting this labor will permanently remove all their associated transaction records. This action cannot be undone. Are you sure you want to proceed?"
     },
     "ttc": {
       "sntt": "S. No.",
@@ -536,7 +537,8 @@
       "tt": "Total Wages",
       "pt": "Pay",
       "hot": "Hand Over",
-      "act": "Action"
+      "actiont": "Action",
+      "aptt": "Are you sure you want to delete this transaction record? This action cannot be undone."
     }
   },
   "casualDrawer": {
@@ -579,10 +581,18 @@
     "htc": {
       "sntt": "S. No.",
       "dt": "Date",
-      "nt": "Worker Name",
+      "nt": "Owner",
       "ct": "Contact",
       "at": "Address",
-      "act": "Action"
+      "vd": {
+        "vdt": "Vehicle Details",
+        "vdmt": "Vehicle Detail",
+        "vdmtvn": "Vehicle Number",
+        "vdmtvt": "Vehicle Type",
+        "vdmtvid": "Vehicle ID"
+      },
+      "actiont": "Action",
+      "aptt": "Deleting this owner will permanently remove all their associated transaction records. This action cannot be undone. Are you sure you want to proceed?"
     },
     "ttc": {
       "sntt": "S. No.",
@@ -592,7 +602,8 @@
       "tt": "Total/Remaing",
       "pt": "Pay",
       "hot": "Hand Over",
-      "act": "Action"
+      "actiont": "Action",
+      "aptt": "Are you sure you want to delete this transaction record? This action cannot be undone."
     },
     "card": {
       "title": "Mechanized Hiring Data",
@@ -647,7 +658,9 @@
       "paytpt": "enter trans way",
       "hof": "Hande Over",
       "hopt": "enter name of person",
-      "sbt": "Submit"
+      "sbt": "Submit",
+      "odt": "Duration",
+      "omt": "Measurement"
     }
   },
   "layout": {

@@ -186,38 +186,33 @@ async function handleDeleteManyIndData(req, res) {
 }
 
 async function handlePushIndShopeAccountById(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const id = req.params.id;
-  const body = req.body;
-  if (!id || !body) {
-    return res.status(400).json({
-      status: "Error",
-      msg: "Id and all fields are required",
-    });
-  }
-  const indDataBySNo = await Industries.findOneAndUpdate(
-    { _id: id, userId: currentUserId },
-    {
-      $push: {
-        shopeAccount: body,
+  try {
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const id = req.params.id;
+    const body = req.body;
+    const indDataBySNo = await Industries.findOneAndUpdate(
+      { _id: id, userId: currentUserId },
+      {
+        $push: {
+          shopeAccount: body,
+        },
       },
-    },
-    { new: true },
-  );
-  if (!indDataBySNo) {
-    return res.status(400).json({
+      { new: true },
+    );
+    return res.status(200).json({
+      status: "Success",
+      msg: "Shop account pushed successfully",
+      data: indDataBySNo,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).json({
       status: "Error",
-      msg: "Please enter the Id correctly",
+      Code: "",
     });
   }
-
-  return res.status(200).json({
-    status: "Success",
-    msg: "Shop account pushed successfully",
-    data: indDataBySNo,
-  });
 }
 
 async function handleUpdateIndShopeAccountTransactionById(req, res) {

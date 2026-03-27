@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-shopeAccountSchema = new mongoose.Schema({
+const shopeAccountSchema = new mongoose.Schema({
   startDate: {
     type: Date,
     default: new Date(),

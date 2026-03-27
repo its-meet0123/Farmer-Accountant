@@ -7,6 +7,7 @@ const dateRouter = require("./routes/endDate");
 const userRouter = require("./routes/user");
 const workerRouter = require("./routes/worker");
 const otherExpenseRouter = require("./routes/otherexpense");
+const dashBordRouter = require("./routes/dashbord");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
@@ -35,6 +36,7 @@ app.use("/intshope", intShopeRouter);
 app.use("/intdate", dateRouter);
 app.use("/worker", workerRouter);
 app.use("/other", otherExpenseRouter);
+app.use("/dashbord", dashBordRouter);
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on Port ${PORT}`);
 });

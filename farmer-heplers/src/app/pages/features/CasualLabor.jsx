@@ -233,7 +233,7 @@ const CasualLabor = () => {
       width: 100,
     },
     {
-      title: t("casualLabor.wtc.act"),
+      title: t("casualLabor.wtc.actiont"),
       dataIndex: "",
       key: "a",
       render: (_, record) => {
@@ -279,7 +279,7 @@ const CasualLabor = () => {
     const columns = [
       ...CASUAL_LABOR_TRANS_COLUMNS,
       {
-        title: t("casualLabor.ttc.act"),
+        title: t("casualLabor.ttc.actiont"),
         dataIndex: "",
         key: "a",
         render: (_, record) => {
