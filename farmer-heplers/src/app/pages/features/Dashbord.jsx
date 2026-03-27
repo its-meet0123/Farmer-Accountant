@@ -10,11 +10,14 @@ const DashBord = () => {
       try {
         const res = await getDashbordData();
         const data = await res.data;
-        console.log(data);
+        console.log("Raw response data:", data);
+        console.log("Setting dashbordData:", data.data);
         setDeshbordData(data.data);
         message.success(data.Code);
       } catch (err) {
-        console.log(err.message);
+        console.error("Error fetching dashboard data:", err);
+        console.error("Error message:", err.message);
+        console.error("Full error object:", err);
         message.error("Dashbord data not fetched");
       }
     }
@@ -23,43 +26,48 @@ const DashBord = () => {
   const features = [
     {
       title: "Shops & Inventory",
-      desc: dashbordData?.shopes.map((shop) => {
-        return {
-          name: shop.shopeNumber || "",
-          total: shop.overAllTotal || 0,
-        };
-      }),
+      desc:
+        dashbordData?.shopes?.map((shop) => {
+          return {
+            name: shop.shopeNumber || "",
+            total: shop.overAllTotal || 0,
+          };
+        }) || [],
     },
     {
       title: "Permanent Workers",
-      desc: dashbordData?.workers.map((worker) => {
-        return {
-          name: worker.workerName || "",
-          total: worker.overAllTotal || 0,
-        };
-      }),
+      desc:
+        dashbordData?.workers?.map((worker) => {
+          return {
+            name: worker.workerName || "",
+            total: worker.overAllTotal || 0,
+          };
+        }) || [],
     },
     {
       title: "Casual Labor",
-      desc: dashbordData?.casualLabors.map((labor) => {
-        return {
-          name: labor.laborName || "",
-          total: labor.pending || 0,
-        };
-      }),
+      desc:
+        dashbordData?.casualLabors?.map((labor) => {
+          return {
+            name: labor.laborName || "",
+            total: labor.pending || 0,
+          };
+        }) || [],
     },
     {
       title: "Harvester & Tools",
-      desc: dashbordData?.harvester.map((harvest) => {
-        return {
-          name: harvest.opratorName || "",
-          total: harvest.pending || 0,
-        };
-      }),
+      desc:
+        dashbordData?.harvester?.map((harvest) => {
+          return {
+            name: harvest.opratorName || "",
+            total: harvest.pending || 0,
+          };
+        }) || [],
     },
   ];
 
-  console.log(features);
+  console.log("Dashboard state:", dashbordData);
+  console.log("Features array:", features);
   return (
     <div style={styles.wrapper}>
       <header style={styles.header}>
