@@ -15,6 +15,7 @@ const {
   calculateAutoInterestForGiveAmount,
   calculateAutoInterestDieselBillAmount,
 } = require("./dashbordInterestCalc");
+const { overAllTotalOfAllShopes } = require("./calculation");
 
 // Dashboard controller functions using map method
 
@@ -33,69 +34,70 @@ async function dashBordData(req, res) {
 
     const allShopes = Ind.map((shopes) => {
       const shopeNumber = shopes?.shopeNumber;
-      const shopeData = shopes.shopeAccount
-        .map((transaction) => {
-          const startDate = transaction?.startDate || "";
-          const rate = transaction?.rate || 24;
-          const endDate = new Date();
+      const shopeData = shopes.shopeAccount.map((transaction) => {
+        const startDate = transaction?.startDate || "";
+        const rate = transaction?.rate || 24;
+        const endDate = new Date();
 
-          const loanAmount = transaction?.loan?.amount || 0;
-          const buyAmount = transaction?.indBuy?.billAmount || 0;
-          const sellAmount = transaction?.indSell?.billAmount || 0;
-          const dieselAmount = transaction?.diesel?.billAmount || 0;
-          //loan
-          if (
-            loanAmount > 0 ||
-            buyAmount > 0 ||
-            sellAmount > 0 ||
-            dieselAmount > 0
-          ) {
-            const loanInterest = calculateAutoInterestForTakeAmount(
-              loanAmount,
-              startDate,
-              rate,
-              endDate,
-            );
-            //buy item
+        const loanAmount = transaction?.loan?.amount || 0;
+        const buyAmount = transaction?.indBuy?.billAmount || 0;
+        const sellAmount = transaction?.indSell?.billAmount || 0;
+        const dieselAmount = transaction?.diesel?.billAmount || 0;
+        //loan
+        if (
+          loanAmount > 0 ||
+          buyAmount > 0 ||
+          sellAmount > 0 ||
+          dieselAmount > 0
+        ) {
+          const loanInterest = calculateAutoInterestForTakeAmount(
+            loanAmount,
+            startDate,
+            rate,
+            endDate,
+          );
+          //buy item
 
-            const buyInterest = calculateAutoInterestForBuyBillAmount(
-              buyAmount,
-              startDate,
-              rate,
-              endDate,
-            );
-            //sellItem
+          const buyInterest = calculateAutoInterestForBuyBillAmount(
+            buyAmount,
+            startDate,
+            rate,
+            endDate,
+          );
+          //sellItem
 
-            const sellInterest = calculateAutoInterestForGiveAmount(
-              sellAmount,
-              startDate,
-              rate,
-              endDate,
-            );
-            //dieselAmount
+          const sellInterest = calculateAutoInterestForGiveAmount(
+            sellAmount,
+            startDate,
+            rate,
+            endDate,
+          );
+          //dieselAmount
 
-            const dieselInterest = calculateAutoInterestDieselBillAmount(
-              dieselAmount,
-              startDate,
-              rate,
-              endDate,
-            );
+          const dieselInterest = calculateAutoInterestDieselBillAmount(
+            dieselAmount,
+            startDate,
+            rate,
+            endDate,
+          );
 
-            return {
-              loan: loanInterest,
-              buy: buyInterest,
-              sell: sellInterest,
-              diesel: dieselInterest,
-            };
-            return null;
-          }
-        })
-        .filter((item) => item !== null);
+          return {
+            loan: loanInterest,
+            buy: buyInterest,
+            sell: sellInterest,
+            diesel: dieselInterest,
+          };
+        } else {
+          return null;
+        }
+      });
+
+      const shopesTotal = overAllTotalOfAllShopes(shopeData);
       return {
         shopeNumber: shopeNumber,
-        transactions: shopeData,
+        overAllTotal: shopesTotal,
       };
-    });
+    }).filter((item) => item !== null);
 
     return res.status(200).json({
       status: "Success",
