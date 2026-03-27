@@ -22,31 +22,40 @@ const DashBord = () => {
   }, []);
   const features = [
     {
-      title: "Vendor Ledger",
-      desc: [
-        "Track all your purchases from seed and fertilizer stores.",
-        "Keep your credits and payments clear with every trader.",
-        "Digital records for seeds and fertilizers.",
-      ],
+      title: "Shops & Inventory",
+      desc: dashbordData.shopes.map((shop) => {
+        return {
+          name: shop.shopeNumber,
+          total: shop.overAllTotal,
+        };
+      }),
     },
     {
-      title: "Sharecropping",
-      desc: ["Easily manage workers on share-basis (1/4th, 1/5th)."],
+      title: "Permanent Workers",
+      desc: dashbordData.workers.map((worker) => {
+        return {
+          name: worker.workerName,
+          total: worker.overAllTotal,
+        };
+      }),
     },
     {
-      title: "Labor & Custom Hiring",
-      desc: [
-        "Track daily wages for casual labor.",
-        "Hiring costs for tractors or harvesters.",
-        "Manage multiple workers without paperwork.",
-      ],
+      title: "Casual Labor",
+      desc: dashbordData.casualLabors.map((labor) => {
+        return {
+          name: labor.laborName,
+          total: labor.pending,
+        };
+      }),
     },
     {
-      title: "Farm P&L Tracker",
-      desc: [
-        "Total income minus all expenses.",
-        "Built-in automatic interest calculation.",
-      ],
+      title: "Harvester & Tools",
+      desc: dashbordData.harvester.map((harvest) => {
+        return {
+          name: harvest.opratorName,
+          total: harvest.pending,
+        };
+      }),
     },
   ];
 
@@ -102,9 +111,10 @@ const FeatureCard = ({ item }) => {
               : "none",
             height: "100%",
           }}>
-          {item.desc.map((text, i) => (
+          {item.desc.map((obj, i) => (
             <div key={i} style={styles.descSlide}>
-              <p style={{ margin: 0 }}>{text}</p>
+              <p>{obj.name}</p>
+              <p style={{ margin: 0 }}>{obj.total}</p>
             </div>
           ))}
         </div>
