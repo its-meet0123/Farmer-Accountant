@@ -57,8 +57,8 @@ const DashBord = () => {
     {
       title: "Harvester & Tools",
       desc:
-        dashbordData?.harvester && Array.isArray(dashbordData.harvester)
-          ? dashbordData.harvester.map((harvest) => ({
+        dashbordData?.harvesters && Array.isArray(dashbordData.harvesters)
+          ? dashbordData.harvesters.map((harvest) => ({
               name: harvest.opratorName || "",
               total: harvest.pending || 0,
             }))
