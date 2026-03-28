@@ -22,18 +22,18 @@ function overAllTotalOfAllShopes(data) {
 
 function overAllTotalOfAllWorkers(data) {
   let totalOfReturnAmount = 0;
-  let totalOfPayment = 0;
   let totalOfReturnPayment = 0;
 
   data.forEach(({ give, take }) => {
     totalOfReturnAmount += Number(give.totalAmount || 0);
-    totalOfPayment += Number(take.payment || 0);
     totalOfReturnPayment += Number(take.totalPayment || 0);
   });
-  const amountTex = Number(totalOfPayment) * (1 / 100);
-  const grandTotal = Number(
-    totalOfReturnPayment - (totalOfReturnAmount + amountTex),
-  ).toFixed(2);
+  const oAT = totalOfReturnPayment - totalOfReturnAmount;
+  const grandTotal = Number(oAT).toFixed(2);
+
+  console.log("reutrn Amount :", totalOfReturnAmount);
+  console.log("return payment :", totalOfReturnPayment);
+  console.log("OAT :", oAT);
 
   return grandTotal;
 }
