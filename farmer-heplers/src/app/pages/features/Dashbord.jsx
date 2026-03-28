@@ -120,6 +120,7 @@ const DashBord = () => {
       <div style={styles.mainGrid}>
         {features && Array.isArray(features) && features.length > 0 ? (
           features.map((item, index) => {
+            console.log("title :", item.title, "desc :", item.desc);
             // FIX: Check if item exists and its desc array has at least one element
             if (!item || !Array.isArray(item.desc)) {
               return null; // Kuch bhi render nahi karega agar data khali hai
