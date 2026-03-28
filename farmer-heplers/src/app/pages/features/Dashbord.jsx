@@ -32,7 +32,7 @@ const DashBord = () => {
       }
     }
     getData();
-  }, []);
+  }, [location.pathname, t]);
   const features = [
     {
       title: "Shops & Inventory",
