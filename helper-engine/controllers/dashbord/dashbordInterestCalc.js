@@ -15,8 +15,8 @@ function calculateAutoInterestForTakeAmount(amount, startDate, rate, endDate) {
   return {
     days,
     months,
-    interst: interest.toFixed(2),
-    totalAmount: (amount + interest).toFixed(2),
+    interst: interest,
+    totalAmount: amount + interest,
   };
 }
 function calculateAutoInterestForBuyBillAmount(
@@ -41,8 +41,8 @@ function calculateAutoInterestForBuyBillAmount(
   return {
     days,
     months,
-    interst: interest.toFixed(2),
-    totalAmount: (amount + interest).toFixed(2),
+    interst: interest,
+    totalAmount: amount + interest,
   };
 }
 
@@ -63,8 +63,8 @@ function calculateAutoInterestForGiveAmount(amount, startDate, rate, endDate) {
   return {
     days,
     months,
-    interst: interest.toFixed(2),
-    totalAmount: (amount + interest).toFixed(2),
+    interst: interest,
+    totalAmount: amount + interest,
   };
 }
 
@@ -90,8 +90,8 @@ function calculateAutoInterestDieselBillAmount(
   return {
     days,
     months,
-    interst: interest.toFixed(2),
-    totalAmount: (amount + interest).toFixed(2),
+    interst: interest,
+    totalAmount: amount + interest,
   };
 }
 

@@ -92,7 +92,6 @@ async function dashBordData(req, res) {
           },
         };
       });
-      console.log(shopeData);
 
       const shopesTotal = overAllTotalOfAllShopes(shopeData);
       return {
