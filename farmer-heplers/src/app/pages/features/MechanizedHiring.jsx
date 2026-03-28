@@ -210,7 +210,7 @@ const HarvesterData = () => {
       }
     }
     getData();
-  }, [fetch]);
+  }, [fetch, t]);
 
   const ExpanedRow = (record) => {
     const transData =
@@ -250,7 +250,13 @@ const HarvesterData = () => {
       },
     ];
 
-    return <Table dataSource={transData} columns={TRANS_COLUMNS} />;
+    return (
+      <Table
+        dataSource={transData}
+        columns={TRANS_COLUMNS}
+        scroll={{ x: 300 }}
+      />
+    );
   };
 
   const tableData = useMemo(() => {
@@ -316,6 +322,7 @@ const HarvesterData = () => {
             dataSource={tableData}
             columns={columns}
             expandable={{ expandedRowRender: (record) => ExpanedRow(record) }}
+            scroll={{ x: 500 }}
           />
         )}
       </PageContainer>

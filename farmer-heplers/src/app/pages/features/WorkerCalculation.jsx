@@ -163,7 +163,15 @@ const WorkerCalculation = () => {
   };
 
   const monthlyTotal = useMemo(() => {
-    if (!tableData) return 0;
+    const formatCurrency = (amount) => {
+      return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+      }).format(amount);
+    };
+
+    if (!tableData) return formatCurrency(0);
     let giveAmount = 0;
     let takePayment = 0;
 
@@ -178,9 +186,10 @@ const WorkerCalculation = () => {
       if (isSameMonth) {
         giveAmount += Number(transaction.give.amount);
         takePayment += Number(transaction.take.payment);
-        return giveAmount - takePayment;
+        const sub = giveAmount - takePayment;
+        return formatCurrency(sub);
       }
-      return total;
+      return formatCurrency(total);
     }, 0);
   }, [tableData, selectMonth, today]);
 
