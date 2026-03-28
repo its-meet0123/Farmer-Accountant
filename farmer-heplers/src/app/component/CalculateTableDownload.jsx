@@ -2,6 +2,13 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Modal } from "antd";
 const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
   const data = shope.shopeAccount ? shope.shopeAccount : [];
 
   let totalOfLoanAmount = 0;
@@ -48,12 +55,13 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
         totalOfBuyBillAmountInterest +
         totalOfDieselBillAmountInterest),
   ).toFixed(2);
-  const grandTotal = Number(
+  const oAt =
     totalOfReturnSellBillAmount -
-      (totalOfReturnLoanAmount +
-        totalOfReturnBuyBillAmount +
-        totalOfReturnDieselBillAmount),
-  ).toFixed(2);
+    (totalOfReturnLoanAmount +
+      totalOfReturnBuyBillAmount +
+      totalOfReturnDieselBillAmount);
+
+  const grandTotal = formatCurrency(oAt);
 
   const formattedDate = (date) => {
     const rawDate = date ? new Date(date) : new Date();
@@ -232,6 +240,14 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
   );
 };
 const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
+
   const data = worker.account ? worker.account : [];
 
   let totalOfAmount = 0;
@@ -257,9 +273,9 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
     totalOfPaymentInterest - (totalOfAmountInterest + amountTex),
   ).toFixed(2);
 
-  const grandTotal = Number(
-    totalOfReturnPayment - (totalOfReturnAmount + amountTex),
-  ).toFixed(2);
+  const oAt = totalOfReturnPayment - (totalOfReturnAmount + amountTex);
+
+  const grandTotal = formatCurrency(oAt);
 
   const formattedDate = (date) => {
     const rawDate = date ? new Date(date) : new Date();

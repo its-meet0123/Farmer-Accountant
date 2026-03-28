@@ -4,11 +4,13 @@ import { getDashbordData } from "../../service/dashbord";
 import { message, Spin } from "antd";
 import { useLocation } from "react-router-dom";
 import { LoadingOutlined } from "@ant-design/icons";
+import { useAuth } from "../../auth/AuthContext";
 
 const DashBord = () => {
   const location = useLocation();
   const [isLoanding, setIsLoanding] = useState(false);
   const [dashbordData, setDeshbordData] = useState({});
+  const { t } = useAuth();
   useEffect(() => {
     async function getData() {
       try {
@@ -34,7 +36,7 @@ const DashBord = () => {
               name: shop.shopeNumber || "",
               total: shop.overAllTotal || 0,
             }))
-          : [],
+          : [{ isEmpty: true, name: t("dashbord.features.dtfs2"), total: 0 }],
     },
     {
       title: "Permanent Workers",
@@ -44,7 +46,7 @@ const DashBord = () => {
               name: worker.workerName || "",
               total: worker.overAllTotal || 0,
             }))
-          : [],
+          : [{ isEmpty: true, name: t("dashbord.features.dtfpw2"), total: 0 }],
     },
     {
       title: "Casual Labor",
@@ -54,7 +56,7 @@ const DashBord = () => {
               name: labor.laborName || "",
               total: labor.pending || 0,
             }))
-          : [],
+          : [{ isEmpty: true, name: t("dashbord.features.dtfcl2"), total: 0 }],
     },
     {
       title: "Harvester & Tools",
@@ -64,7 +66,7 @@ const DashBord = () => {
               name: harvest.opratorName || "",
               total: harvest.pending || 0,
             }))
-          : [],
+          : [{ isEmpty: true, name: t("dashbord.features.dtfhl2"), total: 0 }],
     },
   ];
 
@@ -159,13 +161,30 @@ const FeatureCard = ({ item, isLoanding }) => {
                   ...styles.descSlide,
                   width: `${100 / descArray.length}%`,
                 }}>
-                {/* Ab yahan hum object ki keys access karenge */}
                 <div style={styles.contentBox}>
-                  <p style={styles.dataName}>{data?.name || "N/A"}</p>
-                  <div style={styles.amountBadge}>
-                    <span style={styles.currency}>₹</span>{" "}
-                    {data?.total?.toLocaleString() || 0}
-                  </div>
+                  <p
+                    style={{
+                      ...styles.dataName,
+                      // Agar text bada hai toh size 1.1rem ya 1.2rem rakhein
+                      fontSize: data.isEmpty ? "1.15rem" : "1.4rem",
+                      fontWeight: data.isEmpty ? "400" : "600",
+                      color: "#ffffff",
+                      opacity: data.isEmpty ? 0.7 : 1,
+                      lineHeight: "1.6", // Lines ke beech gap taaki padhne mein aasaan ho
+                      textAlign: "center",
+                      margin: "0 auto",
+                      maxWidth: "90%", // Side se thoda gap chhoda hai
+                      wordBreak: "break-word", // Badi lines ko automatic wrap karega
+                    }}>
+                    {data?.name || "N/A"}
+                  </p>
+
+                  {!data.isEmpty && (
+                    <div style={styles.amountBadge}>
+                      <span style={styles.currency}>₹</span>{" "}
+                      {data?.total?.toLocaleString("en-IN") || 0}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
