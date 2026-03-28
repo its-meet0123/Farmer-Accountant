@@ -133,9 +133,10 @@ const FeatureCard = ({ item }) => {
           style={{
             display: "flex",
             width: `${descArray.length * 100}%`,
-            transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
+            //transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
+            transform: `translateX(-${currentIndex * 100}%)`,
             transition: hasMultipleDesc
-              ? "transform 0.8s cubic-bezier(0.65, 0, 0.35, 1)"
+              ? "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
               : "none",
             height: "100%",
           }}>
