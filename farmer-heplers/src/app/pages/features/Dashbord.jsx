@@ -133,15 +133,20 @@ const FeatureCard = ({ item }) => {
           style={{
             display: "flex",
             width: `${descArray.length * 100}%`,
-            //transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
-            transform: `translateX(-${currentIndex * 100}%)`,
+            transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
+            //transform: `translateX(-${currentIndex * 100}%)`,
             transition: hasMultipleDesc
               ? "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
               : "none",
             height: "100%",
           }}>
           {descArray.map((data, i) => (
-            <div key={i} style={styles.descSlide}>
+            <div
+              key={i}
+              style={{
+                ...styles.descSlide,
+                width: `${100 / descArray.length}%`,
+              }}>
               {/* Ab yahan hum object ki keys access karenge */}
               <div style={styles.contentBox}>
                 <p style={styles.dataName}>{data?.name || "N/A"}</p>
