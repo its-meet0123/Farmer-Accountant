@@ -31,7 +31,7 @@ const DashBord = () => {
     {
       title: "Shops & Inventory",
       desc:
-        dashbordData?.shopes && Array.isArray(dashbordData.shopes)
+        dashbordData?.shopes.length > 0 && Array.isArray(dashbordData.shopes)
           ? dashbordData.shopes.map((shop) => ({
               name: shop.shopeNumber || "",
               total: shop.overAllTotal || 0,
@@ -48,7 +48,7 @@ const DashBord = () => {
     {
       title: "Permanent Workers",
       desc:
-        dashbordData?.workers && Array.isArray(dashbordData.workers)
+        dashbordData?.workers.length > 0 && Array.isArray(dashbordData.workers)
           ? dashbordData.workers.map((worker) => ({
               name: worker.workerName || "",
               total: worker.overAllTotal || 0,
@@ -65,7 +65,8 @@ const DashBord = () => {
     {
       title: "Casual Labor",
       desc:
-        dashbordData?.casualLabors && Array.isArray(dashbordData.casualLabors)
+        dashbordData?.casualLabors.length > 0 &&
+        Array.isArray(dashbordData.casualLabors)
           ? dashbordData.casualLabors.map((labor) => ({
               name: labor.laborName || "",
               total: labor.pending || 0,
@@ -82,7 +83,8 @@ const DashBord = () => {
     {
       title: "Harvester & Tools",
       desc:
-        dashbordData?.harvesters && Array.isArray(dashbordData.harvesters)
+        dashbordData?.harvesters.length > 0 &&
+        Array.isArray(dashbordData.harvesters)
           ? dashbordData.harvesters.map((harvest) => ({
               name: harvest.opratorName || "",
               total: harvest.pending || 0,
