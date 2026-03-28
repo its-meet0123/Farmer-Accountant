@@ -1,14 +1,16 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Modal } from "antd";
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+  }).format(amount);
+};
+
 const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
-    }).format(amount);
-  };
   const data = shope.shopeAccount ? shope.shopeAccount : [];
 
   let totalOfLoanAmount = 0;
@@ -125,12 +127,16 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                     <td style={{ padding: "5px" }}>
                       {formattedDate(account.startDate)}
                     </td>
-                    <td style={{ padding: "5px" }}>{account.loan.amount}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formatCurrency(account.loan.amount)}
+                    </td>
                     <td style={{ padding: "5px" }}>{account.loan.days}</td>
                     <td style={{ padding: "5px" }}>{account.loan.months}</td>
-                    <td style={{ padding: "5px" }}>{account.loan.interest}</td>
                     <td style={{ padding: "5px" }}>
-                      {account.loan.totalAmount}
+                      {formatCurrency(account.loan.interest)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formatCurrency(account.loan.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formattedDate(endDate[0]?.endDate)}
@@ -145,15 +151,15 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                       {formattedDate(account.startDate)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {account.indBuy.billAmount}
+                      {formatCurrency(account.indBuy.billAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>{account.indBuy.days}</td>
                     <td style={{ padding: "5px" }}>{account.indBuy.months}</td>
                     <td style={{ padding: "5px" }}>
-                      {account.indBuy.interest}
+                      {formatCurrency(account.indBuy.interest)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {account.indBuy.totalAmount}
+                      {formatCurrency(account.indBuy.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formattedDate(endDate[0]?.endDate)}
@@ -167,15 +173,15 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                       {formattedDate(account.startDate)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {account.diesel.billAmount}
+                      {formatCurrency(account.diesel.billAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>{account.diesel.days}</td>
                     <td style={{ padding: "5px" }}>{account.diesel.months}</td>
                     <td style={{ padding: "5px" }}>
-                      {account.diesel.interest}
+                      {formatCurrency(account.diesel.interest)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {account.diesel.totalAmount}
+                      {formatCurrency(account.diesel.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formattedDate(endDate[0]?.endDate)}
@@ -189,15 +195,15 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                       {formattedDate(account.startDate)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {account.indSell.billAmount}
+                      {formatCurrency(account.indSell.billAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>{account.indSell.days}</td>
                     <td style={{ padding: "5px" }}>{account.indSell.months}</td>
                     <td style={{ padding: "5px" }}>
-                      {account.indSell.interest}
+                      {formatCurrency(account.indSell.interest)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {account.indSell.totalAmount}
+                      {formatCurrency(account.indSell.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formattedDate(endDate[0]?.endDate)}
@@ -215,10 +221,10 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                 }}>
                 <td style={{ padding: "5px" }}>Total</td>
                 <td style={{ padding: "5px" }}></td>
-                <td style={{ padding: "5px" }}>{amount}</td>
+                <td style={{ padding: "5px" }}>{formatCurrency(amount)}</td>
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}></td>
-                <td style={{ padding: "5px" }}>{interest}</td>
+                <td style={{ padding: "5px" }}>{formatCurrency(interest)}</td>
                 {grandTotal > 0 ? (
                   <td style={{ padding: "5px", color: "#84994f" }}>
                     {grandTotal}
@@ -240,14 +246,6 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
   );
 };
 const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
-    }).format(amount);
-  };
-
   const data = worker.account ? worker.account : [];
 
   let totalOfAmount = 0;
@@ -342,12 +340,16 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                     <td style={{ padding: "5px" }}>
                       {formattedDate(account.date)}
                     </td>
-                    <td style={{ padding: "5px" }}>{account.give.amount}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formatCurrency(account.give.amount)}
+                    </td>
                     <td style={{ padding: "5px" }}>{account.give.days}</td>
                     <td style={{ padding: "5px" }}>{account.give.months}</td>
-                    <td style={{ padding: "5px" }}>{account.give.interest}</td>
                     <td style={{ padding: "5px" }}>
-                      {account.give.totalAmount}
+                      {formatCurrency(account.give.interest)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formatCurrency(account.give.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formattedDate(endDate[1]?.endDate)}
@@ -361,12 +363,16 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                     <td style={{ padding: "5px" }}>
                       {formattedDate(account.date)}
                     </td>
-                    <td style={{ padding: "5px" }}>{account.take.payment}</td>
+                    <td style={{ padding: "5px" }}>
+                      {formatCurrency(account.take.payment)}
+                    </td>
                     <td style={{ padding: "5px" }}>{account.take.days}</td>
                     <td style={{ padding: "5px" }}>{account.take.months}</td>
-                    <td style={{ padding: "5px" }}>{account.take.interest}</td>
                     <td style={{ padding: "5px" }}>
-                      {account.take.totalPayment}
+                      {formatCurrency(account.take.interest)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {formatCurrency(account.take.totalPayment)}
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formattedDate(endDate[1]?.endDate)}
@@ -384,12 +390,10 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                 }}>
                 <td style={{ padding: "5px" }}>Total</td>
                 <td style={{ padding: "5px" }}></td>
-                <td style={{ padding: "5px" }}>{amount}</td>
+                <td style={{ padding: "5px" }}>{formatCurrency(amount)}</td>
                 <td style={{ padding: "5px" }}></td>
-                <td style={{ padding: "5px" }}>
-                  {Number(amountTex).toFixed(2)}
-                </td>
-                <td style={{ padding: "5px" }}>{interest}</td>
+                <td style={{ padding: "5px" }}>{formatCurrency(amountTex)}</td>
+                <td style={{ padding: "5px" }}>{formatCurrency(interest)}</td>
                 {grandTotal > 0 ? (
                   <td style={{ padding: "5px", color: "#84994f" }}>
                     {grandTotal}

@@ -1,14 +1,14 @@
 import { Table } from "antd";
 
-const TableFooterForWorkerCalc = ({ data }) => {
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
-    }).format(amount);
-  };
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+  }).format(amount);
+};
 
+const TableFooterForWorkerCalc = ({ data }) => {
   let totalOfAmount = 0;
   let totalOfAmountInterest = 0;
   let totalOfReturnAmount = 0;
@@ -25,8 +25,8 @@ const TableFooterForWorkerCalc = ({ data }) => {
     totalOfPaymentInterest += Number(take.interest || 0);
     totalOfReturnPayment += Number(take.totalPayment || 0);
   });
-  const amountTex = Number(totalOfPayment) * (1 / 100);
-  const oAt = totalOfReturnPayment - (totalOfReturnAmount + amountTex);
+  const amountTex = Number(totalOfPayment) * (1 / 100) || 0;
+  const oAt = totalOfReturnPayment - (totalOfReturnAmount + amountTex) || 0;
   const grandTotal = formatCurrency(oAt);
 
   return (
@@ -39,37 +39,41 @@ const TableFooterForWorkerCalc = ({ data }) => {
             </Table.Summary.Cell>
             <Table.Summary.Cell index={1}></Table.Summary.Cell>
             <Table.Summary.Cell index={2}>
-              <h4 style={{ color: "#D73535" }}>{totalOfAmount}</h4>
+              <h4 style={{ color: "#D73535" }}>
+                {formatCurrency(totalOfAmount)}
+              </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={3}></Table.Summary.Cell>
             <Table.Summary.Cell index={4}></Table.Summary.Cell>
             <Table.Summary.Cell index={5}></Table.Summary.Cell>
             <Table.Summary.Cell index={6}>
               <h4 style={{ color: "#D73535" }}>
-                {Number(totalOfAmountInterest).toFixed(2)}
+                {formatCurrency(totalOfAmountInterest)}
               </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={7}>
               <h4 style={{ color: "#D73535" }}>
-                {totalOfReturnAmount.toFixed(2)}
+                {formatCurrency(totalOfReturnAmount)}
               </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={8}>
-              <h4 style={{ color: "#8ABB6C" }}>{totalOfPayment}</h4>
+              <h4 style={{ color: "#8ABB6C" }}>
+                {formatCurrency(totalOfPayment)}
+              </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={9}>
-              {Number(amountTex).toFixed(2)}
+              {formatCurrency(amountTex)}
             </Table.Summary.Cell>
             <Table.Summary.Cell index={10}></Table.Summary.Cell>
             <Table.Summary.Cell index={11}></Table.Summary.Cell>
             <Table.Summary.Cell index={12}>
               <h4 style={{ color: "#8ABB6C" }}>
-                {Number(totalOfPaymentInterest).toFixed(2)}
+                {formatCurrency(totalOfPaymentInterest)}
               </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={13}>
               <h4 style={{ color: "#8ABB6C" }}>
-                {totalOfReturnPayment.toFixed(2)}
+                {formatCurrency(totalOfReturnPayment)}
               </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={14}>
@@ -87,14 +91,6 @@ const TableFooterForWorkerCalc = ({ data }) => {
 };
 
 const TableFooterForViewCalc = ({ data }) => {
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
-    }).format(amount);
-  };
-
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
   let totalOfReturnLoanAmount = 0;
@@ -144,52 +140,60 @@ const TableFooterForViewCalc = ({ data }) => {
           </Table.Summary.Cell>
           <Table.Summary.Cell index={1}></Table.Summary.Cell>
           <Table.Summary.Cell index={2}>
-            <h4 style={{ color: "#3e0703" }}>{totalOfLoanAmount}</h4>
+            <h4 style={{ color: "#3e0703" }}>
+              {formatCurrency(totalOfLoanAmount)}
+            </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={3}></Table.Summary.Cell>
           <Table.Summary.Cell index={4}></Table.Summary.Cell>
           <Table.Summary.Cell index={5}>
             <h4 style={{ color: "#3e0703" }}>
-              {totalOfLoanAmountInterest.toFixed(2)}
+              {formatCurrency(totalOfLoanAmountInterest)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={6}>
             <h4 style={{ color: "#3e0703" }}>
-              {Number(totalOfReturnLoanAmount.toFixed(2))}
+              {formatCurrency(totalOfReturnLoanAmount)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={7}>
-            <h4 style={{ color: "#D73535" }}>{totalOfBuyBillAmount}</h4>
+            <h4 style={{ color: "#D73535" }}>
+              {formatCurrency(totalOfBuyBillAmount)}
+            </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={8}></Table.Summary.Cell>
           <Table.Summary.Cell index={9}></Table.Summary.Cell>
           <Table.Summary.Cell index={10}>
             <h4 style={{ color: "#D73535" }}>
-              {totalOfBuyBillAmountInterest.toFixed(2)}
+              {formatCurrency(totalOfBuyBillAmountInterest)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={11}>
             <h4 style={{ color: "#D73535" }}>
-              {Number(totalOfReturnBuyBillAmount.toFixed(2))}
+              {formatCurrency(totalOfReturnBuyBillAmount)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={12}>
-            <h4 style={{ color: "#8ABB6C" }}>{totalOfSellBillAmount}</h4>
+            <h4 style={{ color: "#8ABB6C" }}>
+              {formatCurrency(totalOfSellBillAmount)}
+            </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={13}></Table.Summary.Cell>
           <Table.Summary.Cell index={14}></Table.Summary.Cell>
           <Table.Summary.Cell index={15}>
             <h4 style={{ color: "#8ABB6C" }}>
-              {totalOfSellBillAmountInterest.toFixed(2)}
+              {formatCurrency(totalOfSellBillAmountInterest)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={16}>
             <h4 style={{ color: "#8ABB6C" }}>
-              {totalOfReturnSellBillAmount.toFixed(2)}
+              {formatCurrency(totalOfReturnSellBillAmount)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={17}>
-            <h4 style={{ color: "#075b5e" }}>{totalOfDieselBillAmount}</h4>
+            <h4 style={{ color: "#075b5e" }}>
+              {formatCurrency(totalOfDieselBillAmount)}
+            </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={18}></Table.Summary.Cell>
           <Table.Summary.Cell index={19}></Table.Summary.Cell>
@@ -200,7 +204,7 @@ const TableFooterForViewCalc = ({ data }) => {
           </Table.Summary.Cell>
           <Table.Summary.Cell index={21}>
             <h4 style={{ color: "#075b5e" }}>
-              {totalOfReturnDieselBillAmount.toFixed(2)}
+              {formatCurrency(totalOfReturnDieselBillAmount)}
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={22}>

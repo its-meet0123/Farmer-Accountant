@@ -12,6 +12,14 @@ const formattedDate = (date) => {
   return DateTimeFormat;
 };
 
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+  }).format(amount);
+};
+
 const showModal = ({ crop, title, t }) => {
   Modal.success({
     title: title,
@@ -120,7 +128,8 @@ const getColumnsForViewPage = (t) => {
           key: "amount",
           width: 100,
           render: (text) => {
-            return <p style={{ color: "#3E0703" }}>{text}</p>;
+            const loanAmount = formatCurrency(text);
+            return <p style={{ color: "#3E0703" }}>{loanAmount}</p>;
           },
         },
         {
@@ -168,7 +177,8 @@ const getColumnsForViewPage = (t) => {
           key: "billAmount",
           width: 100,
           render: (text) => {
-            return <p style={{ color: "#D73535" }}>{text}</p>;
+            const billAmount = formatCurrency(text);
+            return <p style={{ color: "#D73535" }}>{billAmount}</p>;
           },
         },
         {
@@ -227,7 +237,8 @@ const getColumnsForViewPage = (t) => {
           key: "amount",
           width: 100,
           render: (text) => {
-            return <p style={{ color: "#8ABB6C" }}>{text}</p>;
+            const sellAmount = formatCurrency(text);
+            return <p style={{ color: "#8ABB6C" }}>{sellAmount}</p>;
           },
         },
         {
@@ -313,7 +324,8 @@ const getColumnsForViewPage = (t) => {
           key: "amount",
           width: 100,
           render: (text) => {
-            return <p style={{ color: "#075B5E" }}>{text}</p>;
+            const billAmount = formatCurrency(text);
+            return <p style={{ color: "#075B5E" }}>{billAmount}</p>;
           },
         },
         {
@@ -404,7 +416,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "amount",
           width: 100,
           render: (text) => {
-            if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
+            const loanAmount = formatCurrency(text);
+            if (text > 0)
+              return <p style={{ color: "#3E0703" }}>{loanAmount}</p>;
           },
         },
         {
@@ -443,7 +457,8 @@ const getColumnsForCalulationPage = (t) => {
           key: "interest",
           width: 100,
           render: (text) => {
-            if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
+            const int = formatCurrency(text);
+            if (text > 0) return <p style={{ color: "#3E0703" }}>{int}</p>;
           },
         },
         {
@@ -456,7 +471,8 @@ const getColumnsForCalulationPage = (t) => {
           key: "totalAmount",
           width: 100,
           render: (text) => {
-            if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
+            const total = formatCurrency(text);
+            if (text > 0) return <p style={{ color: "#3E0703" }}>{total}</p>;
           },
         },
       ],
@@ -473,9 +489,10 @@ const getColumnsForCalulationPage = (t) => {
           dataIndex: ["indBuy", "billAmount"],
           key: "billAmount",
           width: 100,
-          render: (text, record) => {
-            if (record.indBuy.billAmount > 0)
-              return <p style={{ color: "#D73535" }}>{text}</p>;
+          render: (text) => {
+            const billAmount = formatCurrency(text);
+            if (text > 0)
+              return <p style={{ color: "#D73535" }}>{billAmount}</p>;
           },
         },
         {
@@ -516,8 +533,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "interest",
           width: 100,
           render: (text, record) => {
+            const int = formatCurrency(text);
             if (record.indBuy.billAmount > 0)
-              return <p style={{ color: "#D73535" }}>{text}</p>;
+              return <p style={{ color: "#D73535" }}>{int}</p>;
           },
         },
         {
@@ -530,8 +548,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "totalAmount",
           width: 100,
           render: (text, record) => {
+            const total = formatCurrency(text);
             if (record.indBuy.billAmount > 0)
-              return <p style={{ color: "#D73535" }}>{text}</p>;
+              return <p style={{ color: "#D73535" }}>{total}</p>;
           },
         },
       ],
@@ -549,8 +568,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "amount",
           width: 100,
           render: (text, record) => {
+            const billAmount = formatCurrency(text);
             if (record.indSell.billAmount > 0)
-              return <p style={{ color: "#8ABB6C" }}>{text}</p>;
+              return <p style={{ color: "#8ABB6C" }}>{billAmount}</p>;
           },
         },
         {
@@ -591,8 +611,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "interest",
           width: 100,
           render: (text, record) => {
+            const int = formatCurrency(text);
             if (record.indSell.billAmount > 0)
-              return <p style={{ color: "#8ABB6C" }}>{text}</p>;
+              return <p style={{ color: "#8ABB6C" }}>{int}</p>;
           },
         },
         {
@@ -605,8 +626,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "totalAmount",
           width: 100,
           render: (text, record) => {
+            const total = formatCurrency(text);
             if (record.indSell.billAmount > 0)
-              return <p style={{ color: "#8ABB6C" }}>{text}</p>;
+              return <p style={{ color: "#8ABB6C" }}>{total}</p>;
           },
         },
       ],
@@ -624,8 +646,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "amount",
           width: 100,
           render: (text, record) => {
+            const billAmount = formatCurrency(text);
             if (record.diesel.billAmount > 0)
-              return <p style={{ color: "#075B5E" }}>{text}</p>;
+              return <p style={{ color: "#075B5E" }}>{billAmount}</p>;
           },
         },
         {
@@ -666,8 +689,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "interest",
           width: 100,
           render: (text, record) => {
+            const int = formatCurrency(text);
             if (record.diesel.billAmount > 0)
-              return <p style={{ color: "#075B5E" }}>{text}</p>;
+              return <p style={{ color: "#075B5E" }}>{int}</p>;
           },
         },
         {
@@ -680,8 +704,9 @@ const getColumnsForCalulationPage = (t) => {
           key: "totalAmount",
           width: 100,
           render: (text, record) => {
+            const total = formatCurrency(text);
             if (record.diesel.billAmount > 0)
-              return <p style={{ color: "#075B5E" }}>{text}</p>;
+              return <p style={{ color: "#075B5E" }}>{total}</p>;
           },
         },
       ],
@@ -770,7 +795,8 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
           key: "giveAmount",
           width: 100,
           render: (amount) => {
-            return <p style={{ color: "#D73535" }}>{amount}</p>;
+            const giveAmount = formatCurrency(amount);
+            return <p style={{ color: "#D73535" }}>{giveAmount}</p>;
           },
         },
         {
@@ -842,7 +868,10 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
           dataIndex: ["take", "payment"],
           width: 100,
           key: "takeAmount",
-          render: (payment) => <p style={{ color: "#8ABB6C" }}>{payment}</p>,
+          render: (payment) => {
+            const takePay = formatCurrency(payment);
+            return <p style={{ color: "#8ABB6C" }}>{takePay}</p>;
+          },
         },
         {
           title: (
@@ -923,7 +952,8 @@ const getColumnsForWorkerCalcPage = (t) => {
           key: "giveAmount",
           width: 100,
           render: (amount) => {
-            return <p style={{ color: "#D73535" }}>{amount}</p>;
+            const giveAmount = formatCurrency(amount);
+            return <p style={{ color: "#D73535" }}>{giveAmount}</p>;
           },
         },
         {
@@ -970,7 +1000,10 @@ const getColumnsForWorkerCalcPage = (t) => {
           dataIndex: ["give", "interest"],
           key: "giveInterest",
           width: 100,
-          render: (interest) => <p style={{ color: "#D73535" }}>{interest}</p>,
+          render: (interest) => {
+            const int = formatCurrency(interest);
+            return <p style={{ color: "#D73535" }}>{int}</p>;
+          },
         },
         {
           title: (
@@ -981,9 +1014,10 @@ const getColumnsForWorkerCalcPage = (t) => {
           dataIndex: ["give", "totalAmount"],
           key: "giveTotalAmount",
           width: 100,
-          render: (totalAmount) => (
-            <p style={{ color: "#D73535" }}>{totalAmount}</p>
-          ),
+          render: (totalAmount) => {
+            const total = formatCurrency(totalAmount);
+            return <p style={{ color: "#D73535" }}>{total}</p>;
+          },
         },
       ],
     },
@@ -999,7 +1033,10 @@ const getColumnsForWorkerCalcPage = (t) => {
           dataIndex: ["take", "payment"],
           width: 100,
           key: "takeAmount",
-          render: (payment) => <p style={{ color: "#8ABB6C" }}>{payment}</p>,
+          render: (payment) => {
+            const takePay = formatCurrency(payment);
+            return <p style={{ color: "#8ABB6C" }}>{takePay}</p>;
+          },
         },
         {
           title: (
@@ -1045,7 +1082,10 @@ const getColumnsForWorkerCalcPage = (t) => {
           dataIndex: ["take", "interest"],
           width: 100,
           key: "takeInterest",
-          render: (interest) => <p style={{ color: "#8ABB6C" }}>{interest}</p>,
+          render: (interest) => {
+            const int = formatCurrency(interest);
+            return <p style={{ color: "#8ABB6C" }}>{int}</p>;
+          },
         },
         {
           title: (
@@ -1055,9 +1095,10 @@ const getColumnsForWorkerCalcPage = (t) => {
           ),
           dataIndex: ["take", "totalPayment"],
           key: "takeTotalPayment",
-          render: (totalPayment) => (
-            <p style={{ color: "#8ABB6C" }}>{totalPayment}</p>
-          ),
+          render: (totalPayment) => {
+            const total = formatCurrency(totalPayment);
+            return <p style={{ color: "#8ABB6C" }}>{total}</p>;
+          },
         },
       ],
     },
@@ -1083,12 +1124,20 @@ const getColumnsForCasualLaborPage = (t) => {
       dataIndex: "startDate",
       key: "date",
       width: 100,
+      render: (date) => {
+        const fdate = formattedDate(date);
+        return fdate;
+      },
     },
     {
       title: t("casualLabor.ttc.wt"),
       dataIndex: "salary",
       key: "salary",
       width: 100,
+      render: (salary) => {
+        const formatedSalary = formatCurrency(salary);
+        return formatedSalary;
+      },
     },
     {
       title: t("casualLabor.ttc.dut"),
@@ -1101,12 +1150,20 @@ const getColumnsForCasualLaborPage = (t) => {
       dataIndex: "total",
       key: "total",
       width: 100,
+      render: (total) => {
+        const formatedTotal = formatCurrency(total);
+        return formatedTotal;
+      },
     },
     {
       title: t("casualLabor.ttc.pt"),
       dataIndex: "pay",
       key: "pay",
       width: 100,
+      render: (amount) => {
+        const Amount = formatCurrency(amount);
+        return Amount;
+      },
     },
     {
       title: t("casualLabor.ttc.hot"),
@@ -1225,12 +1282,20 @@ const getColumnsForHarvestTransaction = (t) => {
       dataIndex: "startDate",
       key: "date",
       width: 100,
+      render: (date) => {
+        const formatedDate = formattedDate(date);
+        return formatedDate;
+      },
     },
     {
       title: t("mechanizedHiring.ttc.wt"),
       dataIndex: "salary",
       key: "salary",
       width: 100,
+      render: (amount) => {
+        const Amount = formatCurrency(amount);
+        return Amount;
+      },
     },
     {
       title: t("mechanizedHiring.ttc.dut"),
@@ -1251,12 +1316,20 @@ const getColumnsForHarvestTransaction = (t) => {
       dataIndex: "total",
       key: "total",
       width: 100,
+      render: (amount) => {
+        const Amount = formatCurrency(amount);
+        return Amount;
+      },
     },
     {
       title: t("mechanizedHiring.ttc.pt"),
       dataIndex: "pay",
       key: "pay",
       width: 100,
+      render: (amount) => {
+        const Amount = formatCurrency(amount);
+        return Amount;
+      },
     },
     {
       title: t("mechanizedHiring.ttc.hot"),
