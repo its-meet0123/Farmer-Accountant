@@ -25,11 +25,11 @@ const DashBord = () => {
         const res = await getDashbordData();
         const data = await res.data;
         setDeshbordData(data.data);
-        message.success(data.Code);
+        message.success(t(data.Code));
         setIsLoading(false);
       } catch (err) {
         console.error("Error message:", err.message);
-        message.error("Dashbord data not fetched");
+        message.error(t("DB.SEM"));
       }
     }
     getData();
@@ -37,7 +37,7 @@ const DashBord = () => {
 
   const features = [
     {
-      title: "Shops & Inventory",
+      title: t("dashbord.features.tfs"),
       path: "/home",
       desc:
         shopesArray.length > 0
@@ -55,7 +55,7 @@ const DashBord = () => {
             ],
     },
     {
-      title: "Permanent Workers",
+      title: t("dashbord.features.tfpw"),
       path: "/worker",
       desc:
         permanentWorkersArray.length > 0
@@ -73,7 +73,7 @@ const DashBord = () => {
             ],
     },
     {
-      title: "Casual Labor",
+      title: t("dashbord.features.tfcl"),
       path: "/other/labor",
       desc:
         casualLaborsArray.length > 0
@@ -91,7 +91,7 @@ const DashBord = () => {
             ],
     },
     {
-      title: "Harvester & Tools",
+      title: t("dashbord.features.tfhl"),
       path: "/other/mechanized",
       desc:
         harvestersArray.length > 0
@@ -123,11 +123,12 @@ const DashBord = () => {
     <div style={styles.wrapper}>
       <header style={styles.header}>
         <h1 style={styles.headerTitle}>
-          FARMER-<span style={{ color: "#4da3ff" }}>ACCOUNTANT</span>
+          {t("dashbord.features.tfdh1")}-
+          <span style={{ color: "#4da3ff" }}>
+            {t("dashbord.features.tfdh2")}
+          </span>
         </h1>
-        <p style={styles.headerSubtitle}>
-          Cultivating growth through organized farm accounting.
-        </p>
+        <p style={styles.headerSubtitle}>{t("dashbord.features.stfdh")}</p>
       </header>
 
       <div style={styles.mainGrid}>

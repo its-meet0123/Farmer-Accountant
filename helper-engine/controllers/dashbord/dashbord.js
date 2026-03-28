@@ -184,7 +184,7 @@ async function dashBordData(req, res) {
     return res.status(200).json({
       status: "Success",
       data: allCalculateData,
-      Code: "dashbord fetched successfully",
+      Code: "DB.SM",
     });
   } catch (err) {
     console.log(err.message);
