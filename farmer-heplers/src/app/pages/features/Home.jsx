@@ -115,10 +115,13 @@ const HomePage = () => {
       try {
         setIsLoanding("loadData");
         const entRes = await getAllEntData();
-        const entData = entRes?.data?.data;
+        const entData = await entRes?.data?.data;
         const indRes = await getAllIndShopes();
         const indData = await indRes?.data?.data;
-        if (entRes.status === "Success" && indRes.status === "Success") {
+        if (
+          entRes.data.status === "Success" &&
+          indRes.data.status === "Success"
+        ) {
           setEntData(entData);
           setIndData(indData);
           setIsLoanding(null);

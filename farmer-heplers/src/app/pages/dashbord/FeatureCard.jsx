@@ -69,10 +69,7 @@ const FeatureCard = ({ item, isLoading }) => {
                     {data?.name || "N/A"}
                   </p>
                   {!data.isEmpty && (
-                    <div style={styles.amountBadge}>
-                      <span style={{ fontSize: "0.9rem" }}>₹</span>{" "}
-                      {data?.total?.toLocaleString("en-IN")}
-                    </div>
+                    <div style={styles.amountBadge}>{data?.total}</div>
                   )}
                 </div>
               </div>
