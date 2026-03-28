@@ -45,6 +45,14 @@ const WorkerCalculation = () => {
     { label: t("workerCalcPage.form.deleteButtonText"), value: "delete" },
   ];
 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
+
   const setDate = async () => {
     if (id == null || id == "" || id == undefined) {
       const formDate = form.getFieldsValue();
@@ -163,15 +171,7 @@ const WorkerCalculation = () => {
   };
 
   const monthlyTotal = useMemo(() => {
-    const formatCurrency = (amount) => {
-      return new Intl.NumberFormat("en-IN", {
-        style: "currency",
-        currency: "INR",
-        maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
-      }).format(amount);
-    };
-
-    if (!tableData) return formatCurrency(0);
+    if (!tableData) return 0;
     let giveAmount = 0;
     let takePayment = 0;
 
@@ -186,12 +186,14 @@ const WorkerCalculation = () => {
       if (isSameMonth) {
         giveAmount += Number(transaction.give.amount);
         takePayment += Number(transaction.take.payment);
-        const sub = giveAmount - takePayment;
-        return formatCurrency(sub);
+
+        return giveAmount - takePayment;
       }
-      return formatCurrency(total);
+      return total;
     }, 0);
   }, [tableData, selectMonth, today]);
+
+  const mothlyTurnover = formatCurrency(Number(monthlyTotal));
 
   return (
     <>
@@ -257,7 +259,7 @@ const WorkerCalculation = () => {
                   value={selectMonth ? selectMonth : today}
                   onChange={(date) => setSelectMonth(date)}
                 />
-                <InputNumber value={monthlyTotal} readOnly />
+                <Input value={mothlyTurnover} readOnly />
               </Flex>
             </Flex>
             <Table

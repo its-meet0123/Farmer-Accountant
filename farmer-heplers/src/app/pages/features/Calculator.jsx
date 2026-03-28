@@ -66,6 +66,15 @@ const CalcPage = () => {
   const returnBack = () => {
     navigate("/view");
   };
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
+
   console.log(id);
   const setDate = async () => {
     if (id == null || id == "" || id == undefined) {
@@ -212,6 +221,8 @@ const CalcPage = () => {
     }, 0);
   }, [tableData, selectMonth, today]);
 
+  const monthlyTurnover = formatCurrency(Number(monthlyTotal));
+
   return (
     <>
       {contextHolder}
@@ -276,7 +287,7 @@ const CalcPage = () => {
                   value={selectMonth ? selectMonth : today}
                   onChange={(date) => setSelectMonth(date)}
                 />
-                <InputNumber value={monthlyTotal} readOnly />
+                <InputNumber value={monthlyTurnover} readOnly />
               </Flex>
             </Flex>
             <Table
