@@ -35,6 +35,7 @@ const DashBord = () => {
           ? dashbordData.shopes.map((shop) => ({
               name: shop.shopeNumber || "",
               total: shop.overAllTotal || 0,
+              isEmpty: false,
             }))
           : [{ isEmpty: true, name: t("dashbord.features.dtfs2"), total: 0 }],
     },
@@ -45,6 +46,7 @@ const DashBord = () => {
           ? dashbordData.workers.map((worker) => ({
               name: worker.workerName || "",
               total: worker.overAllTotal || 0,
+              isEmpty: false,
             }))
           : [{ isEmpty: true, name: t("dashbord.features.dtfpw2"), total: 0 }],
     },
@@ -55,6 +57,7 @@ const DashBord = () => {
           ? dashbordData.casualLabors.map((labor) => ({
               name: labor.laborName || "",
               total: labor.pending || 0,
+              isEmpty: false,
             }))
           : [{ isEmpty: true, name: t("dashbord.features.dtfcl2"), total: 0 }],
     },
@@ -65,6 +68,7 @@ const DashBord = () => {
           ? dashbordData.harvesters.map((harvest) => ({
               name: harvest.opratorName || "",
               total: harvest.pending || 0,
+              isEmpty: false,
             }))
           : [{ isEmpty: true, name: t("dashbord.features.dtfhl2"), total: 0 }],
     },
@@ -93,7 +97,7 @@ const DashBord = () => {
         {features && Array.isArray(features) && features.length > 0 ? (
           features.map((item, index) => {
             // FIX: Check if item exists and its desc array has at least one element
-            if (!item || !Array.isArray(item.desc) || item.desc.length === 0) {
+            if (!item || !Array.isArray(item.desc)) {
               return null; // Kuch bhi render nahi karega agar data khali hai
             }
 
