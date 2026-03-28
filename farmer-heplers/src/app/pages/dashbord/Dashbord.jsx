@@ -5,6 +5,7 @@ import { message } from "antd";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { styles } from "./DashboardStyles";
+import FeatureCard from "./FeatureCard";
 
 const DashBord = () => {
   const location = useLocation();
