@@ -32,8 +32,8 @@ async function dashBordData(req, res) {
     const allShopes = Ind.map((shopes) => {
       const shopeNumber = shopes?.shopeNumber;
       const shopeData = shopes.shopeAccount.map((transaction) => {
-        const startDate = transaction?.startDate || "";
-        const rate = transaction?.rate || 24;
+        const startDate = transaction?.startDate || new Date();
+        const rate = transaction?.rate || 0;
         const endDate = new Date();
 
         const loanAmount = transaction?.loan?.amount || 0;

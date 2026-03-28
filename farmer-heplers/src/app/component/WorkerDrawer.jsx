@@ -29,6 +29,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
   const [editTransactionForm] = Form.useForm();
   const today = dayjs();
   const [action, setAction] = useState("none");
+  const [btnLoad, setBtnLoad] = useState(null);
 
   const plainOptions = [
     {
@@ -43,143 +44,167 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
   ];
 
   const onClose = () => {
+    setBtnLoad(null);
     setOpen(null);
   };
 
   const handleSubmitInfoForm = async () => {
-    const formValues = workerInfoForm.getFieldsValue();
-    const workerInfo = {
-      userId: authState.user.userId,
-      workerDetail: {
-        workerName: {
-          firstName: formValues.firstName,
-          lastName: formValues.lastName,
-          nickName: formValues.nickName,
+    setBtnLoad("ifb");
+    try {
+      const formValues = workerInfoForm.getFieldsValue();
+      const workerInfo = {
+        userId: authState.user.userId,
+        workerDetail: {
+          workerName: {
+            firstName: formValues.firstName,
+            lastName: formValues.lastName,
+            nickName: formValues.nickName,
+          },
+          contect: formValues.contect,
+          date: new Date(formValues.date),
+          idProof: formValues.idProof,
         },
-        contect: formValues.contect,
-        date: new Date(formValues.date),
-        idProof: formValues.idProof,
-      },
-      account: [],
-    };
-    const res = await addWorker(workerInfo);
-    if (res.status === 201) {
-      message.success(res.data.message);
-      workerInfoForm.resetFields();
-      setOpen(null);
-      setFetchData(formValues);
-    } else {
+        account: [],
+      };
+      const res = await addWorker(workerInfo);
+      if (res.status === 201) {
+        message.success(res.data.message);
+        workerInfoForm.resetFields();
+        setFetchData(formValues);
+        onClose();
+      }
+    } catch (err) {
       message.error(t("workerDrawer.submitFunction.errorMessageforCreate1"));
+      console.log(err.message);
     }
   };
 
   const handleSubmitTransactionForm = async () => {
+    setBtnLoad("tfb");
     if (open === "at") {
       const formValues = transactionForm.getFieldsValue();
       if (action === "give") {
-        const transactionBody = {
-          date: new Date(formValues.date),
-          give: {
-            crop: formValues.crop,
-            amount: formValues.amount,
-            brief: formValues.brief,
-            amountType: formValues.amountType,
-          },
-          take: {
-            crop: [],
-            payment: formValues.payment,
-            paymentType: formValues.paymentType,
-          },
-        };
-        const res = await addWorkerTransactionById(worker._id, transactionBody);
-        if (res.status === 200) {
-          transactionForm.resetFields();
-          message.success(res.data.message);
-          setFetchData(transactionBody);
-          onClose();
-        } else {
+        try {
+          const transactionBody = {
+            date: new Date(formValues.date),
+            give: {
+              crop: formValues.crop,
+              amount: formValues.amount,
+              brief: formValues.brief,
+              amountType: formValues.amountType,
+            },
+            take: {
+              crop: [],
+              payment: formValues.payment,
+              paymentType: formValues.paymentType,
+            },
+          };
+          const res = await addWorkerTransactionById(
+            worker._id,
+            transactionBody,
+          );
+          if (res.status === 200) {
+            transactionForm.resetFields();
+            message.success(res.data.message);
+            setFetchData(transactionBody);
+            onClose();
+          }
+        } catch (err) {
           message.error(
             t("workerDrawer.submitFunction.errorMessageforCreate2"),
           );
+          console.log(err.message);
         }
       }
       if (action === "take") {
-        const transactionBody = {
-          date: new Date(formValues.date),
-          give: {
-            crop: [],
-            amount: formValues.amount,
-            brief: formValues.brief,
-            amountType: formValues.amountType,
-          },
-          take: {
-            crop: formValues.crop,
-            payment: formValues.payment,
-            paymentType: formValues.paymentType,
-          },
-        };
-        const res = await addWorkerTransactionById(worker._id, transactionBody);
-        if (res.status === 200) {
-          transactionForm.resetFields();
-          message.success(res.data.message);
-          setFetchData(transactionBody);
-          onClose();
-        } else {
+        try {
+          const transactionBody = {
+            date: new Date(formValues.date),
+            give: {
+              crop: [],
+              amount: formValues.amount,
+              brief: formValues.brief,
+              amountType: formValues.amountType,
+            },
+            take: {
+              crop: formValues.crop,
+              payment: formValues.payment,
+              paymentType: formValues.paymentType,
+            },
+          };
+          const res = await addWorkerTransactionById(
+            worker._id,
+            transactionBody,
+          );
+          if (res.status === 200) {
+            transactionForm.resetFields();
+            message.success(res.data.message);
+            setFetchData(transactionBody);
+            onClose();
+          }
+        } catch (err) {
           message.error(
             t("workerDrawer.submitLFunction.errorMessageforCreate2"),
           );
+          console.log(err.message);
         }
       }
       if (action === "none") {
-        const transactionBody = {
-          date: new Date(formValues.date),
-          give: {
-            crop: [],
-            amount: formValues.amount,
-            brief: formValues.brief,
-            amountType: formValues.amountType,
-          },
-          take: {
-            crop: [],
-            payment: formValues.payment,
-            paymentType: formValues.paymentType,
-          },
-        };
-        const res = await addWorkerTransactionById(worker._id, transactionBody);
-        if (res.status === 200) {
-          transactionForm.resetFields();
-          message.success(res.data.message);
-          setFetchData(transactionBody);
-          onClose();
-        } else {
+        try {
+          const transactionBody = {
+            date: new Date(formValues.date),
+            give: {
+              crop: [],
+              amount: formValues.amount,
+              brief: formValues.brief,
+              amountType: formValues.amountType,
+            },
+            take: {
+              crop: [],
+              payment: formValues.payment,
+              paymentType: formValues.paymentType,
+            },
+          };
+          const res = await addWorkerTransactionById(
+            worker._id,
+            transactionBody,
+          );
+          if (res.status === 200) {
+            transactionForm.resetFields();
+            message.success(res.data.message);
+            setFetchData(transactionBody);
+            onClose();
+          }
+        } catch (err) {
           message.error(
             t("workerDrawer.submitFunction.errorMessageforCreate2"),
           );
+          console.log(err.message);
         }
       }
     }
     if (open === "ewt") {
-      const formValues = editTransactionForm.getFieldsValue();
-      console.log(formValues);
-      const ids = {
-        workerId: worker._id,
-        accountId: worker.account[0]._id,
-      };
-      const transactionBody = {
-        date: new Date(formValues.date),
-        give: {
-          corp: formValues.corpG || [],
-          amount: formValues.amount,
-          amountType: formValues.amountType,
-          brief: formValues.brief,
-        },
-        take: {
-          crop: formValues.cropT || [],
-          payment: formValues.payment,
-          paymentType: formValues.paymentType,
-        },
-      };
-      if (ids.workerId && ids.accountId && transactionBody) {
+      try {
+        const formValues = editTransactionForm.getFieldsValue();
+        console.log(formValues);
+        const ids = {
+          workerId: worker._id,
+          accountId: worker.account[0]._id,
+        };
+        const transactionBody = {
+          date: new Date(formValues.date),
+          give: {
+            corp: formValues.corpG || [],
+            amount: formValues.amount,
+            amountType: formValues.amountType,
+            brief: formValues.brief,
+          },
+          take: {
+            crop: formValues.cropT || [],
+            payment: formValues.payment,
+            paymentType: formValues.paymentType,
+          },
+        };
         console.log(transactionBody);
         const res = await updateWorkerTransactionById(ids, transactionBody);
         if (res.status === 200) {
@@ -187,9 +212,10 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           editTransactionForm.resetFields();
           message.success(res.data.message);
           onClose();
-        } else {
-          message.error(t("workerDrawer.submitFunction.errorMessageforEdit"));
         }
+      } catch (err) {
+        message.error(t("workerDrawer.submitFunction.errorMessageforEdit"));
+        console.log(err.message);
       }
     }
   };
@@ -227,7 +253,10 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                 {t("workerDrawer.transactionInput.button.cbt")}
               </Button>
               <Form.Item label={null}>
-                <Button type="primary" htmlType="submit">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={btnLoad == "ifb" && true}>
                   OK
                 </Button>
               </Form.Item>
@@ -348,7 +377,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
             labelCol={{ span: 10 }}
             wrapperCol={{ span: 25 }}
             form={transactionForm}
-            initialValues={{ corp: [""] }}
+            initialValues={{ corp: [] }}
             onFinish={handleSubmitTransactionForm}>
             <Row gutter={24}>
               <Form.Item
@@ -453,7 +482,10 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                 <DatePicker format={"DD/MM/YYYY"} />
               </Form.Item>
               <Form.Item label={null}>
-                <Button type="primary" htmlType="submit">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={btnLoad === "tfb" && true}>
                   {t("workerDrawer.transactionInput.button.sbt")}
                 </Button>
               </Form.Item>
@@ -596,7 +628,10 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                 <DatePicker format={"DD/MM/YYYY"} />
               </Form.Item>
               <Form.Item label={null}>
-                <Button type="primary" htmlType="submit">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={btnLoad === "tfb" && true}>
                   {t("workerDrawer.transactionInput.button.sbt")}
                 </Button>
               </Form.Item>

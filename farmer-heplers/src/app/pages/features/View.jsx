@@ -17,7 +17,7 @@ import { PageContainer } from "../../component/PageContainer";
 
 const ViewPage = () => {
   const { t } = useAuth();
-  const [isLoanding, setIsLoanding] = useState(false);
+  const [isLoanding, setIsLoanding] = useState(null);
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [allInd, setAllInd] = useState([]);
@@ -41,6 +41,7 @@ const ViewPage = () => {
   };
 
   const editFunction = async (record) => {
+    setIsLoanding("edit");
     const date = dayjs(record.startDate);
     form.setFieldsValue({
       id: record._id,
@@ -76,8 +77,10 @@ const ViewPage = () => {
       accountId: record._id,
       shopeNumber: record.shopeNumber,
     });
-
-    setOpenType("edit");
+    setTimeout(() => {
+      setIsLoanding(null);
+      setOpenType("edit");
+    }, 1000);
   };
 
   const handleAddShopeTransaction = (record) => {
@@ -86,6 +89,7 @@ const ViewPage = () => {
   };
 
   const deleteTransaction = async (record) => {
+    setIsLoanding("at");
     const data = allInd.filter((ind) => {
       return ind.shopeAccount.some((shope) => shope._id === record._id);
     });
@@ -98,7 +102,8 @@ const ViewPage = () => {
       if (res.status === 200) {
         const text = `${t("ViewPage.deleteTransFunctionMessages.successMessage1")}`;
         showSuccess(text);
-        setFetch("delete transaction");
+        setFetch(res.data);
+        setIsLoanding(null);
       }
     } catch (err) {
       message.error(t("ViewPage.deleteTransFunctionMessages.errorMessage1"));
@@ -128,11 +133,11 @@ const ViewPage = () => {
   useEffect(() => {
     async function getData() {
       try {
-        setIsLoanding(true);
+        setIsLoanding("loadData");
         const res = await getAllIndShopes();
         const data = await res.data.data;
-        setIsLoanding(false);
         setAllInd(data);
+        setIsLoanding(null);
       } catch (err) {
         message.error(t("ViewPage.fetchDataErrorMessage"));
         console.log(err.message);
@@ -183,6 +188,7 @@ const ViewPage = () => {
               type="link"
               icon={<FileAddOutlined />}
               onClick={() => handleAddShopeTransaction(record)}
+              loading={isLoanding == "at" && true}
             />
             <Button
               type="link"
@@ -232,6 +238,7 @@ const ViewPage = () => {
                 type="link"
                 icon={<EditOutlined />}
                 size="small"
+                loading={isLoanding == "edit" && true}
                 onClick={() => editFunction(record)}
               />
               <Popconfirm
@@ -263,7 +270,7 @@ const ViewPage = () => {
     <>
       {contextHolder}
       <PageContainer title={t("ViewPage.cardTitle")} extra={""}>
-        {isLoanding ? (
+        {isLoanding == "loadData" ? (
           <Spin size="large" />
         ) : (
           <Table

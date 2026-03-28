@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
 
 import { getDashbordData } from "../../service/dashbord";
-import { message } from "antd";
+import { message, Spin } from "antd";
+import { useLocation } from "react-router-dom";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const DashBord = () => {
+  const location = useLocation();
+  const [isLoanding, setIsLoanding] = useState(false);
   const [dashbordData, setDeshbordData] = useState({});
   useEffect(() => {
     async function getData() {
       try {
+        setIsLoanding(true);
         const res = await getDashbordData();
         const data = await res.data;
         setDeshbordData(data.data);
         message.success(data.Code);
+        setIsLoanding(false);
       } catch (err) {
         console.error("Error message:", err.message);
         message.error("Dashbord data not fetched");
       }
     }
     getData();
-  }, []);
+  }, [location.pathname]);
   const features = [
     {
       title: "Shops & Inventory",
@@ -89,7 +95,9 @@ const DashBord = () => {
               return null; // Kuch bhi render nahi karega agar data khali hai
             }
 
-            return <FeatureCard key={index} item={item} />;
+            return (
+              <FeatureCard key={index} item={item} isLoanding={isLoanding} />
+            );
           })
         ) : (
           <div style={styles.noData}>No accounting data found...</div>
@@ -101,7 +109,7 @@ const DashBord = () => {
   );
 };
 
-const FeatureCard = ({ item }) => {
+const FeatureCard = ({ item, isLoanding }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Strict validation: ensure item.desc is always an array
@@ -129,37 +137,41 @@ const FeatureCard = ({ item }) => {
   return (
     <div style={styles.card}>
       <div style={styles.cardHeader}>{item.title}</div>
-      <div style={styles.scrollArea}>
-        <div
-          style={{
-            display: "flex",
-            width: `${descArray.length * 100}%`,
-            transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
-            //transform: `translateX(-${currentIndex * 100}%)`,
-            transition: hasMultipleDesc
-              ? "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
-              : "none",
-            height: "100%",
-          }}>
-          {descArray.map((data, i) => (
-            <div
-              key={i}
-              style={{
-                ...styles.descSlide,
-                width: `${100 / descArray.length}%`,
-              }}>
-              {/* Ab yahan hum object ki keys access karenge */}
-              <div style={styles.contentBox}>
-                <p style={styles.dataName}>{data?.name || "N/A"}</p>
-                <div style={styles.amountBadge}>
-                  <span style={styles.currency}>₹</span>{" "}
-                  {data?.total?.toLocaleString() || 0}
+      {isLoanding ? (
+        <Spin indicator={<LoadingOutlined spin />} size="small" />
+      ) : (
+        <div style={styles.scrollArea}>
+          <div
+            style={{
+              display: "flex",
+              width: `${descArray.length * 100}%`,
+              transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
+              //transform: `translateX(-${currentIndex * 100}%)`,
+              transition: hasMultipleDesc
+                ? "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
+                : "none",
+              height: "100%",
+            }}>
+            {descArray.map((data, i) => (
+              <div
+                key={i}
+                style={{
+                  ...styles.descSlide,
+                  width: `${100 / descArray.length}%`,
+                }}>
+                {/* Ab yahan hum object ki keys access karenge */}
+                <div style={styles.contentBox}>
+                  <p style={styles.dataName}>{data?.name || "N/A"}</p>
+                  <div style={styles.amountBadge}>
+                    <span style={styles.currency}>₹</span>{" "}
+                    {data?.total?.toLocaleString() || 0}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {hasMultipleDesc && (
         <div style={styles.dotsContainer}>

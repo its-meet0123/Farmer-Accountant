@@ -23,7 +23,7 @@ import { PageContainer } from "../../component/PageContainer";
 
 const WorkersData = () => {
   const { t } = useAuth();
-  const [isLoanding, setIsLoanding] = useState(false);
+  const [isLoanding, setIsLoanding] = useState(null);
   const [workerList, setWorkerList] = useState([]);
   const [worker, setWorker] = useState({});
   const [openType, setOpenType] = useState(null);
@@ -53,6 +53,7 @@ const WorkersData = () => {
   };
 
   const editWorkerTransaction = (record) => {
+    setIsLoanding("ewt");
     const filltredWorker = workerList
       .map((mainObj) => ({
         ...mainObj,
@@ -60,7 +61,10 @@ const WorkersData = () => {
       }))
       .filter((mainObj) => mainObj.account.length > 0);
     setWorker(filltredWorker[0]);
-    setOpenType("ewt");
+    setTimeout(() => {
+      setIsLoanding(null);
+      setOpenType("ewt");
+    }, 1000);
   };
 
   const deleteWorkerTransaction = async (record) => {
@@ -73,25 +77,28 @@ const WorkersData = () => {
     if (!filltredWorker || !record) {
       message.error(t("workerPage.deleteFunctionMessage.errorMessage1"));
     }
-    const workerId = filltredWorker[0]._id;
-    const accountIds = [record._id];
-    if (workerId && accountIds) {
+    try {
+      const workerId = filltredWorker[0]._id;
+      const accountIds = [record._id];
       const res = await deleteWorkerTransactionById(workerId, accountIds);
       console.log(res);
       if (res.status === 200) {
         message.success(res.data.message);
-        setFetchData("deleteT");
+        setFetchData(res.data);
       }
+    } catch (err) {
+      console.log(err.message);
+      message.error("Worker not deleted");
     }
   };
   useEffect(() => {
     async function getData() {
       try {
-        setIsLoanding(true);
+        setIsLoanding("loadData");
         const res = await getAllWorkers();
         const data = await res.data.data;
-        setIsLoanding(false);
         setWorkerList(data);
+        setIsLoanding(null);
       } catch (err) {
         message.error(t("workerPage.fetchDataErrorMessage"));
         console.log(err.message);
@@ -162,7 +169,8 @@ const WorkersData = () => {
             <Button
               type="link"
               icon={<EditOutlined />}
-              onClick={() => editWorkerTransaction(record)}></Button>
+              onClick={() => editWorkerTransaction(record)}
+              loading={isLoanding == "ewt" && true}></Button>
             <Popconfirm
               title={t(
                 "workerPage.tableColumns.extandTableColumns.actionPopAlertText",

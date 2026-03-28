@@ -21,58 +21,64 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
   const [addForm] = Form.useForm();
   const [edit, setEdit] = useState(false);
   const date = dayjs(new Date());
+  const [btnLoad, setBtnLoad] = useState(true);
 
   const onClose = () => {
     addForm.resetFields();
     form.resetFields();
+    setBtnLoad(false);
     setOpen(null);
   };
   const handleSubmit = async () => {
+    setBtnLoad(true);
     if (open === "edit") {
-      const allValues = form.getFieldsValue();
-      const date = dayjs(allValues.startDate);
-      const transaction = {
-        startDate: date,
-        rate: allValues.rate,
-        loan: {
-          amount: allValues.amount,
-          amountType: allValues.amountType,
-          handOver: allValues.handOver,
-        },
-        indBuy: {
-          billAmount: allValues.bBillAmount,
-          bill: allValues.bBill,
-          brief: allValues.bBrief,
-          handOver: allValues.bHandOver,
-        },
-        indSell: {
-          crop: allValues.crop,
-          billAmount: allValues.sBillAmount,
-          bill: allValues.sBill,
-          brief: allValues.sBrief,
-          handOver: allValues.sHandOver,
-        },
-        diesel: {
-          billAmount: allValues.dBillAmount,
-          bill: allValues.dBill,
-          qty: allValues.dQty,
-          rate: allValues.dRate,
-          handOver: allValues.dHandOver,
-        },
-      };
+      try {
+        const allValues = form.getFieldsValue();
+        const date = dayjs(allValues.startDate);
+        const transaction = {
+          startDate: date,
+          rate: allValues.rate,
+          loan: {
+            amount: allValues.amount,
+            amountType: allValues.amountType,
+            handOver: allValues.handOver,
+          },
+          indBuy: {
+            billAmount: allValues.bBillAmount,
+            bill: allValues.bBill,
+            brief: allValues.bBrief,
+            handOver: allValues.bHandOver,
+          },
+          indSell: {
+            crop: allValues.crop,
+            billAmount: allValues.sBillAmount,
+            bill: allValues.sBill,
+            brief: allValues.sBrief,
+            handOver: allValues.sHandOver,
+          },
+          diesel: {
+            billAmount: allValues.dBillAmount,
+            bill: allValues.dBill,
+            qty: allValues.dQty,
+            rate: allValues.dRate,
+            handOver: allValues.dHandOver,
+          },
+        };
 
-      const res = await updateIndShopeAccount(
-        Id.shopeId,
-        allValues.id,
-        transaction,
-      );
-      if (res.status === 200) {
-        const text = `${t("indDrawer.submitFunction.successMessageforEdit")}`;
-        onClose();
-        setFetch(transaction);
-        showSuccess(text);
-      } else {
+        const res = await updateIndShopeAccount(
+          Id.shopeId,
+          allValues.id,
+          transaction,
+        );
+        if (res.status === 200) {
+          const text = `${t("indDrawer.submitFunction.successMessageforEdit")}`;
+          onClose();
+          setFetch(transaction);
+          showSuccess(text);
+        }
+      } catch (err) {
         message.error(t("indDrawer.submitFunction.errorMessageforEdit"));
+        console.log(err.message);
       }
     }
     if (open === "add") {
@@ -342,7 +348,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
             <Form.Item name="id"></Form.Item>
             <Form.Item></Form.Item>
             <Flex justify="flex-end" horizontal style={{ padding: "1rem" }}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={btnLoad}>
                 {t("indDrawer.button.sbt")}
               </Button>
             </Flex>
@@ -560,7 +566,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               </Form.List>
             </Row>
             <Flex justify="flex-end" horizontal style={{ padding: "1rem" }}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" loading={btnLoad}>
                 {t("indDrawer.button.sbt")}
               </Button>
             </Flex>

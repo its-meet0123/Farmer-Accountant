@@ -42,10 +42,12 @@ const EntDrawer = ({
   const [rowData, setRowData] = useState({});
   const date = dayjs(new Date());
   const screens = useBreakpoint();
+  const [btnLoad, setBtnLoad] = useState(false);
 
   const onClose = () => {
     addForm.resetFields();
     form.resetFields();
+    setBtnLoad(false);
     setOpen(null);
   };
 
@@ -63,6 +65,7 @@ const EntDrawer = ({
     setRowData(obj);
   };
   const handleSubmit = async () => {
+    setBtnLoad(true);
     if (open === "add") {
       const allValues = addForm.getFieldsValue();
       console.log(allValues);
@@ -316,7 +319,8 @@ const EntDrawer = ({
                   <Button
                     type="primary"
                     htmlType="submit"
-                    disabled={activeRow !== null}>
+                    disabled={activeRow !== null}
+                    loading={btnLoad}>
                     {t("entDrawer.drawerForm.button.sbt")}
                   </Button>
                 </Form.Item>
@@ -479,7 +483,7 @@ const EntDrawer = ({
             </Row>
             <Flex justify="flex-end" horizontal>
               <Form.Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" loading={btnLoad}>
                   {t("entDrawer.drawerForm.button.sbt")}
                 </Button>
               </Form.Item>

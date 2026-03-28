@@ -17,7 +17,7 @@ import { PageContainer } from "../../component/PageContainer";
 const HomePage = () => {
   const [form] = Form.useForm();
   const [entData, setEntData] = useState([]);
-  const [isLoanding, setIsLoanding] = useState(false);
+  const [isLoanding, setIsLoanding] = useState(null);
   const [indData, setIndData] = useState([]);
   const [openType, setOpenType] = useState(null);
   const [fetch, setFetch] = useState();
@@ -39,6 +39,7 @@ const HomePage = () => {
     });
   };
   const deleteFunction = async (record) => {
+    setIsLoanding("delete");
     const data = indData.filter((ind) => {
       return record.shopes.some(
         (shope) => shope.shopeNumber === ind.shopeNumber,
@@ -57,6 +58,7 @@ const HomePage = () => {
         const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
         showSuccess(text);
         setFetch({ res1: entRes.data, res2: indRes.data });
+        setIsLoanding(null);
       } else {
         message.error(t("homePage.deleteFunctionMessages.errorMessage"));
         console.log(indRes.data.message);
@@ -65,10 +67,9 @@ const HomePage = () => {
   };
 
   const editFunction = async (id) => {
+    setIsLoanding("edit");
     try {
-      setIsLoanding(true);
       const res = await getEntDataById(id);
-      setIsLoanding(false);
       if (res.status === 200) {
         const data = await res.data.data;
         const date = dayjs(data.startDate);
@@ -82,8 +83,11 @@ const HomePage = () => {
           shopes: data.shopes,
           startDate: date,
         });
-        setFetch(data);
-        setOpenType("edit");
+        setTimeout(() => {
+          setFetch(data);
+          setOpenType("edit");
+          setIsLoanding(null);
+        }, 1000);
       }
     } catch (err) {
       message.error(t("homePage.editFunctionMessages.errorMessage"));
@@ -109,14 +113,16 @@ const HomePage = () => {
   useEffect(() => {
     async function getData() {
       try {
-        setIsLoanding(true);
+        setIsLoanding("loadData");
         const entRes = await getAllEntData();
         const entData = entRes?.data?.data;
-        setIsLoanding(false);
         setEntData(entData);
         const indRes = await getAllIndShopes();
         const indData = await indRes?.data?.data;
-        setIndData(indData);
+        if (entRes.status === "Success" && indRes === "Success") {
+          setIndData(indData);
+          setIsLoanding(null);
+        }
       } catch (err) {
         message.error(t("homePage.fetchDataErrorMessage"));
         console.error(err.message);
@@ -185,6 +191,7 @@ const HomePage = () => {
             icon={<EditOutlined />}
             size="small"
             onClick={() => editFunction(record._id)}
+            loading={isLoanding == "edit" && true}
           />
           <Popconfirm
             title={
@@ -194,7 +201,12 @@ const HomePage = () => {
             okText="Yes"
             cancelText="No"
             placement="left">
-            <Button type="link" icon={<DeleteOutlined />} size="small" />
+            <Button
+              type="link"
+              icon={<DeleteOutlined />}
+              size="small"
+              loading={isLoanding == "delete" && true}
+            />
           </Popconfirm>
           {/* <Button type="primary" icon={<DownloadOutlined />} size={size} /> */}
         </Flex>
@@ -220,7 +232,7 @@ const HomePage = () => {
           </Button>
         }
         size={20}>
-        {isLoanding ? (
+        {isLoanding === "loadData" ? (
           <Spin size="large" />
         ) : (
           <Table
