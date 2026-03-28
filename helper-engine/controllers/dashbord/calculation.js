@@ -1,4 +1,11 @@
 function overAllTotalOfAllShopes(data) {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
   let totalOfReturnLoanAmount = 0;
   let totalOfReturnBuyBillAmount = 0;
   let totalOfReturnSellBillAmount = 0;
@@ -16,11 +23,19 @@ function overAllTotalOfAllShopes(data) {
     totalOfReturnLoanAmount -
     totalOfReturnBuyBillAmount -
     totalOfReturnDieselBillAmount;
-  const grandTotal = Number(oAT).toFixed(2);
+  const grandTotal = formatCurrency(oAT);
   return grandTotal;
 }
 
 function overAllTotalOfAllWorkers(data) {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
+
   console.log("workerTransactions :", data);
   let totalOfReturnAmount = 0;
   let totalOfReturnPayment = 0;
@@ -30,11 +45,7 @@ function overAllTotalOfAllWorkers(data) {
     totalOfReturnPayment += Number(take.totalAmount || 0);
   });
   const oAT = totalOfReturnPayment - totalOfReturnAmount;
-  const grandTotal = Number(oAT).toFixed(2);
-
-  console.log("reutrn Amount :", totalOfReturnAmount);
-  console.log("return payment :", totalOfReturnPayment);
-  console.log("OAT :", oAT);
+  const grandTotal = formatCurrency(oAT);
 
   return grandTotal;
 }
