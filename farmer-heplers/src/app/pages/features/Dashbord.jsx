@@ -68,14 +68,14 @@ const DashBord = () => {
     },
   ];
 
-  features.forEach((feature, idx) => {
-    console.log(`Feature ${idx} (${feature.title}):`, {
-      hasDesc: !!feature.desc,
-      isArray: Array.isArray(feature.desc),
-      length: feature.desc?.length || 0,
-      desc: feature.desc,
-    });
-  });
+  // features.forEach((feature, idx) => {
+  //   console.log(`Feature ${idx} (${feature.title}):`, {
+  //     hasDesc: !!feature.desc,
+  //     isArray: Array.isArray(feature.desc),
+  //     length: feature.desc?.length || 0,
+  //     desc: feature.desc,
+  //   });
+  // });
   return (
     <div style={styles.wrapper}>
       <header style={styles.header}>

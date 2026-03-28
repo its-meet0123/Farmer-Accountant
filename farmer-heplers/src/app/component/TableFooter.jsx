@@ -1,6 +1,14 @@
 import { Table } from "antd";
 
 const TableFooterForWorkerCalc = ({ data }) => {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
+
   let totalOfAmount = 0;
   let totalOfAmountInterest = 0;
   let totalOfReturnAmount = 0;
@@ -18,9 +26,8 @@ const TableFooterForWorkerCalc = ({ data }) => {
     totalOfReturnPayment += Number(take.totalPayment || 0);
   });
   const amountTex = Number(totalOfPayment) * (1 / 100);
-  const grandTotal = Number(
-    totalOfReturnPayment - (totalOfReturnAmount + amountTex),
-  ).toFixed(2);
+  const oAt = totalOfReturnPayment - (totalOfReturnAmount + amountTex);
+  const grandTotal = formatCurrency(oAt);
 
   return (
     <>
@@ -80,6 +87,14 @@ const TableFooterForWorkerCalc = ({ data }) => {
 };
 
 const TableFooterForViewCalc = ({ data }) => {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
+
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
   let totalOfReturnLoanAmount = 0;
@@ -119,7 +134,7 @@ const TableFooterForViewCalc = ({ data }) => {
     totalOfReturnLoanAmount -
     totalOfReturnBuyBillAmount -
     totalOfReturnDieselBillAmount;
-  const grandTotal = Number(oAT).toFixed(2);
+  const grandTotal = formatCurrency(oAT);
   return (
     <>
       <Table.Summary fixed="bottom">
