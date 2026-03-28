@@ -3,6 +3,7 @@ import {
   DatePicker,
   Flex,
   Form,
+  Input,
   InputNumber,
   message,
   Radio,
@@ -287,7 +288,7 @@ const CalcPage = () => {
                   value={selectMonth ? selectMonth : today}
                   onChange={(date) => setSelectMonth(date)}
                 />
-                <InputNumber value={monthlyTurnover} readOnly />
+                <Input value={monthlyTurnover} readOnly />
               </Flex>
             </Flex>
             <Table
