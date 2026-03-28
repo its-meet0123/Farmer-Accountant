@@ -7,7 +7,7 @@ import WorkersData from "../pages/features/Worker";
 import WorkerCalculation from "../pages/features/WorkerCalculation";
 import CasualLabor from "../pages/features/CasualLabor";
 import HarvesterData from "../pages/features/MechanizedHiring";
-import DashBord from "../pages/features/Dashbord";
+import DashBord from "../pages/dashbord/Dashbord";
 
 export const protectedRoutes = [
   {

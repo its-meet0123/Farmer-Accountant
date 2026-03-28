@@ -685,7 +685,7 @@
       "dtfs2": "Track your traders' daily accounts here. [ Traders(nav) > Add Industry(button) > Vendors(nav) > + Icon button (Action Columns) ].",
       "dtfpw2": "Track your permanent workers' daily accounts here. [Permanent Worker(nav) > Add Worker(button) > +Icon button(Action Columns) ]",
       "dtfcl2": "Manage your casual labor payments easily. [ OtherExpense(nav) > CasualLabor(nav) > Add Labor(button) > +Icon button(Action Columns) ]",
-      "dtfhl2": "Manage your harvester's pending payments easily. [ OtherExpense(nav) > Mechanized Hiring(nav) > New Harvester Entry(button) > +Icon button (Action Columns) ]"
+      "dtfhl2": "Manage your harvester's payments easily. [ OtherExpense(nav) > Mechanized Hiring(nav) > New Harvester Entry(button) > +Icon button (Action Columns) ]"
     }
   },
   "CL": {
