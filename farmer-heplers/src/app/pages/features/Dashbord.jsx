@@ -26,7 +26,7 @@ const DashBord = () => {
       }
     }
     getData();
-  }, [location.pathname]);
+  }, [location.pathname, t]);
   const features = [
     {
       title: "Shops & Inventory",
@@ -37,7 +37,13 @@ const DashBord = () => {
               total: shop.overAllTotal || 0,
               isEmpty: false,
             }))
-          : [{ isEmpty: true, name: t("dashbord.features.dtfs2"), total: 0 }],
+          : [
+              {
+                isEmpty: true,
+                name: t("dashbord.features.dtfs2") || "A",
+                total: 0,
+              },
+            ],
     },
     {
       title: "Permanent Workers",
@@ -48,7 +54,13 @@ const DashBord = () => {
               total: worker.overAllTotal || 0,
               isEmpty: false,
             }))
-          : [{ isEmpty: true, name: t("dashbord.features.dtfpw2"), total: 0 }],
+          : [
+              {
+                isEmpty: true,
+                name: t("dashbord.features.dtfpw2") || "B",
+                total: 0,
+              },
+            ],
     },
     {
       title: "Casual Labor",
@@ -59,7 +71,13 @@ const DashBord = () => {
               total: labor.pending || 0,
               isEmpty: false,
             }))
-          : [{ isEmpty: true, name: t("dashbord.features.dtfcl2"), total: 0 }],
+          : [
+              {
+                isEmpty: true,
+                name: t("dashbord.features.dtfcl2") || "C",
+                total: 0,
+              },
+            ],
     },
     {
       title: "Harvester & Tools",
@@ -70,7 +88,13 @@ const DashBord = () => {
               total: harvest.pending || 0,
               isEmpty: false,
             }))
-          : [{ isEmpty: true, name: t("dashbord.features.dtfhl2"), total: 0 }],
+          : [
+              {
+                isEmpty: true,
+                name: t("dashbord.features.dtfhl2") || "D",
+                total: 0,
+              },
+            ],
     },
   ];
 
@@ -184,10 +208,7 @@ const FeatureCard = ({ item, isLoanding }) => {
                   </p>
 
                   {!data.isEmpty && (
-                    <div style={styles.amountBadge}>
-                      <span style={styles.currency}>₹</span>{" "}
-                      {data?.total?.toLocaleString("en-IN") || 0}
-                    </div>
+                    <div style={styles.amountBadge}>{data?.total}</div>
                   )}
                 </div>
               </div>

@@ -20,6 +20,13 @@ const {
 // Dashboard controller functions using map method
 
 async function dashBordData(req, res) {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+    }).format(amount);
+  };
   try {
     const token = req.cookies.token;
     const decoded = jwt.verify(token, JWT_SECRET);
@@ -147,10 +154,10 @@ async function dashBordData(req, res) {
       .map((labors) => {
         const laborName = labors?.serviceProvider?.nickName;
         const lastTransaction = labors?.transactions.at(-1);
-
+        const oAt = formatCurrency(lastTransaction?.total);
         return {
           laborName: laborName,
-          pending: lastTransaction?.total,
+          pending: oAt,
         };
       })
       .filter((item) => item !== null);
@@ -159,10 +166,10 @@ async function dashBordData(req, res) {
       .map((harvester) => {
         const opratorName = harvester?.serviceProvider?.nickName;
         const lastTransaction = harvester?.transactions.at(-1);
-
+        const oAt = formatCurrency(lastTransaction?.total);
         return {
           opratorName: opratorName,
-          pending: lastTransaction?.total,
+          pending: oAt,
         };
       })
       .filter((item) => item !== null);
