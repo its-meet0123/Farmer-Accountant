@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { PageContainer } from "../../component/PageContainer";
+
 import { getDashbordData } from "../../service/dashbord";
 import { message } from "antd";
 
@@ -84,14 +84,15 @@ const DashBord = () => {
       <div style={styles.mainGrid}>
         {features && Array.isArray(features) && features.length > 0 ? (
           features.map((item, index) => {
-            if (!item || typeof item !== "object") {
-              console.warn("Invalid feature item:", item);
-              return null;
+            // FIX: Check if item exists and its desc array has at least one element
+            if (!item || !Array.isArray(item.desc) || item.desc.length === 0) {
+              return null; // Kuch bhi render nahi karega agar data khali hai
             }
+
             return <FeatureCard key={index} item={item} />;
           })
         ) : (
-          <div>No data available</div>
+          <div style={styles.noData}>No accounting data found...</div>
         )}
       </div>
 
