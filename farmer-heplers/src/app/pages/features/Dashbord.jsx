@@ -11,6 +11,12 @@ const DashBord = () => {
   const [isLoanding, setIsLoanding] = useState(false);
   const [dashbordData, setDeshbordData] = useState({});
   const { t } = useAuth();
+
+  const shopesArray = dashbordData?.shopes || [];
+  const permanentWorkersArray = dashbordData?.workers || [];
+  const casualLaborsArray = dashbordData?.casualLabors || [];
+  const harvestersArray = dashbordData?.harvesters || [];
+
   useEffect(() => {
     async function getData() {
       try {
@@ -31,8 +37,8 @@ const DashBord = () => {
     {
       title: "Shops & Inventory",
       desc:
-        dashbordData?.shopes.length > 0 && Array.isArray(dashbordData.shopes)
-          ? dashbordData.shopes.map((shop) => ({
+        shopesArray.length > 0
+          ? shopesArray.map((shop) => ({
               name: shop.shopeNumber || "",
               total: shop.overAllTotal || 0,
               isEmpty: false,
@@ -48,8 +54,8 @@ const DashBord = () => {
     {
       title: "Permanent Workers",
       desc:
-        dashbordData?.workers.length > 0 && Array.isArray(dashbordData.workers)
-          ? dashbordData.workers.map((worker) => ({
+        permanentWorkersArray.length > 0
+          ? permanentWorkersArray.map((worker) => ({
               name: worker.workerName || "",
               total: worker.overAllTotal || 0,
               isEmpty: false,
@@ -65,9 +71,8 @@ const DashBord = () => {
     {
       title: "Casual Labor",
       desc:
-        dashbordData?.casualLabors.length > 0 &&
-        Array.isArray(dashbordData.casualLabors)
-          ? dashbordData.casualLabors.map((labor) => ({
+        casualLaborsArray.length > 0
+          ? casualLaborsArray.map((labor) => ({
               name: labor.laborName || "",
               total: labor.pending || 0,
               isEmpty: false,
@@ -83,9 +88,8 @@ const DashBord = () => {
     {
       title: "Harvester & Tools",
       desc:
-        dashbordData?.harvesters.length > 0 &&
-        Array.isArray(dashbordData.harvesters)
-          ? dashbordData.harvesters.map((harvest) => ({
+        harvestersArray.length > 0
+          ? harvestersArray.map((harvest) => ({
               name: harvest.opratorName || "",
               total: harvest.pending || 0,
               isEmpty: false,
