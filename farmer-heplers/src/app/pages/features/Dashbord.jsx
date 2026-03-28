@@ -10,14 +10,10 @@ const DashBord = () => {
       try {
         const res = await getDashbordData();
         const data = await res.data;
-        console.log("Raw response data:", data);
-        console.log("Setting dashbordData:", data.data);
         setDeshbordData(data.data);
         message.success(data.Code);
       } catch (err) {
-        console.error("Error fetching dashboard data:", err);
         console.error("Error message:", err.message);
-        console.error("Full error object:", err);
         message.error("Dashbord data not fetched");
       }
     }
@@ -66,8 +62,6 @@ const DashBord = () => {
     },
   ];
 
-  console.log("Dashboard state:", dashbordData);
-  console.log("Features array:", features);
   features.forEach((feature, idx) => {
     console.log(`Feature ${idx} (${feature.title}):`, {
       hasDesc: !!feature.desc,
@@ -83,7 +77,7 @@ const DashBord = () => {
           FARMER-<span style={{ color: "#4da3ff" }}>ACCOUNTANT</span>
         </h1>
         <p style={styles.headerSubtitle}>
-          Back to Leading the Future of Farming.
+          Cultivating growth through organized farm accounting.
         </p>
       </header>
 
@@ -111,8 +105,6 @@ const FeatureCard = ({ item }) => {
 
   // Strict validation: ensure item.desc is always an array
   const descArray = Array.isArray(item?.desc) ? item.desc : [];
-  console.log("FeatureCard item:", item);
-  console.log("FeatureCard descArray:", descArray);
 
   const hasMultipleDesc = descArray.length > 1;
 
@@ -122,7 +114,7 @@ const FeatureCard = ({ item }) => {
         setCurrentIndex((prevIndex) =>
           prevIndex === descArray.length - 1 ? 0 : prevIndex + 1,
         );
-      }, 4500);
+      }, 2000);
 
       return () => clearInterval(timer);
     }
@@ -130,7 +122,6 @@ const FeatureCard = ({ item }) => {
 
   // Guard check after hooks - don't render if invalid item
   if (!item || typeof item !== "object") {
-    console.warn("FeatureCard received invalid item:", item);
     return null;
   }
 
@@ -144,26 +135,19 @@ const FeatureCard = ({ item }) => {
             width: `${descArray.length * 100}%`,
             transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
             transition: hasMultipleDesc
-              ? "transform 0.9s cubic-bezier(0.4, 0, 0.2, 1)"
+              ? "transform 0.8s cubic-bezier(0.65, 0, 0.35, 1)"
               : "none",
             height: "100%",
           }}>
           {descArray.map((data, i) => (
             <div key={i} style={styles.descSlide}>
               {/* Ab yahan hum object ki keys access karenge */}
-              <div style={{ textAlign: "center" }}>
-                <p
-                  style={{ margin: 0, fontSize: "1.2rem", fontWeight: "bold" }}>
-                  {data?.name}
-                </p>
-                <p
-                  style={{
-                    margin: "5px 0 0 0",
-                    color: "#4da3ff",
-                    fontSize: "1rem",
-                  }}>
-                  {data?.total}
-                </p>
+              <div style={styles.contentBox}>
+                <p style={styles.dataName}>{data?.name || "N/A"}</p>
+                <div style={styles.amountBadge}>
+                  <span style={styles.currency}>₹</span>{" "}
+                  {data?.total?.toLocaleString() || 0}
+                </div>
               </div>
             </div>
           ))}
@@ -177,7 +161,7 @@ const FeatureCard = ({ item }) => {
               key={i}
               style={{
                 ...styles.dot,
-                width: currentIndex === i ? "12px" : "6px",
+                width: currentIndex === i ? "20px" : "6px",
                 opacity: currentIndex === i ? 1 : 0.4,
                 backgroundColor: "#4da3ff", // Light blue dots
               }}
@@ -225,55 +209,86 @@ const styles = {
     padding: "0 25px",
   },
   card: {
-    height: "280px",
+    height: "260px",
     display: "flex",
     flexDirection: "column",
-    borderRadius: "20px",
+    borderRadius: "24px",
     overflow: "hidden",
-    // Image ke left container jaisa dark blue
     backgroundColor: "#161d2f",
-    border: "1px solid rgba(255,255,255,0.1)",
-    boxShadow: "0 15px 35px rgba(0,0,0,0.3)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+    transition: "transform 0.3s ease, border-color 0.3s ease",
+    position: "relative",
   },
   cardHeader: {
-    color: "#4da3ff", // Light blue from image text
-    padding: "25px 18px 10px 18px",
+    background: "rgba(255, 255, 255, 0.03)",
+    color: "#4da3ff",
+    padding: "20px 10px",
     textAlign: "center",
-    fontWeight: "bold",
-    fontSize: "1.3rem",
-    letterSpacing: "0.5px",
+    fontWeight: "700",
+    fontSize: "1.1rem",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    borderBottom: "1px solid rgba(255,255,255,0.05)",
   },
   scrollArea: {
     flex: 1,
     overflow: "hidden",
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
   },
   descSlide: {
-    width: "100%",
-    padding: "0 35px",
-    color: "#ffffff",
-    fontSize: "1.05rem",
-    lineHeight: "1.6",
+    width: "100%", // Ye slider ke total width ka part banega
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    textAlign: "center",
     flexShrink: 0,
     boxSizing: "border-box",
+  },
+  contentBox: {
+    textAlign: "center",
+    padding: "20px",
+  },
+  dataName: {
+    margin: 0,
+    fontSize: "1.4rem",
+    fontWeight: "600",
+    color: "#ffffff",
+    marginBottom: "10px",
+  },
+  amountBadge: {
+    display: "inline-block",
+    backgroundColor: "rgba(77, 163, 255, 0.15)",
+    color: "#4da3ff",
+    padding: "8px 20px",
+    borderRadius: "50px",
+    fontSize: "1.2rem",
+    fontWeight: "700",
+    border: "1px solid rgba(77, 163, 255, 0.3)",
+  },
+  currency: {
+    fontSize: "0.9rem",
+    marginRight: "2px",
+    opacity: 0.8,
+  },
+  noData: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "rgba(255,255,255,0.4)",
+    fontStyle: "italic",
   },
   dotsContainer: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
     gap: "6px",
+    paddingBottom: "20px",
   },
   dot: {
     height: "6px",
     borderRadius: "10px",
-    transition: "all 0.4s ease",
+    backgroundColor: "#4da3ff",
+    transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
   },
   footerBar: {
     height: "6px",

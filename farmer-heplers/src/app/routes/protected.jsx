@@ -49,7 +49,7 @@ export const protectedRoutes = [
         element: <CasualLabor />,
       },
       { path: "/other/mechanized", element: <HarvesterData /> },
-      { path: "*", element: <Navigate to="/home" /> },
+      { path: "*", element: <Navigate to="/" /> },
     ],
   },
 ];
