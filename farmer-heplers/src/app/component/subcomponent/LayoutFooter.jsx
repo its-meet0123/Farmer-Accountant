@@ -3,7 +3,7 @@ import { Row, Col, Space } from "antd";
 
 import LanguageChangeDropDown from "../LanguageChangeDropdown";
 import { footerstyles } from "./FooterStyles.js";
-import { MessageCircle } from "lucide-react";
+import { Mail, MessageCircle, Phone } from "lucide-react";
 import { FacebookFilled, InstagramFilled } from "@ant-design/icons";
 
 const LayoutFooter = ({ t, logout }) => {
@@ -77,10 +77,10 @@ const LayoutFooter = ({ t, logout }) => {
               direction="vertical"
               style={{ color: "rgba(255,255,255,0.65)" }}>
               <Space>
-                <Phone size={16} /> +91 98765 43210
+                <Phone size={16} /> +91 9166463479
               </Space>
               <Space>
-                <Mail size={16} /> support@farmeracc.com
+                <Mail size={16} /> sukhramghria63223@gmail.com
               </Space>
             </Space>
           </Col>
