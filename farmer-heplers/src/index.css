@@ -30,7 +30,7 @@ body {
   padding:0;
   /* display: flex se block */
   display: block;
-  place-items: center;
+ /* place-items: center;*/
   min-height: 100vh;
   padding: 0;
   width: 100%;
