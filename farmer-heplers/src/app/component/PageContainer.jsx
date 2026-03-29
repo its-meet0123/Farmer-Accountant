@@ -181,6 +181,18 @@ const PageContainer = ({ title, children, extra }) => {
         radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
         radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
       `,
+        width: "100%",
+        borderRadius: "12px",
+        overflow: "hidden",
+      }}
+      styles={{
+        body: {
+          padding: "clamp(8px, 3vw, 24px)",
+        },
+        header: {
+          padding: "12px 16px",
+          borderBottom: "1px solid rgba(255,255,255,0.1)",
+        },
       }}
       title={
         <span
@@ -195,7 +207,7 @@ const PageContainer = ({ title, children, extra }) => {
         </span>
       }
       extra={extra}>
-      {children}
+      <div style={{ width: "100%", overflowX: "auto" }}>{children}</div>
     </Card>
   );
 };
