@@ -122,7 +122,7 @@ const LayoutFooter = ({ t, logout }) => {
         <div style={{ textAlign: "center", color: "rgba(255,255,255,0.45)" }}>
           {`${t("layout.footer.ft1")} ©${currentYear} ${t("layout.footer.ft2")}`}
           <div style={{ fontSize: "12px", marginTop: "5px" }}>
-            Made with ❤️ for Farmers
+            {t("layout.footer.stffl")}
           </div>
         </div>
       </div>

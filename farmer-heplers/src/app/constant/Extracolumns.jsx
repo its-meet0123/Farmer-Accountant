@@ -125,7 +125,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["loan", "amount"],
           key: "amount",
-          width: 100,
+          width: 150,
           render: (text) => {
             const loanAmount = formatCurrency(text);
             return <p style={{ color: "#3E0703" }}>{loanAmount}</p>;
@@ -174,7 +174,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indBuy", "billAmount"],
           key: "billAmount",
-          width: 100,
+          width: 150,
           render: (text) => {
             const billAmount = formatCurrency(text);
             return <p style={{ color: "#D73535" }}>{billAmount}</p>;
@@ -234,7 +234,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indSell", "billAmount"],
           key: "amount",
-          width: 100,
+          width: 150,
           render: (text) => {
             const sellAmount = formatCurrency(text);
             return <p style={{ color: "#8ABB6C" }}>{sellAmount}</p>;
@@ -321,7 +321,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["diesel", "billAmount"],
           key: "amount",
-          width: 100,
+          width: 150,
           render: (text) => {
             const billAmount = formatCurrency(text);
             return <p style={{ color: "#075B5E" }}>{billAmount}</p>;
@@ -412,7 +412,7 @@ const getColumnsForCalulationPage = (t) => {
           ),
           dataIndex: ["loan", "amount"],
           key: "amount",
-          width: 100,
+          width: 150,
           render: (text) => {
             const loanAmount = formatCurrency(text);
             if (text > 0)
@@ -467,7 +467,7 @@ const getColumnsForCalulationPage = (t) => {
           ),
           dataIndex: ["loan", "totalAmount"],
           key: "totalAmount",
-          width: 100,
+          width: 150,
           render: (text) => {
             const total = formatCurrency(text);
             if (text > 0) return <p style={{ color: "#3E0703" }}>{total}</p>;
@@ -486,7 +486,7 @@ const getColumnsForCalulationPage = (t) => {
           ),
           dataIndex: ["indBuy", "billAmount"],
           key: "billAmount",
-          width: 100,
+          width: 150,
           render: (text) => {
             const billAmount = formatCurrency(text);
             if (text > 0)
@@ -544,7 +544,7 @@ const getColumnsForCalulationPage = (t) => {
           ),
           dataIndex: ["indBuy", "totalAmount"],
           key: "totalAmount",
-          width: 100,
+          width: 150,
           render: (text, record) => {
             const total = formatCurrency(text);
             if (record.indBuy.billAmount > 0)
@@ -564,7 +564,7 @@ const getColumnsForCalulationPage = (t) => {
           ),
           dataIndex: ["indSell", "billAmount"],
           key: "amount",
-          width: 100,
+          width: 150,
           render: (text, record) => {
             const billAmount = formatCurrency(text);
             if (record.indSell.billAmount > 0)
@@ -622,7 +622,7 @@ const getColumnsForCalulationPage = (t) => {
           ),
           dataIndex: ["indSell", "totalAmount"],
           key: "totalAmount",
-          width: 100,
+          width: 150,
           render: (text, record) => {
             const total = formatCurrency(text);
             if (record.indSell.billAmount > 0)
@@ -642,7 +642,7 @@ const getColumnsForCalulationPage = (t) => {
           ),
           dataIndex: ["diesel", "billAmount"],
           key: "amount",
-          width: 100,
+          width: 150,
           render: (text, record) => {
             const billAmount = formatCurrency(text);
             if (record.diesel.billAmount > 0)
@@ -700,7 +700,7 @@ const getColumnsForCalulationPage = (t) => {
           ),
           dataIndex: ["diesel", "totalAmount"],
           key: "totalAmount",
-          width: 100,
+          width: 150,
           render: (text, record) => {
             const total = formatCurrency(text);
             if (record.diesel.billAmount > 0)
@@ -791,7 +791,7 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
           ),
           dataIndex: ["give", "amount"],
           key: "giveAmount",
-          width: 100,
+          width: 150,
           render: (amount) => {
             const giveAmount = formatCurrency(amount);
             return <p style={{ color: "#D73535" }}>{giveAmount}</p>;
@@ -864,7 +864,7 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
             </p>
           ),
           dataIndex: ["take", "payment"],
-          width: 100,
+          width: 150,
           key: "takeAmount",
           render: (payment) => {
             const takePay = formatCurrency(payment);
@@ -948,7 +948,7 @@ const getColumnsForWorkerCalcPage = (t) => {
           ),
           dataIndex: ["give", "amount"],
           key: "giveAmount",
-          width: 100,
+          width: 150,
           render: (amount) => {
             const giveAmount = formatCurrency(amount);
             return <p style={{ color: "#D73535" }}>{giveAmount}</p>;
@@ -1011,7 +1011,7 @@ const getColumnsForWorkerCalcPage = (t) => {
           ),
           dataIndex: ["give", "totalAmount"],
           key: "giveTotalAmount",
-          width: 100,
+          width: 150,
           render: (totalAmount) => {
             const total = formatCurrency(totalAmount);
             return <p style={{ color: "#D73535" }}>{total}</p>;
@@ -1029,7 +1029,7 @@ const getColumnsForWorkerCalcPage = (t) => {
             </p>
           ),
           dataIndex: ["take", "payment"],
-          width: 100,
+          width: 150,
           key: "takeAmount",
           render: (payment) => {
             const takePay = formatCurrency(payment);
@@ -1093,6 +1093,7 @@ const getColumnsForWorkerCalcPage = (t) => {
           ),
           dataIndex: ["take", "totalPayment"],
           key: "takeTotalPayment",
+          width: 150,
           render: (totalPayment) => {
             const total = formatCurrency(totalPayment);
             return <p style={{ color: "#8ABB6C" }}>{total}</p>;
@@ -1131,7 +1132,7 @@ const getColumnsForCasualLaborPage = (t) => {
       title: t("casualLabor.ttc.wt"),
       dataIndex: "salary",
       key: "salary",
-      width: 100,
+      width: 150,
       render: (salary) => {
         const formatedSalary = formatCurrency(salary);
         return formatedSalary;
@@ -1147,7 +1148,7 @@ const getColumnsForCasualLaborPage = (t) => {
       title: t("casualLabor.ttc.tt"),
       dataIndex: "total",
       key: "total",
-      width: 100,
+      width: 150,
       render: (total) => {
         const formatedTotal = formatCurrency(total);
         return formatedTotal;
@@ -1157,7 +1158,7 @@ const getColumnsForCasualLaborPage = (t) => {
       title: t("casualLabor.ttc.pt"),
       dataIndex: "pay",
       key: "pay",
-      width: 100,
+      width: 150,
       render: (amount) => {
         const Amount = formatCurrency(amount);
         return Amount;
@@ -1293,7 +1294,7 @@ const getColumnsForHarvestTransaction = (t) => {
       title: t("mechanizedHiring.ttc.wt"),
       dataIndex: "salary",
       key: "salary",
-      width: 100,
+      width: 150,
       render: (amount) => {
         const Amount = formatCurrency(amount);
         return Amount;
@@ -1317,7 +1318,7 @@ const getColumnsForHarvestTransaction = (t) => {
       title: t("mechanizedHiring.ttc.tt"),
       dataIndex: "total",
       key: "total",
-      width: 100,
+      width: 150,
       render: (amount) => {
         const Amount = formatCurrency(amount);
         return Amount;
@@ -1327,7 +1328,7 @@ const getColumnsForHarvestTransaction = (t) => {
       title: t("mechanizedHiring.ttc.pt"),
       dataIndex: "pay",
       key: "pay",
-      width: 100,
+      width: 150,
       render: (amount) => {
         const Amount = formatCurrency(amount);
         return Amount;
