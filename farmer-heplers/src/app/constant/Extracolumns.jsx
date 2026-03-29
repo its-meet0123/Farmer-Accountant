@@ -1219,6 +1219,10 @@ const getColumnsForHarvestList = (t) => {
       dataIndex: "date",
       width: 100,
       key: "date",
+      render: (date) => {
+        const formtedDate = formattedDate(date);
+        return formtedDate;
+      },
     },
     {
       title: t("mechanizedHiring.htc.nt"),

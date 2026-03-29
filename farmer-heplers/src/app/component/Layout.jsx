@@ -5,6 +5,8 @@ import { useAuth } from "../auth/AuthContext";
 import Profile from "./Profile";
 import UserActionModel from "./UserIdActionModel";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
+import { styles } from "../styles/footerStyle";
+import LayoutFooter from "./subcomponent/LayoutFooter";
 
 const { Header, Content, Footer } = Layout;
 const { useBreakpoint } = Grid;
@@ -102,11 +104,8 @@ const AppLayout = ({ children }) => {
           {children}
         </div>
       </Content>
-      <Footer
-        style={{
-          textAlign: "center",
-        }}>
-        {`${t("layout.ft1")} ©${new Date().getFullYear()} ${t("layout.ft2")}`}
+      <Footer style={styles.container}>
+        <LayoutFooter t={t} logout={logout} />
       </Footer>
       <UserActionModel
         openType={openType}
