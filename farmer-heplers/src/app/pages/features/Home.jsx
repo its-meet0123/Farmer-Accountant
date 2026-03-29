@@ -144,7 +144,7 @@ const HomePage = () => {
       title: t("homePage.tableColumns.serialNoTitleText"),
       dataIndex: "serialNo",
       key: "serialNO",
-      width: 20,
+      width: "7%",
       fixed: "start",
       render: (record) => {
         return record;
@@ -154,12 +154,12 @@ const HomePage = () => {
       title: t("homePage.tableColumns.IndustryNameTitleText"),
       dataIndex: "nameInd",
       key: "nameInd",
-      width: 150,
+      width: "35%",
     },
     {
       title: t("homePage.tableColumns.founderTitleText"),
       key: "firstName",
-      width: 70,
+      width: "18%",
       render: (record) => {
         return (
           record?.indFounder?.firstName + " " + record.indFounder?.lastName
@@ -170,14 +170,14 @@ const HomePage = () => {
       title: t("homePage.tableColumns.contactTitleText"),
       dataIndex: "indContact",
       key: "indContact",
-      width: 100,
+      width: "27%",
     },
 
     {
       title: t("homePage.tableColumns.dateTitleText"),
       dataIndex: "startDate",
       key: "startDate",
-      width: 100,
+      width: "27%",
       render: (startDate) => {
         const date = formattedDate(startDate);
         return date;
@@ -185,7 +185,7 @@ const HomePage = () => {
     },
     {
       title: t("homePage.tableColumns.actionTitleText"),
-      width: 100,
+      width: "27%",
       key: "x",
       render: (_, record) => (
         <Flex gap="small" wrap>
