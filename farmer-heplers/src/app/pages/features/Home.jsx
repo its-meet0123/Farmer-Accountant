@@ -144,7 +144,7 @@ const HomePage = () => {
       title: t("homePage.tableColumns.serialNoTitleText"),
       dataIndex: "serialNo",
       key: "serialNO",
-      width: 50,
+      width: 20,
       render: (record) => {
         return record;
       },
@@ -153,12 +153,12 @@ const HomePage = () => {
       title: t("homePage.tableColumns.IndustryNameTitleText"),
       dataIndex: "nameInd",
       key: "nameInd",
-      width: 200,
+      width: 150,
     },
     {
       title: t("homePage.tableColumns.founderTitleText"),
       key: "firstName",
-      width: 150,
+      width: 70,
       render: (record) => {
         return (
           record?.indFounder?.firstName + " " + record.indFounder?.lastName
@@ -246,7 +246,7 @@ const HomePage = () => {
             expandable={{
               expandedRowRender: (record) => ExpandedRow(record),
             }}
-            scroll={{ x: "max-content" }}
+            scroll={{ x: 500 }}
           />
         )}
       </PageContainer>

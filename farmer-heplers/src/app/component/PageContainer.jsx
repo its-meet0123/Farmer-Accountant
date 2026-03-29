@@ -1,6 +1,8 @@
 import React from "react";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
-import { Card } from "antd";
+import { Card, Grid } from "antd";
+
+const { useBreakpoint } = Grid;
 
 const AuthContainer = ({
   children,
@@ -160,6 +162,7 @@ const AuthContainer = ({
 };
 
 const PageContainer = ({ title, children, extra }) => {
+  const screen = useBreakpoint();
   const style = {
     backgroundImage: `
         radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
@@ -187,7 +190,7 @@ const PageContainer = ({ title, children, extra }) => {
       }}
       styles={{
         body: {
-          padding: "clamp(8px, 3vw, 24px)",
+          padding: "clamp(0, 3vw, 24px)",
         },
         header: {
           padding: "12px 16px",
