@@ -23,7 +23,7 @@ export const footerstyles = {
     marginBottom: "20px",
   },
   text: { color: "rgba(255,255,255,0.65)", lineHeight: "1.6" },
-  list: { listStyle: "none", padding: 0, margin: 0 },
+  list: { listStyle: "none", padding: 0, margin: 0, textAlign: "center" },
   link: {
     color: "rgba(255,255,255,0.65)",
     display: "inline-block",
@@ -35,7 +35,7 @@ export const footerstyles = {
     background: "rgba(255,255,255,0.05)",
     width: "40px",
     height: "40px",
-    display: "flex",
+    display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "10px",

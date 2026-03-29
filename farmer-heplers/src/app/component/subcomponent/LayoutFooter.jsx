@@ -15,9 +15,9 @@ const LayoutFooter = ({ t, logout }) => {
   return (
     <>
       <div style={footerstyles.contentWrapper}>
-        <Row gutter={[32, 32]} justify="space-between">
+        <Row gutter={[32, 32]} justify="center">
           {/* Section 1: Brand/Logo */}
-          <Col xs={24} sm={12} md={6}>
+          <Col xs={24} sm={12} md={6} style={{ textAlign: "center" }}>
             <h3 style={footerstyles.title}>
               FARMER-<span style={{ color: "#4da3ff" }}>ACCOUNTANT</span>
             </h3>
@@ -27,7 +27,7 @@ const LayoutFooter = ({ t, logout }) => {
           </Col>
 
           {/* Section 2: Quick Links */}
-          <Col xs={24} sm={12} md={6}>
+          <Col xs={24} sm={12} md={6} style={{ textAlign: "center" }}>
             <h4 style={footerstyles.heading}>Quick Links</h4>
             <ul style={footerstyles.list}>
               {/* <li>
@@ -74,7 +74,7 @@ const LayoutFooter = ({ t, logout }) => {
           </Col>
 
           {/* Section 3: Support */}
-          <Col xs={24} sm={12} md={6}>
+          <Col xs={24} sm={12} md={6} style={{ textAlign: "center" }}>
             <h4 style={footerstyles.heading}>Support</h4>
             <Space
               direction="vertical"
@@ -89,9 +89,11 @@ const LayoutFooter = ({ t, logout }) => {
           </Col>
 
           {/* Section 4: Social Connect */}
-          <Col xs={24} sm={12} md={6}>
+          <Col xs={24} sm={12} md={6} style={{ textAlign: "center" }}>
             <h4 style={footerstyles.heading}>Connect With Us</h4>
-            <Space size="middle">
+            <Space
+              size="middle"
+              style={{ width: "100%", justifyContent: "center" }}>
               <a
                 href="https://wa.me/yournumber"
                 style={footerstyles.socialIcon}

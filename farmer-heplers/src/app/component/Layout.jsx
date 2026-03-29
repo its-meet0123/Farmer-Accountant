@@ -10,6 +10,7 @@ import { footerstyles } from "./subcomponent/FooterStyles.js";
 
 const { Header, Content, Footer } = Layout;
 const { useBreakpoint } = Grid;
+const isMobile = !screen.md;
 
 function getItem(label, key, children, icon) {
   return {
@@ -85,7 +86,13 @@ const AppLayout = ({ children }) => {
           }}
         />
       </Header>
-      <Content style={{ padding: "0 48px", alignContent: "center" }}>
+      <Content
+        style={{
+          padding: isMobile ? "10px" : "24px",
+          margin: "0 auto",
+          width: "100%",
+          maxWidth: isMobile ? "100%" : "1400px",
+        }}>
         <div
           style={{
             // background: colorBgContainer,
