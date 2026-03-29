@@ -281,7 +281,7 @@ const ViewPage = () => {
               expandedRowRender: (record) => ExpandedRow(record),
             }}
             pagination={false}
-            scroll={{ x: "max-content" }}
+            scroll={{ x: 500 }}
           />
         )}
       </PageContainer>
