@@ -30,8 +30,31 @@ export const footerstyles = {
     marginBottom: "10px",
     transition: "color 0.3s",
   },
-  socialIcon: {
-    color: "rgba(255,255,255,0.85)",
+  socialIconWhatsapp: {
+    color: "#25D366",
+    background: "rgba(255,255,255,0.05)",
+    width: "40px",
+    height: "40px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "10px",
+    transition: "all 0.3s ease",
+  },
+  socialIconInstagram: {
+    color:
+      "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
+    background: "rgba(255,255,255,0.05)",
+    width: "40px",
+    height: "40px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "10px",
+    transition: "all 0.3s ease",
+  },
+  socialIconFacebook: {
+    color: "#1877F2",
     background: "rgba(255,255,255,0.05)",
     width: "40px",
     height: "40px",

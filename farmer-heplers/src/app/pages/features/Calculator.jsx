@@ -135,6 +135,12 @@ const CalcPage = () => {
   };
 
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     async function getData() {
       try {
         setIsLoanding(true);
@@ -150,12 +156,6 @@ const CalcPage = () => {
     }
     getData();
   }, [state]);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     async function getData() {
@@ -255,19 +255,17 @@ const CalcPage = () => {
         ) : (
           <>
             <Flex
-              // Mobile par niche-upar (vertical), Desktop par side-by-side (horizontal)
               vertical={isMobile}
               justify="space-between"
-              gap="middle" // Items ke beech space ke liye
+              gap="middle"
               style={{ width: "100%", padding: isMobile ? "10px" : "0" }}>
-              {/* --- Left Section: Form & Actions --- */}
               <Flex
                 vertical={isMobile}
                 align={isMobile ? "stretch" : "center"}
                 gap="small">
                 <Form
                   form={form}
-                  layout={isMobile ? "vertical" : "inline"} // Mobile pe label upar aa jayenge
+                  layout={isMobile ? "vertical" : "inline"}
                   onFinish={setDate}
                   style={{ width: isMobile ? "100%" : "auto" }}>
                   <Form.Item
@@ -277,7 +275,7 @@ const CalcPage = () => {
                     <DatePicker
                       disabled={id && fetch !== "edit"}
                       format={"DD/MM/YYYY"}
-                      style={{ width: "100%" }} // Mobile pe full width
+                      style={{ width: "100%" }}
                     />
                   </Form.Item>
 
@@ -309,7 +307,6 @@ const CalcPage = () => {
                 </Form>
               </Flex>
 
-              {/* --- Right Section: Month Selector & Turnover --- */}
               <Flex
                 vertical={isMobile}
                 align={isMobile ? "stretch" : "center"}

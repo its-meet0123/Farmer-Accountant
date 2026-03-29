@@ -28,6 +28,7 @@ import { DownloadOutlined, RollbackOutlined } from "@ant-design/icons";
 import { PageContainer } from "../../component/PageContainer";
 
 const WorkerCalculation = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { state } = useLocation();
   const navigate = useNavigate();
   const today = dayjs();
@@ -113,6 +114,12 @@ const WorkerCalculation = () => {
   const returnBack = () => {
     navigate("/worker");
   };
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     async function getData() {
@@ -221,9 +228,20 @@ const WorkerCalculation = () => {
           <Spin size="large" />
         ) : (
           <>
-            <Flex horizontal justify="space-between">
-              <Flex horizontal>
-                <Form form={form} layout="inline" onFinish={setDate}>
+            <Flex
+              vertical={isMobile}
+              justify="space-between"
+              gap="middle"
+              style={{ width: "100%", padding: isMobile ? "10px" : "0" }}>
+              <Flex
+                vertical={isMobile}
+                align={isMobile ? "stretch" : "center"}
+                gap="small">
+                <Form
+                  form={form}
+                  layout={isMobile ? "vertical" : "inline"}
+                  onFinish={setDate}
+                  style={{ width: isMobile ? "100%" : "auto" }}>
                   <Form.Item
                     label={t("workerCalcPage.form.inputLabel")}
                     name="endDate">
@@ -232,35 +250,63 @@ const WorkerCalculation = () => {
                       format={"DD/MM/YYYY"}
                     />
                   </Form.Item>
+
                   {(id == null || fetch === "edit" || fetch === "delete") && (
-                    <Form.Item>
-                      <Button htmlType="submit">
+                    <Form.Item
+                      style={{ marginBottom: isMobile ? "12px" : "0" }}>
+                      <Button htmlType="submit" block={isMobile} type="primary">
                         {t("workerCalcPage.form.setButtonText")}
                       </Button>
                     </Form.Item>
                   )}
                   {id && (
-                    <Radio.Group
-                      block
-                      defaultValue={fetch}
-                      options={options}
-                      optionType="button"
-                      onChange={(e) => {
-                        setFetch(e.target.value);
-                      }}
-                    />
+                    <Form.Item
+                      style={{
+                        marginBottom: isMobile ? "12px" : "0",
+                        flex: 1,
+                      }}>
+                      <Radio.Group
+                        block
+                        defaultValue={fetch}
+                        options={options}
+                        optionType="button"
+                        onChange={(e) => {
+                          setFetch(e.target.value);
+                        }}
+                        style={{ width: "100%" }}
+                      />
+                    </Form.Item>
                   )}
                 </Form>
               </Flex>
-              <Flex horizontal>
-                <h5>{t("workerCalcPage.transInput")}</h5>
-                <DatePicker
-                  picker="month"
-                  format="MMM/YY"
-                  value={selectMonth ? selectMonth : today}
-                  onChange={(date) => setSelectMonth(date)}
-                />
-                <Input value={mothlyTurnover} readOnly />
+
+              <Flex
+                vertical={isMobile}
+                align={isMobile ? "stretch" : "center"}
+                gap="small"
+                style={{
+                  marginTop: isMobile ? "20px" : "0",
+                  borderTop: isMobile ? "1px solid #f0f0f0" : "none",
+                  paddingTop: isMobile ? "20px" : "0",
+                }}>
+                <p style={{ fontWeight: 600, margin: 0 }}>
+                  {t("workerCalcPage.transInput")}
+                </p>
+
+                <Flex gap="small" style={{ width: "100%" }}>
+                  <DatePicker
+                    picker="month"
+                    format="MMM/YY"
+                    value={selectMonth ? selectMonth : today}
+                    onChange={(date) => setSelectMonth(date)}
+                    style={{ flex: 1 }}
+                  />
+                  <Input
+                    value={mothlyTurnover}
+                    readOnly
+                    style={{ width: isMobile ? "40%" : "120px" }}
+                  />
+                </Flex>
               </Flex>
             </Flex>
             <Table

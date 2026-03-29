@@ -190,7 +190,13 @@ const PageContainer = ({ title, children, extra }) => {
         </span>
       }
       extra={extra}>
-      <div style={{ width: "100%", overflowX: "auto", margin: "-15px" }}>
+      <div
+        style={{
+          width: "100%",
+          overflowX: "auto",
+          margin: "-15px",
+          justifyContent: "center",
+        }}>
         {children}
       </div>
     </Card>

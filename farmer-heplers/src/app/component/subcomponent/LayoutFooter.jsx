@@ -3,7 +3,7 @@ import { Row, Col, Space } from "antd";
 
 import LanguageChangeDropDown from "../LanguageChangeDropdown";
 import { footerstyles } from "./FooterStyles.js";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import {
   FacebookFilled,
   InstagramFilled,
@@ -95,20 +95,20 @@ const LayoutFooter = ({ t, logout }) => {
               size="middle"
               style={{ width: "100%", justifyContent: "center" }}>
               <a
-                href="https://wa.me/yournumber"
-                style={footerstyles.socialIcon}
+                href="https://wa.me/919166463479"
+                style={footerstyles.socialIconWhatsapp}
                 className="whatsapp">
                 <WhatsAppOutlined size={22} />
               </a>
               <a
-                href="https://instagram.com"
-                style={footerstyles.socialIcon}
+                href="https://www.instagram.com/itz_sukh_z/"
+                style={footerstyles.socialIconInstagram}
                 className="instagram">
                 <InstagramFilled size={22} />
               </a>
               <a
-                href="https://facebook.com"
-                style={footerstyles.socialIcon}
+                href="https://www.facebook.com/share/1B2rH44Vcr/"
+                style={footerstyles.socialIconFacebook}
                 className="facebook">
                 <FacebookFilled size={22} />
               </a>
