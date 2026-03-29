@@ -308,7 +308,11 @@ const CasualLabor = () => {
     ];
 
     return (
-      <Table dataSource={transactions} columns={columns} scroll={{ x: 300 }} />
+      <Table
+        dataSource={transactions}
+        columns={columns}
+        scroll={{ x: "max-content" }}
+      />
     );
   };
 
@@ -328,7 +332,7 @@ const CasualLabor = () => {
             dataSource={tableData}
             columns={columns}
             expandable={{ expandedRowRender: (record) => ExpandedRow(record) }}
-            scroll={{ x: 500 }}
+            scroll={{ x: "max-content" }}
           />
         )}
       </PageContainer>

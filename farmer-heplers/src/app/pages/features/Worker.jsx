@@ -190,7 +190,7 @@ const WorkersData = () => {
         dataSource={transaction}
         columns={columns}
         rowKey="_id"
-        scroll={{ x: 200 }}
+        scroll={{ x: "max-content" }}
       />
     );
   };
@@ -218,7 +218,7 @@ const WorkersData = () => {
             expandable={{
               expandedRowRender: (record) => ExpandedRow(record),
             }}
-            scroll={{ x: 500 }}
+            scroll={{ x: "max-content" }}
           />
         )}
         <WorkerDrawer

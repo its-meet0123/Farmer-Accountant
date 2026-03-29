@@ -254,7 +254,7 @@ const HarvesterData = () => {
       <Table
         dataSource={transData}
         columns={TRANS_COLUMNS}
-        scroll={{ x: 300 }}
+        scroll={{ x: "max-content" }}
       />
     );
   };
@@ -322,7 +322,7 @@ const HarvesterData = () => {
             dataSource={tableData}
             columns={columns}
             expandable={{ expandedRowRender: (record) => ExpanedRow(record) }}
-            scroll={{ x: 500 }}
+            scroll={{ x: "max-content" }}
           />
         )}
       </PageContainer>

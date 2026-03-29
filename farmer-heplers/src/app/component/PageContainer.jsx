@@ -183,16 +183,16 @@ const PageContainer = ({ title, children, extra }) => {
       `,
       }}
       title={
-        <p
+        <span
           style={{
-            fontSize: "2.5rem",
-            fontWeight: "800",
-            color: "#0F172A",
-            margin: "0 0 10px 0",
-            letterSpacing: "-1px",
+            fontSize: "clamp(1rem, 4vw, 1.25rem)",
+            display: "block",
+            color: "#0f172a",
+            whiteSpace: "normal",
+            lineHeight: "1.4",
           }}>
           {title}
-        </p>
+        </span>
       }
       extra={extra}>
       {children}

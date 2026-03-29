@@ -88,8 +88,8 @@ const AppLayout = ({ children }) => {
       </Header>
       <Content
         style={{
-          padding: isMobile ? "10px" : "24px",
-          margin: "0 auto",
+          padding: isMobile ? "2px" : "24px",
+          margin: "0",
           width: "100%",
           maxWidth: isMobile ? "100%" : "1400px",
         }}>
