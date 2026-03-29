@@ -28,6 +28,7 @@ import { DownloadTable1 } from "../../component/CalculateTableDownload";
 import { PageContainer } from "../../component/PageContainer";
 
 const CalcPage = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const { authState, t } = useAuth();
   const { state } = useLocation();
   const navigate = useNavigate();
@@ -151,6 +152,12 @@ const CalcPage = () => {
   }, [state]);
 
   useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     async function getData() {
       try {
         if (fetch != "del") {
@@ -247,48 +254,89 @@ const CalcPage = () => {
           <Spin size="large" />
         ) : (
           <>
-            <Flex horizontal justify="space-between">
-              <Flex horizontal>
-                <Form form={form} layout="inline" onFinish={setDate}>
+            <Flex
+              // Mobile par niche-upar (vertical), Desktop par side-by-side (horizontal)
+              vertical={isMobile}
+              justify="space-between"
+              gap="middle" // Items ke beech space ke liye
+              style={{ width: "100%", padding: isMobile ? "10px" : "0" }}>
+              {/* --- Left Section: Form & Actions --- */}
+              <Flex
+                vertical={isMobile}
+                align={isMobile ? "stretch" : "center"}
+                gap="small">
+                <Form
+                  form={form}
+                  layout={isMobile ? "vertical" : "inline"} // Mobile pe label upar aa jayenge
+                  onFinish={setDate}
+                  style={{ width: isMobile ? "100%" : "auto" }}>
                   <Form.Item
                     label={t("calculationPage.form.inputLabel")}
-                    name="endDate">
+                    name="endDate"
+                    style={{ marginBottom: isMobile ? "12px" : "0", flex: 1 }}>
                     <DatePicker
                       disabled={id && fetch !== "edit"}
                       format={"DD/MM/YYYY"}
+                      style={{ width: "100%" }} // Mobile pe full width
                     />
                   </Form.Item>
+
                   {(id == null || fetch === "edit" || fetch === "delete") && (
-                    <Form.Item>
-                      <Button htmlType="submit">
+                    <Form.Item
+                      style={{ marginBottom: isMobile ? "12px" : "0" }}>
+                      <Button htmlType="submit" block={isMobile} type="primary">
                         {t("calculationPage.form.setButtonText")}
                       </Button>
                     </Form.Item>
                   )}
+
                   {id && (
-                    <Radio.Group
-                      block
-                      defaultValue={fetch}
-                      options={options}
-                      optionType="button"
-                      onChange={(e) => {
-                        setFetch(e.target.value);
-                      }}
-                    />
+                    <Form.Item
+                      style={{
+                        marginBottom: isMobile ? "12px" : "0",
+                        flex: 1,
+                      }}>
+                      <Radio.Group
+                        block
+                        defaultValue={fetch}
+                        options={options}
+                        optionType="button"
+                        onChange={(e) => setFetch(e.target.value)}
+                        style={{ width: "100%" }}
+                      />
+                    </Form.Item>
                   )}
                 </Form>
               </Flex>
-              <Flex horizontal>
-                <p style={{ fontWeight: 600 }}>
+
+              {/* --- Right Section: Month Selector & Turnover --- */}
+              <Flex
+                vertical={isMobile}
+                align={isMobile ? "stretch" : "center"}
+                gap="small"
+                style={{
+                  marginTop: isMobile ? "20px" : "0",
+                  borderTop: isMobile ? "1px solid #f0f0f0" : "none",
+                  paddingTop: isMobile ? "20px" : "0",
+                }}>
+                <p style={{ fontWeight: 600, margin: 0 }}>
                   {t("calculationPage.transInput")}:
                 </p>
-                <DatePicker
-                  picker="month"
-                  format="MMM/YY"
-                  value={selectMonth ? selectMonth : today}
-                  onChange={(date) => setSelectMonth(date)}
-                />
-                <Input value={monthlyTurnover} readOnly />
+
+                <Flex gap="small" style={{ width: "100%" }}>
+                  <DatePicker
+                    picker="month"
+                    format="MMM/YY"
+                    value={selectMonth ? selectMonth : today}
+                    onChange={(date) => setSelectMonth(date)}
+                    style={{ flex: 1 }}
+                  />
+                  <Input
+                    value={monthlyTurnover}
+                    readOnly
+                    style={{ width: isMobile ? "40%" : "120px" }}
+                  />
+                </Flex>
               </Flex>
             </Flex>
             <Table
