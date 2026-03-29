@@ -76,7 +76,7 @@ const LaborTransForm = ({
 
   return (
     <>
-      {openType == "tranAdd" && (
+      {openType == "transAdd" && (
         <Alert
           message={t("casualDrawer.acltf.glm")}
           description={t("casualDrawer.acltf.glt")}
