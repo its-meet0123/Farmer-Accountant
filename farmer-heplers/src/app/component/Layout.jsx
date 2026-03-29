@@ -5,8 +5,8 @@ import { useAuth } from "../auth/AuthContext";
 import Profile from "./Profile";
 import UserActionModel from "./UserIdActionModel";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
-import { styles } from "../styles/footerStyle";
 import LayoutFooter from "./subcomponent/LayoutFooter";
+import { styles } from "./subcomponent/FooterStyles";
 
 const { Header, Content, Footer } = Layout;
 const { useBreakpoint } = Grid;

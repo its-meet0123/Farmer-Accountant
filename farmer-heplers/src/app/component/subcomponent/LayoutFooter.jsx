@@ -1,5 +1,3 @@
-import { styles } from "../../styles/footerStyle";
-
 import React from "react";
 import { Row, Col, Space } from "antd";
 import {
@@ -10,6 +8,7 @@ import {
   Phone,
 } from "lucide-react";
 import LanguageChangeDropDown from "../LanguageChangeDropdown";
+import { styles } from "./FooterStyles";
 
 const LayoutFooter = ({ t, logout }) => {
   const currentYear = new Date().getFullYear();
