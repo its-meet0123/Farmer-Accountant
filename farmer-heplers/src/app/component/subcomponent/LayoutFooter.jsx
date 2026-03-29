@@ -1,14 +1,10 @@
 import React from "react";
 import { Row, Col, Space } from "antd";
-import {
-  Instagram,
-  Facebook,
-  MessageCircle, // WhatsApp ke liye
-  Mail,
-  Phone,
-} from "lucide-react";
+
 import LanguageChangeDropDown from "../LanguageChangeDropdown";
 import { footerstyles } from "./FooterStyles.js";
+import { MessageCircle } from "lucide-react";
+import { FacebookFilled, InstagramFilled } from "@ant-design/icons";
 
 const LayoutFooter = ({ t, logout }) => {
   const currentYear = new Date().getFullYear();
@@ -103,13 +99,13 @@ const LayoutFooter = ({ t, logout }) => {
                 href="https://instagram.com"
                 style={footerstyles.socialIcon}
                 className="instagram">
-                <Instagram size={22} />
+                <InstagramFilled size={22} />
               </a>
               <a
                 href="https://facebook.com"
                 style={footerstyles.socialIcon}
                 className="facebook">
-                <Facebook size={22} />
+                <FacebookFilled size={22} />
               </a>
             </Space>
           </Col>
