@@ -1,5 +1,5 @@
 function calculateAutoInterestForTakeAmount(amount, startDate, rate, endDate) {
-  if (amount === 0 || !amount) return {};
+  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0 };
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 
@@ -25,7 +25,7 @@ function calculateAutoInterestForBuyBillAmount(
   rate,
   endDate,
 ) {
-  if (amount === 0 || !amount) return {};
+  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0 };
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 
@@ -47,7 +47,7 @@ function calculateAutoInterestForBuyBillAmount(
 }
 
 function calculateAutoInterestForGiveAmount(amount, startDate, rate, endDate) {
-  if (amount === 0 || !amount) return {};
+  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0 };
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 
@@ -74,7 +74,11 @@ function calculateAutoInterestDieselBillAmount(
   rate,
   endDate,
 ) {
-  if (amount === 0 || !amount) return {};
+  if (amount === 0 || !amount)
+    return {
+      interst: 0,
+      totalAmount: 0,
+    };
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 

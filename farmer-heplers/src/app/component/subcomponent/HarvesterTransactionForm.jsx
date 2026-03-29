@@ -93,6 +93,16 @@ const HarvesterTransactionForm = ({
         labelCol={100}
         wrapperCol={150}
         onFinish={onFinish}>
+        {openType == "addTrans" && (
+          <Alert
+            message={t("harvestDrawer.ahtf.glm")}
+            description={t("harvestDrawer.ahtf.glt")}
+            type="info"
+            showIcon
+            closable
+            style={{ marginBottom: 24 }}
+          />
+        )}
         <Row gutter={12}>
           <Form.Item label="Harvester ID" name="harvesterId" hidden>
             <Input />

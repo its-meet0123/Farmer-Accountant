@@ -77,11 +77,7 @@ const TableFooterForWorkerCalc = ({ data }) => {
               </h4>
             </Table.Summary.Cell>
             <Table.Summary.Cell index={14}>
-              {grandTotal > 0 ? (
-                <h4 style={{ color: "#8ABB6C" }}>{grandTotal}</h4>
-              ) : (
-                <h4 style={{ color: "#D73535" }}>{grandTotal}</h4>
-              )}
+              <h4 style={{ color: "#4da3ff" }}>{grandTotal}</h4>
             </Table.Summary.Cell>
           </Table.Summary.Row>
         </Table.Summary>
@@ -208,11 +204,7 @@ const TableFooterForViewCalc = ({ data }) => {
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={22}>
-            {grandTotal > 0 ? (
-              <h4 style={{ color: "#8ABB6C" }}>{grandTotal}</h4>
-            ) : (
-              <h4 style={{ color: "#D73535" }}>{grandTotal}</h4>
-            )}
+            <h4 style={{ color: "#4da3ff" }}>{grandTotal}</h4>
           </Table.Summary.Cell>
         </Table.Summary.Row>
       </Table.Summary>

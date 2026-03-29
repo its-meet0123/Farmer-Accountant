@@ -44,7 +44,7 @@ function overAllTotalOfAllWorkers(data) {
     totalOfReturnAmount += Number(give.totalAmount || 0);
     totalOfReturnPayment += Number(take.totalAmount || 0);
   });
-  const oAT = totalOfReturnPayment - totalOfReturnAmount;
+  const oAT = totalOfReturnPayment - totalOfReturnAmount || 0;
   const grandTotal = formatCurrency(oAT);
 
   return grandTotal;

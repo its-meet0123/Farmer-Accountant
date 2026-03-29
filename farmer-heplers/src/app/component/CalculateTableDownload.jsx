@@ -225,15 +225,10 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}>{formatCurrency(interest)}</td>
-                {grandTotal > 0 ? (
-                  <td style={{ padding: "5px", color: "#84994f" }}>
-                    {grandTotal}
-                  </td>
-                ) : (
-                  <td style={{ padding: "5px", color: "#9e3b3b" }}>
-                    {grandTotal}
-                  </td>
-                )}
+                <td
+                  style={{ padding: "5px", color: "#4da3ff", fontWeight: 600 }}>
+                  {grandTotal}
+                </td>
                 <td style={{ padding: "5px", color: "#ffff" }}>
                   {shope.shopeNumber}
                 </td>
@@ -394,15 +389,12 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}>{formatCurrency(amountTex)}</td>
                 <td style={{ padding: "5px" }}>{formatCurrency(interest)}</td>
-                {grandTotal > 0 ? (
-                  <td style={{ padding: "5px", color: "#84994f" }}>
-                    {grandTotal}
-                  </td>
-                ) : (
-                  <td style={{ padding: "5px", color: "#9e3b3b" }}>
-                    {grandTotal}
-                  </td>
-                )}
+
+                <td
+                  style={{ padding: "5px", color: "#4da3ff", fontWeight: 600 }}>
+                  {grandTotal}
+                </td>
+
                 <td style={{ padding: "5px", color: "#ffff" }}>
                   {worker?.workerName?.nickName}
                 </td>

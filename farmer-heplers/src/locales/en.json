@@ -357,7 +357,6 @@
     }
   },
   "indDrawer": {
-    "glt": "Fields with * are mandatory. Use 'Cash/Amount' for payments, 'Buy Items' for spray/fertilizer, 'Diesel' for fuel, and 'Sell Crops' for crop sales.",
     "submitFunction": {
       "successMessageforCreate": "Transaction Added Successfully",
       "errorMessageforCreate": "Failed to upload the new transaction.",
@@ -365,6 +364,7 @@
       "errorMessageforEdit": "Transaction could not be edited due to a system error."
     },
     "drawerForm": {
+      "glt": "Fields with * are mandatory. Use 'Cash/Amount' for payments, 'Buy Items' for spray/fertilizer, 'Diesel' for fuel, and 'Sell Crops' for crop sales.",
       "titleText1": "Edit",
       "titleText2": "Add",
       "ttt1": "Mandatory fields",
@@ -485,6 +485,8 @@
     "awDrawerTitle": "Add Worker",
     "awtDrawerTitle": "Add Worker Transaction",
     "transactionInput": {
+      "glm": "Form Guidelines",
+      "glt": ". Fields with * are mandatory.\n. Make a Payment only : use 'amount', 'type', 'brief' fields.\n. Make a Payment + Part of Crop : use 'amount', 'type', 'brief', select 'gives' and press '+' icon and enter crop details.\n. Only Receive Payments : use 'payment', 'type', fields. \n. Receive Payments + Yield Share : use 'payment', 'type', select 'takes' and press '+' icon and enter crop details.  ",
       "at": "Amount",
       "apt": "enter amount",
       "att": "Type",
@@ -507,6 +509,8 @@
       },
       "dt": "Date",
       "drm": "Date is required",
+      "int": "Rate",
+      "intrm": "Please enter interest rate",
       "button": {
         "sbt": "Submit",
         "cbt": "Cancel"
@@ -564,6 +568,8 @@
       "sbt": "Submit"
     },
     "acltf": {
+      "glm": "Form Guidelines",
+      "glt": ". Process payment upon task is finished : use all fields. \n. Only record work details without payment : use 'date', 'wages/d' and 'duration' fields. \n. Only record payment details : user 'date', 'pay', 'transaction type' and 'hand Over' fields. ",
       "df": "Date",
       "dpt": "Select date",
       "wpdf": "Wages/D",
@@ -645,6 +651,8 @@
       "sbt": "Submit"
     },
     "ahtf": {
+      "glm": "Form Guidelines",
+      "glt": ". Process payment upon task is finished : use all fields. \n. Only record work details without payment : use 'date', 'wages/d' and 'duration' fields. \n. Only record payment details : user 'date', 'pay', 'transaction type' and 'hand Over' fields. ",
       "df": "Date",
       "dpt": "Select date",
       "dfrmt": "date is required",

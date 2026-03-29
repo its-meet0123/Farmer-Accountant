@@ -37,6 +37,7 @@ async function dashBordData(req, res) {
     const allHarvests = await Harvest.find({ userId: currentUserId });
 
     const allShopes = Ind.map((shopes) => {
+      if (!shopes?.shopeAccount) return null;
       const shopeNumber = shopes?.shopeNumber;
       const shopeData = shopes.shopeAccount.map((transaction) => {
         const startDate = transaction?.startDate || new Date();
@@ -109,6 +110,7 @@ async function dashBordData(req, res) {
 
     const workersList = workers
       .map((worker) => {
+        if (!worker?.transactions) return null;
         const workerName = worker?.workerDetail?.workerName?.nickName;
         const workerAccounts = worker?.account.map((transactions) => {
           const startDate = transactions?.date;
@@ -154,7 +156,7 @@ async function dashBordData(req, res) {
       .map((labors) => {
         const laborName = labors?.serviceProvider?.nickName;
         const lastTransaction = labors?.transactions.at(-1);
-        const oAt = formatCurrency(lastTransaction?.total);
+        const oAt = formatCurrency(lastTransaction?.total || 0);
         return {
           laborName: laborName,
           pending: oAt,
@@ -166,7 +168,7 @@ async function dashBordData(req, res) {
       .map((harvester) => {
         const opratorName = harvester?.serviceProvider?.nickName;
         const lastTransaction = harvester?.transactions.at(-1);
-        const oAt = formatCurrency(lastTransaction?.total);
+        const oAt = formatCurrency(lastTransaction?.total || 0);
         return {
           opratorName: opratorName,
           pending: oAt,

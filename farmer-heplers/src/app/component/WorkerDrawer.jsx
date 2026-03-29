@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Button,
   Col,
   DatePicker,
@@ -87,6 +88,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         try {
           const transactionBody = {
             date: new Date(formValues.date),
+            rate: formValues.interestRate,
             give: {
               crop: formValues.crop,
               amount: formValues.amount,
@@ -120,6 +122,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         try {
           const transactionBody = {
             date: new Date(formValues.date),
+            rate: formValues.interestRate,
             give: {
               crop: [],
               amount: formValues.amount,
@@ -153,6 +156,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         try {
           const transactionBody = {
             date: new Date(formValues.date),
+            rate: formValues.interestRate,
             give: {
               crop: [],
               amount: formValues.amount,
@@ -193,6 +197,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         };
         const transactionBody = {
           date: new Date(formValues.date),
+          rate: formValues.interestRate,
           give: {
             corp: formValues.corpG || [],
             amount: formValues.amount,
@@ -226,6 +231,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
       if (open === "ewt") {
         editTransactionForm.setFieldsValue({
           date: dayjs(workerAccount.date),
+          interestRate: workerAccount.rate,
           amount: workerAccount.give.amount,
           amountType: workerAccount.give.amountType,
           brief: workerAccount.give.brief,
@@ -373,124 +379,159 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
           </Button>
         }>
         {open === "at" && (
-          <Form
-            labelCol={{ span: 10 }}
-            wrapperCol={{ span: 25 }}
-            form={transactionForm}
-            initialValues={{ corp: [] }}
-            onFinish={handleSubmitTransactionForm}>
-            <Row gutter={24}>
-              <Form.Item
-                label={t("workerDrawer.transactionInput.at")}
-                name="amount">
-                <InputNumber
-                  placeholder={t("workerDrawer.transactionInput.apt")}
-                  controls={false}
+          <>
+            <Alert
+              message={t("workerDrawer.transactionInput.glm")}
+              description={t("workerDrawer.transactionInput.glt")}
+              type="info"
+              showIcon
+              closable
+              style={{ marginBottom: 24 }}
+            />
+            <Form
+              labelCol={{ span: 10 }}
+              wrapperCol={{ span: 25 }}
+              form={transactionForm}
+              initialValues={{ corp: [] }}
+              onFinish={handleSubmitTransactionForm}>
+              <Row gutter={24}>
+                <Form.Item
+                  label={t("workerDrawer.transactionInput.at")}
+                  name="amount">
+                  <InputNumber
+                    placeholder={t("workerDrawer.transactionInput.apt")}
+                    controls={false}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label={t("workerDrawer.transactionInput.att")}
+                  name="amountType">
+                  <Input
+                    placeholder={t("workerDrawer.transactionInput.atpt")}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label={t("workerDrawer.transactionInput.bt")}
+                  name="brief">
+                  <Input placeholder={t("workerDrawer.transactionInput.bt")} />
+                </Form.Item>
+              </Row>
+              <Row gutter={24}>
+                <Form.Item
+                  label={t("workerDrawer.transactionInput.plt")}
+                  name="payment">
+                  <InputNumber
+                    placeholder={t("workerDrawer.transactionInput.plpt")}
+                    controls={false}
+                  />
+                </Form.Item>
+                <Form.Item
+                  label={t("workerDrawer.transactionInput.ptt")}
+                  name="paymentType">
+                  <Input
+                    placeholder={t("workerDrawer.transactionInput.ptpt")}
+                  />
+                </Form.Item>
+              </Row>
+              <Form.Item>
+                <Radio.Group
+                  options={plainOptions}
+                  onChange={(e) => {
+                    setAction(e.target.value);
+                  }}
+                  value={action}
                 />
               </Form.Item>
-              <Form.Item
-                label={t("workerDrawer.transactionInput.att")}
-                name="amountType">
-                <Input placeholder={t("workerDrawer.transactionInput.atpt")} />
-              </Form.Item>
-              <Form.Item
-                label={t("workerDrawer.transactionInput.bt")}
-                name="brief">
-                <Input placeholder={t("workerDrawer.transactionInput.bt")} />
-              </Form.Item>
-            </Row>
-            <Row gutter={24}>
-              <Form.Item
-                label={t("workerDrawer.transactionInput.plt")}
-                name="payment">
-                <InputNumber
-                  placeholder={t("workerDrawer.transactionInput.plpt")}
-                  controls={false}
-                />
-              </Form.Item>
-              <Form.Item
-                label={t("workerDrawer.transactionInput.ptt")}
-                name="paymentType">
-                <Input placeholder={t("workerDrawer.transactionInput.ptpt")} />
-              </Form.Item>
-            </Row>
-            <Form.Item>
-              <Radio.Group
-                options={plainOptions}
-                onChange={(e) => {
-                  setAction(e.target.value);
-                }}
-                value={action}
-              />
-            </Form.Item>
-            {action !== "none" && (
-              <Form.List name="crop">
-                {(fields, { add, remove }) => (
-                  <>
-                    {fields.map(({ key, name }) => (
-                      <Row gutter={24} key={key}>
-                        <Col span={5}>
-                          <Form.Item
-                            label={t("workerDrawer.transactionInput.crops.cnt")}
-                            name={[name, "name"]}>
-                            <Input placeholder="Crop Name" />
-                          </Form.Item>
-                        </Col>
-                        <Col span={5}>
-                          <Form.Item
-                            label={t("workerDrawer.transactionInput.crops.cqt")}
-                            name={[name, "qty"]}>
-                            <InputNumber placeholder="Crop Qty." />
-                          </Form.Item>
-                        </Col>
-                        <Col span={5}>
-                          <Form.Item
-                            label={t("workerDrawer.transactionInput.crops.crt")}
-                            name={[name, "rate"]}>
-                            <InputNumber placeholder="Rate of crop" />
-                          </Form.Item>
-                        </Col>
-                        <Col span={5}>
-                          <Form.Item
-                            label={t("workerDrawer.transactionInput.crops.ctt")}
-                            name={[name, "amount"]}>
-                            <InputNumber placeholder="Total of crop" />
-                          </Form.Item>
-                        </Col>
-                        <Col span={4}>
-                          <MinusCircleOutlined onClick={() => remove(name)} />
-                        </Col>
-                      </Row>
-                    ))}
+              {action !== "none" && (
+                <Form.List name="crop">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map(({ key, name }) => (
+                        <Row gutter={24} key={key}>
+                          <Col span={5}>
+                            <Form.Item
+                              label={t(
+                                "workerDrawer.transactionInput.crops.cnt",
+                              )}
+                              name={[name, "name"]}>
+                              <Input placeholder="Crop Name" />
+                            </Form.Item>
+                          </Col>
+                          <Col span={5}>
+                            <Form.Item
+                              label={t(
+                                "workerDrawer.transactionInput.crops.cqt",
+                              )}
+                              name={[name, "qty"]}>
+                              <InputNumber placeholder="Crop Qty." />
+                            </Form.Item>
+                          </Col>
+                          <Col span={5}>
+                            <Form.Item
+                              label={t(
+                                "workerDrawer.transactionInput.crops.crt",
+                              )}
+                              name={[name, "rate"]}>
+                              <InputNumber placeholder="Rate of crop" />
+                            </Form.Item>
+                          </Col>
+                          <Col span={5}>
+                            <Form.Item
+                              label={t(
+                                "workerDrawer.transactionInput.crops.ctt",
+                              )}
+                              name={[name, "amount"]}>
+                              <InputNumber placeholder="Total of crop" />
+                            </Form.Item>
+                          </Col>
+                          <Col span={4}>
+                            <MinusCircleOutlined onClick={() => remove(name)} />
+                          </Col>
+                        </Row>
+                      ))}
 
-                    <PlusCircleOutlined onClick={() => add()} />
-                  </>
-                )}
-              </Form.List>
-            )}
-            <Row gutter={24}>
-              <Form.Item
-                label={t("workerDrawer.transactionInput.dt")}
-                name="date"
-                initialValue={today}
-                rules={[
-                  {
-                    required: true,
-                    message: t("workerDrawer.transactionInput.drm"),
-                  },
-                ]}>
-                <DatePicker format={"DD/MM/YYYY"} />
-              </Form.Item>
-              <Form.Item label={null}>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  loading={btnLoad === "tfb" && true}>
-                  {t("workerDrawer.transactionInput.button.sbt")}
-                </Button>
-              </Form.Item>
-            </Row>
-          </Form>
+                      <PlusCircleOutlined onClick={() => add()} />
+                    </>
+                  )}
+                </Form.List>
+              )}
+              <Row gutter={24}>
+                <Form.Item
+                  label={t("workerDrawer.transactionInput.dt")}
+                  name="date"
+                  initialValue={today}
+                  rules={[
+                    {
+                      required: true,
+                      message: t("workerDrawer.transactionInput.drm"),
+                    },
+                  ]}>
+                  <DatePicker format={"DD/MM/YYYY"} />
+                </Form.Item>
+                <Form.Item
+                  label={t("workerDrawer.transactionInput.int")}
+                  name="interestRate"
+                  initialValue={0}
+                  rules={[
+                    {
+                      required: true,
+                      message: t("workerDrawer.transactionInput.intrm"),
+                    },
+                  ]}
+                  help={t("indDrawer.drawerForm.interestInput.hint")}>
+                  <InputNumber />
+                </Form.Item>
+                <Form.Item label={null}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    loading={btnLoad === "tfb" && true}>
+                    {t("workerDrawer.transactionInput.button.sbt")}
+                  </Button>
+                </Form.Item>
+              </Row>
+            </Form>
+          </>
         )}
 
         {open === "ewt" && (
@@ -626,6 +667,17 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
                   },
                 ]}>
                 <DatePicker format={"DD/MM/YYYY"} />
+              </Form.Item>
+              <Form.Item
+                label={t("workerDrawer.transactionInput.int")}
+                name="interestRate"
+                rules={[
+                  {
+                    required: true,
+                    message: t("workerDrawer.transactionInput.intrm"),
+                  },
+                ]}>
+                <InputNumber />
               </Form.Item>
               <Form.Item label={null}>
                 <Button
