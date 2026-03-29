@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { styles } from "./DashboardStyles";
+import { styles } from "./DashboardStyles.js";
 
 const FeatureCard = ({ item, isLoading }) => {
   const navigate = useNavigate();

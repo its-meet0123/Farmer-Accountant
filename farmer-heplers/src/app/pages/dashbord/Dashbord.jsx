@@ -4,7 +4,7 @@ import { getDashbordData } from "../../service/dashbord";
 import { message } from "antd";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
-import { styles } from "./DashboardStyles";
+import { styles } from "./DashboardStyles.js";
 import FeatureCard from "./FeatureCard";
 
 const DashBord = () => {

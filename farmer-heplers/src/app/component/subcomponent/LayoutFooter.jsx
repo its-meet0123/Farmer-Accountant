@@ -8,7 +8,7 @@ import {
   Phone,
 } from "lucide-react";
 import LanguageChangeDropDown from "../LanguageChangeDropdown";
-import { footerstyles } from "./FooterStyles";
+import { footerstyles } from "./FooterStyles.js";
 
 const LayoutFooter = ({ t, logout }) => {
   const currentYear = new Date().getFullYear();

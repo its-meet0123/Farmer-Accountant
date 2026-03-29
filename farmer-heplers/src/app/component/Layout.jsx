@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import UserActionModel from "./UserIdActionModel";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
 import LayoutFooter from "./subcomponent/LayoutFooter";
-import { footerstyles } from "./subcomponent/FooterStyles";
+import { footerstyles } from "./subcomponent/FooterStyles.js";
 
 const { Header, Content, Footer } = Layout;
 const { useBreakpoint } = Grid;
