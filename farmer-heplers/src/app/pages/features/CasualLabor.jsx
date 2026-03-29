@@ -333,7 +333,8 @@ const CasualLabor = () => {
             dataSource={tableData}
             columns={columns}
             expandable={{ expandedRowRender: (record) => ExpandedRow(record) }}
-            scroll={{ x: 800 }}
+            scroll={{ x: "max-content" }}
+            style={{ width: "100%" }}
           />
         )}
       </PageContainer>

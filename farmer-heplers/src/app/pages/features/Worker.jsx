@@ -217,7 +217,8 @@ const WorkersData = () => {
             expandable={{
               expandedRowRender: (record) => ExpandedRow(record),
             }}
-            scroll={{ x: 800 }}
+            scroll={{ x: "max-content" }}
+            style={{ width: "100%" }}
           />
         )}
         <WorkerDrawer

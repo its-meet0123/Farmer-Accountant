@@ -323,7 +323,8 @@ const HarvesterData = () => {
             dataSource={tableData}
             columns={columns}
             expandable={{ expandedRowRender: (record) => ExpanedRow(record) }}
-            scroll={{ x: 800 }}
+            scroll={{ x: "max-content" }}
+            style={{ width: "100%" }}
           />
         )}
       </PageContainer>

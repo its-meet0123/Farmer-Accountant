@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
 import { Card, Grid } from "antd";
 
@@ -13,7 +13,15 @@ const AuthContainer = ({
   t,
   showLangButton = true,
 }) => {
-  // --- Enhanced Inline Style Objects ---
+  // Screen size check karne ke liye state
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const styles = {
     overlay: {
       minHeight: "100vh",
@@ -21,142 +29,114 @@ const AuthContainer = ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      padding: "20px",
+      padding: isMobile ? "10px" : "20px",
       fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
       position: "relative",
-
-      // *** UNIQUE BACKGROUND START ***
-      // 1. Base Gradient: A sophisticated deep teal to charcoal radial gradient
       backgroundImage: `
         radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
         radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
       `,
-      // 2. Subtle Pattern Overlay (SVG based, cross-browser safe)
-      // This creates a very light geometric texture over the gradient
-      //   maskImage:
-      //     "url(\"data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E\")",
-      //   backgroundColor: "#011627", // Fallback color
-      //   // *** UNIQUE BACKGROUND END ***
+      backgroundAttachment: "fixed",
     },
     langWrapper: {
       position: "absolute",
       top: "20px",
       right: "20px",
-      zIndex: 10, // Ensures it's above the pattern
-    },
-    select: {
-      padding: "8px 12px",
-      borderRadius: "8px",
-      border: "1px solid rgba(255, 255, 255, 0.2)",
-      background: "rgba(255, 255, 255, 0.1)",
-      color: "white",
-      backdropFilter: "blur(10px)", // Nice frosted glass effect
-      cursor: "pointer",
-      outline: "none",
-      fontSize: "14px",
+      zIndex: 10,
     },
     card: {
       display: "flex",
+      flexDirection: isMobile ? "column" : "row", // Mobile pe vertical layout
       width: "100%",
-      maxWidth: "960px", // Slightly wider for a better split
-      backgroundColor: "rgba(255, 255, 255, 0.95)", // Slightly translucent
-      borderRadius: "24px", // More rounded corners
-      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)", // Deeper shadow for pop
+      maxWidth: isMobile ? "100%" : "960px",
+      backgroundColor: "rgba(255, 255, 255, 0.95)",
+      borderRadius: isMobile ? "16px" : "24px",
+      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4)",
       overflow: "hidden",
-      minHeight: "600px",
-      backdropFilter: "blur(5px)", // Subtle blur behind the card
+      minHeight: isMobile ? "auto" : "600px",
+      backdropFilter: "blur(5px)",
     },
     leftPanel: {
       flex: 1,
-      background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)", // Deep slate branding panel
-      padding: "60px",
-      display: "flex",
+      background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
+      padding: isMobile ? "40px 20px" : "60px",
+      display: isMobile && !sologntext ? "none" : "flex", // Agar mobile pe slogan nahi dikhana to hide kar sakte hain
       flexDirection: "column",
       justifyContent: "center",
       color: "#F8FAFC",
     },
     rightPanel: {
-      flex: 1.2, // Gives the form side a bit more room
-      padding: "60px",
+      flex: 1.2,
+      padding: isMobile ? "40px 20px" : "60px",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       backgroundColor: "#fff",
     },
     title: {
-      fontSize: "2.5rem",
+      fontSize: isMobile ? "1.8rem" : "2.5rem",
       fontWeight: "800",
       color: "#0F172A",
       margin: "0 0 10px 0",
       letterSpacing: "-1px",
     },
     subtitle: {
-      fontSize: "1.1rem",
+      fontSize: isMobile ? "0.95rem" : "1.1rem",
       color: "#475569",
-      marginBottom: "40px",
+      marginBottom: "30px",
       fontWeight: "400",
     },
   };
 
   return (
     <div style={styles.overlay}>
+      {/* Language Selector - Always on top */}
+      {showLangButton && (
+        <div style={styles.langWrapper}>
+          <LanguageChangeDropDown />
+        </div>
+      )}
+
       <div style={styles.card}>
-        {/* Branding Side */}
+        {/* Branding Side - Mobile par chota ya hide ho jayega */}
         <div style={styles.leftPanel}>
           <div
             style={{
-              marginBottom: "30px",
-              fontSize: "1.5rem",
+              marginBottom: "20px",
+              fontSize: "1.2rem",
               fontWeight: "bold",
               color: "#38BDF8",
             }}>
             {t("pageContainer.logotext")}
           </div>
+
           <h1
             style={{
-              fontSize: "3rem",
+              fontSize: isMobile ? "2rem" : "3rem",
               fontWeight: "800",
               marginBottom: "20px",
               lineHeight: "1.1",
             }}>
-            {sologntext.text1}{" "}
-            <span style={{ color: "#38BDF8" }}>{sologntext.text2}</span>
+            {sologntext?.text1}{" "}
+            <span style={{ color: "#38BDF8" }}>{sologntext?.text2}</span>
           </h1>
-          {/* Language Selector */}
-          {showLangButton && (
-            <div style={styles.langWrapper}>
-              <LanguageChangeDropDown />
-            </div>
+
+          {!isMobile && (
+            <p style={{ opacity: 0.7, fontSize: "1rem", fontWeight: "300" }}>
+              {keytext}
+            </p>
           )}
         </div>
+
+        {/* Form Side */}
         <div style={styles.rightPanel}>
-          <p
-            style={{
-              fontSize: "1.2rem",
-              lineHeight: "1.7",
-              opacity: 0.8,
-              fontWeight: "300",
-            }}>
-            {keytext}
-          </p>
           <h2 style={styles.title}>{title}</h2>
           {subtitle && <p style={styles.subtitle}>{subtitle}</p>}
 
-          {/* Form Content wrapped here */}
-          {children}
+          {/* Form Content */}
+          <div style={{ width: "100%" }}>{children}</div>
         </div>
-
-        {/* <div
-          style={{
-            marginTop: "40px",
-            height: "4px",
-            width: "60px",
-            background: "#38BDF8",
-            borderRadius: "2px",
-          }}></div> */}
       </div>
-
-      {/* Form Side */}
     </div>
   );
 };
