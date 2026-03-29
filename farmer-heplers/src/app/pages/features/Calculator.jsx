@@ -298,7 +298,7 @@ const CalcPage = () => {
               rowKey="serialNo"
               summary={(currentData) => setFooter(currentData)}
               bordered
-              scroll={{ x: "max-content" }}
+              scroll={{ x: 800 }}
               sticky
             />
           </>

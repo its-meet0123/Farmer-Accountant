@@ -274,6 +274,7 @@ const HarvesterData = () => {
       title: t("mechanizedHiring.htc.actiont"),
       dataIndex: "",
       key: "a",
+      fixed: "end",
       render: (_, record) => {
         return (
           <Flex gap={2} horizontal>
@@ -322,7 +323,7 @@ const HarvesterData = () => {
             dataSource={tableData}
             columns={columns}
             expandable={{ expandedRowRender: (record) => ExpanedRow(record) }}
-            scroll={{ x: "max-content" }}
+            scroll={{ x: 800 }}
           />
         )}
       </PageContainer>

@@ -268,7 +268,7 @@ const WorkerCalculation = () => {
               dataSource={tableData}
               bordered
               rowKey="serialNo"
-              scroll={{ x: "max-content" }}
+              scroll={{ x: 800 }}
               summary={(currentData) => setFooter(currentData)}
             />
           </>

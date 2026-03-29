@@ -178,7 +178,7 @@ const ViewPage = () => {
     {
       title: t("ViewPage.tableColumns.actionTitleText"),
       dataIndex: "",
-      width: 100,
+      width: 50,
       key: "a",
       fixed: "end",
       render: (_, record) => {
@@ -229,7 +229,7 @@ const ViewPage = () => {
         title: t("ViewPage.tableColumns.actionTitleText"),
         dataIndex: "",
         key: "x",
-        width: 100,
+        width: 50,
         fixed: "end",
         render: (_, record) => {
           return (

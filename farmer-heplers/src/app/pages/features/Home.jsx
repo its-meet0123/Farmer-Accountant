@@ -145,6 +145,7 @@ const HomePage = () => {
       dataIndex: "serialNo",
       key: "serialNO",
       width: 20,
+      fixed: "start",
       render: (record) => {
         return record;
       },
@@ -186,7 +187,6 @@ const HomePage = () => {
       title: t("homePage.tableColumns.actionTitleText"),
       width: 100,
       key: "x",
-      fixed: "end",
       render: (_, record) => (
         <Flex gap="small" wrap>
           <Button

@@ -236,6 +236,7 @@ const CasualLabor = () => {
       title: t("casualLabor.wtc.actiont"),
       dataIndex: "",
       key: "a",
+      fixed: "end",
       render: (_, record) => {
         return (
           <Flex gap={2} horizontal>
@@ -332,7 +333,7 @@ const CasualLabor = () => {
             dataSource={tableData}
             columns={columns}
             expandable={{ expandedRowRender: (record) => ExpandedRow(record) }}
-            scroll={{ x: "max-content" }}
+            scroll={{ x: 800 }}
           />
         )}
       </PageContainer>

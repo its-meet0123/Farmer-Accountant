@@ -123,7 +123,7 @@ const WorkersData = () => {
     {
       title: t("workerPage.tableColumns.actionText"),
       dataIndex: "",
-      width: 100,
+      width: 50,
       fixed: "end",
       render: (_, record) => (
         <Flex gap="small" horizontal>
@@ -163,7 +163,6 @@ const WorkersData = () => {
       {
         title: t("workerPage.tableColumns.extandTableColumns.actionText"),
         dataIndex: "",
-        fixed: "end",
         render: (_, record) => (
           <Flex gap="small" horizontal>
             <Button
@@ -218,7 +217,7 @@ const WorkersData = () => {
             expandable={{
               expandedRowRender: (record) => ExpandedRow(record),
             }}
-            scroll={{ x: "max-content" }}
+            scroll={{ x: 800 }}
           />
         )}
         <WorkerDrawer

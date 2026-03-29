@@ -109,7 +109,6 @@ const getColumnsForViewPage = (t) => {
       dataIndex: "startDate",
       key: "startDate",
       width: 150,
-      fixed: "left",
       render: (startDate) => {
         const date = formattedDate(startDate);
         return date;
@@ -397,7 +396,6 @@ const getColumnsForCalulationPage = (t) => {
       dataIndex: "startDate",
       key: "startDate",
       width: 100,
-      fixed: "left",
       render: (startDate) => {
         const date = formattedDate(startDate);
         return date;
