@@ -102,13 +102,13 @@ const getColumnsForViewPage = (t) => {
       title: t("ViewPage.tableColumns.extandTableColumns.transNoTitleText"),
       dataIndex: "serialNo",
 
-      width: "15%",
+      width: 50,
     },
     {
       title: t("ViewPage.tableColumns.extandTableColumns.dateTitleText"),
       dataIndex: "startDate",
       key: "startDate",
-      width: "45%",
+      width: 150,
       render: (startDate) => {
         const date = formattedDate(startDate);
         return date;
@@ -125,7 +125,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["loan", "amount"],
           key: "amount",
-          width: "30%",
+          width: 100,
           render: (text) => {
             const loanAmount = formatCurrency(text);
             return <p style={{ color: "#3E0703" }}>{loanAmount}</p>;
@@ -141,7 +141,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["loan", "amountType"],
           key: "amountType",
-          width: "21%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#3E0703" }}>{text}</p>;
           },
@@ -154,7 +154,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["loan", "handOver"],
           key: "handOver",
-          width: "21%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#3E0703" }}>{text}</p>;
           },
@@ -174,7 +174,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indBuy", "billAmount"],
           key: "billAmount",
-          width: "30%",
+          width: 100,
           render: (text) => {
             const billAmount = formatCurrency(text);
             return <p style={{ color: "#D73535" }}>{billAmount}</p>;
@@ -188,7 +188,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indBuy", "bill"],
           key: "bill",
-          width: "21%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#D73535" }}>{text}</p>;
           },
@@ -201,7 +201,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indBuy", "brief"],
           key: "brief",
-          width: "21%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#D73535" }}>{text}</p>;
           },
@@ -214,7 +214,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indBuy", "handOver"],
           key: "handOver",
-          width: "21%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#D73535" }}>{text}</p>;
           },
@@ -234,7 +234,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indSell", "billAmount"],
           key: "amount",
-          width: "30%",
+          width: 100,
           render: (text) => {
             const sellAmount = formatCurrency(text);
             return <p style={{ color: "#8ABB6C" }}>{sellAmount}</p>;
@@ -248,7 +248,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indSell", "bill"],
           key: "bill",
-          width: "21%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#8ABB6C" }}>{text}</p>;
           },
@@ -261,7 +261,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indSell", "brief"],
           key: "brief",
-          width: "21%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#8ABB6C" }}>{text}</p>;
           },
@@ -276,7 +276,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indSell", "crop"],
           key: "crop",
-          width: "30%",
+          width: 100,
           render: (_, record) => {
             const crop = record.indSell.crop;
             const title = `${t("ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonTitle")}`;
@@ -301,7 +301,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["indSell", "handOver"],
           key: "handOver",
-          width: "21%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#8ABB6C" }}>{text}</p>;
           },
@@ -321,7 +321,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["diesel", "billAmount"],
           key: "amount",
-          width: "30%",
+          width: 100,
           render: (text) => {
             const billAmount = formatCurrency(text);
             return <p style={{ color: "#075B5E" }}>{billAmount}</p>;
@@ -342,7 +342,7 @@ const getColumnsForViewPage = (t) => {
               ),
               dataIndex: ["diesel", "qty"],
               key: "abill",
-              width: "21%",
+              width: 100,
               render: (text) => {
                 return <p style={{ color: "#075B5E" }}>{text}</p>;
               },
@@ -357,7 +357,7 @@ const getColumnsForViewPage = (t) => {
               ),
               dataIndex: ["diesel", "rate"],
               key: "abill",
-              width: "30%",
+              width: 100,
               render: (text) => {
                 return <p style={{ color: "#075B5E" }}>{text}</p>;
               },
@@ -372,7 +372,7 @@ const getColumnsForViewPage = (t) => {
           ),
           dataIndex: ["diesel", "handOver"],
           key: "handOver",
-          width: "30%",
+          width: 100,
           render: (text) => {
             return <p style={{ color: "#075B5E" }}>{text}</p>;
           },

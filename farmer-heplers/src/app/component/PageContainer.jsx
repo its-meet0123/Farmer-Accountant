@@ -194,8 +194,6 @@ const PageContainer = ({ title, children, extra }) => {
         style={{
           width: "100%",
           overflowX: "auto",
-          margin: "-15px",
-          justifyContent: "center",
         }}>
         {children}
       </div>

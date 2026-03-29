@@ -262,7 +262,7 @@ const ViewPage = () => {
         tableLayout="fixed"
         rowKey="_id"
         bordered
-        scroll={{ x: "max-contant" }}
+        scroll={{ x: 900 }}
       />
     );
   };
@@ -281,7 +281,7 @@ const ViewPage = () => {
               expandedRowRender: (record) => ExpandedRow(record),
             }}
             pagination={false}
-            scroll={{ x: "max-content" }}
+            scroll={{ x: 900 }}
             style={{ width: "100%" }}
           />
         )}
