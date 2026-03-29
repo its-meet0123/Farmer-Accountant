@@ -166,7 +166,7 @@ const PageContainer = ({ title, children, extra }) => {
       `,
         width: "100%",
         borderRadius: "12px",
-        overflow: "hidden",
+        overflow: "auto",
       }}
       styles={{
         body: {
