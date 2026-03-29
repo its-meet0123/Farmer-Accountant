@@ -76,6 +76,16 @@ const LaborTransForm = ({
 
   return (
     <>
+      {openType == "tranAdd" && (
+        <Alert
+          message={t("casualDrawer.acltf.glm")}
+          description={t("casualDrawer.acltf.glt")}
+          type="info"
+          showIcon
+          closable
+          style={{ marginBottom: 24 }}
+        />
+      )}
       <Form
         layout="inline"
         name={
@@ -87,16 +97,6 @@ const LaborTransForm = ({
         labelCol={100}
         wrapperCol={150}
         onFinish={onFinish}>
-        {openType == "tranAdd" && (
-          <Alert
-            message={t("casualDrawer.acltf.glm")}
-            description={t("casualDrawer.acltf.glt")}
-            type="info"
-            showIcon
-            closable
-            style={{ marginBottom: 24 }}
-          />
-        )}
         <Row gutter={24}>
           <Form.Item label="Trans ID" name="transId" hidden>
             <Input />
