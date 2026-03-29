@@ -1,6 +1,6 @@
 export const footerstyles = {
   container: {
-    background: "#0d2836", // Aapke dashboard theme se milta julta dark color
+    background: "#000", // Aapke dashboard theme se milta julta dark color
     padding: "60px 0 30px 0",
     color: "#ffffff",
     borderTop: "1px solid rgba(255,255,255,0.1)",

@@ -18,8 +18,7 @@ const LayoutFooter = ({ t, logout }) => {
               FARMER-<span style={{ color: "#4da3ff" }}>ACCOUNTANT</span>
             </h3>
             <p style={footerstyles.text}>
-              {t("layout.footer_desc") ||
-                "Simplifying farm management and accounting for a better future."}
+              Simplifying farm management and accounting for a better future.
             </p>
           </Col>
 
@@ -34,27 +33,27 @@ const LayoutFooter = ({ t, logout }) => {
               </li> */}
               <li>
                 <a href="/home" style={footerstyles.link}>
-                  t("layout.menu.home")
+                  {t("layout.menu.home")}
                 </a>
               </li>
               <li>
                 <a href="/view" style={footerstyles.link}>
-                  t("layout.menu.view")
+                  {t("layout.menu.view")}
                 </a>
               </li>
               <li>
                 <a href="/worker" style={footerstyles.link}>
-                  t("layout.menu.worker")
+                  {t("layout.menu.worker")}
                 </a>
               </li>
               <li>
                 <a href="/other/labor" style={footerstyles.link}>
-                  t("layout.menu.other.labor")
+                  {t("layout.menu.other.labor")}
                 </a>
               </li>
               <li>
                 <a href="/other/mechanized" style={footerstyles.link}>
-                  t("layout.menu.other.hiring")
+                  {t("layout.menu.other.hiring")}
                 </a>
               </li>
               <li>
@@ -64,7 +63,7 @@ const LayoutFooter = ({ t, logout }) => {
               </li>
               <li>
                 <a href="" style={footerstyles.link} onClick={() => logout()}>
-                  t("layout.menu.logout")
+                  {t("layout.menu.logout")}
                 </a>
               </li>
             </ul>
