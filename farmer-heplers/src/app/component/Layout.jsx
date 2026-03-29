@@ -6,7 +6,7 @@ import Profile from "./Profile";
 import UserActionModel from "./UserIdActionModel";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
 import LayoutFooter from "./subcomponent/LayoutFooter";
-import { styles } from "./subcomponent/FooterStyles";
+import { footerstyles } from "./subcomponent/FooterStyles";
 
 const { Header, Content, Footer } = Layout;
 const { useBreakpoint } = Grid;
@@ -104,7 +104,7 @@ const AppLayout = ({ children }) => {
           {children}
         </div>
       </Content>
-      <Footer style={styles.container}>
+      <Footer style={footerstyles.container}>
         <LayoutFooter t={t} logout={logout} />
       </Footer>
       <UserActionModel

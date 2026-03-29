@@ -1,4 +1,4 @@
-export const styles = {
+export const footerstyles = {
   container: {
     background: "#0d2836", // Aapke dashboard theme se milta julta dark color
     padding: "60px 0 30px 0",

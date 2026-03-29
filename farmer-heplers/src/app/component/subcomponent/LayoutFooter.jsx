@@ -8,20 +8,20 @@ import {
   Phone,
 } from "lucide-react";
 import LanguageChangeDropDown from "../LanguageChangeDropdown";
-import { styles } from "./FooterStyles";
+import { footerstyles } from "./FooterStyles";
 
 const LayoutFooter = ({ t, logout }) => {
   const currentYear = new Date().getFullYear();
   return (
     <>
-      <div style={styles.contentWrapper}>
+      <div style={footerstyles.contentWrapper}>
         <Row gutter={[32, 32]} justify="space-between">
           {/* Section 1: Brand/Logo */}
           <Col xs={24} sm={12} md={6}>
-            <h3 style={styles.title}>
+            <h3 style={footerstyles.title}>
               FARMER-<span style={{ color: "#4da3ff" }}>ACCOUNTANT</span>
             </h3>
-            <p style={styles.text}>
+            <p style={footerstyles.text}>
               {t("layout.footer_desc") ||
                 "Simplifying farm management and accounting for a better future."}
             </p>
@@ -29,45 +29,45 @@ const LayoutFooter = ({ t, logout }) => {
 
           {/* Section 2: Quick Links */}
           <Col xs={24} sm={12} md={6}>
-            <h4 style={styles.heading}>Quick Links</h4>
-            <ul style={styles.list}>
+            <h4 style={footerstyles.heading}>Quick Links</h4>
+            <ul style={footerstyles.list}>
               {/* <li>
-                <a href="/" style={styles.link}>
+                <a href="/" style={footerstyles.link}>
                   Dashboard
                 </a>
               </li> */}
               <li>
-                <a href="/home" style={styles.link}>
+                <a href="/home" style={footerstyles.link}>
                   t("layout.menu.home")
                 </a>
               </li>
               <li>
-                <a href="/view" style={styles.link}>
+                <a href="/view" style={footerstyles.link}>
                   t("layout.menu.view")
                 </a>
               </li>
               <li>
-                <a href="/worker" style={styles.link}>
+                <a href="/worker" style={footerstyles.link}>
                   t("layout.menu.worker")
                 </a>
               </li>
               <li>
-                <a href="/other/labor" style={styles.link}>
+                <a href="/other/labor" style={footerstyles.link}>
                   t("layout.menu.other.labor")
                 </a>
               </li>
               <li>
-                <a href="/other/mechanized" style={styles.link}>
+                <a href="/other/mechanized" style={footerstyles.link}>
                   t("layout.menu.other.hiring")
                 </a>
               </li>
               <li>
-                <a href="" style={styles.link}>
+                <a href="" style={footerstyles.link}>
                   <LanguageChangeDropDown />
                 </a>
               </li>
               <li>
-                <a href="" style={styles.link} onClick={() => logout()}>
+                <a href="" style={footerstyles.link} onClick={() => logout()}>
                   t("layout.menu.logout")
                 </a>
               </li>
@@ -76,7 +76,7 @@ const LayoutFooter = ({ t, logout }) => {
 
           {/* Section 3: Support */}
           <Col xs={24} sm={12} md={6}>
-            <h4 style={styles.heading}>Support</h4>
+            <h4 style={footerstyles.heading}>Support</h4>
             <Space
               direction="vertical"
               style={{ color: "rgba(255,255,255,0.65)" }}>
@@ -91,23 +91,23 @@ const LayoutFooter = ({ t, logout }) => {
 
           {/* Section 4: Social Connect */}
           <Col xs={24} sm={12} md={6}>
-            <h4 style={styles.heading}>Connect With Us</h4>
+            <h4 style={footerstyles.heading}>Connect With Us</h4>
             <Space size="middle">
               <a
                 href="https://wa.me/yournumber"
-                style={styles.socialIcon}
+                style={footerstyles.socialIcon}
                 className="whatsapp">
                 <MessageCircle size={22} />
               </a>
               <a
                 href="https://instagram.com"
-                style={styles.socialIcon}
+                style={footerstyles.socialIcon}
                 className="instagram">
                 <Instagram size={22} />
               </a>
               <a
                 href="https://facebook.com"
-                style={styles.socialIcon}
+                style={footerstyles.socialIcon}
                 className="facebook">
                 <Facebook size={22} />
               </a>
@@ -115,7 +115,7 @@ const LayoutFooter = ({ t, logout }) => {
           </Col>
         </Row>
 
-        <div style={styles.divider} />
+        <div style={footerstyles.divider} />
 
         {/* Copyright Line */}
         <div style={{ textAlign: "center", color: "rgba(255,255,255,0.45)" }}>
