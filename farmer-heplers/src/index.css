@@ -1,4 +1,6 @@
 :root {
+  /*font-size*/
+  font-size: 16px;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -24,7 +26,9 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  padding:0;
+  /* display: flex se block */
+  display: block;
   place-items: center;
   min-height: 100vh;
   padding: 0;

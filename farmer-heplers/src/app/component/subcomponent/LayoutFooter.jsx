@@ -4,7 +4,11 @@ import { Row, Col, Space } from "antd";
 import LanguageChangeDropDown from "../LanguageChangeDropdown";
 import { footerstyles } from "./FooterStyles.js";
 import { Mail, MessageCircle, Phone } from "lucide-react";
-import { FacebookFilled, InstagramFilled } from "@ant-design/icons";
+import {
+  FacebookFilled,
+  InstagramFilled,
+  WhatsAppOutlined,
+} from "@ant-design/icons";
 
 const LayoutFooter = ({ t, logout }) => {
   const currentYear = new Date().getFullYear();
@@ -92,7 +96,7 @@ const LayoutFooter = ({ t, logout }) => {
                 href="https://wa.me/yournumber"
                 style={footerstyles.socialIcon}
                 className="whatsapp">
-                <MessageCircle size={22} />
+                <WhatsAppOutlined size={22} />
               </a>
               <a
                 href="https://instagram.com"
@@ -114,7 +118,7 @@ const LayoutFooter = ({ t, logout }) => {
 
         {/* Copyright Line */}
         <div style={{ textAlign: "center", color: "rgba(255,255,255,0.45)" }}>
-          {`${t("layout.ft1")} ©${currentYear} ${t("layout.ft2")}`}
+          {`${t("layout.footer.ft1")} ©${currentYear} ${t("layout.footer.ft2")}`}
           <div style={{ fontSize: "12px", marginTop: "5px" }}>
             Made with ❤️ for Farmers
           </div>

@@ -664,8 +664,16 @@
     }
   },
   "layout": {
-    "ft1": "Farmer Accountant",
-    "ft2": "Created by Sukh Ramghria",
+    "footer": {
+      "tt1": "FARMER",
+      "tt2": "ACCOUNTANT",
+      "st": "Simplifying farm managment and accounting for a better future.",
+      "ql": "Quick Links",
+      "supt": "Support",
+      "cwut": "Contact with us",
+      "ft1": "Farmer Accountant",
+      "ft2": "Created by Sukh Ramghria"
+    },
     "menu": {
       "home": "Traders",
       "view": "Vendors",
