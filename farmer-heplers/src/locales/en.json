@@ -357,6 +357,7 @@
     }
   },
   "indDrawer": {
+    "glt": "Fields with * are mandatory. Use 'Cash/Amount' for payments, 'Buy Items' for spray/fertilizer, 'Diesel' for fuel, and 'Sell Crops' for crop sales.",
     "submitFunction": {
       "successMessageforCreate": "Transaction Added Successfully",
       "errorMessageforCreate": "Failed to upload the new transaction.",
@@ -375,7 +376,8 @@
       "interestInput": {
         "text": "Interest Rate",
         "rm": "Interest rate is required",
-        "pt": "Enter interest rate"
+        "pt": "Enter interest rate",
+        "hint": "Enter rate (e.g., Enter 12 for 1(1%) rupee interest, 18 for 1.5(1.5%) rupee, or 24 for 2(2%) rupees)."
       },
       "ttt2": "Cash/Account amount",
       "loanInput": {

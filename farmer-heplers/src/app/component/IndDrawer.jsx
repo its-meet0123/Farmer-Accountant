@@ -1,5 +1,6 @@
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import {
+  Alert,
   Button,
   Col,
   DatePicker,
@@ -21,7 +22,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
   const [addForm] = Form.useForm();
   const [edit, setEdit] = useState(false);
   const date = dayjs(new Date());
-  const [btnLoad, setBtnLoad] = useState(true);
+  const [btnLoad, setBtnLoad] = useState(false);
 
   const onClose = () => {
     addForm.resetFields();
@@ -145,6 +146,15 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
             )}
           </Space>
         }>
+        {open == "add" && (
+          <Alert
+            message="Form Guidelines"
+            description={t("indDrawer.drawerForm.glt")}
+            type="info"
+            showIcon
+            closable
+          />
+        )}
         {open === "edit" && (
           <Form
             form={form}
@@ -389,7 +399,8 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                     required: true,
                     message: t("indDrawer.drawerForm.interestInput.rm"),
                   },
-                ]}>
+                ]}
+                help={t("indDrawer.drawerForm.interestInput.hint")}>
                 <InputNumber
                   placeholder={t("indDrawer.drawerForm.interestInput.pt")}
                 />
