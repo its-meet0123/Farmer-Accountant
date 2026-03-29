@@ -98,7 +98,7 @@ const AppLayout = ({ children }) => {
           style={{
             // background: colorBgContainer,
             minHeight: 280,
-            padding: 24,
+            // padding: 24,
             borderRadius: borderRadiusLG,
             //       backgroundImage: `
             //   radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
