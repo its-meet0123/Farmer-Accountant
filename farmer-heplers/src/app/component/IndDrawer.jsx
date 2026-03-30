@@ -3,6 +3,7 @@ import {
   Alert,
   Button,
   Col,
+  Collapse,
   DatePicker,
   Drawer,
   Flex,
@@ -17,6 +18,7 @@ import {
 import { useState } from "react";
 import { pushIndShopeAccountById, updateIndShopeAccount } from "../service/ind";
 import dayjs from "dayjs";
+import Panel from "antd/es/splitter/Panel";
 
 const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
   const [addForm] = Form.useForm();
@@ -147,13 +149,17 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
           </Space>
         }>
         {open == "add" && (
-          <Alert
-            message="Form Guidelines"
-            description={t("indDrawer.drawerForm.glt")}
-            type="info"
-            showIcon
-            closable
-          />
+          <Collapse ghost style={{ marginBottom: 20 }}>
+            <Panel header={t("indDrawer.drawerForm.colps.glm")} key="1">
+              <ul>
+                <li>{"indDrawer.drawerForm.colps.li1"}</li>
+                <li>{"indDrawer.drawerForm.colps.li2"}</li>
+                <li>{"indDrawer.drawerForm.colps.li3"}</li>
+                <li>{"indDrawer.drawerForm.colps.li4"}</li>
+                <li>{"indDrawer.drawerForm.colps.li5"}</li>
+              </ul>
+            </Panel>
+          </Collapse>
         )}
         {open === "edit" && (
           <Form
@@ -400,14 +406,18 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                     message: t("indDrawer.drawerForm.interestInput.rm"),
                   },
                   {
-                    type: "number",
-                    min: 0.01,
-                    max: 60,
-                    message: "between 0 to 60",
+                    validator: (_, value) => {
+                      if (value && !/^\d+$/.test(value.toString())) {
+                        return Promise.reject(new Error("Only numbers"));
+                      }
+                      return Promise.resolve();
+                    },
                   },
                   {
-                    pattern: /^[0-9]+$/,
-                    message: "Only numbers",
+                    type: "number",
+                    min: 0,
+                    max: 60,
+                    message: "between 0 and 60",
                   },
                 ]}
                 extra={t("indDrawer.drawerForm.interestInput.hint")}>

@@ -364,7 +364,15 @@
       "errorMessageforEdit": "Transaction could not be edited due to a system error."
     },
     "drawerForm": {
-      "glt": "Fields with * are mandatory. Use 'Cash/Amount' for payments, 'Buy Items' for spray/fertilizer, 'Diesel' for fuel, and 'Sell Crops' for crop sales.",
+      "colps": {
+        "glm": "Form Guidelines",
+        "li1": "Fill all (*) fields per transaction",
+        "li2": "Use 'Cash/Account' fields for only interst-based payments",
+        "li3": "Use 'Buy Items' fields for Spray/Fertilizer/Seed purchases",
+        "li4": "Use 'Sell Crops' fields for crop sales",
+        "li5": "Use 'Diesel' fields for diesel purchases",
+        "li6": "You can fill multiple sections (e.g., Buy Items + Diesel) in a single entry."
+      },
       "titleText1": "Edit",
       "titleText2": "Add",
       "ttt1": "Mandatory fields",
