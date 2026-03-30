@@ -134,7 +134,7 @@ const AuthContainer = ({
           {subtitle && <p style={styles.subtitle}>{subtitle}</p>}
 
           {/* Form Content */}
-          <div style={{ width: "100%" }}>{children}</div>
+          <Card style={{ width: "100%" }}>{children}</Card>
         </div>
       </div>
     </div>

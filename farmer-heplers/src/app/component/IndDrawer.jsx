@@ -401,6 +401,10 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               <Form.Item
                 label={t("indDrawer.drawerForm.interestInput.text")}
                 name="rate"
+                getValueFromEvent={(e) => {
+                  const val = String(e).replace(/[^0-9]/g, "");
+                  return val ? parseInt(val, 10) : null;
+                }}
                 rules={[
                   {
                     required: true,
@@ -424,10 +428,6 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 extra={t("indDrawer.drawerForm.interestInput.hint")}>
                 <InputNumber
                   placeholder={t("indDrawer.drawerForm.interestInput.pt")}
-                  onInput={(value) => {
-                    return String(value).replace(/[^0-9]/g, "");
-                  }}
-                  parser={(value) => value.replace(/[^0-9]/g, "")}
                 />
               </Form.Item>
             </Row>

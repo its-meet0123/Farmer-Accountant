@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Card, Flex, Form, Input, message } from "antd";
+import { Button, Flex, Form, Input, message } from "antd";
 import { postUserDataForLoggedIn } from "../../service/auth";
 import { useAuth } from "../../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,6 @@ const LogIn = () => {
       if (data.status === "success") {
         loginComplete(data);
         message.success(t(data.code));
-      } else {
       }
     } catch (err) {
       const text = `${t("loginPage.formSubmitErrorText")}`;
@@ -58,63 +57,61 @@ const LogIn = () => {
         subtitle={t("loginPage.cardSubTitle")}
         t={t}>
         {contextHolder}
-        <Card>
-          <Form
-            name="login"
-            initialValues={{ remember: true }}
-            style={{ maxWidth: 360 }}
-            onFinish={onFinish}>
-            <Form.Item
-              name="userId"
-              rules={[
-                {
-                  required: true,
-                  message: t("loginPage.formUserIdInput.requiredText"),
-                },
-                { min: 5, message: t("loginPage.formUserIdInput.checkText") },
-                { max: 15, message: t("loginPage.formUserIdInput.checkText") },
-              ]}>
-              <Input
-                prefix={<UserOutlined />}
-                placeholder={t("loginPage.formUserIdInput.text")}
-                allowClear
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: t("loginPage.formPasswordInput.requiredText"),
-                },
-                { min: 6, message: t("loginPage.formPasswordInput.checkText") },
-              ]}>
-              <Input
-                prefix={<LockOutlined />}
-                type="password"
-                placeholder={t("loginPage.formPasswordInput.text")}
-                allowClear
-              />
-            </Form.Item>
-            <Form.Item>
-              <Flex justify="space-between" align="center">
-                <a onClick={() => setPassword()}>
-                  {t("loginPage.formForgotPasswordButtonText")}
-                </a>
-              </Flex>
-            </Form.Item>
-
-            <Form.Item>
-              <Button block type="primary" htmlType="submit">
-                {t("loginPage.formSubmitButtonText")}
-              </Button>
-              or{" "}
-              <a onClick={() => goToSignUP()}>
-                {t("loginPage.formGoToSignUpButtonText")}
+        <Form
+          name="login"
+          initialValues={{ remember: true }}
+          style={{ maxWidth: 360 }}
+          onFinish={onFinish}>
+          <Form.Item
+            name="userId"
+            rules={[
+              {
+                required: true,
+                message: t("loginPage.formUserIdInput.requiredText"),
+              },
+              { min: 5, message: t("loginPage.formUserIdInput.checkText") },
+              { max: 15, message: t("loginPage.formUserIdInput.checkText") },
+            ]}>
+            <Input
+              prefix={<UserOutlined />}
+              placeholder={t("loginPage.formUserIdInput.text")}
+              allowClear
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: t("loginPage.formPasswordInput.requiredText"),
+              },
+              { min: 6, message: t("loginPage.formPasswordInput.checkText") },
+            ]}>
+            <Input
+              prefix={<LockOutlined />}
+              type="password"
+              placeholder={t("loginPage.formPasswordInput.text")}
+              allowClear
+            />
+          </Form.Item>
+          <Form.Item>
+            <Flex justify="space-between" align="center">
+              <a onClick={() => setPassword()}>
+                {t("loginPage.formForgotPasswordButtonText")}
               </a>
-            </Form.Item>
-          </Form>
-        </Card>
+            </Flex>
+          </Form.Item>
+
+          <Form.Item>
+            <Button block type="primary" htmlType="submit">
+              {t("loginPage.formSubmitButtonText")}
+            </Button>
+            or{" "}
+            <a onClick={() => goToSignUP()}>
+              {t("loginPage.formGoToSignUpButtonText")}
+            </a>
+          </Form.Item>
+        </Form>
       </AuthContainer>
       <UserActionModel openType={openType} setOpenType={setOpenType} t={t} />
     </>

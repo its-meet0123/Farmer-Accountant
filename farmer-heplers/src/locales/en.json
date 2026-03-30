@@ -366,8 +366,8 @@
     "drawerForm": {
       "colps": {
         "glm": "Form Guidelines",
-        "li1": "Fill all mandatory(*) fields per transaction",
-        "li2": "Use 'Cash/Account' fields for only interst-based payments",
+        "li1": "Fill all mandatory(*) fields per transaction.",
+        "li2": "Use 'Cash/Account' fields for only interst-based/advance payments",
         "li3": "Use 'Buy Items' fields for Spray/Fertilizer/Seed purchases",
         "li4": "Use 'Sell Crops' fields for crop sales",
         "li5": "Use 'Diesel' fields for diesel purchases",
