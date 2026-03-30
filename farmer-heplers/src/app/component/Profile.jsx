@@ -1,75 +1,50 @@
-//import { UserOutlined } from "@ant-design/icons";
-//import { Avatar, Flex } from "antd";
+import { Avatar, Grid, Space, Tooltip, Typography } from "antd";
 
-const Profile = ({ userName, screen }) => {
+const { useBreakpoint } = Grid;
+const { Text } = Typography;
+
+const Profile = ({ userName }) => {
+  const screens = useBreakpoint();
+  const isMobile = !screens.md && screens.xs;
+
   const firstName = userName?.firstName
     ? userName.firstName.toUpperCase()
     : "?";
   const firstLetter = firstName.charAt(0) || "?";
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          padding: "6px 16px",
-          // Glassmorphism Look (Site ke gradient ke saath match karega)
-          background: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "50px", // Capsule shape
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
-          cursor: "pointer",
-          transition: "all 0.3s ease",
-        }}
-        // Hover effect ke liye (Agar aap desktop par hain)
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.background = "rgba(255, 255, 255, 0.2)")
-        }
-        onMouseLeave={(e) =>
-          (e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)")
-        }>
-        {/* Avatar Section */}
-        <div
+      <Space size={12} style={{ cursor: "pointer" }}>
+        <Tooltip
+          title={`${userName?.firstName} ${userName?.lastName}`}
+          placement="bottom"
+          color="#1e293b"></Tooltip>
+        <Avatar
+          size={isMobile ? 32 : 40}
           style={{
-            width: "35px",
-            height: "35px",
-            borderRadius: "50%",
-            background: "linear-gradient(135deg, #4da3ff 0%, #61daf b 100%)", // Blue gradient avatar
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "14px",
+            background: "linear-gradient(135deg, #4da3ff 0%, #005bc5 100%)",
+            border: "2px solid rgba(255,255,255,0.3)",
             fontWeight: "bold",
-            color: "#fff",
-            border: "2px solid rgba(255,255,255,0.5)",
+            fontSize: isMobile ? "14px" : "18px",
           }}>
           {firstLetter}
-        </div>
-
-        {/* Name Section */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <span
-            style={{
-              display: screen.md ? "block" : "none",
-              color: "#ffffff",
-              fontSize: "14px",
-              fontWeight: "600",
-              letterSpacing: "0.5px",
-              lineHeight: "1.2",
-            }}>
-            {userName.firstName} {userName.lastName}
-          </span>
-          {/* <span style={{ 
-      color: "rgba(255, 255, 255, 0.6)", 
-      fontSize: "10px",
-      textTransform: "uppercase" 
-    }}>
-      Admin
-    </span> */}
-        </div>
-      </div>
+        </Avatar>
+        {!isMobile && (
+          <div
+            style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
+            <Text style={{ color: "#fff", fontSize: "14px", fontWeight: 600 }}>
+              {userName?.firstName}
+            </Text>
+            {/* <Text
+              style={{
+                color: "rgba(255,255,255,0.6)",
+                fontSize: "10px",
+                marginTop: "2px",
+              }}>
+              ADMIN
+            </Text> */}
+          </div>
+        )}
+      </Space>
     </>
   );
 };
