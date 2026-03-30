@@ -152,11 +152,11 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
           <Collapse ghost style={{ marginBottom: 20 }}>
             <Panel header={t("indDrawer.drawerForm.colps.glm")} key="1">
               <ul>
-                <li>{"indDrawer.drawerForm.colps.li1"}</li>
-                <li>{"indDrawer.drawerForm.colps.li2"}</li>
-                <li>{"indDrawer.drawerForm.colps.li3"}</li>
-                <li>{"indDrawer.drawerForm.colps.li4"}</li>
-                <li>{"indDrawer.drawerForm.colps.li5"}</li>
+                <li>{t("indDrawer.drawerForm.colps.li1")}</li>
+                <li>{t("indDrawer.drawerForm.colps.li2")}</li>
+                <li>{t("indDrawer.drawerForm.colps.li3")}</li>
+                <li>{t("indDrawer.drawerForm.colps.li4")}</li>
+                <li>{t("indDrawer.drawerForm.colps.li5")}</li>
               </ul>
             </Panel>
           </Collapse>
