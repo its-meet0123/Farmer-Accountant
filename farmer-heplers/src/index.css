@@ -38,9 +38,9 @@ body {
   position: relative;
   overflow-x: hidden;
    /* horizontal movement*/
-   touch-action: pan-y;
-   -webkit-overflow-scrolling: touch;
-   overscroll-behavior: none;
+   /*touch-action: pan-y;*/
+   /* -webkit-overflow-scrolling: touch; */
+   /* overscroll-behavior: none; */
 }
 
 h1 {
