@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { postUserDataForSignUp } from "../../service/auth";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ const layout = {
 };
 
 const SignUp = () => {
+  const [isLoading, setIsLoanding] = useState(false);
   const [form] = Form.useForm();
   const { signupComplete, t } = useAuth();
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const SignUp = () => {
   };
 
   const onFinish = async (values) => {
+    setIsLoanding(true);
     console.log(values);
     if (!values) {
       message.success(t("signUpPage.formSubmitErrorText1"));
@@ -30,6 +32,7 @@ const SignUp = () => {
       if (data.status === "success") {
         message.success(t(data.code));
         signupComplete();
+        setIsLoanding(false);
         navigate("/login");
       }
     } catch (err) {
@@ -106,7 +109,7 @@ const SignUp = () => {
             <Input />
           </Form.Item>
           <Form.Item label={null} wrapperCol={{ span: 24 }}>
-            <Button type="primary" htmlType="submit" block>
+            <Button type="primary" htmlType="submit" block loading={isLoading}>
               {t("signUpPage.formSubmitButtonText")}
             </Button>
             or{" "}

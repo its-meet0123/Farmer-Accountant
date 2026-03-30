@@ -8,6 +8,7 @@ import UserActionModel from "../../component/UserIdActionModel";
 import { AuthContainer } from "../../component/PageContainer";
 
 const LogIn = () => {
+  const [isLoading, setIsLoanding] = useState(false);
   const { loginComplete, setIsSignedUp, t } = useAuth();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
@@ -31,11 +32,13 @@ const LogIn = () => {
   };
 
   const onFinish = async (values) => {
+    setIsLoanding(true);
     console.log("Received values of form: ", values);
     try {
       const res = await postUserDataForLoggedIn(values);
       const data = await res.data;
       if (data.status === "success") {
+        setIsLoanding(false);
         loginComplete(data);
         message.success(t(data.code));
       }
@@ -103,7 +106,7 @@ const LogIn = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button block type="primary" htmlType="submit">
+            <Button block type="primary" htmlType="submit" loading={isLoading}>
               {t("loginPage.formSubmitButtonText")}
             </Button>
             or{" "}
