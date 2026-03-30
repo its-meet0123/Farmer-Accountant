@@ -13,6 +13,7 @@ const FarmerLoader = ({ isLoading, user }) => {
   const [index, setIndex] = useState(0);
   const [percent, setPercent] = useState(0);
   const [show, setShow] = useState(true);
+  const [showReload, setShowReload] = useState(false);
 
   const promoData = [
     {
@@ -50,18 +51,31 @@ const FarmerLoader = ({ isLoading, user }) => {
 
   useEffect(() => {
     let progressTimer;
+    let timeOutTimer;
 
     if (!user) {
       progressTimer = setInterval(() => {
         setPercent((prev) => (prev < 95 ? prev + 1 : prev));
       }, 200);
+
+      timeOutTimer = setTimeout(() => {
+        if (!user) setShowReload(true);
+      }, 20000);
     } else {
       setPercent(100);
+      setShowReload(false);
       setTimeout(() => setShow(false), 500);
     }
 
-    return () => clearInterval(progressTimer);
+    return () => {
+      clearInterval(progressTimer);
+      clearTimeout(timeOutTimer);
+    };
   }, [user]);
+
+  const handleReload = () => {
+    window.location.reload();
+  };
 
   if (!show && !isLoading) return null;
 
@@ -77,7 +91,7 @@ const FarmerLoader = ({ isLoading, user }) => {
               direction="vertical"
               size="large"
               style={{ width: "100%", textAlign: "center" }}>
-              <Spin size="large" tip="लोड हो रहा है..." />
+              {!showReload && <Spin size="large" tip="लोड हो रहा है..." />}
 
               <div
                 style={{
@@ -101,11 +115,20 @@ const FarmerLoader = ({ isLoading, user }) => {
               <div style={{ marginTop: "20px" }}>
                 <Progress
                   percent={percent}
-                  status="active"
-                  strokeColor={{
-                    "0%": "#4caf50",
-                    "100%": "#2e7d32",
-                  }}
+                  status={
+                    showReload
+                      ? "exception"
+                      : percent === 100
+                        ? "success"
+                        : "active"
+                  }
+                  strokeColor={
+                    percent === 100
+                      ? "#52c41a"
+                      : showReload
+                        ? "#ff4d4f"
+                        : "#4caf50"
+                  }
                   showInfo={true}
                   format={(p) => (
                     <span style={{ color: "#2e7d32", fontWeight: "bold" }}>
@@ -113,11 +136,30 @@ const FarmerLoader = ({ isLoading, user }) => {
                     </span>
                   )}
                 />
-                <Text type="secondary" style={{ fontSize: "12px" }}>
-                  {user
-                    ? "पहचान सफल! डैशबोर्ड तैयार है..."
-                    : "किसान डेटा लोड हो रहा है..."}
-                </Text>
+                {showReload ? (
+                  <div style={{ marginTop: "15px" }}>
+                    <Text
+                      type="danger"
+                      style={{ display: "block", marginBottom: "10px" }}>
+                      सर्वर रिस्पॉन्स नहीं दे रहा है। कृपया पेज रिफ्रेश करें।
+                    </Text>
+                    <Button
+                      type="primary"
+                      danger
+                      icon={<ReloadOutlined />}
+                      onClick={handleReload}
+                      size="large"
+                      shape="round">
+                      अभी रीलोड करें
+                    </Button>
+                  </div>
+                ) : (
+                  <Text type="secondary" style={{ fontSize: "12px" }}>
+                    {user
+                      ? "सफलतापूर्वक लॉगिन!"
+                      : "किसान डेटा तैयार हो रहा है, कृपया रुकें..."}
+                  </Text>
+                )}
               </div>
             </Space>
           </Card>
