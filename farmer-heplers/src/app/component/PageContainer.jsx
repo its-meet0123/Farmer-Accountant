@@ -164,6 +164,7 @@ const PageContainer = ({ title, children, extra }) => {
       `,
         width: "100%",
         borderRadius: "12px",
+        minHeight: "100vh",
         overflow: "auto",
       }}
       styles={{
