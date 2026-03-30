@@ -18,7 +18,7 @@ import {
 import { useState } from "react";
 import { pushIndShopeAccountById, updateIndShopeAccount } from "../service/ind";
 import dayjs from "dayjs";
-import Panel from "antd/es/splitter/Panel";
+const { Panel } = Collapse;
 
 const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
   const [addForm] = Form.useForm();
@@ -423,6 +423,11 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 extra={t("indDrawer.drawerForm.interestInput.hint")}>
                 <InputNumber
                   placeholder={t("indDrawer.drawerForm.interestInput.pt")}
+                  onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
                 />
               </Form.Item>
             </Row>
