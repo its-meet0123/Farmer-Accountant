@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Card, Progress, Typography, Space, Spin, Row, Col } from "antd";
+import {
+  Card,
+  Progress,
+  Typography,
+  Space,
+  Spin,
+  Row,
+  Col,
+  Button,
+} from "antd";
 import {
   LineChartOutlined,
   WalletOutlined,
   SafetyOutlined,
   DashboardOutlined,
+  ReloadOutlined,
 } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
