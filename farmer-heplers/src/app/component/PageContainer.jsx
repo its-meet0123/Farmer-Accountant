@@ -90,14 +90,12 @@ const AuthContainer = ({
 
   return (
     <div style={styles.overlay}>
-      {/* Language Selector - Always on top */}
-      {showLangButton && (
-        <div style={styles.langWrapper}>
-          <LanguageChangeDropDown />
-        </div>
-      )}
-
       <div style={styles.card}>
+        {showLangButton && (
+          <div style={styles.langWrapper}>
+            <LanguageChangeDropDown />
+          </div>
+        )}
         {/* Branding Side - Mobile par chota ya hide ho jayega */}
         <div style={styles.leftPanel}>
           <div

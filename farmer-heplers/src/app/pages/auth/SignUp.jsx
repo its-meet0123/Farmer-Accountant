@@ -105,7 +105,7 @@ const SignUp = () => {
             ]}>
             <Input />
           </Form.Item>
-          <Form.Item label={null}>
+          <Form.Item label={null} wrapperCol={{ span: 24 }}>
             <Button type="primary" htmlType="submit" block>
               {t("signUpPage.formSubmitButtonText")}
             </Button>
