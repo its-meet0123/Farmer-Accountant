@@ -406,21 +406,11 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                     message: "between 0 to 60",
                   },
                   {
-                    validator: (_, value) => {
-                      if (!value) {
-                        return Promise.resolve();
-                      }
-                      const regex = !/[0-9]/;
-                      if (regex.test(value)) {
-                        return Promise.resolve();
-                      }
-                      return Promise.reject(
-                        new Error(t("indDrawer.drawerForm.interestInput.rm2")),
-                      );
-                    },
+                    pattern: /^[0-9]+$/,
+                    message: "Only numbers",
                   },
                 ]}
-                help={t("indDrawer.drawerForm.interestInput.hint")}>
+                extra={t("indDrawer.drawerForm.interestInput.hint")}>
                 <InputNumber
                   placeholder={t("indDrawer.drawerForm.interestInput.pt")}
                 />
