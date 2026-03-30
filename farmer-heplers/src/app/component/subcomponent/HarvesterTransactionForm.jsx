@@ -10,6 +10,7 @@ import {
   Spin,
   Radio,
   Alert,
+  Collapse,
 } from "antd";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
@@ -17,6 +18,8 @@ import {
   addTransactionForHarvestData,
   updateHarvestDataTransaction,
 } from "../../service/other";
+
+const { Panel } = Collapse;
 
 const HarvesterTransactionForm = ({
   form,
@@ -84,14 +87,17 @@ const HarvesterTransactionForm = ({
   return (
     <>
       {openType == "addTrans" && (
-        <Alert
-          message={t("harvestDrawer.ahtf.glm")}
-          description={t("harvestDrawer.ahtf.glt")}
-          type="info"
-          showIcon
-          closable
-          style={{ marginBottom: 24 }}
-        />
+        <Collapse ghost style={{ marginBottom: 20 }}>
+          <Panel header={t("casualDrawer.acltf.colps.glm")} key="1">
+            <ul>
+              <li>{t("casualDrawer.acltf.colps.li1")}</li>
+              <li>{t("casualDrawer.acltf.colps.li2")}</li>
+              <li>{t("casualDrawer.acltf.colps.li3")}</li>
+              <li>{t("casualDrawer.acltf.colps.li4")}</li>
+              <li>{t("casualDrawer.acltf.colps.li5")}</li>
+            </ul>
+          </Panel>
+        </Collapse>
       )}
       <Form
         layout="inline"

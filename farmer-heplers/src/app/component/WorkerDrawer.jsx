@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  Alert,
   Button,
   Col,
+  Collapse,
   DatePicker,
   Drawer,
   Form,
@@ -11,9 +11,6 @@ import {
   message,
   Radio,
   Row,
-  Space,
-  theme,
-  Typography,
 } from "antd";
 import { useAuth } from "../auth/AuthContext";
 import dayjs from "dayjs";
@@ -23,6 +20,7 @@ import {
   updateWorkerTransactionById,
 } from "../service/worker";
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
+const { Panel } = Collapse;
 
 const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
   const { authState, t } = useAuth();
@@ -381,14 +379,20 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
         }>
         {open === "at" && (
           <>
-            <Alert
-              message={t("workerDrawer.transactionInput.glm")}
-              description={t("workerDrawer.transactionInput.glt")}
-              type="info"
-              showIcon
-              closable
-              style={{ marginBottom: 24 }}
-            />
+            <Collapse ghost style={{ marginBottom: 20 }}>
+              <Panel
+                header={t("workerDrawer.transactionInput.colps.glm")}
+                key="1">
+                <ul>
+                  <li>{t("workerDrawer.transactionInput.colps.li1")}</li>
+                  <li>{t("workerDrawer.transactionInput.colps.li2")}</li>
+                  <li>{t("workerDrawer.transactionInput.colps.li3")}</li>
+                  <li>{t("workerDrawer.transactionInput.colps.li4")}</li>
+                  <li>{t("workerDrawer.transactionInput.colps.li5")}</li>
+                  <li>{t("workerDrawer.transactionInput.colps.li6")}</li>
+                </ul>
+              </Panel>
+            </Collapse>
             <Form
               labelCol={{ span: 10 }}
               wrapperCol={{ span: 25 }}

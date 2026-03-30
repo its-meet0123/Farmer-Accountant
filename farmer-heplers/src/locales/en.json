@@ -366,13 +366,14 @@
     "drawerForm": {
       "colps": {
         "glm": "Form Guidelines",
-        "li1": "Fill all (*) fields per transaction",
+        "li1": "Fill all mandatory(*) fields per transaction",
         "li2": "Use 'Cash/Account' fields for only interst-based payments",
         "li3": "Use 'Buy Items' fields for Spray/Fertilizer/Seed purchases",
         "li4": "Use 'Sell Crops' fields for crop sales",
         "li5": "Use 'Diesel' fields for diesel purchases",
         "li6": "You can fill multiple sections (e.g., Buy Items + Diesel) in a single entry."
       },
+      "glt": "* marked boxes are mandatory. Use 'Cash/Amount' for payments, 'Buy Items' for fertilizer/spray, 'Diesel' for diesel, and 'Sell Crops' for crop sales.",
       "titleText1": "Edit",
       "titleText2": "Add",
       "ttt1": "Mandatory fields",
@@ -466,11 +467,11 @@
   },
   "workerDrawer": {
     "submitFunction": {
-      "successMessageforCreate1": "",
+      "successMessageforCreate1": "Worker data created Successfully",
       "errorMessageforCreate1": "Failed to upload the Worker data.",
-      "successMessageforCreate2": "",
+      "successMessageforCreate2": "Worker transaction added Successfully",
       "errorMessageforCreate2": "Failed to upload the Worker transaction",
-      "successMessageforEdit": "",
+      "successMessageforEdit": "Worker transaction updated Successfully",
       "errorMessageforEdit": "Failed to update transaction details."
     },
     "detailInput": {
@@ -494,8 +495,15 @@
     "awDrawerTitle": "Add Worker",
     "awtDrawerTitle": "Add Worker Transaction",
     "transactionInput": {
-      "glm": "Form Guidelines",
-      "glt": ". Fields with * are mandatory.\n. Make a Payment only : use 'amount', 'type', 'brief' fields.\n. Make a Payment + Part of Crop : use 'amount', 'type', 'brief', select 'gives' and press '+' icon and enter crop details.\n. Only Receive Payments : use 'payment', 'type', fields. \n. Receive Payments + Yield Share : use 'payment', 'type', select 'takes' and press '+' icon and enter crop details.  ",
+      "colps": {
+        "glm": "Form Guidelines",
+        "li1": "Fill all mandatory(*) fields per transaction",
+        "li2": "Use 'Amount', 'Type', 'Brief', fields for permanent worker advance payments (gives).",
+        "li3": "For worker deposits, use 'Payment' and 'Type' fields.",
+        "li4": "For Cash + Crop(Wheat/Mustard) advances fill 'Amount', 'Type', 'Brief' fields and select 'Gives' and press '+' icon then fill crops details.",
+        "li5": "For Cash + Crop deposits fill 'Payment', 'Type' fields and select Takes and press '+' icon then fill crops details.",
+        "li6": "You can fill multiple sections (e.g., Advance + Desposit) in a single entry."
+      },
       "at": "Amount",
       "apt": "enter amount",
       "att": "Type",
@@ -577,8 +585,14 @@
       "sbt": "Submit"
     },
     "acltf": {
-      "glm": "Form Guidelines",
-      "glt": ". Process payment upon task is finished : use all fields. \n. Only record work details without payment : use 'date', 'wages/d' and 'duration' fields. \n. Only record payment details : user 'date', 'pay', 'transaction type' and 'hand Over' fields. ",
+      "colps": {
+        "glm": "Form Guidelines",
+        "li1": "Fill all mandatory(*) fields per transaction",
+        "li2": "Process payment upon task is finished: fill all fields.",
+        "li3": "Only record task finished without payment: fill 'Wages/D' and 'Duration' fields.",
+        "li4": "Only record payment details: fill 'Pay', 'Transaction type', and 'HandOver' fields.",
+        "li5": "Multiple transactions allowed."
+      },
       "df": "Date",
       "dpt": "Select date",
       "wpdf": "Wages/D",

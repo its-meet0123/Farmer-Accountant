@@ -1,4 +1,5 @@
 import { Button, Flex, Input, Modal } from "antd";
+import dayjs from "dayjs";
 
 const formattedDate = (date) => {
   const rawDate = date ? new Date(date) : new Date();
@@ -109,6 +110,8 @@ const getColumnsForViewPage = (t) => {
       dataIndex: "startDate",
       key: "startDate",
       width: 150,
+      defaultSortOrder: "descend",
+      sorter: (a, b) => dayjs(a.startDate).unix() - dayjs(b.startDate).unix(),
       render: (startDate) => {
         const date = formattedDate(startDate);
         return date;
@@ -396,6 +399,8 @@ const getColumnsForCalulationPage = (t) => {
       dataIndex: "startDate",
       key: "startDate",
       width: 100,
+      defaultSortOrder: "descend",
+      sorter: (a, b) => dayjs(a.startDate).unix() - dayjs(b.startDate).unix(),
       render: (startDate) => {
         const date = formattedDate(startDate);
         return date;
@@ -732,6 +737,9 @@ const getWorkerListColumnsForWorkerPage = (t) => {
       dataIndex: ["workerDetail", "date"],
       key: "date",
       width: 150,
+      //defaultSortOrder: "descend",
+      //sorter: (a, b) =>
+      // dayjs(a.workerDetail?.date).unix() - dayjs(b.workerDetail?.date).unix(),
       render: (date) => {
         const wDate = formattedDate(date);
         return wDate;
@@ -775,6 +783,8 @@ const getWorkerTransactionColumnsForWorkerPage = (t) => {
       dataIndex: "date",
       key: "date",
       width: 100,
+      defaultSortOrder: "descend",
+      sorter: (a, b) => dayjs(a.date).unix() - dayjs(b.date).unix(),
       render: (date) => {
         const wDate = formattedDate(date);
         return wDate;
@@ -932,6 +942,8 @@ const getColumnsForWorkerCalcPage = (t) => {
       dataIndex: "date",
       key: "date",
       width: 150,
+      defaultSortOrder: "descend",
+      sorter: (a, b) => dayjs(a.date).unix() - dayjs(b.date).unix(),
       render: (date) => {
         const workerDate = formattedDate(date);
         return workerDate;
@@ -1123,6 +1135,8 @@ const getColumnsForCasualLaborPage = (t) => {
       dataIndex: "startDate",
       key: "date",
       width: 100,
+      defaultSortOrder: "descend",
+      sorter: (a, b) => dayjs(a.startDate).unix() - dayjs(b.startDate).unix(),
       render: (date) => {
         const fdate = formattedDate(date);
         return fdate;
@@ -1218,6 +1232,8 @@ const getColumnsForHarvestList = (t) => {
       dataIndex: "date",
       width: 100,
       key: "date",
+      //defaultSortOrder: "descend",
+      //sorter: (a, b) => dayjs(a.date).unix() - dayjs(b.date).unix(),
       render: (date) => {
         const formtedDate = formattedDate(date);
         return formtedDate;
@@ -1285,6 +1301,8 @@ const getColumnsForHarvestTransaction = (t) => {
       dataIndex: "startDate",
       key: "date",
       width: 100,
+      defaultSortOrder: "descend",
+      sorter: (a, b) => dayjs(a.startDate).unix() - dayjs(b.startDate).unix(),
       render: (date) => {
         const formatedDate = formattedDate(date);
         return formatedDate;

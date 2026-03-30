@@ -157,6 +157,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 <li>{t("indDrawer.drawerForm.colps.li3")}</li>
                 <li>{t("indDrawer.drawerForm.colps.li4")}</li>
                 <li>{t("indDrawer.drawerForm.colps.li5")}</li>
+                <li>{t("indDrawer.drawerForm.colps.li6")}</li>
               </ul>
             </Panel>
           </Collapse>
@@ -423,11 +424,10 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 extra={t("indDrawer.drawerForm.interestInput.hint")}>
                 <InputNumber
                   placeholder={t("indDrawer.drawerForm.interestInput.pt")}
-                  onKeyPress={(event) => {
-                    if (!/[0-9]/.test(event.key)) {
-                      event.preventDefault();
-                    }
+                  onInput={(value) => {
+                    return String(value).replace(/[^0-9]/g, "");
                   }}
+                  parser={(value) => value.replace(/[^0-9]/g, "")}
                 />
               </Form.Item>
             </Row>

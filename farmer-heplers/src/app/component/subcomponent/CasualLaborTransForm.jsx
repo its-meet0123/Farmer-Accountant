@@ -2,6 +2,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import {
   Alert,
   Button,
+  Collapse,
   DatePicker,
   Form,
   Input,
@@ -17,6 +18,7 @@ import {
 } from "../../service/other";
 import { useAuth } from "../../auth/AuthContext";
 import dayjs from "dayjs";
+const { Panel } = Collapse;
 
 const LaborTransForm = ({
   form,
@@ -77,14 +79,17 @@ const LaborTransForm = ({
   return (
     <>
       {openType == "transAdd" && (
-        <Alert
-          message={t("casualDrawer.acltf.glm")}
-          description={t("casualDrawer.acltf.glt")}
-          type="info"
-          showIcon
-          closable
-          style={{ marginBottom: 24 }}
-        />
+        <Collapse ghost style={{ marginBottom: 20 }}>
+          <Panel header={t("casualDrawer.acltf.colps.glm")} key="1">
+            <ul>
+              <li>{t("casualDrawer.acltf.colps.li1")}</li>
+              <li>{t("casualDrawer.acltf.colps.li2")}</li>
+              <li>{t("casualDrawer.acltf.colps.li3")}</li>
+              <li>{t("casualDrawer.acltf.colps.li4")}</li>
+              <li>{t("casualDrawer.acltf.colps.li5")}</li>
+            </ul>
+          </Panel>
+        </Collapse>
       )}
       <Form
         layout="inline"
@@ -107,7 +112,13 @@ const LaborTransForm = ({
           <Form.Item
             label={t("casualDrawer.acltf.df")}
             name="startDate"
-            initialValue={today}>
+            initialValue={today}
+            rules={[
+              {
+                required: true,
+                message: "Select date",
+              },
+            ]}>
             <DatePicker
               format={"DD/MM/YYYY"}
               placeholder={t("casualDrawer.acltf.dpt")}
