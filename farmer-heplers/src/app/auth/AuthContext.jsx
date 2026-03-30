@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { userLoggedOut } from "../service/auth";
 import { Alert, message, Spin } from "antd";
 import { useTranslation } from "react-i18next";
-import FarmerLoader from "../constant/Loader";
+import FarmerLoader from "./Loader";
 
 const AuthContext = createContext();
 
@@ -81,29 +81,10 @@ export const AuthProvider = ({ children }) => {
 
   if (isLoading)
     return (
-      // <div
-      //   style={{
-      //     position: "fixed",
-      //     top: 0,
-      //     left: 0,
-      //     width: "100vw",
-      //     height: "100vh",
-      //     display: "flex",
-      //     justifyContent: "center",
-      //     alignItems: "center",
-      //     backdropFilter: "blur(4px)",
-      //     zIndex: 9999,
-      //     flexDirection: "column",
-      //   }}>
-      //   <Spin tip="Loading...">
-      //     <Alert
-      //       title={t("authcontext.spinAlertTitle")}
-      //       description={t("authcontext.spinAlertText")}
-      //       type="info"
-      //     />
-      //   </Spin>
-      // </div>
-      <FarmerLoader />
+      <>
+        <FarmerLoader />
+        Loading ...
+      </>
     );
 
   return (
