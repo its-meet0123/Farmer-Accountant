@@ -9,9 +9,10 @@ import {
 
 const { Title, Text } = Typography;
 
-const FarmerLoader = ({ isLoading }) => {
+const FarmerLoader = ({ isLoading, user }) => {
   const [index, setIndex] = useState(0);
   const [percent, setPercent] = useState(0);
+  const [show, setShow] = useState(true);
 
   const promoData = [
     {
@@ -41,25 +42,28 @@ const FarmerLoader = ({ isLoading }) => {
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const promoInterval = setInterval(() => {
       setIndex((prev) => (prev + 1) % promoData.length);
-    }, 3500);
-
-    // प्रोग्रेस बार: यह तब तक बढ़ेगा जब तक 'isLoading' true है
-    const progressTimer = setInterval(() => {
-      setPercent((prev) => {
-        if (prev >= 98) return prev;
-        return prev + 1;
-      });
-    }, 200);
-
-    return () => {
-      clearInterval(interval);
-      clearInterval(progressTimer);
-    };
+    }, 3000);
+    return () => clearInterval(promoInterval);
   }, []);
 
-  if (!isLoading) return null;
+  useEffect(() => {
+    let progressTimer;
+
+    if (!user) {
+      progressTimer = setInterval(() => {
+        setPercent((prev) => (prev < 95 ? prev + 1 : prev));
+      }, 200);
+    } else {
+      setPercent(100);
+      setTimeout(() => setShow(false), 500);
+    }
+
+    return () => clearInterval(progressTimer);
+  }, [user]);
+
+  if (!show && !isLoading) return null;
 
   return (
     <div style={overlayStyle}>
@@ -110,7 +114,9 @@ const FarmerLoader = ({ isLoading }) => {
                   )}
                 />
                 <Text type="secondary" style={{ fontSize: "12px" }}>
-                  सर्वर से जुड़ रहे हैं, कृपया प्रतीक्षा करें...
+                  {user
+                    ? "पहचान सफल! डैशबोर्ड तैयार है..."
+                    : "किसान डेटा लोड हो रहा है..."}
                 </Text>
               </div>
             </Space>

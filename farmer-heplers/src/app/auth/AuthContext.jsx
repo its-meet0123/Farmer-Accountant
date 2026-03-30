@@ -97,7 +97,7 @@ export const AuthProvider = ({ children }) => {
           {children}
         </AuthContext.Provider>
       ) : (
-        <FarmerLoader isLoading={isLoading} />
+        <FarmerLoader isLoading={isLoading} user={authState.user} />
       )}
     </>
   );
