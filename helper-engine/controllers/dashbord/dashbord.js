@@ -110,7 +110,7 @@ async function dashBordData(req, res) {
 
     const workersList = workers
       .map((worker) => {
-        if (!worker?.transactions) return null;
+        if (!worker?.account) return null;
         const workerName = worker?.workerDetail?.workerName?.nickName;
         const workerAccounts = worker?.account.map((transactions) => {
           const startDate = transactions?.date;

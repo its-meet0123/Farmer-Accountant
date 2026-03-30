@@ -399,6 +399,26 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                     required: true,
                     message: t("indDrawer.drawerForm.interestInput.rm"),
                   },
+                  {
+                    type: "number",
+                    min: 0.01,
+                    max: 60,
+                    message: "between 0 to 60",
+                  },
+                  {
+                    validator: (_, value) => {
+                      if (!value) {
+                        return Promise.resolve();
+                      }
+                      const regex = !/[0-9]/;
+                      if (regex.test(value)) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(t("indDrawer.drawerForm.interestInput.rm2")),
+                      );
+                    },
+                  },
                 ]}
                 help={t("indDrawer.drawerForm.interestInput.hint")}>
                 <InputNumber

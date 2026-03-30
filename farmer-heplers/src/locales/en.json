@@ -376,6 +376,7 @@
       "interestInput": {
         "text": "Interest Rate",
         "rm": "Interest rate is required",
+        "rm2": "Only numeric values allowed",
         "pt": "Enter interest rate",
         "hint": "Enter rate (e.g., Enter 12 for 1(1%) rupee interest, 18 for 1.5(1.5%) rupee, or 24 for 2(2%) rupees)."
       },
