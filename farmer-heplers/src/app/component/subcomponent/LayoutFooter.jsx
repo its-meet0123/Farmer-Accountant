@@ -1,7 +1,5 @@
 import React from "react";
 import { Row, Col, Space } from "antd";
-
-import LanguageChangeDropDown from "../LanguageChangeDropdown";
 import { footerstyles } from "./FooterStyles.js";
 import { Mail, Phone } from "lucide-react";
 import {
@@ -10,7 +8,7 @@ import {
   WhatsAppOutlined,
 } from "@ant-design/icons";
 
-const LayoutFooter = ({ t, logout }) => {
+const LayoutFooter = ({ t }) => {
   const currentYear = new Date().getFullYear();
   return (
     <>
@@ -60,16 +58,16 @@ const LayoutFooter = ({ t, logout }) => {
                   {t("layout.menu.other.hiring")}
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="" style={footerstyles.link}>
                   <LanguageChangeDropDown />
                 </a>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <a href="" style={footerstyles.link} onClick={() => logout()}>
                   {t("layout.menu.logout")}
                 </a>
-              </li>
+              </li> */}
             </ul>
           </Col>
 

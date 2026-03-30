@@ -204,7 +204,7 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
                 )}
               </Form.List>
             )}
-            <Form.Item label={null}>
+            <Form.Item label={null} wrapperCol={{ span: 24 }}>
               {!findUser.user && (
                 <Button
                   type="primary"
