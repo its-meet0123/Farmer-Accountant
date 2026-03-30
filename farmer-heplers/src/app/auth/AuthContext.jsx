@@ -81,21 +81,24 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <>
-      <AuthContext.Provider
-        value={{
-          authState,
-          isSignedUp,
-          signupComplete,
-          loginComplete,
-          logout,
-          setIsSignedUp,
-          goToSignUP,
-          t,
-          i18n,
-        }}>
-        {children}
-      </AuthContext.Provider>
-      <FarmerLoader isLoading={isLoading} />
+      {!isLoading ? (
+        <AuthContext.Provider
+          value={{
+            authState,
+            isSignedUp,
+            signupComplete,
+            loginComplete,
+            logout,
+            setIsSignedUp,
+            goToSignUP,
+            t,
+            i18n,
+          }}>
+          {children}
+        </AuthContext.Provider>
+      ) : (
+        <FarmerLoader isLoading={isLoading} />
+      )}
     </>
   );
 };
