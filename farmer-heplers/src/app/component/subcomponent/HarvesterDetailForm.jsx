@@ -87,15 +87,15 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
               placeholder={t("harvestDrawer.ahf.dpt")}
             />
           </Form.Item>
-          <Form.Item label={t("harvestDrawer.ahf.nnf")} name="nickName">
+          <Form.Item
+            label={t("harvestDrawer.ahf.nnf")}
+            name="nickName"
+            rules={[{ required: true, message: t("harvestDrawer.ahf.fnrmt") }]}>
             <Input placeholder={t("harvestDrawer.ahf.nnpt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
-          <Form.Item
-            label={t("harvestDrawer.ahf.fnf")}
-            name="firstName"
-            rules={[{ required: true, message: t("harvestDrawer.ahf.fnrmt") }]}>
+          <Form.Item label={t("harvestDrawer.ahf.fnf")} name="firstName">
             <Input placeholder={t("harvestDrawer.ahf.fnpt")} />
           </Form.Item>
           <Form.Item label={t("harvestDrawer.ahf.lnf")} name="lastName">

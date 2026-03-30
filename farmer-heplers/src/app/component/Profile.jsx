@@ -7,10 +7,10 @@ const Profile = ({ userName }) => {
   const screens = useBreakpoint();
   const isMobile = !screens.md && screens.xs;
 
-  const firstName = userName?.firstName
-    ? userName.firstName.toUpperCase()
-    : "?";
-  const firstLetter = firstName.charAt(0) || "?";
+  const Name = userName?.firstName
+    ? `${userName.firstName} ${userName.lastName}`
+    : "NO Name";
+  const firstLetter = userName?.firstName.chartAt(0).toUpperCase();
   return (
     <>
       <Space size={12} style={{ cursor: "pointer" }}>
@@ -19,12 +19,13 @@ const Profile = ({ userName }) => {
           placement="bottom"
           color="#1e293b"></Tooltip>
         <Avatar
-          size={isMobile ? 32 : 40}
+          size={40}
           style={{
             background: "linear-gradient(135deg, #4da3ff 0%, #005bc5 100%)",
             border: "2px solid rgba(255,255,255,0.3)",
             fontWeight: "bold",
-            fontSize: isMobile ? "14px" : "18px",
+            fontSize: "18px",
+            marginRight: isMobile && "5px",
           }}>
           {firstLetter}
         </Avatar>
@@ -32,7 +33,7 @@ const Profile = ({ userName }) => {
           <div
             style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
             <Text style={{ color: "#fff", fontSize: "14px", fontWeight: 600 }}>
-              {userName?.firstName}
+              {Name}
             </Text>
             {/* <Text
               style={{

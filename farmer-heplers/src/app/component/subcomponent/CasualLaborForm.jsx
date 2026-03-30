@@ -92,15 +92,15 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
               placeholder={t("casualDrawer.aclf.dpt")}
             />
           </Form.Item>
-          <Form.Item label={t("casualDrawer.aclf.nnf")} name="nickName">
+          <Form.Item
+            label={t("casualDrawer.aclf.nnf")}
+            name="nickName"
+            rules={[{ required: true, message: t("casualDrawer.aclf.fnrmt") }]}>
             <Input placeholder={t("casualDrawer.aclf.nnplt")} />
           </Form.Item>
         </Row>
         <Row gutter={24}>
-          <Form.Item
-            label={t("casualDrawer.aclf.fnf")}
-            name="firstName"
-            rules={[{ required: true, message: t("casualDrawer.aclf.fnrmt") }]}>
+          <Form.Item label={t("casualDrawer.aclf.fnf")} name="firstName">
             <Input placeholder={t("casualDrawer.aclf.fnpt")} />
           </Form.Item>
           <Form.Item label={t("casualDrawer.aclf.lnf")} name="lastName">
