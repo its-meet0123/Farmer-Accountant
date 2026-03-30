@@ -10,7 +10,7 @@ const Profile = ({ userName }) => {
   const Name = userName?.firstName
     ? `${userName.firstName} ${userName.lastName}`
     : "NO Name";
-  const firstLetter = userName?.firstName.chartAt(0).toUpperCase();
+  const firstLetter = userName?.firstName?.charAt(0).toUpperCase();
   return (
     <>
       <Space size={12} style={{ cursor: "pointer" }}>
