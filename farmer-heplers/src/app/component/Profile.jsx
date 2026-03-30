@@ -17,18 +17,19 @@ const Profile = ({ userName }) => {
         <Tooltip
           title={`${userName?.firstName} ${userName?.lastName}`}
           placement="bottom"
-          color="#1e293b"></Tooltip>
-        <Avatar
-          size={40}
-          style={{
-            background: "linear-gradient(135deg, #4da3ff 0%, #005bc5 100%)",
-            border: "2px solid rgba(255,255,255,0.3)",
-            fontWeight: "bold",
-            fontSize: "18px",
-            marginRight: isMobile && "5px",
-          }}>
-          {firstLetter}
-        </Avatar>
+          color="#1e293b">
+          <Avatar
+            size={40}
+            style={{
+              background: "linear-gradient(135deg, #4da3ff 0%, #005bc5 100%)",
+              border: "2px solid rgba(255,255,255,0.3)",
+              fontWeight: "bold",
+              fontSize: "18px",
+              marginRight: isMobile && "5px",
+            }}>
+            {firstLetter}
+          </Avatar>
+        </Tooltip>
         {!isMobile && (
           <div
             style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>

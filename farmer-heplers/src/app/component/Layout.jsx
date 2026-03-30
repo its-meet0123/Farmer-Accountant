@@ -87,13 +87,9 @@ const AppLayout = ({ children }) => {
         />
       </Header>
       <Content
-      // style={{
-      //   padding: isMobile ? "0" : "24px",
-      //   margin: "0",
-      //   width: "100%",
-      //   maxWidth: isMobile ? "100%" : "1400px",
-      // }}
-      >
+        style={{
+          minHeight: "100vh",
+        }}>
         <div
           style={{
             // background: colorBgContainer,
