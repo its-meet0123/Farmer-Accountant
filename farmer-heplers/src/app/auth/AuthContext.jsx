@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         const res = await axios.get(
-          "https://farmer-accoutant-backend.onrender.com/user/statusstatus?t=${Date.now()}",
+          "https://farmer-accoutant-backend.onrender.com/user/status?t=${Date.now()}",
           {
             headers: {
               "Cache-Control": "no-cache",

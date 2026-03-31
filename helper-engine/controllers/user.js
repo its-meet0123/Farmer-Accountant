@@ -34,34 +34,41 @@ async function handleUserSignUp(req, res) {
 }
 
 async function handleUserLogin(req, res) {
-  const { userId, password } = req.body;
-  const user = await User.findOne({
-    userId,
-    password,
-  });
-  if (!user) {
-    return res.json({
-      status: "fail",
-      code: "INVALID_CREDENTIALS",
+  try {
+    const { userId, password } = req.body;
+    const user = await User.findOne({
+      userId,
+      password,
+    });
+    if (!user) {
+      return res.json({
+        status: "fail",
+        code: "INVALID_CREDENTIALS",
+      });
+    }
+    const token = jwt.sign({ id: userId, password: password }, JWT_SECRET, {
+      expiresIn: "30d",
+    });
+    return res
+      .cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      })
+      .json({
+        status: "success",
+        code: "USER_LOGIN",
+        isLoggedIn: true,
+        user: user,
+      });
+  } catch (err) {
+    return res.status(500).json({
+      status: "Error",
+      message: err.message,
     });
   }
-  const token = jwt.sign({ id: userId, password: password }, JWT_SECRET, {
-    expiresIn: "30d",
-  });
-  return res
-    .cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      path: "/",
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    })
-    .json({
-      status: "success",
-      code: "USER_LOGIN",
-      isLoggedIn: true,
-      user: user,
-    });
 }
 
 async function handleCheckAuthStatus(req, res) {
