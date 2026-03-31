@@ -106,7 +106,7 @@ const WorkersData = () => {
       }
     }
     getData();
-  }, [fetchData, t]);
+  }, [fetchData]);
 
   const tableData = useMemo(() => {
     if (!workerList) return [];

@@ -135,7 +135,7 @@ const WorkerCalculation = () => {
       }
     }
     getData();
-  }, [state, t]);
+  }, [state]);
 
   useEffect(() => {
     async function getData() {

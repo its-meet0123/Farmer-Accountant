@@ -210,7 +210,7 @@ const HarvesterData = () => {
       }
     }
     getData();
-  }, [fetch, t]);
+  }, [fetch]);
 
   const ExpanedRow = (record) => {
     const transData =

@@ -189,7 +189,7 @@ const CasualLabor = () => {
       }
     }
     getData();
-  }, [fetch, t]);
+  }, [fetch]);
 
   const tableData = useMemo(() => {
     if (!additonalWorker) return [];

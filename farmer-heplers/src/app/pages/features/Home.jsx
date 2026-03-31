@@ -133,7 +133,7 @@ const HomePage = () => {
       setFetch("");
     }
     getData();
-  }, [fetch, t]);
+  }, [fetch]);
 
   const tableData = entData.map((item, index) => ({
     ...item,

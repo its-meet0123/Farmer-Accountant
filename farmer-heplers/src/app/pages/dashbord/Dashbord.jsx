@@ -33,7 +33,7 @@ const DashBord = () => {
       }
     }
     getData();
-  }, [location.pathname, t]);
+  }, [location.pathname]);
 
   const features = [
     {

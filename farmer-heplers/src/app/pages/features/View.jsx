@@ -146,7 +146,7 @@ const ViewPage = () => {
       setFetch("");
     }
     getData();
-  }, [fetch, t]);
+  }, [fetch]);
 
   const tableData = useMemo(() => {
     if (!allInd) return [];
