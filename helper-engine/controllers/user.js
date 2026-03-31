@@ -101,21 +101,28 @@ async function handleCheckAuthStatus(req, res) {
 }
 
 async function handleUserLogOut(req, res) {
-  return res
-    .clearCookie("token", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      path: "/",
-      domain: "https://farmer-accoutant-backend.onrender.com",
-      expires: new Date(0),
-    })
-    .json({
-      status: "success",
-      code: "USER_LOGOUT",
-      isLoggedIn: false,
-      user: null,
+  try {
+    return res
+      .clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        path: "/",
+        domain: "https://farmer-accoutant-backend.onrender.com",
+        expires: new Date(0),
+      })
+      .json({
+        status: "success",
+        code: "USER_LOGOUT",
+        isLoggedIn: false,
+        user: null,
+      });
+  } catch (err) {
+    return res.status(500).json({
+      status: "Error",
+      message: err.message,
     });
+  }
 }
 
 async function handleUserDeshbordData(req, res) {
