@@ -109,20 +109,28 @@ async function handleCheckAuthStatus(req, res) {
 
 async function handleUserLogOut(req, res) {
   try {
-    return res
-      .clearCookie("token", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none",
-        path: "/",
-        expires: new Date(0),
-      })
-      .json({
-        status: "success",
-        code: "USER_LOGOUT",
-        isLoggedIn: false,
-        user: null,
-      });
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/",
+      expires: new Date(0),
+    });
+
+    res.cookie("token", "", {
+      expires: new Date(0),
+      path: "/",
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
+
+    return res.json({
+      status: "success",
+      code: "USER_LOGOUT",
+      isLoggedIn: false,
+      user: null,
+    });
   } catch (err) {
     return res.status(500).json({
       status: "Error",
