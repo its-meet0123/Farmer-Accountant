@@ -107,6 +107,7 @@ async function handleUserLogOut(req, res) {
       secure: true,
       sameSite: "none",
       path: "/",
+      domain: "https://farmer-accoutant-backend.onrender.com",
       expires: new Date(0),
     })
     .json({
