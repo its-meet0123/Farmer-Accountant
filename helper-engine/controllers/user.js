@@ -110,7 +110,7 @@ async function handleCheckAuthStatus(req, res) {
 
 async function handleUserLogOut(req, res) {
   try {
-    res.clearCookie("token", {
+    res.cookie("token", "", {
       httpOnly: true,
       secure: true,
       sameSite: "none",
@@ -118,12 +118,12 @@ async function handleUserLogOut(req, res) {
       expires: new Date(0),
     });
 
-    res.cookie("token", "", {
-      expires: new Date(0),
-      path: "/",
+    res.clearCookie("token", {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      path: "/",
+      expires: new Date(0),
     });
 
     return res.json({
