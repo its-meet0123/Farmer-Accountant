@@ -64,8 +64,9 @@ const FeatureCard = ({ item, isLoading }) => {
                       size={60}
                       percent={percent}
                       status="active"
-                      format={() => `${days} Days`}
-                      style={{ color: "#ffffff" }}
+                      format={() => (
+                        <p style={{ color: "#ffffff" }}>{days} Days</p>
+                      )}
                       strokeColor={{ "0%": "#108ee9", "100%": "#87d068" }}
                     />
                     <p

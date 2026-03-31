@@ -187,7 +187,7 @@ async function dashBordData(req, res) {
         return {
           opratorName: opratorName,
           pending: oAt,
-          accoutnAge: duration,
+          accountAge: duration,
         };
       })
       .filter((item) => item !== null);
