@@ -225,7 +225,14 @@ const WorkerCalculation = () => {
           </>
         }>
         {isLoanding ? (
-          <Spin size="large" />
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}>
+            <Spin size="large" styles={{ indicator: { color: "#00E5FF" } }} />
+          </div>
         ) : (
           <>
             <Flex

@@ -327,7 +327,14 @@ const CasualLabor = () => {
           </Button>
         }>
         {isLoading ? (
-          <Spin size="small" />
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}>
+            <Spin size="large" styles={{ indicator: { color: "#00E5FF" } }} />
+          </div>
         ) : (
           <Table
             dataSource={tableData}
