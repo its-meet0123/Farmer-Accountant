@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }) => {
           setIsLoading(false);
         } else {
           setAuthState({ isLoggedIn: false, user: null });
+          setIsLoading(false);
         }
       } catch (err) {
         setAuthState({
