@@ -1,9 +1,9 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { userLoggedOut } from "../../service/auth";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
 import FarmerLoader from "./Loader";
+import { userLoggedOut } from "../service/auth";
 
 const AuthContext = createContext();
 
