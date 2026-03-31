@@ -37,6 +37,11 @@ app.use("/intdate", dateRouter);
 app.use("/worker", workerRouter);
 app.use("/other", otherExpenseRouter);
 app.use("/dashbord", dashBordRouter);
+
+app.get("/health-check", (req, res) => {
+  res.status(200).send("Server is Up and Running");
+});
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on Port ${PORT}`);
 });
