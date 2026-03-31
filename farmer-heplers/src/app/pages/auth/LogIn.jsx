@@ -42,6 +42,8 @@ const LogIn = () => {
         setIsLoanding(false);
         loginComplete(data);
         message.success(t(data.code));
+      } else {
+        message.error(t("loginPage.formSubmitErrorText"));
       }
     } catch (err) {
       const text = `${t("loginPage.formSubmitErrorText")}`;
