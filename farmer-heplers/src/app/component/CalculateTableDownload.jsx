@@ -1,7 +1,7 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
@@ -28,8 +28,11 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
       }
     });
     setData(sortedData);
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
+
+  useEffect(() => {
+    handleSort();
+  }, [shope, sortOrder]);
 
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
@@ -128,7 +131,11 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
             <thead>
               <tr style={{ backgroundColor: "#213C51", color: "#fff" }}>
                 <th>Sr.No</th>
-                <th style={{ padding: "5px" }} onClick={handleSort}>
+                <th
+                  style={{ padding: "5px" }}
+                  onClick={() =>
+                    setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                  }>
                   Date ({sortOrder === "asc" ? "🔼" : "🔽"})
                 </th>
                 <th style={{ padding: "5px" }}>Amount</th>
