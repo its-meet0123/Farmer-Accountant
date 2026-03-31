@@ -68,6 +68,7 @@ const FeatureCard = ({ item, isLoading }) => {
                         <p style={{ color: "#ffffff" }}>{days} Days</p>
                       )}
                       strokeColor={{ "0%": "#108ee9", "100%": "#87d068" }}
+                      trailColor="rgba(4, 153,169,0.15)"
                     />
                     <p
                       style={{
