@@ -21,13 +21,18 @@ export async function postUserDataForSignUp(user) {
 }
 
 export async function postUserDataForLoggedIn(user) {
-  return await axios.post(`${API}/user/login`, user, {
-    headers: {
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-    },
-    withCredentials: true,
-  });
+  try {
+    return await axios.post(`${API}/user/login`, user, {
+      headers: {
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache",
+      },
+      withCredentials: true,
+    });
+  } catch (err) {
+    console.error("Login Error: ", err.message);
+    throw err;
+  }
 }
 
 export async function userLoggedOut() {

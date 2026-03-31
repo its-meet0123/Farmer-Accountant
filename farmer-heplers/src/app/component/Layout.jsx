@@ -101,7 +101,7 @@ const AppLayout = ({ children }) => {
         </div>
       </Content>
       <Footer style={footerstyles.container}>
-        <LayoutFooter t={t} logout={logout} />
+        <LayoutFooter t={t} />
       </Footer>
       <UserActionModel
         openType={openType}

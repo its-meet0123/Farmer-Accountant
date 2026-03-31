@@ -41,7 +41,7 @@ async function handleUserLogin(req, res) {
       password,
     });
     if (!user) {
-      return res.json({
+      return res.status(401).json({
         status: "fail",
         code: "INVALID_CREDENTIALS",
       });

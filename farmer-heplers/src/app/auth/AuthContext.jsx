@@ -80,18 +80,23 @@ export const AuthProvider = ({ children }) => {
           isLoggedIn: data.isLoggedIn,
           user: data.user,
         });
+        setIsSignedUp(true);
         message.success(t(data.code));
+        console.log("auth state", data);
         window.location.replace("https://farmer-accoutant.onrender.com/login");
       }
     } catch (err) {
       message.error(t("logout_error") || err.message);
+      console.log(err.message);
     }
   };
   const goToSignUp = () => {
     localStorage.setItem("hasAccount", "false");
-    logout();
     setIsSignedUp(false);
   };
+
+  console.log("auth sate console", authState);
+  console.log("singup checking console in auth ", isSignedUp);
 
   return (
     <>

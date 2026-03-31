@@ -36,8 +36,9 @@ const LogIn = () => {
     console.log("Received values of form: ", values);
     try {
       const res = await postUserDataForLoggedIn(values);
-      const data = await res.data;
+      const data = res.data;
       if (data.status === "success") {
+        console.log("login page user", data);
         setIsLoanding(false);
         loginComplete(data);
         message.success(t(data.code));
