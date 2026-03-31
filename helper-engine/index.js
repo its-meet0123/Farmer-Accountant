@@ -33,7 +33,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", corsOptions.methods.join(", "));
   res.header(
     "Access-Control-Allow-Headers",
-    corsOptions.allowedHeaders.join(", "),
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, cache-control, pragma",
   );
   res.header("Access-Control-Allow-Credentials", "true");
 

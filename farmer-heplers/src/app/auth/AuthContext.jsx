@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         const res = await axios.get(
-          "https://farmer-accoutant-backend.onrender.com/user/status",
+          "https://farmer-accoutant-backend.onrender.com/user/statusstatus?t=${Date.now()}",
           {
             headers: {
               "Cache-Control": "no-cache",
@@ -33,12 +33,14 @@ export const AuthProvider = ({ children }) => {
         );
         const data = await res.data;
         console.log(data);
-        if (data.isLoggedIn) {
+        if (data && data.isLoggedIn) {
           setAuthState({
             isLoggedIn: data.isLoggedIn,
             user: data.user,
           });
           setIsLoanding(false);
+        } else {
+          setAuthState({ isLoggedIn: false, user: null });
         }
       } catch (err) {
         setAuthState({
@@ -67,15 +69,17 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
+      setAuthState({ isLoggedIn: false, user: null });
       const res = await userLoggedOut();
       const data = await res.data;
       if (data.status === "success") {
-        localStorage.removeItem("token");
+        localStorage.clear();
+        sessionStorage.clear();
         setAuthState({
           isLoggedIn: data.isLoggedIn,
           user: data.user,
         });
-
+        window.location.replace("https://farmer-accoutant.onrender.com/login");
         message.success(t(data.code));
       }
     } catch (err) {
@@ -90,24 +94,24 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <>
-      {!isLoading ? (
-        <AuthContext.Provider
-          value={{
-            authState,
-            isSignedUp,
-            signupComplete,
-            loginComplete,
-            logout,
-            setIsSignedUp,
-            goToSignUP,
-            t,
-            i18n,
-          }}>
-          {children}
-        </AuthContext.Provider>
-      ) : (
-        <FarmerLoader isLoading={isLoading} user={authState.user} />
-      )}
+      <AuthContext.Provider
+        value={{
+          authState,
+          isSignedUp,
+          signupComplete,
+          loginComplete,
+          logout,
+          setIsSignedUp,
+          goToSignUP,
+          t,
+          i18n,
+        }}>
+        {isLoading ? (
+          <FarmerLoader isLoading={isLoading} user={authState.user} />
+        ) : (
+          children
+        )}
+      </AuthContext.Provider>
     </>
   );
 };

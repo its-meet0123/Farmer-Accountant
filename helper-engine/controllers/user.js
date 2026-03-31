@@ -108,7 +108,6 @@ async function handleUserLogOut(req, res) {
         secure: true,
         sameSite: "none",
         path: "/",
-        domain: "farmer-accoutant-backend.onrender.com",
         expires: new Date(0),
       })
       .json({
@@ -123,20 +122,6 @@ async function handleUserLogOut(req, res) {
       message: err.message,
     });
   }
-}
-
-async function handleUserDeshbordData(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const [entData, indData, workerData, endDate] = await Promise.all([
-    EntData.findOne({ userId: currentUserId }),
-    IndData.findOne({ userId: currentUserId }),
-    WorkerData.findOne({ userId: currentUserId }),
-    EndDate.findOne({ userId: currentUserId }),
-  ]);
-
-  res.json({ entData, indData, workerData, endDate });
 }
 
 async function handleGetSignUpUserData(req, res) {
@@ -205,7 +190,6 @@ module.exports = {
   handleUserLogin,
   handleCheckAuthStatus,
   handleUserLogOut,
-  handleUserDeshbordData,
   handleGetSignUpUserData,
   handleSignUpUserUpdatePassword,
   handleSignUpUserDeleteAccount,
