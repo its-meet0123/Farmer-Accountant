@@ -32,13 +32,17 @@ export async function postUserDataForLoggedIn(user) {
 }
 
 export async function userLoggedOut() {
-  return await axios.post(`${API}/user/logout`, {
-    headers: {
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
+  return await axios.post(
+    `${API}/user/logout`,
+    {},
+    {
+      headers: {
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache",
+      },
+      withCredentials: true,
     },
-    withCredentials: true,
-  });
+  );
 }
 
 export async function getUserData(user) {
