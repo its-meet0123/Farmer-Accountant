@@ -163,7 +163,8 @@ async function dashBordData(req, res) {
     const casualLaborList = allCasualLabor
       .map((labors) => {
         const laborName = labors?.serviceProvider?.nickName;
-        const effectiveDate = labors?.transactions?.at(0)?.date || new Date();
+        const effectiveDate =
+          labors?.transactions?.at(0)?.startDate || new Date();
         const lastTransaction = labors?.transactions.at(-1);
         const oAt = formatCurrency(lastTransaction?.total || 0);
         const duration = calculateAccountDuration(effectiveDate);
@@ -178,7 +179,8 @@ async function dashBordData(req, res) {
     const harvestList = allHarvests
       .map((harvester) => {
         const opratorName = harvester?.serviceProvider?.nickName;
-        const effectiveDate = harvester?.transactions?.at(0);
+        const effectiveDate =
+          harvester?.transactions?.at(0)?.startDate || new Date();
         const lastTransaction = harvester?.transactions.at(-1);
         const oAt = formatCurrency(lastTransaction?.total || 0);
         const duration = calculateAccountDuration(effectiveDate);

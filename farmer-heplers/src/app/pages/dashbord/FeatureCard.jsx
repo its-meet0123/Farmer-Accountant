@@ -61,8 +61,11 @@ const FeatureCard = ({ item, isLoading }) => {
                   <div style={styles.contentBox}>
                     <Progress
                       type="circle"
+                      size={60}
                       percent={percent}
+                      status="active"
                       format={() => `${days} Days`}
+                      style={{ color: "#ffffff" }}
                       strokeColor={{ "0%": "#108ee9", "100%": "#87d068" }}
                     />
                     <p
