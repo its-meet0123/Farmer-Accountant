@@ -1,6 +1,16 @@
 import axios from "axios";
 const API = import.meta.env.VITE_API_URL;
 
+const apiClient = axios.create({
+  baseURL: API,
+  headers: {
+    "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
+  },
+  timeout: 30000,
+});
+
 export async function postUserDataForSignUp(user) {
   return await axios.post(`${API}/user/signup`, user, {
     headers: {
@@ -35,13 +45,22 @@ export async function userLoggedOut() {
 }
 
 export async function getUserData(user) {
-  return await axios.post(`${API}/user`, user);
+  try {
+    const url = `/user?t=${new Date().getTime()}`;
+    return await apiClient.post(url, user);
+  } catch (error) {
+    console.error("Iphone fetch Error: ", error.message);
+    throw error;
+  }
+  //return await axios.post(`${API}/user`, user);
 }
 
 export async function changeUserPassword(passwords) {
-  return await axios.post(`${API}/user/update-password`, passwords);
+  return await apiClient.post(`/user/update-password`, passwords);
+  // return await axios.post(`${API}/user/update-password`, passwords);
 }
 
 export async function deleteUserAccount(user) {
-  return await axios.post(`${API}/user/delete-account`, user);
+  return await apiClient.post(`/user/delete-account`, user);
+  //return await axios.post(`${API}/user/delete-account`, user);
 }
