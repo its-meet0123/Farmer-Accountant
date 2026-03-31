@@ -16,7 +16,6 @@ export async function postUserDataForSignUp(user) {
     headers: {
       "Cache-Control": "no-cache",
       Pragma: "no-cache",
-      Expires: "0",
     },
     withCredentials: true,
   });
@@ -27,7 +26,6 @@ export async function postUserDataForLoggedIn(user) {
     headers: {
       "Cache-Control": "no-cache",
       Pragma: "no-cache",
-      Expires: "0",
     },
     withCredentials: true,
   });
@@ -38,7 +36,6 @@ export async function userLoggedOut() {
     headers: {
       "Cache-Control": "no-cache",
       Pragma: "no-cache",
-      Expires: "0",
     },
     withCredentials: true,
   });

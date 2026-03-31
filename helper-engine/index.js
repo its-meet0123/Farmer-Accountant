@@ -21,14 +21,22 @@ connectMongoDB(`${process.env.MONGO_URI}`).then(() =>
   console.log("Connected to MongoDB"),
 );
 
-app.use(
-  cors({
-    origin: "https://farmer-accoutant.onrender.com",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-  }),
-);
+const corsOptions = {
+  origin: "https://farmer-accoutant.onrender.com",
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "chache-control",
+    "pragma",
+  ],
+};
+
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
 
 app.use("/user", userRouter);
 app.use("/int", integratedRouter);
