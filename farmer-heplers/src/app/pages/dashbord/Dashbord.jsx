@@ -44,6 +44,7 @@ const DashBord = () => {
           ? shopesArray.map((shop) => ({
               name: shop.shopeNumber || "",
               total: shop.overAllTotal || 0,
+              accountAge: shop.accountAge || 0,
               isEmpty: false,
             }))
           : [
@@ -62,6 +63,7 @@ const DashBord = () => {
           ? permanentWorkersArray.map((worker) => ({
               name: worker.workerName || "",
               total: worker.overAllTotal || 0,
+              accountAge: worker?.accountAge || 0,
               isEmpty: false,
             }))
           : [
@@ -80,6 +82,7 @@ const DashBord = () => {
           ? casualLaborsArray.map((labor) => ({
               name: labor.laborName || "",
               total: labor.pending || 0,
+              accountAge: labor?.accountAge || 0,
               isEmpty: false,
             }))
           : [
@@ -98,6 +101,7 @@ const DashBord = () => {
           ? harvestersArray.map((harvest) => ({
               name: harvest.opratorName || "",
               total: harvest.pending || 0,
+              accountAge: harvest?.accountAge || 0,
               isEmpty: false,
             }))
           : [

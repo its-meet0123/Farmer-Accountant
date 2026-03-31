@@ -1,5 +1,5 @@
 function calculateAutoInterestForTakeAmount(amount, startDate, rate, endDate) {
-  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0 };
+  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0, days: 0 };
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 
@@ -25,7 +25,7 @@ function calculateAutoInterestForBuyBillAmount(
   rate,
   endDate,
 ) {
-  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0 };
+  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0, days: 0 };
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 
@@ -47,7 +47,7 @@ function calculateAutoInterestForBuyBillAmount(
 }
 
 function calculateAutoInterestForGiveAmount(amount, startDate, rate, endDate) {
-  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0 };
+  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0, days: 0 };
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 
@@ -74,11 +74,7 @@ function calculateAutoInterestDieselBillAmount(
   rate,
   endDate,
 ) {
-  if (amount === 0 || !amount)
-    return {
-      interst: 0,
-      totalAmount: 0,
-    };
+  if (amount === 0 || !amount) return { interst: 0, totalAmount: 0, days: 0 };
   const start = new Date(startDate);
   const today = endDate ? new Date(endDate) : new Date();
 
@@ -99,9 +95,20 @@ function calculateAutoInterestDieselBillAmount(
   };
 }
 
+const calculateAccountDuration = (effectiveDate) => {
+  const start = new Date(effectiveDate);
+  const today = new Date();
+
+  const diffTime = today - start;
+  const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  return days;
+};
+
 module.exports = {
   calculateAutoInterestForTakeAmount,
   calculateAutoInterestForBuyBillAmount,
   calculateAutoInterestDieselBillAmount,
   calculateAutoInterestForGiveAmount,
+  calculateAccountDuration,
 };

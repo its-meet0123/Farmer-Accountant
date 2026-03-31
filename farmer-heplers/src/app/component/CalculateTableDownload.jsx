@@ -136,7 +136,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                   onClick={() =>
                     setSortOrder(sortOrder === "asc" ? "desc" : "asc")
                   }>
-                  Date ({sortOrder === "asc" ? "🔼" : "🔽"})
+                  Date ({sortOrder === "desc" ? "🔼" : "🔽"})
                 </th>
                 <th style={{ padding: "5px" }}>Amount</th>
                 <th style={{ padding: "5px" }}>Days</th>
@@ -327,7 +327,6 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
     });
 
     setData(sortedData);
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
   const handleCancel = () => {
@@ -347,6 +346,10 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
       pdf.save(`Table_View_of ${worker?.workerName?.nickName}`);
     });
   };
+
+  useEffect(() => {
+    handleSort();
+  }, [accounts, sortOrder]);
   return (
     <>
       <Modal
@@ -364,8 +367,12 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
             <thead>
               <tr style={{ backgroundColor: "#213C51", color: "#fff" }}>
                 <th>Sr.No</th>
-                <th style={{ padding: "5px" }} onClick={() => handleSort()}>
-                  Date {sortOrder === "asc" ? "🔼" : "🔽"}
+                <th
+                  style={{ padding: "5px" }}
+                  onClick={() =>
+                    setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                  }>
+                  Date {sortOrder === "desc" ? "🔼" : "🔽"}
                 </th>
                 <th style={{ padding: "5px" }}>Amount</th>
                 <th style={{ padding: "5px" }}>Days</th>

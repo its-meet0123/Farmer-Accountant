@@ -11,6 +11,7 @@ const {
   calculateAutoInterestForBuyBillAmount,
   calculateAutoInterestForGiveAmount,
   calculateAutoInterestDieselBillAmount,
+  calculateAccountDuration,
 } = require("./dashbordInterestCalc");
 const {
   overAllTotalOfAllShopes,
@@ -39,6 +40,8 @@ async function dashBordData(req, res) {
     const allShopes = Ind.map((shopes) => {
       if (!shopes?.shopeAccount) return null;
       const shopeNumber = shopes?.shopeNumber;
+      const effectiveDate =
+        shopes?.shopeAccount?.at(0)?.startDate || new Date();
       const shopeData = shopes.shopeAccount.map((transaction) => {
         const startDate = transaction?.startDate || new Date();
         const rate = transaction?.rate || 0;
@@ -102,9 +105,11 @@ async function dashBordData(req, res) {
       });
 
       const shopesTotal = overAllTotalOfAllShopes(shopeData);
+      const duration = calculateAccountDuration(effectiveDate);
       return {
         shopeNumber: shopeNumber,
         overAllTotal: shopesTotal,
+        accountAge: duration,
       };
     }).filter((item) => item !== null);
 
@@ -112,6 +117,7 @@ async function dashBordData(req, res) {
       .map((worker) => {
         if (!worker?.account) return null;
         const workerName = worker?.workerDetail?.workerName?.nickName;
+        const effectiveDate = worker?.account?.at(0)?.date || new Date();
         const workerAccounts = worker?.account.map((transactions) => {
           const startDate = transactions?.date;
           const rate = transactions?.rate || 24;
@@ -145,9 +151,11 @@ async function dashBordData(req, res) {
           };
         });
         const Returns = overAllTotalOfAllWorkers(workerAccounts);
+        const duration = calculateAccountDuration(effectiveDate);
         return {
           workerName: workerName,
           overAllTotal: Returns,
+          accountAge: duration,
         };
       })
       .filter((item) => item !== null);
@@ -155,11 +163,14 @@ async function dashBordData(req, res) {
     const casualLaborList = allCasualLabor
       .map((labors) => {
         const laborName = labors?.serviceProvider?.nickName;
+        const effectiveDate = labors?.transactions?.at(0)?.date || new Date();
         const lastTransaction = labors?.transactions.at(-1);
         const oAt = formatCurrency(lastTransaction?.total || 0);
+        const duration = calculateAccountDuration(effectiveDate);
         return {
           laborName: laborName,
           pending: oAt,
+          accountAge: duration,
         };
       })
       .filter((item) => item !== null);
@@ -167,11 +178,14 @@ async function dashBordData(req, res) {
     const harvestList = allHarvests
       .map((harvester) => {
         const opratorName = harvester?.serviceProvider?.nickName;
+        const effectiveDate = harvester?.transactions?.at(0);
         const lastTransaction = harvester?.transactions.at(-1);
         const oAt = formatCurrency(lastTransaction?.total || 0);
+        const duration = calculateAccountDuration(effectiveDate);
         return {
           opratorName: opratorName,
           pending: oAt,
+          accoutnAge: duration,
         };
       })
       .filter((item) => item !== null);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Spin } from "antd";
+import { Progress, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { styles } from "./DasnbordStyle";
 
@@ -48,32 +48,42 @@ const FeatureCard = ({ item, isLoading }) => {
               height: "100%",
               opacity: isLoading ? 0.5 : 1,
             }}>
-            {descArray.map((data, i) => (
-              <div
-                key={i}
-                style={{
-                  ...styles.descSlide,
-                  width: `${100 / descArray.length}%`,
-                }}>
-                <div style={styles.contentBox}>
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: data.isEmpty ? "1.15rem" : "1.4rem",
-                      fontWeight: data.isEmpty ? "400" : "600",
-                      color: "#ffffff",
-                      opacity: data.isEmpty ? 0.7 : 1,
-                      lineHeight: "1.6",
-                      wordBreak: "break-word",
-                    }}>
-                    {data?.name || "N/A"}
-                  </p>
-                  {!data.isEmpty && (
-                    <div style={styles.amountBadge}>{data?.total}</div>
-                  )}
+            {descArray.map((data, i) => {
+              const days = data?.accountAge;
+              const percent = Math.min(Math.round((days / 180) * 100), 100);
+              return (
+                <div
+                  key={i}
+                  style={{
+                    ...styles.descSlide,
+                    width: `${100 / descArray.length}%`,
+                  }}>
+                  <div style={styles.contentBox}>
+                    <Progress
+                      type="circle"
+                      percent={percent}
+                      format={() => `${days} Days`}
+                      strokeColor={{ "0%": "#108ee9", "100%": "#87d068" }}
+                    />
+                    <p
+                      style={{
+                        margin: 0,
+                        fontSize: data.isEmpty ? "1.15rem" : "1.4rem",
+                        fontWeight: data.isEmpty ? "400" : "600",
+                        color: "#ffffff",
+                        opacity: data.isEmpty ? 0.7 : 1,
+                        lineHeight: "1.6",
+                        wordBreak: "break-word",
+                      }}>
+                      {data?.name || "N/A"}
+                    </p>
+                    {!data.isEmpty && (
+                      <div style={styles.amountBadge}>{data?.total}</div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
