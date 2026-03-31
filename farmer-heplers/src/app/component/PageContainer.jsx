@@ -193,6 +193,8 @@ const PageContainer = ({ title, children, extra }) => {
         style={{
           width: "100%",
           overflowX: "auto",
+          display: "flex",
+          justifyContent: "center",
         }}>
         {children}
       </div>

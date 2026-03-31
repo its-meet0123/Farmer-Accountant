@@ -33,7 +33,13 @@ const Profile = ({ userName }) => {
         {!isMobile && (
           <div
             style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-            <Text style={{ color: "#fff", fontSize: "14px", fontWeight: 600 }}>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: "14px",
+                fontWeight: 600,
+                textTransform: "capitalize",
+              }}>
               {Name}
             </Text>
             {/* <Text

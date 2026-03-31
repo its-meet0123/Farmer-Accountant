@@ -1,6 +1,7 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Modal } from "antd";
+import { useState } from "react";
 
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
@@ -11,7 +12,24 @@ const formatCurrency = (amount) => {
 };
 
 const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
-  const data = shope.shopeAccount ? shope.shopeAccount : [];
+  const [data, setData] = useState([]);
+  const accounts = shope.shopeAccount ? shope.shopeAccount : [];
+  const [sortOrder, setSortOrder] = useState("asc");
+
+  const handleSort = () => {
+    const sortedData = [...accounts].sort((a, b) => {
+      const dateA = new Date(a.startDate);
+      const dateB = new Date(b.startDate);
+
+      if (sortOrder === "asc") {
+        return dateA - dateB;
+      } else {
+        return dateB - dateA;
+      }
+    });
+    setData(sortedData);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
 
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
@@ -110,7 +128,9 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
             <thead>
               <tr style={{ backgroundColor: "#213C51", color: "#fff" }}>
                 <th>Sr.No</th>
-                <th style={{ padding: "5px" }}>Date</th>
+                <th style={{ padding: "5px" }} onClick={handleSort}>
+                  Date ({sortOrder === "asc" ? "🔼" : "🔽"})
+                </th>
                 <th style={{ padding: "5px" }}>Amount</th>
                 <th style={{ padding: "5px" }}>Days</th>
                 <th style={{ padding: "5px" }}>Months</th>
@@ -241,7 +261,9 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
   );
 };
 const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
-  const data = worker.account ? worker.account : [];
+  const accounts = worker.account ? worker.account : [];
+  const [data, setData] = useState([]);
+  const [sortOrder, setSortOrder] = useState("asc");
 
   let totalOfAmount = 0;
   let totalOfAmountInterest = 0;
@@ -284,6 +306,23 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
 
     return DateTimeFormat;
   };
+
+  const handleSort = () => {
+    const sortedData = [...accounts].sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+
+      if (sortOrder === "asc") {
+        return dateA - dateB;
+      } else {
+        return dateB - dateA;
+      }
+    });
+
+    setData(sortedData);
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
   const handleCancel = () => {
     setModelOpen(false);
   };
@@ -318,7 +357,9 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
             <thead>
               <tr style={{ backgroundColor: "#213C51", color: "#fff" }}>
                 <th>Sr.No</th>
-                <th style={{ padding: "5px" }}>Date</th>
+                <th style={{ padding: "5px" }} onClick={() => handleSort()}>
+                  Date {sortOrder === "asc" ? "🔼" : "🔽"}
+                </th>
                 <th style={{ padding: "5px" }}>Amount</th>
                 <th style={{ padding: "5px" }}>Days</th>
                 <th style={{ padding: "5px" }}>Months</th>
