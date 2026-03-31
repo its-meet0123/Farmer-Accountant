@@ -573,7 +573,7 @@
       "nnpt": "enter nick name",
       "fnf": "First Name",
       "fnpt": "enter first name",
-      "fnrmt": "First name is required",
+      "fnrmt": "Nick name is required",
       "lnf": "Last Name",
       "lnpt": "enter last name",
       "cf": "Contact",
@@ -587,6 +587,7 @@
     "acltf": {
       "colps": {
         "glm": "Form Guidelines",
+        "hli": "Please review and enter your transactions carefully. Once added, a transaction can only be edited or deleted if it is the last entry in your records.",
         "li1": "Fill all mandatory(*) fields per transaction",
         "li2": "Process payment upon task is finished: fill all fields.",
         "li3": "Only record task finished without payment: fill 'Wages/D' and 'Duration' fields.",
@@ -640,7 +641,7 @@
       "title": "Mechanized Hiring Data",
       "bt": "New Harvest Entry",
       "dtm": "Delete action not work",
-      "dtd": "You can only delete this transaction if it is the must recent one. Transactions preceding the last entry cannot be modified.",
+      "dtd": "You can only delete this transaction if it is the must recent one. Transactions preceding the last entry cannot be deleted.",
       "etm": "Edit action not work",
       "etd": "You can only edit this transaction if it is the must recent one. Transactions preceding the last entry cannot be modified."
     }
