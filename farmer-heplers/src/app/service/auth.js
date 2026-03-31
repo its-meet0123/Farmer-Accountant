@@ -8,7 +8,6 @@ const apiClient = axios.create({
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
   },
-  timeout: 30000,
 });
 
 export async function postUserDataForSignUp(user) {
