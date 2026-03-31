@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { userLoggedOut } from "../service/auth";
+import { userLoggedOut } from "../../service/auth";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
 import FarmerLoader from "./Loader";
@@ -8,7 +8,7 @@ import FarmerLoader from "./Loader";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLoading, setIsLoanding] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isSignedUp, setIsSignedUp] = useState(
     localStorage.getItem("hasAccount") === "true",
   );
@@ -22,7 +22,8 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         const res = await axios.get(
-          "https://farmer-accoutant-backend.onrender.com/user/status?t=${Date.now()}",
+          `https://farmer-accoutant-backend.onrender.com/user/status?t=${Date.now()}`,
+
           {
             headers: {
               "Cache-Control": "no-cache",
@@ -31,14 +32,14 @@ export const AuthProvider = ({ children }) => {
             withCredentials: true,
           },
         );
-        const data = await res.data;
+        const data = res.data;
         console.log(data);
         if (data && data.isLoggedIn) {
           setAuthState({
             isLoggedIn: data.isLoggedIn,
             user: data.user,
           });
-          setIsLoanding(false);
+          setIsLoading(false);
         } else {
           setAuthState({ isLoggedIn: false, user: null });
         }
@@ -49,12 +50,11 @@ export const AuthProvider = ({ children }) => {
         });
         console.log(err.message);
       } finally {
-        setIsLoanding(false);
+        setIsLoading(false);
       }
     };
     checkAuth();
   }, []);
-  console.log(authState);
 
   const signupComplete = () => {
     localStorage.setItem("hasAccount", "true");
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setAuthState({ isLoggedIn: false, user: null });
       const res = await userLoggedOut();
-      const data = await res.data;
+      const data = res.data;
       if (data.status === "success") {
         localStorage.clear();
         sessionStorage.clear();
@@ -79,14 +79,13 @@ export const AuthProvider = ({ children }) => {
           isLoggedIn: data.isLoggedIn,
           user: data.user,
         });
-        window.location.replace("https://farmer-accoutant.onrender.com/login");
         message.success(t(data.code));
       }
     } catch (err) {
-      console.log(err.message);
+      message.error(t("logout_error") || err.message);
     }
   };
-  const goToSignUP = () => {
+  const goToSignUp = () => {
     localStorage.setItem("hasAccount", "false");
     logout();
     setIsSignedUp(false);
@@ -102,7 +101,7 @@ export const AuthProvider = ({ children }) => {
           loginComplete,
           logout,
           setIsSignedUp,
-          goToSignUP,
+          goToSignUp,
           t,
           i18n,
         }}>

@@ -22,7 +22,7 @@ const LogIn = () => {
     });
   };
 
-  const goToSignUP = () => {
+  const goToSignUp = () => {
     setIsSignedUp(false);
     navigate("/signup");
   };
@@ -110,7 +110,7 @@ const LogIn = () => {
               {t("loginPage.formSubmitButtonText")}
             </Button>
             or{" "}
-            <a onClick={() => goToSignUP()}>
+            <a onClick={() => goToSignUp()}>
               {t("loginPage.formGoToSignUpButtonText")}
             </a>
           </Form.Item>
