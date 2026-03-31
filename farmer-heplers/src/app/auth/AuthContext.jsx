@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { userLoggedOut } from "../service/auth";
-import { Alert, message, Spin } from "antd";
+import { message } from "antd";
 import { useTranslation } from "react-i18next";
 import FarmerLoader from "./Loader";
 
@@ -24,6 +24,11 @@ export const AuthProvider = ({ children }) => {
         const res = await axios.get(
           "https://farmer-accoutant-backend.onrender.com/user/status",
           {
+            headers: {
+              "Cache-Control": "no-cache",
+              Pragma: "no-cache",
+              Expires: "0",
+            },
             withCredentials: true,
           },
         );
@@ -41,6 +46,7 @@ export const AuthProvider = ({ children }) => {
           isLoggedIn: false,
           user: null,
         });
+        console.log(err.message);
       } finally {
         setIsLoanding(false);
       }
@@ -64,11 +70,15 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await userLoggedOut();
       const data = await res.data;
-      setAuthState({
-        isLoggedIn: data.isLoggedIn,
-        user: data.user,
-      });
-      message.success(t(data.code));
+      if (data.status === "success") {
+        localStorage.removeItem("token");
+        setAuthState({
+          isLoggedIn: data.isLoggedIn,
+          user: data.user,
+        });
+
+        message.success(t(data.code));
+      }
     } catch (err) {
       console.log(err.message);
     }
