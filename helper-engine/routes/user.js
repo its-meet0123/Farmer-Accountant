@@ -4,7 +4,6 @@ const {
   handleUserLogin,
   handleCheckAuthStatus,
   handleUserLogOut,
-  handleUserDeshbordData,
   handleGetSignUpUserData,
   handleSignUpUserUpdatePassword,
   handleSignUpUserDeleteAccount,
@@ -15,7 +14,6 @@ router.post("/", handleGetSignUpUserData);
 router.get("/status", handleCheckAuthStatus);
 router.post("/signup", handleUserSignUp);
 router.post("/login", handleUserLogin);
-router.get("/dashboard", handleUserDeshbordData);
 router.post("/logout", handleUserLogOut);
 router.post("/update-password", handleSignUpUserUpdatePassword);
 router.post("/delete-account", handleSignUpUserDeleteAccount);
