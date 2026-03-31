@@ -115,6 +115,7 @@ async function handleUserLogOut(req, res) {
       secure: true,
       sameSite: "none",
       path: "/",
+      partitioned: true,
       expires: new Date(0),
     });
 
@@ -123,6 +124,7 @@ async function handleUserLogOut(req, res) {
       secure: true,
       sameSite: "none",
       path: "/",
+      partitioned: true,
       expires: new Date(0),
     });
 

@@ -71,11 +71,11 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       setAuthState({ isLoggedIn: false, user: null });
+      localStorage.clear();
+      sessionStorage.clear();
       const res = await userLoggedOut();
       const data = res.data;
       if (data.status === "success") {
-        localStorage.clear();
-        sessionStorage.clear();
         setAuthState({
           isLoggedIn: data.isLoggedIn,
           user: data.user,
