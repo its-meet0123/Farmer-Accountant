@@ -24,9 +24,9 @@ connectMongoDB(`${process.env.MONGO_URI}`).then(() =>
 app.use(
   cors({
     origin: "https://farmer-accoutant.onrender.com",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   }),
 );
 
