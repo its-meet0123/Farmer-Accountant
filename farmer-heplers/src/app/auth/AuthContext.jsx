@@ -81,6 +81,7 @@ export const AuthProvider = ({ children }) => {
           user: data.user,
         });
         message.success(t(data.code));
+        window.location.replace("https://farmer-accoutant.onrender.com/login");
       }
     } catch (err) {
       message.error(t("logout_error") || err.message);
