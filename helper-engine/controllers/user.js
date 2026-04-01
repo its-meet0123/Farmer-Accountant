@@ -11,27 +11,40 @@ const JWT_SECRET = process.env.SECRET_KEY;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
 async function handleUserSignUp(req, res) {
-  const { userName, userId, password } = req.body;
-  const existingUser = await User.findOne({ userId, password });
-  if (existingUser) {
-    res.json({
+  try {
+    const { userName, userId, password } = req.body;
+    const existingUser = await User.findOne({ userId });
+    if (existingUser) {
+      res.json({
+        status: "success",
+        code: "USER_EXISTS",
+        isSignedUp: true,
+        isLoggedIn: false,
+        user: existingUser,
+      });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    console.log("hashedPassword for signup: ", hashedPassword);
+
+    await User.create({
+      userName,
+      userId,
+      password: hashedPassword,
+    });
+    return res.status(201).json({
       status: "success",
-      code: "USER_EXISTS",
+      code: "USER_CREATED",
       isSignedUp: true,
-      isLoggedIn: false,
-      user: existingUser,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: "error",
+      message: err.message,
     });
   }
-  await User.create({
-    userName,
-    userId,
-    password,
-  });
-  return res.status(201).json({
-    status: "success",
-    code: "USER_CREATED",
-    isSignedUp: true,
-  });
 }
 
 async function handleUserLogin(req, res) {
@@ -178,22 +191,37 @@ async function handleGetSignUpUserData(req, res) {
 }
 
 async function handleSignUpUserUpdatePassword(req, res) {
-  const { userId, newPassword } = req.body;
+  try {
+    const { userId, newPassword } = req.body;
 
-  const user = await User.findOneAndUpdate(
-    { userId: userId },
-    { password: newPassword },
-  );
-  if (!user) {
-    return res.status(404).json({
-      status: "fail",
-      code: "USER_NOT_FOUND",
+    // const user = await User.findOneAndUpdate(
+    //   { userId: userId },
+    //   { password: newPassword },
+    // );
+    const user = await User.findOne({ userId });
+
+    if (!user) {
+      return res.status(404).json({
+        status: "fail",
+        code: "USER_NOT_FOUND",
+      });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    console.log("hashedPassword for update : ", hashedPassword);
+    user.password = hashedPassword;
+    await user.save();
+    return res.status(200).json({
+      status: "success",
+      code: "PASSWORD_UPDATED",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: "error",
+      message: err.message,
     });
   }
-  return res.status(200).json({
-    status: "success",
-    code: "PASSWORD_UPDATED",
-  });
 }
 
 async function handleSignUpUserDeleteAccount(req, res) {
