@@ -1,6 +1,20 @@
 import axios from "axios";
 const API = import.meta.env.VITE_API_URL;
 
+const apiClient = axios.create({
+  baseURL: API,
+  headers: {
+    "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
+  },
+});
+
+const refreshClient = axios.create({
+  baseURL: API,
+  withCredentials: true,
+});
+
 const axiosInstance = axios.create({
   baseURL: API,
   headers: {
@@ -8,11 +22,6 @@ const axiosInstance = axios.create({
     "Cache-Control": "no-cache",
     Pragma: "no-cache",
   },
-  withCredentials: true,
-});
-
-const refreshClient = axios.create({
-  baseURL: API,
   withCredentials: true,
 });
 
@@ -38,10 +47,12 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
+    console.log("Response error in interceptor: ", error.response);
 
     let isRedirecting = false;
 
     if (!error.response || !originalRequest) {
+      console.log("Neteork or Cors error in interceptor");
       return Promise.reject(error);
     }
 
@@ -50,6 +61,7 @@ axiosInstance.interceptors.response.use(
       !originalRequest._retry &&
       !originalRequest.url.includes("/user/refresh-token")
     ) {
+      console.log("401 error intercepted, attempting token refresh");
       originalRequest._retry = true;
 
       try {
@@ -60,6 +72,7 @@ axiosInstance.interceptors.response.use(
         console.log("Token refreshed from interceptor: ", newToken);
 
         if (!newToken) {
+          console.log("No new token received during refresh");
           throw new Error("No new token received");
         }
 
@@ -82,14 +95,5 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-const apiClient = axios.create({
-  baseURL: API,
-  headers: {
-    "Content-Type": "application/json",
-    "Cache-Control": "no-cache",
-    Pragma: "no-cache",
-  },
-});
 
 export { axiosInstance, apiClient };
