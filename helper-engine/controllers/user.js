@@ -40,12 +40,15 @@ async function handleUserLogin(req, res) {
     const user = await User.findOne({
       userId,
     });
+    console.log("user :", user);
 
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("isMatch :", isMatch);
     if (!user || !isMatch) {
       return res.status(401).json({
         status: "fail",
         code: "INVALID_CREDENTIALS",
+        message: isMatch,
       });
     }
     // 30d to 15m
