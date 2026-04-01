@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
         console.log(data);
 
-        if (data.isLoggedIn === "ture") {
+        if (data.isLoggedIn === "true") {
           setAuthState({
             isLoggedIn: data.isLoggedIn,
             user: data.user,
