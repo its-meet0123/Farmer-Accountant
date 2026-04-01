@@ -4,11 +4,13 @@ const EntData = require("../models/integrated");
 const IndData = require("../models/integratedData");
 const EndDate = require("../models/endDate");
 const WorkerData = require("../models/worker");
-const bcrypt = require("bcryptjs");
+//const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.SECRET_KEY;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
+
+console.log("aaaaaaaaaaaa : ", JWT_SECRET, "bbbbbbbbbbb : ", REFRESH_SECRET);
 
 async function handleUserSignUp(req, res) {
   try {
@@ -64,11 +66,11 @@ async function handleUserLogin(req, res) {
       });
     }
     // 30d to 15m
-    const accessToken = jwt.sign({ id: userId }, JWT_SECRET, {
+    const accessToken = jwt.sign({ id: user.userId }, JWT_SECRET, {
       expiresIn: "15m",
     });
     // refresh accessToken for 7d
-    const refreshToken = jwt.sign({ id: userId }, REFRESH_SECRET, {
+    const refreshToken = jwt.sign({ id: user.userId }, REFRESH_SECRET, {
       expiresIn: "7d",
     });
 
