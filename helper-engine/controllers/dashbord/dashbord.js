@@ -29,7 +29,8 @@ async function dashBordData(req, res) {
     }).format(amount);
   };
   try {
-    const token = req.cookies.token;
+    // const token = req.cookies.token;
+    const token = req.headers.authorization?.split(" ")[1];
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const Ind = await Industries.find({ userId: currentUserId });

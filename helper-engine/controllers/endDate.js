@@ -4,22 +4,30 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleGetInterestDate(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const interestDate = await InterestDate.find({ userId: currentUserId });
+  //const token = req.cookies.token;
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const interestDate = await InterestDate.find({ userId: currentUserId });
 
-  if (!interestDate) {
-    return res.status(404).json({
+    if (!interestDate) {
+      return res.status(404).json({
+        status: "Error",
+        Message: "Interest Date not found",
+      });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      data: interestDate,
+    });
+  } catch (err) {
+    return res.status(500).json({
       status: "Error",
-      Message: "Interest Date not found",
+      message: err.message,
     });
   }
-
-  return res.status(200).json({
-    status: "success",
-    data: interestDate,
-  });
 }
 
 async function handlePostInterestDate(req, res) {
@@ -43,7 +51,8 @@ async function handlePostInterestDate(req, res) {
 }
 
 async function handleUpdateInterestDate(req, res) {
-  const token = req.cookies.token;
+  //const token = req.cookies.token;
+  const token = req.headers.authorization?.split(" ")[1];
   const decoded = jwt.verify(token, JWT_SECRET);
   const currentUserId = decoded.id;
 

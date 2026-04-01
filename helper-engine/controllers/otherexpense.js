@@ -10,27 +10,51 @@ const JWT_SECRET = process.env.SECRET_KEY;
 
 // 1. get worker list
 async function handleGetAllAdditionalWorkers(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const allAdditionalWorker = await FieldWorker.find({ userId: currentUserId });
-  if (!allAdditionalWorker) {
-    return res.status(404).json({
-      status: "Error",
-      Code: "CL.FW.WNF",
+  try {
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const allAdditionalWorker = await FieldWorker.find({
+      userId: currentUserId,
     });
+    if (!allAdditionalWorker) {
+      return res.status(404).json({
+        status: "Error",
+        Code: "CL.FW.WNF",
+      });
+    }
+    return res.status(200).json({
+      status: "Success",
+      data: allAdditionalWorker,
+      Code: "CL.FW.WF",
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(500)
+      .json({ status: "Error", Code: "CL.FW.GAWSEM", message: err.message });
   }
-  return res.status(200).json({
-    status: "Success",
-    data: allAdditionalWorker,
-    Code: "CL.FW.WF",
-  });
 }
 
 // 1. get harvest data
 async function handleGetAllHarvestList(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const harvestList = await Harvest.find({ userId: currentUserId });
@@ -55,7 +79,14 @@ async function handleUpdateHarvestDataById(req, res) {
   try {
     const { id } = req.params;
     const body = req.body;
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -83,7 +114,14 @@ async function handleUpdateAdditionalWorkerById(req, res) {
   try {
     const id = req.params.id;
     const body = req.body;
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     if (!id || !body) {
@@ -122,7 +160,14 @@ async function handleUpdateAdditionalWorkerById(req, res) {
 async function handleDeleteAdditionalWorkerById(req, res) {
   try {
     const id = req.params.id;
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -160,7 +205,14 @@ async function handleDeleteAdditionalWorkerById(req, res) {
 async function handleDeleteHarvestDataById(req, res) {
   try {
     const { id } = req.params;
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -205,7 +257,14 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
         trans: body,
       });
     }
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -251,7 +310,14 @@ async function handleAddHarvesterTransactionById(req, res) {
 
     const body = await autoTotalForHarvesterData(ids, upComingTrans);
 
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -298,7 +364,14 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
         trnas: body,
       });
     }
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -339,7 +412,14 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
 // 5. update harvester data transaction
 async function updateHarvesterTransactionByIds(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -378,7 +458,14 @@ async function updateHarvesterTransactionByIds(req, res) {
 async function deleteAdditionalWorkerTransactionByIds(req, res) {
   try {
     const { workerId, transactionId } = req.params;
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -426,7 +513,14 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
 async function deleteHavresterTransactionByIds(req, res) {
   try {
     const { harvestId, transactionId } = req.params;
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 

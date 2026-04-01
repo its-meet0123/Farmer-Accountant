@@ -52,8 +52,6 @@ async function handleUserLogin(req, res) {
     const user = await User.findOne({
       userId,
     });
-    console.log("scerets: ", JWT_SECRET, REFRESH_SECRET);
-    console.log("user :", user);
 
     const isMatch = user ? (password == user.password ? true : false) : false;
     console.log("isMatch :", isMatch);

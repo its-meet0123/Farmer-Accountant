@@ -7,25 +7,51 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleGetAllIndData(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const indAllData = await Industries.find({ userId: currentUserId });
-  if (!indAllData) {
-    return res.status(404).json({
+  try {
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res.status(401).json({
+        status: "Error",
+        message: "Authentication token required",
+      });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const indAllData = await Industries.find({ userId: currentUserId });
+
+    if (!indAllData) {
+      return res.status(404).json({
+        status: "Error",
+        Message: "Data not found",
+      });
+    }
+
+    return res.status(200).json({
+      status: "Success",
+      data: indAllData,
+    });
+  } catch (error) {
+    return res.status(500).json({
       status: "Error",
-      Message: "Data not found",
+      message: error.message,
     });
   }
-  return res.status(200).json({
-    status: "Success",
-    data: indAllData,
-  });
 }
 
 async function handleGetIndShopeAccountById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
+
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const { id } = req.params;
@@ -137,37 +163,58 @@ async function handleGetIndShopeAccountById(req, res) {
 }
 
 async function handleUpdateIndDataById(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const { id } = req.params;
-  const body = req.body;
-  const indDataById = await Industries.findOneAndUpdate(
-    { _id: id, userId: currentUserId },
-    body,
-    {
-      new: true,
-    },
-  );
-  if (!indDataById) {
-    return res.status(404).json({ status: "Error", msg: "Data not found" });
+  try {
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const { id } = req.params;
+    const body = req.body;
+    const indDataById = await Industries.findOneAndUpdate(
+      { _id: id, userId: currentUserId },
+      body,
+      {
+        new: true,
+      },
+    );
+    if (!indDataById) {
+      return res.status(404).json({ status: "Error", msg: "Data not found" });
+    }
+    return res.json({
+      status: "Success",
+      msg: "Ind. Data updated successfully",
+      data: indDataById,
+    });
+  } catch (err) {
+    return res.status(500).json({ status: "Error", message: err.message });
   }
-  return res.json({
-    status: "Success",
-    msg: "Ind. Data updated successfully",
-    data: indDataById,
-  });
 }
 
 async function handleDeleteManyIndData(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const ids = req.body;
-  if (!Array.isArray(ids) || ids.length === 0) {
-    return res.status(400).json({ message: "Ids required" });
-  }
   try {
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const ids = req.body;
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ message: "Ids required" });
+    }
+
     const indDataById = await Industries.deleteMany({
       _id: { $in: ids },
       userId: currentUserId,
@@ -187,7 +234,15 @@ async function handleDeleteManyIndData(req, res) {
 
 async function handlePushIndShopeAccountById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
+
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const id = req.params.id;
@@ -216,10 +271,19 @@ async function handlePushIndShopeAccountById(req, res) {
 }
 
 async function handleUpdateIndShopeAccountTransactionById(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
   try {
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+
     const { shopeId, accountId } = req.params;
     const updateData = req.body;
 
@@ -244,50 +308,79 @@ async function handleUpdateIndShopeAccountTransactionById(req, res) {
 }
 
 async function handleDeleteManyIndShopeTransaction(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const { id } = req.params;
-  const ids = req.body;
-  if (ids.length === 0) {
-    return res.status(400).json({ message: "Ids required" });
+  try {
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const { id } = req.params;
+    const ids = req.body;
+    if (ids.length === 0) {
+      return res.status(400).json({ message: "Ids required" });
+    }
+    const indDataById = await Industries.updateOne(
+      { _id: id, userId: currentUserId },
+      {
+        $pull: { shopeAccount: { _id: { $in: ids } } },
+      },
+    );
+    if (!indDataById) {
+      return res
+        .status(404)
+        .json({ status: "Error", msg: "Ind Data not found" });
+    }
+    return res
+      .status(200)
+      .json({ status: "Success", msg: "Ind. Datas Deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ status: "Error", message: err.message });
   }
-  const indDataById = await Industries.updateOne(
-    { _id: id, userId: currentUserId },
-    {
-      $pull: { shopeAccount: { _id: { $in: ids } } },
-    },
-  );
-  if (!indDataById) {
-    return res.status(404).json({ status: "Error", msg: "Ind Data not found" });
-  }
-  return res
-    .status(200)
-    .json({ status: "Success", msg: "Ind. Datas Deleted successfully" });
 }
 
 async function handleCreateIndData(req, res) {
-  const body = req.body;
-  console.log(body);
-  if (!body) {
-    return res
-      .status(404)
-      .json({ status: "Error", msg: "All fields are required" });
+  try {
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
+
+    jwt.verify(token, JWT_SECRET);
+
+    const body = req.body;
+    console.log(body);
+    if (!body) {
+      return res
+        .status(404)
+        .json({ status: "Error", msg: "All fields are required" });
+    }
+
+    const result = await Industries.insertMany(
+      body.map((item) => ({
+        userId: item.userId,
+        nameInd: item.nameInd,
+        shopeNumber: item.shopeNumber,
+        shopeAccount: item.shopeAccount,
+      })),
+    );
+
+    return res.status(201).json({
+      status: "Success",
+      msg: `Ind. Data created successfully for ${result._id} id`,
+    });
+  } catch (err) {
+    return res.status(500).json({ status: "Error", message: err.message });
   }
-
-  const result = await Industries.insertMany(
-    body.map((item) => ({
-      userId: item.userId,
-      nameInd: item.nameInd,
-      shopeNumber: item.shopeNumber,
-      shopeAccount: item.shopeAccount,
-    })),
-  );
-
-  return res.status(201).json({
-    status: "Success",
-    msg: `Ind. Data created successfully for ${result._id} id`,
-  });
 }
 
 module.exports = {

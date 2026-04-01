@@ -4,109 +4,145 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleGetAllEntData(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const entDataDB = await entData.find({ userId: currentUserId });
+  // const token = req.cookies.token;
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const entDataDB = await entData.find({ userId: currentUserId });
 
-  if (!entDataDB) {
-    return res.status(404).json({
+    if (!entDataDB) {
+      return res.status(404).json({
+        status: "Error",
+        msg: "Ent Data not found",
+      });
+    }
+
+    return res.status(200).json({
+      status: "Success",
+      data: entDataDB,
+    });
+  } catch (err) {
+    return res.status(500).json({
       status: "Error",
-      msg: "Ent Data not found",
+      message: err.message,
     });
   }
-
-  return res.status(200).json({
-    status: "Success",
-    data: entDataDB,
-  });
 }
 
 async function handleGetEntDataById(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const { id } = req.params;
-  if (!id) {
-    return res.status(400).json({
+  // const token = req.cookies.token;
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({
+        status: "Error",
+        msg: "ID required",
+      });
+    }
+    const entDataDB = await entData.findById({
+      _id: id,
+      userId: currentUserId,
+    });
+
+    if (!entDataDB) {
+      return res.status(404).json({
+        status: "Error",
+        msg: `data not found from this ${id} `,
+      });
+    }
+
+    return res.status(200).json({
+      status: "Success",
+      data: entDataDB,
+    });
+  } catch (err) {
+    return res.status(500).json({
       status: "Error",
-      msg: "ID required",
+      message: err.message,
     });
   }
-  const entDataDB = await entData.findById({ _id: id, userId: currentUserId });
-
-  if (!entDataDB) {
-    return res.status(404).json({
-      status: "Error",
-      msg: `data not found from this ${id} `,
-    });
-  }
-
-  return res.status(200).json({
-    status: "Success",
-    data: entDataDB,
-  });
 }
 
 async function handleUpdateEntDataById(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const { id } = req.params;
-  const body = req.body;
+  // const token = req.cookies.token;
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const { id } = req.params;
+    const body = req.body;
 
-  if (!id && !body) {
-    return res.status(400).json({
+    if (!id && !body) {
+      return res.status(400).json({
+        status: "Error",
+        msg: "Please id and fields are required",
+      });
+    }
+    const entDataDB = await entData.findByIdAndUpdate(
+      { _id: id, userId: currentUserId },
+      body,
+      { new: true },
+    );
+
+    if (!entDataDB) {
+      return res.status(404).json({
+        status: "Error",
+        msg: "Ent Data not found",
+      });
+    }
+
+    return res.status(200).json({
+      status: "Success",
+      data: entDataDB,
+    });
+  } catch (err) {
+    return res.status(500).json({
       status: "Error",
-      msg: "Please id and fields are required",
+      message: err.message,
     });
   }
-  const entDataDB = await entData.findByIdAndUpdate(
-    { _id: id, userId: currentUserId },
-    body,
-    { new: true },
-  );
-
-  if (!entDataDB) {
-    return res.status(404).json({
-      status: "Error",
-      msg: "Ent Data not found",
-    });
-  }
-
-  return res.status(200).json({
-    status: "Success",
-    data: entDataDB,
-  });
 }
 
 async function handleDeleteEntDataById(req, res) {
-  const token = req.cookies.token;
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const { id } = req.params;
-  if (!id) {
-    return res.status(400).json({
+  // const token = req.cookies.token;
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
+    const currentUserId = decoded.id;
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({
+        status: "Error",
+        msg: "ID required",
+      });
+    }
+    const entDataDB = await entData.findByIdAndDelete({
+      _id: id,
+      userId: currentUserId,
+    });
+
+    if (!entDataDB) {
+      return res.status(404).json({
+        status: "Error",
+        msg: `data not found from this ${id} `,
+      });
+    }
+
+    return res.status(200).json({
+      status: "Success",
+      msg: `data deleted successfully from ${entDataDB._id}`,
+    });
+  } catch (err) {
+    return res.status(500).json({
       status: "Error",
-      msg: "ID required",
+      message: err.message,
     });
   }
-  const entDataDB = await entData.findByIdAndDelete({
-    _id: id,
-    userId: currentUserId,
-  });
-
-  if (!entDataDB) {
-    return res.status(404).json({
-      status: "Error",
-      msg: `data not found from this ${id} `,
-    });
-  }
-
-  return res.status(200).json({
-    status: "Success",
-    msg: `data deleted successfully from ${entDataDB._id}`,
-  });
 }
 
 async function handlePostEntData(req, res) {

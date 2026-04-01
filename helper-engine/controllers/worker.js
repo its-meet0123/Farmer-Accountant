@@ -21,7 +21,14 @@ async function handleAddWorker(req, res) {
 
 async function handleGetAllWorkers(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const workers = await WorkerData.find({ userId: currentUserId });
@@ -43,7 +50,14 @@ async function handleGetAllWorkers(req, res) {
 
 async function handleEditWorkerById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -82,7 +96,14 @@ async function handleEditWorkerById(req, res) {
 
 async function handleDeleteWorkerById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -116,7 +137,14 @@ async function handleDeleteWorkerById(req, res) {
 
 async function handleGetWorkerById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const { id } = req.params;
@@ -150,7 +178,14 @@ async function handleGetWorkerById(req, res) {
 
 async function handlePushWorkerTransactionById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -188,7 +223,14 @@ async function handlePushWorkerTransactionById(req, res) {
 
 async function handleGetWorkerTransactionById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const { workerId } = req.params;
@@ -265,14 +307,22 @@ async function handleGetWorkerTransactionById(req, res) {
     return res.status(500).json({
       status: "fail",
       message:
-        "Data not fetched internal sever problem in get worker transaction",
+        "Data not fetched internal sever problem in get worker transaction" +
+        err.message,
     });
   }
 }
 
 async function handleUpdateWorkerTransactionById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const { workerId, accountId } = req.params;
@@ -306,7 +356,14 @@ async function handleUpdateWorkerTransactionById(req, res) {
 
 async function handleDeleteWorkerTransactionById(req, res) {
   try {
-    const token = req.cookies.token;
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
