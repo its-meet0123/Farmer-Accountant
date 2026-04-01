@@ -4,7 +4,7 @@ const EntData = require("../models/integrated");
 const IndData = require("../models/integratedData");
 const EndDate = require("../models/endDate");
 const WorkerData = require("../models/worker");
-import bcrypt from "bcryptjs";
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.SECRET_KEY;
