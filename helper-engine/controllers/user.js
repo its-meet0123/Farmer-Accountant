@@ -10,8 +10,6 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.SECRET_KEY;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
-console.log("aaaaaaaaaaaa : ", JWT_SECRET, "bbbbbbbbbbb : ", REFRESH_SECRET);
-
 async function handleUserSignUp(req, res) {
   try {
     const { userName, userId, password } = req.body;
