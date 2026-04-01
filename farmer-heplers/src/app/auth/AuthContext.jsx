@@ -27,9 +27,6 @@ export const AuthProvider = ({ children }) => {
         console.log(data);
 
         if (data.isLoggedIn === "ture") {
-          if (data.accessToken) {
-            localStorage.setItem("token", data.accessToken);
-          }
           setAuthState({
             isLoggedIn: data.isLoggedIn,
             user: data.user,

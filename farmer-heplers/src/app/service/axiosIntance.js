@@ -39,10 +39,11 @@ axiosInstance.interceptors.response.use(
 
       try {
         const res = await axios.post(
-          `${API}/user/status?t=${Date.now()}`,
+          `${API}/user/refresh-token?t=${Date.now()}`,
           {},
           { withCredentials: true },
         );
+
         const newToken = res.data.accessToken;
 
         localStorage.setItem("token", newToken);
