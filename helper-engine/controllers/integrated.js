@@ -6,7 +6,14 @@ const JWT_SECRET = process.env.SECRET_KEY;
 async function handleGetAllEntData(req, res) {
   // const token = req.cookies.token;
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const entDataDB = await entData.find({ userId: currentUserId });
@@ -33,7 +40,14 @@ async function handleGetAllEntData(req, res) {
 async function handleGetEntDataById(req, res) {
   // const token = req.cookies.token;
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
 
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
@@ -71,7 +85,14 @@ async function handleGetEntDataById(req, res) {
 async function handleUpdateEntDataById(req, res) {
   // const token = req.cookies.token;
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const { id } = req.params;
@@ -111,7 +132,14 @@ async function handleUpdateEntDataById(req, res) {
 async function handleDeleteEntDataById(req, res) {
   // const token = req.cookies.token;
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const { id } = req.params;

@@ -49,8 +49,6 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
     console.log("Response error in interceptor: ", error.response);
 
-    let isRedirecting = false;
-
     if (!error.response || !originalRequest) {
       console.log("Neteork or Cors error in interceptor");
       return Promise.reject(error);
@@ -83,10 +81,8 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(originalRequest);
       } catch (err) {
         localStorage.removeItem("token");
-        if (!isRedirecting) {
-          isRedirecting = true;
-          //window.location.href = "https://farmer-accoutant.onrender.com/login";
-        }
+
+        //window.location.href = "https://farmer-accoutant.onrender.com/login";
 
         console.error("Token refresh failed: ", err.message);
         return Promise.reject(err);

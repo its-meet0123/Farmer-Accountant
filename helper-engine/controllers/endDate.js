@@ -6,7 +6,14 @@ const JWT_SECRET = process.env.SECRET_KEY;
 async function handleGetInterestDate(req, res) {
   //const token = req.cookies.token;
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res
+        .status(401)
+        .json({ status: "Error", message: "Authentication token required" });
+    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const interestDate = await InterestDate.find({ userId: currentUserId });
@@ -52,7 +59,14 @@ async function handlePostInterestDate(req, res) {
 
 async function handleUpdateInterestDate(req, res) {
   //const token = req.cookies.token;
-  const token = req.headers.authorization?.split(" ")[1];
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
   const decoded = jwt.verify(token, JWT_SECRET);
   const currentUserId = decoded.id;
 
