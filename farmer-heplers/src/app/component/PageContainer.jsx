@@ -24,8 +24,8 @@ const AuthContainer = ({
 
   const styles = {
     overlay: {
-      minHeight: "100vh",
-      width: "100%",
+      height: "100vh",
+      width: "100vw",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
