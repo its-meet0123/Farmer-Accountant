@@ -24,9 +24,9 @@ export const AuthProvider = ({ children }) => {
         const res = await axiosInstance.get(`/user/status?t=${Date.now()}`);
         const data = await res.data;
 
-        console.log(data);
+        console.log("auth Provider fetch data : ", data);
 
-        if (data.isLoggedIn === "true") {
+        if (data.isLoggedIn === true) {
           setAuthState({
             isLoggedIn: data.isLoggedIn,
             user: data.user,
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
           isLoggedIn: false,
           user: null,
         });
-        console.log(err.message);
+        console.log("auth provider api error : ", err.message);
         // window.location.replace("https://farmer-accoutant.onrender.com/login");
       } finally {
         setIsLoading(false);

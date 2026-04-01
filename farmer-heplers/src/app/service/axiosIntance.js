@@ -54,8 +54,10 @@ axiosInstance.interceptors.response.use(
 
       try {
         const res = await refreshClient.post(`/user/refresh-token`, {});
-
+        console.log("Interceptor refresh response: ", res);
         const newToken = res.data.accessToken;
+
+        console.log("Token refreshed from interceptor: ", newToken);
 
         if (!newToken) {
           throw new Error("No new token received");
