@@ -11,6 +11,11 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
+const refreshClient = axios.create({
+  baseURL: API,
+  withCredentials: true,
+});
+
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -34,6 +39,8 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    let isRedirecting = false;
+
     if (!error.response || !originalRequest) {
       return Promise.reject(error);
     }
@@ -41,13 +48,13 @@ axiosInstance.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.includes("/refresh-token")
+      !originalRequest.url.includes("/user/refresh-token")
     ) {
       originalRequest._retry = true;
 
       try {
-        const res = await axios.post(
-          `${API}/user/refresh-token?t=${Date.now()}`,
+        const res = await refreshClient.post(
+          `/user/refresh-token?t=${Date.now()}`,
           {},
           { withCredentials: true },
         );
@@ -65,7 +72,11 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(originalRequest);
       } catch (err) {
         localStorage.removeItem("token");
-        window.location.href = "https://farmer-accoutant.onrender.com/login";
+        if (!isRedirecting) {
+          isRedirecting = true;
+          window.location.href = "https://farmer-accoutant.onrender.com/login";
+        }
+
         console.error("Token refresh failed: ", err.message);
         return Promise.reject(err);
       }
