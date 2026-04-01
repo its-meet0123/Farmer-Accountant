@@ -34,7 +34,15 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (!originalRequest) {
+      return Promise.reject(error);
+    }
+
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes("/user/refresh-token")
+    ) {
       originalRequest._retry = true;
 
       try {
@@ -46,6 +54,10 @@ axiosInstance.interceptors.response.use(
 
         const newToken = res.data.accessToken;
 
+        if (!newToken) {
+          throw new Error("No new token received");
+        }
+
         localStorage.setItem("token", newToken);
 
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
@@ -55,6 +67,7 @@ axiosInstance.interceptors.response.use(
         localStorage.removeItem("token");
         window.location.href = "https://farmer-accoutant.onrender.com/login";
         console.error("Token refresh failed: ", err.message);
+        return Promise.reject(err);
       }
     }
     return Promise.reject(error);
