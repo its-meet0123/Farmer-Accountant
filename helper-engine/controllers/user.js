@@ -49,27 +49,19 @@ async function handleUserLogin(req, res) {
       });
     }
     // 30d to 15m
-    const accessToken = jwt.sign(
-      { id: userId, password: password },
-      JWT_SECRET,
-      {
-        expiresIn: "15m",
-      },
-    );
+    const accessToken = jwt.sign({ id: userId }, JWT_SECRET, {
+      expiresIn: "15m",
+    });
     // refresh accessToken for 7d
-    const refreshToken = jwt.sign(
-      { id: userId, password: password },
-      REFRESH_SECRET,
-      {
-        expiresIn: "7d",
-      },
-    );
+    const refreshToken = jwt.sign({ id: userId }, REFRESH_SECRET, {
+      expiresIn: "7d",
+    });
 
     return res
       .cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: true,
-        sameSite: "none",
+        sameSite: "None",
         path: "/",
         partitioned: true,
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
@@ -90,6 +82,7 @@ async function handleUserLogin(req, res) {
 }
 
 async function handleCheckAuthStatus(req, res) {
+  console.log("cookies :", req.cookies);
   // const token = req.cookies.token;
   const refreshToken = req.cookies.refreshToken;
   const token = req.headers.authorization?.split(" ")[1];
@@ -167,7 +160,7 @@ async function handleUserLogOut(req, res) {
     res.cookie("token", "", {
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "None",
       path: "/",
       partitioned: true,
       expires: new Date(0),
