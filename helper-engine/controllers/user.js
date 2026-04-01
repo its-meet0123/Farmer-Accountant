@@ -24,8 +24,7 @@ async function handleUserSignUp(req, res) {
       });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = password;
 
     console.log("hashedPassword for signup: ", hashedPassword);
 
@@ -55,7 +54,7 @@ async function handleUserLogin(req, res) {
     });
     console.log("user :", user);
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = user ? (password == user.password ? true : false) : false;
     console.log("isMatch :", isMatch);
     if (!user || !isMatch) {
       return res.status(401).json({
@@ -207,8 +206,7 @@ async function handleSignUpUserUpdatePassword(req, res) {
       });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    const hashedPassword = newPassword;
     console.log("hashedPassword for update : ", hashedPassword);
     user.password = hashedPassword;
     await user.save();
