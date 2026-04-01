@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       setAuthState({ isLoggedIn: false, user: null });
-      localStorage.clear();
+      localStorage.removeItem("token");
       sessionStorage.clear();
       const res = await userLoggedOut();
       const data = res.data;
