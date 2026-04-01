@@ -49,7 +49,7 @@ const LogIn = () => {
       }
     } catch (err) {
       const text = `${t("loginPage.formSubmitErrorText")}`;
-      showError(text);
+      showError(err.message);
       console.log(err.message);
     }
   };

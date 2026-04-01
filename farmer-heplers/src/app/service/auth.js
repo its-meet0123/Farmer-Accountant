@@ -5,12 +5,7 @@ export async function postUserDataForSignUp(user) {
 }
 
 export async function postUserDataForLoggedIn(user) {
-  try {
-    return await axiosInstance.post(`/user/login`, user);
-  } catch (err) {
-    console.error("Login Error: ", err.message);
-    throw err;
-  }
+  return await axiosInstance.post(`/user/login`, user);
 }
 
 export async function userLoggedOut() {

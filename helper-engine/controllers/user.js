@@ -85,65 +85,32 @@ async function handleCheckAuthStatus(req, res) {
   console.log("cookies :", req.cookies);
   console.log("headers : ", req.headers);
   // const token = req.cookies.token;
-  const refreshToken = req.cookies.token;
+
   const token = req.headers.authorization?.split(" ")[1];
-
-  try {
-    if (token) {
-      const decoded = jwt.verify(token, JWT_SECRET);
-
-      const user = await User.findOne({
-        userId: decoded.id,
-      });
-
-      if (user) {
-        return res.status(200).json({
-          status: "success",
-          isLoggedIn: true,
-          user: user,
-        });
-      }
-    }
-  } catch (err) {
-    console.log("header token access system error :", err.message);
-  }
-  // const decoded = jwt.verify(refreshToken, REFRESH_SECRET);
-
-  if (!refreshToken) {
-    return res.status(403).json({
-      status: "Fail",
+  if (!token) {
+    return res.status(401).json({
+      status: "fail",
+      message: "No token provided",
       isLoggedIn: false,
-      message: "You are not authnticated!",
     });
   }
+
   try {
-    const refreshVerify = jwt.verify(refreshToken, REFRESH_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
 
-    if (!refreshVerify.id) {
-      return res.status(403).json({
-        status: "Fail",
-        isLoggedIn: false,
-        message: "Token is invaild or expired!",
-      });
-    }
-
-    const user = await User.findOne({ userId: refreshVerify.id });
+    const user = await User.findOne({
+      userId: decoded.id,
+    });
 
     if (!user) {
       return res.status(401).json({
-        status: "Fail",
+        status: "fail",
         isLoggedIn: false,
-        message: "User not found!",
+        user: null,
       });
     }
-
-    const newAccessToken = jwt.sign({ id: user.userId }, JWT_SECRET, {
-      expiresIn: "15m",
-    });
-
-    res.status(200).json({
+    return res.status(200).json({
       status: "success",
-      accessToken: newAccessToken,
       isLoggedIn: true,
       user: user,
     });
@@ -251,6 +218,42 @@ async function handleSignUpUserDeleteAccount(req, res) {
   }
 }
 
+async function handleRefreshToken(req, res) {
+  const refreshToken = req.cookies.refreshToken;
+  if (!refreshToken) {
+    return res.status(401).json({
+      status: "fail",
+      message: "No refresh token provided",
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(refreshToken, REFRESH_SECRET);
+    const user = await User.findOne({ userId: decoded.id });
+
+    if (!user) {
+      return res.status(401).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+
+    const newAccessToken = jwt.sign({ id: user.userId }, JWT_SECRET, {
+      expiresIn: "15m",
+    });
+
+    return res.status(200).json({
+      status: "success",
+      accessToken: newAccessToken,
+    });
+  } catch (err) {
+    return res.status(403).json({
+      status: "fail",
+      message: "Invalid or expired refresh token" + err.message,
+    });
+  }
+}
+
 module.exports = {
   handleUserSignUp,
   handleUserLogin,
@@ -259,4 +262,5 @@ module.exports = {
   handleGetSignUpUserData,
   handleSignUpUserUpdatePassword,
   handleSignUpUserDeleteAccount,
+  handleRefreshToken,
 };
