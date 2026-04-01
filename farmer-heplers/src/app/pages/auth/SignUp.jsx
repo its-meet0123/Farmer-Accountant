@@ -34,10 +34,14 @@ const SignUp = () => {
         signupComplete();
         setIsLoanding(false);
         navigate("/login");
+      } else {
+        message.error("user create nhi huyaa hai");
+        setIsLoanding(false);
       }
     } catch (err) {
       message.error(t("signUpPage.formSubmitErrorText2"));
       console.log(err.message);
+      setIsLoanding(false);
     }
   };
 

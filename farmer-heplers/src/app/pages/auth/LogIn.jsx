@@ -51,6 +51,7 @@ const LogIn = () => {
       const text = `${t("loginPage.formSubmitErrorText")}`;
       showError(err.message);
       console.log(err.message);
+      setIsLoading(false);
     }
   };
   return (
