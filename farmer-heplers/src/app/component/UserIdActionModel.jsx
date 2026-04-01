@@ -95,10 +95,14 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
 
       try {
         const res = await deleteUserAccount(user);
-        message.warning(t(res.data.code));
-        setOpenType(null);
-        goToSingUp();
-        navigate("/signup");
+        const data = await res.data;
+        if (data.status === "success") {
+          message.warning(t(res.data.code));
+          setOpenType(null);
+          goToSingUp();
+        } else {
+          message.error(t("userIdActionModal.submitFunction.duem"));
+        }
       } catch (err) {
         console.log(err.message);
         message.error(t("userIdActionModal.submitFunction.duem"));

@@ -1,9 +1,9 @@
-import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
 import FarmerLoader from "./Loader";
 import { userLoggedOut } from "../service/auth";
+import { axiosInstance } from "../service/axiosIntance";
 
 const AuthContext = createContext();
 
@@ -21,30 +21,29 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get(
-          `https://farmer-accoutant-backend.onrender.com/user/status?t=${Date.now()}`,
+        const res = await axiosInstance.get(`/user/status?t=${Date.now()}`);
+        const data = await res.data;
 
-          {
-            headers: {
-              "Cache-Control": "no-cache",
-              Pragma: "no-cache",
-            },
-            withCredentials: true,
-          },
-        );
-        const data = res.data;
         console.log(data);
-        if (data && data.isLoggedIn) {
+
+        if (data.isLoggedIn === "ture") {
+          if (data.accessToken) {
+            localStorage.setItem("token", data.accessToken);
+          }
           setAuthState({
             isLoggedIn: data.isLoggedIn,
             user: data.user,
           });
           setIsLoading(false);
         } else {
-          setAuthState({ isLoggedIn: false, user: null });
+          setAuthState({
+            isLoggedIn: false,
+            user: null,
+          });
           setIsLoading(false);
         }
       } catch (err) {
+        localStorage.removeItem("token");
         setAuthState({
           isLoggedIn: false,
           user: null,

@@ -1,34 +1,13 @@
-import axios from "axios";
+import { apiClient, axiosInstance } from "./axiosIntance";
 const API = import.meta.env.VITE_API_URL;
 
-const apiClient = axios.create({
-  baseURL: API,
-  headers: {
-    "Content-Type": "application/json",
-    "Cache-Control": "no-cache",
-    Pragma: "no-cache",
-  },
-});
-
 export async function postUserDataForSignUp(user) {
-  return await axios.post(`${API}/user/signup`, user, {
-    headers: {
-      "Cache-Control": "no-cache",
-      Pragma: "no-cache",
-    },
-    withCredentials: true,
-  });
+  return await axiosInstance.post(`${API}/user/signup`, user);
 }
 
 export async function postUserDataForLoggedIn(user) {
   try {
-    return await axios.post(`${API}/user/login`, user, {
-      headers: {
-        "Cache-Control": "no-cache",
-        Pragma: "no-cache",
-      },
-      withCredentials: true,
-    });
+    return await axiosInstance.post(`${API}/user/login`, user);
   } catch (err) {
     console.error("Login Error: ", err.message);
     throw err;
@@ -36,17 +15,7 @@ export async function postUserDataForLoggedIn(user) {
 }
 
 export async function userLoggedOut() {
-  return await axios.post(
-    `${API}/user/logout`,
-    {},
-    {
-      headers: {
-        "Cache-Control": "no-cache",
-        Pragma: "no-cache",
-      },
-      withCredentials: true,
-    },
-  );
+  return await axiosInstance.post(`/user/logout`, {});
 }
 
 export async function getUserData(user) {

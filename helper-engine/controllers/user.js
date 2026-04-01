@@ -4,10 +4,11 @@ const EntData = require("../models/integrated");
 const IndData = require("../models/integratedData");
 const EndDate = require("../models/endDate");
 const WorkerData = require("../models/worker");
+import bcrypt from "bcryptjs";
 const jwt = require("jsonwebtoken");
-const { default: mongoose } = require("mongoose");
 
 const JWT_SECRET = process.env.SECRET_KEY;
+const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
 async function handleUserSignUp(req, res) {
   const { userName, userId, password } = req.body;
@@ -38,28 +39,44 @@ async function handleUserLogin(req, res) {
     const { userId, password } = req.body;
     const user = await User.findOne({
       userId,
-      password,
     });
-    if (!user) {
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!user || !isMatch) {
       return res.status(401).json({
         status: "fail",
         code: "INVALID_CREDENTIALS",
       });
     }
-    const token = jwt.sign({ id: userId, password: password }, JWT_SECRET, {
-      expiresIn: "30d",
-    });
+    // 30d to 15m
+    const accessToken = jwt.sign(
+      { id: userId, password: password },
+      JWT_SECRET,
+      {
+        expiresIn: "15m",
+      },
+    );
+    // refresh accessToken for 7d
+    const refreshToken = jwt.sign(
+      { id: userId, password: password },
+      REFRESH_SECRET,
+      {
+        expiresIn: "7d",
+      },
+    );
+
     return res
-      .cookie("token", token, {
+      .cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: true,
         sameSite: "none",
         path: "/",
         partitioned: true,
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       })
       .json({
         status: "success",
+        accessToken: accessToken,
         code: "USER_LOGIN",
         isLoggedIn: true,
         user: user,
@@ -73,34 +90,71 @@ async function handleUserLogin(req, res) {
 }
 
 async function handleCheckAuthStatus(req, res) {
-  const token = req.cookies.token;
+  // const token = req.cookies.token;
+  const refreshToken = req.cookies.refreshToken;
+  const token = req.headers.authorization?.split(" ")[1];
 
-  if (!token) {
-    return res.json({
-      status: "fail",
+  try {
+    if (token) {
+      const decoded = jwt.verify(token, JWT_SECRET);
+
+      const user = await User.findOne({
+        userId: decoded.id,
+      });
+
+      if (user) {
+        return res.status(200).json({
+          status: "success",
+          isLoggedIn: true,
+          user: user,
+        });
+      }
+    }
+  } catch (err) {
+    console.log("header token access system error :", err.message);
+  }
+  // const decoded = jwt.verify(refreshToken, REFRESH_SECRET);
+
+  if (!refreshToken) {
+    return res.status(403).json({
+      status: "Fail",
       isLoggedIn: false,
+      message: "You are not authnticated!",
     });
   }
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    const user = await User.findOne({
-      userId: decoded.id,
-      password: decoded.password,
-    });
+    const refreshVerify = jwt.verify(refreshToken, REFRESH_SECRET);
 
-    if (!user) {
-      return res.json({
-        status: "fail",
+    if (!refreshVerify.id) {
+      return res.status(403).json({
+        status: "Fail",
         isLoggedIn: false,
+        message: "Token is invaild or expired!",
       });
     }
-    return res.status(200).json({
+
+    const user = await User.findOne({ userId: refreshVerify.id });
+
+    if (!user) {
+      return res.status(401).json({
+        status: "Fail",
+        isLoggedIn: false,
+        message: "User not found!",
+      });
+    }
+
+    const newAccessToken = jwt.sign({ id: user.userId }, JWT_SECRET, {
+      expiresIn: "15m",
+    });
+
+    res.status(200).json({
       status: "success",
+      accessToken: newAccessToken,
       isLoggedIn: true,
       user: user,
     });
   } catch (err) {
-    return res.json({
+    return res.status(500).json({
       status: "error",
       message: err.message,
       isLoggedIn: false,
@@ -119,7 +173,7 @@ async function handleUserLogOut(req, res) {
       expires: new Date(0),
     });
 
-    res.clearCookie("token", {
+    res.clearCookie("refreshToken", {
       httpOnly: true,
       secure: true,
       sameSite: "none",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Flex, Form, Input, message } from "antd";
 import { postUserDataForLoggedIn } from "../../service/auth";
@@ -8,7 +8,7 @@ import UserActionModel from "../../component/UserIdActionModel";
 import { AuthContainer } from "../../component/PageContainer";
 
 const LogIn = () => {
-  const [isLoading, setIsLoanding] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { loginComplete, setIsSignedUp, t } = useAuth();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
@@ -32,18 +32,20 @@ const LogIn = () => {
   };
 
   const onFinish = async (values) => {
-    setIsLoanding(true);
+    setIsLoading(true);
     console.log("Received values of form: ", values);
     try {
       const res = await postUserDataForLoggedIn(values);
       const data = res.data;
       if (data.status === "success") {
+        localStorage.setItem("token", data.accessToken);
         console.log("login page user", data);
-        setIsLoanding(false);
+        setIsLoading(false);
         loginComplete(data);
         message.success(t(data.code));
       } else {
-        message.error(t("loginPage.formSubmitErrorText"));
+        message.error(t(data.code));
+        setIsLoading(false);
       }
     } catch (err) {
       const text = `${t("loginPage.formSubmitErrorText")}`;
