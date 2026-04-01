@@ -30,7 +30,7 @@ const workerAccountSchema = new mongoose.Schema({
     payment: { type: Number, default: 0 },
     paymentType: String,
   },
-  rate: { type: Number, default: 24 },
+  rate: { type: Number, default: 0 },
 });
 
 const workerSchema = new mongoose.Schema({

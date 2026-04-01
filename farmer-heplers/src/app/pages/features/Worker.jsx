@@ -1,4 +1,4 @@
-import { Button, Flex, message, Popconfirm, Spin, Table } from "antd";
+import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
 import { useEffect, useMemo, useState } from "react";
 import {
   deleteWorkerById,
@@ -25,9 +25,9 @@ const WorkersData = () => {
   const { t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(null);
   const [workerList, setWorkerList] = useState([]);
-  const [worker, setWorker] = useState({});
   const [openType, setOpenType] = useState(null);
   const [fetchData, setFetchData] = useState("");
+  const [editTransactionForm] = Form.useForm();
   const navigate = useNavigate();
 
   const calcView = (account) => {
@@ -54,13 +54,25 @@ const WorkersData = () => {
 
   const editWorkerTransaction = (record) => {
     setIsLoanding("ewt");
-    const filltredWorker = workerList
-      .map((mainObj) => ({
-        ...mainObj,
-        account: mainObj.account.filter((childObj) => childObj === record),
-      }))
-      .filter((mainObj) => mainObj.account.length > 0);
-    setWorker(filltredWorker[0]);
+    const filltredWorker = workerList.find((worker) => {
+      return worker.account.some((transaction) =>
+        Object.keys(transaction).every(
+          (key) => transaction[key] === record[key],
+        ),
+      );
+    });
+    editTransactionForm.setFieldsValue({
+      workerId: filltredWorker?._id,
+      transactionId: record?._id,
+      amount: record?.give?.amount,
+      amountType: record?.give?.amountType,
+      cropG: record?.give?.crop,
+      brief: record?.give?.brief,
+      payment: record?.take?.payment,
+      paymentType: record?.take?.paymentType,
+      cropT: record?.take?.crop,
+      interestRate: record?.rate,
+    });
     setTimeout(() => {
       setIsLoanding(null);
       setOpenType("ewt");
@@ -131,7 +143,7 @@ const WorkersData = () => {
             type="link"
             icon={<FileAddOutlined />}
             onClick={() => {
-              (setOpenType("at"), setWorker(record));
+              setOpenType("at");
             }}></Button>
           <Button
             type="link"
@@ -232,8 +244,8 @@ const WorkersData = () => {
           open={openType}
           setOpen={setOpenType}
           workerList={workerList}
-          worker={worker}
           setFetchData={setFetchData}
+          editTransactionForm={editTransactionForm}
         />
       </PageContainer>
     </>

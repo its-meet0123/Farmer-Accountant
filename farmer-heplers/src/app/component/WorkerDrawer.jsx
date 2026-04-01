@@ -22,11 +22,16 @@ import {
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 const { Panel } = Collapse;
 
-const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
+const WorkerDrawer = ({
+  open,
+  setOpen,
+  workerList,
+  setFetchData,
+  editTransactionForm,
+}) => {
   const { authState, t } = useAuth();
   const [workerInfoForm] = Form.useForm();
   const [transactionForm] = Form.useForm();
-  const [editTransactionForm] = Form.useForm();
   const today = dayjs();
   const [action, setAction] = useState("none");
   const [btnLoad, setBtnLoad] = useState(null);
@@ -83,6 +88,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
     setBtnLoad("tfb");
     if (open === "at") {
       const formValues = transactionForm.getFieldsValue();
+      const Id = formValues.workerId;
       if (action === "give") {
         try {
           const transactionBody = {
@@ -100,10 +106,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
               paymentType: formValues.paymentType,
             },
           };
-          const res = await addWorkerTransactionById(
-            worker._id,
-            transactionBody,
-          );
+          const res = await addWorkerTransactionById(Id, transactionBody);
           if (res.status === 200) {
             transactionForm.resetFields();
             message.success(res.data.message);
@@ -134,10 +137,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
               paymentType: formValues.paymentType,
             },
           };
-          const res = await addWorkerTransactionById(
-            worker._id,
-            transactionBody,
-          );
+          const res = await addWorkerTransactionById(Id, transactionBody);
           if (res.status === 200) {
             transactionForm.resetFields();
             message.success(res.data.message);
@@ -168,10 +168,7 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
               paymentType: formValues.paymentType,
             },
           };
-          const res = await addWorkerTransactionById(
-            worker._id,
-            transactionBody,
-          );
+          const res = await addWorkerTransactionById(Id, transactionBody);
           if (res.status === 200) {
             transactionForm.resetFields();
             message.success(res.data.message);
@@ -189,10 +186,12 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
     if (open === "ewt") {
       try {
         const formValues = editTransactionForm.getFieldsValue();
+        const workerId = formValues.workerId;
+        const transactionId = formValues.transactionId;
         console.log(formValues);
         const ids = {
-          workerId: worker._id,
-          accountId: worker.account[0]._id,
+          workerId: workerId,
+          accountId: transactionId,
         };
         const transactionBody = {
           date: new Date(formValues.date),
@@ -223,25 +222,6 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
       }
     }
   };
-
-  useEffect(() => {
-    if (worker) {
-      const workerAccount = worker.account ? worker.account[0] : {};
-      if (open === "ewt") {
-        editTransactionForm.setFieldsValue({
-          date: dayjs(workerAccount.date),
-          interestRate: workerAccount.rate,
-          amount: workerAccount.give.amount,
-          amountType: workerAccount.give.amountType,
-          brief: workerAccount.give.brief,
-          cropG: workerAccount.give.crop,
-          payment: workerAccount.take.payment,
-          paymentType: workerAccount.take.paymentType,
-          cropT: workerAccount.take.crop,
-        });
-      }
-    }
-  }, [worker]);
 
   return (
     <>
@@ -400,6 +380,9 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
               initialValues={{ corp: [] }}
               onFinish={handleSubmitTransactionForm}>
               <Row gutter={24}>
+                <Form.Item label="Worker ID" name="workerId" hidden>
+                  <Input />
+                </Form.Item>
                 <Form.Item
                   label={t("workerDrawer.transactionInput.at")}
                   name="amount">
@@ -545,6 +528,12 @@ const WorkerDrawer = ({ open, setOpen, workerList, setFetchData, worker }) => {
             wrapperCol={{ span: 25 }}
             form={editTransactionForm}
             onFinish={handleSubmitTransactionForm}>
+            <Form.Item label="Worker ID" name="workerId" hidden>
+              <Input />
+            </Form.Item>
+            <Form.Item label="Trans ID" name="transactionId">
+              <Input />
+            </Form.Item>
             <Row gutter={24}>
               <Form.Item
                 label={t("workerDrawer.transactionInput.at")}

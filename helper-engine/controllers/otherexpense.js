@@ -10,16 +10,16 @@ const JWT_SECRET = process.env.SECRET_KEY;
 
 // 1. get worker list
 async function handleGetAllAdditionalWorkers(req, res) {
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const allAdditionalWorker = await FieldWorker.find({
@@ -46,15 +46,15 @@ async function handleGetAllAdditionalWorkers(req, res) {
 
 // 1. get harvest data
 async function handleGetAllHarvestList(req, res) {
-  try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const harvestList = await Harvest.find({ userId: currentUserId });
@@ -76,17 +76,17 @@ async function handleGetAllHarvestList(req, res) {
 
 // 2. update harvest data by id
 async function handleUpdateHarvestDataById(req, res) {
-  try {
-    const { id } = req.params;
-    const body = req.body;
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const { id } = req.params;
+  const body = req.body;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -111,17 +111,17 @@ async function handleUpdateHarvestDataById(req, res) {
 
 // 2. update worker by id
 async function handleUpdateAdditionalWorkerById(req, res) {
-  try {
-    const id = req.params.id;
-    const body = req.body;
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const id = req.params.id;
+  const body = req.body;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     if (!id || !body) {
@@ -158,16 +158,16 @@ async function handleUpdateAdditionalWorkerById(req, res) {
 
 // 3. delete additional worker
 async function handleDeleteAdditionalWorkerById(req, res) {
-  try {
-    const id = req.params.id;
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const id = req.params.id;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -203,16 +203,16 @@ async function handleDeleteAdditionalWorkerById(req, res) {
 
 // 3. delete harvest data by id
 async function handleDeleteHarvestDataById(req, res) {
-  try {
-    const { id } = req.params;
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const { id } = req.params;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -238,33 +238,33 @@ async function handleDeleteHarvestDataById(req, res) {
 
 // 4. add additional worker transaction by id
 async function handleAddAdditionalWorkerTransactionById(req, res) {
-  try {
-    const id = req.params.id;
-    const upcomingTrans = req.body;
-    if (!id || !upcomingTrans) {
-      return res.status(400).json({
-        status: "Error",
-        Code: "CL.FW.AWTEM",
-      });
-    }
-    const ids = { iD: id, transactionId: "" };
-    const body = await autoTotalForOtherExpense(ids, upcomingTrans);
-    if (!body) {
-      return res.status(500).json({
-        status: "Error",
-        Code: "CL.CTEM",
-        Message: "Total not define",
-        trans: body,
-      });
-    }
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const id = req.params.id;
+  const upcomingTrans = req.body;
+  if (!id || !upcomingTrans) {
+    return res.status(400).json({
+      status: "Error",
+      Code: "CL.FW.AWTEM",
+    });
+  }
+  const ids = { iD: id, transactionId: "" };
+  const body = await autoTotalForOtherExpense(ids, upcomingTrans);
+  if (!body) {
+    return res.status(500).json({
+      status: "Error",
+      Code: "CL.CTEM",
+      Message: "Total not define",
+      trans: body,
+    });
+  }
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -302,22 +302,22 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
 
 // 4. add Harvester transaction by id
 async function handleAddHarvesterTransactionById(req, res) {
+  const { id } = req.params;
+  const upComingTrans = req.body;
+
+  const ids = { iD: id, transactionId: "" };
+
+  const body = await autoTotalForHarvesterData(ids, upComingTrans);
+
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
   try {
-    const { id } = req.params;
-    const upComingTrans = req.body;
-
-    const ids = { iD: id, transactionId: "" };
-
-    const body = await autoTotalForHarvesterData(ids, upComingTrans);
-
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -345,16 +345,16 @@ async function handleAddHarvesterTransactionById(req, res) {
 
 // 5. update additional worker transaction by id
 async function updateAdditionalWorkerTransactionByIds(req, res) {
+  const { workerId, transactionId } = req.params;
+  const ids = { iD: workerId, transactionId: transactionId };
+  const upcomingTrans = req.body;
+  if (!workerId && !transactionId && !upcomingTrans) {
+    return res.status(400).json({
+      status: "Error",
+      Code: "CL.FW.UWTEM",
+    });
+  }
   try {
-    const { workerId, transactionId } = req.params;
-    const ids = { iD: workerId, transactionId: transactionId };
-    const upcomingTrans = req.body;
-    if (!workerId && !transactionId && !upcomingTrans) {
-      return res.status(400).json({
-        status: "Error",
-        Code: "CL.FW.UWTEM",
-      });
-    }
     const body = await autoTotalForOtherExpense(ids, upcomingTrans);
     if (!body) {
       return res.status(500).json({
@@ -411,15 +411,15 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
 
 // 5. update harvester data transaction
 async function updateHarvesterTransactionByIds(req, res) {
-  try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -456,16 +456,16 @@ async function updateHarvesterTransactionByIds(req, res) {
 
 // 6. delete additional worker transaction by id
 async function deleteAdditionalWorkerTransactionByIds(req, res) {
-  try {
-    const { workerId, transactionId } = req.params;
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const { workerId, transactionId } = req.params;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 
@@ -511,16 +511,16 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
 
 // 6. delete Harvester transaction
 async function deleteHavresterTransactionByIds(req, res) {
-  try {
-    const { harvestId, transactionId } = req.params;
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  const { harvestId, transactionId } = req.params;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
 

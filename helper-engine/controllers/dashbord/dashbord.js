@@ -28,16 +28,17 @@ async function dashBordData(req, res) {
       maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
     }).format(amount);
   };
-  try {
-    // const token = req.cookies.token;
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
+  // const token = req.cookies.token;
+  const authHeader = req.headers.authorization || "";
+  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+  if (!token) {
+    return res
+      .status(401)
+      .json({ status: "Error", message: "Authentication token required" });
+  }
+  try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const currentUserId = decoded.id;
     const Ind = await Industries.find({ userId: currentUserId });
