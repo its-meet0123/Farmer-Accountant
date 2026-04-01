@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (!error.response && !originalRequest) {
+    if (!error.response || !originalRequest) {
       return Promise.reject(error);
     }
 
