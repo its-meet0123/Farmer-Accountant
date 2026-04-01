@@ -34,14 +34,14 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (!originalRequest) {
+    if (!error.response && !originalRequest) {
       return Promise.reject(error);
     }
 
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.includes("/user/refresh-token")
+      !originalRequest.url.includes("/refresh-token")
     ) {
       originalRequest._retry = true;
 
