@@ -38,6 +38,9 @@ export const AuthProvider = ({ children }) => {
             user: null,
           });
           setIsLoading(false);
+          window.location.replace(
+            "https://farmer-accoutant.onrender.com/login",
+          );
         }
       } catch (err) {
         localStorage.removeItem("token");
@@ -46,6 +49,7 @@ export const AuthProvider = ({ children }) => {
           user: null,
         });
         console.log(err.message);
+        window.location.replace("https://farmer-accoutant.onrender.com/login");
       } finally {
         setIsLoading(false);
       }

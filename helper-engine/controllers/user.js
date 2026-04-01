@@ -64,21 +64,20 @@ async function handleUserLogin(req, res) {
     }
     // 30d to 15m
     const accessToken = jwt.sign({ id: user.userId }, JWT_SECRET, {
-      expiresIn: "15m",
+      expiresIn: "7d",
     });
     // refresh accessToken for 7d
     const refreshToken = jwt.sign({ id: user.userId }, REFRESH_SECRET, {
-      expiresIn: "7d",
+      expiresIn: "30d",
     });
 
     return res
       .cookie("refreshToken", refreshToken, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         sameSite: "None",
         path: "/",
-        partitioned: true,
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
       })
       .json({
         status: "success",
@@ -150,10 +149,9 @@ async function handleUserLogOut(req, res) {
 
     res.clearCookie("refreshToken", {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "none",
       path: "/",
-      partitioned: true,
       expires: new Date(0),
     });
 

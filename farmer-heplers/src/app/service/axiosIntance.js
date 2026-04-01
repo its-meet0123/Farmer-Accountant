@@ -54,7 +54,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         const res = await refreshClient.post(
-          `/user/refresh-token?t=${Date.now()}`,
+          `/user/refresh-token`,
           {},
           { withCredentials: true },
         );
