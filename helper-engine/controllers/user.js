@@ -83,8 +83,9 @@ async function handleUserLogin(req, res) {
 
 async function handleCheckAuthStatus(req, res) {
   console.log("cookies :", req.cookies);
+  console.log("headers : ", req.headers);
   // const token = req.cookies.token;
-  const refreshToken = req.cookies.refreshToken;
+  const refreshToken = req.cookies.token;
   const token = req.headers.authorization?.split(" ")[1];
 
   try {
