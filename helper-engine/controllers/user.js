@@ -64,7 +64,7 @@ async function handleUserLogin(req, res) {
     }
     // 30d to 15m
     const accessToken = jwt.sign({ id: user.userId }, JWT_SECRET, {
-      expiresIn: "7d",
+      expiresIn: "2m",
     });
     // refresh accessToken for 7d
     const refreshToken = jwt.sign({ id: user.userId }, REFRESH_SECRET, {
@@ -138,14 +138,14 @@ async function handleCheckAuthStatus(req, res) {
 
 async function handleUserLogOut(req, res) {
   try {
-    res.cookie("token", "", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-      path: "/",
-      partitioned: true,
-      expires: new Date(0),
-    });
+    // res.cookie("refreshToken", "", {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    //   sameSite: "None",
+    //   path: "/",
+    //   partitioned: true,
+    //   expires: new Date(0),
+    // });
 
     res.clearCookie("refreshToken", {
       httpOnly: true,
