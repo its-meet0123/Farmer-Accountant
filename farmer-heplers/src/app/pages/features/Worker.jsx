@@ -27,7 +27,8 @@ const WorkersData = () => {
   const [workerList, setWorkerList] = useState([]);
   const [openType, setOpenType] = useState(null);
   const [fetchData, setFetchData] = useState("");
-  const [editTransactionForm] = Form.useForm();
+  const [transactionForm] = Form.useForm();
+  const [workerInfoForm] = Form.useForm();
   const navigate = useNavigate();
 
   const calcView = (account) => {
@@ -52,6 +53,26 @@ const WorkersData = () => {
     }
   };
 
+  const editWorker = (record) => {
+    setIsLoanding("ew");
+
+    workerInfoForm.setFieldValue({
+      workerId: record._id,
+      firstName: record?.workerDetail?.workerName?.firstName,
+      lastName: record?.workerDetail?.workerName?.lastName,
+      nickName: record?.workerDetail?.workerName?.nickName,
+      contect: record?.workerDetail?.contect,
+      date: record?.workerDetail?.date,
+      idProof: record?.workerDetail?.idProof,
+      account: record?.account || [],
+    });
+
+    setTimeout(() => {
+      setIsLoanding(null);
+      setOpenType("ew");
+    }, 1000);
+  };
+
   const editWorkerTransaction = (record) => {
     setIsLoanding("ewt");
     const filltredWorker = workerList.find((worker) => {
@@ -61,7 +82,7 @@ const WorkersData = () => {
         ),
       );
     });
-    editTransactionForm.setFieldsValue({
+    transactionForm.setFieldsValue({
       workerId: filltredWorker?._id,
       transactionId: record?._id,
       amount: record?.give?.amount,
@@ -72,6 +93,7 @@ const WorkersData = () => {
       paymentType: record?.take?.paymentType,
       cropT: record?.take?.crop,
       interestRate: record?.rate,
+      date: record?.date,
     });
     setTimeout(() => {
       setIsLoanding(null);
@@ -149,6 +171,11 @@ const WorkersData = () => {
             type="link"
             icon={<EyeOutlined />}
             onClick={() => calcView(record)}></Button>
+          <Button
+            type="link"
+            icon={<EditOutlined />}
+            onClick={() => editWorker(record)}
+            loading={isLoanding == "ewt" && true}></Button>
           <Popconfirm
             title={
               <AlertText
@@ -245,7 +272,8 @@ const WorkersData = () => {
           setOpen={setOpenType}
           workerList={workerList}
           setFetchData={setFetchData}
-          editTransactionForm={editTransactionForm}
+          transactionForm={transactionForm}
+          workerInfoForm={workerInfoForm}
         />
       </PageContainer>
     </>
