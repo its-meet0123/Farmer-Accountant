@@ -9,19 +9,28 @@ const {
   handleDeleteManyIndData,
   handleDeleteManyIndShopeTransaction,
 } = require("../controllers/integratedData");
+const authMiddleware = require("../middleware/checkAuth");
 const router = express.Router();
-router.route("/").post(handleCreateIndData).get(handleGetAllIndData);
+router
+  .route("/")
+  .post(handleCreateIndData)
+  .get(authMiddleware, handleGetAllIndData);
 router
   .route("/:id")
-  .get(handleGetIndShopeAccountById)
-  .put(handlePushIndShopeAccountById)
-  .patch(handleUpdateIndDataById);
+  .get(authMiddleware, handleGetIndShopeAccountById)
+  .put(authMiddleware, handlePushIndShopeAccountById)
+  .patch(authMiddleware, handleUpdateIndDataById);
 router.put(
   "/:shopeId/account/:accountId",
-  handleUpdateIndShopeAccountTransactionById
+  authMiddleware,
+  handleUpdateIndShopeAccountTransactionById,
 );
 
-router.post("/delete-many", handleDeleteManyIndData);
-router.patch("/:id/delete-many", handleDeleteManyIndShopeTransaction);
+router.post("/delete-many", authMiddleware, handleDeleteManyIndData);
+router.patch(
+  "/:id/delete-many",
+  authMiddleware,
+  handleDeleteManyIndShopeTransaction,
+);
 
 module.exports = router;

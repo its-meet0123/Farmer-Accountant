@@ -25,7 +25,7 @@ const WorkerDrawer = ({
   return (
     <>
       <Drawer
-        title={t("workerDrawer.awDrawerTitle")}
+        title={t("workerDrawer.drawerTitle")}
         size={450}
         placement="right"
         closable={false}

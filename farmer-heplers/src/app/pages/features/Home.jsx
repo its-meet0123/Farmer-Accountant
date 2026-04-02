@@ -205,7 +205,8 @@ const HomePage = () => {
             cancelText="No"
             placement="left">
             <Button
-              type="link"
+              color="danger"
+              variant="text"
               icon={<DeleteOutlined />}
               size="small"
               loading={isLoanding == "delete" && true}

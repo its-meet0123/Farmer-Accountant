@@ -7,17 +7,8 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleGetAllIndData(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res.status(401).json({
-      status: "Error",
-      message: "Authentication token required",
-    });
-  }
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const indAllData = await Industries.find({ userId: currentUserId });
 
@@ -41,17 +32,8 @@ async function handleGetAllIndData(req, res) {
 }
 
 async function handleGetIndShopeAccountById(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
-
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const { id } = req.params;
     if (!id) {
@@ -162,17 +144,8 @@ async function handleGetIndShopeAccountById(req, res) {
 }
 
 async function handleUpdateIndDataById(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
-
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const { id } = req.params;
     const body = req.body;
@@ -197,17 +170,8 @@ async function handleUpdateIndDataById(req, res) {
 }
 
 async function handleDeleteManyIndData(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
-
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const ids = req.body;
     if (!Array.isArray(ids) || ids.length === 0) {
@@ -232,17 +196,8 @@ async function handleDeleteManyIndData(req, res) {
 }
 
 async function handlePushIndShopeAccountById(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
-
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const id = req.params.id;
     const body = req.body;
@@ -270,17 +225,8 @@ async function handlePushIndShopeAccountById(req, res) {
 }
 
 async function handleUpdateIndShopeAccountTransactionById(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
-
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
 
     const { shopeId, accountId } = req.params;
@@ -307,17 +253,8 @@ async function handleUpdateIndShopeAccountTransactionById(req, res) {
 }
 
 async function handleDeleteManyIndShopeTransaction(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
-
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const { id } = req.params;
     const ids = req.body;
@@ -344,18 +281,7 @@ async function handleDeleteManyIndShopeTransaction(req, res) {
 }
 
 async function handleCreateIndData(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
-
   try {
-    jwt.verify(token, JWT_SECRET);
-
     const body = req.body;
     console.log(body);
     if (!body) {

@@ -242,7 +242,12 @@ const HarvesterData = () => {
                 okText="Yes"
                 cancelText="No"
                 placement="left">
-                <Button type="link" icon={<DeleteOutlined />} size="small" />
+                <Button
+                  color="danger"
+                  variant="text"
+                  icon={<DeleteOutlined />}
+                  size="small"
+                />
               </Popconfirm>
             </Flex>
           );
@@ -300,7 +305,12 @@ const HarvesterData = () => {
               okText="Yes"
               cancelText="No"
               placement="left">
-              <Button type="link" icon={<DeleteOutlined />} size="small" />
+              <Button
+                color="danger"
+                variant="text"
+                icon={<DeleteOutlined />}
+                size="small"
+              />
             </Popconfirm>
           </Flex>
         );

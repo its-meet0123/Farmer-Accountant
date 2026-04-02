@@ -492,8 +492,8 @@
       "cpt": "enter mob no",
       "dt": "Date"
     },
-    "awDrawerTitle": "Add Worker",
-    "awtDrawerTitle": "Add Worker Transaction",
+    "drawerTitle": "Worker Drawer",
+
     "transactionInput": {
       "colps": {
         "glm": "Form Guidelines",
