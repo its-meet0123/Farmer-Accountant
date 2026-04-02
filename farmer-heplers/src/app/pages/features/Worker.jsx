@@ -44,7 +44,7 @@ const WorkersData = () => {
       workerId: record._id,
     });
 
-    setOpenType("aw");
+    setOpenType("at");
   };
 
   const deleteWorker = async (record) => {
