@@ -26,6 +26,7 @@ const WorkerDrawer = ({
     <>
       <Drawer
         title={t("workerDrawer.awDrawerTitle")}
+        size={450}
         placement="right"
         closable={false}
         onClose={onClose}
