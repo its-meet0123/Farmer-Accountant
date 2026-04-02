@@ -269,7 +269,7 @@ const WorkersData = () => {
         )}
         <WorkerDrawer
           openType={openType}
-          setOpen={setOpenType}
+          setOpenType={setOpenType}
           workerList={workerList}
           setFetchData={setFetchData}
           transactionForm={transactionForm}
