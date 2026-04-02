@@ -1,4 +1,13 @@
-import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
+import {
+  Button,
+  Dropdown,
+  Flex,
+  Form,
+  message,
+  Popconfirm,
+  Spin,
+  Table,
+} from "antd";
 import { useEffect, useMemo, useState } from "react";
 import {
   deleteWorkerById,
@@ -13,6 +22,7 @@ import WorkerDrawer from "../../component/WorkerDrawer";
 import {
   DeleteOutlined,
   EditOutlined,
+  EllipsisOutlined,
   EyeOutlined,
   FileAddOutlined,
 } from "@ant-design/icons";
@@ -171,36 +181,55 @@ const WorkersData = () => {
     {
       title: t("workerPage.tableColumns.actionText"),
       dataIndex: "",
-      width: 50,
+      width: 20,
       fixed: "end",
       render: (_, record) => (
-        <Flex gap="small" horizontal>
-          <Button
-            type="link"
-            icon={<FileAddOutlined />}
-            onClick={() => addWorkerTransaction(record)}></Button>
-          <Button
-            type="link"
-            icon={<EyeOutlined />}
-            onClick={() => calcView(record)}></Button>
-          <Button
-            type="link"
-            icon={<EditOutlined />}
-            onClick={() => editWorker(record)}
-            loading={isLoanding == "ew" && true}></Button>
-          <Popconfirm
-            title={
-              <AlertText
-                text={`${t("workerPage.tableColumns.actionPopAlertText")}`}
-              />
-            }
-            onConfirm={() => deleteWorker(record)}
-            okText="Yes"
-            cancelText="No"
-            placement="left">
-            <Button type="link" icon={<DeleteOutlined />} size="small" />
-          </Popconfirm>
-        </Flex>
+        <Dropdown
+          menu={{
+            items: [
+              {
+                key: "1",
+                icon: <FileAddOutlined />,
+                onClick: () => addWorkerTransaction(record),
+              },
+              {
+                key: "2",
+                icon: <EyeOutlined />,
+                onClick: () => calcView(record),
+              },
+              {
+                key: "3",
+                icon: <EditOutlined />,
+                onClick: () => editWorker(record),
+              },
+              {
+                key: "4",
+                icon: <DeleteOutlined />,
+                danger: true,
+                label: (
+                  <Popconfirm
+                    title={
+                      <AlertText
+                        text={`${t("workerPage.tableColumns.actionPopAlertText")}`}
+                      />
+                    }
+                    onConfirm={() => deleteWorker(record)}
+                    okText="Yes"
+                    cancelText="No"
+                    placement="left">
+                    <Button
+                      type="text"
+                      icon={<DeleteOutlined />}
+                      size="small"
+                    />
+                  </Popconfirm>
+                ),
+              },
+            ],
+          }}
+          trigger={["click"]}>
+          <Button type="text" icon={<EllipsisOutlined />} />
+        </Dropdown>
       ),
     },
   ];
