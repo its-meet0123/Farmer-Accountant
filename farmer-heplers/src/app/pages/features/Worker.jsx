@@ -41,7 +41,7 @@ const WorkersData = () => {
 
   const addWorkerTransaction = (record) => {
     workerInfoForm.setFieldsValue({
-      workerId: record._id,
+      workerId: record?._id,
     });
 
     setOpenType("at");
@@ -175,9 +175,7 @@ const WorkersData = () => {
           <Button
             type="link"
             icon={<FileAddOutlined />}
-            onClick={() => {
-              addWorkerTransaction(record);
-            }}></Button>
+            onClick={() => addWorkerTransaction(record)}></Button>
           <Button
             type="link"
             icon={<EyeOutlined />}
