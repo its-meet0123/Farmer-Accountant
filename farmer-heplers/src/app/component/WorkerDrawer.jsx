@@ -29,7 +29,7 @@ const WorkerDrawer = ({
         placement="right"
         closable={false}
         onClose={onClose}
-        openType={openType !== null}
+        open={openType !== null}
         extra={
           <Button onClick={onClose}>
             {t("workerDrawer.transactionInput.button.cbt")}
