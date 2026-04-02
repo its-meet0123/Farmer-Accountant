@@ -175,7 +175,7 @@ const WorkersData = () => {
             type="link"
             icon={<EditOutlined />}
             onClick={() => editWorker(record)}
-            loading={isLoanding == "ewt" && true}></Button>
+            loading={isLoanding == "ew" && true}></Button>
           <Popconfirm
             title={
               <AlertText
@@ -268,7 +268,7 @@ const WorkersData = () => {
           />
         )}
         <WorkerDrawer
-          open={openType}
+          openType={openType}
           setOpen={setOpenType}
           workerList={workerList}
           setFetchData={setFetchData}
