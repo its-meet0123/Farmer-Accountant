@@ -50,7 +50,7 @@ const WorkerDrawer = ({
 
         {(openType == "at" || openType == "ewt") && (
           <WorkerTransForm
-            oenType={openType}
+            openType={openType}
             transactionForm={transactionForm}
             onClose={onClose}
             setFetchData={setFetchData}

@@ -36,6 +36,7 @@ const WorkerTransForm = ({
     setBtnLoad(true);
     if (openType === "at") {
       const formValues = transactionForm.getFieldsValue();
+      console.log("add worker transaction formValues: ", formValues);
 
       const { workerId, cropG, cropT, ...resetFields } = formValues;
 
@@ -56,10 +57,11 @@ const WorkerTransForm = ({
           },
         };
         const res = await addWorkerTransactionById(workerId, transactionBody);
+        console.log("add worker transaction form : ", res);
         if (res.status === 200) {
           transactionForm.resetFields();
           message.success(res.data.message);
-          setFetchData(transactionBody);
+          setFetchData(res.data);
           setBtnLoad(false);
           onClose();
         }
@@ -109,7 +111,7 @@ const WorkerTransForm = ({
   };
   return (
     <>
-      {openType == "aw" && (
+      {openType == "at" && (
         <Collapse ghost style={{ marginBottom: 20 }}>
           <Panel header={t("workerDrawer.transactionInput.colps.glm")} key="1">
             <ul>
@@ -126,8 +128,9 @@ const WorkerTransForm = ({
       <Form
         labelCol={{ span: 10 }}
         wrapperCol={{ span: 25 }}
+        name={(openType == "at" && "Add") || (openType == "ewt" && "Edit")}
         form={transactionForm}
-        initialValues={{ corp: [] }}
+        initialValues={{ cropG: [], cropT: [] }}
         onFinish={handleSubmitTransactionForm}>
         <Row gutter={24}>
           <Form.Item

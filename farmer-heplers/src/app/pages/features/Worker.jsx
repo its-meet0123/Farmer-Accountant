@@ -55,9 +55,8 @@ const WorkersData = () => {
 
   const editWorker = (record) => {
     setIsLoanding("ew");
-
     workerInfoForm.setFieldsValue({
-      workerId: record._id,
+      workerId: record?._id,
       firstName: record?.workerDetail?.workerName?.firstName,
       lastName: record?.workerDetail?.workerName?.lastName,
       nickName: record?.workerDetail?.workerName?.nickName,
