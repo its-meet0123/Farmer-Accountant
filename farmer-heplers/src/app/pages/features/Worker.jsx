@@ -40,11 +40,14 @@ const WorkersData = () => {
   };
 
   const addWorkerTransaction = (record) => {
-    workerInfoForm.setFieldsValue({
+    transactionForm.setFieldsValue({
       workerId: record?._id,
     });
 
-    setOpenType("at");
+    setTimeout(() => {
+      setIsLoanding(null);
+      setOpenType("at");
+    }, 1000);
   };
 
   const deleteWorker = async (record) => {
