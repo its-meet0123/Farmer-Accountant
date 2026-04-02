@@ -56,6 +56,10 @@ const WorkerTransForm = ({
             paymentType: resetFields.paymentType,
           },
         };
+        console.log(
+          "worker trans form transaction body value :",
+          transactionBody,
+        );
         const res = await addWorkerTransactionById(workerId, transactionBody);
         console.log("add worker transaction form : ", res);
         if (res.status === 200) {

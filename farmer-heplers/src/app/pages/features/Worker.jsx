@@ -38,6 +38,14 @@ const WorkersData = () => {
     console.log(account._id);
   };
 
+  const addWorkerTransaction = (record) => {
+    workerInfoForm.setFieldsValue({
+      workerId: record._id,
+    });
+
+    setOpenType("aw");
+  };
+
   const deleteWorker = async (record) => {
     if (record._id) {
       try {
@@ -54,6 +62,7 @@ const WorkersData = () => {
   };
 
   const editWorker = (record) => {
+    console.log("edit worker trans function click: ", record);
     setIsLoanding("ew");
     workerInfoForm.setFieldsValue({
       workerId: record?._id,
@@ -164,7 +173,7 @@ const WorkersData = () => {
             type="link"
             icon={<FileAddOutlined />}
             onClick={() => {
-              setOpenType("at");
+              addWorkerTransaction(record);
             }}></Button>
           <Button
             type="link"
