@@ -12,6 +12,7 @@ import {
   DatePicker,
   Form,
   Input,
+  InputNumber,
   message,
   Row,
   Segmented,
@@ -167,7 +168,7 @@ const WorkerTransForm = ({
               <Form.Item
                 label={t("workerDrawer.transactionInput.at")}
                 name="amount">
-                <InputNumbr
+                <InputNumber
                   placeholder={t("workerDrawer.transactionInput.apt")}
                   controls={false}
                 />

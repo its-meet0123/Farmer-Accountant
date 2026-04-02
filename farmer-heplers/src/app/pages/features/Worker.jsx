@@ -245,7 +245,7 @@ const WorkersData = () => {
             {t("workerPage.cardButtonText")}
           </Button>
         }>
-        {isLoanding ? (
+        {isLoanding == "loadData" ? (
           <div
             style={{
               width: "100%",
