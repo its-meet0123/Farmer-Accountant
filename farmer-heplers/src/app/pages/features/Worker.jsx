@@ -20,6 +20,7 @@ import AlertText from "../../component/Text";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { PageContainer } from "../../component/PageContainer";
+import dayjs from "dayjs";
 
 const WorkersData = () => {
   const { t } = useAuth();
@@ -64,13 +65,14 @@ const WorkersData = () => {
   const editWorker = (record) => {
     console.log("edit worker trans function click: ", record);
     setIsLoanding("ew");
+    const date = dayjs(record?.workerDetail?.date);
     workerInfoForm.setFieldsValue({
       workerId: record?._id,
       firstName: record?.workerDetail?.workerName?.firstName,
       lastName: record?.workerDetail?.workerName?.lastName,
       nickName: record?.workerDetail?.workerName?.nickName,
       contect: record?.workerDetail?.contect,
-      date: record?.workerDetail?.date,
+      date: date,
       idProof: record?.workerDetail?.idProof,
       account: record?.account || [],
     });
@@ -90,6 +92,7 @@ const WorkersData = () => {
         ),
       );
     });
+    const date = dayjs(record?.date);
     transactionForm.setFieldsValue({
       workerId: filltredWorker?._id,
       transactionId: record?._id,
@@ -101,7 +104,7 @@ const WorkersData = () => {
       paymentType: record?.take?.paymentType,
       cropT: record?.take?.crop,
       interestRate: record?.rate,
-      date: record?.date,
+      date: date,
     });
     setTimeout(() => {
       setIsLoanding(null);
