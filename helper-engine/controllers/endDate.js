@@ -1,20 +1,10 @@
 require("dotenv").config();
 const InterestDate = require("../models/endDate");
-const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleGetInterestDate(req, res) {
   //const token = req.cookies.token;
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const interestDate = await InterestDate.find({ userId: currentUserId });
 
@@ -59,68 +49,68 @@ async function handlePostInterestDate(req, res) {
 
 async function handleUpdateInterestDate(req, res) {
   //const token = req.cookies.token;
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
+  try {
+    const decoded = req.user;
+    const currentUserId = decoded.id;
 
-  const { id } = req.params;
-  const body = req.body;
-  if (!id || !body) {
-    return res.json({ status: "error", message: "Id and body are required" });
-  }
+    const { id } = req.params;
+    const body = req.body;
+    if (!id || !body) {
+      return res.json({ status: "error", message: "Id and body are required" });
+    }
 
-  const updateInterestDate = await InterestDate.findByIdAndUpdate(
-    { _id: id, userId: currentUserId },
-    body,
-    {
-      new: true,
-    },
-  );
-  if (!updateInterestDate) {
-    return res
-      .status(404)
-      .json({ status: "error", message: "Interest Date not found" });
+    const updateInterestDate = await InterestDate.findByIdAndUpdate(
+      { _id: id, userId: currentUserId },
+      body,
+      {
+        new: true,
+      },
+    );
+    if (!updateInterestDate) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Interest Date not found" });
+    }
+    return res.status(200).json({
+      status: "success",
+      message: "Interest Date update successfully",
+      data: updateInterestDate,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: "Error",
+      message: err.message,
+    });
   }
-  return res.status(200).json({
-    status: "success",
-    message: "Interest Date update successfully",
-    data: updateInterestDate,
-  });
 }
 
 async function handleDeleteInterestDate(req, res) {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+  try {
+    const decoded = req.user;
+    const currentUserId = decoded.id;
+    const { id } = req.params;
 
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
+    const interestDate = await InterestDate.findByIdAndDelete({
+      _id: id,
+      userId: currentUserId,
+    });
+    if (!interestDate) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "Interest Date not deleted" });
+    }
+
+    return res.status(200).json({
+      status: "success",
+      message: "Interest Date deleted successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "Fail",
+      message: err.message,
+    });
   }
-  const decoded = jwt.verify(token, JWT_SECRET);
-  const currentUserId = decoded.id;
-  const { id } = req.params;
-
-  const interestDate = await InterestDate.findByIdAndDelete({
-    _id: id,
-    userId: currentUserId,
-  });
-  if (!interestDate) {
-    return res
-      .status(404)
-      .json({ status: "error", message: "Interest Date not deleted" });
-  }
-
-  return res
-    .status(200)
-    .json({ status: "success", message: "Interest Date deleted successfully" });
 }
 
 module.exports = {

@@ -6,14 +6,18 @@ const {
   handleUpdateEntDataById,
   handleDeleteEntDataById,
 } = require("../controllers/integrated");
+const authMiddleware = require("../middleware/checkAuth");
 
 const router = express.Router();
 
-router.route("/").post(handlePostEntData).get(handleGetAllEntData);
+router
+  .route("/")
+  .post(handlePostEntData)
+  .get(authMiddleware, handleGetAllEntData);
 router
   .route("/:id")
-  .get(handleGetEntDataById)
-  .patch(handleUpdateEntDataById)
-  .delete(handleDeleteEntDataById);
+  .get(authMiddleware, handleGetEntDataById)
+  .patch(authMiddleware, handleUpdateEntDataById)
+  .delete(authMiddleware, handleDeleteEntDataById);
 
 module.exports = router;

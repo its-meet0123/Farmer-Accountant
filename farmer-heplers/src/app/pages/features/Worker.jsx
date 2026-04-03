@@ -189,16 +189,19 @@ const WorkersData = () => {
             items: [
               {
                 key: "1",
+                label: "add",
                 icon: <FileAddOutlined />,
                 onClick: () => addWorkerTransaction(record),
               },
               {
                 key: "2",
+                label: "view",
                 icon: <EyeOutlined />,
                 onClick: () => calcView(record),
               },
               {
                 key: "3",
+                label: "edit",
                 icon: <EditOutlined />,
                 onClick: () => editWorker(record),
               },
@@ -217,11 +220,9 @@ const WorkersData = () => {
                     okText="Yes"
                     cancelText="No"
                     placement="left">
-                    <Button
-                      type="text"
-                      icon={<DeleteOutlined />}
-                      size="small"
-                    />
+                    <Button type="text" size="small">
+                      delete
+                    </Button>
                   </Popconfirm>
                 ),
               },
@@ -257,14 +258,7 @@ const WorkersData = () => {
               onConfirm={() => deleteWorkerTransaction(record)}
               okText="Yes"
               cancelText="No"
-              placement="left">
-              <Button
-                color="danger"
-                variant="text"
-                icon={<DeleteOutlined />}
-                size="small"
-              />
-            </Popconfirm>
+              placement="left"></Popconfirm>
           </Flex>
         ),
       },

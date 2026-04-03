@@ -64,7 +64,7 @@ async function handleUserLogin(req, res) {
     }
     // 30d to 15m
     const accessToken = jwt.sign({ id: user.userId }, JWT_SECRET, {
-      expiresIn: "2m",
+      expiresIn: "1d",
     });
     // refresh accessToken for 7d
     const refreshToken = jwt.sign({ id: user.userId }, REFRESH_SECRET, {
@@ -94,59 +94,8 @@ async function handleUserLogin(req, res) {
   }
 }
 
-async function handleCheckAuthStatus(req, res) {
-  console.log("cookies :", req.cookies);
-  console.log("headers : ", req.headers);
-  // const token = req.cookies.token;
-
-  const token = req.headers.authorization?.split(" ")[1];
-  if (!token) {
-    return res.status(401).json({
-      status: "fail",
-      message: "No token provided",
-      isLoggedIn: false,
-    });
-  }
-
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-
-    const user = await User.findOne({
-      userId: decoded.id,
-    });
-
-    if (!user) {
-      return res.status(401).json({
-        status: "fail",
-        isLoggedIn: false,
-        user: null,
-      });
-    }
-    return res.status(200).json({
-      status: "success",
-      isLoggedIn: true,
-      user: user,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      status: "error",
-      message: err.message,
-      isLoggedIn: false,
-    });
-  }
-}
-
 async function handleUserLogOut(req, res) {
   try {
-    // res.cookie("refreshToken", "", {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === "production",
-    //   sameSite: "None",
-    //   path: "/",
-    //   partitioned: true,
-    //   expires: new Date(0),
-    // });
-
     res.clearCookie("refreshToken", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -244,49 +193,11 @@ async function handleSignUpUserDeleteAccount(req, res) {
   }
 }
 
-async function handleRefreshToken(req, res) {
-  const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) {
-    return res.status(401).json({
-      status: "fail",
-      message: "No refresh token provided",
-    });
-  }
-
-  try {
-    const decoded = jwt.verify(refreshToken, REFRESH_SECRET);
-    const user = await User.findOne({ userId: decoded.id });
-
-    if (!user) {
-      return res.status(401).json({
-        status: "fail",
-        message: "User not found",
-      });
-    }
-
-    const newAccessToken = jwt.sign({ id: user.userId }, JWT_SECRET, {
-      expiresIn: "15m",
-    });
-
-    return res.status(200).json({
-      status: "success",
-      accessToken: newAccessToken,
-    });
-  } catch (err) {
-    return res.status(403).json({
-      status: "fail",
-      message: "Invalid or expired refresh token" + err.message,
-    });
-  }
-}
-
 module.exports = {
   handleUserSignUp,
   handleUserLogin,
-  handleCheckAuthStatus,
   handleUserLogOut,
   handleGetSignUpUserData,
   handleSignUpUserUpdatePassword,
   handleSignUpUserDeleteAccount,
-  handleRefreshToken,
 };

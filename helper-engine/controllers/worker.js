@@ -1,9 +1,6 @@
-require("dotenv").config();
 const WorkerData = require("../models/worker");
 const InterestDate = require("../models/endDate");
-const jwt = require("jsonwebtoken");
 const { calculateAutoInterst } = require("../components/calculator");
-const JWT_SECRET = process.env.SECRET_KEY;
 
 async function handleAddWorker(req, res) {
   try {
@@ -21,15 +18,7 @@ async function handleAddWorker(req, res) {
 
 async function handleGetAllWorkers(req, res) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const workers = await WorkerData.find({ userId: currentUserId });
 
@@ -50,15 +39,7 @@ async function handleGetAllWorkers(req, res) {
 
 async function handleEditWorkerById(req, res) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
 
     const { id } = req.params;
@@ -96,15 +77,7 @@ async function handleEditWorkerById(req, res) {
 
 async function handleDeleteWorkerById(req, res) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
 
     const { id } = req.params;
@@ -137,15 +110,7 @@ async function handleDeleteWorkerById(req, res) {
 
 async function handleGetWorkerById(req, res) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const { id } = req.params;
 
@@ -178,15 +143,7 @@ async function handleGetWorkerById(req, res) {
 
 async function handlePushWorkerTransactionById(req, res) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
 
     const { id } = req.params;
@@ -223,15 +180,7 @@ async function handlePushWorkerTransactionById(req, res) {
 
 async function handleGetWorkerTransactionById(req, res) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const { workerId } = req.params;
     if (!workerId || !currentUserId) {
@@ -315,15 +264,7 @@ async function handleGetWorkerTransactionById(req, res) {
 
 async function handleUpdateWorkerTransactionById(req, res) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const { workerId, accountId } = req.params;
 
@@ -356,15 +297,7 @@ async function handleUpdateWorkerTransactionById(req, res) {
 
 async function handleDeleteWorkerTransactionById(req, res) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-    if (!token) {
-      return res
-        .status(401)
-        .json({ status: "Error", message: "Authentication token required" });
-    }
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
 
     const { workerId } = req.params;

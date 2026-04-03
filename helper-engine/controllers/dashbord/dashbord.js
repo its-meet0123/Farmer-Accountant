@@ -1,7 +1,3 @@
-require("dotenv").config();
-const jwt = require("jsonwebtoken");
-
-const JWT_SECRET = process.env.SECRET_KEY;
 // Dashboard controller imports
 const WorkerData = require("../../models/worker");
 const { FieldWorker, Harvest } = require("../../models/otherexpense");
@@ -29,17 +25,8 @@ async function dashBordData(req, res) {
     }).format(amount);
   };
 
-  // const token = req.cookies.token;
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
-  if (!token) {
-    return res
-      .status(401)
-      .json({ status: "Error", message: "Authentication token required" });
-  }
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = req.user;
     const currentUserId = decoded.id;
     const Ind = await Industries.find({ userId: currentUserId });
     const workers = await WorkerData.find({ userId: currentUserId });

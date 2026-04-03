@@ -15,6 +15,7 @@ const {
   updateHarvesterTransactionByIds,
   deleteHavresterTransactionByIds,
 } = require("../controllers/otherexpense");
+const authMiddleware = require("../middleware/checkAuth");
 
 const router = express.Router();
 
@@ -34,15 +35,18 @@ router
 router.put("/labor/:id/transaction", handleAddAdditionalWorkerTransactionById);
 
 // harvest router
-router.route("/harvester").get(handleGetAllHarvestList).post(postHavrestData);
+router
+  .route("/harvester")
+  .get(authMiddleware, handleGetAllHarvestList)
+  .post(postHavrestData);
 router
   .route("/harvester/:id")
-  .patch(handleUpdateHarvestDataById)
-  .delete(handleDeleteHarvestDataById)
-  .put(handleAddHarvesterTransactionById);
+  .patch(authMiddleware, handleUpdateHarvestDataById)
+  .delete(authMiddleware, handleDeleteHarvestDataById)
+  .put(authMiddleware, handleAddHarvesterTransactionById);
 router
   .route("/harvester/:harvestId/transaction/:transactionId")
-  .patch(updateHarvesterTransactionByIds)
-  .delete(deleteHavresterTransactionByIds);
+  .patch(authMiddleware, updateHarvesterTransactionByIds)
+  .delete(authMiddleware, deleteHavresterTransactionByIds);
 
 module.exports = router;

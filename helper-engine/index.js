@@ -8,6 +8,7 @@ const userRouter = require("./routes/user");
 const workerRouter = require("./routes/worker");
 const otherExpenseRouter = require("./routes/otherexpense");
 const dashBordRouter = require("./routes/dashbord");
+const authRouter = require("./routes/auth");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
@@ -47,6 +48,7 @@ app.use("/intdate", dateRouter);
 app.use("/worker", workerRouter);
 app.use("/other", otherExpenseRouter);
 app.use("/dashbord", dashBordRouter);
+app.use("/auth", authRouter);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on Port ${PORT}`);

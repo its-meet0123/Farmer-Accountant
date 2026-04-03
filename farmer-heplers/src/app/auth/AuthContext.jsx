@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axiosInstance.get(`/user/status?t=${Date.now()}`);
+        const res = await axiosInstance.get(`/auth/status?t=${Date.now()}`);
         const data = await res.data;
 
         console.log("auth Provider fetch data : ", data);

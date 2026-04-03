@@ -10,19 +10,31 @@ const {
   handleGetWorkerById,
   handleGetWorkerTransactionById,
 } = require("../controllers/worker");
+const authMiddleware = require("../middleware/checkAuth");
 
 const router = express.Router();
-router.route("/").post(handleAddWorker).get(handleGetAllWorkers);
+router
+  .route("/")
+  .post(handleAddWorker)
+  .get(authMiddleware, handleGetAllWorkers);
 router
   .route("/:id")
-  .patch(handleEditWorkerById)
-  .get(handleGetWorkerById)
-  .delete(handleDeleteWorkerById);
+  .patch(authMiddleware, handleEditWorkerById)
+  .get(authMiddleware, handleGetWorkerById)
+  .delete(authMiddleware, handleDeleteWorkerById);
 router.put("/:id/push", handlePushWorkerTransactionById);
 router
   .route("/:workerId/account/:accountId")
-  .patch(handleUpdateWorkerTransactionById);
-router.post("/:workerId/delete", handleDeleteWorkerTransactionById);
-router.get("/:workerId/account", handleGetWorkerTransactionById);
+  .patch(authMiddleware, handleUpdateWorkerTransactionById);
+router.post(
+  "/:workerId/delete",
+  authMiddleware,
+  handleDeleteWorkerTransactionById,
+);
+router.get(
+  "/:workerId/account",
+  authMiddleware,
+  handleGetWorkerTransactionById,
+);
 
 module.exports = router;

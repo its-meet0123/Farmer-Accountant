@@ -57,13 +57,13 @@ axiosInstance.interceptors.response.use(
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.includes("/user/refresh-token")
+      !originalRequest.url.includes("/auth/refresh-token")
     ) {
       console.log("401 error intercepted, attempting token refresh");
       originalRequest._retry = true;
 
       try {
-        const res = await refreshClient.post(`/user/refresh-token`, {});
+        const res = await refreshClient.post(`/auth/refresh-token`, {});
         console.log("Interceptor refresh response: ", res);
         const newToken = res.data.accessToken;
 
