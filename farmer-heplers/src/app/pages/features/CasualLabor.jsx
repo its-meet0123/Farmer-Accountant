@@ -300,7 +300,7 @@ const CasualLabor = () => {
                 )}
               </Button>
               <Popconfirm
-                title={<AlertText text={`${t("CasualLabor.wtc.aptt")}`} />}
+                title={<AlertText text={`${t("casualLabor.wtc.aptt")}`} />}
                 onConfirm={() => deleteLaborTrans(record)}
                 okText="Yes"
                 cancelText="No"
