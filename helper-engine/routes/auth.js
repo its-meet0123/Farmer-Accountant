@@ -4,7 +4,7 @@ const {
   handleRefreshToken,
 } = require("../middleware/auth");
 
-const router = express.Router;
+const router = express.Router();
 
 router.get("/status", handleCheckAuthStatus);
 router.post("/refresh-token", handleRefreshToken);
