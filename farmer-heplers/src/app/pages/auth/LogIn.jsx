@@ -38,13 +38,11 @@ const LogIn = () => {
 
   const onFinish = async (values) => {
     setIsLoading(true);
-    console.log("Received values of form: ", values);
     try {
       const res = await postUserDataForLoggedIn(values);
       const data = res.data;
       if (data.status === "success") {
         localStorage.setItem("token", data.accessToken);
-        console.log("login page user", data);
         setIsLoading(false);
         loginComplete(data);
         message.success(t(data.code));
@@ -54,7 +52,7 @@ const LogIn = () => {
       }
     } catch (err) {
       const text = `${t("loginPage.formSubmitErrorText")}`;
-      showError(err.message);
+      showError(text);
       console.log(err.message);
       setIsLoading(false);
     }

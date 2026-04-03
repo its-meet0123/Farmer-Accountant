@@ -380,8 +380,6 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    console.log("workerId:", workerId, "transactionId:", transactionId);
-
     if (!workerId && !transactionId && !currentUserId) {
       return res.status(400).json({
         status: "Error",

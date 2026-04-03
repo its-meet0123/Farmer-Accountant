@@ -85,26 +85,25 @@ const UserActionModel = ({ openType, setOpenType, goToSingUp, t }) => {
 
   const deleteUser = async () => {
     const formValues = deleteForm.getFieldsValue();
-    if (formValues) {
+    try {
+      const { userId, password } = formValues;
       const user = {
-        userId: formValues.userId,
-        password: formValues.password,
+        userId: userId,
+        password: password,
       };
 
-      try {
-        const res = await deleteUserAccount(user);
-        const data = await res.data;
-        if (data.status === "success") {
-          message.warning(t(res.data.code));
-          setOpenType(null);
-          goToSingUp();
-        } else {
-          message.error(t("userIdActionModal.submitFunction.duem"));
-        }
-      } catch (err) {
-        console.log(err.message);
+      const res = await deleteUserAccount(user);
+      const data = await res.data;
+      if (data.status === "success") {
+        message.warning(t(res.data.code));
+        setOpenType(null);
+        goToSingUp();
+      } else {
         message.error(t("userIdActionModal.submitFunction.duem"));
       }
+    } catch (err) {
+      console.log(err.message);
+      message.error(t("userIdActionModal.submitFunction.duem"));
     }
   };
 

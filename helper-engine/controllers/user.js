@@ -26,8 +26,6 @@ async function handleUserSignUp(req, res) {
 
     const hashedPassword = password;
 
-    console.log("hashedPassword for signup: ", hashedPassword);
-
     await User.create({
       userName,
       userId,
@@ -54,7 +52,7 @@ async function handleUserLogin(req, res) {
     });
 
     const isMatch = user ? (password == user.password ? true : false) : false;
-    console.log("isMatch :", isMatch);
+
     if (!user || !isMatch) {
       return res.status(401).json({
         status: "fail",
@@ -120,7 +118,7 @@ async function handleUserLogOut(req, res) {
 
 async function handleGetSignUpUserData(req, res) {
   const userId = req.body.id;
-  console.log(userId);
+
   const user = await User.findOne({ userId: userId });
   if (!user) {
     return res.json({
@@ -153,7 +151,6 @@ async function handleSignUpUserUpdatePassword(req, res) {
     }
 
     const hashedPassword = newPassword;
-    console.log("hashedPassword for update : ", hashedPassword);
     user.password = hashedPassword;
     await user.save();
     return res.status(200).json({

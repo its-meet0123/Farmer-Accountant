@@ -24,8 +24,6 @@ export const AuthProvider = ({ children }) => {
         const res = await axiosInstance.get(`/auth/status?t=${Date.now()}`);
         const data = await res.data;
 
-        console.log("auth Provider fetch data : ", data);
-
         if (data.isLoggedIn === true) {
           setAuthState({
             isLoggedIn: data.isLoggedIn,
@@ -38,9 +36,6 @@ export const AuthProvider = ({ children }) => {
             user: null,
           });
           setIsLoading(false);
-          // window.location.replace(
-          //   "https://farmer-accoutant.onrender.com/login",
-          // );
         }
       } catch (err) {
         localStorage.removeItem("token");
@@ -49,7 +44,6 @@ export const AuthProvider = ({ children }) => {
           user: null,
         });
         console.log("auth provider api error : ", err.message);
-        // window.location.replace("https://farmer-accoutant.onrender.com/login");
       } finally {
         setIsLoading(false);
       }
@@ -82,7 +76,6 @@ export const AuthProvider = ({ children }) => {
         });
         setIsSignedUp(true);
         message.success(t(data.code));
-        console.log("auth state", data);
         window.location.replace("https://farmer-accoutant.onrender.com/login");
       }
     } catch (err) {
@@ -94,9 +87,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("hasAccount", "false");
     setIsSignedUp(false);
   };
-
-  console.log("auth sate console", authState);
-  console.log("singup checking console in auth ", isSignedUp);
 
   return (
     <>

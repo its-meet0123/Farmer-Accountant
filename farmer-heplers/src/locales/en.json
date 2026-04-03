@@ -320,6 +320,13 @@
       "withoutChangeMessage": "No changes detected"
     },
     "drawerForm": {
+      "colps": {
+        "glm": "Form Guidelines",
+        "li1": "To change your data, click the pencil icon to unlock the form.",
+        "li2": "After editing the form, click the check icon to enable the submit button.",
+        "li3": "Please note: All changes must be made before clicking the check button.",
+        "li4": "Following the conditions mentioned above, you can now update your trader's details."
+      },
       "titleText1": "Edit",
       "titleText2": "Add",
       "nameInput": {
