@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
 import { Card, Grid } from "antd";
-import { overflow } from "html2canvas/dist/types/css/property-descriptors/overflow";
 
 const { useBreakpoint } = Grid;
 
@@ -37,8 +36,8 @@ const AuthContainer = ({
         radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
         radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
       `,
-      //overflowX: "hidden",
-      // WebkitOverflowScrolling: "touch",
+      overflowX: "hidden",
+      WebkitOverflowScrolling: "touch",
       //backgroundAttachment: "fixed",
     },
     langWrapper: {
