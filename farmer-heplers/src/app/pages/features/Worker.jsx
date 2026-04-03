@@ -38,6 +38,7 @@ const WorkersData = () => {
   const [workerList, setWorkerList] = useState([]);
   const [openType, setOpenType] = useState(null);
   const [fetchData, setFetchData] = useState("");
+  const [transactionType, setTransactionType] = useState("Gives");
   const [transactionForm] = Form.useForm();
   const [workerInfoForm] = Form.useForm();
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ const WorkersData = () => {
     console.log("edit worker trans function click: ", record);
     setIsLoanding("ew");
     const date = dayjs(record?.workerDetail?.date);
+
     workerInfoForm.setFieldsValue({
       workerId: record?._id,
       firstName: record?.workerDetail?.workerName?.firstName,
@@ -98,6 +100,13 @@ const WorkersData = () => {
 
   const editWorkerTransaction = (record) => {
     setIsLoanding("ewt");
+    if (record?.give?.amount > 0 && record?.take?.amount > 0) {
+      setTransactionType("Both");
+    } else if (record?.give?.amount > 0) {
+      setTransactionType("Gives");
+    } else if (record?.take?.payment > 0) {
+      setTransactionType("Takes");
+    }
     const filltredWorker = workerList.find((worker) => {
       return worker.account.some((transaction) =>
         Object.keys(transaction).every(
@@ -321,6 +330,8 @@ const WorkersData = () => {
           setFetchData={setFetchData}
           transactionForm={transactionForm}
           workerInfoForm={workerInfoForm}
+          transactionType={transactionType}
+          setTransactionType={setTransactionType}
         />
       </PageContainer>
     </>

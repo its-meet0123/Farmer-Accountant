@@ -25,33 +25,13 @@ const WorkerTransForm = ({
   openType,
   transactionForm,
   setFetchData,
+  transactionType,
+  setTransactionType,
   onClose,
 }) => {
   const { t } = useAuth();
   const [btnLoad, setBtnLoad] = useState(false);
   const today = dayjs();
-  const [transactionType, setTransactionType] = useState("Gives");
-
-  useEffect(() => {
-    if (openType == "ewt") {
-      const values = transactionForm.getFieldsValue();
-      const { amount, payment } = values;
-      if (amount > 0 && payment > 0) {
-        setTransactionType("Both");
-        return null;
-      }
-      if (amount > 0) {
-        setTransactionType("Gives");
-        return null;
-      }
-      if (payment > 0) {
-        setTransactionType("Takes");
-        return null;
-      }
-    } else {
-      return null;
-    }
-  }, [openType, transactionForm]);
 
   const handleSubmitTransactionForm = async () => {
     setBtnLoad(true);

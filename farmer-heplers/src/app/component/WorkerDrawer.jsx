@@ -11,6 +11,8 @@ const WorkerDrawer = ({
   setFetchData,
   workerInfoForm,
   transactionForm,
+  transactionType,
+  setTransactionType,
 }) => {
   const { t } = useAuth();
   //const [workerInfoForm] = Form.useForm();
@@ -53,6 +55,8 @@ const WorkerDrawer = ({
             transactionForm={transactionForm}
             onClose={onClose}
             setFetchData={setFetchData}
+            transactionType={transactionType}
+            setTransactionType={setTransactionType}
           />
         )}
       </Drawer>
