@@ -22,17 +22,21 @@ const router = express.Router();
 // labor routes
 router
   .route("/labor")
-  .get(handleGetAllAdditionalWorkers)
+  .get(authMiddleware, handleGetAllAdditionalWorkers)
   .post(postAdditionalWorker);
 router
   .route("/labor/:id")
-  .patch(handleUpdateAdditionalWorkerById)
-  .delete(handleDeleteAdditionalWorkerById);
+  .patch(authMiddleware, handleUpdateAdditionalWorkerById)
+  .delete(authMiddleware, handleDeleteAdditionalWorkerById);
 router
   .route("/labor/:workerId/transaction/:transactionId")
-  .patch(updateAdditionalWorkerTransactionByIds)
-  .delete(deleteAdditionalWorkerTransactionByIds);
-router.put("/labor/:id/transaction", handleAddAdditionalWorkerTransactionById);
+  .patch(authMiddleware, updateAdditionalWorkerTransactionByIds)
+  .delete(authMiddleware, deleteAdditionalWorkerTransactionByIds);
+router.put(
+  "/labor/:id/transaction",
+  authMiddleware,
+  handleAddAdditionalWorkerTransactionById,
+);
 
 // harvest router
 router

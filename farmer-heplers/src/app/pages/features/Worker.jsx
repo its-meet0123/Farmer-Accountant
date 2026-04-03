@@ -100,7 +100,7 @@ const WorkersData = () => {
 
   const editWorkerTransaction = (record) => {
     setIsLoanding("ewt");
-    if (record?.give?.amount > 0 && record?.take?.amount > 0) {
+    if (record?.give?.amount > 0 && record?.take?.payment > 0) {
       setTransactionType("Both");
     } else if (record?.give?.amount > 0) {
       setTransactionType("Gives");
