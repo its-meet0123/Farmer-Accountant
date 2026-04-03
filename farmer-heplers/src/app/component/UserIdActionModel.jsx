@@ -6,12 +6,10 @@ import {
   deleteUserAccount,
   getUserData,
 } from "../service/auth";
-import { useNavigate } from "react-router-dom";
 
-const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
+const UserActionModel = ({ openType, setOpenType, goToSingUp, t }) => {
   const [passwordForm] = Form.useForm();
   const [deleteForm] = Form.useForm();
-  const navigate = useNavigate();
   const [findUser, setfindUser] = useState({});
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -119,12 +117,7 @@ const UserActionModel = ({ openType, setOpenType, user, goToSingUp, t }) => {
       deleteUser();
     }
   };
-  useEffect(() => {
-    deleteForm.setFieldsValue({
-      userId: user?.userId || "",
-      password: user?.password || "",
-    });
-  }, [user]);
+
   return (
     <>
       {contextHolder}

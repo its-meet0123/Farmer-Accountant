@@ -172,161 +172,181 @@ const EntDrawer = ({
           </Space>
         }>
         {open === "edit" && (
-          <Form
-            form={form}
-            variant="filled"
-            onFinish={handleSubmit}
-            disabled={!edit}>
-            <Row gutter={24}>
-              <Col span={12}>
-                <Form.Item
-                  label={t("entDrawer.drawerForm.nameInput.fnText")}
-                  name="firstName"
-                  rules={[
-                    {
-                      required: true,
-                      message: t("entDrawer.drawerForm.nameInput.fnrText"),
-                    },
-                  ]}>
-                  <Input
-                    placeholder={t("entDrawer.drawerForm.nameInput.fnpt")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("entDrawer.drawerForm.nameInput.indnText")}
-                  name="nameInd"
-                  rules={[
-                    {
-                      required: true,
-                      message: t("entDrawer.drawerForm.nameInput.indnrText"),
-                    },
-                  ]}>
-                  <Input
-                    placeholder={t("entDrawer.drawerForm.nameInput.indnpt")}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("entDrawer.drawerForm.contactInput.text")}
-                  name="indContact"
-                  rules={[
-                    {
-                      required: true,
-                      message: t("entDrawer.drawerForm.contactInput.rm"),
-                    },
-                    {
-                      validator: (_, value) => {
-                        if (!value) {
-                          return Promise.resolve();
-                        }
-                        const regex = /^[6-9]\d{9}$/;
-                        if (regex.test(value)) {
-                          return Promise.resolve();
-                        }
-                        return Promise.reject(
-                          new Error(t("entDrawer.drawerForm.contactInput.vt")),
-                        );
+          <>
+            <Collapse ghost style={{ marginBottom: 20 }}>
+              <Panel header={t("casualDrawer.acltf.colps.glm")} key="1">
+                <ul style={{ gap: "2px" }}>
+                  <li>{t("entDrawer.drawerForm.colps.li1")}</li>
+                  <li>{t("entDrawer.drawerForm.colps.li2")}</li>
+                  <li style={{ color: "#ff7f7f" }}>
+                    {t("entDrawer.drawerForm.colps.li3")}
+                  </li>
+                  <li>{t("entDrawer.drawerForm.colps.li4")}</li>
+                  {/* <li>{t("entDrawer.drawerForm.colps.li5")}</li>
+                  <li>{t("entDrawer.drawerForm.colps.li6")}</li> */}
+                </ul>
+              </Panel>
+            </Collapse>
+            <Form
+              form={form}
+              variant="filled"
+              onFinish={handleSubmit}
+              disabled={!edit}>
+              <Row gutter={24}>
+                <Col span={12}>
+                  <Form.Item
+                    label={t("entDrawer.drawerForm.nameInput.fnText")}
+                    name="firstName"
+                    rules={[
+                      {
+                        required: true,
+                        message: t("entDrawer.drawerForm.nameInput.fnrText"),
                       },
-                    },
-                  ]}>
-                  <Input
-                    placeholder={t("entDrawer.drawerForm.contactInput.pt")}
-                    type="tel"
-                    maxLength={10}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label={t("entDrawer.drawerForm.dateInput.text")}
-                  name="startDate"
-                  rules={[
-                    {
-                      required: true,
-                      message: t("entDrawer.drawerForm.dateInput.rm"),
-                    },
-                  ]}>
-                  <DatePicker format={"DD/MM/YYYY"} />
-                </Form.Item>
-                <Form.Item name="id"></Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  label={t("entDrawer.drawerForm.nameInput.lnText")}
-                  name="lastName">
-                  <Input
-                    placeholder={t("entDrawer.drawerForm.nameInput.lnpt")}
-                  />
-                </Form.Item>
-                <Form.List name="shopes">
-                  {(fields) => (
-                    <>
-                      {fields.map(({ key, name }) => {
-                        const isEditable = activeRow === name;
-                        const isAnyEditable =
-                          activeRow !== null && activeRow !== name;
-                        return (
-                          <Flex gap="middle" horizontal key={key}>
-                            <Flex gap="small" vertical>
-                              <Form.Item
-                                label={t(
-                                  "entDrawer.drawerForm.shopeInputs.snt",
-                                )}
-                                name={[name, "shopeNumber"]}
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: t(
-                                      "entDrawer.drawerForm.shopeInputs.rm",
-                                    ),
-                                  },
-                                ]}>
-                                <Input
-                                  placeholder={t(
-                                    "entDrawer.drawerForm.shopeInputs.snpt",
+                    ]}>
+                    <Input
+                      placeholder={t("entDrawer.drawerForm.nameInput.fnpt")}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label={t("entDrawer.drawerForm.nameInput.indnText")}
+                    name="nameInd"
+                    rules={[
+                      {
+                        required: true,
+                        message: t("entDrawer.drawerForm.nameInput.indnrText"),
+                      },
+                    ]}>
+                    <Input
+                      placeholder={t("entDrawer.drawerForm.nameInput.indnpt")}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label={t("entDrawer.drawerForm.contactInput.text")}
+                    name="indContact"
+                    rules={[
+                      {
+                        required: true,
+                        message: t("entDrawer.drawerForm.contactInput.rm"),
+                      },
+                      {
+                        validator: (_, value) => {
+                          if (!value) {
+                            return Promise.resolve();
+                          }
+                          const regex = /^[6-9]\d{9}$/;
+                          if (regex.test(value)) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(
+                            new Error(
+                              t("entDrawer.drawerForm.contactInput.vt"),
+                            ),
+                          );
+                        },
+                      },
+                    ]}>
+                    <Input
+                      placeholder={t("entDrawer.drawerForm.contactInput.pt")}
+                      type="tel"
+                      maxLength={10}
+                    />
+                  </Form.Item>
+                  <Form.Item
+                    label={t("entDrawer.drawerForm.dateInput.text")}
+                    name="startDate"
+                    rules={[
+                      {
+                        required: true,
+                        message: t("entDrawer.drawerForm.dateInput.rm"),
+                      },
+                    ]}>
+                    <DatePicker format={"DD/MM/YYYY"} />
+                  </Form.Item>
+                  <Form.Item name="id"></Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    label={t("entDrawer.drawerForm.nameInput.lnText")}
+                    name="lastName">
+                    <Input
+                      placeholder={t("entDrawer.drawerForm.nameInput.lnpt")}
+                    />
+                  </Form.Item>
+                  <Form.List name="shopes">
+                    {(fields) => (
+                      <>
+                        {fields.map(({ key, name }) => {
+                          const isEditable = activeRow === name;
+                          const isAnyEditable =
+                            activeRow !== null && activeRow !== name;
+                          return (
+                            <Flex gap="middle" horizontal key={key}>
+                              <Flex gap="small" vertical>
+                                <Form.Item
+                                  label={t(
+                                    "entDrawer.drawerForm.shopeInputs.snt",
                                   )}
-                                  disabled={!isEditable}
-                                />
-                              </Form.Item>
-                              <Form.Item
-                                label={t("entDrawer.drawerForm.shopeInputs.at")}
-                                name={[name, "shopeAddress"]}>
-                                <Input
-                                  placeholder={t(
-                                    "entDrawer.drawerForm.shopeInputs.apt",
+                                  name={[name, "shopeNumber"]}
+                                  rules={[
+                                    {
+                                      required: true,
+                                      message: t(
+                                        "entDrawer.drawerForm.shopeInputs.rm",
+                                      ),
+                                    },
+                                  ]}>
+                                  <Input
+                                    placeholder={t(
+                                      "entDrawer.drawerForm.shopeInputs.snpt",
+                                    )}
+                                    disabled={!isEditable}
+                                  />
+                                </Form.Item>
+                                <Form.Item
+                                  label={t(
+                                    "entDrawer.drawerForm.shopeInputs.at",
                                   )}
-                                  disabled={!isEditable}
-                                />
-                              </Form.Item>
+                                  name={[name, "shopeAddress"]}>
+                                  <Input
+                                    placeholder={t(
+                                      "entDrawer.drawerForm.shopeInputs.apt",
+                                    )}
+                                    disabled={!isEditable}
+                                  />
+                                </Form.Item>
+                              </Flex>
+                              {isEditable ? (
+                                <Button
+                                  icon={<CheckOutlined />}
+                                  onClick={() => handleEdit(name)}></Button>
+                              ) : (
+                                <Button
+                                  type="link"
+                                  icon={<EditOutlined />}
+                                  disabled={isAnyEditable}
+                                  onClick={() => {
+                                    handleToggleActive(name);
+                                  }}></Button>
+                              )}
                             </Flex>
-                            {isEditable ? (
-                              <Button
-                                icon={<CheckOutlined />}
-                                onClick={() => handleEdit(name)}></Button>
-                            ) : (
-                              <Button
-                                type="link"
-                                icon={<EditOutlined />}
-                                disabled={isAnyEditable}
-                                onClick={() => {
-                                  handleToggleActive(name);
-                                }}></Button>
-                            )}
-                          </Flex>
-                        );
-                      })}
-                    </>
-                  )}
-                </Form.List>
-                <Form.Item>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    disabled={activeRow !== null}
-                    loading={btnLoad}>
-                    {t("entDrawer.drawerForm.button.sbt")}
-                  </Button>
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
+                          );
+                        })}
+                      </>
+                    )}
+                  </Form.List>
+                  <Form.Item>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      disabled={activeRow !== null}
+                      loading={btnLoad}>
+                      {t("entDrawer.drawerForm.button.sbt")}
+                    </Button>
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+          </>
         )}
         {open === "add" && (
           <Form

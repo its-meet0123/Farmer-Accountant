@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  LockOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Button, Flex, Form, Input, message } from "antd";
 import { postUserDataForLoggedIn } from "../../service/auth";
 import { useAuth } from "../../auth/AuthContext";
@@ -99,6 +104,9 @@ const LogIn = () => {
             <Input
               prefix={<LockOutlined />}
               type="password"
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
               placeholder={t("loginPage.formPasswordInput.text")}
               allowClear
             />

@@ -258,7 +258,14 @@ const WorkersData = () => {
               onConfirm={() => deleteWorkerTransaction(record)}
               okText="Yes"
               cancelText="No"
-              placement="left"></Popconfirm>
+              placement="left">
+              <Button
+                color="danger"
+                variant="text"
+                icon={<DeleteOutlined />}
+                size="small"
+              />
+            </Popconfirm>
           </Flex>
         ),
       },

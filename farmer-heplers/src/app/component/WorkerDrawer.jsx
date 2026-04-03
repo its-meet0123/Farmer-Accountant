@@ -36,8 +36,7 @@ const WorkerDrawer = ({
             {t("workerDrawer.transactionInput.button.cbt")}
           </Button>
         }
-        //getContainer={false}
-      >
+        getContainer={false}>
         {(openType == "aw" || openType == "ew") && (
           <WorkerForm
             workerInfoForm={workerInfoForm}

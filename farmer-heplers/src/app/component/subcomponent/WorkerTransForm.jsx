@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import dayjs from "dayjs";
 import {
@@ -31,6 +31,27 @@ const WorkerTransForm = ({
   const [btnLoad, setBtnLoad] = useState(false);
   const today = dayjs();
   const [transactionType, setTransactionType] = useState("Gives");
+
+  useEffect(() => {
+    if (openType == "ewt") {
+      const values = transactionForm.getFieldsValue();
+      const { amount, payment } = values;
+      if (amount > 0 && payment > 0) {
+        setTransactionType("Both");
+        return null;
+      }
+      if (amount > 0) {
+        setTransactionType("Gives");
+        return null;
+      }
+      if (payment > 0) {
+        setTransactionType("Takes");
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }, [openType, transactionForm]);
 
   const handleSubmitTransactionForm = async () => {
     setBtnLoad(true);
@@ -134,7 +155,7 @@ const WorkerTransForm = ({
         wrapperCol={{ span: 25 }}
         name={(openType == "at" && "Add") || (openType == "ewt" && "Edit")}
         form={transactionForm}
-        initialValues={{ cropG: [], cropT: [] }}
+        initialValues={{ cropG: [{}], cropT: [{}] }}
         onFinish={handleSubmitTransactionForm}>
         <Row gutter={24}>
           <Form.Item
@@ -168,6 +189,7 @@ const WorkerTransForm = ({
           options={["Gives", "Takes", "Both"]}
           value={transactionType}
           onChange={setTransactionType}
+          style={{ margin: "2rem" }}
         />
         {(transactionType == "Gives" || transactionType == "Both") && (
           <>
