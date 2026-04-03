@@ -33,8 +33,6 @@ axiosInstance.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
 
-    console.log("Request sent : ", config);
-
     return config;
   },
   (error) => Promise.reject(error),
@@ -42,15 +40,12 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => {
-    console.log("Response Received :", response);
     return response;
   },
   async (error) => {
     const originalRequest = error.config;
-    console.log("Response error in interceptor: ", error.response);
 
     if (!error.response || !originalRequest) {
-      console.log("Neteork or Cors error in interceptor");
       return Promise.reject(error);
     }
 
@@ -59,18 +54,14 @@ axiosInstance.interceptors.response.use(
       !originalRequest._retry &&
       !originalRequest.url.includes("/auth/refresh-token")
     ) {
-      console.log("401 error intercepted, attempting token refresh");
       originalRequest._retry = true;
 
       try {
         const res = await refreshClient.post(`/auth/refresh-token`, {});
-        console.log("Interceptor refresh response: ", res);
+
         const newToken = res.data.accessToken;
 
-        console.log("Token refreshed from interceptor: ", newToken);
-
         if (!newToken) {
-          console.log("No new token received during refresh");
           throw new Error("No new token received");
         }
 
@@ -84,7 +75,6 @@ axiosInstance.interceptors.response.use(
 
         //window.location.href = "https://farmer-accoutant.onrender.com/login";
 
-        console.error("Token refresh failed: ", err.message);
         return Promise.reject(err);
       }
     }

@@ -59,17 +59,19 @@ const FeatureCard = ({ item, isLoading }) => {
                     width: `${100 / descArray.length}%`,
                   }}>
                   <div style={styles.contentBox}>
-                    <Progress
-                      type="circle"
-                      size={60}
-                      percent={percent}
-                      status="active"
-                      format={() => (
-                        <p style={{ color: "#ffffff" }}>{days} Days</p>
-                      )}
-                      strokeColor={{ "0%": "#108ee9", "100%": "#87d068" }}
-                      trailColor="rgba(4, 153,169,0.15)"
-                    />
+                    {!data.isEmpty && (
+                      <Progress
+                        type="circle"
+                        size={60}
+                        percent={percent}
+                        status="active"
+                        format={() => (
+                          <p style={{ color: "#ffffff" }}>{days} Days</p>
+                        )}
+                        strokeColor={{ "0%": "#108ee9", "100%": "#87d068" }}
+                        trailColor="rgba(4, 153,169,0.15)"
+                      />
+                    )}
                     <p
                       style={{
                         margin: 0,
