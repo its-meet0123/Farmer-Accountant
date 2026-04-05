@@ -109,7 +109,7 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
         </Row>
         <Row gutter={24}>
           <Form.Item label={t("casualDrawer.aclf.cf")} name="contact">
-            <Input placeholder={t("casualDrawer.aclf.cfpt")} maxLength={10} />
+            <Input placeholder={t("casualDrawer.aclf.cfpt")} maxLength={11} />
           </Form.Item>
           <Form.Item label={t("casualDrawer.aclf.lf")} name="address">
             <Input placeholder={t("casualDrawer.aclf.lfpt")} />

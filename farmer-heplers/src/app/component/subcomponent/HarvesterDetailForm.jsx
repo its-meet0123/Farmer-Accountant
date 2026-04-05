@@ -104,7 +104,7 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
         </Row>
         <Row gutter={24}>
           <Form.Item label={t("harvestDrawer.ahf.cf")} name="contact">
-            <Input placeholder={t("harvestDrawer.ahf.cfpt")} maxLength={10} />
+            <Input placeholder={t("harvestDrawer.ahf.cfpt")} maxLength={11} />
           </Form.Item>
           <Form.Item label={t("harvestDrawer.ahf.lf")} name="address">
             <Input placeholder={t("harvestDrawer.ahf.lfpt")} />
