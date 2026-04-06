@@ -86,42 +86,42 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
     }
     if (open === "add") {
       const allValues = addForm.getFieldsValue();
-      const transaction = {
-        startDate: allValues.startDate,
-        rate: allValues.rate,
-        loan: {
-          amount: allValues.amount,
-          amountType: allValues.amountType,
-          handOver: allValues.handOver,
-        },
-        indBuy: {
-          billAmount: allValues.bBillAmount,
-          bill: allValues.bBill,
-          brief: allValues.bBrief,
-          handOver: allValues.bHandOver,
-        },
-        indSell: {
-          crop: allValues.crops || [],
-          billAmount: allValues.sBillAmount,
-          bill: allValues.sBill,
-          brief: allValues.sBrief,
-          handOver: allValues.sHandOver,
-        },
-        diesel: {
-          billAmount: allValues.dBillAmount,
-          bill: allValues.dBill,
-          qty: allValues.dQty,
-          rate: allValues.dRate,
-          handOver: allValues.dHandOver,
-        },
-      };
-      const res = await pushIndShopeAccountById(Id.shopeId, transaction);
+      // const transaction = {
+      //   startDate: allValues.startDate,
+      //   rate: allValues.rate,
+      //   loan: {
+      //     amount: allValues.amount,
+      //     amountType: allValues.amountType,
+      //     handOver: allValues.handOver,
+      //   },
+      //   indBuy: {
+      //     billAmount: allValues.bBillAmount,
+      //     bill: allValues.bBill,
+      //     brief: allValues.bBrief,
+      //     handOver: allValues.bHandOver,
+      //   },
+      //   indSell: {
+      //     crop: allValues.crops || [],
+      //     billAmount: allValues.sBillAmount,
+      //     bill: allValues.sBill,
+      //     brief: allValues.sBrief,
+      //     handOver: allValues.sHandOver,
+      //   },
+      //   diesel: {
+      //     billAmount: allValues.dBillAmount,
+      //     bill: allValues.dBill,
+      //     qty: allValues.dQty,
+      //     rate: allValues.dRate,
+      //     handOver: allValues.dHandOver,
+      //   },
+      // };
+      const res = await pushIndShopeAccountById(Id.shopeId, allValues);
 
       if (res.status === 200) {
         onClose();
         const text = `${t("indDrawer.submitFunction.successMessageforCreate")}`;
         showSuccess(text);
-        setFetch(transaction);
+        setFetch(res.data);
       } else {
         message.error(t("indDrawer.submitFunction.errorMessageforCreate"));
       }

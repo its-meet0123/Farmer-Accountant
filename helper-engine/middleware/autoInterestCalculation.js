@@ -1,0 +1,91 @@
+const { calculateAutoInterst } = require("../components/calculator");
+
+async function autoInterestCalculation(req, res, next) {
+  try {
+    const body = req.body;
+    console.log(body);
+    if (!body) {
+      return res
+        .status(404)
+        .json({ status: "Error", msg: "All fields are required" });
+    }
+
+    const startDate = body?.startDate;
+    const rate = body?.rate || 0;
+    const endDate = new Date();
+    const loanAmount = body?.amount || 0;
+    const buyBillAmount = body?.bBillAmount || 0;
+    const sellBillAmount = body?.sBillAmount || 0;
+    const dieselBillAmount = body?.dBillAmount || 0;
+
+    const interestOfLoanAmount = calculateAutoInterst(
+      loanAmount,
+      startDate,
+      rate,
+      endDate,
+    );
+    const interestOfBuyBillAmount = calculateAutoInterst(
+      buyBillAmount,
+      startDate,
+      rate,
+      endDate,
+    );
+    const interestOfSellBillAmount = calculateAutoInterst(
+      sellBillAmount,
+      startDate,
+      rate,
+      endDate,
+    );
+    const interestOfDieselBillAmount = calculateAutoInterst(
+      dieselBillAmount,
+      startDate,
+      rate,
+      endDate,
+    );
+
+    const newBody = {
+      startDate: startDate,
+      rate: rate,
+      loan: {
+        amount: loanAmount,
+        ...interestOfLoanAmount,
+        amountType: body?.amountType,
+        handOver: body?.handOver,
+      },
+      indBuy: {
+        billAmount: buyBillAmount,
+        ...interestOfBuyBillAmount,
+        bill: body?.bBill,
+        brief: body?.bBrief,
+        handOver: body?.bHandOver,
+      },
+      indSell: {
+        crop: body?.crops || [],
+        billAmount: sellBillAmount,
+        ...interestOfSellBillAmount,
+        bill: body?.sBill,
+        brief: body?.sBrief,
+        handOver: body?.sHandOver,
+      },
+      diesel: {
+        billAmount: dieselBillAmount,
+        ...interestOfDieselBillAmount,
+        bill: body?.dBill,
+        qty: body?.dOty,
+        rate: body?.dRate,
+        handOver: body?.dHandOver,
+      },
+    };
+
+    req.body = newBody;
+
+    next();
+  } catch (err) {
+    return res.status(500).json({
+      status: "Fail",
+      message: err.message,
+    });
+  }
+}
+
+module.exports = autoInterestCalculation;
