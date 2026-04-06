@@ -125,28 +125,26 @@ const DashBord = () => {
   // });
 
   return (
-    <>
-      <div style={styles.wrapper}>
-        <header style={styles.header}>
-          <h1 style={styles.headerTitle}>
-            {t("dashbord.features.tfdh1")}-
-            <span style={{ color: "#4da3ff" }}>
-              {t("dashbord.features.tfdh2")}
-            </span>
-          </h1>
-          <p style={styles.headerSubtitle}>{t("dashbord.features.stfdh")}</p>
-        </header>
+    <div style={styles.wrapper}>
+      <header style={styles.header}>
+        <h1 style={styles.headerTitle}>
+          {t("dashbord.features.tfdh1")}-
+          <span style={{ color: "#4da3ff" }}>
+            {t("dashbord.features.tfdh2")}
+          </span>
+        </h1>
+        <p style={styles.headerSubtitle}>{t("dashbord.features.stfdh")}</p>
+      </header>
 
-        <div style={styles.mainGrid}>
-          {features.map((item, index) => (
-            <FeatureCard key={index} item={item} isLoading={isLoading} />
-          ))}
-        </div>
-        <MonthlyTurnover dashbordData={dashbordData} />
-
-        <div style={styles.footerBar}></div>
+      <div style={styles.mainGrid}>
+        {features.map((item, index) => (
+          <FeatureCard key={index} item={item} isLoading={isLoading} />
+        ))}
       </div>
-    </>
+      <MonthlyTurnover dashbordData={dashbordData} />
+
+      <div style={styles.footerBar}></div>
+    </div>
   );
 };
 
