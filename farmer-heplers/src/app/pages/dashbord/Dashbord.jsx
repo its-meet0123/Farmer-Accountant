@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { styles } from "./DasnbordStyle";
 import FeatureCard from "./FeatureCard";
-//import MonthlyTurnover from "../graph/monthlyTurnover";
+import MonthlyTurnover from "../graph/MonthlyTurnover";
 
 const DashBord = () => {
   const location = useLocation();
@@ -141,8 +141,7 @@ const DashBord = () => {
           <FeatureCard key={index} item={item} isLoading={isLoading} />
         ))}
       </div>
-      {/* <MonthlyTurnover dashbordData={dashbordData} /> */}
-
+      <MonthlyTurnover transactions={dashbordData} />
       <div style={styles.footerBar}></div>
     </div>
   );
