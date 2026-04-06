@@ -124,8 +124,8 @@ const WorkerTransForm = ({
               <li>{t("workerDrawer.transactionInput.colps.li2")}</li>
               <li>{t("workerDrawer.transactionInput.colps.li3")}</li>
               <li>{t("workerDrawer.transactionInput.colps.li4")}</li>
-              <li>{t("workerDrawer.transactionInput.colps.li5")}</li>
-              <li>{t("workerDrawer.transactionInput.colps.li6")}</li>
+              {/* <li>{t("workerDrawer.transactionInput.colps.li5")}</li>
+              <li>{t("workerDrawer.transactionInput.colps.li6")}</li> */}
             </ul>
           </Panel>
         </Collapse>

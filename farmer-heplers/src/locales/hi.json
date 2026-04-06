@@ -486,17 +486,13 @@
       "cpt": "मोबाइल नंबर दर्ज करें",
       "dt": "तारीख"
     },
-    "awDrawerTitle": "कर्मचारी जोड़ें",
-    "awtDrawerTitle": "कर्मचारी लेनदेन जोड़ें",
     "transactionInput": {
       "colps": {
         "glm": "फॉर्म दिशानिर्देश",
-        "li1": "प्रति लेनदेन सभी अनिवार्य(*) फ़ील्ड भरें",
-        "li2": "स्थायी कर्मचारी अग्रिम भुगतान के लिए 'राशि', 'प्रकार', 'विवरण' फ़ील्ड का उपयोग करें।",
-        "li3": "कर्मचारी जमा के लिए 'भुगतान' और 'प्रकार' फ़ील्ड का उपयोग करें।",
-        "li4": "नकद + फसल (गेहूं/सरसों) अग्रिम के लिए 'राशि', 'प्रकार', 'विवरण' फ़ील्ड भरें और 'दिया (Gives)' चुनें और '+' आइकन दबाएं फिर फसल विवरण भरें।",
-        "li5": "नकद + फसल जमा के लिए 'भुगतान', 'प्रकार' फ़ील्ड भरें और 'लिया (Takes)' चुनें और '+' आइकन दबाएं फिर फसल विवरण भरें।",
-        "li6": "आप एक ही प्रविष्टि में कई सेक्शन भर सकते हैं (उदा., अग्रिम + जमा)।"
+        "li1": "Fill all mandatory(*) fields per transaction",
+        "li2": "For worker advance payments, select the 'Gives' Section. If the advance is in cash, fill in the 'Amount', 'Type', and 'Brief' fields. If a part of the crop is given as an advance, complete the 'Crop' fields instead.",
+        "li3": "For worker deposits, select the 'Takes' section. If the de posit is in cash, fill in the 'Payment'and 'Type' fields. If a part of the crop (his share from the harvest) is deposit, complete the 'Crop' fields instead. ",
+        "li4": "To maintain both types of records, click on the 'Both' section. The input fields will then automatically adjust based on your transaction type."
       },
       "at": "राशि",
       "apt": "राशि दर्ज करें",
@@ -582,13 +578,12 @@
     },
     "acltf": {
       "colps": {
-        "glm": "फॉर्म दिशानिर्देश",
-        "hli": "कृपया अपने लेनदेन की सावधानीपूर्वक समीक्षा करें और दर्ज करें। एक बार जोड़े जाने के बाद, एक लेनदेन को केवल तभी संपादित या हटाया जा सकता है यदि यह आपके रिकॉर्ड में सबसे हालिया हो।",
-        "li1": "प्रति लेनदेन सभी अनिवार्य(*) फ़ील्ड भरें",
-        "li2": "कार्य पूर्ण होने पर भुगतान करें: सभी फ़ील्ड भरें।",
-        "li3": "केवल भुगतान के बिना कार्य का विवरण रिकॉर्ड करें: 'मजदूरी/दिन' और 'अवधि' फ़ील्ड भरें।",
-        "li4": "केवल भुगतान विवरण रिकॉर्ड करें: 'भुगतान', 'लेनदेन प्रकार' और 'सौंप दिया' फ़ील्ड भरें।",
-        "li5": "कई लेनदेन की अनुमति है।"
+        "li1": "Fill all mandatory(*) fields per transaction",
+        "li2": "Process payment upon task is finished: fill all fields.",
+        "li3": "Only record task finished without payment: fill 'Wages/D' and 'Duration' fields.",
+        "li4": "Only record payment details: fill 'Pay', 'Transaction type', and 'HandOver' fields.",
+        "li5": "Multiple transactions allowed.",
+        "li6": "Select 'Duration' if the work is time-based. Select 'Measurement' if the work is based on field area."
       },
       "df": "तारीख",
       "dpt": "तारीख चुनें",
@@ -617,7 +612,8 @@
         "vdmt": "वाहन की जानकारी",
         "vdmtvn": "वाहन नंबर",
         "vdmtvt": "वाहन का प्रकार",
-        "vdmtvid": "वाहन आईडी"
+        "vdmtvid": "वाहन आईडी",
+        "vdmttow": "काम का प्रकार"
       },
       "actiont": "कार्रवाई",
       "aptt": "इस मालिक को हटाने से उनके सभी जुड़े लेनदेन रिकॉर्ड स्थायी रूप से हट जाएंगे। इसे वापस नहीं लिया जा सकता। क्या आप आगे बढ़ना चाहते हैं?"
@@ -664,7 +660,8 @@
         "vtf": "वाहन का प्रकार",
         "vtpt": "वाहन को परिभाषित करें",
         "vidf": "वाहन आईडी",
-        "vidpt": "वाहन की आईडी दर्ज करें"
+        "vidpt": "वाहन की आईडी दर्ज करें",
+        "tow": "काम का प्रकार"
       },
       "idpf": "पहचान पत्र",
       "idppt": "पहचान पत्र दर्ज करें",

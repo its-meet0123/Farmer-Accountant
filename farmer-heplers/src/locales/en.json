@@ -505,11 +505,9 @@
       "colps": {
         "glm": "Form Guidelines",
         "li1": "Fill all mandatory(*) fields per transaction",
-        "li2": "Use 'Amount', 'Type', 'Brief', fields for permanent worker advance payments (gives).",
-        "li3": "For worker deposits, use 'Payment' and 'Type' fields.",
-        "li4": "For Cash + Crop(Wheat/Mustard) advances fill 'Amount', 'Type', 'Brief' fields and select 'Gives' and press '+' icon then fill crops details.",
-        "li5": "For Cash + Crop deposits fill 'Payment', 'Type' fields and select Takes and press '+' icon then fill crops details.",
-        "li6": "You can fill multiple sections (e.g., Advance + Desposit) in a single entry."
+        "li2": "For worker advance payments, select the 'Gives' Section. If the advance is in cash, fill in the 'Amount', 'Type', and 'Brief' fields. If a part of the crop is given as an advance, complete the 'Crop' fields instead.",
+        "li3": "For worker deposits, select the 'Takes' section. If the de posit is in cash, fill in the 'Payment'and 'Type' fields. If a part of the crop (his share from the harvest) is deposit, complete the 'Crop' fields instead. ",
+        "li4": "To maintain both types of records, click on the 'Both' section. The input fields will then automatically adjust based on your transaction type."
       },
       "at": "Amount",
       "apt": "enter amount",
@@ -593,13 +591,12 @@
     },
     "acltf": {
       "colps": {
-        "glm": "Form Guidelines",
-        "hli": "Please review and enter your transactions carefully. Once added, a transaction can only be edited or deleted if it is the last entry in your records.",
         "li1": "Fill all mandatory(*) fields per transaction",
         "li2": "Process payment upon task is finished: fill all fields.",
         "li3": "Only record task finished without payment: fill 'Wages/D' and 'Duration' fields.",
         "li4": "Only record payment details: fill 'Pay', 'Transaction type', and 'HandOver' fields.",
-        "li5": "Multiple transactions allowed."
+        "li5": "Multiple transactions allowed.",
+        "li6": "Select 'Duration' if the work is time-based. Select 'Measurement' if the work is based on field area."
       },
       "df": "Date",
       "dpt": "Select date",
@@ -628,7 +625,8 @@
         "vdmt": "Vehicle Detail",
         "vdmtvn": "Vehicle Number",
         "vdmtvt": "Vehicle Type",
-        "vdmtvid": "Vehicle ID"
+        "vdmtvid": "Vehicle ID",
+        "vdmttow": "Type of Work"
       },
       "actiont": "Action",
       "aptt": "Deleting this owner will permanently remove all their associated transaction records. This action cannot be undone. Are you sure you want to proceed?"
@@ -636,6 +634,7 @@
     "ttc": {
       "sntt": "S. No.",
       "dt": "Date",
+      "vid": "Vehical ID",
       "wt": "Harvesting Charge",
       "dut": "Duration/Measuremernt",
       "tt": "Total/Remaing",
@@ -675,7 +674,8 @@
         "vtf": "Vehicle Type",
         "vtpt": "define the vehicle",
         "vidf": "Vehicle ID",
-        "vidpt": "enter id of vehicle"
+        "vidpt": "enter id of vehicle",
+        "tow": "Type of Work"
       },
       "idpf": "Id Proof",
       "idppt": "enter Id proof",
@@ -685,6 +685,7 @@
       "glm": "Form Guidelines",
       "glt": ". Process payment upon task is finished : use all fields. \n. Only record work details without payment : use 'date', 'wages/d' and 'duration' fields. \n. Only record payment details : user 'date', 'pay', 'transaction type' and 'hand Over' fields. ",
       "df": "Date",
+      "vid": "Vehical ID",
       "dpt": "Select date",
       "dfrmt": "date is required",
       "durf": "Duration",

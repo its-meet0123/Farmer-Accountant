@@ -1204,6 +1204,7 @@ const getColumnsForHarvestList = (t) => {
                 <th>{t("mechanizedHiring.htc.vd.vdmtvn")}</th>
                 <th>{t("mechanizedHiring.htc.vd.vdmtvt")}</th>
                 <th>{t("mechanizedHiring.htc.vd.vdmtvid")}</th>
+                <th>{t("mechanizedHiring.htc.vd.vdmttow")} </th>
               </tr>
             </thead>
             <tbody>
@@ -1212,6 +1213,7 @@ const getColumnsForHarvestList = (t) => {
                   <td>{vehicle.vehicalNumber}</td>
                   <td>{vehicle.vehicalType}</td>
                   <td>{vehicle.vehicalID}</td>
+                  <td>{vehicle.typeOfWork}</td>
                 </tr>
               ))}
             </tbody>
@@ -1307,6 +1309,12 @@ const getColumnsForHarvestTransaction = (t) => {
         const formatedDate = formattedDate(date);
         return formatedDate;
       },
+    },
+    {
+      title: t("mechanizedHiring.ttc.vid"),
+      dataIndex: "vehical",
+      key: "vehical",
+      width: 100,
     },
     {
       title: t("mechanizedHiring.ttc.wt"),

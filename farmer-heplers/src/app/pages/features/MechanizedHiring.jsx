@@ -129,6 +129,7 @@ const HarvesterData = () => {
       harvesterId: harvesterId,
       transId: transId,
       startDate: date,
+      vehical: record?.vehical,
       duration: record?.duration,
       measurment: record?.measurment,
       salary: record?.salary,

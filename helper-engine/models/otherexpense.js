@@ -8,6 +8,7 @@ const accountSchemaFW = new mongoose.Schema({
   salary: { type: Number, default: 0 },
   total: { type: Number, default: 0 },
   pay: { type: Number, default: 0 },
+  payFor: String,
   transType: String,
   remaining: Number,
   handOver: String,
@@ -27,7 +28,7 @@ const fieldWorkerModel = new mongoose.Schema({
     contact: { type: String },
     idProof: { type: String },
   },
-  brief: String,
+  typeOfWork: String,
   date: {
     type: Date,
     default: new Date(),
@@ -45,6 +46,7 @@ const accountSchemaHF = new mongoose.Schema({
   total: { type: Number, default: 0 },
   pay: { type: Number, default: 0 },
   transType: String,
+  vehical: String,
   remaining: { type: Number, default: 0 },
   brief: String,
   handOver: String,
@@ -69,6 +71,7 @@ const harvestModel = new mongoose.Schema({
       vehicalID: String,
       vehicalType: String,
       vehicalNumber: String,
+      typeOfWork: String,
     },
   ],
   date: {

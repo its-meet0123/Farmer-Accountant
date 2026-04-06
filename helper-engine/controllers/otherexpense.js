@@ -468,6 +468,7 @@ async function postAdditionalWorker(req, res) {
         address: body.address,
         idProof: body.idProof,
       },
+      typeOfWork: body.typeOfWork,
       transactions: body.transactions,
     });
 

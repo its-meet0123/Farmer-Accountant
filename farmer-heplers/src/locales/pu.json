@@ -295,8 +295,7 @@
       },
       "grandTotalText": "ਕੁੱਲ ਜੋੜ"
     },
-    "cardTitle": "ਲੈਣ-ਦੇਣ ਦਾ ਵੇਰਵਾ",
-    "transInput": "ਮਾਸਿਕ ਟਰਨਓਵਰ"
+    "cardTitle": "ਲੈਣ-ਦੇਣ ਦਾ ਵੇਰਵਾ"
   },
   "settingPage": {
     "logoutText": "ਲੌਗ ਆਊਟ",
@@ -485,17 +484,13 @@
       "cpt": "ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ",
       "dt": "ਮਿਤੀ"
     },
-    "awDrawerTitle": "ਕਾਮਾ ਜੋੜੋ",
-    "awtDrawerTitle": "ਕਾਮੇ ਦਾ ਲੈਣ-ਦੇਣ ਜੋੜੋ",
     "transactionInput": {
       "colps": {
         "glm": "ਫਾਰਮ ਹਿਦਾਇਤਾਂ",
-        "li1": "ਪ੍ਰਤੀ ਲੈਣ-ਦੇਣ ਸਭੀ ਜ਼ਰੂਰੀ(*) ਖਾਨੇ ਭਰੋ",
-        "li2": "ਸਥਾਈ ਖੇਤਮਜ਼ਦੂਰ ਅਗ੍ਰਿਮ ਭੁਗਤਾਨ ਲਈ 'ਰਕਮ', 'ਕਿਸਮ', 'ਵੇਰਵਾ' ਖਾਨੇ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
-        "li3": "ਮਜ਼ਦੂਰ ਜਮਾ ਲਈ 'ਭੁਗਤਾਨ' ਅਤੇ 'ਕਿਸਮ' ਖਾਨੇ ਦੀ ਵਰਤੋਂ ਕਰੋ।",
-        "li4": "ਨਕਦ + ਫਸਲ (ਗੇਹੂਂ/ਸਰਸਰ) ਅਗ੍ਰਿਮ 'ਰਕਮ', 'ਕਿਸਮ', 'ਵੇਰਵਾ' ਖਾਨੇ ਭਰੋ ਅਤੇ 'ਦਿੱਤਾ (Gives)' ਚੁਣੋ ਅਤੇ '+' ਆਈਕਨ ਦਬਾਓ ਫਿਰ ਫਸਲ ਵੇਰਵਾ ਭਰੋ।",
-        "li5": "ਨਕਦ + ਫਸਲ ਜਮਾ 'ਭੁਗਤਾਨ', 'ਕਿਸਮ' ਖਾਨੇ ਭਰੋ ਅਤੇ 'ਲਿਆ (Takes)' ਚੁਣੋ ਅਤੇ '+' ਆਈਕਨ ਦਬਾਓ ਫਿਰ ਫਸਲ ਵੇਰਵਾ ਭਰੋ।",
-        "li6": "ਤੁਸੀਂ ਇੱਕ ਹੀ ਪ੍ਰਵਿਸ਼ਟੀ ਵਿੱਚ ਕਈ ਭਾਗ ਭਰ ਸਕਦੇ ਹੋ (ਜਿਵੇਂ, ਅਗ੍ਰਿਮ + ਜਮਾ)।"
+        "li1": "Fill all mandatory(*) fields per transaction",
+        "li2": "For worker advance payments, select the 'Gives' Section. If the advance is in cash, fill in the 'Amount', 'Type', and 'Brief' fields. If a part of the crop is given as an advance, complete the 'Crop' fields instead.",
+        "li3": "For worker deposits, select the 'Takes' section. If the de posit is in cash, fill in the 'Payment'and 'Type' fields. If a part of the crop (his share from the harvest) is deposit, complete the 'Crop' fields instead. ",
+        "li4": "To maintain both types of records, click on the 'Both' section. The input fields will then automatically adjust based on your transaction type."
       },
       "at": "ਰਕਮ",
       "apt": "ਰਕਮ ਦਰਜ ਕਰੋ",
@@ -580,12 +575,12 @@
     },
     "acltf": {
       "colps": {
-        "glm": "ਫਾਰਮ ਹਿਦਾਇਤਾਂ",
-        "li1": "ਹਰ ਲੈਣ-ਦੇਣ ਲਈ ਸਾਰੇ ਜ਼ਰੂਰੀ(*) ਖਾਨੇ ਭਰੋ",
-        "li2": "ਕਾਮ ਪਪਟਾ ਹੋਨੇ ਤੋਁ ਪਾਲ਼ਕ ખਿਤਰ ਫਟੇ: ਸਾਰੇ ਖਾਨੇ ਭਰੋ।",
-        "li3": "ਸਿਰਫ਼ ਕਾਮ ਦਾ ਵੇਰਵਾ ਬਿਨਾਂ ਪਾਲ਼ਕ ਕੀ ਦੇ੖: 'Wages/D' ਣੈ ਖਾਨਿਆਂ ਭਰੋ।",
-        "li4": "ਸਿਰਫ਼ ਪਾਲ਼ਕ ਦਾ ਵੇਰਵਾ: 'Pay', 'Transaction type', ਣੈ 'HandOver' ਖਾਨਿਆਂ ਭਰੋ।",
-        "li5": "ਕਈ ਲੈਣ-ਦੇਣ ਇਜਾਜਤ ਹਰ਷ਾਙਿਤ ਹਨ।"
+        "li1": "Fill all mandatory(*) fields per transaction",
+        "li2": "Process payment upon task is finished: fill all fields.",
+        "li3": "Only record task finished without payment: fill 'Wages/D' and 'Duration' fields.",
+        "li4": "Only record payment details: fill 'Pay', 'Transaction type', and 'HandOver' fields.",
+        "li5": "Multiple transactions allowed.",
+        "li6": "Select 'Duration' if the work is time-based. Select 'Measurement' if the work is based on field area."
       },
       "df": "ਮਿਤੀ",
       "dpt": "ਮਿਤੀ ਚੁਣੋ",
@@ -614,7 +609,8 @@
         "vdmt": "ਵਾਹਨ ਦੀ ਜਾਣਕਾਰੀ",
         "vdmtvn": "ਵਾਹਨ ਨੰਬਰ",
         "vdmtvt": "ਵਾਹਨ ਦੀ ਕਿਸਮ",
-        "vdmtvid": "ਵਾਹਨ ਆਈਡੀ"
+        "vdmtvid": "ਵਾਹਨ ਆਈਡੀ",
+        "vdmttow": "ਕਾਮ ਦੀ ਕਿਸਮ"
       },
       "actiont": "ਐਕਸ਼ਨ",
       "aptt": "ਇਸ ਮਾਲਕ ਨੂੰ ਡਿਲੀਟ ਕਰਨ ਨਾਲ ਉਹਨਾਂ ਦੇ ਸਾਰੇ ਲੈਣ-ਦੇਣ ਰਿਕਾਰਡ ਪੱਕੇ ਤੌਰ 'ਤੇ ਹਟ ਜਾਣਗੇ। ਕੀ ਤੁਸੀਂ ਅੱਗੇ ਵਧਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
@@ -661,7 +657,8 @@
         "vtf": "ਵਾਹਨ ਦੀ ਕਿਸਮ",
         "vtpt": "ਵਾਹਨ ਦੀ ਕਿਸਮ ਦੱਸੋ",
         "vidf": "ਵਾਹਨ ਆਈਡੀ",
-        "vidpt": "ਵਾਹਨ ਦੀ ਆਈਡੀ ਦਰਜ ਕਰੋ"
+        "vidpt": "ਵਾਹਨ ਦੀ ਆਈਡੀ ਦਰਜ ਕਰੋ",
+        "tow": "ਕਰਮ ਦੀ ਕਿਸਮ"
       },
       "idpf": "ਪਛਾਣ ਪੱਤਰ",
       "idppt": "ਪਛਾਣ ਪੱਤਰ ਦਰਜ ਕਰੋ",

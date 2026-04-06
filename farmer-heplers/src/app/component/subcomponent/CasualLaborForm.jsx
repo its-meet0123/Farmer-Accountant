@@ -80,9 +80,6 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
         wrapperCol={150}
         onFinish={onFinish}>
         <Row gutter={24}>
-          <Form.Item label="ID" name="laborId" hidden>
-            <Input />
-          </Form.Item>
           <Form.Item
             label={t("casualDrawer.aclf.df")}
             name="date"
@@ -92,6 +89,11 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
               placeholder={t("casualDrawer.aclf.dpt")}
             />
           </Form.Item>
+        </Row>
+        <Row gutter={24}>
+          {/* <Form.Item label={t("casualDrawer.aclf.tow")} name="typeOfWork">
+            <Input />
+          </Form.Item> */}
           <Form.Item
             label={t("casualDrawer.aclf.nnf")}
             name="nickName"
@@ -111,6 +113,7 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
           <Form.Item label={t("casualDrawer.aclf.cf")} name="contact">
             <Input placeholder={t("casualDrawer.aclf.cfpt")} maxLength={11} />
           </Form.Item>
+
           <Form.Item label={t("casualDrawer.aclf.lf")} name="address">
             <Input placeholder={t("casualDrawer.aclf.lfpt")} />
           </Form.Item>
@@ -118,9 +121,6 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
         <Row gutter={24}>
           <Form.Item label={t("casualDrawer.aclf.idpf")} name="idProof">
             <Input placeholder={t("casualDrawer.aclf.idppt")} />
-          </Form.Item>
-          <Form.Item label="Transactions" name="transactions" hidden>
-            <Input />
           </Form.Item>
 
           <Button type="primary" htmlType="submit">
@@ -134,6 +134,12 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
             )}
           </Button>
         </Row>
+        <Form.Item label="ID" name="laborId" hidden>
+          <Input />
+        </Form.Item>
+        <Form.Item label="Transactions" name="transactions" hidden>
+          <Input />
+        </Form.Item>
       </Form>
     </>
   );

@@ -119,15 +119,15 @@ const HarvesterTransactionForm = ({
         labelCol={100}
         wrapperCol={150}
         onFinish={onFinish}>
+        <Form.Item label="Harvester ID" name="harvesterId" hidden>
+          <Input />
+        </Form.Item>
+
+        <Form.Item label="Trans ID" name="transId" hidden>
+          <Input />
+        </Form.Item>
+
         <Row gutter={12}>
-          <Form.Item label="Harvester ID" name="harvesterId" hidden>
-            <Input />
-          </Form.Item>
-
-          <Form.Item label="Trans ID" name="transId" hidden>
-            <Input />
-          </Form.Item>
-
           <Form.Item
             label={t("harvestDrawer.ahtf.df")}
             name="startDate"
@@ -138,6 +138,10 @@ const HarvesterTransactionForm = ({
               format={"DD/MM/YYYY"}
               placeholder={t("harvestDrawer.ahtf.dpt")}
             />
+          </Form.Item>
+
+          <Form.Item label={t("harvestDrawer.ahtf.vid")} name="vehical">
+            <Input />
           </Form.Item>
         </Row>
 
