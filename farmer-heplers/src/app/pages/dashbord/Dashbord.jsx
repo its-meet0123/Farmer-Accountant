@@ -141,7 +141,7 @@ const DashBord = () => {
           <FeatureCard key={index} item={item} isLoading={isLoading} />
         ))}
       </div>
-      {/* <MonthlyTurnover dashbordData={dashbordData} /> */}
+      <MonthlyTurnover dashbordData={dashbordData} />
 
       <div style={styles.footerBar}></div>
     </div>
