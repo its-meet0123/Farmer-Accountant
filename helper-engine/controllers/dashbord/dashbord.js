@@ -167,7 +167,7 @@ async function dashBordData(req, res) {
         const oAt = formatCurrency(lastTransaction?.total || 0);
         const duration = calculateAccountDuration(effectiveDate);
         return {
-          ...labors,
+          ...labors?.transactions,
           laborName: laborName,
           pending: oAt,
           accountAge: duration,
@@ -184,7 +184,7 @@ async function dashBordData(req, res) {
         const oAt = formatCurrency(lastTransaction?.total || 0);
         const duration = calculateAccountDuration(effectiveDate);
         return {
-          ...harvester,
+          ...harvester?.transactions,
           opratorName: opratorName,
           pending: oAt,
           accountAge: duration,
