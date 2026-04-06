@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { styles } from "./DasnbordStyle";
 import FeatureCard from "./FeatureCard";
+import MonthlyTurnover from "../graph/monthlyTurnover";
 
 const DashBord = () => {
   const location = useLocation();
@@ -124,123 +125,29 @@ const DashBord = () => {
   // });
 
   return (
-    <div style={styles.wrapper}>
-      <header style={styles.header}>
-        <h1 style={styles.headerTitle}>
-          {t("dashbord.features.tfdh1")}-
-          <span style={{ color: "#4da3ff" }}>
-            {t("dashbord.features.tfdh2")}
-          </span>
-        </h1>
-        <p style={styles.headerSubtitle}>{t("dashbord.features.stfdh")}</p>
-      </header>
+    <>
+      <div style={styles.wrapper}>
+        <header style={styles.header}>
+          <h1 style={styles.headerTitle}>
+            {t("dashbord.features.tfdh1")}-
+            <span style={{ color: "#4da3ff" }}>
+              {t("dashbord.features.tfdh2")}
+            </span>
+          </h1>
+          <p style={styles.headerSubtitle}>{t("dashbord.features.stfdh")}</p>
+        </header>
 
-      <div style={styles.mainGrid}>
-        {features.map((item, index) => (
-          <FeatureCard key={index} item={item} isLoading={isLoading} />
-        ))}
+        <div style={styles.mainGrid}>
+          {features.map((item, index) => (
+            <FeatureCard key={index} item={item} isLoading={isLoading} />
+          ))}
+        </div>
+
+        <div style={styles.footerBar}></div>
+        <MonthlyTurnover dashbordData={dashbordData} />
       </div>
-
-      <div style={styles.footerBar}></div>
-    </div>
+    </>
   );
 };
-
-// const FeatureCard = ({ item, isLoanding }) => {
-//   const [currentIndex, setCurrentIndex] = useState(0);
-
-//   // Strict validation: ensure item.desc is always an array
-//   const descArray = Array.isArray(item?.desc) ? item.desc : [];
-
-//   const hasMultipleDesc = descArray.length > 1;
-
-//   useEffect(() => {
-//     if (hasMultipleDesc) {
-//       const timer = setInterval(() => {
-//         setCurrentIndex((prevIndex) =>
-//           prevIndex === descArray.length - 1 ? 0 : prevIndex + 1,
-//         );
-//       }, 2000);
-
-//       return () => clearInterval(timer);
-//     }
-//   }, [hasMultipleDesc, descArray.length]);
-
-//   // Guard check after hooks - don't render if invalid item
-//   if (!item || typeof item !== "object") {
-//     return null;
-//   }
-
-//   return (
-//     <div style={styles.card}>
-//       <div style={styles.cardHeader}>{item.title}</div>
-//       {isLoanding ? (
-//         <Spin indicator={<LoadingOutlined spin />} size="small" />
-//       ) : (
-//         <div style={styles.scrollArea}>
-//           <div
-//             style={{
-//               display: "flex",
-//               width: `${descArray.length * 100}%`,
-//               transform: `translateX(-${(currentIndex * 100) / descArray.length}%)`,
-//               //transform: `translateX(-${currentIndex * 100}%)`,
-//               transition: hasMultipleDesc
-//                 ? "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
-//                 : "none",
-//               height: "100%",
-//             }}>
-//             {descArray.map((data, i) => (
-//               <div
-//                 key={i}
-//                 style={{
-//                   ...styles.descSlide,
-//                   width: `${100 / descArray.length}%`,
-//                 }}>
-//                 <div style={styles.contentBox}>
-//                   <p
-//                     style={{
-//                       ...styles.dataName,
-//                       // Agar text bada hai toh size 1.1rem ya 1.2rem rakhein
-//                       fontSize: data.isEmpty ? "1.15rem" : "1.4rem",
-//                       fontWeight: data.isEmpty ? "400" : "600",
-//                       color: "#ffffff",
-//                       opacity: data.isEmpty ? 0.7 : 1,
-//                       lineHeight: "1.6", // Lines ke beech gap taaki padhne mein aasaan ho
-//                       textAlign: "center",
-//                       margin: "0 auto",
-//                       maxWidth: "90%", // Side se thoda gap chhoda hai
-//                       wordBreak: "break-word", // Badi lines ko automatic wrap karega
-//                     }}>
-//                     {data?.name || "N/A"}
-//                   </p>
-
-//                   {!data.isEmpty && (
-//                     <div style={styles.amountBadge}>{data?.total}</div>
-//                   )}
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       )}
-
-//       {hasMultipleDesc && (
-//         <div style={styles.dotsContainer}>
-//           {descArray.map((_, i) => (
-//             <div
-//               key={i}
-//               style={{
-//                 ...styles.dot,
-//                 width: currentIndex === i ? "20px" : "6px",
-//                 opacity: currentIndex === i ? 1 : 0.4,
-//                 backgroundColor: "#4da3ff", // Light blue dots
-//               }}
-//             />
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
 
 export default DashBord;

@@ -103,6 +103,7 @@ async function dashBordData(req, res) {
       const shopesTotal = overAllTotalOfAllShopes(shopeData);
       const duration = calculateAccountDuration(effectiveDate);
       return {
+        ...shopeData,
         shopeNumber: shopeNumber,
         overAllTotal: shopesTotal,
         accountAge: duration,
@@ -149,6 +150,7 @@ async function dashBordData(req, res) {
         const Returns = overAllTotalOfAllWorkers(workerAccounts);
         const duration = calculateAccountDuration(effectiveDate);
         return {
+          ...workerAccounts,
           workerName: workerName,
           overAllTotal: Returns,
           accountAge: duration,
@@ -165,6 +167,7 @@ async function dashBordData(req, res) {
         const oAt = formatCurrency(lastTransaction?.total || 0);
         const duration = calculateAccountDuration(effectiveDate);
         return {
+          ...labors,
           laborName: laborName,
           pending: oAt,
           accountAge: duration,
@@ -181,6 +184,7 @@ async function dashBordData(req, res) {
         const oAt = formatCurrency(lastTransaction?.total || 0);
         const duration = calculateAccountDuration(effectiveDate);
         return {
+          ...harvester,
           opratorName: opratorName,
           pending: oAt,
           accountAge: duration,
