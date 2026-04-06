@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getDashbordData } from "../../service/dashbord";
+import { getDashbordData, getMonthlyTurnover } from "../../service/dashbord";
 import { message } from "antd";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
@@ -12,6 +12,7 @@ const DashBord = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [dashbordData, setDeshbordData] = useState({});
+  const [data, setData] = useState({});
   const { t } = useAuth();
 
   const shopesArray = dashbordData?.shopes || [];
@@ -19,14 +20,26 @@ const DashBord = () => {
   const casualLaborsArray = dashbordData?.casualLabors || [];
   const harvestersArray = dashbordData?.harvesters || [];
 
+  const getDashbordDataFromApi = async () => {
+    const res = await getDashbordData();
+    const data = await res.data;
+    setDeshbordData(data.data);
+    message.success(t(data.Code));
+  };
+
+  const getMonthlyTurnoverData = async () => {
+    const res = await getMonthlyTurnover();
+    const data = await res.data;
+    setData(data.data);
+    message.success(data.Code);
+  };
+
   useEffect(() => {
     async function getData() {
       try {
         setIsLoading(true);
-        const res = await getDashbordData();
-        const data = await res.data;
-        setDeshbordData(data.data);
-        message.success(t(data.Code));
+        getDashbordDataFromApi();
+        getMonthlyTurnoverData();
         setIsLoading(false);
       } catch (err) {
         console.error("Error message:", err.message);
@@ -141,7 +154,7 @@ const DashBord = () => {
           <FeatureCard key={index} item={item} isLoading={isLoading} />
         ))}
       </div>
-      <MonthlyTurnover transactions={dashbordData} />
+      <MonthlyTurnover trunover={data} />
       <div style={styles.footerBar}></div>
     </div>
   );
