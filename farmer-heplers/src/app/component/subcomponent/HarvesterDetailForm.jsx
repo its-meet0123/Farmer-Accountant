@@ -134,7 +134,9 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
                       <Input placeholder={t("harvestDrawer.ahf.vd.vidpt")} />
                     </Form.Item>
 
-                    <Form.Item label={t("harvestDrawer.ahf.vd.tow")}>
+                    <Form.Item
+                      label={t("harvestDrawer.ahf.vd.tow")}
+                      name={[name, "typeOfWork"]}>
                       <Input />
                     </Form.Item>
 
