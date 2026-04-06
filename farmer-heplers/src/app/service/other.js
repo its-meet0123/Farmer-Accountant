@@ -63,10 +63,10 @@ export async function updateFieldWorkerTransaction(ids, updatedTransaction) {
 }
 
 export async function updateHarvestDataTransaction(ids, updatedTransaction) {
-  const { harvestId, transactionId } = ids;
+  const { harvesterId, transactionId } = ids;
 
   return await axiosInstance.patch(
-    `/other/harvester/${harvestId}/transaction/${transactionId}`,
+    `/other/harvester/${harvesterId}/transaction/${transactionId}`,
     updatedTransaction,
   );
 }

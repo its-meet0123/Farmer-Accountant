@@ -342,16 +342,16 @@ async function updateHarvesterTransactionByIds(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    const { harvestId, transactionId } = req.params;
+    const { harvesterId, transactionId } = req.params;
     const upComingTrans = req.body;
 
-    const ids = { iD: harvestId, transactionId: transactionId };
+    const ids = { iD: harvesterId, transactionId: transactionId };
 
     const body = await autoTotalForHarvesterData(ids, upComingTrans);
 
     const harvestData = await Harvest.updateOne(
       {
-        _id: harvestId,
+        _id: harvesterId,
         userId: currentUserId,
         "transactions._id": transactionId,
       },
