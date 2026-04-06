@@ -8,7 +8,14 @@ async function monthlyTurnover(req, res) {
 
     const monthlyTurnover = Ind.map((shopes) => {
       return shopes?.shopeAccount.reduce((acc, curr) => {
-        const month = curr.startDate.substring(0, 7);
+        const date = new Date(curr.startDate);
+
+        if (isNaN(date.getTime())) return acc;
+
+        const month = date.toLocaleDateString("en-US", {
+          month: "short",
+          year: "numeric",
+        });
 
         if (!acc[month]) {
           acc[month] = {
