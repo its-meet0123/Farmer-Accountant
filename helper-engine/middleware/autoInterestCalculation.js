@@ -77,7 +77,7 @@ async function autoInterestCalculation(req, res, next) {
       },
     };
 
-    req.body = newBody;
+    req.body = newBody || [];
 
     next();
   } catch (err) {

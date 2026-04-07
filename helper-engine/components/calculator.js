@@ -3,7 +3,7 @@ const { FieldWorker, Harvest } = require("../models/otherexpense");
 function calculateAutoInterst(amount, startDate, rate, endDate) {
   if (amount === 0 || !amount)
     return {
-      interst: 0,
+      interest: 0,
       totalAmount: 0,
     };
   const start = new Date(startDate);
@@ -21,7 +21,7 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   return {
     days,
     months,
-    interst: interest,
+    interest: interest,
     totalAmount: amount + interest,
   };
 }

@@ -14,7 +14,7 @@ const shopeAccountSchema = new mongoose.Schema({
     handOver: String,
     days: Number,
     months: Number,
-    interst: { type: Number, default: 0 },
+    interest: { type: Number, default: 0 },
     totalAmount: { type: Number, default: 0 },
   },
   indBuy: {
@@ -27,7 +27,7 @@ const shopeAccountSchema = new mongoose.Schema({
     handOver: String,
     days: Number,
     months: Number,
-    interst: { type: Number, default: 0 },
+    interest: { type: Number, default: 0 },
     totalAmount: { type: Number, default: 0 },
   },
   indSell: {
@@ -47,7 +47,7 @@ const shopeAccountSchema = new mongoose.Schema({
     },
     days: Number,
     months: Number,
-    interst: { type: Number, default: 0 },
+    interest: { type: Number, default: 0 },
     totalAmount: { type: Number, default: 0 },
     bill: String,
   },
@@ -61,7 +61,7 @@ const shopeAccountSchema = new mongoose.Schema({
     handOver: String,
     days: Number,
     months: Number,
-    interst: { type: Number, default: 0 },
+    interest: { type: Number, default: 0 },
     totalAmount: { type: Number, default: 0 },
   },
   rate: {

@@ -444,7 +444,7 @@ const getColumnsForCalulationPage = (t) => {
             </p>
           ),
           dataIndex: ["loan", "months"],
-          key: "days",
+          key: "months",
           width: 100,
           render: (text) => {
             if (text > 0) return <p style={{ color: "#3E0703" }}>{text}</p>;
