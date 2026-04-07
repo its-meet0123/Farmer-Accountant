@@ -262,7 +262,9 @@ const EntDrawer = ({
                     ]}>
                     <DatePicker format={"DD/MM/YYYY"} />
                   </Form.Item>
-                  <Form.Item name="id"></Form.Item>
+                  <Form.Item name="id" hidden>
+                    <Input />
+                  </Form.Item>
                 </Col>
                 <Col span={12}>
                   <Form.Item

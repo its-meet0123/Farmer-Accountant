@@ -36,43 +36,40 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
     setBtnLoad(true);
     if (open === "edit") {
       try {
-        const allValues = form.getFieldsValue();
-        // const date = allValues.startDate;
+        const editValue = form.getFieldsValue();
+        const { id, ...editedValues } = editValue;
+        // const date = editValue.startDate;
         // const transaction = {
         //   startDate: date,
-        //   rate: allValues.rate,
+        //   rate: editValue.rate,
         //   loan: {
-        //     amount: allValues.amount,
-        //     amountType: allValues.amountType,
-        //     handOver: allValues.handOver,
+        //     amount: editValue.amount,
+        //     amountType: editValue.amountType,
+        //     handOver: editValue.handOver,
         //   },
         //   indBuy: {
-        //     billAmount: allValues.bBillAmount,
-        //     bill: allValues.bBill,
-        //     brief: allValues.bBrief,
-        //     handOver: allValues.bHandOver,
+        //     billAmount: editValue.bBillAmount,
+        //     bill: editValue.bBill,
+        //     brief: editValue.bBrief,
+        //     handOver: editValue.bHandOver,
         //   },
         //   indSell: {
-        //     crop: allValues.crop,
-        //     billAmount: allValues.sBillAmount,
-        //     bill: allValues.sBill,
-        //     brief: allValues.sBrief,
-        //     handOver: allValues.sHandOver,
+        //     crop: editValue.crop,
+        //     billAmount: editValue.sBillAmount,
+        //     bill: editValue.sBill,
+        //     brief: editValue.sBrief,
+        //     handOver: editValue.sHandOver,
         //   },
         //   diesel: {
-        //     billAmount: allValues.dBillAmount,
-        //     bill: allValues.dBill,
-        //     qty: allValues.dQty,
-        //     rate: allValues.dRate,
-        //     handOver: allValues.dHandOver,
+        //     billAmount: editValue.dBillAmount,
+        //     bill: editValue.dBill,
+        //     qty: editValue.dQty,
+        //     rate: editValue.dRate,
+        //     handOver: editValue.dHandOver,
         //   },
         // };
 
-        const res = await updateIndShopeAccount(
-          Id.shopeId,
-          allValues.id,
-          allValues,
-        );
+        const res = await updateIndShopeAccount(Id.shopeId, id, editedValues);
         if (res.status === 200) {
           const text = `${t("indDrawer.submitFunction.successMessageforEdit")}`;
           onClose();
