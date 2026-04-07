@@ -1,6 +1,5 @@
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import {
-  Alert,
   Button,
   Col,
   Collapse,
@@ -38,36 +37,6 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
       try {
         const editValue = form.getFieldsValue();
         const { id, ...editedValues } = editValue;
-        // const date = editValue.startDate;
-        // const transaction = {
-        //   startDate: date,
-        //   rate: editValue.rate,
-        //   loan: {
-        //     amount: editValue.amount,
-        //     amountType: editValue.amountType,
-        //     handOver: editValue.handOver,
-        //   },
-        //   indBuy: {
-        //     billAmount: editValue.bBillAmount,
-        //     bill: editValue.bBill,
-        //     brief: editValue.bBrief,
-        //     handOver: editValue.bHandOver,
-        //   },
-        //   indSell: {
-        //     crop: editValue.crop,
-        //     billAmount: editValue.sBillAmount,
-        //     bill: editValue.sBill,
-        //     brief: editValue.sBrief,
-        //     handOver: editValue.sHandOver,
-        //   },
-        //   diesel: {
-        //     billAmount: editValue.dBillAmount,
-        //     bill: editValue.dBill,
-        //     qty: editValue.dQty,
-        //     rate: editValue.dRate,
-        //     handOver: editValue.dHandOver,
-        //   },
-        // };
 
         const res = await updateIndShopeAccount(Id.shopeId, id, editedValues);
         if (res.status === 200) {
@@ -83,35 +52,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
     }
     if (open === "add") {
       const allValues = addForm.getFieldsValue();
-      // const transaction = {
-      //   startDate: allValues.startDate,
-      //   rate: allValues.rate,
-      //   loan: {
-      //     amount: allValues.amount,
-      //     amountType: allValues.amountType,
-      //     handOver: allValues.handOver,
-      //   },
-      //   indBuy: {
-      //     billAmount: allValues.bBillAmount,
-      //     bill: allValues.bBill,
-      //     brief: allValues.bBrief,
-      //     handOver: allValues.bHandOver,
-      //   },
-      //   indSell: {
-      //     crop: allValues.crops || [],
-      //     billAmount: allValues.sBillAmount,
-      //     bill: allValues.sBill,
-      //     brief: allValues.sBrief,
-      //     handOver: allValues.sHandOver,
-      //   },
-      //   diesel: {
-      //     billAmount: allValues.dBillAmount,
-      //     bill: allValues.dBill,
-      //     qty: allValues.dQty,
-      //     rate: allValues.dRate,
-      //     handOver: allValues.dHandOver,
-      //   },
-      // };
+
       const res = await pushIndShopeAccountById(Id.shopeId, allValues);
 
       if (res.status === 200) {

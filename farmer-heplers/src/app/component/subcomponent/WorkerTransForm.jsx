@@ -39,29 +39,29 @@ const WorkerTransForm = ({
       const formValues = transactionForm.getFieldsValue();
       console.log("add worker transaction formValues: ", formValues);
 
-      const { workerId, cropG, cropT, ...resetFields } = formValues;
+      const { workerId, ...resetFields } = formValues;
 
       try {
-        const transactionBody = {
-          date: new Date(formValues.date),
-          rate: resetFields.interestRate,
-          give: {
-            crop: cropG || [],
-            amount: resetFields.amount,
-            brief: resetFields.brief,
-            amountType: resetFields.amountType,
-          },
-          take: {
-            crop: cropT || [],
-            payment: resetFields.payment,
-            paymentType: resetFields.paymentType,
-          },
-        };
-        console.log(
-          "worker trans form transaction body value :",
-          transactionBody,
-        );
-        const res = await addWorkerTransactionById(workerId, transactionBody);
+        // const transactionBody = {
+        //   date: new Date(formValues.date),
+        //   rate: resetFields.interestRate,
+        //   give: {
+        //     crop: cropG || [],
+        //     amount: resetFields.amount,
+        //     brief: resetFields.brief,
+        //     amountType: resetFields.amountType,
+        //   },
+        //   take: {
+        //     crop: cropT || [],
+        //     payment: resetFields.payment,
+        //     paymentType: resetFields.paymentType,
+        //   },
+        // };
+        // console.log(
+        //   "worker trans form transaction body value :",
+        //   transactionBody,
+        // );
+        const res = await addWorkerTransactionById(workerId, resetFields);
         console.log("add worker transaction form : ", res);
         if (res.status === 200) {
           transactionForm.resetFields();
@@ -78,32 +78,31 @@ const WorkerTransForm = ({
     if (openType === "ewt") {
       try {
         const formValues = transactionForm.getFieldsValue();
-        const { workerId, transactionId, cropG, cropT, ...resetFields } =
-          formValues;
+        const { workerId, transactionId, ...resetFields } = formValues;
         console.log(formValues);
         const ids = {
           workerId: workerId,
           accountId: transactionId,
         };
-        const transactionBody = {
-          date: new Date(resetFields.date),
-          rate: resetFields.interestRate,
-          give: {
-            crop: cropG || [],
-            amount: resetFields.amount,
-            amountType: resetFields.amountType,
-            brief: resetFields.brief,
-          },
-          take: {
-            crop: cropT || [],
-            payment: resetFields.payment,
-            paymentType: resetFields.paymentType,
-          },
-        };
-        console.log(transactionBody);
-        const res = await updateWorkerTransactionById(ids, transactionBody);
+        // const transactionBody = {
+        //   date: new Date(resetFields.date),
+        //   rate: resetFields.interestRate,
+        //   give: {
+        //     crop: cropG || [],
+        //     amount: resetFields.amount,
+        //     amountType: resetFields.amountType,
+        //     brief: resetFields.brief,
+        //   },
+        //   take: {
+        //     crop: cropT || [],
+        //     payment: resetFields.payment,
+        //     paymentType: resetFields.paymentType,
+        //   },
+        // };
+        // console.log(transactionBody);
+        const res = await updateWorkerTransactionById(ids, resetFields);
         if (res.status === 200) {
-          setFetchData(transactionBody);
+          setFetchData(res.data);
           message.success(res.data.message);
           setBtnLoad(false);
           onClose();

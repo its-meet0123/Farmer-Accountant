@@ -1,6 +1,6 @@
 const { calculateAutoInterst } = require("../components/calculator");
 
-async function autoInterestCalculation(req, res, next) {
+async function autoInterestCalculationForShopes(req, res, next) {
   try {
     const body = req.body;
     console.log(
@@ -91,4 +91,66 @@ async function autoInterestCalculation(req, res, next) {
   }
 }
 
-module.exports = autoInterestCalculation;
+async function autoInterestCalculationForWorker(req, res, next) {
+  try {
+    const body = req.body;
+    if (!body) {
+      return res.status(400).json({
+        status: "Error",
+        Code: "Transaction not find",
+        data: null,
+      });
+    }
+    const startDate = body?.date;
+    const rate = body?.rate;
+    const endDate = new Date();
+    const giveAmount = body?.amount;
+    const takePayment = body?.payment;
+
+    const interestOfGiveAmount = calculateAutoInterst(
+      giveAmount,
+      startDate,
+      rate,
+      endDate,
+    );
+    const interestOfTakePayment = calculateAutoInterst(
+      takePayment,
+      startDate,
+      rate,
+      endDate,
+    );
+
+    const transactionBody = {
+      date: startDate,
+      rate: rate,
+      give: {
+        amount: giveAmount,
+        brief: body?.brief,
+        amountType: body?.amountType,
+        ...interestOfGiveAmount,
+        crop: body?.cropG,
+      },
+      take: {
+        payment: takePayment,
+        paymentType: body?.paymentType,
+        ...interestOfTakePayment,
+        crop: body?.cropT,
+      },
+    };
+
+    req.body = transactionBody;
+
+    next();
+  } catch (err) {
+    return res.status(500).json({
+      status: "Fail",
+      message: err.message,
+      data: null,
+    });
+  }
+}
+
+module.exports = {
+  autoInterestCalculationForShopes,
+  autoInterestCalculationForWorker,
+};

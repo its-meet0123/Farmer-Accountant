@@ -17,6 +17,12 @@ const workerAccountSchema = new mongoose.Schema({
     amount: { type: Number, default: 0 },
     brief: String,
     amountType: String,
+    rate: Number,
+    handOver: String,
+    days: Number,
+    months: Number,
+    interest: { type: Number, default: 0 },
+    totalAmount: { type: Number, default: 0 },
   },
   take: {
     crop: [
@@ -29,6 +35,12 @@ const workerAccountSchema = new mongoose.Schema({
     ],
     payment: { type: Number, default: 0 },
     paymentType: String,
+    rate: Number,
+    handOver: String,
+    days: Number,
+    months: Number,
+    interest: { type: Number, default: 0 },
+    totalAmount: { type: Number, default: 0 },
   },
   rate: { type: Number, default: 0 },
 });

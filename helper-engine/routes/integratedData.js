@@ -10,7 +10,10 @@ const {
   handleDeleteManyIndShopeTransaction,
 } = require("../controllers/integratedData");
 const authMiddleware = require("../middleware/checkAuth");
-const autoInterestCalculation = require("../middleware/autoInterestCalculation");
+const {
+  autoInterestCalculationForShopes,
+} = require("../middleware/autoInterestCalculation");
+
 const router = express.Router();
 router
   .route("/")
@@ -19,12 +22,16 @@ router
 router
   .route("/:id")
   .get(authMiddleware, handleGetIndShopeAccountById)
-  .put(authMiddleware, autoInterestCalculation, handlePushIndShopeAccountById)
+  .put(
+    authMiddleware,
+    autoInterestCalculationForShopes,
+    handlePushIndShopeAccountById,
+  )
   .patch(authMiddleware, handleUpdateIndDataById);
 router.put(
   "/:shopeId/account/:accountId",
   authMiddleware,
-  autoInterestCalculation,
+  autoInterestCalculationForShopes,
   handleUpdateIndShopeAccountTransactionById,
 );
 
