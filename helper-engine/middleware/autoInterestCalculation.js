@@ -3,7 +3,10 @@ const { calculateAutoInterst } = require("../components/calculator");
 async function autoInterestCalculation(req, res, next) {
   try {
     const body = req.body;
-    console.log(body);
+    console.log(
+      "auto interest middleware for add and edit shope transaction :",
+      body,
+    );
     if (!body) {
       return res
         .status(404)
