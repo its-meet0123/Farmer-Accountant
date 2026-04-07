@@ -145,7 +145,6 @@ async function handleUpdateIndDataById(req, res) {
     const currentUserId = decoded.id;
     const { id } = req.params;
     const body = req.body;
-    console.log("update controller fetch body of auto interest", body);
     const indDataById = await Industries.findOneAndUpdate(
       { _id: id, userId: currentUserId },
       body,
@@ -228,7 +227,7 @@ async function handleUpdateIndShopeAccountTransactionById(req, res) {
 
     const { shopeId, accountId } = req.params;
     const updateData = req.body;
-
+    console.log("update controller fetch body of auto interest", updateData);
     const updatedShopeAccount = await Industries.findOneAndUpdate(
       {
         userId: currentUserId,
