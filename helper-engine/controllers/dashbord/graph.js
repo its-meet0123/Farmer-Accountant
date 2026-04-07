@@ -27,15 +27,15 @@ async function monthlyTurnover(req, res) {
           };
         }
 
-        ((acc[month].totalLoan += curr?.loan?.amount || 0),
-          (acc[month].totalBuy += curr?.loan?.amount || 0),
-          (acc[month].totalSell += curr?.indSell?.billAmount || 0),
-          (acc[month].totalDiesel += curr?.diesel?.billAmount || 0),
+        ((acc[month].totalLoan += curr?.loan?.totalAamount || 0),
+          (acc[month].totalBuy += curr?.loan?.totalAamount || 0),
+          (acc[month].totalSell += curr?.indSell?.totalAamount || 0),
+          (acc[month].totalDiesel += curr?.diesel?.totalAamount || 0),
           (acc[month].grandTotal +=
-            (curr?.loan?.amount || 0) +
-            (curr?.loan?.amount || 0) +
-            (curr?.indSell?.billAmount || 0) +
-            (curr?.diesel?.billAmount || 0)));
+            (curr?.loan?.totalAamount || 0) +
+            (curr?.loan?.totalAamount || 0) +
+            (curr?.indSell?.totalAamount || 0) +
+            (curr?.diesel?.totalAamount || 0)));
 
         return acc;
       }, {});

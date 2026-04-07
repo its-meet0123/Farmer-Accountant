@@ -12,6 +12,10 @@ const shopeAccountSchema = new mongoose.Schema({
     },
     amountType: String,
     handOver: String,
+    days: Number,
+    months: Number,
+    interest: { type: Number, default: 0 },
+    totalAmount: { type: Number, default: 0 },
   },
   indBuy: {
     billAmount: {
@@ -21,6 +25,10 @@ const shopeAccountSchema = new mongoose.Schema({
     bill: String,
     brief: String,
     handOver: String,
+    days: Number,
+    months: Number,
+    interest: { type: Number, default: 0 },
+    totalAmount: { type: Number, default: 0 },
   },
   indSell: {
     crop: [
@@ -37,6 +45,10 @@ const shopeAccountSchema = new mongoose.Schema({
       type: Number,
       default: 0,
     },
+    days: Number,
+    months: Number,
+    interest: { type: Number, default: 0 },
+    totalAmount: { type: Number, default: 0 },
     bill: String,
   },
   diesel: {
@@ -47,10 +59,14 @@ const shopeAccountSchema = new mongoose.Schema({
     },
     rate: Number,
     handOver: String,
+    days: Number,
+    months: Number,
+    interest: { type: Number, default: 0 },
+    totalAmount: { type: Number, default: 0 },
   },
   rate: {
     type: Number,
-    default: 24,
+    default: 0,
   },
 });
 

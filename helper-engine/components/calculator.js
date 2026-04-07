@@ -21,8 +21,8 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   return {
     days,
     months,
-    interst: interest.toFixed(2),
-    totalAmount: (amount + interest).toFixed(2),
+    interst: interest,
+    totalAmount: amount + interest,
   };
 }
 

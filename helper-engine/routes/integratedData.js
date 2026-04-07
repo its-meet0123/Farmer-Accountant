@@ -20,7 +20,7 @@ router
   .route("/:id")
   .get(authMiddleware, handleGetIndShopeAccountById)
   .put(authMiddleware, autoInterestCalculation, handlePushIndShopeAccountById)
-  .patch(authMiddleware, handleUpdateIndDataById);
+  .patch(authMiddleware, autoInterestCalculation, handleUpdateIndDataById);
 router.put(
   "/:shopeId/account/:accountId",
   authMiddleware,
