@@ -422,7 +422,7 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                       {formatCurrency(account.take.interest)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {formatCurrency(account.take.totalPayment)}
+                      {formatCurrency(account.take.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formattedDate(endDate[1]?.endDate)}

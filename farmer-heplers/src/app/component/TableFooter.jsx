@@ -23,7 +23,7 @@ const TableFooterForWorkerCalc = ({ data }) => {
     totalOfReturnAmount += Number(give.totalAmount || 0);
     totalOfPayment += Number(take.payment || 0);
     totalOfPaymentInterest += Number(take.interest || 0);
-    totalOfReturnPayment += Number(take.totalPayment || 0);
+    totalOfReturnPayment += Number(take.totalAmount || 0);
   });
   const amountTex = Number(totalOfPayment) * (1 / 100) || 0;
   const oAt = totalOfReturnPayment - (totalOfReturnAmount + amountTex) || 0;

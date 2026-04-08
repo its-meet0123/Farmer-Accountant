@@ -19,23 +19,17 @@ async function monthlyTurnover(req, res) {
 
         if (!acc[month]) {
           acc[month] = {
-            totalLoan: 0,
-            totalBuy: 0,
-            totalSell: 0,
-            totalDiesel: 0,
+            month: month,
             grandTotal: 0,
           };
         }
+        const currentTotal =
+          (curr?.indSell?.totalAmount || 0) -
+          ((curr?.loan?.totalAmount || 0) +
+            (curr?.indBuy?.totalAmount || 0) +
+            (curr?.diesel?.totalAmount || 0));
 
-        ((acc[month].totalLoan += curr?.loan?.totalAmount || 0),
-          (acc[month].totalBuy += curr?.loan?.totalAmount || 0),
-          (acc[month].totalSell += curr?.indSell?.totalAmount || 0),
-          (acc[month].totalDiesel += curr?.diesel?.totalAmount || 0),
-          (acc[month].grandTotal +=
-            (curr?.loan?.totalAmount || 0) +
-            (curr?.loan?.totalAmount || 0) +
-            (curr?.indSell?.totalAmount || 0) +
-            (curr?.diesel?.totalAmount || 0)));
+        acc[month].grandTotal = currentTotal;
 
         return acc;
       }, {});
