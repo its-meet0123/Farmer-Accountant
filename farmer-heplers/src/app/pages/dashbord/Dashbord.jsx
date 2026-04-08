@@ -196,8 +196,14 @@ const DashBord = () => {
             backgroundColor: "#161d2f",
             marginTop: "20px",
             color: "#ffffff",
-            overflowX: "auto",
-            overflowY: "hidden",
+            overflow: "hidden",
+          }}
+          styles={{
+            body: {
+              overflowX: "auto",
+              width: "100%",
+              height: "calc(600px-57px)",
+            },
           }}>
           <TurnoverGraph turnover={monthlyTotal} />
         </Card>
