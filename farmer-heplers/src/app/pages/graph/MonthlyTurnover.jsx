@@ -12,14 +12,15 @@ import {
 } from "recharts";
 
 const TurnoverGraph = ({ turnover }) => {
-  console.log("monthly turnover component :", turnover);
+  //console.log("monthly turnover component :", turnover);
 
   return (
     <>
       {turnover.length != 0 && (
-        <ResponsiveContainer height={500}>
+        <ResponsiveContainer width={"150%"} height={500}>
           <LineChart
             data={turnover}
+            width={"100%"}
             height={"100%"}
             margin={{ top: 10, right: 30, left: 20, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
