@@ -10,7 +10,7 @@ import TurnoverGraph from "../graph/MonthlyTurnover";
 
 const DashBord = () => {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [dashbordData, setDeshbordData] = useState({});
   const [monthlyTotal, setMonthlyTotal] = useState([]);
   const { t } = useAuth();
@@ -154,7 +154,7 @@ const DashBord = () => {
           <FeatureCard key={index} item={item} isLoading={isLoading} />
         ))}
       </div>
-      <TurnoverGraph trunover={monthlyTotal} />
+      {!isLoading && <TurnoverGraph trunover={monthlyTotal} />}
       <div style={styles.footerBar}></div>
     </div>
   );
