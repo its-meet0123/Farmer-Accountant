@@ -16,7 +16,7 @@ const TurnoverGraph = ({ trunover }) => {
 
   return (
     <>
-      <Card title="Turnover Graph">
+      <Card title="Turnover Graph" style={{ width: "100%", height: "100%" }}>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={trunover}
