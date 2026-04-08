@@ -6,13 +6,13 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { styles } from "./DasnbordStyle";
 import FeatureCard from "./FeatureCard";
-import MonthlyTurnover from "../graph/MonthlyTurnover";
+import TurnoverGraph from "../graph/MonthlyTurnover";
 
 const DashBord = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [dashbordData, setDeshbordData] = useState({});
-  const [data, setData] = useState({});
+  const [monthlyTotal, setMonthlyTotal] = useState([]);
   const { t } = useAuth();
 
   const shopesArray = dashbordData?.shopes || [];
@@ -30,7 +30,7 @@ const DashBord = () => {
   const getMonthlyTurnoverData = async () => {
     const res = await getMonthlyTurnover();
     const data = await res.data;
-    setData(data.data);
+    setMonthlyTotal(data.data);
     message.success(data.Code);
   };
 
@@ -154,7 +154,7 @@ const DashBord = () => {
           <FeatureCard key={index} item={item} isLoading={isLoading} />
         ))}
       </div>
-      <MonthlyTurnover trunover={data} />
+      <TurnoverGraph trunover={monthlyTotal} />
       <div style={styles.footerBar}></div>
     </div>
   );
