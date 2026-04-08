@@ -17,7 +17,7 @@ const TurnoverGraph = ({ trunover }) => {
   return (
     <>
       {trunover.length != 0 && (
-        <ResponsiveContainer width="100%" height="500px">
+        <ResponsiveContainer width={"100%"} height={500}>
           <LineChart
             data={trunover}
             width={"100%"}
