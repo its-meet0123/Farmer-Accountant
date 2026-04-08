@@ -73,7 +73,7 @@ const CalcPage = () => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
-      maximumFractionDigits: 2, // Paise dikhane ke liye (.00)
+      maximumFractionDigits: 2,
     }).format(amount);
   };
 

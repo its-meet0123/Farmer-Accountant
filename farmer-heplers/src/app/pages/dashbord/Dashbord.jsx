@@ -8,6 +8,14 @@ import { styles } from "./DasnbordStyle";
 import FeatureCard from "./FeatureCard";
 import TurnoverGraph from "../graph/MonthlyTurnover";
 
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 2,
+  }).format(amount);
+};
+
 const DashBord = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
@@ -136,15 +144,6 @@ const DashBord = () => {
     return monthlyTotal.reduce((acc, curr) => acc + (curr.grandTotal || 0), 0);
   }, [monthlyTotal]);
 
-  // features.forEach((feature, idx) => {
-  //   console.log(`Feature ${idx} (${feature.title}):`, {
-  //     hasDesc: !!feature.desc,
-  //     isArray: Array.isArray(feature.desc),
-  //     length: feature.desc?.length || 0,
-  //     desc: feature.desc,
-  //   });
-  // });
-
   return (
     <div style={styles.wrapper}>
       <header style={styles.header}>
@@ -166,14 +165,25 @@ const DashBord = () => {
         <Card
           title={<span style={{ color: "#4da3ff" }}>Turnover Graph</span>}
           extra={
-            <span
-              style={{
-                color: overAllTotal > 0 ? "green" : "red",
-                fontSize: "1.3rem",
-                fontWeight: 600,
-              }}>
-              {overAllTotal}
-            </span>
+            overAllTotal > 0 ? (
+              <span
+                style={{
+                  color: "green",
+                  fontSize: "1.3rem",
+                  fontWeight: 600,
+                }}>
+                Profit: {formatCurrency(overAllTotal)}
+              </span>
+            ) : (
+              <span
+                style={{
+                  color: "red",
+                  fontSize: "1.3rem",
+                  fontWeight: 600,
+                }}>
+                Loss: {formatCurrency(overAllTotal)}
+              </span>
+            )
           }
           style={{
             //width: "100%",
