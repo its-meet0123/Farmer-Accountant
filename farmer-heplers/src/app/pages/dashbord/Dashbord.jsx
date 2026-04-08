@@ -21,13 +21,11 @@ const DashBord = () => {
   const harvestersArray = dashbordData?.harvesters || [];
 
   const getDashbordDataFromApi = async () => {
-    setIsLoading(true);
     const res = await getDashbordData();
     const data = await res.data;
     if (data.status == "Success") {
       setDeshbordData(data.data);
       message.success(t(data.Code));
-      setIsLoading(false);
     }
   };
 
