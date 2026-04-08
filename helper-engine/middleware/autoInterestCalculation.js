@@ -52,35 +52,35 @@ async function autoInterestCalculationForShopes(req, res, next) {
       loan: {
         amount: loanAmount,
         ...interestOfLoanAmount,
-        amountType: body?.amountType,
-        handOver: body?.handOver,
+        amountType: body?.amountType || "",
+        handOver: body?.handOver || "",
       },
       indBuy: {
         billAmount: buyBillAmount,
         ...interestOfBuyBillAmount,
-        bill: body?.bBill,
-        brief: body?.bBrief,
-        handOver: body?.bHandOver,
+        bill: body?.bBill || "",
+        brief: body?.bBrief || "",
+        handOver: body?.bHandOver || "",
       },
       indSell: {
         crop: body?.crops || [],
         billAmount: sellBillAmount,
         ...interestOfSellBillAmount,
-        bill: body?.sBill,
-        brief: body?.sBrief,
-        handOver: body?.sHandOver,
+        bill: body?.sBill || "",
+        brief: body?.sBrief || "",
+        handOver: body?.sHandOver || "",
       },
       diesel: {
         billAmount: dieselBillAmount,
         ...interestOfDieselBillAmount,
-        bill: body?.dBill,
-        qty: body?.dOty,
-        rate: body?.dRate,
-        handOver: body?.dHandOver,
+        bill: body?.dBill || "",
+        qty: body?.dOty || "",
+        rate: body?.dRate || "",
+        handOver: body?.dHandOver || "",
       },
     };
 
-    req.body = newBody || [];
+    req.body = newBody || {};
 
     next();
   } catch (err) {
@@ -102,10 +102,10 @@ async function autoInterestCalculationForWorker(req, res, next) {
       });
     }
     const startDate = body?.date;
-    const rate = body?.rate;
+    const rate = body?.interestRate || 0;
     const endDate = new Date();
-    const giveAmount = body?.amount;
-    const takePayment = body?.payment;
+    const giveAmount = body?.amount || 0;
+    const takePayment = body?.payment || 0;
 
     const interestOfGiveAmount = calculateAutoInterst(
       giveAmount,
@@ -125,16 +125,16 @@ async function autoInterestCalculationForWorker(req, res, next) {
       rate: rate,
       give: {
         amount: giveAmount,
-        brief: body?.brief,
-        amountType: body?.amountType,
+        brief: body?.brief || "",
+        amountType: body?.amountType || "",
         ...interestOfGiveAmount,
-        crop: body?.cropG,
+        crop: body?.cropG || [],
       },
       take: {
         payment: takePayment,
-        paymentType: body?.paymentType,
+        paymentType: body?.paymentType || "",
         ...interestOfTakePayment,
-        crop: body?.cropT,
+        crop: body?.cropT || [],
       },
     };
 
