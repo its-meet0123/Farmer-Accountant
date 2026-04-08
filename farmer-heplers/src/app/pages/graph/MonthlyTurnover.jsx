@@ -16,10 +16,13 @@ const TurnoverGraph = ({ trunover }) => {
 
   return (
     <>
-      <Card title="Turnover Graph" style={{ width: "100%", height: 400 }}>
-        <ResponsiveContainer width="100%" height="100%">
+      {trunover.length != 0 && (
+        <Card title="Turnover Graph" style={{ width: "100%", height: 400 }}>
+          {/* <ResponsiveContainer width="100%" height="100%"> */}
           <LineChart
             data={trunover}
+            width={"100%"}
+            height={500}
             margin={{ top: 10, right: 30, left: 20, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
@@ -42,8 +45,9 @@ const TurnoverGraph = ({ trunover }) => {
               strokeWidth={3}
             />
           </LineChart>
-        </ResponsiveContainer>
-      </Card>
+          {/* </ResponsiveContainer> */}
+        </Card>
+      )}
     </>
   );
 };
