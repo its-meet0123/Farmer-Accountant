@@ -33,7 +33,7 @@ const TurnoverGraph = ({ trunover }) => {
 
             <YAxis
               domain={[-300000, 300000]}
-              tick={{ fill: "#ffffff" }}
+              tick={{ fill: "#4da3ff" }}
               axisLine={{ stroke: "#ffffff" }}
               tickFormatter={(value) => `₹${value.toLocaleString()}`}
             />
