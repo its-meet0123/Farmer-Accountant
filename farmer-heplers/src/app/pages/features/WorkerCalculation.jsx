@@ -194,7 +194,7 @@ const WorkerCalculation = () => {
         giveAmount += Number(transaction.give.amount);
         takePayment += Number(transaction.take.payment);
 
-        return giveAmount - takePayment;
+        return takePayment - giveAmount;
       }
       return total;
     }, 0);
