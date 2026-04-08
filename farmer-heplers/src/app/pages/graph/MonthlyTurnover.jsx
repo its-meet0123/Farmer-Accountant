@@ -27,18 +27,37 @@ const TurnoverGraph = ({ trunover }) => {
 
             <XAxis
               dataKey="month"
-              tick={{ fill: "#4da3ff" }}
+              tick={{ fill: "#ffffff" }}
               axisLine={{ stroke: "#ffffff" }}
             />
 
             <YAxis
-              domain={[-300000, 300000]}
-              tick={{ fill: "#4da3ff" }}
+              domain={[-600000, 600000]}
+              tick={{ fill: "#ffffff" }}
               axisLine={{ stroke: "#ffffff" }}
-              tickFormatter={(value) => `₹${value.toLocaleString()}`}
+              tickFormatter={(value) => {
+                const formattedValue = new Intl.NumberFormat("en-IN", {
+                  style: "currency",
+                  currency: "INR",
+                  minimumFractionDigits: 0,
+                }).format(value);
+
+                return formattedValue;
+              }}
             />
 
-            <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} />
+            <Tooltip
+              itemStyle={{ color: "#4da3ff" }}
+              formatter={(value, name, props) => {
+                const formattedValue = new Intl.NumberFormat("en-IN", {
+                  style: "currency",
+                  currency: "INR",
+                  minimumFractionDigits: 0,
+                }).format(value);
+
+                return formattedValue;
+              }}
+            />
             <Legend />
 
             <ReferenceLine
