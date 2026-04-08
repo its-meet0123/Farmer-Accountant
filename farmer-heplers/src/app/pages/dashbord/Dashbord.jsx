@@ -132,13 +132,9 @@ const DashBord = () => {
     },
   ];
 
-  const overAllTotal =
-    useMemo(() => {
-      let total = 0;
-      return monthlyTotal.forEach(({ grandTotal }) => {
-        total += grandTotal;
-      });
-    }, [monthlyTotal]) || 0;
+  const overAllTotal = useMemo(() => {
+    return monthlyTotal.reduce((acc, curr) => acc + (curr.grandTotal || 0), 0);
+  }, [monthlyTotal]);
 
   // features.forEach((feature, idx) => {
   //   console.log(`Feature ${idx} (${feature.title}):`, {
@@ -170,7 +166,12 @@ const DashBord = () => {
         <Card
           title={<span style={{ color: "#4da3ff" }}>Turnover Graph</span>}
           extra={
-            <span style={{ color: overAllTotal > 0 ? "green" : "red" }}>
+            <span
+              style={{
+                color: overAllTotal > 0 ? "green" : "red",
+                fontSize: "1.3rem",
+                fontWeight: 600,
+              }}>
               {overAllTotal}
             </span>
           }
