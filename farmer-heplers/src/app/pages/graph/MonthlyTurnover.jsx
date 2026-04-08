@@ -27,7 +27,7 @@ const TurnoverGraph = ({ trunover }) => {
 
             <XAxis
               dataKey="month"
-              tick={{ fill: "#ffffff" }}
+              tick={{ fill: "#4da3ff" }}
               axisLine={{ stroke: "#ffffff" }}
             />
 
