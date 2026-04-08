@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { getDashbordData, getMonthlyTurnover } from "../../service/dashbord";
 import { Card, message } from "antd";
@@ -132,6 +132,14 @@ const DashBord = () => {
     },
   ];
 
+  const overAllTotal =
+    useMemo(() => {
+      let total = 0;
+      return monthlyTotal.forEach(({ grandTotal }) => {
+        total += grandTotal;
+      });
+    }, [monthlyTotal]) || 0;
+
   // features.forEach((feature, idx) => {
   //   console.log(`Feature ${idx} (${feature.title}):`, {
   //     hasDesc: !!feature.desc,
@@ -161,15 +169,20 @@ const DashBord = () => {
       {!isLoading && (
         <Card
           title={<span style={{ color: "#4da3ff" }}>Turnover Graph</span>}
+          extra={
+            <span style={{ color: overAllTotal > 0 ? "green" : "red" }}>
+              {overAllTotal}
+            </span>
+          }
           style={{
-            width: "100%",
+            //width: "100%",
             height: 600,
             backgroundColor: "#161d2f",
             marginTop: "20px",
             color: "#ffffff",
             overflowX: "auto",
           }}>
-          <TurnoverGraph trunover={monthlyTotal} />
+          <TurnoverGraph turnover={monthlyTotal} />
         </Card>
       )}
       <div style={styles.footerBar}></div>

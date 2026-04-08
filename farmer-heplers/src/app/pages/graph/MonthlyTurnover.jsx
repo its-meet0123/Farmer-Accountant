@@ -11,16 +11,15 @@ import {
   YAxis,
 } from "recharts";
 
-const TurnoverGraph = ({ trunover }) => {
-  console.log("monthly turnover component :", trunover);
+const TurnoverGraph = ({ turnover }) => {
+  console.log("monthly turnover component :", turnover);
 
   return (
     <>
-      {trunover.length != 0 && (
-        <ResponsiveContainer width={"100%"} height={500}>
+      {turnover.length != 0 && (
+        <ResponsiveContainer height={500}>
           <LineChart
-            data={trunover}
-            width={"100%"}
+            data={turnover}
             height={"100%"}
             margin={{ top: 10, right: 30, left: 20, bottom: 10 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
