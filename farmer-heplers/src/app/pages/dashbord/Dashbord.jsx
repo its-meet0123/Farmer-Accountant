@@ -196,7 +196,7 @@ const DashBord = () => {
             backgroundColor: "#161d2f",
             marginTop: "20px",
             color: "#ffffff",
-            overflowX: "auto",
+            overflowY: "auto",
           }}>
           <TurnoverGraph turnover={monthlyTotal} />
         </Card>
