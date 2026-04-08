@@ -1103,11 +1103,11 @@ const getColumnsForWorkerCalcPage = (t) => {
               {t("workerCalcPage.tableColumns.takes.totalText")}
             </p>
           ),
-          dataIndex: ["take", "totalPayment"],
-          key: "takeTotalPayment",
+          dataIndex: ["take", "totalAmount"],
+          key: "taketotalAmount",
           width: 150,
-          render: (totalPayment) => {
-            const total = formatCurrency(totalPayment);
+          render: (totalAmount) => {
+            const total = formatCurrency(totalAmount);
             return <p style={{ color: "#8ABB6C" }}>{total}</p>;
           },
         },
