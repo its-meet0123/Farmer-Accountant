@@ -245,13 +245,11 @@ const WorkersData = () => {
   ];
 
   const ExpandedRow = (record) => {
-    const transaction = useMemo(() => {
-      if (!record?.account) return [];
-      return record?.account.map((item, index) => ({
+    const transaction =
+      record?.account.map((item, index) => ({
         ...item,
         serialNo: index + 1,
-      }));
-    }, [record?.account]);
+      })) || [];
     const Worker_Transaction_Columns =
       getWorkerTransactionColumnsForWorkerPage(t);
     const columns = [
