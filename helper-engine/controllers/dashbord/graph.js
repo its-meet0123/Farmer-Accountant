@@ -18,10 +18,7 @@ async function monthlyTurnover(req, res) {
         });
 
         if (!acc[month]) {
-          acc[month] = {
-            month: month,
-            grandTotal: 0,
-          };
+          acc[month] = 0;
         }
         const currentTotal =
           (curr?.indSell?.totalAmount || 0) -
@@ -29,7 +26,7 @@ async function monthlyTurnover(req, res) {
             (curr?.indBuy?.totalAmount || 0) +
             (curr?.diesel?.totalAmount || 0));
 
-        acc[month].grandTotal = currentTotal;
+        acc[month] += currentTotal;
 
         return acc;
       }, {});
