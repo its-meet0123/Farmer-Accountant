@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { getDashbordData, getMonthlyTurnover } from "../../service/dashbord";
-import { message } from "antd";
+import { Card, message } from "antd";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { styles } from "./DasnbordStyle";
@@ -158,7 +158,19 @@ const DashBord = () => {
           <FeatureCard key={index} item={item} isLoading={isLoading} />
         ))}
       </div>
-      {!isLoading && <TurnoverGraph trunover={monthlyTotal} />}
+      {!isLoading && (
+        <Card
+          title={<span style={{ color: "#4da3ff" }}>Turnover Graph</span>}
+          style={{
+            width: "100%",
+            height: 600,
+            backgroundColor: "#161d2f",
+            marginTop: "20px",
+            color: "#ffffff",
+          }}>
+          <TurnoverGraph trunover={monthlyTotal} />
+        </Card>
+      )}
       <div style={styles.footerBar}></div>
     </div>
   );

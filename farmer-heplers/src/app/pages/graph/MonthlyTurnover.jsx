@@ -17,36 +17,40 @@ const TurnoverGraph = ({ trunover }) => {
   return (
     <>
       {trunover.length != 0 && (
-        <Card title="Turnover Graph" style={{ width: "100%", height: 600 }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart
-              data={trunover}
-              width={"100%"}
-              height={"100%"}
-              margin={{ top: 10, right: 30, left: 20, bottom: 10 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} />
+        // {/* <ResponsiveContainer width="100%" height="100%"> */}
+        <LineChart
+          data={trunover}
+          width={"100%"}
+          height={"100%"}
+          margin={{ top: 10, right: 30, left: 20, bottom: 10 }}>
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
-              <XAxis dataKey="month" />
+          <XAxis
+            dataKey="month"
+            tick={{ fill: "#ffffff" }}
+            axisLine={{ stroke: "#ffffff" }}
+          />
 
-              <YAxis
-                domain={[-300000, 300000]}
-                tickFormatter={(value) => `₹${value.toLocaleString()}`}
-              />
+          <YAxis
+            domain={[-300000, 300000]}
+            tick={{ fill: "#ffffff" }}
+            axisLine={{ stroke: "#ffffff" }}
+            tickFormatter={(value) => `₹${value.toLocaleString()}`}
+          />
 
-              <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} />
-              <Legend />
+          <Tooltip formatter={(value) => `₹${value.toLocaleString()}`} />
+          <Legend />
 
-              <ReferenceLine y={0} stroke="#000" strokeWidth={1} label="Zero" />
+          <ReferenceLine y={0} stroke="#ffffff" strokeWidth={1} label="Zero" />
 
-              <Line
-                type="monotone"
-                dataKey="grandTotal"
-                stroke="#1890ff"
-                strokeWidth={3}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </Card>
+          <Line
+            type="monotone"
+            dataKey="grandTotal"
+            stroke="#1890ff"
+            strokeWidth={3}
+          />
+        </LineChart>
+        //{/* </ResponsiveContainer> */}
       )}
     </>
   );
