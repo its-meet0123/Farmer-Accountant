@@ -47,7 +47,7 @@ const TurnoverGraph = ({ trunover }) => {
             />
 
             <Tooltip
-              itemStyle={{ color: "#4da3ff" }}
+              labelStyle={{ color: "#0000" }}
               formatter={(value, name, props) => {
                 const formattedValue = new Intl.NumberFormat("en-IN", {
                   style: "currency",
