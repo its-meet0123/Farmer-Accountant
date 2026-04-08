@@ -21,26 +21,32 @@ const DashBord = () => {
   const harvestersArray = dashbordData?.harvesters || [];
 
   const getDashbordDataFromApi = async () => {
+    setIsLoading(true);
     const res = await getDashbordData();
     const data = await res.data;
-    setDeshbordData(data.data);
-    message.success(t(data.Code));
+    if (data.status == "Success") {
+      setDeshbordData(data.data);
+      message.success(t(data.Code));
+      setIsLoading(false);
+    }
   };
 
   const getMonthlyTurnoverData = async () => {
+    setIsLoading(true);
     const res = await getMonthlyTurnover();
     const data = await res.data;
-    setMonthlyTotal(data.data);
-    message.success(data.Code);
+    if (data.status == "Success") {
+      setMonthlyTotal(data.data);
+      message.success(data.Code);
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     async function getData() {
       try {
-        setIsLoading(true);
         getDashbordDataFromApi();
         getMonthlyTurnoverData();
-        setIsLoading(false);
       } catch (err) {
         console.error("Error message:", err.message);
         message.error(t("DB.SEM"));
