@@ -174,7 +174,7 @@ const DashBord = () => {
                 }}>
                 Profit: {formatCurrency(overAllTotal)}
               </span>
-            ) : (
+            ) : overAllTotal < 0 ? (
               <span
                 style={{
                   color: "red",
@@ -182,6 +182,11 @@ const DashBord = () => {
                   fontWeight: 600,
                 }}>
                 Loss: {formatCurrency(overAllTotal)}
+              </span>
+            ) : (
+              <span
+                style={{ color: "#fff", fontSize: "1.3rem", fontWeight: 600 }}>
+                {formatCurrency(0)}
               </span>
             )
           }
