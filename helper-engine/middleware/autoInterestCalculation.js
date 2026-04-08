@@ -125,7 +125,7 @@ async function autoInterestCalculationForWorker(req, res, next) {
     }
     const startDate = body?.date;
     const rate = body?.interestRate || 0;
-    const endDate = Dates[1].endDate || new Date();
+    const endDate = Dates[1]?.endDate || new Date();
     const giveAmount = body?.amount || 0;
     const takePayment = body?.payment || 0;
 
