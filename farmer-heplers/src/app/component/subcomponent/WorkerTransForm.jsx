@@ -42,25 +42,6 @@ const WorkerTransForm = ({
       const { workerId, ...resetFields } = formValues;
 
       try {
-        // const transactionBody = {
-        //   date: new Date(formValues.date),
-        //   rate: resetFields.interestRate,
-        //   give: {
-        //     crop: cropG || [],
-        //     amount: resetFields.amount,
-        //     brief: resetFields.brief,
-        //     amountType: resetFields.amountType,
-        //   },
-        //   take: {
-        //     crop: cropT || [],
-        //     payment: resetFields.payment,
-        //     paymentType: resetFields.paymentType,
-        //   },
-        // };
-        // console.log(
-        //   "worker trans form transaction body value :",
-        //   transactionBody,
-        // );
         const res = await addWorkerTransactionById(workerId, resetFields);
         console.log("add worker transaction form : ", res);
         if (res.status === 200) {

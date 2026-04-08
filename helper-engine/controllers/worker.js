@@ -1,6 +1,4 @@
 const WorkerData = require("../models/worker");
-const InterestDate = require("../models/endDate");
-const { calculateAutoInterst } = require("../components/calculator");
 
 async function handleAddWorker(req, res) {
   try {
@@ -193,59 +191,12 @@ async function handleGetWorkerTransactionById(req, res) {
       _id: workerId,
       userId: currentUserId,
     });
-    const Dates = await InterestDate.find({ userId: currentUserId });
-    if (!worker || !Dates) {
+    if (!worker) {
       res.status(500).json({
         status: "fail",
         message: "Data not found in DB",
       });
     }
-
-    //const endDate = Dates[1]?.endDate;
-    // const workerTransactionWithInterest = {
-    //   workerName: worker.workerDetail.workerName,
-    //   account: worker?.account?.map((ac) => {
-    //     const amount = ac.give.amount;
-    //     const payment = ac.take.payment;
-    //     const rate = ac.rate;
-    //     const startDate = ac.date;
-
-    //     const amountResult = calculateAutoInterst(
-    //       amount,
-    //       startDate,
-    //       rate,
-    //       endDate,
-    //     );
-    //     const paymentResult = calculateAutoInterst(
-    //       payment,
-    //       startDate,
-    //       rate,
-    //       endDate,
-    //     );
-
-    //     return {
-    //       date: startDate,
-    //       give: {
-    //         amount: amount,
-    //         interest: Number(amountResult.interst).toFixed(2),
-    //         totalAmount: Number(amountResult.totalAmount).toFixed(2),
-    //         amountType: ac.give.amountType,
-    //         brief: ac.give.brief,
-    //         days: amountResult.days,
-    //         months: amountResult.months,
-    //       },
-    //       take: {
-    //         payment: payment,
-    //         paymentType: ac.take.paymentType,
-    //         interest: Number(paymentResult.interst).toFixed(2),
-    //         totalPayment: Number(paymentResult.totalAmount).toFixed(2),
-    //         days: paymentResult.days,
-    //         months: paymentResult.months,
-    //       },
-    //       rate: rate,
-    //     };
-    //   }),
-    // };
 
     return res.status(200).json({
       status: "success",

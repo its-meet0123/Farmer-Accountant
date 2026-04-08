@@ -2,13 +2,7 @@
 const WorkerData = require("../../models/worker");
 const { FieldWorker, Harvest } = require("../../models/otherexpense");
 const Industries = require("../../models/integratedData");
-const {
-  calculateAutoInterestForTakeAmount,
-  calculateAutoInterestForBuyBillAmount,
-  calculateAutoInterestForGiveAmount,
-  calculateAutoInterestDieselBillAmount,
-  calculateAccountDuration,
-} = require("./dashbordInterestCalc");
+const { calculateAccountDuration } = require("./dashbordInterestCalc");
 const {
   overAllTotalOfAllShopes,
   overAllTotalOfAllWorkers,
@@ -39,71 +33,12 @@ async function dashBordData(req, res) {
       const effectiveDate =
         shopes?.shopeAccount?.at(0)?.startDate || new Date();
       const shopeData = shopes.shopeAccount.map((transaction) => {
-        const startDate = transaction?.startDate || new Date();
-        const rate = transaction?.rate || 0;
-        const endDate = new Date();
-
-        const loanAmount = transaction?.loan?.amount || 0;
-        const buyAmount = transaction?.indBuy?.billAmount || 0;
-        const sellAmount = transaction?.indSell?.billAmount || 0;
-        const dieselAmount = transaction?.diesel?.billAmount || 0;
-        //loan
-
-        const loanInterest = calculateAutoInterestForTakeAmount(
-          loanAmount,
-          startDate,
-          rate,
-          endDate,
-        );
-        //buy item
-
-        const buyInterest = calculateAutoInterestForBuyBillAmount(
-          buyAmount,
-          startDate,
-          rate,
-          endDate,
-        );
-        //sellItem
-
-        const sellInterest = calculateAutoInterestForGiveAmount(
-          sellAmount,
-          startDate,
-          rate,
-          endDate,
-        );
-        //dieselAmount
-
-        const dieselInterest = calculateAutoInterestDieselBillAmount(
-          dieselAmount,
-          startDate,
-          rate,
-          endDate,
-        );
-
-        return {
-          loan: {
-            ...transaction?.loan,
-            ...loanInterest,
-          },
-          indBuy: {
-            ...transaction?.indBuy,
-            ...buyInterest,
-          },
-          indSell: {
-            ...transaction?.indSell,
-            ...sellInterest,
-          },
-          diesel: {
-            ...transaction?.diesel,
-            ...dieselInterest,
-          },
-        };
+        return transaction;
       });
 
       const shopesTotal = overAllTotalOfAllShopes(shopeData);
       const duration = calculateAccountDuration(effectiveDate);
       return {
-        ...shopeData,
         shopeNumber: shopeNumber,
         overAllTotal: shopesTotal,
         accountAge: duration,
@@ -116,41 +51,11 @@ async function dashBordData(req, res) {
         const workerName = worker?.workerDetail?.workerName?.nickName;
         const effectiveDate = worker?.account?.at(0)?.date || new Date();
         const workerAccounts = worker?.account.map((transactions) => {
-          const startDate = transactions?.date;
-          const rate = transactions?.rate || 24;
-          const endDate = new Date();
-
-          const giveAmount = transactions?.give?.amount;
-          const takeAmount = transactions?.take?.payment;
-
-          const giveInterest = calculateAutoInterestForGiveAmount(
-            giveAmount,
-            startDate,
-            rate,
-            endDate,
-          );
-          const takeInterest = calculateAutoInterestForTakeAmount(
-            takeAmount,
-            startDate,
-            rate,
-            endDate,
-          );
-
-          return {
-            give: {
-              ...transactions?.give,
-              ...giveInterest,
-            },
-            take: {
-              ...transactions?.take,
-              ...takeInterest,
-            },
-          };
+          return transactions;
         });
         const Returns = overAllTotalOfAllWorkers(workerAccounts);
         const duration = calculateAccountDuration(effectiveDate);
         return {
-          ...workerAccounts,
           workerName: workerName,
           overAllTotal: Returns,
           accountAge: duration,
@@ -167,7 +72,6 @@ async function dashBordData(req, res) {
         const oAt = formatCurrency(lastTransaction?.total || 0);
         const duration = calculateAccountDuration(effectiveDate);
         return {
-          ...labors?.transactions,
           laborName: laborName,
           pending: oAt,
           accountAge: duration,
@@ -184,7 +88,6 @@ async function dashBordData(req, res) {
         const oAt = formatCurrency(lastTransaction?.total || 0);
         const duration = calculateAccountDuration(effectiveDate);
         return {
-          ...harvester?.transactions,
           opratorName: opratorName,
           pending: oAt,
           accountAge: duration,

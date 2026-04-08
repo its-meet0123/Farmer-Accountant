@@ -1,8 +1,12 @@
 const { calculateAutoInterst } = require("../components/calculator");
+const InterestDate = require("../models/endDate");
 
+//const endDate = Dates[1]?.endDate;
 async function autoInterestCalculationForShopes(req, res, next) {
   try {
     const body = req.body;
+    const decoded = req.user;
+    const currentUserId = decoded.id;
     console.log(
       "auto interest middleware for add and edit shope transaction :",
       body,
@@ -12,10 +16,18 @@ async function autoInterestCalculationForShopes(req, res, next) {
         .status(404)
         .json({ status: "Error", msg: "All fields are required" });
     }
+    const Dates = await InterestDate.find({ userId: currentUserId });
+
+    if (!Dates) {
+      res.status(500).json({
+        status: "fail",
+        message: "Data not found in DB",
+      });
+    }
 
     const startDate = body?.startDate;
     const rate = body?.rate || 0;
-    const endDate = new Date();
+    const endDate = Dates[0]?.endDate || new Date();
     const loanAmount = body?.amount || 0;
     const buyBillAmount = body?.bBillAmount || 0;
     const sellBillAmount = body?.sBillAmount || 0;
@@ -94,6 +106,8 @@ async function autoInterestCalculationForShopes(req, res, next) {
 async function autoInterestCalculationForWorker(req, res, next) {
   try {
     const body = req.body;
+    const decoded = req.user;
+    const currentUserId = decoded.id;
     if (!body) {
       return res.status(400).json({
         status: "Error",
@@ -101,9 +115,17 @@ async function autoInterestCalculationForWorker(req, res, next) {
         data: null,
       });
     }
+
+    const Dates = InterestDate.find({ userId: currentUserId });
+    if (!Dates) {
+      return res.status(400).json({
+        status: "Fail",
+        message: "Date not found in DB",
+      });
+    }
     const startDate = body?.date;
     const rate = body?.interestRate || 0;
-    const endDate = new Date();
+    const endDate = Dates[1].endDate || new Date();
     const giveAmount = body?.amount || 0;
     const takePayment = body?.payment || 0;
 
