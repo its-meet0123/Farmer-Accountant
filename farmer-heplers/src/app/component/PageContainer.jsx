@@ -167,7 +167,7 @@ const PageContainer = ({ title, children, extra }) => {
         width: "100%",
         borderRadius: "12px",
         minHeight: "100vh",
-        overflow: "auto",
+        // overflow: "auto",
       }}
       styles={{
         body: {
@@ -194,7 +194,7 @@ const PageContainer = ({ title, children, extra }) => {
       extra={extra}>
       <div
         style={{
-          width: "150%",
+          minWidth: "100%",
         }}>
         {children}
       </div>
