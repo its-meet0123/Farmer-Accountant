@@ -299,7 +299,7 @@ const ViewPage = () => {
             }}
             pagination={false}
             scroll={{ x: 900 }}
-            style={{ width: "100%" }}
+            style={{ minWidth: "100%" }}
           />
         )}
       </PageContainer>

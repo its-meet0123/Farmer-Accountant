@@ -255,7 +255,7 @@ const HomePage = () => {
               expandedRowRender: (record) => ExpandedRow(record),
             }}
             scroll={{ x: "max-content" }}
-            style={{ width: "100%" }}
+            style={{ minWidth: "100%" }}
           />
         )}
       </PageContainer>
