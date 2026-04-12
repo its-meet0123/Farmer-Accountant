@@ -260,6 +260,7 @@ const HarvesterData = () => {
       <Table
         dataSource={transData}
         columns={TRANS_COLUMNS}
+        rowKey="_id"
         scroll={{ x: "max-content" }}
       />
     );
@@ -340,6 +341,7 @@ const HarvesterData = () => {
           <Table
             dataSource={tableData}
             columns={columns}
+            rowKey="_id"
             expandable={{ expandedRowRender: (record) => ExpanedRow(record) }}
             scroll={{ x: "max-content" }}
             style={{ width: "100%" }}

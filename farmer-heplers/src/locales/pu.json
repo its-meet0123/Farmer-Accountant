@@ -575,6 +575,7 @@
     },
     "acltf": {
       "colps": {
+        "glm": "Form Guidelines",
         "li1": "Fill all mandatory(*) fields per transaction",
         "li2": "Process payment upon task is finished: fill all fields.",
         "li3": "Only record task finished without payment: fill 'Wages/D' and 'Duration' fields.",

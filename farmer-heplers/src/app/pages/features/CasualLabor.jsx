@@ -321,6 +321,7 @@ const CasualLabor = () => {
     return (
       <Table
         dataSource={transactions}
+        rowKey="_id"
         columns={columns}
         scroll={{ x: "max-content" }}
       />
@@ -349,6 +350,7 @@ const CasualLabor = () => {
           <Table
             dataSource={tableData}
             columns={columns}
+            rowKey="_id"
             expandable={{ expandedRowRender: (record) => ExpandedRow(record) }}
             scroll={{ x: "max-content" }}
             style={{ width: "100%" }}
