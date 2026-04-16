@@ -429,13 +429,13 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
 
 // 6. delete Harvester transaction
 async function deleteHavresterTransactionByIds(req, res) {
-  const { harvestId, transactionId } = req.params;
+  const { harvesterId, transactionId } = req.params;
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
     const deleteHarvestTransaction = await Harvest.updateOne(
-      { _id: harvestId, userId: currentUserId },
+      { _id: harvesterId, userId: currentUserId },
       {
         $pull: { transactions: { _id: transactionId } },
       },
