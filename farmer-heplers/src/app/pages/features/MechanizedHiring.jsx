@@ -99,26 +99,26 @@ const HarvesterData = () => {
       );
     });
     console.log("edit transaction data", forHarvesterId);
-    const length = forHarvesterId?.transactions?.length;
+    //const length = forHarvesterId?.transactions?.length;
     const harvesterId = forHarvesterId._id;
     const transId = record?._id;
     const date = dayjs(record?.startDate);
 
-    console.log("length :", length);
-    console.log("record :", record?.serialNo);
+    // console.log("length :", length);
+    // console.log("record :", record?.serialNo);
 
-    if (length !== record.serialNo) {
-      setOpenType(null);
-      setTimeout(() => {
-        notification.warning({
-          message: t("mechanizedHiring.card.etm"),
-          description: t("mechanizedHiring.card.etd"),
-          placement: "topRight",
-        });
-        setIsLoading(null);
-      }, 1000);
-      return;
-    }
+    // if (length !== record.serialNo) {
+    //   setOpenType(null);
+    //   setTimeout(() => {
+    //     notification.warning({
+    //       message: t("mechanizedHiring.card.etm"),
+    //       description: t("mechanizedHiring.card.etd"),
+    //       placement: "topRight",
+    //     });
+    //     setIsLoading(null);
+    //   }, 1000);
+    //   return;
+    // }
     if (record?.duration > 0) {
       setBaseOfRate("duration");
     }
