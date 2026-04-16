@@ -98,9 +98,9 @@ const HarvesterData = () => {
         ),
       );
     });
-    console.log("edit transaction data", forHarvesterId);
+    //console.log("edit transaction data", forHarvesterId);
     //const length = forHarvesterId?.transactions?.length;
-    const harvesterId = forHarvesterId._id;
+    const harvesterId = forHarvesterId?._id;
     const transId = record?._id;
     const date = dayjs(record?.startDate);
 

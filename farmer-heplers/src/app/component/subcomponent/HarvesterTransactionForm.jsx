@@ -69,7 +69,7 @@ const HarvesterTransactionForm = ({
         const formValues = form.getFieldsValue();
         const { harvesterId, transId, ...restOfformValues } = formValues;
         const ids = { harvesterId: harvesterId, transactionId: transId };
-
+        console.log("edit harvester transaction form data: ", formValues);
         const res = await updateHarvestDataTransaction(ids, restOfformValues);
         const data = await res.data;
         if (data.status === "Success") {
