@@ -49,7 +49,7 @@ router
   .delete(authMiddleware, handleDeleteHarvestDataById)
   .put(authMiddleware, handleAddHarvesterTransactionById);
 router
-  .route("/harvester/:harvestId/transaction/:transactionId")
+  .route("/harvester/:harvesterId/transaction/:transactionId")
   .patch(authMiddleware, updateHarvesterTransactionByIds)
   .delete(authMiddleware, deleteHavresterTransactionByIds);
 
