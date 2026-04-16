@@ -12,6 +12,7 @@ const accountSchemaFW = new mongoose.Schema({
   transType: String,
   remaining: Number,
   handOver: String,
+  transactionNumber: Number,
 });
 
 const fieldWorkerModel = new mongoose.Schema({
@@ -50,6 +51,7 @@ const accountSchemaHF = new mongoose.Schema({
   remaining: { type: Number, default: 0 },
   brief: String,
   handOver: String,
+  transactionNumber: Number,
 });
 
 const harvestModel = new mongoose.Schema({

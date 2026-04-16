@@ -128,6 +128,7 @@ const HarvesterData = () => {
     transactionForm.setFieldsValue({
       harvesterId: harvesterId,
       transId: transId,
+      transactionNumber: record?.transactionNumber,
       startDate: date,
       vehical: record?.vehical,
       duration: record?.duration,

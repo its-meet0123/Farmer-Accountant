@@ -93,7 +93,10 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
 
   if (ids.transactionId) {
     const getTransaction = harvesterDB.transactions.find((transaction) => {
-      return transaction._id.toString() === ids.transactionId.toString();
+      //return transaction._id.toString() === ids.transactionId.toString();
+      return (
+        transaction.transactionNumber === upComingTrans.transactionNumber - 1
+      );
     });
 
     console.log("from Shema trans", getTransaction);
@@ -107,22 +110,23 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
         ? upComingTrans.duration * upComingTrans.salary
         : upComingTrans.measurment
           ? upComingTrans.measurment * upComingTrans.salary
-          : transTotal;
+          : 0;
 
-      const bodyTotal = total - upComingTrans.pay;
+      const bodyTotal = transTotal + total - upComingTrans.pay;
 
       return {
         ...upComingTrans,
+        transactionNumber: getTransaction.transactionNumber + 1,
         total: bodyTotal,
       };
     }
   }
 
-  const transaction = harvesterDB.transactions || [];
+  const transactions = harvesterDB.transactions || [];
 
-  const transTotal = transaction.length
-    ? transaction[transaction.length - 1].total
-    : 0;
+  const transaction = transactions.length
+    ? transactions[transactions.length - 1]
+    : [];
 
   const total = upComingTrans.duration
     ? upComingTrans.duration * upComingTrans.salary
@@ -130,19 +134,18 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
       ? upComingTrans.measurment * upComingTrans.salary
       : 0;
 
-  if (upComingTrans.pay > 0) {
-    let bodyTotal = transTotal + total - upComingTrans.pay;
-    return {
-      ...upComingTrans,
-      total: bodyTotal,
-    };
-  }
-
-  const bodyTotal = transTotal + total;
+  let bodyTotal = transaction?.total + total - (upComingTrans.pay || 0);
   return {
     ...upComingTrans,
+    transactionNumber: transaction?.transactionNumber + 1 || 1,
     total: bodyTotal,
   };
+
+  // const bodyTotal = transTotal + total;
+  // return {
+  //   ...upComingTrans,
+  //   total: bodyTotal,
+  // };
 }
 
 module.exports = {

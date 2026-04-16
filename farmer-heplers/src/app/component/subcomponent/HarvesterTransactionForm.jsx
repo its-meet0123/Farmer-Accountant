@@ -127,6 +127,10 @@ const HarvesterTransactionForm = ({
           <Input />
         </Form.Item>
 
+        <Form.Item label="Trans No" name="transactionNumber" hidden>
+          <Input />
+        </Form.Item>
+
         <Row gutter={12}>
           <Form.Item
             label={t("harvestDrawer.ahtf.df")}
