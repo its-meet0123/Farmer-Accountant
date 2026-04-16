@@ -143,7 +143,7 @@ const CasualLabor = () => {
       },
     );
 
-    if (record.serialNo !== length) {
+    if (record.transactionNumber !== length) {
       setOpenType(null);
       setTimeout(() => {
         notification.warning({
@@ -193,8 +193,8 @@ const CasualLabor = () => {
 
   const tableData = useMemo(() => {
     if (!additonalWorker) return [];
-    return additonalWorker.map((workers, index) => ({
-      ...workers,
+    return additonalWorker.map((list, index) => ({
+      ...list,
       serialNo: index + 1,
     }));
   }, [additonalWorker]);
@@ -276,11 +276,7 @@ const CasualLabor = () => {
   ];
 
   const ExpandedRow = (record) => {
-    const transactions =
-      record?.transactions.map((transaction, index) => ({
-        ...transaction,
-        serialNo: index + 1,
-      })) || [];
+    const transactions = record?.transactions || [];
     const CASUAL_LABOR_TRANS_COLUMNS = getColumnsForCasualLaborPage(t);
     const columns = [
       ...CASUAL_LABOR_TRANS_COLUMNS,

@@ -164,7 +164,7 @@ const HarvesterData = () => {
       },
     );
 
-    if (record.serialNo !== length) {
+    if (record.transactionNumber !== length) {
       setOpenType(null);
       setTimeout(() => {
         notification.warning({
@@ -215,11 +215,7 @@ const HarvesterData = () => {
   }, [fetch]);
 
   const ExpanedRow = (record) => {
-    const transData =
-      record?.transactions.map((transaction, index) => ({
-        ...transaction,
-        serialNo: index + 1,
-      })) || [];
+    const transData = record?.transactions || [];
     const transColumns = getColumnsForHarvestTransaction(t);
     const TRANS_COLUMNS = [
       ...transColumns,
