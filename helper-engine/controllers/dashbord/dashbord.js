@@ -69,7 +69,7 @@ async function dashBordData(req, res) {
         const effectiveDate =
           labors?.transactions?.at(0)?.startDate || new Date();
         const lastTransaction = labors?.transactions.at(-1);
-        const oAt = formatCurrency(lastTransaction?.total || 0);
+        const oAt = formatCurrency(lastTransaction?.remaining || 0);
         const duration = calculateAccountDuration(effectiveDate);
         return {
           laborName: laborName,
@@ -85,7 +85,7 @@ async function dashBordData(req, res) {
         const effectiveDate =
           harvester?.transactions?.at(0)?.startDate || new Date();
         const lastTransaction = harvester?.transactions.at(-1);
-        const oAt = formatCurrency(lastTransaction?.total || 0);
+        const oAt = formatCurrency(lastTransaction?.remaining || 0);
         const duration = calculateAccountDuration(effectiveDate);
         return {
           opratorName: opratorName,
