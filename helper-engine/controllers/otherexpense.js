@@ -251,6 +251,14 @@ async function handleAddHarvesterTransactionById(req, res) {
   const ids = { iD: id, transactionId: "" };
 
   const body = await autoTotalForHarvesterData(ids, upComingTrans);
+  if (!body) {
+    return res.status(500).json({
+      status: "Error",
+      Code: "",
+      Message:
+        "Body not find from middleware autoTotalForHarvesterData function.",
+    });
+  }
 
   try {
     const decoded = req.user;

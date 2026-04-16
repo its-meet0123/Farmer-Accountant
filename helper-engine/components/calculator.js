@@ -91,7 +91,7 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
 
   if (!harvesterDB) return {};
 
-  if (ids.transactionId) {
+  if (ids.transactionId && upComingTrans.transactionNumber) {
     const getTransaction = harvesterDB.transactions.find((transaction) => {
       //return transaction._id.toString() === ids.transactionId.toString();
       return (
@@ -126,7 +126,7 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
 
   const transaction = transactions.length
     ? transactions[transactions.length - 1]
-    : [];
+    : {};
 
   const total = upComingTrans.duration
     ? upComingTrans.duration * upComingTrans.salary
