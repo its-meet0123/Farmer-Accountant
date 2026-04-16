@@ -354,6 +354,7 @@ async function updateHarvesterTransactionByIds(req, res) {
     const upComingTrans = req.body;
 
     const ids = { iD: harvesterId, transactionId: transactionId };
+    console.log("updateHarvesterTransactionByIds ids: ", ids);
 
     const body = await autoTotalForHarvesterData(ids, upComingTrans);
 
