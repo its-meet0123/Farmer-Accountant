@@ -564,6 +564,7 @@
       "dut": "Duration(total working day)",
       "tt": "Total Wages",
       "pt": "Pay",
+      "rt": "Remaining",
       "hot": "Hand Over",
       "actiont": "Action",
       "aptt": "Are you sure you want to delete this transaction record? This action cannot be undone."
@@ -638,8 +639,9 @@
       "vid": "Vehical ID",
       "wt": "Harvesting Charge",
       "dut": "Duration/Measuremernt",
-      "tt": "Total/Remaing",
+      "tt": "Total",
       "pt": "Pay",
+      "rt": "Remaining",
       "hot": "Hand Over",
       "actiont": "Action",
       "aptt": "Are you sure you want to delete this transaction record? This action cannot be undone."

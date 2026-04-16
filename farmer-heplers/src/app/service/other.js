@@ -63,9 +63,8 @@ export async function updateFieldWorkerTransaction(ids, updatedTransaction) {
 }
 
 export async function updateHarvestDataTransaction(ids, updatedTransaction) {
-  console.log("update harvest data transaction api called with ids: ", ids);
+  //console.log("update harvest data transaction api called with ids: ", ids);
   const { harvesterId, transactionId } = ids;
-
   return await axiosInstance.patch(
     `/other/harvester/${harvesterId}/transaction/${transactionId}`,
     updatedTransaction,

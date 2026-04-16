@@ -1126,7 +1126,7 @@ const getColumnsForCasualLaborPage = (t) => {
   const TRANS_COLUMNS = [
     {
       title: t("casualLabor.ttc.sntt"),
-      dataIndex: "serialNo",
+      dataIndex: "transactionNumber",
       key: "serialNo",
       width: 50,
     },
@@ -1176,6 +1176,16 @@ const getColumnsForCasualLaborPage = (t) => {
       render: (amount) => {
         const Amount = formatCurrency(amount);
         return Amount;
+      },
+    },
+    {
+      title: t("casualLabor.ttc.rt"),
+      dataIndex: "remaining",
+      key: "remaining",
+      width: 150,
+      render: (remain) => {
+        const formatedTotal = formatCurrency(remain);
+        return formatedTotal;
       },
     },
     {
@@ -1294,7 +1304,7 @@ const getColumnsForHarvestTransaction = (t) => {
   const TRANS_COLUMNS = [
     {
       title: t("mechanizedHiring.ttc.sntt"),
-      dataIndex: "serialNo",
+      dataIndex: "transactionNumber",
       key: "serialNo",
       width: 50,
     },
@@ -1358,6 +1368,16 @@ const getColumnsForHarvestTransaction = (t) => {
       render: (amount) => {
         const Amount = formatCurrency(amount);
         return Amount;
+      },
+    },
+    {
+      title: t("mechanizedHiring.ttc.rt"),
+      dataIndex: "remaining",
+      key: "remaining",
+      width: 150,
+      render: (remain) => {
+        const formatedTotal = formatCurrency(remain);
+        return formatedTotal;
       },
     },
     {

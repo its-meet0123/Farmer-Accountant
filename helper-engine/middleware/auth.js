@@ -5,8 +5,8 @@ const JWT_SECRET = process.env.SECRET_KEY;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
 async function handleCheckAuthStatus(req, res) {
-  console.log("cookies :", req.cookies);
-  console.log("headers : ", req.headers);
+  // console.log("cookies :", req.cookies);
+  //console.log("headers : ", req.headers);
   // const token = req.cookies.token;
 
   const token = req.headers.authorization?.split(" ")[1];
