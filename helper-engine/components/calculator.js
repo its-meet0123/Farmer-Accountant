@@ -126,7 +126,7 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
 
   const transaction = transactions.length
     ? transactions[transactions.length - 1]
-    : {};
+    : { total: 0, transactionNumber: 0 };
 
   const total = upComingTrans.duration
     ? upComingTrans.duration * upComingTrans.salary
@@ -137,7 +137,7 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
   let bodyTotal = transaction?.total + total - (upComingTrans.pay || 0);
   return {
     ...upComingTrans,
-    transactionNumber: transaction?.transactionNumber + 1 || 1,
+    transactionNumber: transaction?.transactionNumber + 1,
     total: bodyTotal,
   };
 
