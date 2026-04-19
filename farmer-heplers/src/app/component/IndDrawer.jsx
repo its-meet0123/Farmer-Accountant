@@ -125,8 +125,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               </Form.Item>
               <Form.Item
                 label={t("indDrawer.drawerForm.interestInput.text")}
-                name="rate"
-                getValueFromEvent={(e) => e.target.value.replace(/\D/g, "")}>
+                name="rate">
                 <InputNumber
                   placeholder={t("indDrawer.drawerForm.interestInput.pt")}
                 />
@@ -340,22 +339,25 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               <Form.Item
                 label={t("indDrawer.drawerForm.interestInput.text")}
                 name="rate"
-                getValueFromEvent={(e) => {
-                  const val = String(e).replace(/[^0-9]/g, "");
-                  return val ? parseInt(val, 10) : null;
-                }}
+                // getValueFromEvent={(e) => {
+                //   const val = String(e).replace(/[^0-9]/g, "");
+                //   return val ? parseInt(val, 10) : null;
+                // }}
+                getValueFromEvent={(e) => e.target.value.replace(/\D/g, "")}
                 rules={[
                   {
                     required: true,
                     message: t("indDrawer.drawerForm.interestInput.rm"),
                   },
                   {
+                    pattern: /^[0-9]+$/,
                     validator: (_, value) => {
                       if (value && !/^\d+$/.test(value.toString())) {
                         return Promise.reject(new Error("Only numbers"));
                       }
                       return Promise.resolve();
                     },
+                    message: "Only numbers",
                   },
                   {
                     type: "number",
