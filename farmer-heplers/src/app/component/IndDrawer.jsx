@@ -350,7 +350,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                     message: t("indDrawer.drawerForm.interestInput.rm"),
                   },
                   {
-                    pattern: /^[0-9]+$/,
+                    //pattern: /^[0-9]+$/,
                     validator: (_, value) => {
                       if (value && !/^\d+$/.test(value.toString())) {
                         return Promise.reject(new Error("Only numbers"));
