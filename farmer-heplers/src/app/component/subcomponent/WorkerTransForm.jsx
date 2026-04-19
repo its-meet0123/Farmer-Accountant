@@ -139,6 +139,22 @@ const WorkerTransForm = ({
                 required: true,
                 message: t("workerDrawer.transactionInput.intrm"),
               },
+              {
+                pattern: /^[0-9]+$/,
+                validator: (_, value) => {
+                  if (value && !/^\d+$/.test(value.toString())) {
+                    return Promise.reject(new Error("Only numbers"));
+                  }
+                  return Promise.resolve();
+                },
+                message: "Only numbers",
+              },
+              {
+                type: "number",
+                min: 0,
+                max: 60,
+                message: "between 0 and 60",
+              },
             ]}
             help={t("indDrawer.drawerForm.interestInput.hint")}>
             <InputNumber />

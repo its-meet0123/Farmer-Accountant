@@ -339,11 +339,6 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               <Form.Item
                 label={t("indDrawer.drawerForm.interestInput.text")}
                 name="rate"
-                // getValueFromEvent={(e) => {
-                //   const val = String(e).replace(/[^0-9]/g, "");
-                //   return val ? parseInt(val, 10) : null;
-                // }}
-                // getValueFromEvent={(e) => e.target.value.replace(/\D/g, "")}
                 rules={[
                   {
                     required: true,
