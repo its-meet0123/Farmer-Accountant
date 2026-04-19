@@ -125,7 +125,8 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               </Form.Item>
               <Form.Item
                 label={t("indDrawer.drawerForm.interestInput.text")}
-                name="rate">
+                name="rate"
+                getValueFromEvent={(e) => e.target.value.replace(/\D/g, "")}>
                 <InputNumber
                   placeholder={t("indDrawer.drawerForm.interestInput.pt")}
                 />
