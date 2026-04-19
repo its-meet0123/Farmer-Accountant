@@ -229,9 +229,7 @@ const WorkersData = () => {
                     okText="Yes"
                     cancelText="No"
                     placement="left">
-                    <Button type="text" size="small">
-                      delete
-                    </Button>
+                    delete
                   </Popconfirm>
                 ),
               },
