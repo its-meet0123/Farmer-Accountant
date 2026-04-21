@@ -489,10 +489,10 @@
     "transactionInput": {
       "colps": {
         "glm": "फॉर्म दिशानिर्देश",
-        "li1": "Fill all mandatory(*) fields per transaction",
-        "li2": "For worker advance payments, select the 'Gives' Section. If the advance is in cash, fill in the 'Amount', 'Type', and 'Brief' fields. If a part of the crop is given as an advance, complete the 'Crop' fields instead.",
-        "li3": "For worker deposits, select the 'Takes' section. If the de posit is in cash, fill in the 'Payment'and 'Type' fields. If a part of the crop (his share from the harvest) is deposit, complete the 'Crop' fields instead. ",
-        "li4": "To maintain both types of records, click on the 'Both' section. The input fields will then automatically adjust based on your transaction type."
+        "li1": "प्रत्येक लेनदेन के लिए सभी अनिवार्य(*) फील्ड भरें",
+        "li2": "मजदूर अग्रिम भुगतान के लिए, 'देता है' अनुभाग चुनें। यदि अग्रिम नकद में है, तो 'राशि', 'प्रकार', और 'विवरण' फील्ड भरें। यदि फसल का कोई हिस्सा अग्रिम के रूप में दिया गया है, तो इसके बजाय 'फसल' फील्ड पूरी करें।",
+        "li3": "मजदूर जमा राशि के लिए, 'लेता है' अनुभाग चुनें। यदि जमा नकद में है, तो 'भुगतान' और 'प्रकार' फील्ड भरें। यदि फसल का कोई हिस्सा (कटाई से उसका हिस्सा) जमा किया जाता है, तो इसके बजाय 'फसल' फील्ड पूरी करें।",
+        "li4": "दोनों प्रकार के रिकॉर्ड रखने के लिए, 'दोनों' अनुभाग पर क्लिक करें। इनपुट फील्ड आपके लेनदेन प्रकार के आधार पर स्वचालित रूप से समायोजित होंगे।"
       },
       "at": "राशि",
       "apt": "राशि दर्ज करें",
@@ -578,13 +578,13 @@
     },
     "acltf": {
       "colps": {
-        "glm": "Form Guidelines",
-        "li1": "Fill all mandatory(*) fields per transaction",
-        "li2": "Process payment upon task is finished: fill all fields.",
-        "li3": "Only record task finished without payment: fill 'Wages/D' and 'Duration' fields.",
-        "li4": "Only record payment details: fill 'Pay', 'Transaction type', and 'HandOver' fields.",
-        "li5": "Multiple transactions allowed.",
-        "li6": "Select 'Duration' if the work is time-based. Select 'Measurement' if the work is based on field area."
+        "glm": "फॉर्म दिशानिर्देश",
+        "li1": "प्रत्येक लेनदेन के लिए सभी अनिवार्य(*) फील्ड भरें",
+        "li2": "काम पूरा होने पर भुगतान करें: सभी फील्ड भरें।",
+        "li3": "केवल बिना भुगतान के पूरा किया गया काम रिकॉर्ड करें: 'मजदूरी/दिन' और 'अवधि' फील्ड भरें।",
+        "li4": "केवल भुगतान विवरण रिकॉर्ड करें: 'भुगतान', 'लेनदेन प्रकार', और 'हस्तांतरण' फील्ड भरें।",
+        "li5": "कई लेनदेन की अनुमति है।",
+        "li6": "यदि काम समय-आधारित है तो 'अवधि' चुनें। यदि काम खेत के क्षेत्र के आधार पर है तो 'माप' चुनें।"
       },
       "df": "तारीख",
       "dpt": "तारीख चुनें",
@@ -626,6 +626,7 @@
       "dut": "अवधि/माप",
       "tt": "कुल/शेष",
       "pt": "भुगतान",
+      "rt": "शेष",
       "hot": "सौंप दिया",
       "actiont": "कार्रवाई",
       "aptt": "क्या आप वाकई इस लेनदेन रिकॉर्ड को हटाना चाहते हैं? इसे वापस नहीं लाया जा सकता।"
@@ -672,6 +673,7 @@
       "glm": "फॉर्म दिशानिर्देश",
       "glt": ". कार्य पूर्ण होने पर भुगतान करें: सभी फ़ील्ड का उपयोग करें। \n. केवल भुगतान के बिना कार्य विवरण रिकॉर्ड करें: 'तारीख', 'मजदूरी/दिन' और 'अवधि' फ़ील्ड का उपयोग करें। \n. केवल भुगतान विवरण रिकॉर्ड करें: 'तारीख', 'भुगतान', 'लेनदेन प्रकार' और 'सौंप दिया' फ़ील्ड का उपयोग करें। ",
       "df": "तारीख",
+      "vid": "वाहन ID",
       "dpt": "तारीख चुनें",
       "dfrmt": "तारीख आवश्यक है",
       "durf": "अवधि",

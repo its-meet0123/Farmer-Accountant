@@ -487,10 +487,10 @@
     "transactionInput": {
       "colps": {
         "glm": "ਫਾਰਮ ਹਿਦਾਇਤਾਂ",
-        "li1": "Fill all mandatory(*) fields per transaction",
-        "li2": "For worker advance payments, select the 'Gives' Section. If the advance is in cash, fill in the 'Amount', 'Type', and 'Brief' fields. If a part of the crop is given as an advance, complete the 'Crop' fields instead.",
-        "li3": "For worker deposits, select the 'Takes' section. If the de posit is in cash, fill in the 'Payment'and 'Type' fields. If a part of the crop (his share from the harvest) is deposit, complete the 'Crop' fields instead. ",
-        "li4": "To maintain both types of records, click on the 'Both' section. The input fields will then automatically adjust based on your transaction type."
+        "li1": "ਹਰੇਕ ਲੇਣ-ਦੇਣ ਲਈ ਸਾਰੀਆਂ ਲਾਜ਼ਮੀ(*) ਖੇਤਰ ਭਰੋ",
+        "li2": "ਮਜ਼ਦੂਰ ਅਗ੍ਰਿਮ ਭੁਗਤਾਨ ਲਈ, 'ਦੇਵੇ' ਭਾਗ ਚੁਣੋ। ਜੇ ਅਗ੍ਰਿਮ ਨਕਦ ਵਿੱਚ ਹੈ, ਤਾਂ 'ਰਕਮ', 'ਕਿਸਮ', ਅਤੇ 'ਵੇਰਵਾ' ਖੇਤਰ ਭਰੋ। ਜੇ ਫਸਲ ਦਾ ਕੋਈ ਹਿੱਸਾ ਅਗ੍ਰਿਮ ਵਜੋਂ ਦਿੱਤਾ ਗਿਆ ਹੈ, ਤਾਂ ਇਸ ਦੀ ਥਾਂ 'ਫਸਲ' ਖੇਤਰ ਪੂਰੀ ਕਰੋ।",
+        "li3": "ਮਜ਼ਦੂਰ ਜਮਾ ਰਕਮ ਲਈ, 'ਲਵੇ' ਭਾਗ ਚੁਣੋ। ਜੇ ਜਮਾ ਨਕਦ ਵਿੱਚ ਹੈ, ਤਾਂ 'ਭੁਗਤਾਨ' ਅਤੇ 'ਕਿਸਮ' ਖੇਤਰ ਭਰੋ। ਜੇ ਫਸਲ ਦਾ ਕੋਈ ਹਿੱਸਾ (ਵਾਢੀ ਤੋਂ ਉਸ ਦਾ ਹਿੱਸਾ) ਜਮਾ ਕੀਤਾ ਜਾਂਦਾ ਹੈ, ਤਾਂ ਇਸ ਦੀ ਥਾਂ 'ਫਸਲ' ਖੇਤਰ ਪੂਰੀ ਕਰੋ।",
+        "li4": "ਦੋਵਾਂ ਕਿਸਮਾਂ ਦੇ ਰਿਕਾਰਡ ਰੱਖਣ ਲਈ, 'ਦੋਵੇਂ' ਭਾਗ 'ਤੇ ਕਲਿੱਕ ਕਰੋ। ਇਨਪੁਟ ਖੇਤਰ ਆਪਣੇ ਲੇਣ-ਦੇਣ ਦੀ ਕਿਸਮ ਦੇ ਅਨੁਸਾਰ ਆਪਣੇ ਆਪ ਸਮਾਯੋਜਿਤ ਹੋ ਜਾਣਗੇ।"
       },
       "at": "ਰਕਮ",
       "apt": "ਰਕਮ ਦਰਜ ਕਰੋ",
@@ -575,13 +575,13 @@
     },
     "acltf": {
       "colps": {
-        "glm": "Form Guidelines",
-        "li1": "Fill all mandatory(*) fields per transaction",
-        "li2": "Process payment upon task is finished: fill all fields.",
-        "li3": "Only record task finished without payment: fill 'Wages/D' and 'Duration' fields.",
-        "li4": "Only record payment details: fill 'Pay', 'Transaction type', and 'HandOver' fields.",
-        "li5": "Multiple transactions allowed.",
-        "li6": "Select 'Duration' if the work is time-based. Select 'Measurement' if the work is based on field area."
+        "glm": "ਫਾਰਮ ਹਿਦਾਇਤਾਂ",
+        "li1": "ਹਰੇਕ ਲੇਣ-ਦੇਣ ਲਈ ਸਾਰੀਆਂ ਲਾਜ਼ਮੀ(*) ਖੇਤਰ ਭਰੋ",
+        "li2": "ਕੰਮ ਪੂਰਾ ਹੋਣ 'ਤੇ ਭੁਗਤਾਨ ਪ੍ਰਕਿਰਿਆ ਕਰੋ: ਸਾਰੀਆਂ ਖੇਤਰ ਭਰੋ।",
+        "li3": "ਸਿਰਫ ਬਿਨਾਂ ਭੁਗਤਾਨ ਦੇ ਪੂਰਾ ਕੀਤਾ ਗਿਆ ਕੰਮ ਰਿਕਾਰਡ ਕਰੋ: 'ਮਜ਼ਦੂਰੀ/ਦਿਨ' ਅਤੇ 'ਮਿਆਦ' ਖੇਤਰ ਭਰੋ।",
+        "li4": "ਸਿਰਫ ਭੁਗਤਾਨ ਦਾ ਵੇਰਵਾ ਰਿਕਾਰਡ ਕਰੋ: 'ਭੁਗਤਾਨ', 'ਲੇਣ-ਦੇਣ ਦੀ ਕਿਸਮ', ਅਤੇ 'ਹਸਤਾਂਤਰਣ' ਖੇਤਰ ਭਰੋ।",
+        "li5": "ਕਈ ਲੇਣ-ਦੇਣ ਦੀ ਆਗਿਆ ਹੈ।",
+        "li6": "ਜੇ ਕੰਮ ਸਮੇਂ-ਆਧਾਰਿਤ ਹੈ ਤਾਂ 'ਮਿਆਦ' ਚੁਣੋ। ਜੇ ਕੰਮ ਖੇਤ ਦੇ ਖੇਤਰ 'ਤੇ ਆਧਾਰਿਤ ਹੈ ਤਾਂ 'ਮਾਪ' ਚੁਣੋ।"
       },
       "df": "ਮਿਤੀ",
       "dpt": "ਮਿਤੀ ਚੁਣੋ",
@@ -623,6 +623,7 @@
       "dut": "ਸਮਾਂ/ਮਾਪ",
       "tt": "ਕੁੱਲ/ਬਾਕੀ",
       "pt": "ਭੁਗਤਾਨ",
+      "rt": "ਬਾਕੀ",
       "hot": "ਹਵਾਲੇ ਕੀਤਾ",
       "actiont": "ਐਕਸ਼ਨ",
       "aptt": "ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਇਸ ਲੈਣ-ਦੇਣ ਦੇ ਰਿਕਾਰਡ ਨੂੰ ਡਿਲੀਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਹ ਵਾਪਸ ਨਹੀਂ ਲਿਆ ਜਾ ਸਕਦਾ।"
@@ -669,6 +670,7 @@
       "glm": "ਫਾਰਮ ਹਿਦਾਇਤਾਂ",
       "glt": "ਘਣਤਲ਼ ਮਾਇਕਵਾਨ ਸੰਬੰਧਤ ਭੁਗਤਾਨ ਅਤੇ ਮਾਪ ਜਾਣਕਾਰੀ ਲਈ ਲਰ੍ਜ॥ ਕਾਮ ਮੁਕੰਮਲ ਹੋਣੇ ਤੋਂ ਬਾਅਦ ਭੁਗਤਾਨ: ਸਾਰੇ ਖਾਨੇ ਭਰੋ। ਸਿਰਫ਼ ਕਾਮ ਦਾ ਵੇਰਵਾ: 'date', 'wages/d' ਅਤੇ 'duration' ਖਾਨੇ ਭਰੋ। ਸਿਰਫ਼ ਭੁਗਤਾਨ: 'date', 'pay', 'Transaction type' ਅਤੇ 'HandOver' ਖਾਨੇ ਭਰੋ।",
       "df": "ਮਿਤੀ",
+      "vid": "ਵਾਹਨ ID",
       "dpt": "ਮਿਤੀ ਚੁਣੋ",
       "dfrmt": "ਮਿਤੀ ਜ਼ਰੂਰੀ ਹੈ",
       "durf": "ਸਮਾਂ",
