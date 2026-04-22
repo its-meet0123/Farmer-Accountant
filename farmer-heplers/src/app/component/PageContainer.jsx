@@ -195,6 +195,7 @@ const PageContainer = ({ title, children, extra }) => {
       <div
         style={{
           minWidth: "100%",
+          overflowY: "auto",
         }}>
         {children}
       </div>
