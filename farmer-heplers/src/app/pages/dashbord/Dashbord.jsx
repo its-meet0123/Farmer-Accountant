@@ -157,7 +157,7 @@ const DashBord = () => {
         <p style={styles.headerSubtitle}>{t("dashbord.features.stfdh")}</p>
       </header>
 
-      {!dashbordData ? (
+      {dashbordData == null ? (
         <DashbordInfo />
       ) : (
         <>
