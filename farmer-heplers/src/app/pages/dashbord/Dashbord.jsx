@@ -20,7 +20,7 @@ const formatCurrency = (amount) => {
 const DashBord = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
-  const [dashbordData, setDeshbordData] = useState({});
+  const [dashbordData, setDeshbordData] = useState();
   const [monthlyTotal, setMonthlyTotal] = useState([]);
   const { t } = useAuth();
 
