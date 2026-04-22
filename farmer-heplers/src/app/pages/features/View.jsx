@@ -298,7 +298,7 @@ const ViewPage = () => {
               expandedRowRender: (record) => ExpandedRow(record),
             }}
             pagination={false}
-            scroll={{ x: 900 }}
+            scroll={{ x: 900, y: 700 }}
             style={{ minWidth: "100%" }}
           />
         )}
