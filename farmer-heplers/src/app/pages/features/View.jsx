@@ -160,13 +160,13 @@ const ViewPage = () => {
     {
       title: t("ViewPage.tableColumns.serialNoTitleText"),
       dataIndex: "serialNo",
-      width: "10%",
+      width: "20%",
       key: "sno",
     },
     {
       title: t("ViewPage.tableColumns.IndustryNameTitleText"),
       dataIndex: "nameInd",
-      width: "40%",
+      width: "60%",
       key: "nameInd",
     },
     {

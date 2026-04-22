@@ -159,7 +159,7 @@ const EntDrawer = ({
           (open === "edit" && t("entDrawer.drawerForm.titleText1")) ||
           (open === "add" && t("entDrawer.drawerForm.titleText2"))
         }
-        getContainer={false}
+        getContainer={true}
         placement="right"
         size={screens.md ? "large" : "default"}
         onClose={onClose}
