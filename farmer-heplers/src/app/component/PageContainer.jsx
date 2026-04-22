@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LanguageChangeDropDown from "./LanguageChangeDropdown";
-import { Card, Grid } from "antd";
+import { Card } from "antd";
 
-const { useBreakpoint } = Grid;
+//const { useBreakpoint } = Grid;
 
 const AuthContainer = ({
   children,
@@ -142,20 +142,20 @@ const AuthContainer = ({
 };
 
 const PageContainer = ({ title, children, extra }) => {
-  const screen = useBreakpoint();
-  const style = {
-    backgroundImage: `
-        radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
-        radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
-      `,
-    title: {
-      fontSize: "2.5rem",
-      fontWeight: "800",
-      color: "#0F172A",
-      margin: "0 0 10px 0",
-      letterSpacing: "-1px",
-    },
-  };
+  // const screen = useBreakpoint();
+  // const style = {
+  //   backgroundImage: `
+  //       radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
+  //       radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
+  //     `,
+  //   title: {
+  //     fontSize: "2.5rem",
+  //     fontWeight: "800",
+  //     color: "#0F172A",
+  //     margin: "0 0 10px 0",
+  //     letterSpacing: "-1px",
+  //   },
+  // };
 
   return (
     <Card

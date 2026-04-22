@@ -302,16 +302,16 @@ const ViewPage = () => {
             style={{ minWidth: "100%" }}
           />
         )}
+        <IndDrawer
+          open={openType}
+          setOpen={setOpenType}
+          Id={Id}
+          form={form}
+          setFetch={setFetch}
+          showSuccess={showSuccess}
+          t={t}
+        />
       </PageContainer>
-      <IndDrawer
-        open={openType}
-        setOpen={setOpenType}
-        Id={Id}
-        form={form}
-        setFetch={setFetch}
-        showSuccess={showSuccess}
-        t={t}
-      />
     </>
   );
 };

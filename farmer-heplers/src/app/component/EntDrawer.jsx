@@ -7,6 +7,7 @@ import {
 import {
   Button,
   Col,
+  Collapse,
   DatePicker,
   Drawer,
   Flex,
@@ -23,6 +24,7 @@ import { postIntShopeInitailData, UpdateIndDataById } from "../service/ind";
 import dayjs from "dayjs";
 
 const { useBreakpoint } = Grid;
+const { Panel } = Collapse;
 
 const EntDrawer = ({
   open,
