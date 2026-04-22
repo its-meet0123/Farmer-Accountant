@@ -73,7 +73,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
           (open === "edit" && t("indDrawer.drawerForm.titleText1")) ||
           (open === "add" && t("indDrawer.drawerForm.titleText2"))
         }
-        getContainer={true}
+        getContainer={false}
         placement="right"
         size="large"
         onClose={onClose}

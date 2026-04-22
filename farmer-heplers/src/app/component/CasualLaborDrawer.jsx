@@ -23,7 +23,8 @@ const LaborDrawer = ({
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}
-        size="large">
+        size="large"
+        getContainer={false}>
         {(openType === "laborAdd" || openType === "laborEdit") && (
           <CasualLaborAddForm
             form={laborForm}

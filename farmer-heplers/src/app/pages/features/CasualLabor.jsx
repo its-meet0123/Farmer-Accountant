@@ -319,7 +319,7 @@ const CasualLabor = () => {
         dataSource={transactions}
         rowKey="_id"
         columns={columns}
-        scroll={{ x: "max-content" }}
+        scroll={{ x: "max-content", y: "90vh" }}
       />
     );
   };
@@ -352,16 +352,16 @@ const CasualLabor = () => {
             style={{ width: "100%" }}
           />
         )}
+        <LaborDrawer
+          openType={openType}
+          setOpenType={setOpenType}
+          laborForm={laborForm}
+          setFetch={setFetch}
+          transactionForm={transactionForm}
+          additionalWorker={additonalWorker}
+          t={t}
+        />
       </PageContainer>
-      <LaborDrawer
-        openType={openType}
-        setOpenType={setOpenType}
-        laborForm={laborForm}
-        setFetch={setFetch}
-        transactionForm={transactionForm}
-        additionalWorker={additonalWorker}
-        t={t}
-      />
     </>
   );
 };

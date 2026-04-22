@@ -340,22 +340,22 @@ const HarvesterData = () => {
             columns={columns}
             rowKey="_id"
             expandable={{ expandedRowRender: (record) => ExpanedRow(record) }}
-            scroll={{ x: "max-content" }}
+            scroll={{ x: "max-content", y: "90vh" }}
             style={{ width: "100%" }}
           />
         )}
+        <HarvestDrawer
+          openType={openType}
+          setOpenType={setOpenType}
+          setFetch={setFetch}
+          detailForm={detailForm}
+          transactionForm={transactionForm}
+          harvesterList={harvestList}
+          baseOfRate={baseOfRate}
+          setBaseOfRate={setBaseOfRate}
+          t={t}
+        />
       </PageContainer>
-      <HarvestDrawer
-        openType={openType}
-        setOpenType={setOpenType}
-        setFetch={setFetch}
-        detailForm={detailForm}
-        transactionForm={transactionForm}
-        harvesterList={harvestList}
-        baseOfRate={baseOfRate}
-        setBaseOfRate={setBaseOfRate}
-        t={t}
-      />
     </>
   );
 };

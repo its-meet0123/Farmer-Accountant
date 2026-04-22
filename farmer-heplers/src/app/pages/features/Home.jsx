@@ -254,23 +254,23 @@ const HomePage = () => {
             expandable={{
               expandedRowRender: (record) => ExpandedRow(record),
             }}
-            scroll={{ x: "max-content" }}
+            scroll={{ x: "max-content", y: "90vh" }}
             style={{ minWidth: "100%" }}
           />
         )}
+        <EntDrawer
+          open={openType}
+          form={form}
+          setOpen={setOpenType}
+          setShopeNo={setShopeNo}
+          indData={filltredIndData}
+          setFetch={setFetch}
+          showSuccess={showSuccess}
+          user={authState.user}
+          data={{ entData, indData }}
+          t={t}
+        />
       </PageContainer>
-      <EntDrawer
-        open={openType}
-        form={form}
-        setOpen={setOpenType}
-        setShopeNo={setShopeNo}
-        indData={filltredIndData}
-        setFetch={setFetch}
-        showSuccess={showSuccess}
-        user={authState.user}
-        data={{ entData, indData }}
-        t={t}
-      />
     </>
   );
 };
