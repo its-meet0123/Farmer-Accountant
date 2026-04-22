@@ -95,18 +95,31 @@ async function dashBordData(req, res) {
       })
       .filter((item) => item !== null);
 
-    const allCalculateData = {
-      shopes: allShopes,
-      workers: workersList,
-      casualLabors: casualLaborList,
-      harvesters: harvestList,
-    };
+    if (
+      allShopes.length > 0 &&
+      workersList.length > 0 &&
+      casualLaborList.length > 0 &&
+      harvestList.length > 0
+    ) {
+      const allCalculateData = {
+        shopes: allShopes,
+        workers: workersList,
+        casualLabors: casualLaborList,
+        harvesters: harvestList,
+      };
 
-    return res.status(200).json({
-      status: "Success",
-      data: allCalculateData,
-      Code: "DB.SM",
-    });
+      return res.status(200).json({
+        status: "Success",
+        data: allCalculateData,
+        Code: "DB.SM",
+      });
+    } else {
+      return res.status(204).json({
+        status: "No Content",
+        data: null,
+        Code: "Dashbord data is not available",
+      });
+    }
   } catch (err) {
     console.log(err.message);
     return res.status(500).json({
