@@ -7,6 +7,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { styles } from "./DasnbordStyle";
 import FeatureCard from "./FeatureCard";
 import TurnoverGraph from "../graph/MonthlyTurnover";
+import DashbordInfo from "./Info";
 
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
@@ -156,59 +157,70 @@ const DashBord = () => {
         <p style={styles.headerSubtitle}>{t("dashbord.features.stfdh")}</p>
       </header>
 
-      <div style={styles.mainGrid}>
-        {features.map((item, index) => (
-          <FeatureCard key={index} item={item} isLoading={isLoading} />
-        ))}
-      </div>
-      {!isLoading && (
-        <Card
-          title={<span style={{ color: "#4da3ff" }}>Turnover Graph</span>}
-          extra={
-            overAllTotal > 0 ? (
-              <span
-                style={{
-                  color: "green",
-                  fontSize: "1.3rem",
-                  fontWeight: 600,
-                }}>
-                Profit: {formatCurrency(overAllTotal)}
-              </span>
-            ) : overAllTotal < 0 ? (
-              <span
-                style={{
-                  color: "red",
-                  fontSize: "1.3rem",
-                  fontWeight: 600,
-                }}>
-                Loss: {formatCurrency(overAllTotal)}
-              </span>
-            ) : (
-              <span
-                style={{ color: "#fff", fontSize: "1.3rem", fontWeight: 600 }}>
-                {formatCurrency(0)}
-              </span>
-            )
-          }
-          style={{
-            width: "100%",
-            height: 600,
-            backgroundColor: "#161d2f",
-            marginTop: "20px",
-            color: "#ffffff",
-            overflow: "hidden",
-          }}
-          styles={{
-            body: {
-              overflowX: "auto",
-              width: "100%",
-              height: "calc(600px-57px)",
-            },
-          }}>
-          <TurnoverGraph turnover={monthlyTotal} />
-        </Card>
+      {!dashbordData ? (
+        <DashbordInfo />
+      ) : (
+        <>
+          {" "}
+          <div style={styles.mainGrid}>
+            {features.map((item, index) => (
+              <FeatureCard key={index} item={item} isLoading={isLoading} />
+            ))}
+          </div>
+          {!isLoading && (
+            <Card
+              title={<span style={{ color: "#4da3ff" }}>Turnover Graph</span>}
+              extra={
+                overAllTotal > 0 ? (
+                  <span
+                    style={{
+                      color: "green",
+                      fontSize: "1.3rem",
+                      fontWeight: 600,
+                    }}>
+                    Profit: {formatCurrency(overAllTotal)}
+                  </span>
+                ) : overAllTotal < 0 ? (
+                  <span
+                    style={{
+                      color: "red",
+                      fontSize: "1.3rem",
+                      fontWeight: 600,
+                    }}>
+                    Loss: {formatCurrency(overAllTotal)}
+                  </span>
+                ) : (
+                  <span
+                    style={{
+                      color: "#fff",
+                      fontSize: "1.3rem",
+                      fontWeight: 600,
+                    }}>
+                    {formatCurrency(0)}
+                  </span>
+                )
+              }
+              style={{
+                width: "100%",
+                height: 600,
+                backgroundColor: "#161d2f",
+                marginTop: "20px",
+                color: "#ffffff",
+                overflow: "hidden",
+              }}
+              styles={{
+                body: {
+                  overflowX: "auto",
+                  width: "100%",
+                  height: "calc(600px-57px)",
+                },
+              }}>
+              <TurnoverGraph turnover={monthlyTotal} />
+            </Card>
+          )}
+          <div style={styles.footerBar}></div>
+        </>
       )}
-      <div style={styles.footerBar}></div>
     </div>
   );
 };
