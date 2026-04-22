@@ -173,6 +173,7 @@ const PageContainer = ({ title, children, extra }) => {
         body: {
           padding: "clamp(0, 1px, 24px)",
           overflowX: "auto",
+          overflowY: "auto",
         },
         header: {
           padding: "12px 16px",
@@ -195,7 +196,6 @@ const PageContainer = ({ title, children, extra }) => {
       <div
         style={{
           minWidth: "100%",
-          overflowY: "auto",
         }}>
         {children}
       </div>
