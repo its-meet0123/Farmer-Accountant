@@ -4,6 +4,7 @@ import {
   UserAddOutlined,
 } from "@ant-design/icons";
 import { Card, Col, Row } from "antd";
+import { Link } from "react-router-dom";
 
 const DashbordInfo = () => {
   return (
@@ -21,11 +22,30 @@ const DashbordInfo = () => {
                 color: "#ffd700",
               }}
             />
-            <h3 style={{ color: "#fff" }}>Farmer Management</h3>
-            <p>
-              Naye kisan bhaiyon ko add karein aur unka saara record ek hi jagah
-              maintain karein.
-            </p>
+            <h3 style={{ color: "#fff" }}>Arhatiya (Bahi-Khata)</h3>
+            <ul>
+              <li>Arhatiya ka hisab kitab rkhne ka asaan trika </li>
+              <li>
+                Apna Bahi-Khata chalu krne ke liye{" "}
+                <Link to="/home">Traders</Link> per jaaye or Add Industry button
+                per click krne per ik form open hoga use fill kre.
+              </li>
+              <li>
+                Form fill krne ke baad <Link to="/view">Vendors</Link> per jaaye
+                vaha aapko apne Arhatiya ki Shope Number waali list mil jaaye gi
+                jiske Action columns mai + icon waale button per click kre ik or
+                form opne hoga jis se apna lenn denn chaalu kre.
+              </li>
+              <li>
+                Es form ke ander Rate/drr ya byaj dar 2 rupiya secda (2%) ke
+                liye <b>24</b> daale. 1.5 rupiya secda (1.5%) ke liye <b>18</b>{" "}
+                daale. 1 rupiya secda (1%) ke liye <b>12</b> daale.
+              </li>
+              <li>
+                Form ke fields ko alg alg len den daalne ke trike se set kiya
+                gya hai aap apne len den ke hisaab se bhr skte hai.
+              </li>
+            </ul>
           </Card>
         </Col>
 
