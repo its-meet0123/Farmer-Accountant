@@ -8,7 +8,10 @@ import { Card, Col, Row } from "antd";
 const DashbordInfo = () => {
   return (
     <>
-      <Row gutter={[24, 24]} justify="center">
+      <Row
+        gutter={[24, 24]}
+        justify="center"
+        style={{ margin: "0 2rem 0 2rem" }}>
         <Col xs={24} sm={12} md={8}>
           <Card style={glassStyle} hoverable>
             <UserAddOutlined
