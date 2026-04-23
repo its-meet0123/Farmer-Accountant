@@ -19,7 +19,7 @@ const DashbordInfo = () => {
       <Row
         gutter={[24, 24]}
         justify="center"
-        style={{ margin: "0 0.2rem 0 0.2rem" }}>
+        style={{ margin: "0 0.2rem 0 0.2rem", gap: 5 }}>
         <Col xs={24} sm={12} md={8}>
           <Card style={glassStyle} hoverable>
             <Store
@@ -129,7 +129,7 @@ const DashbordInfo = () => {
       <Row
         gutter={[24, 24]}
         justify="center"
-        style={{ margin: "0 0.2rem 0 0.2rem" }}>
+        style={{ margin: "0 0.2rem 0 0.2rem", gap: 5 }}>
         <Col xs={24} sm={12} md={8}>
           <Card style={glassStyle} hoverable>
             <Truck
