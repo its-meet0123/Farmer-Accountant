@@ -7,13 +7,15 @@ import {
   WarningOutlined,
 } from "@ant-design/icons";
 import { Card, Col, Row } from "antd";
-import { HardHat, Pickaxe, Store, Truck } from "lucide-react";
+import { ArrowRight, HardHat, Pickaxe, Store, Truck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const DashbordInfo = () => {
   return (
     <>
-      <h3>Niche diye gye jaankari per dyaan de.</h3>
+      <h3 style={{ color: "#faad14" }}>
+        <ArrowRight /> Niche diye gaye vivran ko dhyanpurvak padhein.
+      </h3>
       <Row
         gutter={[24, 24]}
         justify="center"
