@@ -96,9 +96,9 @@ async function dashBordData(req, res) {
       .filter((item) => item !== null);
 
     if (
-      allShopes.length > 0 &&
-      workersList.length > 0 &&
-      casualLaborList.length > 0 &&
+      allShopes.length > 0 ||
+      workersList.length > 0 ||
+      casualLaborList.length > 0 ||
       harvestList.length > 0
     ) {
       const allCalculateData = {
