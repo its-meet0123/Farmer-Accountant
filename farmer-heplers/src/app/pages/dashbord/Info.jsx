@@ -4,6 +4,7 @@ import {
   EyeOutlined,
   FileAddOutlined,
   QuestionCircleOutlined,
+  WarningOutlined,
 } from "@ant-design/icons";
 import { Card, Col, Row } from "antd";
 import { HardHat, Pickaxe, Store, Truck } from "lucide-react";
@@ -209,7 +210,7 @@ const DashbordInfo = () => {
 
         <Col xs={24} sm={12} md={8}>
           <Card style={glassStyle} hoverable>
-            <HardHat
+            <WarningOutlined
               style={{
                 fontSize: "32px",
                 marginBottom: "15px",
