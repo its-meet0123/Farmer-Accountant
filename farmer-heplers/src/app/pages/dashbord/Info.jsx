@@ -19,7 +19,7 @@ const DashbordInfo = () => {
       <Row
         gutter={[24, 24]}
         justify="center"
-        style={{ margin: "0 0.2rem 0 0.2rem", gap: 5 }}>
+        style={{ margin: "0 0.2rem 0 0.2rem", gap: 2 }}>
         <Col xs={24} sm={12} md={8}>
           <Card style={glassStyle} hoverable>
             <Store
@@ -36,15 +36,21 @@ const DashbordInfo = () => {
               </li>
               <li>
                 Apna Bahi-Khata chalu krne ke liye{" "}
-                <Link to="/home">Traders</Link> per jaaye or Add Industry button
-                per click krne per ik form open hoga useme Arhatiya ki jaankari
-                fill kre.
+                <Link to="/home" style={{ fontSize: "16px" }}>
+                  Traders
+                </Link>{" "}
+                per jaaye or Add Industry button per click krne per ik form open
+                hoga useme Arhatiya ki jaankari fill kre.
               </li>
               <li>
-                Form fill krne ke baad <Link to="/view">Vendors</Link> per jaaye
-                vaha aapko apne Arhatiya ki Shope Number waali list mil jaaye gi
-                jiske Action columns mai <FileAddOutlined /> button per click
-                kre ik or form opne hoga jis se apna lenn denn chaalu kre.
+                Form fill krne ke baad{" "}
+                <Link to="/view">
+                  <b>Vendors</b>
+                </Link>{" "}
+                per jaaye vaha aapko apne Arhatiya ki Shope Number waali list
+                mil jaaye gi jiske Action columns mai{" "}
+                <FileAddOutlined size={32} /> button per click kre ik or form
+                opne hoga jis se apna lenn denn chaalu kre.
               </li>
               <li>
                 Es form ke ander Rate/drr ya byaj dar 2 rupiya secda (2%) ke
@@ -76,15 +82,17 @@ const DashbordInfo = () => {
               </li>
               <li>
                 Bantaidar ka len denn ke liye{" "}
-                <Link to="/worker">Permanent Worker</Link> per click kre or Add
-                Worker button per click krne per ik form open hoga jisme Worker
-                ki jaankari add kre.
+                <Link to="/worker" style={{ fontSize: "16px" }}>
+                  Permanent Worker
+                </Link>{" "}
+                per click kre or Add Worker button per click krne per ik form
+                open hoga jisme Worker ki jaankari add kre.
               </li>
               <li>
                 uske baad aapke paas worker ki list aa jaaye gi jisme action
-                columns mai <FileAddOutlined /> button per click krne ke baad
-                aapke pass len den add krne wala form open hoga. jiske uper
-                guidline di gyi hai len den kaise add krnaa hai.
+                columns mai <FileAddOutlined size={32} /> button per click krne
+                ke baad aapke pass len den add krne wala form open hoga. jiske
+                uper guidline di gyi hai len den kaise add krnaa hai.
               </li>
               <li>
                 Ager advance payment di jaati hai byaj per interest rate fild
@@ -112,15 +120,18 @@ const DashbordInfo = () => {
               </li>
               <li>
                 Dehadi Mazdoor add krne ke liye{" "}
-                <Link to="/other/labor">Casual Labor</Link> per click krne per
-                aap labor nav mai jaaye ge yaha aapko <i>Add Labor</i> button
-                per click krne per ik form open hoga.{" "}
+                <Link to="/other/labor" style={{ fontSize: "16px" }}>
+                  Casual Labor
+                </Link>{" "}
+                per click krne per aap labor nav mai jaaye ge yaha aapko{" "}
+                <i>Add Labor</i> button per click krne per ik form open
+                hoga.{" "}
               </li>
               <li>
                 jisme aapko labor ki details daalni hogi or submit krne per
                 table data mile ga jisme apke labor ki info hoogi uske action
-                columns mai <FileAddOutlined /> button ko click krne per aapke
-                paas len den form aa jaaye ga.
+                columns mai <FileAddOutlined size={32} /> button ko click krne
+                per aapke paas len den form aa jaaye ga.
               </li>
             </ul>
           </Card>
@@ -146,16 +157,18 @@ const DashbordInfo = () => {
               <li>Compains or tuddi repars ka len den rkhne ke liye.</li>
               <li>
                 Len den shuru krne ke liye{" "}
-                <Link to="/other/mechanized">Mechanized Hiring</Link> per click
-                krne per aap mechanized nav mai jaaye ge yaha aapko{" "}
+                <Link to="/other/mechanized" style={{ fontSize: "16px" }}>
+                  Mechanized Hiring
+                </Link>{" "}
+                per click krne per aap mechanized nav mai jaaye ge yaha aapko{" "}
                 <i>New Harvest Entry</i> button per click krne per ik form open
                 hoga.{" "}
               </li>
               <li>
                 jisme aapko Oprator ja malik ki details daalni hogi or submit
                 krne per table data mile ga jisme apke oprator ki info hoogi
-                uske action columns mai <FileAddOutlined /> button ko click krne
-                per aapke paas len den form aa jaaye ga.
+                uske action columns mai <FileAddOutlined size={32} /> button ko
+                click krne per aapke paas len den form aa jaaye ga.
               </li>
             </ul>
           </Card>
@@ -186,14 +199,15 @@ const DashbordInfo = () => {
               </li>
               <li>
                 Vendors or Permanent Worker tabs mai aapko tables data ke Action
-                Columns mai ik <EyeOutlined /> button mile gaa jispe click krne
-                ke baad aap apni hr ik len den ka record check kr skte hai or
-                uper diye gye <DownloadOutlined /> button per click krne per aap
-                apna record download kr k rkh skte hai.
+                Columns mai ik <EyeOutlined size={32} /> button mile gaa jispe
+                click krne ke baad aap apni hr ik len den ka record check kr
+                skte hai or uper diye gye <DownloadOutlined size={32} /> button
+                per click krne per aap apna record download kr k rkh skte hai.
               </li>
               <li>
                 Her ik len den ko edit delete kiya ja skta hai edit ke liye{" "}
-                <EditOutlined /> button hr ik table row mai moojud rhta hai.
+                <EditOutlined size={32} /> button hr ik table row mai moojud
+                rhta hai.
               </li>
               <li>
                 Yehe sirf ik hisaab kitaab ki digital dairy hai. jise
