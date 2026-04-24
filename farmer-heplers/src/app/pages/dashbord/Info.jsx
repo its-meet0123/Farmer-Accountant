@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const DashbordInfo = () => {
   return (
-    <div style={{ gap: 2 }}>
+    <div style={{ gap: 5 }}>
       <h3 style={{ color: "#faad14" }}>
         <ArrowRight /> Niche diye gaye vivran ko dhyanpurvak padhein.
       </h3>
