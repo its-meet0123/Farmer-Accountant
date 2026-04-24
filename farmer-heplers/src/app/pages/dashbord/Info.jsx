@@ -12,14 +12,14 @@ import { Link } from "react-router-dom";
 
 const DashbordInfo = () => {
   return (
-    <div style={{ gap: 5 }}>
+    <div>
       <h3 style={{ color: "#faad14" }}>
         <ArrowRight /> Niche diye gaye vivran ko dhyanpurvak padhein.
       </h3>
       <Row
         gutter={[24, 24]}
         justify="center"
-        style={{ margin: "0 0.2rem 0 0.2rem" }}>
+        style={{ margin: "0.5rem 0.2rem 0.5rem 0.2rem" }}>
         <Col xs={24} sm={12} md={8}>
           <Card style={glassStyle} hoverable>
             <Store
@@ -140,7 +140,7 @@ const DashbordInfo = () => {
       <Row
         gutter={[24, 24]}
         justify="center"
-        style={{ margin: "0 0.2rem 0 0.2rem" }}>
+        style={{ margin: "0.5rem 0.2rem 0.5rem 0.2rem" }}>
         <Col xs={24} sm={12} md={8}>
           <Card style={glassStyle} hoverable>
             <Truck
