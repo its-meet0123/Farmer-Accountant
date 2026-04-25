@@ -52,6 +52,7 @@ const Expense = ({ data }) => {
       rowKey="no"
       pagination={false}
       style={{ background: "none" }}
+      rowClassName="transparent-row"
     />
   );
 };
