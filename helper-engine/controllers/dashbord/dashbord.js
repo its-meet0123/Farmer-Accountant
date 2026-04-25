@@ -102,17 +102,18 @@ async function dashBordData(req, res) {
         (sum, entry) => sum + (entry?.diesel?.totalAmount || 0),
         0,
       );
-      return formatCurrency(total + shopeDieselSum);
+
+      return total + shopeDieselSum;
     }, 0);
 
     const getTotalOfSeedsFertilizer = Ind.reduce((total, shopes) => {
       if (!shopes?.shopeAccount) return total;
-      const seedsFertilizerSum = shopes.shopeAccount.reduce(
+      const seedsFertilizerSum = shopes?.shopeAccount.reduce(
         (sum, entry) => sum + (entry?.indBuy?.totalAmount || 0),
         0,
       );
 
-      return formatCurrency(total + seedsFertilizerSum);
+      return total + seedsFertilizerSum;
     }, 0);
 
     const getAllTotalOfPermanentWorkers = workers.reduce((total, worker) => {
@@ -125,7 +126,7 @@ async function dashBordData(req, res) {
         0,
       );
 
-      return formatCurrency(total + workerAccountSum);
+      return total + workerAccountSum;
     }, 0);
 
     const getTotalOfCasualLabor = allCasualLabor.reduce((total, labor) => {
@@ -135,7 +136,7 @@ async function dashBordData(req, res) {
         0,
       );
 
-      return formatCurrency(total + laborSum);
+      return total + laborSum;
     }, 0);
 
     const getTotalOfHarvest = allHarvests.reduce((total, harvest) => {
@@ -146,7 +147,7 @@ async function dashBordData(req, res) {
         0,
       );
 
-      return formatCurrency(total + harvestSum);
+      return total + harvestSum;
     }, 0);
 
     if (
@@ -160,11 +161,11 @@ async function dashBordData(req, res) {
         workers: workersList,
         casualLabors: casualLaborList,
         harvesters: harvestList,
-        totalOfDiesel: getTotalOfDiesel,
-        totalOfSeedsAndFertilizer: getTotalOfSeedsFertilizer,
-        totalOfPermanentWorker: getAllTotalOfPermanentWorkers,
-        totalOfHarvest: getTotalOfHarvest,
-        totalOfCasualLabor: getTotalOfCasualLabor,
+        totalOfDiesel: formatCurrency(getTotalOfDiesel),
+        totalOfSeedsAndFertilizer: formatCurrency(getTotalOfSeedsFertilizer),
+        totalOfPermanentWorker: formatCurrency(getAllTotalOfPermanentWorkers),
+        totalOfHarvest: formatCurrency(getTotalOfHarvest),
+        totalOfCasualLabor: formatCurrency(getTotalOfCasualLabor),
       };
 
       return res.status(200).json({
