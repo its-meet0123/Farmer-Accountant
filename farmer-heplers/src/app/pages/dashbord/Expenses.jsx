@@ -1,31 +1,33 @@
 import { ConfigProvider, Table, theme } from "antd";
+import { useAuth } from "../../auth/AuthContext";
 
 const Expense = ({ data }) => {
+  const { t } = useAuth();
   const formattedTotal = data?.totalExpense || 0;
   const dataSource = [
     {
       no: "1",
-      label: "Faul",
+      label: t("dashboard.cards.table.lt1"),
       value: data?.totalOfDiesel,
     },
     {
       no: "2",
-      label: "Seeds & Fertilizer",
+      label: t("dashboard.cards.table.lt2"),
       value: data?.totalOfSeedsAndFertilizer,
     },
     {
       no: "3",
-      label: "Permanent Worker",
+      label: t("dashboard.cards.table.lt3"),
       value: data?.totalOfPermanentWorker,
     },
     {
       no: "4",
-      label: "Machinery",
+      label: t("dashboard.cards.table.lt4"),
       value: data?.totalOfHarvest,
     },
     {
       no: "5",
-      label: "Casual Labor",
+      label: t("dashboard.cards.table.lt5"),
       value: data?.totalOfCasualLabor,
     },
   ];
@@ -83,7 +85,7 @@ const Expense = ({ data }) => {
                 fontWeight: "bold",
                 fontSize: "18px",
               }}>
-              TOTAL EXPENSES
+              {t("dashboard.cards.table.lt6")}
             </span>
             <span
               style={{

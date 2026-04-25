@@ -747,6 +747,18 @@
       "tfdh1": "FARMER",
       "tfdh2": "ACCOUNTANT",
       "stfdh": "Cultivating growth through organized farm accounting."
+    },
+    "cards": {
+      "card1title": "Expense",
+      "card2title": "Turnover Graph",
+      "table": {
+        "lt1": "Faul",
+        "lt2": "Seeds & Fertilizer",
+        "lt3": "Permanent Worker",
+        "lt4": "Machinery",
+        "lt5": "Casual Labor",
+        "lt6": "TOTAL EXPENSE"
+      }
     }
   },
   "infoDashboard": {

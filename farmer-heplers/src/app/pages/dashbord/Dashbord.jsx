@@ -172,7 +172,11 @@ const DashBord = () => {
           {!isLoading && (
             <>
               <Card
-                title={<span style={{ color: "#4da3ff" }}>Expense</span>}
+                title={
+                  <span style={{ color: "#4da3ff" }}>
+                    {t("dashboard.cards.card1title")}
+                  </span>
+                }
                 style={{
                   width: "100%",
                   backgroundColor: "#161d2f",
@@ -183,7 +187,11 @@ const DashBord = () => {
                 <Expense data={dashbordData} />
               </Card>
               <Card
-                title={<span style={{ color: "#4da3ff" }}>Turnover Graph</span>}
+                title={
+                  <span style={{ color: "#4da3ff" }}>
+                    {t("dashboard.cards.card2title")}
+                  </span>
+                }
                 extra={
                   overAllTotal > 0 ? (
                     <span
