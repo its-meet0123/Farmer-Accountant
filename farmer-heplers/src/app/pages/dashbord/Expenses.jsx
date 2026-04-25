@@ -7,27 +7,27 @@ const Expense = ({ data }) => {
   const dataSource = [
     {
       no: "1",
-      label: t("dashboard.cards.table.lt1"),
+      label: t("dashbord.cards.table.lt1"),
       value: data?.totalOfDiesel,
     },
     {
       no: "2",
-      label: t("dashboard.cards.table.lt2"),
+      label: t("dashbord.cards.table.lt2"),
       value: data?.totalOfSeedsAndFertilizer,
     },
     {
       no: "3",
-      label: t("dashboard.cards.table.lt3"),
+      label: t("dashbord.cards.table.lt3"),
       value: data?.totalOfPermanentWorker,
     },
     {
       no: "4",
-      label: t("dashboard.cards.table.lt4"),
+      label: t("dashbord.cards.table.lt4"),
       value: data?.totalOfHarvest,
     },
     {
       no: "5",
-      label: t("dashboard.cards.table.lt5"),
+      label: t("dashbord.cards.table.lt5"),
       value: data?.totalOfCasualLabor,
     },
   ];
@@ -85,7 +85,7 @@ const Expense = ({ data }) => {
                 fontWeight: "bold",
                 fontSize: "18px",
               }}>
-              {t("dashboard.cards.table.lt6")}
+              {t("dashbord.cards.table.lt6")}
             </span>
             <span
               style={{

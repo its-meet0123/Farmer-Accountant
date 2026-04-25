@@ -174,7 +174,7 @@ const DashBord = () => {
               <Card
                 title={
                   <span style={{ color: "#4da3ff" }}>
-                    {t("dashboard.cards.card1title")}
+                    {t("dashbord.cards.card1title")}
                   </span>
                 }
                 style={{
@@ -189,7 +189,7 @@ const DashBord = () => {
               <Card
                 title={
                   <span style={{ color: "#4da3ff" }}>
-                    {t("dashboard.cards.card2title")}
+                    {t("dashbord.cards.card2title")}
                   </span>
                 }
                 extra={
