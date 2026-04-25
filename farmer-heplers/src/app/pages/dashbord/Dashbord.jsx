@@ -32,6 +32,7 @@ const DashBord = () => {
   const getDashbordDataFromApi = async () => {
     const res = await getDashbordData();
     const data = await res.data;
+    console.log("dashboard data in new format", data);
     if (data.status == "Success") {
       setDeshbordData(data.data);
       message.success(t(data.Code));

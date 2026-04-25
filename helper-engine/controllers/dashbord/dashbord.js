@@ -6,6 +6,7 @@ const { calculateAccountDuration } = require("./dashbordInterestCalc");
 const {
   overAllTotalOfAllShopes,
   overAllTotalOfAllWorkers,
+  calculateAllDieselExpense,
 } = require("./calculation");
 
 // Dashboard controller functions using map method
@@ -95,6 +96,59 @@ async function dashBordData(req, res) {
       })
       .filter((item) => item !== null);
 
+    const getTotalOfDiesel = Ind.reduce((total, shopes) => {
+      if (!shopes?.shopeAccount) return total;
+      const shopeDieselSum = shopes.shopeAccount.reduce(
+        (sum, entry) => sum + (entry?.diesel?.totalAmount || 0),
+        0,
+      );
+      return total + shopeDieselSum;
+    }, 0);
+
+    const getTotalOfSeedsFertilizer = Ind.reduce((total, shopes) => {
+      if (!shopes?.shopeAccount) return total;
+      const seedsFertilizerSum = shopes.shopeAccount.reduce(
+        (sum, entry) => sum + (entry?.indBuy?.totalAmount || 0),
+        0,
+      );
+
+      return total + seedsFertilizerSum;
+    }, 0);
+
+    const getAllTotalOfPermanentWorkers = workers.reduce((total, worker) => {
+      if (!worker?.account) return total;
+      const workerAccountSum = worker.account.reduce(
+        (sum, transaction) =>
+          sum +
+          ((transaction?.take?.totalAmount || 0) -
+            (transaction?.give?.totalAmount || 0)),
+        0,
+      );
+
+      return total + workerAccountSum;
+    }, 0);
+
+    const getTotalOfCasualLabor = allCasualLabor.reduce((total, labor) => {
+      if (!labor?.transactions) return total;
+      const laborSum = labor.transactions.reduce(
+        (sum, transaction) => sum + (transaction?.total || 0),
+        0,
+      );
+
+      return total + laborSum;
+    }, 0);
+
+    const getTotalOfHarvest = allHarvests.reduce((total, harvest) => {
+      if (!harvest?.transactions) return total;
+
+      const harvestSum = harvest.transactions.reduce(
+        (sum, transaction) => sum + (transaction?.total || 0),
+        0,
+      );
+
+      return total + harvestSum;
+    }, 0);
+
     if (
       allShopes.length > 0 ||
       workersList.length > 0 ||
@@ -106,6 +160,11 @@ async function dashBordData(req, res) {
         workers: workersList,
         casualLabors: casualLaborList,
         harvesters: harvestList,
+        totalOfDiesel: getTotalOfDiesel,
+        totalOfSeedsAndFertilizer: getTotalOfSeedsFertilizer,
+        totalOfPermanentWorker: getAllTotalOfPermanentWorkers,
+        totalOfHarvest: getTotalOfHarvest,
+        totalOfCasualLabor: getTotalOfCasualLabor,
       };
 
       return res.status(200).json({
