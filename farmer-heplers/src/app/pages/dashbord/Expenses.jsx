@@ -10,7 +10,7 @@ const Expense = ({ data }) => {
     {
       no: "2",
       label: "Seeds & Fertilizer",
-      value: data?.totalOfSeddsAndFertilizer,
+      value: data?.totalOfSeedsAndFertilizer,
     },
     {
       no: "3",
@@ -33,13 +33,27 @@ const Expense = ({ data }) => {
     {
       dataIndex: "label",
       key: "label",
+      render: (text) => (
+        <span style={{ color: "#4da3ff", fontWeight: 500 }}>{text}</span>
+      ),
     },
     {
       dataIndex: "value",
       key: "value",
+      render: (value) => (
+        <span style={{ color: "#ffffff", fontWeight: "bold" }}>{value}</span>
+      ),
     },
   ];
-  return <Table dataSource={dataSource} columns={columns} rowKey="no" />;
+  return (
+    <Table
+      dataSource={dataSource}
+      columns={columns}
+      rowKey="no"
+      pagination={false}
+      style={{ background: "none" }}
+    />
+  );
 };
 
 export default Expense;

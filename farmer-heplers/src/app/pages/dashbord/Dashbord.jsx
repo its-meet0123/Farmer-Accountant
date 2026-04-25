@@ -172,6 +172,25 @@ const DashBord = () => {
           {!isLoading && (
             <>
               <Card
+                title={<span style={{ color: "#4da3ff" }}>Expense</span>}
+                style={{
+                  width: "100%",
+                  height: 600,
+                  backgroundColor: "#161d2f",
+                  marginTop: "20px",
+                  color: "#ffffff",
+                  overflow: "hidden",
+                }}
+                styles={{
+                  body: {
+                    overflowX: "auto",
+                    width: "100%",
+                    height: "calc(600px-57px)",
+                  },
+                }}>
+                <Expense data={dashbordData} />
+              </Card>
+              <Card
                 title={<span style={{ color: "#4da3ff" }}>Turnover Graph</span>}
                 extra={
                   overAllTotal > 0 ? (
@@ -219,26 +238,6 @@ const DashBord = () => {
                   },
                 }}>
                 <TurnoverGraph turnover={monthlyTotal} />
-              </Card>
-
-              <Card
-                title={<span style={{ color: "#4da3ff" }}>Expense</span>}
-                style={{
-                  width: "100%",
-                  height: 600,
-                  backgroundColor: "#161d2f",
-                  marginTop: "20px",
-                  color: "#ffffff",
-                  overflow: "hidden",
-                }}
-                styles={{
-                  body: {
-                    overflowX: "auto",
-                    width: "100%",
-                    height: "calc(600px-57px)",
-                  },
-                }}>
-                <Expense data={dashbordData} />
               </Card>
             </>
           )}
