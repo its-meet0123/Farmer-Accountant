@@ -749,6 +749,51 @@
       "stfdh": "Cultivating growth through organized farm accounting."
     }
   },
+  "infoDashboard": {
+    "title": "Please read the following descriptions carefully.",
+    "arhatiya": {
+      "title": "Arhatiya (Bahi-Khata)",
+      "desc1": "An easy way to maintain Arhatiya accounts with interest calculation.",
+      "desc2": "To start your Bahi-Khata, go to 'Traders' and click the 'Add Industry' button to fill in Arhatiya details.",
+      "desc3": "After filling the form, go to 'Vendors' to see your shop list. Click the 'FileAdd' icon in the action column to start transactions.",
+      "interest_note": "In the interest rate field: Enter '24' for 2% interest, '18' for 1.5%, and '12' for 1%.",
+      "flexibility": "Form fields are designed for different transaction types; fill them according to your needs."
+    },
+    "permanent_worker": {
+      "title": "Permanent Worker/Bantaidar",
+      "desc1": "For managing records of Bantaidars (workers on 1/4th or 1/5th share).",
+      "desc2": "Go to 'Permanent Worker', click 'Add Worker', and fill in their details.",
+      "desc3": "Click the 'FileAdd' icon in the worker list to open the transaction form. Follow the guidelines provided on the form.",
+      "advance_note": "If advance payment is given with interest, use the same rates as Arhatiya; otherwise, enter '0'."
+    },
+    "casual_labor": {
+      "title": "Casual Labor/Daily Wager",
+      "desc1": "For maintaining accounts of laborers working on an irregular/daily basis.",
+      "desc2": "Go to 'Casual Labor' and click 'Add Labor' to open the registration form.",
+      "desc3": "After submitting, click the 'FileAdd' icon in the action column of the table to add transaction details."
+    },
+    "machinery": {
+      "title": "Mechanized Hiring/Machinery Rent",
+      "desc1": "For managing transactions of Combine harvesters and straw reapers.",
+      "desc2": "Go to 'Mechanized Hiring' and click 'New Harvest Entry' to open the form.",
+      "desc3": "Enter operator or owner details. After submitting, use the 'FileAdd' button in the list to manage accounts."
+    },
+    "info": {
+      "title": "Information",
+      "tabs": "Tabs are available for all transaction types. Use the 'Setting' tab to change language or delete your account.",
+      "dashboard": "All active transactions appear on the Dashboard with category-wise totals and monthly turnover graphs.",
+      "records": "In 'Vendors' and 'Permanent Worker', use the 'Eye' icon to view records and the 'Download' icon to save them.",
+      "edit_delete": "Every transaction can be edited or deleted using the 'Edit' icon in each row.",
+      "digital_dairy": "This is a digital diary (Bahi-Khata) for record-keeping.",
+      "contact": "For any issues or suggestions, contact the developer via WhatsApp or Instagram icons in the footer."
+    },
+    "warning": {
+      "title": "Warning",
+      "delete_account": "Clicking 'Ok' in the settings delete model will permanently erase your account and all data.",
+      "delete_entity": "Deleting a Trader, Worker, or Laborer will delete all related transaction history.",
+      "edit_notice": "For Casual Labor/Harvesters: If you edit a past transaction (e.g., No. 5), you MUST update all subsequent entries (6, 7, etc.) to maintain balance accuracy."
+    }
+  },
   "CL": {
     "FW": {
       "WNF": "Casual worker not found",
