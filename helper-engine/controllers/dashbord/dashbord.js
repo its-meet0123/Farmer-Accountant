@@ -150,6 +150,13 @@ async function dashBordData(req, res) {
       return total + harvestSum;
     }, 0);
 
+    const totalExpense =
+      getTotalOfDiesel +
+      getTotalOfSeedsFertilizer +
+      getAllTotalOfPermanentWorkers +
+      getTotalOfCasualLabor +
+      getTotalOfHarvest;
+
     if (
       allShopes.length > 0 ||
       workersList.length > 0 ||
@@ -170,6 +177,7 @@ async function dashBordData(req, res) {
         ),
         totalOfHarvest: formatCurrency(getTotalOfHarvest || 0),
         totalOfCasualLabor: formatCurrency(getTotalOfCasualLabor || 0),
+        totalExpense: formatCurrency(totalExpense || 0),
       };
 
       return res.status(200).json({

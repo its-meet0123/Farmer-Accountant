@@ -1,6 +1,7 @@
 import { ConfigProvider, Table, theme } from "antd";
 
 const Expense = ({ data }) => {
+  const formattedTotal = data?.totalExpense || 0;
   const dataSource = [
     {
       no: "1",
@@ -67,6 +68,33 @@ const Expense = ({ data }) => {
         pagination={false}
         style={{ background: "none" }}
         rowClassName="transparent-row"
+        footer={() => (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              borderTop: "2px solid #4da3ff", // Image jaisi line
+              paddingTop: "10px",
+              marginTop: "5px",
+            }}>
+            <span
+              style={{
+                color: "#4da3ff",
+                fontWeight: "bold",
+                fontSize: "18px",
+              }}>
+              TOTAL EXPENSES
+            </span>
+            <span
+              style={{
+                color: "#ffffff",
+                fontWeight: "bold",
+                fontSize: "18px",
+              }}>
+              {formattedTotal}
+            </span>
+          </div>
+        )}
       />
     </ConfigProvider>
   );
