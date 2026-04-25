@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { ConfigProvider, Table, theme } from "antd";
 
 const Expense = ({ data }) => {
   const dataSource = [
@@ -46,14 +46,29 @@ const Expense = ({ data }) => {
     },
   ];
   return (
-    <Table
-      dataSource={dataSource}
-      columns={columns}
-      rowKey="no"
-      pagination={false}
-      style={{ background: "none" }}
-      rowClassName="transparent-row"
-    />
+    <ConfigProvider
+      theme={{
+        components: {
+          Table: {
+            headerBg: "#161d2f",
+            colorBgContainer: "#161d2f",
+            rowHoverBg: "#1f1f1f",
+
+            headerColor: "#ffffff",
+            colorText: "#ffffff",
+            borderColor: "#303030",
+          },
+        },
+      }}>
+      <Table
+        dataSource={dataSource}
+        columns={columns}
+        rowKey="no"
+        pagination={false}
+        style={{ background: "none" }}
+        rowClassName="transparent-row"
+      />
+    </ConfigProvider>
   );
 };
 
