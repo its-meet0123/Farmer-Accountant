@@ -161,11 +161,15 @@ async function dashBordData(req, res) {
         workers: workersList,
         casualLabors: casualLaborList,
         harvesters: harvestList,
-        totalOfDiesel: formatCurrency(getTotalOfDiesel),
-        totalOfSeedsAndFertilizer: formatCurrency(getTotalOfSeedsFertilizer),
-        totalOfPermanentWorker: formatCurrency(getAllTotalOfPermanentWorkers),
-        totalOfHarvest: formatCurrency(getTotalOfHarvest),
-        totalOfCasualLabor: formatCurrency(getTotalOfCasualLabor),
+        totalOfDiesel: formatCurrency(getTotalOfDiesel || 0),
+        totalOfSeedsAndFertilizer: formatCurrency(
+          getTotalOfSeedsFertilizer || 0,
+        ),
+        totalOfPermanentWorker: formatCurrency(
+          getAllTotalOfPermanentWorkers || 0,
+        ),
+        totalOfHarvest: formatCurrency(getTotalOfHarvest || 0),
+        totalOfCasualLabor: formatCurrency(getTotalOfCasualLabor || 0),
       };
 
       return res.status(200).json({
