@@ -102,7 +102,7 @@ async function dashBordData(req, res) {
         (sum, entry) => sum + (entry?.diesel?.totalAmount || 0),
         0,
       );
-      return total + shopeDieselSum;
+      return formatCurrency(total + shopeDieselSum);
     }, 0);
 
     const getTotalOfSeedsFertilizer = Ind.reduce((total, shopes) => {
@@ -112,7 +112,7 @@ async function dashBordData(req, res) {
         0,
       );
 
-      return total + seedsFertilizerSum;
+      return formatCurrency(total + seedsFertilizerSum);
     }, 0);
 
     const getAllTotalOfPermanentWorkers = workers.reduce((total, worker) => {
@@ -125,7 +125,7 @@ async function dashBordData(req, res) {
         0,
       );
 
-      return total + workerAccountSum;
+      return formatCurrency(total + workerAccountSum);
     }, 0);
 
     const getTotalOfCasualLabor = allCasualLabor.reduce((total, labor) => {
@@ -135,7 +135,7 @@ async function dashBordData(req, res) {
         0,
       );
 
-      return total + laborSum;
+      return formatCurrency(total + laborSum);
     }, 0);
 
     const getTotalOfHarvest = allHarvests.reduce((total, harvest) => {
@@ -146,7 +146,7 @@ async function dashBordData(req, res) {
         0,
       );
 
-      return total + harvestSum;
+      return formatCurrency(total + harvestSum);
     }, 0);
 
     if (
