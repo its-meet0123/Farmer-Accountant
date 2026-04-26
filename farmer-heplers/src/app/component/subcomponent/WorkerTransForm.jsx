@@ -65,22 +65,6 @@ const WorkerTransForm = ({
           workerId: workerId,
           accountId: transactionId,
         };
-        // const transactionBody = {
-        //   date: new Date(resetFields.date),
-        //   rate: resetFields.interestRate,
-        //   give: {
-        //     crop: cropG || [],
-        //     amount: resetFields.amount,
-        //     amountType: resetFields.amountType,
-        //     brief: resetFields.brief,
-        //   },
-        //   take: {
-        //     crop: cropT || [],
-        //     payment: resetFields.payment,
-        //     paymentType: resetFields.paymentType,
-        //   },
-        // };
-        // console.log(transactionBody);
         const res = await updateWorkerTransactionById(ids, resetFields);
         if (res.status === 200) {
           setFetchData(res.data);

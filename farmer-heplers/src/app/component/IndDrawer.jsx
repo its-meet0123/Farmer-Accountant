@@ -150,7 +150,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               <Form.Item
                 label={t("indDrawer.drawerForm.dieselInput.text4")}
                 name="handOver">
-                <InputNumber
+                <Input
                   placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
                 />
               </Form.Item>
@@ -216,7 +216,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               <Form.Item
                 label={t("indDrawer.drawerForm.dieselInput.text4")}
                 name="dHandOver">
-                <InputNumber
+                <Input
                   placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
                 />
               </Form.Item>
@@ -249,7 +249,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               <Form.Item
                 label={t("indDrawer.drawerForm.dieselInput.text4")}
                 name="sHandOver">
-                <InputNumber
+                <Input
                   placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
                 />
               </Form.Item>
@@ -450,7 +450,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               <Form.Item
                 label={t("indDrawer.drawerForm.dieselInput.text4")}
                 name="dHandOver">
-                <InputNumber
+                <Input
                   placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
                 />
               </Form.Item>
@@ -483,7 +483,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
               <Form.Item
                 label={t("indDrawer.drawerForm.dieselInput.text4")}
                 name="sHandOver">
-                <InputNumber
+                <Input
                   placeholder={t("indDrawer.drawerForm.dieselInput.pt4")}
                 />
               </Form.Item>
