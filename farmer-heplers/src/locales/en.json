@@ -396,7 +396,7 @@
         "pt": "Enter interest rate",
         "hint": "For 1% Rate (₹1 Saikda): Enter 12, For ​1.5% Rate (₹1.50 Saikda): Enter 18 For ​2% Rate (₹2 Saikda): Enter 24"
       },
-      "ttt2": "Cash/Account amount",
+      "ttt2": "Advance amount (Cash/Account)",
       "loanInput": {
         "text1": "Loan Amount",
         "text2": "Type",

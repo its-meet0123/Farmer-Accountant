@@ -75,7 +75,7 @@ async function autoInterestCalculationForShopes(req, res, next) {
         handOver: body?.bHandOver || "",
       },
       indSell: {
-        crop: body?.crops || [],
+        crop: body?.crops || body?.crop || [],
         billAmount: sellBillAmount,
         ...interestOfSellBillAmount,
         bill: body?.sBill || "",
