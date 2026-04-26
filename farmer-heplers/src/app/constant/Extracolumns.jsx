@@ -41,7 +41,7 @@ const showModal = ({ crop, title, t }) => {
             />
             <Input
               value={formatCurrency(i?.rate || 0)}
-              type="number"
+              type="text"
               title={t(
                 "workerPage.tableColumns.extandTableColumns.takes.Crops.cropRateText",
               )}
@@ -63,7 +63,7 @@ const showModal = ({ crop, title, t }) => {
             />
             <Input
               value={formatCurrency(i?.amount || i?.total || 0)}
-              type="number"
+              type="text"
               title={t(
                 "workerPage.tableColumns.extandTableColumns.takes.Crops.cropTotalText",
               )}
