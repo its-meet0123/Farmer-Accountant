@@ -27,7 +27,7 @@ const showModal = ({ crop, title, t }) => {
     content: (
       <>
         {crop?.map((i) => (
-          <Flex key={i.id} horizontal>
+          <Flex key={i._id} horizontal>
             <Input
               value={i?.name}
               type="string"
@@ -40,7 +40,7 @@ const showModal = ({ crop, title, t }) => {
               readOnly
             />
             <Input
-              value={i?.rate}
+              value={formatCurrency(i?.rate || 0)}
               type="number"
               title={t(
                 "workerPage.tableColumns.extandTableColumns.takes.Crops.cropRateText",
@@ -62,7 +62,7 @@ const showModal = ({ crop, title, t }) => {
               readOnly
             />
             <Input
-              value={i?.amount || i?.total}
+              value={formatCurrency(i?.amount || i?.total || 0)}
               type="number"
               title={t(
                 "workerPage.tableColumns.extandTableColumns.takes.Crops.cropTotalText",
@@ -281,7 +281,7 @@ const getColumnsForViewPage = (t) => {
           key: "crop",
           width: 100,
           render: (_, record) => {
-            const crop = record.indSell.crop;
+            const crop = record?.indSell?.crop;
             const title = `${t("ViewPage.tableColumns.extandTableColumns.sellItem.Crops.buttonTitle")}`;
             return (
               record.indSell.billAmount > 0 && (

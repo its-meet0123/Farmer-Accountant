@@ -49,16 +49,20 @@ const ViewPage = () => {
       rate: record.rate,
       amount: record?.loan?.amount,
       amountType: record?.loan?.amountType,
+      handOver: record?.loan?.handOver,
       bBillAmount: record?.indBuy?.billAmount,
       bBill: record?.indBuy?.bill,
       bBrief: record?.indBuy?.brief,
+      bHandOver: record?.indBuy?.handOver,
       sBillAmount: record?.indSell?.billAmount,
       sBill: record?.indSell?.bill,
       sBrief: record?.indSell?.brief,
+      sHandOver: record?.indSell?.handOver,
       crop: record?.indSell?.crop,
       dBillAmount: record?.diesel?.billAmount,
       dQty: record?.diesel?.qty,
       dRate: record?.diesel?.rate,
+      dHandOver: record?.diesel?.handOver,
     });
 
     const result = allInd
