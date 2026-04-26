@@ -254,7 +254,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                 />
               </Form.Item>
               <Form.List name="crop">
-                {(fields) => (
+                {(fields, { add, remove }) => (
                   <>
                     {fields.map(({ key, name }) => (
                       <Row gutter={24} key={key}>
@@ -294,8 +294,15 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
                             <InputNumber placeholder="Total of crop" />
                           </Form.Item>
                         </Col>
+                        <Col>
+                          <MinusCircleOutlined
+                            onClick={() => remove(name)}
+                            style={{ margin: "1rem" }}
+                          />
+                        </Col>
                       </Row>
                     ))}
+                    <PlusCircleOutlined onClick={() => add()} />
                   </>
                 )}
               </Form.List>
@@ -309,6 +316,7 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
             </Flex>
           </Form>
         )}
+
         {open === "add" && (
           <Form
             form={addForm}
