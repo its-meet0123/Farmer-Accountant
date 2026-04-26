@@ -1,4 +1,4 @@
-import { ConfigProvider, Table, theme } from "antd";
+import { ConfigProvider, Table } from "antd";
 import { useAuth } from "../../auth/AuthContext";
 
 const Expense = ({ data }) => {

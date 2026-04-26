@@ -6,7 +6,6 @@ const { calculateAccountDuration } = require("./dashbordInterestCalc");
 const {
   overAllTotalOfAllShopes,
   overAllTotalOfAllWorkers,
-  calculateAllDieselExpense,
 } = require("./calculation");
 
 // Dashboard controller functions using map method
@@ -23,10 +22,12 @@ async function dashBordData(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const Ind = await Industries.find({ userId: currentUserId });
-    const workers = await WorkerData.find({ userId: currentUserId });
-    const allCasualLabor = await FieldWorker.find({ userId: currentUserId });
-    const allHarvests = await Harvest.find({ userId: currentUserId });
+    const [Ind, workers, allCasualLabor, allHarvests] = await Promise.all([
+      Industries.find({ userId: currentUserId }),
+      WorkerData.find({ userId: currentUserId }),
+      FieldWorker.find({ userId: currentUserId }),
+      Harvest.find({ userId: currentUserId }),
+    ]);
 
     const allShopes = Ind.map((shopes) => {
       if (!shopes?.shopeAccount) return null;
