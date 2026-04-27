@@ -377,7 +377,9 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
       y += pageHeightPx;
     }
 
-    pdf.save(`Table_View_of_${worker?.workerName?.nickName}.pdf`);
+    window.open(pdf.output("bloburl"), "_blank");
+
+    //pdf.save(`Table_View_of_${worker?.workerName?.nickName}.pdf`);
   };
 
   // const downloadPDF = () => {
