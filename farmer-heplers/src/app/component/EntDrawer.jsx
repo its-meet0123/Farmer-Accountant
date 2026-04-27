@@ -89,15 +89,16 @@ const EntDrawer = ({
         };
         console.log(newEntData);
         const entRes = await postEntData(newEntData);
-        const shopeDataArray = allValues.aShopes.map((shope) => {
-          const shopeDataObj = {
-            userId: user.userId,
-            nameInd: allValues.aNameInd,
-            shopeNumber: shope.shopeNumber,
-            shopeAccount: [],
-          };
-          return shopeDataObj;
-        });
+        const shopeDataArray =
+          allValues.aShopes.map((shope) => {
+            const shopeDataObj = {
+              userId: user.userId,
+              nameInd: allValues.aNameInd,
+              shopeNumber: shope.shopeNumber,
+              shopeAccount: [],
+            };
+            return shopeDataObj;
+          }) || [];
         const indRes = await postIntShopeInitailData(shopeDataArray);
         if (entRes.status === 201 && indRes.status === 201) {
           const text = `${t("entDrawer.submitFunction.successMessageforCreate")}`;
