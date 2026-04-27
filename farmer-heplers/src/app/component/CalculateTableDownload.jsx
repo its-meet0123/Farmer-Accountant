@@ -2,6 +2,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
+import autoTable from "jspdf-autotable";
 
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
@@ -330,39 +331,53 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
   const handleCancel = () => {
     setModelOpen(false);
   };
+  // const downloadPDF = () => {
+  //   const input = document.getElementById("hidden-table");
+
+  //   html2canvas(input, { scale: 2 }).then((canvas) => {
+  //     const imgData = canvas.toDataURL("image/png");
+
+  //     const pdf = new jsPDF("p", "mm", "a4");
+
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+  //     const pdfHeight = pdf.internal.pageSize.getHeight();
+
+  //     const imgWidth = pdfWidth;
+  //     const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+  //     let heightLeft = imgHeight;
+  //     let position = 0;
+
+  //     // First page
+  //     pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+  //     heightLeft -= pdfHeight;
+
+  //     // Add extra pages
+  //     while (heightLeft > 0) {
+  //       position = heightLeft - imgHeight;
+  //       pdf.addPage();
+  //       pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+  //       heightLeft -= pdfHeight;
+  //     }
+
+  //     pdf.save(
+  //       `Table_View_of_${worker?.workerDetail?.workerName?.nickName}.pdf`,
+  //     );
+  //   });
+  // };
+
   const downloadPDF = () => {
-    const input = document.getElementById("hidden-table");
+    const pdf = new jsPDF();
 
-    html2canvas(input, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-
-      const pdf = new jsPDF("p", "mm", "a4");
-
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-
-      const imgWidth = pdfWidth;
-      const imgHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      let heightLeft = imgHeight;
-      let position = 0;
-
-      // First page
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pdfHeight;
-
-      // Add extra pages
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-        heightLeft -= pdfHeight;
-      }
-
-      pdf.save(
-        `Table_View_of_${worker?.workerDetail?.workerName?.nickName}.pdf`,
-      );
+    autoTable(pdf, {
+      html: "#hidden-table", // directly table id
+      startY: 10,
+      theme: "grid",
+      headStyles: { fillColor: [22, 160, 133] },
+      styles: { fontSize: 8 },
     });
+
+    pdf.save(`Table_View_of_${worker?.workerName?.nickName}.pdf`);
   };
 
   useEffect(() => {
@@ -393,6 +408,7 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                   Date {sortOrder === "desc" ? "🔼" : "🔽"}
                 </th>
                 <th style={{ padding: "5px" }}>Amount</th>
+                <th style={{ padding: "5px" }}>Brief</th>
                 <th style={{ padding: "5px" }}>Days</th>
                 <th style={{ padding: "5px" }}>Months</th>
                 <th style={{ padding: "5px" }}>Interest</th>
@@ -410,6 +426,9 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formatCurrency(account.give.amount)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.give.amountType}
                     </td>
                     <td style={{ padding: "5px" }}>{account.give.days}</td>
                     <td style={{ padding: "5px" }}>{account.give.months}</td>
@@ -433,6 +452,9 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formatCurrency(account.take.payment)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.take.paymentType}
                     </td>
                     <td style={{ padding: "5px" }}>{account.take.days}</td>
                     <td style={{ padding: "5px" }}>{account.take.months}</td>
