@@ -98,6 +98,7 @@ const UserActionModel = ({ openType, setOpenType, goToSingUp, t }) => {
         message.warning(t(res.data.code));
         setOpenType(null);
         goToSingUp();
+        window.location.href = "https://farmer-accoutant.onrender.com/signup";
       } else {
         message.error(t("userIdActionModal.submitFunction.duem"));
       }
@@ -214,6 +215,7 @@ const UserActionModel = ({ openType, setOpenType, goToSingUp, t }) => {
             </Form.Item>
           </Form>
         )}
+
         {openType === "delete" && (
           <Form
             name="basic"

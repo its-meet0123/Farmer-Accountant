@@ -5,7 +5,7 @@ import { useState } from "react";
 import UserActionModel from "../../component/UserIdActionModel";
 
 const Setting = () => {
-  const { logout, authState, t } = useAuth();
+  const { logout, authState, t, goToSignUp } = useAuth();
   const [openType, setOpenType] = useState(null);
 
   const items = [
@@ -49,6 +49,7 @@ const Setting = () => {
         setOpenType={setOpenType}
         user={authState.user}
         logout={logout}
+        goToSignUp={goToSignUp}
         t={t}
       />
     </>
