@@ -311,6 +311,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                 <td style={{ padding: "5px" }}>{formatCurrency(amount)}</td>
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}></td>
+                <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}>{formatCurrency(interest)}</td>
                 <td
                   style={{ padding: "5px", color: "#4da3ff", fontWeight: 600 }}>
@@ -557,6 +558,7 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                 <td style={{ padding: "5px" }}>Total</td>
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}>{formatCurrency(amount)}</td>
+                <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}>{formatCurrency(amountTex)}</td>
                 <td style={{ padding: "5px" }}>{formatCurrency(interest)}</td>
