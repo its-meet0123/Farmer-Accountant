@@ -96,12 +96,8 @@ const UserActionModel = ({ openType, setOpenType, goToSingUp, logout, t }) => {
       const data = await res.data;
       if (data.status === "success") {
         message.warning(t(res.data.code));
-        logout();
-        goToSingUp();
         setOpenType(null);
         window.location.replace("https://farmer-accoutant.onrender.com/signup");
-      } else {
-        message.error(t("userIdActionModal.submitFunction.duem"));
       }
     } catch (err) {
       console.log(err.message);
