@@ -104,20 +104,72 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const downloadPDF = () => {
+
+  const downloadPDF = async () => {
     const input = document.getElementById("hidden-pdf-table");
 
-    html2canvas(input, { scale: 2 }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
+    const canvas = await html2canvas(input, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
 
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    const pdf = new jsPDF("p", "mm", "a4");
 
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Table_View_of ${shope.shopeNumber}`);
-    });
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+    const imgWidth = pdfWidth;
+    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    const pageHeightPx = (canvas.width / pdfWidth) * pdfHeight;
+
+    let y = 0;
+
+    while (y < canvas.height) {
+      const pageCanvas = document.createElement("canvas");
+      const context = pageCanvas.getContext("2d");
+
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = pageHeightPx;
+
+      context.drawImage(
+        canvas,
+        0,
+        y,
+        canvas.width,
+        pageHeightPx,
+        0,
+        0,
+        canvas.width,
+        pageHeightPx,
+      );
+
+      const pageImg = pageCanvas.toDataURL("image/png");
+
+      if (y > 0) pdf.addPage();
+
+      pdf.addImage(pageImg, "PNG", 0, 0, imgWidth, pdfHeight);
+
+      y += pageHeightPx;
+    }
+
+    window.open(pdf.output("bloburl"), "_blank");
+
+    //pdf.save(`Table_View_of_${worker?.workerName?.nickName}.pdf`);
   };
+
+  // const downloadPDF = () => {
+  //   const input = document.getElementById("hidden-pdf-table");
+
+  //   html2canvas(input, { scale: 2 }).then((canvas) => {
+  //     const imgData = canvas.toDataURL("image/png");
+
+  //     const pdf = new jsPDF("p", "mm", "a4");
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+  //     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+  //     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+  //     pdf.save(`Table_View_of ${shope.shopeNumber}`);
+  //   });
+  // };
   return (
     <>
       <Modal
@@ -140,6 +192,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                   Date ({sortOrder === "desc" ? "🔼" : "🔽"})
                 </th>
                 <th style={{ padding: "5px" }}>Amount</th>
+                <th style={{ padding: "5px" }}>Type</th>
                 <th style={{ padding: "5px" }}>Days</th>
                 <th style={{ padding: "5px" }}>Months</th>
                 <th style={{ padding: "5px" }}>Interest</th>
@@ -157,6 +210,9 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                     </td>
                     <td style={{ padding: "5px" }}>
                       {formatCurrency(account.loan.amount)}
+                    </td>
+                    <td style={{ padding: "5px" }}>
+                      {account.loan.amountType}
                     </td>
                     <td style={{ padding: "5px" }}>{account.loan.days}</td>
                     <td style={{ padding: "5px" }}>{account.loan.months}</td>
@@ -181,6 +237,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                     <td style={{ padding: "5px" }}>
                       {formatCurrency(account.indBuy.billAmount)}
                     </td>
+                    <td style={{ padding: "5px" }}>{account.indBuy.brief}</td>
                     <td style={{ padding: "5px" }}>{account.indBuy.days}</td>
                     <td style={{ padding: "5px" }}>{account.indBuy.months}</td>
                     <td style={{ padding: "5px" }}>
@@ -203,6 +260,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                     <td style={{ padding: "5px" }}>
                       {formatCurrency(account.diesel.billAmount)}
                     </td>
+                    <td style={{ padding: "5px" }}>diesel</td>
                     <td style={{ padding: "5px" }}>{account.diesel.days}</td>
                     <td style={{ padding: "5px" }}>{account.diesel.months}</td>
                     <td style={{ padding: "5px" }}>
@@ -225,6 +283,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                     <td style={{ padding: "5px" }}>
                       {formatCurrency(account.indSell.billAmount)}
                     </td>
+                    <td style={{ padding: "5px" }}>{account.indSell?.brief}</td>
                     <td style={{ padding: "5px" }}>{account.indSell.days}</td>
                     <td style={{ padding: "5px" }}>{account.indSell.months}</td>
                     <td style={{ padding: "5px" }}>
