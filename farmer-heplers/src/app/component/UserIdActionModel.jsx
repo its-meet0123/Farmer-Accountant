@@ -7,7 +7,7 @@ import {
   getUserData,
 } from "../service/auth";
 
-const UserActionModel = ({ openType, setOpenType, goToSingUp, t }) => {
+const UserActionModel = ({ openType, setOpenType, goToSingUp, logout, t }) => {
   const [passwordForm] = Form.useForm();
   const [deleteForm] = Form.useForm();
   const [findUser, setfindUser] = useState({});
@@ -96,9 +96,10 @@ const UserActionModel = ({ openType, setOpenType, goToSingUp, t }) => {
       const data = await res.data;
       if (data.status === "success") {
         message.warning(t(res.data.code));
-        setOpenType(null);
+        logout();
         goToSingUp();
-        window.location.href = "https://farmer-accoutant.onrender.com/signup";
+        setOpenType(null);
+        window.location.replace("https://farmer-accoutant.onrender.com/signup");
       } else {
         message.error(t("userIdActionModal.submitFunction.duem"));
       }
