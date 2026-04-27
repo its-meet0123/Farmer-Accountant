@@ -29,6 +29,6 @@ export async function changeUserPassword(passwords) {
 }
 
 export async function deleteUserAccount(user) {
-  return await apiClient.post(`/user/delete-account`, user);
+  return await axiosInstance.post(`/user/delete-account`, user);
   //return await axios.post(`/user/delete-account`, user);
 }
