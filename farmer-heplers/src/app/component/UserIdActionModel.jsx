@@ -97,7 +97,6 @@ const UserActionModel = ({ openType, setOpenType, goToSingUp, logout, t }) => {
       if (data.status === "success") {
         message.warning(t(res.data.code));
         setOpenType(null);
-        goToSingUp();
         window.location.replace("https://farmer-accoutant.onrender.com/signup");
       }
     } catch (err) {
