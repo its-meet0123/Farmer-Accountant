@@ -289,11 +289,9 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
     totalOfReturnPayment += Number(take.totalPayment || 0);
   });
 
-  const amount = Number(totalOfPayment - totalOfAmount).toFixed(2);
+  const amount = totalOfPayment - totalOfAmount;
   const amountTex = totalOfPayment * (1 / 100);
-  const interest = Number(
-    totalOfPaymentInterest - (totalOfAmountInterest + amountTex),
-  ).toFixed(2);
+  const interest = totalOfPaymentInterest - (totalOfAmountInterest + amountTex);
 
   const oAt = totalOfReturnPayment - (totalOfReturnAmount + amountTex);
 
