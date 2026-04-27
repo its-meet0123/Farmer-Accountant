@@ -286,7 +286,7 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
     totalOfReturnAmount += Number(give.totalAmount || 0);
     totalOfPayment += Number(take.payment || 0);
     totalOfPaymentInterest += Number(take.interest || 0);
-    totalOfReturnPayment += Number(take.totalPayment || 0);
+    totalOfReturnPayment += Number(take.totalAmount || 0);
   });
 
   const amount = totalOfPayment - totalOfAmount;
