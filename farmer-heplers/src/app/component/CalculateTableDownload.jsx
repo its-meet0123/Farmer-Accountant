@@ -1,7 +1,7 @@
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Modal } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import autoTable from "jspdf-autotable";
 
 const formatCurrency = (amount) => {
@@ -186,9 +186,10 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                 <th>Sr.No</th>
                 <th
                   style={{ padding: "5px" }}
-                  onClick={() =>
-                    setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-                  }>
+                  // onClick={() =>
+                  //   setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                  // }
+                >
                   Date ({sortOrder === "desc" ? "🔼" : "🔽"})
                 </th>
                 <th style={{ padding: "5px" }}>Amount</th>
@@ -479,9 +480,10 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                 <th>Sr.No</th>
                 <th
                   style={{ padding: "5px" }}
-                  onClick={() =>
-                    setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-                  }>
+                  // onClick={() =>
+                  //   setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                  // }
+                >
                   Date {sortOrder === "desc" ? "🔼" : "🔽"}
                 </th>
                 <th style={{ padding: "5px" }}>Amount</th>
