@@ -331,54 +331,69 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
   const handleCancel = () => {
     setModelOpen(false);
   };
-  // const downloadPDF = () => {
-  //   const input = document.getElementById("hidden-table");
+  const downloadPDF = async () => {
+    const input = document.getElementById("hidden-table");
 
-  //   html2canvas(input, { scale: 2 }).then((canvas) => {
-  //     const imgData = canvas.toDataURL("image/png");
+    const canvas = await html2canvas(input, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
 
-  //     const pdf = new jsPDF("p", "mm", "a4");
+    const pdf = new jsPDF("p", "mm", "a4");
 
-  //     const pdfWidth = pdf.internal.pageSize.getWidth();
-  //     const pdfHeight = pdf.internal.pageSize.getHeight();
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
 
-  //     const imgWidth = pdfWidth;
-  //     const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+    const imgWidth = pdfWidth;
+    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
 
-  //     let heightLeft = imgHeight;
-  //     let position = 0;
+    const pageHeightPx = (canvas.width / pdfWidth) * pdfHeight;
 
-  //     // First page
-  //     pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-  //     heightLeft -= pdfHeight;
+    let y = 0;
 
-  //     // Add extra pages
-  //     while (heightLeft > 0) {
-  //       position = heightLeft - imgHeight;
-  //       pdf.addPage();
-  //       pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-  //       heightLeft -= pdfHeight;
-  //     }
+    while (y < canvas.height) {
+      const pageCanvas = document.createElement("canvas");
+      const context = pageCanvas.getContext("2d");
 
-  //     pdf.save(
-  //       `Table_View_of_${worker?.workerDetail?.workerName?.nickName}.pdf`,
-  //     );
-  //   });
-  // };
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = pageHeightPx;
 
-  const downloadPDF = () => {
-    const pdf = new jsPDF();
+      context.drawImage(
+        canvas,
+        0,
+        y,
+        canvas.width,
+        pageHeightPx,
+        0,
+        0,
+        canvas.width,
+        pageHeightPx,
+      );
 
-    autoTable(pdf, {
-      html: "#hidden-table", // directly table id
-      startY: 10,
-      theme: "grid",
-      headStyles: { fillColor: [22, 160, 133] },
-      styles: { fontSize: 8 },
-    });
+      const pageImg = pageCanvas.toDataURL("image/png");
+
+      if (y > 0) pdf.addPage();
+
+      pdf.addImage(pageImg, "PNG", 0, 0, imgWidth, pdfHeight);
+
+      y += pageHeightPx;
+    }
 
     pdf.save(`Table_View_of_${worker?.workerName?.nickName}.pdf`);
   };
+
+  // const downloadPDF = () => {
+  //   const pdf = new jsPDF();
+
+  //   autoTable(pdf, {
+  //     html: "#hidden-table", // directly table id
+  //     startY: 10,
+  //     theme: "grid",
+  //     headStyles: { fillColor: [22, 160, 133] },
+  //     styles: { fontSize: 8 },
+  //   });
+
+  //   pdf.save(`Table_View_of_${worker?.workerName?.nickName}.pdf`);
+  // };
+  // table mai rkm ka format set nhi ho rhaa hai
 
   useEffect(() => {
     handleSort();
