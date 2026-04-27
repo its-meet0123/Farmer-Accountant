@@ -206,8 +206,8 @@ const WorkerCalculation = () => {
     <>
       <PageContainer
         title={
-          worker?.workerName &&
-          `${t("workerCalcPage.cardTitle")} ${worker?.workerName?.nickName}`
+          worker?.workerDetail?.workerName &&
+          `${t("workerCalcPage.cardTitle")} ${worker?.workerDetail?.workerName?.nickName}`
         }
         extra={
           <>
