@@ -1,6 +1,6 @@
 const {
-  autoTotalForOtherExpense,
   autoTotalForHarvesterData,
+  autoTotalForCasualWorker,
 } = require("../components/calculator");
 const { FieldWorker, Harvest } = require("../models/otherexpense");
 
@@ -204,7 +204,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
     });
   }
   const ids = { iD: id, transactionId: "" };
-  const body = await autoTotalForOtherExpense(ids, upcomingTrans);
+  const body = await autoTotalForCasualWorker(ids, upcomingTrans);
   console.log("body from autoTotalForOtherExpense Labor :", body);
   if (!body) {
     return res.status(500).json({
@@ -305,7 +305,7 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
     });
   }
   try {
-    const body = await autoTotalForOtherExpense(ids, upcomingTrans);
+    const body = await autoTotalForCasualWorker(ids, upcomingTrans);
     if (!body) {
       return res.status(500).json({
         status: "Error",
