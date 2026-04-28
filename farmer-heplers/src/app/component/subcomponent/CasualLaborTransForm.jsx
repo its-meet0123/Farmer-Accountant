@@ -82,20 +82,12 @@ const LaborTransForm = ({
         <Collapse ghost style={{ marginBottom: 20 }}>
           <Panel header={t("casualDrawer.acltf.colps.glm")} key="1">
             <ul style={{ gap: "2px" }}>
-              <li
-                style={{
-                  padding: "2px",
-                  borderRadius: "5px",
-                  border: "1px solid #2196f3",
-                  backgroundColor: "#E3F2FD",
-                }}>
-                {t("casualDrawer.acltf.colps.hli")}
-              </li>
               <li>{t("casualDrawer.acltf.colps.li1")}</li>
               <li>{t("casualDrawer.acltf.colps.li2")}</li>
               <li>{t("casualDrawer.acltf.colps.li3")}</li>
               <li>{t("casualDrawer.acltf.colps.li4")}</li>
               <li>{t("casualDrawer.acltf.colps.li5")}</li>
+              <li>{t("casualDrawer.acltf.colps.li6")}</li>
             </ul>
           </Panel>
         </Collapse>
