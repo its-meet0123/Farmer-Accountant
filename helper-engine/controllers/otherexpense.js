@@ -191,6 +191,12 @@ async function handleDeleteHarvestDataById(req, res) {
 async function handleAddAdditionalWorkerTransactionById(req, res) {
   const id = req.params.id;
   const upcomingTrans = req.body;
+  console.log(
+    "upcomingTrans for add transaction in labor :",
+    upcomingTrans,
+    "And Id :",
+    id,
+  );
   if (!id || !upcomingTrans) {
     return res.status(400).json({
       status: "Error",
@@ -199,6 +205,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
   }
   const ids = { iD: id, transactionId: "" };
   const body = await autoTotalForOtherExpense(ids, upcomingTrans);
+  console.log("body from autoTotalForOtherExpense Labor :", body);
   if (!body) {
     return res.status(500).json({
       status: "Error",
