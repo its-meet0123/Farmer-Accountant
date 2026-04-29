@@ -10,7 +10,7 @@ const accountSchemaFW = new mongoose.Schema({
   pay: { type: Number, default: 0 },
   payFor: String,
   transType: String,
-  remaining: Number,
+  remaining: { type: Number, default: 0 },
   handOver: String,
   transactionNumber: Number,
 });

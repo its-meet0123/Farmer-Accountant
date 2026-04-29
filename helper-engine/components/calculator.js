@@ -45,27 +45,27 @@ async function autoTotalForCasualWorker(ids, upComingTrans) {
       return null;
     }
 
-    const transTotal = getTransaction?.remaining || 0;
-    if (transTotal > 0 || upComingTrans?.pay > 0) {
-      const total = upComingTrans?.duration
-        ? upComingTrans.duration * upComingTrans.salary
-        : upComingTrans.measurment
-          ? upComingTrans.measurment * upComingTrans.salary
-          : 0;
+    const transTotal =
+      upComingTrans.transactionNumber > 1 ? getTransaction?.remaining : 0;
 
-      const bodyTotal = transTotal + total - (upComingTrans.pay || 0);
-      const transactionNumber =
-        upComingTrans.transactionNumber > 1
-          ? getTransaction.transactionNumber + 1
-          : getTransaction.transactionNumber;
+    const total = upComingTrans?.duration
+      ? upComingTrans.duration * upComingTrans.salary
+      : upComingTrans.measurment
+        ? upComingTrans.measurment * upComingTrans.salary
+        : 0;
 
-      return {
-        ...upComingTrans,
-        transactionNumber: transactionNumber,
-        total: total,
-        remaining: bodyTotal,
-      };
-    }
+    const bodyTotal = transTotal + total - (upComingTrans.pay || 0);
+    const transactionNumber =
+      upComingTrans.transactionNumber > 1
+        ? getTransaction.transactionNumber + 1
+        : getTransaction.transactionNumber;
+
+    return {
+      ...upComingTrans,
+      transactionNumber: transactionNumber,
+      total: total,
+      remaining: bodyTotal,
+    };
   }
 
   const transactions = workerDetails.transactions || [];
@@ -111,28 +111,28 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
       return null;
     }
 
-    const transTotal = getTransaction?.remaining || 0;
-    if (transTotal > 0 || upComingTrans?.pay > 0) {
-      const total = upComingTrans?.duration
-        ? upComingTrans.duration * upComingTrans.salary
-        : upComingTrans.measurment
-          ? upComingTrans.measurment * upComingTrans.salary
-          : 0;
+    const transTotal =
+      upComingTrans.transactionNumber > 1 ? getTransaction?.remaining : 0;
 
-      const bodyTotal = transTotal + total - (upComingTrans.pay || 0);
+    const total = upComingTrans?.duration
+      ? upComingTrans.duration * upComingTrans.salary
+      : upComingTrans.measurment
+        ? upComingTrans.measurment * upComingTrans.salary
+        : 0;
 
-      const transactionNumber =
-        upComingTrans.transactionNumber > 1
-          ? getTransaction.transactionNumber + 1
-          : getTransaction.transactionNumber;
+    const bodyTotal = transTotal + total - (upComingTrans.pay || 0);
 
-      return {
-        ...upComingTrans,
-        transactionNumber: transactionNumber,
-        total: total,
-        remaining: bodyTotal,
-      };
-    }
+    const transactionNumber =
+      upComingTrans.transactionNumber > 1
+        ? getTransaction.transactionNumber + 1
+        : getTransaction.transactionNumber;
+
+    return {
+      ...upComingTrans,
+      transactionNumber: transactionNumber,
+      total: total,
+      remaining: bodyTotal,
+    };
   }
 
   const transactions = harvesterDB.transactions || [];
@@ -154,12 +154,6 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
     total: total,
     remaining: bodyTotal,
   };
-
-  // const bodyTotal = transTotal + total;
-  // return {
-  //   ...upComingTrans,
-  //   total: bodyTotal,
-  // };
 }
 
 module.exports = {
