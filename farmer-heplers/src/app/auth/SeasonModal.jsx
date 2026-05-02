@@ -17,7 +17,7 @@ const modalBackground = `
 
 const SeasonModal = ({ season, setSeason, userId }) => {
   const [form] = Form.useForm();
-  const now = dayjs();
+  const today = dayjs();
   const onSubmit = () => {
     const values = form.getFieldsValue();
     console.log("Season values :", values);
@@ -113,11 +113,11 @@ const SeasonModal = ({ season, setSeason, userId }) => {
               </Select>
             </Form.Item>
 
-            <Form.Item label="Year" name="year" initialValue={now.year()}>
+            <Form.Item label="Year" name="year" initialValue={today}>
               <DatePicker picker="year" placeholder="select year" />
             </Form.Item>
 
-            <Form.Item label="Start" name="startDate" initialValue={now.date()}>
+            <Form.Item label="Start" name="startDate" initialValue={today}>
               <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
