@@ -5,10 +5,18 @@ import { logInRoutes, signUpRoutes } from "./public";
 import { useMemo } from "react";
 
 export const AppRoutes = () => {
-  const { authState, isSignedUp } = useAuth();
+  const { authState, isSignedUp, season, setSeason } = useAuth();
   console.log(authState, isSignedUp);
 
   const routesConfig = useMemo(() => {
+    if (authState.user && season.openModal) {
+      <SeasonModal
+        season={season}
+        setSeason={setSeason}
+        userId={authState.user?.userId}
+      />;
+      return null;
+    }
     if (authState.user) {
       return protectedRoutes;
     }
@@ -16,7 +24,7 @@ export const AppRoutes = () => {
       return logInRoutes;
     }
     return signUpRoutes;
-  }, [authState.user, isSignedUp]);
+  }, [authState.user, isSignedUp, season, setSeason]);
 
   const element = useRoutes(routesConfig);
 
