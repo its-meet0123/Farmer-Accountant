@@ -1,4 +1,12 @@
-import { Button, DatePicker, Form, Input, Modal, Select } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  DatePicker,
+  Form,
+  Input,
+  Modal,
+  Select,
+} from "antd";
 const { Option } = Select;
 
 const modalBackground = `
