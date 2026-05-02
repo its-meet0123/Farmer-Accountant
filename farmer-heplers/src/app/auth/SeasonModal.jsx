@@ -29,7 +29,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
   };
   const handleCancel = () => {
     setSeason({
-      data: season.data,
+      data: season?.data || null,
       openModal: false,
     });
   };
@@ -90,7 +90,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
             onFinish={onSubmit}
             style={{ gap: "15px" }} // Spacing maintain karne ke liye
           >
-            <Form.Item name="userId" hidden>
+            <Form.Item name="userId" initialValue={userId} hidden>
               <Input />
             </Form.Item>
 

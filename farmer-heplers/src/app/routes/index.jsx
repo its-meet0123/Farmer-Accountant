@@ -10,14 +10,6 @@ export const AppRoutes = () => {
   console.log(authState, isSignedUp);
 
   const routesConfig = useMemo(() => {
-    if (authState.user && season.openModal) {
-      <SeasonModal
-        season={season}
-        setSeason={setSeason}
-        userId={authState.user?.userId}
-      />;
-      return null;
-    }
     if (authState.user) {
       return protectedRoutes;
     }
@@ -25,9 +17,20 @@ export const AppRoutes = () => {
       return logInRoutes;
     }
     return signUpRoutes;
-  }, [authState.user, isSignedUp, season, setSeason]);
+  }, [authState.user, isSignedUp]);
 
   const element = useRoutes(routesConfig);
 
-  return <>{element}</>;
+  return (
+    <>
+      {element}
+      {authState.user && season.openModal && (
+        <SeasonModal
+          season={season}
+          setSeason={setSeason}
+          userId={authState.user?.userId}
+        />
+      )}
+    </>
+  );
 };
