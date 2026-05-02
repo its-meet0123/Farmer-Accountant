@@ -66,6 +66,11 @@ export const AuthProvider = ({ children }) => {
           data: data.data,
           openModal: false,
         });
+      } else if (data.status == "Error") {
+        setSeason({
+          data: null,
+          openModal: true,
+        });
       }
     };
     checkSeason();
