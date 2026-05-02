@@ -59,14 +59,17 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const checkSeason = async () => {
-      const res = await getActiveSeason();
-      const data = res.data;
-      if (data.status === "Success") {
-        setSeason({
-          data: data.data,
-          openModal: false,
-        });
-      } else if (data.status == "Error") {
+      try {
+        const res = await getActiveSeason();
+        const data = res.data;
+        if (data.status === "Success") {
+          setSeason({
+            data: data.data,
+            openModal: false,
+          });
+        }
+      } catch (err) {
+        console.log(err.message);
         setSeason({
           data: null,
           openModal: true,

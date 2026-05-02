@@ -54,7 +54,7 @@ async function handleGetActiveSession(req, res) {
 
     if (!session) {
       return res.status(404).json({
-        status: "Errror",
+        status: "Error",
         hasSession: false,
         message: "No active session found",
       });
