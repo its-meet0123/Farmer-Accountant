@@ -6,6 +6,11 @@ const dateSchema = new mongoose.Schema({
     ref: "users",
     required: true,
   },
+  sessionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "session",
+    required: true,
+  },
   endDate: { type: Date, default: new Date() },
   dateType: { type: String },
 });

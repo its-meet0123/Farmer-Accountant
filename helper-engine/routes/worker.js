@@ -16,35 +16,33 @@ const {
 } = require("../middleware/autoInterestCalculation");
 
 const router = express.Router();
+router.post("/", handleAddWorker);
+router.get("/:sessionId", authMiddleware, handleGetAllWorkers);
 router
-  .route("/")
-  .post(handleAddWorker)
-  .get(authMiddleware, handleGetAllWorkers);
-router
-  .route("/:id")
+  .route("/:sessionId/:id")
   .patch(authMiddleware, handleEditWorkerById)
   .get(authMiddleware, handleGetWorkerById)
   .delete(authMiddleware, handleDeleteWorkerById);
 router.put(
-  "/:id/push",
+  "/:sessionId/:id/push",
   authMiddleware,
   autoInterestCalculationForWorker,
   handlePushWorkerTransactionById,
 );
 router
-  .route("/:workerId/account/:accountId")
+  .route("/:sessionId/:workerId/account/:accountId")
   .patch(
     authMiddleware,
     autoInterestCalculationForWorker,
     handleUpdateWorkerTransactionById,
   );
 router.post(
-  "/:workerId/delete",
+  "/:sessionId/:workerId/delete",
   authMiddleware,
   handleDeleteWorkerTransactionById,
 );
 router.get(
-  "/:workerId/account",
+  "/:sessionId/:workerId/account",
   authMiddleware,
   handleGetWorkerTransactionById,
 );

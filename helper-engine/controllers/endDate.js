@@ -4,9 +4,13 @@ const InterestDate = require("../models/endDate");
 async function handleGetInterestDate(req, res) {
   //const token = req.cookies.token;
   try {
+    const { sessionId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const interestDate = await InterestDate.find({ userId: currentUserId });
+    const interestDate = await InterestDate.find({
+      userId: currentUserId,
+      sessionId: sessionId,
+    });
 
     if (!interestDate) {
       return res.status(404).json({
@@ -36,6 +40,7 @@ async function handlePostInterestDate(req, res) {
 
   const result = await InterestDate.create({
     userId: data.userId,
+    sessionId: data.sessionId,
     endDate: data.endDate,
     dateType: data.dateType,
   });
@@ -51,6 +56,7 @@ async function handleUpdateInterestDate(req, res) {
   //const token = req.cookies.token;
 
   try {
+    const { sessionId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
 
@@ -61,7 +67,7 @@ async function handleUpdateInterestDate(req, res) {
     }
 
     const updateInterestDate = await InterestDate.findByIdAndUpdate(
-      { _id: id, userId: currentUserId },
+      { _id: id, userId: currentUserId, sessionId: sessionId },
       body,
       {
         new: true,
@@ -89,12 +95,14 @@ async function handleDeleteInterestDate(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { id } = req.params;
+    const { sessionId, id } = req.params;
 
     const interestDate = await InterestDate.findByIdAndDelete({
       _id: id,
       userId: currentUserId,
+      sessionId: sessionId,
     });
+
     if (!interestDate) {
       return res
         .status(404)

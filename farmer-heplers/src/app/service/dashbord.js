@@ -1,9 +1,9 @@
 import { axiosInstance } from "./axiosIntance";
 
-export async function getDashbordData() {
-  return await axiosInstance.get(`/dashbord`);
+export async function getDashbordData(sessionId) {
+  return await axiosInstance.get(`/dashbord/${sessionId}`);
 }
 
-export async function getMonthlyTurnover() {
-  return await axiosInstance.get(`/dashbord/monthly-turnover`);
+export async function getMonthlyTurnover(sessionId) {
+  return await axiosInstance.get(`/dashbord/monthly-turnover/${sessionId}`);
 }

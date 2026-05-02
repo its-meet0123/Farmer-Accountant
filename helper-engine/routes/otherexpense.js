@@ -20,36 +20,32 @@ const authMiddleware = require("../middleware/checkAuth");
 const router = express.Router();
 
 // labor routes
+router.get("/:sessionId/labor", authMiddleware, handleGetAllAdditionalWorkers);
+router.post("/labor", postAdditionalWorker);
 router
-  .route("/labor")
-  .get(authMiddleware, handleGetAllAdditionalWorkers)
-  .post(postAdditionalWorker);
-router
-  .route("/labor/:id")
+  .route("/:sessionId/labor/:id")
   .patch(authMiddleware, handleUpdateAdditionalWorkerById)
   .delete(authMiddleware, handleDeleteAdditionalWorkerById);
 router
-  .route("/labor/:workerId/transaction/:transactionId")
+  .route("/:sessionId/labor/:workerId/transaction/:transactionId")
   .patch(authMiddleware, updateAdditionalWorkerTransactionByIds)
   .delete(authMiddleware, deleteAdditionalWorkerTransactionByIds);
 router.put(
-  "/labor/:id/transaction",
+  "/:sessionId/labor/:id/transaction",
   authMiddleware,
   handleAddAdditionalWorkerTransactionById,
 );
 
 // harvest router
+router.get("/:sessionId/harvester", authMiddleware, handleGetAllHarvestList);
+router.post("/harvester", postHavrestData);
 router
-  .route("/harvester")
-  .get(authMiddleware, handleGetAllHarvestList)
-  .post(postHavrestData);
-router
-  .route("/harvester/:id")
+  .route("/:sessionId/harvester/:id")
   .patch(authMiddleware, handleUpdateHarvestDataById)
   .delete(authMiddleware, handleDeleteHarvestDataById)
   .put(authMiddleware, handleAddHarvesterTransactionById);
 router
-  .route("/harvester/:harvesterId/transaction/:transactionId")
+  .route("/:sessionId/harvester/:harvesterId/transaction/:transactionId")
   .patch(authMiddleware, updateHarvesterTransactionByIds)
   .delete(authMiddleware, deleteHavresterTransactionByIds);
 

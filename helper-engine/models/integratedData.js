@@ -76,6 +76,11 @@ const indShopeSchema = new mongoose.Schema({
     ref: "users",
     required: true,
   },
+  sessionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "session",
+    required: true,
+  },
   nameInd: {
     type: String,
   },

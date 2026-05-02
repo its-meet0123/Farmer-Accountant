@@ -15,12 +15,10 @@ const {
 } = require("../middleware/autoInterestCalculation");
 
 const router = express.Router();
+router.post("/", handleCreateIndData);
+router.get("/:sessionId", authMiddleware, handleGetAllIndData);
 router
-  .route("/")
-  .post(handleCreateIndData)
-  .get(authMiddleware, handleGetAllIndData);
-router
-  .route("/:id")
+  .route("/:sessionId/:id")
   .get(authMiddleware, handleGetIndShopeAccountById)
   .put(
     authMiddleware,
@@ -29,15 +27,15 @@ router
   )
   .patch(authMiddleware, handleUpdateIndDataById);
 router.put(
-  "/:shopeId/account/:accountId",
+  "/:sessionId/:shopeId/account/:accountId",
   authMiddleware,
   autoInterestCalculationForShopes,
   handleUpdateIndShopeAccountTransactionById,
 );
 
-router.post("/delete-many", authMiddleware, handleDeleteManyIndData);
+router.post("/:sessionId/delete-many", authMiddleware, handleDeleteManyIndData);
 router.patch(
-  "/:id/delete-many",
+  "/:sessionId/:id/delete-many",
   authMiddleware,
   handleDeleteManyIndShopeTransaction,
 );

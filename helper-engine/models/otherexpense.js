@@ -21,6 +21,11 @@ const fieldWorkerModel = new mongoose.Schema({
     ref: "users",
     required: true,
   },
+  sessionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "session",
+    required: true,
+  },
   serviceProvider: {
     firstName: { type: String, required: true },
     lastName: { type: String },
@@ -58,6 +63,11 @@ const harvestModel = new mongoose.Schema({
   userId: {
     type: String,
     ref: "users",
+    required: true,
+  },
+  sessionId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "session",
     required: true,
   },
   serviceProvider: {

@@ -9,12 +9,10 @@ const authMiddleware = require("../middleware/checkAuth");
 
 const router = express.Router();
 
+router.post("/", handlePostInterestDate);
+router.get("/:sessionId", authMiddleware, handleGetInterestDate);
 router
-  .route("/")
-  .post(handlePostInterestDate)
-  .get(authMiddleware, handleGetInterestDate);
-router
-  .route("/:id")
+  .route("/:sessionId/:id")
   .patch(authMiddleware, handleUpdateInterestDate)
   .delete(authMiddleware, handleDeleteInterestDate);
 

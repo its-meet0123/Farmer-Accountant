@@ -9,6 +9,7 @@ const workerRouter = require("./routes/worker");
 const otherExpenseRouter = require("./routes/otherexpense");
 const dashBordRouter = require("./routes/dashbord");
 const authRouter = require("./routes/auth");
+const sessionRouter = require("./routes/session");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
@@ -42,6 +43,7 @@ app.get("/health-check", (req, res) => {
 });
 
 app.use("/user", userRouter);
+app.use("/season", sessionRouter);
 app.use("/int", integratedRouter);
 app.use("/intshope", intShopeRouter);
 app.use("/intdate", dateRouter);

@@ -1,12 +1,15 @@
-const { calculateAutoInterst } = require("../components/calculator");
 const Industries = require("../models/integratedData");
 const InterestDate = require("../models/endDate");
 
 async function handleGetAllIndData(req, res) {
   try {
     const decoded = req.user;
+    const { sessionId } = req.params;
     const currentUserId = decoded.id;
-    const indAllData = await Industries.find({ userId: currentUserId });
+    const indAllData = await Industries.find({
+      userId: currentUserId,
+      sessionId: sessionId,
+    });
 
     if (!indAllData) {
       return res.status(404).json({
@@ -31,7 +34,7 @@ async function handleGetIndShopeAccountById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { id } = req.params;
+    const { sessionId, id } = req.params;
     if (!id) {
       res.status(404).json({
         status: "fail",
@@ -41,6 +44,7 @@ async function handleGetIndShopeAccountById(req, res) {
     const indDataBySNo = await Industries.findById({
       _id: id,
       userId: currentUserId,
+      sessionId: sessionId,
     });
     const dates = await InterestDate.find({ userId: currentUserId });
     const endDate = dates[0]?.endDate;
@@ -50,82 +54,7 @@ async function handleGetIndShopeAccountById(req, res) {
         .status(404)
         .json({ status: "Error", msg: "Ind Data not found" });
     }
-    // const updateIndData = {
-    //   shopeNumber: indDataBySNo.shopeNumber,
-    //   shopeAccount: indDataBySNo?.shopeAccount?.map((account) => {
-    //     const loanAmount = account.loan.amount;
-    //     const buyBillAmount = account.indBuy.billAmount;
-    //     const sellBillAmount = account.indSell.billAmount;
-    //     const dieselBillAmount = account.diesel.billAmount;
-    //     const rate = account.rate;
-    //     const startDate = account.startDate;
 
-    //     const loanAmountResult = calculateAutoInterst(
-    //       loanAmount,
-    //       startDate,
-    //       rate,
-    //       endDate,
-    //     );
-    //     const buyBillAmountResult = calculateAutoInterst(
-    //       buyBillAmount,
-    //       startDate,
-    //       rate,
-    //       endDate,
-    //     );
-    //     const sellBillAmountResult = calculateAutoInterst(
-    //       sellBillAmount,
-    //       startDate,
-    //       rate,
-    //       endDate,
-    //     );
-    //     const dieselBillAmountResult = calculateAutoInterst(
-    //       dieselBillAmount,
-    //       startDate,
-    //       rate,
-    //       endDate,
-    //     );
-    //     return {
-    //       startDate: account.startDate,
-    //       loan: {
-    //         amount: account.loan.amount,
-    //         amountType: account.loan.amountType,
-    //         interest: Number(loanAmountResult.interst),
-    //         totalAmount: Number(loanAmountResult.totalAmount),
-    //         days: loanAmountResult.days,
-    //         months: loanAmountResult.months,
-    //       },
-    //       indBuy: {
-    //         billAmount: account.indBuy.billAmount,
-    //         bill: account.indBuy.bill,
-    //         interest: Number(buyBillAmountResult.interst),
-    //         brief: account.indBuy.brief,
-    //         totalAmount: Number(buyBillAmountResult.totalAmount),
-    //         days: buyBillAmountResult.days,
-    //         months: buyBillAmountResult.months,
-    //       },
-    //       indSell: {
-    //         crop: account.indSell.crop,
-    //         brief: account.indSell.brief,
-    //         billAmount: account.indSell.billAmount,
-    //         bill: account.indSell.bill,
-    //         interest: Number(sellBillAmountResult.interst),
-    //         days: sellBillAmountResult.days,
-    //         months: sellBillAmountResult.months,
-    //         totalAmount: Number(sellBillAmountResult.totalAmount),
-    //       },
-    //       diesel: {
-    //         qty: account.diesel.qty,
-    //         billAmount: account.diesel.billAmount,
-    //         rate: account.diesel.rate,
-    //         bill: account.diesel.bill,
-    //         interest: Number(dieselBillAmountResult.interst),
-    //         totalAmount: Number(dieselBillAmountResult.totalAmount),
-    //         days: dieselBillAmountResult.days,
-    //         months: dieselBillAmountResult.months,
-    //       },
-    //     };
-    //   }),
-    // };
     return res.status(200).json({
       status: "Success",
       message: "Ind Data founded",
@@ -143,10 +72,10 @@ async function handleUpdateIndDataById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { id } = req.params;
+    const { sessionId, id } = req.params;
     const body = req.body;
     const indDataById = await Industries.findOneAndUpdate(
-      { _id: id, userId: currentUserId },
+      { _id: id, userId: currentUserId, sessionId: sessionId },
       body,
       {
         new: true,
@@ -169,6 +98,7 @@ async function handleDeleteManyIndData(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
+    const { sessionId } = req.params;
     const ids = req.body;
     if (!Array.isArray(ids) || ids.length === 0) {
       return res.status(400).json({ message: "Ids required" });
@@ -177,6 +107,7 @@ async function handleDeleteManyIndData(req, res) {
     const indDataById = await Industries.deleteMany({
       _id: { $in: ids },
       userId: currentUserId,
+      sessionId: sessionId,
     });
     if (!indDataById) {
       return res
@@ -195,10 +126,10 @@ async function handlePushIndShopeAccountById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const id = req.params.id;
+    const { sessionId, id } = req.params;
     const body = req.body;
     const indDataBySNo = await Industries.findOneAndUpdate(
-      { _id: id, userId: currentUserId },
+      { _id: id, userId: currentUserId, sessionId: sessionId },
       {
         $push: {
           shopeAccount: body,
@@ -225,12 +156,13 @@ async function handleUpdateIndShopeAccountTransactionById(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    const { shopeId, accountId } = req.params;
+    const { sessionId, shopeId, accountId } = req.params;
     const updateData = req.body;
     console.log("update controller fetch body of auto interest", updateData);
     const updatedShopeAccount = await Industries.findOneAndUpdate(
       {
         userId: currentUserId,
+        sessionId: sessionId,
         _id: shopeId,
         "shopeAccount._id": accountId, // 👈 array object match
       },
@@ -252,13 +184,13 @@ async function handleDeleteManyIndShopeTransaction(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { id } = req.params;
+    const { sessionId, id } = req.params;
     const ids = req.body;
     if (ids.length === 0) {
       return res.status(400).json({ message: "Ids required" });
     }
     const indDataById = await Industries.updateOne(
-      { _id: id, userId: currentUserId },
+      { _id: id, userId: currentUserId, sessionId: sessionId },
       {
         $pull: { shopeAccount: { _id: { $in: ids } } },
       },
@@ -289,6 +221,7 @@ async function handleCreateIndData(req, res) {
     const result = await Industries.insertMany(
       body.map((item) => ({
         userId: item.userId,
+        sessionId: item.sessionId,
         nameInd: item.nameInd,
         shopeNumber: item.shopeNumber,
         shopeAccount: item.shopeAccount,

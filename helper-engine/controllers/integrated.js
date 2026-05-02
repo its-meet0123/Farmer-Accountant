@@ -4,9 +4,13 @@ async function handleGetAllEntData(req, res) {
   // const token = req.cookies.token;
 
   try {
+    const { sessionId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const entDataDB = await entData.find({ userId: currentUserId });
+    const entDataDB = await entData.find({
+      userId: currentUserId,
+      sessionId: sessionId,
+    });
 
     if (!entDataDB) {
       return res.status(404).json({
@@ -33,7 +37,7 @@ async function handleGetEntDataById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { id } = req.params;
+    const { sessionId, id } = req.params;
     if (!id) {
       return res.status(400).json({
         status: "Error",
@@ -43,6 +47,7 @@ async function handleGetEntDataById(req, res) {
     const entDataDB = await entData.findById({
       _id: id,
       userId: currentUserId,
+      sessionId: sessionId,
     });
 
     if (!entDataDB) {
@@ -70,7 +75,7 @@ async function handleUpdateEntDataById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { id } = req.params;
+    const { sessionId, id } = req.params;
     const body = req.body;
 
     if (!id && !body) {
@@ -80,7 +85,7 @@ async function handleUpdateEntDataById(req, res) {
       });
     }
     const entDataDB = await entData.findByIdAndUpdate(
-      { _id: id, userId: currentUserId },
+      { _id: id, userId: currentUserId, sessionId: sessionId },
       body,
       { new: true },
     );
@@ -110,7 +115,7 @@ async function handleDeleteEntDataById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { id } = req.params;
+    const { sessionId, id } = req.params;
     if (!id) {
       return res.status(400).json({
         status: "Error",
@@ -120,6 +125,7 @@ async function handleDeleteEntDataById(req, res) {
     const entDataDB = await entData.findByIdAndDelete({
       _id: id,
       userId: currentUserId,
+      sessionId: sessionId,
     });
 
     if (!entDataDB) {
@@ -151,6 +157,7 @@ async function handlePostEntData(req, res) {
   }
   const entDataDB = entData.create({
     userId: body.userId,
+    sessionId: body.sessionId,
     startDate: body.startDate,
     nameInd: body.nameInd,
     indFounder: {

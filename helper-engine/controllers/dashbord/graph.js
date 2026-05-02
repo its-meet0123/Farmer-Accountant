@@ -1,9 +1,22 @@
 const Industries = require("../../models/integratedData");
+const Sessions = require("../../models/session");
 
 async function monthlyTurnover(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
+    const session = await Sessions.findOne({
+      userId: currentUserId,
+      isActive: true,
+    });
+    if (!session && !req.params.sessionId) {
+      return res.status(404).json({
+        status: "Fail",
+        data: null,
+        message:
+          "No active session found. Please provide a session ID or start a new session.",
+      });
+    }
     const Ind = await Industries.find({ userId: currentUserId });
 
     const monthlyTurnover = Ind.reduce((acc, shopes) => {

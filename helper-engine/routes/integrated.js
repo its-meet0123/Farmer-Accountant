@@ -10,12 +10,10 @@ const authMiddleware = require("../middleware/checkAuth");
 
 const router = express.Router();
 
+router.post("/", handlePostEntData);
+router.get("/:sessionId", authMiddleware, handleGetAllEntData);
 router
-  .route("/")
-  .post(handlePostEntData)
-  .get(authMiddleware, handleGetAllEntData);
-router
-  .route("/:id")
+  .route("/:sessionId/:id")
   .get(authMiddleware, handleGetEntDataById)
   .patch(authMiddleware, handleUpdateEntDataById)
   .delete(authMiddleware, handleDeleteEntDataById);

@@ -2,6 +2,7 @@
 const WorkerData = require("../../models/worker");
 const { FieldWorker, Harvest } = require("../../models/otherexpense");
 const Industries = require("../../models/integratedData");
+const Sessions = require("../../models/session");
 const { calculateAccountDuration } = require("./dashbordInterestCalc");
 const {
   overAllTotalOfAllShopes,
@@ -22,11 +23,24 @@ async function dashBordData(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
+    const session = await Sessions.findOne({
+      userId: currentUserId,
+      isActive: true,
+    });
+    if (!session && !req.params.sessionId) {
+      return res.status(404).json({
+        status: "Error",
+        Code: "No active session found",
+        data: null,
+        message: "Please create and activate a session to view dashboard data",
+      });
+    }
+    const sessionId = req.params.sessionId || session._id;
     const [Ind, workers, allCasualLabor, allHarvests] = await Promise.all([
-      Industries.find({ userId: currentUserId }),
-      WorkerData.find({ userId: currentUserId }),
-      FieldWorker.find({ userId: currentUserId }),
-      Harvest.find({ userId: currentUserId }),
+      Industries.find({ userId: currentUserId, sessionId: sessionId }),
+      WorkerData.find({ userId: currentUserId, sessionId: sessionId }),
+      FieldWorker.find({ userId: currentUserId, sessionId: sessionId }),
+      Harvest.find({ userId: currentUserId, sessionId: sessionId }),
     ]);
 
     const allShopes = Ind.map((shopes) => {

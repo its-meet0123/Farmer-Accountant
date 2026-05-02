@@ -5,7 +5,7 @@ const monthlyTurnover = require("../controllers/dashbord/graph");
 
 const router = express.Router();
 
-router.get("/", authMiddleware, dashBordData);
-router.get("/monthly-turnover", authMiddleware, monthlyTurnover);
+router.get("/:sessionId", authMiddleware, dashBordData);
+router.get("/monthly-turnover/:sessionId", authMiddleware, monthlyTurnover);
 
 module.exports = router;

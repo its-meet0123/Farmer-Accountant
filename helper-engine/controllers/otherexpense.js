@@ -7,10 +7,12 @@ const { FieldWorker, Harvest } = require("../models/otherexpense");
 // 1. get worker list
 async function handleGetAllAdditionalWorkers(req, res) {
   try {
+    const { sessionId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
     const allAdditionalWorker = await FieldWorker.find({
       userId: currentUserId,
+      sessionId: sessionId,
     });
     if (!allAdditionalWorker) {
       return res.status(404).json({
@@ -34,9 +36,13 @@ async function handleGetAllAdditionalWorkers(req, res) {
 // 1. get harvest data
 async function handleGetAllHarvestList(req, res) {
   try {
+    const { sessionId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const harvestList = await Harvest.find({ userId: currentUserId });
+    const harvestList = await Harvest.find({
+      userId: currentUserId,
+      sessionId: sessionId,
+    });
 
     return res.status(200).json({
       status: "Success",
@@ -55,7 +61,7 @@ async function handleGetAllHarvestList(req, res) {
 
 // 2. update harvest data by id
 async function handleUpdateHarvestDataById(req, res) {
-  const { id } = req.params;
+  const { sessionId, id } = req.params;
   const body = req.body;
 
   try {
@@ -63,7 +69,7 @@ async function handleUpdateHarvestDataById(req, res) {
     const currentUserId = decoded.id;
 
     const harvestData = await Harvest.findOneAndUpdate(
-      { _id: id, userId: currentUserId },
+      { _id: id, userId: currentUserId, sessionId: sessionId },
       { $set: body },
       { new: true },
     );
@@ -83,13 +89,13 @@ async function handleUpdateHarvestDataById(req, res) {
 
 // 2. update worker by id
 async function handleUpdateAdditionalWorkerById(req, res) {
-  const id = req.params.id;
+  const { sessionId, id } = req.params;
   const body = req.body;
 
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    if (!id || !body) {
+    if (!id || !body || !sessionId) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.UWDEM",
@@ -97,7 +103,7 @@ async function handleUpdateAdditionalWorkerById(req, res) {
     }
     console.log(body);
     const updateAdditionalWorker = await FieldWorker.findOneAndUpdate(
-      { _id: id, userId: currentUserId },
+      { _id: id, userId: currentUserId, sessionId: sessionId },
       { $set: body },
       { new: true },
     );
@@ -123,13 +129,13 @@ async function handleUpdateAdditionalWorkerById(req, res) {
 
 // 3. delete additional worker
 async function handleDeleteAdditionalWorkerById(req, res) {
-  const id = req.params.id;
+  const { sessionId, id } = req.params;
 
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    if (!id) {
+    if (!id || !sessionId) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.DWEM",
@@ -138,6 +144,7 @@ async function handleDeleteAdditionalWorkerById(req, res) {
     const deleteAdditionalWorker = await FieldWorker.findOneAndDelete({
       _id: id,
       userId: currentUserId,
+      sessionId: sessionId,
     });
     if (!deleteAdditionalWorker) {
       return res.status(404).json({
@@ -161,7 +168,7 @@ async function handleDeleteAdditionalWorkerById(req, res) {
 
 // 3. delete harvest data by id
 async function handleDeleteHarvestDataById(req, res) {
-  const { id } = req.params;
+  const { sessionId, id } = req.params;
 
   try {
     const decoded = req.user;
@@ -170,6 +177,7 @@ async function handleDeleteHarvestDataById(req, res) {
     const harvestData = await Harvest.findOneAndDelete({
       _id: id,
       userId: currentUserId,
+      sessionId: sessionId,
     });
 
     return res.status(200).json({
@@ -189,7 +197,7 @@ async function handleDeleteHarvestDataById(req, res) {
 
 // 4. add additional worker transaction by id
 async function handleAddAdditionalWorkerTransactionById(req, res) {
-  const id = req.params.id;
+  const { sessionId, id } = req.params;
   const upcomingTrans = req.body;
   console.log(
     "upcomingTrans for add transaction in labor :",
@@ -197,7 +205,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
     "And Id :",
     id,
   );
-  if (!id || !upcomingTrans) {
+  if (!id || !upcomingTrans || !sessionId) {
     return res.status(400).json({
       status: "Error",
       Code: "CL.FW.AWTEM",
@@ -222,6 +230,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
       {
         _id: id,
         userId: currentUserId,
+        sessionId: sessionId,
       },
       {
         $push: {
@@ -252,7 +261,7 @@ async function handleAddAdditionalWorkerTransactionById(req, res) {
 
 // 4. add Harvester transaction by id
 async function handleAddHarvesterTransactionById(req, res) {
-  const { id } = req.params;
+  const { sessionId, id } = req.params;
   const upComingTrans = req.body;
 
   const ids = { iD: id, transactionId: "" };
@@ -272,7 +281,7 @@ async function handleAddHarvesterTransactionById(req, res) {
     const currentUserId = decoded.id;
 
     const addTransaction = await Harvest.findOneAndUpdate(
-      { _id: id, userId: currentUserId },
+      { _id: id, userId: currentUserId, sessionId: sessionId },
       {
         $push: { transactions: body },
       },
@@ -295,10 +304,10 @@ async function handleAddHarvesterTransactionById(req, res) {
 
 // 5. update additional worker transaction by id
 async function updateAdditionalWorkerTransactionByIds(req, res) {
-  const { workerId, transactionId } = req.params;
+  const { sessionId, workerId, transactionId } = req.params;
   const ids = { iD: workerId, transactionId: transactionId };
   const upcomingTrans = req.body;
-  if (!workerId && !transactionId && !upcomingTrans) {
+  if ((!workerId && !transactionId && !upcomingTrans) || !sessionId) {
     return res.status(400).json({
       status: "Error",
       Code: "CL.FW.UWTEM",
@@ -321,6 +330,7 @@ async function updateAdditionalWorkerTransactionByIds(req, res) {
       {
         _id: workerId,
         userId: currentUserId,
+        sessionId: sessionId,
         "transactions._id": transactionId,
       },
       {
@@ -357,7 +367,7 @@ async function updateHarvesterTransactionByIds(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    const { harvesterId, transactionId } = req.params;
+    const { sessionId, harvesterId, transactionId } = req.params;
     const upComingTrans = req.body;
 
     const ids = { iD: harvesterId, transactionId: transactionId };
@@ -369,6 +379,7 @@ async function updateHarvesterTransactionByIds(req, res) {
       {
         _id: harvesterId,
         userId: currentUserId,
+        sessionId: sessionId,
         "transactions._id": transactionId,
       },
       { $set: { "transactions.$": body } },
@@ -391,7 +402,7 @@ async function updateHarvesterTransactionByIds(req, res) {
 
 // 6. delete additional worker transaction by id
 async function deleteAdditionalWorkerTransactionByIds(req, res) {
-  const { workerId, transactionId } = req.params;
+  const { sessionId, workerId, transactionId } = req.params;
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
@@ -406,6 +417,7 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
       {
         _id: workerId,
         userId: currentUserId,
+        sessionId: sessionId,
       },
       {
         $pull: { transactions: { _id: transactionId } },
@@ -436,13 +448,13 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
 
 // 6. delete Harvester transaction
 async function deleteHavresterTransactionByIds(req, res) {
-  const { harvesterId, transactionId } = req.params;
+  const { sessionId, harvesterId, transactionId } = req.params;
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
     const deleteHarvestTransaction = await Harvest.updateOne(
-      { _id: harvesterId, userId: currentUserId },
+      { _id: harvesterId, userId: currentUserId, sessionId: sessionId },
       {
         $pull: { transactions: { _id: transactionId } },
       },
@@ -475,6 +487,7 @@ async function postAdditionalWorker(req, res) {
     }
     const casualLaborDB = FieldWorker.create({
       userId: body.userId,
+      sessionId: body.sessionId,
       date: body.date,
       serviceProvider: {
         firstName: body.firstName,
@@ -516,6 +529,7 @@ async function postHavrestData(req, res) {
     const body = req.body;
     const harvestDB = Harvest.create({
       userId: body.userId,
+      sessionId: body.sessionId,
       date: body.date,
       serviceProvider: {
         firstName: body.firstName,

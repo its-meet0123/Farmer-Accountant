@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import FarmerLoader from "./Loader";
 import { userLoggedOut } from "../service/auth";
 import { axiosInstance } from "../service/axiosIntance";
+import { getActiveSeason } from "../service/season";
+import SeasonModal from "./SeasonModal";
 
 const AuthContext = createContext();
 
@@ -15,6 +17,10 @@ export const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
     isLoggedIn: false,
     user: null,
+  });
+  const [season, setSeason] = useState({
+    data: null,
+    openModal: true,
   });
   const { t, i18n } = useTranslation();
 
@@ -49,6 +55,20 @@ export const AuthProvider = ({ children }) => {
       }
     };
     checkAuth();
+  }, []);
+
+  useEffect(() => {
+    const checkSeason = async () => {
+      const res = await getActiveSeason();
+      const data = res.data;
+      if (data.status === "Success") {
+        setSeason({
+          data: data.data,
+          openModal: false,
+        });
+      }
+    };
+    checkSeason();
   }, []);
 
   const signupComplete = () => {
@@ -101,9 +121,17 @@ export const AuthProvider = ({ children }) => {
           goToSignUp,
           t,
           i18n,
+          season,
+          setSeason,
         }}>
         {isLoading ? (
           <FarmerLoader isLoading={isLoading} user={authState.user} />
+        ) : season.openModal ? (
+          <SeasonModal
+            season={season}
+            setSeason={setSeason}
+            userId={authState.user?.userId}
+          />
         ) : (
           children
         )}
