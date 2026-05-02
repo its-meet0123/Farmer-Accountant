@@ -134,7 +134,7 @@ export const AuthProvider = ({ children }) => {
         }}>
         {isLoading ? (
           <FarmerLoader isLoading={isLoading} user={authState.user} />
-        ) : season.openModal ? (
+        ) : authState.user.userId && season.openModal ? (
           <SeasonModal
             season={season}
             setSeason={setSeason}
