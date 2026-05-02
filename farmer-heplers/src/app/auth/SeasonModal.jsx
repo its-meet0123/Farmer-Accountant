@@ -7,6 +7,7 @@ import {
   Modal,
   Select,
 } from "antd";
+import dayjs from "dayjs";
 const { Option } = Select;
 
 const modalBackground = `
@@ -16,6 +17,7 @@ const modalBackground = `
 
 const SeasonModal = ({ season, setSeason, userId }) => {
   const [form] = Form.useForm();
+  const now = dayjs();
   const onSubmit = () => {
     const values = form.getFieldsValue();
     console.log("Season values :", values);
@@ -92,21 +94,35 @@ const SeasonModal = ({ season, setSeason, userId }) => {
               name="name"
               rules={[{ required: true }]}>
               <Select placeholder="Select" style={{ width: 120 }}>
-                <Option value="Rabi">Rabi</Option>
-                <Option value="Kharif">Kharif</Option>
+                <Option value="Rabi" label="Rabi">
+                  <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+                    Rabi
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                    Dec/Jan to April/May
+                  </span>
+                </Option>
+                <Option value="Kharif" label="Kharif">
+                  <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+                    Kharif
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                    May/Jun to Nov/Dec.
+                  </span>
+                </Option>
               </Select>
             </Form.Item>
 
-            <Form.Item label="Year" name="year">
-              <Input placeholder="2024" style={{ width: 100 }} />
+            <Form.Item label="Year" name="year" initialValue={now.year()}>
+              <DatePicker picker="year" placeholder="select year" />
             </Form.Item>
 
-            <Form.Item label="Start" name="startDate">
-              <DatePicker style={{ width: 130 }} />
+            <Form.Item label="Start" name="startDate" initialValue={now.date()}>
+              <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
             <Form.Item label="End" name="endDate">
-              <DatePicker style={{ width: 130 }} />
+              <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
             <Form.Item label="Status" name="isActive">
