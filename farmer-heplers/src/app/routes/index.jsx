@@ -3,6 +3,7 @@ import { protectedRoutes } from "./protected";
 import { useAuth } from "../auth/AuthContext";
 import { logInRoutes, signUpRoutes } from "./public";
 import { useMemo } from "react";
+import SeasonModal from "../auth/SeasonModal";
 
 export const AppRoutes = () => {
   const { authState, isSignedUp, season, setSeason } = useAuth();

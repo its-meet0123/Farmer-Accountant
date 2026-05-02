@@ -20,7 +20,12 @@ const SeasonModal = ({ season, setSeason, userId }) => {
   const today = dayjs();
   const onSubmit = () => {
     const values = form.getFieldsValue();
-    console.log("Season values :", values);
+    const formattedValues = {
+      ...values,
+      year: values.year ? values.year.year() : null,
+    };
+
+    console.log("set format season values :", formattedValues);
   };
   const handleCancel = () => {
     setSeason({
@@ -61,7 +66,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
           }
           open={season.openModal}
           onOk={onSubmit}
-          onCancel={handleCancel}
+          //onCancel={handleCancel}
           styles={{
             content: {
               backgroundImage: modalBackground,
