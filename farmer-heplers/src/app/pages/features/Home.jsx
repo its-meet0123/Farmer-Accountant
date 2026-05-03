@@ -23,7 +23,23 @@ const HomePage = () => {
   const [fetch, setFetch] = useState();
   const [shopeNo, setShopeNo] = useState();
   const [messageApi, contextHolder] = message.useMessage();
-  const { authState, t } = useAuth();
+  const { authState, t, season } = useAuth();
+
+  const fetchEntData = async () => {
+    const entRes = await getAllEntData(season?._id);
+    const entData = await entRes.data;
+    if (entData.status == "Success") {
+      setEntData(entData.data);
+    }
+  };
+
+  const fetchIndData = async () => {
+    const indRes = await getAllIndShopes(season?._id);
+    const indData = await indRes.data;
+    if (indData.status === "Success") {
+      setIndData(indData.data);
+    }
+  };
 
   const filltredIndData = useMemo(() => {
     if (shopeNo) {
@@ -111,21 +127,13 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    if (!season._id) return;
     async function getData() {
       try {
         setIsLoanding("loadData");
-        const entRes = await getAllEntData();
-        const entData = await entRes?.data?.data;
-        const indRes = await getAllIndShopes();
-        const indData = await indRes?.data?.data;
-        if (
-          entRes.data.status === "Success" &&
-          indRes.data.status === "Success"
-        ) {
-          setEntData(entData);
-          setIndData(indData);
-          setIsLoanding(null);
-        }
+        await Promise.all([fetchEntData(), fetchIndData()]);
+        setIsLoanding(null);
+        message.success("data fetched successfully");
       } catch (err) {
         message.error(t("homePage.fetchDataErrorMessage"));
         console.error(err.message);
@@ -133,7 +141,7 @@ const HomePage = () => {
       setFetch("");
     }
     getData();
-  }, [fetch]);
+  }, [fetch, season?._id]);
 
   const tableData = entData.map((item, index) => ({
     ...item,
@@ -269,6 +277,7 @@ const HomePage = () => {
           user={authState.user}
           data={{ entData, indData }}
           t={t}
+          season={season}
         />
       </PageContainer>
     </>

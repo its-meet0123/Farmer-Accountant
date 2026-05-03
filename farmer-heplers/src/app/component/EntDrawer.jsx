@@ -37,6 +37,7 @@ const EntDrawer = ({
   user,
   data,
   t,
+  season,
 }) => {
   const [addForm] = Form.useForm();
   const [edit, setEdit] = useState(false);
@@ -80,6 +81,7 @@ const EntDrawer = ({
       } else {
         const newEntData = {
           userId: user.userId,
+          sessionId: season?._id,
           nameInd: allValues.aNameInd,
           firstName: allValues.aFirstName,
           lastName: allValues.aLastName || "",
@@ -122,6 +124,7 @@ const EntDrawer = ({
         message.error(t("entDrawer.submitFunction.sameShopeNoError"));
       } else {
         const entData = {
+          sessionId: season?._id,
           nameInd: editFormValues.nameInd,
           indFounder: {
             firstName: editFormValues.firstName,
@@ -135,6 +138,7 @@ const EntDrawer = ({
         console.log(entRes);
         console.log(indData);
         const indDatas = {
+          sessionId: season?._id,
           nameInd: editFormValues.nameInd || indData[0]?.nameInd,
           shopeNumber: rowData?.shopeNumber || indData[0]?.shopeNumber,
           shopeAccount: indData[0]?.shopeAccount,

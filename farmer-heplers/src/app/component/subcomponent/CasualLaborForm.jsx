@@ -9,7 +9,7 @@ import { useState } from "react";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
-  const { authState, t } = useAuth();
+  const { authState, t, season } = useAuth();
   const today = dayjs();
   const [buttonLoading, setButtonLoading] = useState(false);
 
@@ -21,6 +21,7 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
         const laberDetails = {
           ...formValues,
           userId: authState.user.userId,
+          sessionId: season?._id,
           transactions: [],
         };
         const response = await postFieldWorkerData(laberDetails);
@@ -47,6 +48,7 @@ const CasualLaborAddForm = ({ form, openType, setFetch, onClose }) => {
           date: date,
           serviceProvider: {
             ...restOfformValues,
+            sessionId: season?._id,
           },
           transactions: transactions,
         };

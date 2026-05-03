@@ -31,7 +31,7 @@ import AlertText from "../../component/Text";
 import dayjs from "dayjs";
 
 const HarvesterData = () => {
-  const { t } = useAuth();
+  const { season, t } = useAuth();
   const [harvestList, setHarvestList] = useState([]);
   const [fetch, setFetch] = useState();
   const [isLoading, setIsLoading] = useState(null);
@@ -196,10 +196,11 @@ const HarvesterData = () => {
   };
 
   useEffect(() => {
+    if (!season._id) return;
     async function getData() {
       try {
         setIsLoading("loading");
-        const res = await getAllHarvestList();
+        const res = await getAllHarvestList(season?._id);
         const data = await res.data;
         if (data.status == "Success") {
           setHarvestList(data.data);
@@ -212,7 +213,7 @@ const HarvesterData = () => {
       }
     }
     getData();
-  }, [fetch]);
+  }, [fetch, season?._id]);
 
   const ExpanedRow = (record) => {
     const transData = record?.transactions || [];

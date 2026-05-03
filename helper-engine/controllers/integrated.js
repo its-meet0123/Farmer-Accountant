@@ -37,7 +37,7 @@ async function handleGetEntDataById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     if (!id) {
       return res.status(400).json({
         status: "Error",
@@ -47,7 +47,6 @@ async function handleGetEntDataById(req, res) {
     const entDataDB = await entData.findById({
       _id: id,
       userId: currentUserId,
-      sessionId: sessionId,
     });
 
     if (!entDataDB) {
@@ -75,7 +74,7 @@ async function handleUpdateEntDataById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     const body = req.body;
 
     if (!id && !body) {
@@ -85,7 +84,7 @@ async function handleUpdateEntDataById(req, res) {
       });
     }
     const entDataDB = await entData.findByIdAndUpdate(
-      { _id: id, userId: currentUserId, sessionId: sessionId },
+      { _id: id, userId: currentUserId },
       body,
       { new: true },
     );
@@ -115,7 +114,7 @@ async function handleDeleteEntDataById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     if (!id) {
       return res.status(400).json({
         status: "Error",
@@ -125,7 +124,6 @@ async function handleDeleteEntDataById(req, res) {
     const entDataDB = await entData.findByIdAndDelete({
       _id: id,
       userId: currentUserId,
-      sessionId: sessionId,
     });
 
     if (!entDataDB) {

@@ -16,7 +16,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { PageContainer } from "../../component/PageContainer";
 
 const ViewPage = () => {
-  const { t } = useAuth();
+  const { season, t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(null);
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -135,10 +135,11 @@ const ViewPage = () => {
   };
 
   useEffect(() => {
+    if (!season?._id) return null;
     async function getData() {
       try {
         setIsLoanding("loadData");
-        const res = await getAllIndShopes();
+        const res = await getAllIndShopes(season?._id);
         const data = await res.data.data;
         setAllInd(data);
         setIsLoanding(null);
@@ -150,7 +151,7 @@ const ViewPage = () => {
       setFetch("");
     }
     getData();
-  }, [fetch]);
+  }, [fetch, season?._id]);
 
   const tableData = useMemo(() => {
     if (!allInd) return [];
@@ -314,6 +315,7 @@ const ViewPage = () => {
           setFetch={setFetch}
           showSuccess={showSuccess}
           t={t}
+          season={season}
         />
       </PageContainer>
     </>

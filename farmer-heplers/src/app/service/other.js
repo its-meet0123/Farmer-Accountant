@@ -16,73 +16,57 @@ export async function postHarvestData(harvestDetails) {
   return await axiosInstance.post(`/other/harvester`, harvestDetails);
 }
 
-export async function deleteFieldWorkerData(sessionId, id) {
-  return await axiosInstance.delete(`/other/${sessionId}/labor/${id}`);
+export async function deleteFieldWorkerData(id) {
+  return await axiosInstance.delete(`/other/labor/${id}`);
 }
 
-export async function deleteHarvestData(sessionId, id) {
-  return await axiosInstance.delete(`/other/${sessionId}/harvester/${id}`);
+export async function deleteHarvestData(id) {
+  return await axiosInstance.delete(`/other/harvester/${id}`);
 }
 
-export async function updateFieldWorkerData(ids, updateLaborDetails) {
-  const { sessionId, id } = ids;
-  return await axiosInstance.patch(
-    `/other/${sessionId}/labor/${id}`,
-    updateLaborDetails,
-  );
+export async function updateFieldWorkerData(id, updateLaborDetails) {
+  return await axiosInstance.patch(`/other/labor/${id}`, updateLaborDetails);
 }
 
-export async function updateHarvestData(ids, updateHarvestData) {
-  const { sessionId, id } = ids;
-  return await axiosInstance.patch(
-    `/other/${sessionId}/harvester/${id}`,
-    updateHarvestData,
-  );
+export async function updateHarvestData(id, updateHarvestData) {
+  return await axiosInstance.patch(`/other/harvester/${id}`, updateHarvestData);
 }
 
-export async function addTransactionForFieldWorker(ids, transaction) {
-  const { sessionId, id } = ids;
-  return await axiosInstance.put(
-    `/other/${sessionId}/labor/${id}/transaction`,
-    transaction,
-  );
+export async function addTransactionForFieldWorker(id, transaction) {
+  return await axiosInstance.put(`/other/labor/${id}/transaction`, transaction);
 }
 
-export async function addTransactionForHarvestData(ids, harvestTransaction) {
-  const { sessionId, id } = ids;
-  return await axiosInstance.put(
-    `/other/${sessionId}/harvester/${id}`,
-    harvestTransaction,
-  );
+export async function addTransactionForHarvestData(id, harvestTransaction) {
+  return await axiosInstance.put(`/other/harvester/${id}`, harvestTransaction);
 }
 
 export async function deleteFieldWorkerTransaction(ids) {
-  const { sessionId, workerId, transactionId } = ids;
+  const { workerId, transactionId } = ids;
   return await axiosInstance.delete(
-    `/other/${sessionId}/labor/${workerId}/transaction/${transactionId}`,
+    `/other/labor/${workerId}/transaction/${transactionId}`,
   );
 }
 
 export async function deleteHarvestDataTransaction(ids) {
-  const { sessionId, harvestId, transactionId } = ids;
+  const { harvestId, transactionId } = ids;
   return await axiosInstance.delete(
-    `/other/${sessionId}/harvester/${harvestId}/transaction/${transactionId}`,
+    `/other/harvester/${harvestId}/transaction/${transactionId}`,
   );
 }
 
 export async function updateFieldWorkerTransaction(ids, updatedTransaction) {
-  const { sessionId, workerId, transactionId } = ids;
+  const { workerId, transactionId } = ids;
   return await axiosInstance.patch(
-    `/other/${sessionId}/labor/${workerId}/transaction/${transactionId}`,
+    `/other/labor/${workerId}/transaction/${transactionId}`,
     updatedTransaction,
   );
 }
 
 export async function updateHarvestDataTransaction(ids, updatedTransaction) {
   //console.log("update harvest data transaction api called with ids: ", ids);
-  const { sessionId, harvesterId, transactionId } = ids;
+  const { harvesterId, transactionId } = ids;
   return await axiosInstance.patch(
-    `/other/${sessionId}/harvester/${harvesterId}/transaction/${transactionId}`,
+    `/other/harvester/${harvesterId}/transaction/${transactionId}`,
     updatedTransaction,
   );
 }

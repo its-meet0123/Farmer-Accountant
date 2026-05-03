@@ -34,7 +34,7 @@ async function handleGetIndShopeAccountById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     if (!id) {
       res.status(404).json({
         status: "fail",
@@ -44,7 +44,6 @@ async function handleGetIndShopeAccountById(req, res) {
     const indDataBySNo = await Industries.findById({
       _id: id,
       userId: currentUserId,
-      sessionId: sessionId,
     });
     const dates = await InterestDate.find({ userId: currentUserId });
     const endDate = dates[0]?.endDate;
@@ -72,10 +71,10 @@ async function handleUpdateIndDataById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     const body = req.body;
     const indDataById = await Industries.findOneAndUpdate(
-      { _id: id, userId: currentUserId, sessionId: sessionId },
+      { _id: id, userId: currentUserId },
       body,
       {
         new: true,
@@ -98,7 +97,7 @@ async function handleDeleteManyIndData(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId } = req.params;
+
     const ids = req.body;
     if (!Array.isArray(ids) || ids.length === 0) {
       return res.status(400).json({ message: "Ids required" });
@@ -107,7 +106,6 @@ async function handleDeleteManyIndData(req, res) {
     const indDataById = await Industries.deleteMany({
       _id: { $in: ids },
       userId: currentUserId,
-      sessionId: sessionId,
     });
     if (!indDataById) {
       return res
@@ -126,10 +124,10 @@ async function handlePushIndShopeAccountById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     const body = req.body;
     const indDataBySNo = await Industries.findOneAndUpdate(
-      { _id: id, userId: currentUserId, sessionId: sessionId },
+      { _id: id, userId: currentUserId },
       {
         $push: {
           shopeAccount: body,
@@ -156,13 +154,12 @@ async function handleUpdateIndShopeAccountTransactionById(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    const { sessionId, shopeId, accountId } = req.params;
+    const { shopeId, accountId } = req.params;
     const updateData = req.body;
     console.log("update controller fetch body of auto interest", updateData);
     const updatedShopeAccount = await Industries.findOneAndUpdate(
       {
         userId: currentUserId,
-        sessionId: sessionId,
         _id: shopeId,
         "shopeAccount._id": accountId, // 👈 array object match
       },
@@ -184,13 +181,13 @@ async function handleDeleteManyIndShopeTransaction(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     const ids = req.body;
     if (ids.length === 0) {
       return res.status(400).json({ message: "Ids required" });
     }
     const indDataById = await Industries.updateOne(
-      { _id: id, userId: currentUserId, sessionId: sessionId },
+      { _id: id, userId: currentUserId },
       {
         $pull: { shopeAccount: { _id: { $in: ids } } },
       },

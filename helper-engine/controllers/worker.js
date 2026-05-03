@@ -44,10 +44,10 @@ async function handleEditWorkerById(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     const body = req.body;
 
-    if (!id || !body || !sessionId) {
+    if (!id || !body) {
       return res.status(400).json({
         status: "fail",
         message: "Id, body, and sessionId are required",
@@ -57,7 +57,6 @@ async function handleEditWorkerById(req, res) {
       {
         _id: id,
         userId: currentUserId,
-        sessionId: sessionId,
       },
       body,
       { new: true },
@@ -82,9 +81,9 @@ async function handleDeleteWorkerById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
 
-    if (!id || !currentUserId || !sessionId) {
+    if (!id || !currentUserId) {
       return res.status(400).json({
         status: "fail",
         message: "Id, userId, and sessionId are required",
@@ -94,7 +93,6 @@ async function handleDeleteWorkerById(req, res) {
     const deletedWorker = await WorkerData.findOneAndDelete({
       _id: id,
       userId: currentUserId,
-      sessionId: sessionId,
     });
 
     if (deletedWorker) {
@@ -115,9 +113,9 @@ async function handleGetWorkerById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
 
-    if (!id || !currentUserId || !sessionId) {
+    if (!id || !currentUserId) {
       return res.status(404).json({
         status: "fail",
         message: "Id, userId, and sessionId are required",
@@ -127,7 +125,6 @@ async function handleGetWorkerById(req, res) {
     const worker = await WorkerData.findOne({
       userId: currentUserId,
       _id: id,
-      sessionId: sessionId,
     });
 
     if (worker) {
@@ -150,17 +147,17 @@ async function handlePushWorkerTransactionById(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    const { sessionId, id } = req.params;
+    const { id } = req.params;
     const body = req.body;
 
-    if (!id || !body || !sessionId) {
+    if (!id || !body) {
       return res.status(400).json({
         status: "fail",
         message: "Id, body, and sessionId are required",
       });
     }
     const workerById = await WorkerData.findOneAndUpdate(
-      { _id: id, userId: currentUserId, sessionId: sessionId },
+      { _id: id, userId: currentUserId },
       {
         $push: {
           account: body,
@@ -186,8 +183,8 @@ async function handleGetWorkerTransactionById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, workerId } = req.params;
-    if (!workerId || !currentUserId || !sessionId) {
+    const { workerId } = req.params;
+    if (!workerId || !currentUserId) {
       return res.status(400 || 500).json({
         status: "fail",
         message: "WorkerId, DecodedId, and SessionId not found",
@@ -196,7 +193,6 @@ async function handleGetWorkerTransactionById(req, res) {
     const worker = await WorkerData.findOne({
       _id: workerId,
       userId: currentUserId,
-      sessionId: sessionId,
     });
     if (!worker) {
       res.status(500).json({
@@ -224,14 +220,13 @@ async function handleUpdateWorkerTransactionById(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, workerId, accountId } = req.params;
+    const { workerId, accountId } = req.params;
 
     const updateData = req.body;
     const updatedWorkerAccount = await WorkerData.findOneAndUpdate(
       {
         userId: currentUserId,
         _id: workerId,
-        sessionId: sessionId,
         "account._id": accountId,
       },
       {
@@ -259,10 +254,10 @@ async function handleDeleteWorkerTransactionById(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    const { sessionId, workerId } = req.params;
+    const { workerId } = req.params;
     const ids = req.body;
 
-    if (!workerId || !ids || !sessionId) {
+    if (!workerId || !ids) {
       return res.status(400).json({
         status: "fail",
         message: "Worker Id and session Id is required",
@@ -272,7 +267,7 @@ async function handleDeleteWorkerTransactionById(req, res) {
     const deletedWorkerAccount = await WorkerData.updateOne(
       {
         userId: currentUserId,
-        sessionId: sessionId,
+
         _id: workerId,
       },
       {

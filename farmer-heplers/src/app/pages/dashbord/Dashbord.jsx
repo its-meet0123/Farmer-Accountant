@@ -52,10 +52,11 @@ const DashBord = () => {
   };
 
   useEffect(() => {
+    if (!season?._id) return;
+
     async function getData() {
       try {
-        await getDashbordDataFromApi();
-        await getMonthlyTurnoverData();
+        await Promise.all([getDashbordDataFromApi(), getMonthlyTurnoverData()]);
       } catch (err) {
         console.error("Error message:", err.message);
         message.error(t("DB.SEM"));

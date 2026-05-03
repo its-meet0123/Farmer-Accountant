@@ -28,7 +28,7 @@ import AlertText from "../../component/Text";
 import dayjs from "dayjs";
 
 const CasualLabor = () => {
-  const { t } = useAuth();
+  const { season, t } = useAuth();
   const [laborForm] = Form.useForm();
   const [transactionForm] = Form.useForm();
   const [additonalWorker, setAdditonalWorker] = useState([]);
@@ -175,10 +175,11 @@ const CasualLabor = () => {
   };
 
   useEffect(() => {
+    if (!season?._id) return;
     async function getData() {
       try {
         setIsLoading(true);
-        const res = await getAllFieldWorkerData();
+        const res = await getAllFieldWorkerData(season?._id);
         const data = await res.data;
         setIsLoading(false);
         setAdditonalWorker(data.data);
@@ -189,7 +190,7 @@ const CasualLabor = () => {
       }
     }
     getData();
-  }, [fetch]);
+  }, [fetch, season?._id]);
 
   const tableData = useMemo(() => {
     if (!additonalWorker) return [];

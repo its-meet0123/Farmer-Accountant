@@ -4,39 +4,37 @@ export async function postIntShopeInitailData(shopeData) {
   return await axiosInstance.post(`/intshope`, shopeData);
 }
 
-export async function getAllIndShopes() {
-  return await axiosInstance.get(`/intshope`);
+export async function getAllIndShopes(sessionId) {
+  return await axiosInstance.get(`/intshope/${sessionId}`);
 }
 
-export async function getIndShopeAccountById(sessionId, id) {
-  return await axiosInstance.get(`/intshope/${sessionId}/${id}`);
+export async function getIndShopeAccountById(id) {
+  return await axiosInstance.get(`/intshope/${id}`);
 }
 
-export async function UpdateIndDataById(Ids, indDatas) {
-  const { sessionId, Id } = Ids;
-  return await axiosInstance.patch(`/intshope/${sessionId}/${Id}`, indDatas);
+export async function UpdateIndDataById(Id, indDatas) {
+  return await axiosInstance.patch(`/intshope/${Id}`, indDatas);
 }
 
-export async function deleteIndDataByIds(sessionId, ids) {
-  return await axiosInstance.post(`/intshope/${sessionId}/delete-many`, ids);
+export async function deleteIndDataByIds(ids) {
+  return await axiosInstance.post(`/intshope/delete-many`, ids);
 }
 
-export async function deleteIndShopeAccountData(ids) {
+export async function deleteIndShopeAccountData(shopeId, transactionIds) {
   return await axiosInstance.patch(
-    `/intshope/${ids.sessionId}/${ids.shopeId}/delete-many`,
-    ids.transactionIds,
+    `/intshope/${shopeId}/delete-many`,
+    transactionIds,
   );
 }
 
-export async function pushIndShopeAccountById(ids, transaction) {
-  const { sessionId, id } = ids;
-  return await axiosInstance.put(`/intshope/${sessionId}/${id}`, transaction);
+export async function pushIndShopeAccountById(id, transaction) {
+  return await axiosInstance.put(`/intshope/${id}`, transaction);
 }
 
 export async function updateIndShopeAccount(IDs, transaction) {
-  const { sessionId, shopeId, accountId } = IDs;
+  const { shopeId, accountId } = IDs;
   return await axiosInstance.put(
-    `/intshope/${sessionId}/${shopeId}/account/${accountId}`,
+    `/intshope/${shopeId}/account/${accountId}`,
     transaction,
   );
 }

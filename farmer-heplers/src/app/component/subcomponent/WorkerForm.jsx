@@ -12,7 +12,7 @@ const WorkerForm = ({
   workerList,
 }) => {
   const [btnLoad, setBtnLoad] = useState(false);
-  const { authState, t } = useAuth();
+  const { authState, t, season } = useAuth();
   const today = dayjs();
   const handleSubmitInfoForm = async () => {
     setBtnLoad(true);
@@ -21,6 +21,7 @@ const WorkerForm = ({
         const formValues = workerInfoForm.getFieldsValue();
         const workerInfo = {
           userId: authState.user.userId,
+          sessionId: season?._id,
           workerDetail: {
             workerName: {
               firstName: formValues.firstName,

@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/", handlePostEntData);
 router.get("/:sessionId", authMiddleware, handleGetAllEntData);
 router
-  .route("/:sessionId/:id")
+  .route("/:id")
   .get(authMiddleware, handleGetEntDataById)
   .patch(authMiddleware, handleUpdateEntDataById)
   .delete(authMiddleware, handleDeleteEntDataById);

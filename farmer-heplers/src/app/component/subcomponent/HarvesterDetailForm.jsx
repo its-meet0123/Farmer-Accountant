@@ -10,7 +10,7 @@ import { useAuth } from "../../auth/AuthContext";
 import { postHarvestData, updateHarvestData } from "../../service/other";
 
 const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
-  const { authState, t } = useAuth();
+  const { authState, t, season } = useAuth();
   const today = dayjs();
   const [buttonLoading, setButtonLoading] = useState(false);
 
@@ -22,6 +22,7 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
       const harvesterDetails = {
         ...restOfFormValues,
         userId: authState.user.userId,
+        sessionId: season?._id,
       };
       try {
         const res = await postHarvestData(harvesterDetails);
@@ -43,9 +44,13 @@ const HarvesterDetailForm = ({ form, openType, setFetch, onClose }) => {
       const editValues = form.getFieldsValue();
       console.log("Edit harvester data form values", editValues);
       const { harvesterId, ...restOfFormValues } = editValues;
+      const editDetails = {
+        ...restOfFormValues,
+        sessionId: season?._id,
+      };
 
       try {
-        const res = await updateHarvestData(harvesterId, restOfFormValues);
+        const res = await updateHarvestData(harvesterId, editDetails);
         const data = await res.data;
 
         if (data.status === "Success") {

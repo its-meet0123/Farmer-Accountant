@@ -19,30 +19,30 @@ const router = express.Router();
 router.post("/", handleAddWorker);
 router.get("/:sessionId", authMiddleware, handleGetAllWorkers);
 router
-  .route("/:sessionId/:id")
+  .route("/:id")
   .patch(authMiddleware, handleEditWorkerById)
   .get(authMiddleware, handleGetWorkerById)
   .delete(authMiddleware, handleDeleteWorkerById);
 router.put(
-  "/:sessionId/:id/push",
+  "/:id/push",
   authMiddleware,
   autoInterestCalculationForWorker,
   handlePushWorkerTransactionById,
 );
 router
-  .route("/:sessionId/:workerId/account/:accountId")
+  .route("/:workerId/account/:accountId")
   .patch(
     authMiddleware,
     autoInterestCalculationForWorker,
     handleUpdateWorkerTransactionById,
   );
 router.post(
-  "/:sessionId/:workerId/delete",
+  "/:workerId/delete",
   authMiddleware,
   handleDeleteWorkerTransactionById,
 );
 router.get(
-  "/:sessionId/:workerId/account",
+  "/:workerId/account",
   authMiddleware,
   handleGetWorkerTransactionById,
 );

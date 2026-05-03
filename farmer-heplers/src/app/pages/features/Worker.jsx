@@ -33,7 +33,7 @@ import { PageContainer } from "../../component/PageContainer";
 import dayjs from "dayjs";
 
 const WorkersData = () => {
-  const { t } = useAuth();
+  const { season, t } = useAuth();
   const [isLoanding, setIsLoanding] = useState(null);
   const [workerList, setWorkerList] = useState([]);
   const [openType, setOpenType] = useState(null);
@@ -159,10 +159,11 @@ const WorkersData = () => {
     }
   };
   useEffect(() => {
+    if (!season._id) return;
     async function getData() {
       try {
         setIsLoanding("loadData");
-        const res = await getAllWorkers();
+        const res = await getAllWorkers(season?._id);
         const data = await res.data.data;
         setWorkerList(data);
         setIsLoanding(null);
@@ -173,7 +174,7 @@ const WorkersData = () => {
       }
     }
     getData();
-  }, [fetchData]);
+  }, [fetchData, season._id]);
 
   const tableData = useMemo(() => {
     if (!workerList) return [];

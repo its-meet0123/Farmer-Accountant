@@ -23,15 +23,15 @@ const router = express.Router();
 router.get("/:sessionId/labor", authMiddleware, handleGetAllAdditionalWorkers);
 router.post("/labor", postAdditionalWorker);
 router
-  .route("/:sessionId/labor/:id")
+  .route("/labor/:id")
   .patch(authMiddleware, handleUpdateAdditionalWorkerById)
   .delete(authMiddleware, handleDeleteAdditionalWorkerById);
 router
-  .route("/:sessionId/labor/:workerId/transaction/:transactionId")
+  .route("/labor/:workerId/transaction/:transactionId")
   .patch(authMiddleware, updateAdditionalWorkerTransactionByIds)
   .delete(authMiddleware, deleteAdditionalWorkerTransactionByIds);
 router.put(
-  "/:sessionId/labor/:id/transaction",
+  "/labor/:id/transaction",
   authMiddleware,
   handleAddAdditionalWorkerTransactionById,
 );
@@ -40,12 +40,12 @@ router.put(
 router.get("/:sessionId/harvester", authMiddleware, handleGetAllHarvestList);
 router.post("/harvester", postHavrestData);
 router
-  .route("/:sessionId/harvester/:id")
+  .route("/harvester/:id")
   .patch(authMiddleware, handleUpdateHarvestDataById)
   .delete(authMiddleware, handleDeleteHarvestDataById)
   .put(authMiddleware, handleAddHarvesterTransactionById);
 router
-  .route("/:sessionId/harvester/:harvesterId/transaction/:transactionId")
+  .route("/harvester/:harvesterId/transaction/:transactionId")
   .patch(authMiddleware, updateHarvesterTransactionByIds)
   .delete(authMiddleware, deleteHavresterTransactionByIds);
 

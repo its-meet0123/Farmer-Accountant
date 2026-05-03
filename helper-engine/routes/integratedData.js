@@ -18,7 +18,7 @@ const router = express.Router();
 router.post("/", handleCreateIndData);
 router.get("/:sessionId", authMiddleware, handleGetAllIndData);
 router
-  .route("/:sessionId/:id")
+  .route("/:id")
   .get(authMiddleware, handleGetIndShopeAccountById)
   .put(
     authMiddleware,
@@ -27,15 +27,15 @@ router
   )
   .patch(authMiddleware, handleUpdateIndDataById);
 router.put(
-  "/:sessionId/:shopeId/account/:accountId",
+  "/:shopeId/account/:accountId",
   authMiddleware,
   autoInterestCalculationForShopes,
   handleUpdateIndShopeAccountTransactionById,
 );
 
-router.post("/:sessionId/delete-many", authMiddleware, handleDeleteManyIndData);
+router.post("/delete-many", authMiddleware, handleDeleteManyIndData);
 router.patch(
-  "/:sessionId/:id/delete-many",
+  "/:id/delete-many",
   authMiddleware,
   handleDeleteManyIndShopeTransaction,
 );
