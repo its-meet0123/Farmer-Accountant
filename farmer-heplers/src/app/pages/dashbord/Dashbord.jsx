@@ -65,7 +65,7 @@ const DashBord = () => {
       }
     }
     getData();
-  }, [location.pathname]);
+  }, [location.pathname, season]);
 
   const features = [
     {
