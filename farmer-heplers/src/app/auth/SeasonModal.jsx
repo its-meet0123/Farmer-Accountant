@@ -1,13 +1,16 @@
+import { ArrowsAltOutlined } from "@ant-design/icons";
 import {
   Button,
   ConfigProvider,
   DatePicker,
   Form,
   Input,
+  message,
   Modal,
   Select,
 } from "antd";
 import dayjs from "dayjs";
+import { postSeason } from "../service/season";
 const { Option } = Select;
 
 const modalBackground = `
@@ -18,14 +21,22 @@ const modalBackground = `
 const SeasonModal = ({ season, setSeason, userId }) => {
   const [form] = Form.useForm();
   const today = dayjs();
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const values = form.getFieldsValue();
     const formattedValues = {
       ...values,
       year: values.year ? values.year.year() : null,
     };
 
-    console.log("set format season values :", formattedValues);
+    try {
+      const res = await postSeason(formattedValues);
+      const data = res.data;
+
+      data.status == "success" && message.success(data.message);
+    } catch (err) {
+      console.log(err.message);
+      message.error("Season not created");
+    }
   };
   const handleCancel = () => {
     setSeason({

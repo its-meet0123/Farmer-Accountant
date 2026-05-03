@@ -17,7 +17,11 @@ async function monthlyTurnover(req, res) {
           "No active session found. Please provide a session ID or start a new session.",
       });
     }
-    const Ind = await Industries.find({ userId: currentUserId });
+    const sessionId = req.params.sessionId || session._id;
+    const Ind = await Industries.find({
+      userId: currentUserId,
+      sessionId: sessionId,
+    });
 
     const monthlyTurnover = Ind.reduce((acc, shopes) => {
       shopes?.shopeAccount.forEach((curr) => {
