@@ -5,7 +5,6 @@ import FarmerLoader from "./Loader";
 import { userLoggedOut } from "../service/auth";
 import { axiosInstance } from "../service/axiosIntance";
 import { getActiveSeason } from "../service/season";
-import SeasonModal from "./SeasonModal";
 
 const AuthContext = createContext();
 

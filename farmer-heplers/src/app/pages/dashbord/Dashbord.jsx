@@ -24,7 +24,7 @@ const DashBord = () => {
   const [dashbordData, setDeshbordData] = useState();
   const [monthlyTotal, setMonthlyTotal] = useState([]);
   const { season, t } = useAuth();
-
+  console.log("lget season in dashboard :", season);
   const shopesArray = dashbordData?.shopes || [];
   const permanentWorkersArray = dashbordData?.workers || [];
   const casualLaborsArray = dashbordData?.casualLabors || [];
