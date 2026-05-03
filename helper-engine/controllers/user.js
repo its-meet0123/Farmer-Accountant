@@ -2,8 +2,10 @@ require("dotenv").config();
 const User = require("../models/user");
 const EntData = require("../models/integrated");
 const IndData = require("../models/integratedData");
+const Sessions = require("../models/session");
 const EndDate = require("../models/endDate");
 const WorkerData = require("../models/worker");
+const { FieldWorker, Harvest } = require("../models/otherexpense");
 //const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -169,10 +171,16 @@ async function handleSignUpUserDeleteAccount(req, res) {
   try {
     const { userId, password } = req.body;
 
-    await IndData.deleteMany({ userId: userId });
-    await EntData.deleteMany({ userId: userId });
-    await EndDate.deleteMany({ userId: userId });
-    await WorkerData.deleteMany({ userId: userId });
+    await Promise.all([
+      IndData.deleteMany({ userId: userId }),
+      EntData.deleteMany({ userId: userId }),
+      EndDate.deleteMany({ userId: userId }),
+      WorkerData.deleteMany({ userId: userId }),
+      FieldWorker.deleteMany({ userId: userId }),
+      Harvest.deleteMany({ userId: userId }),
+      Sessions.deleteMany({ userId: userId }),
+    ]);
+
     await User.findOneAndDelete({
       userId: userId,
       password: password,

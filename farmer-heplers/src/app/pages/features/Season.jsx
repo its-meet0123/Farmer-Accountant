@@ -3,6 +3,18 @@ import { useEffect, useState } from "react";
 import { getAllSeason } from "../../service/season";
 import { PageContainer } from "../../component/PageContainer";
 
+const formattedDate = (date) => {
+  const rawDate = date ? new Date(date) : new Date();
+  const DateTimeFormat = new Intl.DateTimeFormat("en-GB", {
+    weekday: "long",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(rawDate);
+
+  return DateTimeFormat;
+};
+
 const Season = () => {
   const [seasonList, setSeasonList] = useState([]);
   useEffect(() => {
@@ -28,7 +40,7 @@ const Season = () => {
 
   const columns = [
     {
-      title: "S.NO.",
+      title: "S.No.",
       dataIndex: "serialNo",
       key: "serialNo",
     },
@@ -46,11 +58,21 @@ const Season = () => {
       title: "Start Date",
       dataIndex: "startDate",
       key: "startDate",
+      render: (startDate) => {
+        const date = formattedDate(startDate);
+
+        return date;
+      },
     },
     {
       title: "End Date",
       dataIndex: "endDate",
       key: "endDate",
+      render: (endDate) => {
+        const date = formattedDate(endDate);
+
+        return date;
+      },
     },
     {
       title: "Active",

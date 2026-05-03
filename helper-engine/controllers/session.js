@@ -1,5 +1,10 @@
 require("dotenv").config();
 const Sessions = require("../models/session");
+const Shopes = require("../models/integratedData");
+const Industries = require("../models/integrated");
+const Workers = require("../models/worker");
+const InterestDate = require("../models/endDate");
+const { FieldWorker, Harvest } = require("../models/otherexpense");
 
 async function handleGetAllSessions(req, res) {
   try {
@@ -156,6 +161,15 @@ async function handleDeleteSession(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
     const { sessionId } = req.params;
+
+    await Promise.all([
+      Industries.deleteMany({ userId: currentUserId, sessionId: sessionId }),
+      Shopes.deleteMany({ userId: currentUserId, sessionId: sessionId }),
+      Workers.deleteMany({ userId: currentUserId, sessionId: sessionId }),
+      FieldWorker.deleteMany({ userId: currentUserId, sessionId: sessionId }),
+      Harvest.deleteMany({ userId: currentUserId, sessionId: sessionId }),
+      InterestDate.deleteMany({ userId: currentUserId, sessionId: sessionId }),
+    ]);
 
     const session = await Sessions.findByIdAndDelete({
       _id: sessionId,
