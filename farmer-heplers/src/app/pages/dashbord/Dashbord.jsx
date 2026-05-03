@@ -57,6 +57,9 @@ const DashBord = () => {
         getDashbordDataFromApi();
         getMonthlyTurnoverData();
       } catch (err) {
+        if (err.code === "ERR_CANCELED") {
+          return;
+        }
         console.error("Error message:", err.message);
         message.error(t("DB.SEM"));
       }
