@@ -31,8 +31,8 @@ const SeasonModal = ({ season, setSeason, userId }) => {
     try {
       const res = await postSeason(formattedValues);
       const data = res.data;
-
       data.status == "success" && message.success(data.message);
+      setSeason(data.data);
     } catch (err) {
       console.log(err.message);
       message.error("Season not created");
