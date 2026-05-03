@@ -1,7 +1,9 @@
-import { message, Table } from "antd";
+import { Button, message, Space, Table, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { getAllSeason } from "../../service/season";
 import { PageContainer } from "../../component/PageContainer";
+import { useAuth } from "../../auth/AuthContext";
+import SeasonModal from "../../auth/SeasonModal";
 
 const formattedDate = (date) => {
   const rawDate = date ? new Date(date) : new Date();
@@ -16,7 +18,18 @@ const formattedDate = (date) => {
 };
 
 const Season = () => {
+  const { authState, t, season, setSeason } = useAuth();
   const [seasonList, setSeasonList] = useState([]);
+
+  const addSeason = () => {
+    setSeason({
+      ...season,
+      openModal: true,
+    });
+  };
+
+  const editSeason = () => {};
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -31,7 +44,7 @@ const Season = () => {
       }
     };
     getData();
-  }, []);
+  }, [season]);
 
   const tableData = seasonList.map((item, index) => ({
     ...item,
@@ -96,16 +109,41 @@ const Season = () => {
       title: "Action",
       key: "a",
       render: (_, record) => {
-        return null;
+        return (
+          //   <Space size="middle">
+
+          //     {/* Edit Button */}
+          //     <Tooltip title="Edit">
+          //       <Button
+          //         type="primary"
+          //         icon={<EditOutlined />}
+          //         onClick={() => addSeason()}
+          //       />
+          //     </Tooltip>
+          //     </Space>
+          null
+        );
       },
     },
   ];
+
   return (
-    <PageContainer>
-      <>
+    <>
+      <PageContainer
+        title={"Season List"}
+        extra={
+          <Button type="primary" onClick={() => addSeason()}>
+            Add season
+          </Button>
+        }>
         <Table dataSource={tableData} columns={columns} rowKey={"_id"} />
-      </>
-    </PageContainer>
+      </PageContainer>
+      <SeasonModal
+        season={season}
+        setSeason={setSeason}
+        userId={authState.user.userId}
+      />
+    </>
   );
 };
 
