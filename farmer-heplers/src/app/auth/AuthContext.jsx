@@ -74,6 +74,9 @@ export const AuthProvider = ({ children }) => {
           data: null,
           openModal: true,
         });
+        if (err.code === "ERR_CANCELED") {
+          return;
+        }
       }
     };
     checkSeason();
