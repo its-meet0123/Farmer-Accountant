@@ -15,11 +15,13 @@ router
   .route("/")
   .post(handlePostSession)
   .get(authMiddleware, handleGetAllSessions);
+
+router.get("/active-session", authMiddleware, handleGetActiveSession);
+
 router
   .route("/:sessionId")
   .get(authMiddleware, handleGetSessionById)
   .delete(authMiddleware, handleDeleteSession)
   .put(authMiddleware, handleUpdateSession);
-router.get("/active-session", authMiddleware, handleGetActiveSession);
 
 module.exports = router;
