@@ -54,8 +54,8 @@ const DashBord = () => {
   useEffect(() => {
     async function getData() {
       try {
-        getDashbordDataFromApi();
-        getMonthlyTurnoverData();
+        await getDashbordDataFromApi();
+        await getMonthlyTurnoverData();
       } catch (err) {
         console.error("Error message:", err.message);
         message.error(t("DB.SEM"));
