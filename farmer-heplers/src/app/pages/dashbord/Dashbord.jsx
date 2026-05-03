@@ -23,7 +23,7 @@ const DashBord = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [dashbordData, setDeshbordData] = useState();
   const [monthlyTotal, setMonthlyTotal] = useState([]);
-  const { t } = useAuth();
+  const { season, t } = useAuth();
 
   const shopesArray = dashbordData?.shopes || [];
   const permanentWorkersArray = dashbordData?.workers || [];
@@ -31,7 +31,7 @@ const DashBord = () => {
   const harvestersArray = dashbordData?.harvesters || [];
 
   const getDashbordDataFromApi = async () => {
-    const res = await getDashbordData();
+    const res = await getDashbordData(season?.sessionId);
     const data = await res.data;
     console.log("dashboard data in new format", data);
     if (data.status == "Success") {
@@ -42,7 +42,7 @@ const DashBord = () => {
 
   const getMonthlyTurnoverData = async () => {
     setIsLoading(true);
-    const res = await getMonthlyTurnover();
+    const res = await getMonthlyTurnover(season?.sessionId);
     const data = await res.data;
     if (data.status == "Success") {
       setMonthlyTotal(data.data);
