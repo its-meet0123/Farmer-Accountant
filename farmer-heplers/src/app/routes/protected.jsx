@@ -8,6 +8,7 @@ import WorkerCalculation from "../pages/features/WorkerCalculation";
 import CasualLabor from "../pages/features/CasualLabor";
 import HarvesterData from "../pages/features/MechanizedHiring";
 import DashBord from "../pages/dashbord/Dashbord";
+import Season from "../pages/features/Season";
 
 export const protectedRoutes = [
   {
@@ -49,6 +50,7 @@ export const protectedRoutes = [
         element: <CasualLabor />,
       },
       { path: "/other/mechanized", element: <HarvesterData /> },
+      { path: "/season", element: <Season /> },
       { path: "*", element: <Navigate to="/" /> },
     ],
   },

@@ -36,6 +36,7 @@ const AppLayout = ({ children }) => {
     getItem(`${t("layout.menu.home")}`, "/home"),
     getItem(`${t("layout.menu.view")}`, "/view"),
     getItem(`${t("layout.menu.worker")}`, "/worker"),
+    getItem("Season", "/season"),
     getItem(`${t("layout.menu.othert")}`, "/other", [
       getItem(`${t("layout.menu.other.labor")}`, "/other/labor"),
       getItem(`${t("layout.menu.other.hiring")}`, "/other/mechanized"),
