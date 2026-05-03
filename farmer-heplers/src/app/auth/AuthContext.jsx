@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     user: null,
   });
   const [season, setSeason] = useState({
-    data: null,
+    ...null,
     openModal: true,
   });
   const { t, i18n } = useTranslation();
@@ -63,14 +63,13 @@ export const AuthProvider = ({ children }) => {
         const data = res.data;
         if (data.status === "Success") {
           setSeason({
-            data: data.data,
+            ...data.data,
             openModal: false,
           });
         }
       } catch (err) {
         console.log(err.message);
         setSeason({
-          data: null,
           openModal: true,
         });
         if (err.code === "ERR_CANCELED") {

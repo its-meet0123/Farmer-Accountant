@@ -31,7 +31,7 @@ const DashBord = () => {
   const harvestersArray = dashbordData?.harvesters || [];
 
   const getDashbordDataFromApi = async () => {
-    const res = await getDashbordData(season?.sessionId);
+    const res = await getDashbordData(season?._id);
     const data = await res.data;
     console.log("dashboard data in new format", data);
     if (data.status == "Success") {
@@ -42,7 +42,7 @@ const DashBord = () => {
 
   const getMonthlyTurnoverData = async () => {
     setIsLoading(true);
-    const res = await getMonthlyTurnover(season?.sessionId);
+    const res = await getMonthlyTurnover(season?._id);
     const data = await res.data;
     if (data.status == "Success") {
       setMonthlyTotal(data.data);
