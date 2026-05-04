@@ -33,12 +33,16 @@ const Season = () => {
   };
 
   const editSeason = (record) => {
+    const year = dayjs(record.year);
+    const startDate = dayjs(record.startDate);
+    const endDate = dayjs(record.endDate);
+
     editForm.setFieldsValue({
       sessionId: record._id,
       name: record.name,
-      year: record.year,
-      startDate: record.startDate,
-      endDate: record.endDate,
+      year: year,
+      startDate: startDate,
+      endDate: endDate,
     });
 
     console.log("in season page :", record);
