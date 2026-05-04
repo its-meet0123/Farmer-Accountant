@@ -22,7 +22,7 @@ function getItem(label, key, children, icon) {
 }
 
 const AppLayout = ({ children }) => {
-  const { authState, logout, goToSingUp, t } = useAuth();
+  const { authState, logout, goToSingUp, t, season } = useAuth();
   const location = useLocation();
   const screen = useBreakpoint();
   const navigate = useNavigate();
@@ -86,6 +86,10 @@ const AppLayout = ({ children }) => {
             openMenus(key);
           }}
         />
+
+        <div style={{ marginLeft: "auto", color: "#fff", fontWeight: 500 }}>
+          {season?.name || "No Session"}[{season?.year || ""}]
+        </div>
       </Header>
       <Content
         style={{
