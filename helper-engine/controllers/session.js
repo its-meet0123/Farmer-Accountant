@@ -40,6 +40,9 @@ async function handlePostSession(req, res) {
 
   let { startDate, endDate } = sessionInfo;
 
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
+
   const today = new Date();
 
   let isActive = false;
