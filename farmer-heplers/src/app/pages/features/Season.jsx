@@ -12,7 +12,12 @@ import {
   Table,
 } from "antd";
 import { useEffect, useState } from "react";
-import { deleteSeason, getAllSeason } from "../../service/season";
+import {
+  deleteSeason,
+  getAllSeason,
+  postSeason,
+  updateSeasonById,
+} from "../../service/season";
 import { PageContainer } from "../../component/PageContainer";
 import { useAuth } from "../../auth/AuthContext";
 
@@ -54,7 +59,14 @@ const Season = () => {
   });
   const [seasonForm] = Form.useForm();
 
-  const onSubmit = () => {
+  const handleCancel = () => {
+    setModal({
+      isOpen: false,
+    });
+    seasonForm.resetFields();
+  };
+
+  const onSubmit = async () => {
     if (modal.isEdit) {
       const editValues = seasonForm.getFieldsValue();
       const formattedValues = {
@@ -63,13 +75,17 @@ const Season = () => {
         endDate: new Date(editValues.endDate),
         year: editValues.year ? editValues.year.year() : null,
       };
-      console.log("edit season values from season form :", formattedValues);
+
+      const { sessionId, ...values } = formattedValues;
+
+      console.log("edit season values from season form :", sessionId, values);
       // try {
-      //   const res = await updateSeasonById(formattedValues);
+      //   const res = await updateSeasonById(sessionId,values);
       //   const data = res.data;
       //   if (data.status == "success") {
       //     message.success(data.message);
       //     setSeason({ ...data.data, openModal: false });
+      //     handleCancel();
       //   }
       // } catch (err) {
       //   console.log(err.message);
@@ -84,16 +100,22 @@ const Season = () => {
         startDate: new Date(values.startDate),
         endDate: new Date(values.endDate),
         year: values.year ? values.year.year() : null,
+        userId: authState.user.userId,
       };
 
       console.log("add season value from season form :", formattedValues);
-    }
-  };
 
-  const handleCancel = () => {
-    setModal({
-      isOpen: false,
-    });
+      // try {
+      //   const res = postSeason(formattedValues);
+      //   const data = res.data;
+      //   if (data.status === "success") {
+      //     message.success(data.message);
+      //     handleCancel();
+      //   }
+      // } catch (err) {
+      //   console.log(err.message);
+      // }
+    }
   };
 
   const editSeason = (record) => {
@@ -226,7 +248,7 @@ const Season = () => {
             items: [
               {
                 key: "1",
-                label: "add",
+                label: "select",
                 icon: modal.isSelect ? (
                   <CheckSquareOutlined />
                 ) : (
