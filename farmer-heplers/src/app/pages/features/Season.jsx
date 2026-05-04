@@ -130,7 +130,7 @@ const Season = () => {
   return (
     <>
       <PageContainer
-        title={"Season List"}
+        title="Season List"
         extra={
           <Button type="primary" onClick={() => addSeason()}>
             Add season
