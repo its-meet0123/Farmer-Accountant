@@ -33,15 +33,17 @@ const Season = () => {
   };
 
   const editSeason = (record) => {
-    const startDate = dayjs(record.startDate);
-    const endDate = dayjs(record.endDate);
-    editForm.setFieldsValue({
-      sessionId: record._id,
-      name: record.name,
-      year: record.year,
-      startDate: startDate,
-      endDate: endDate,
-    });
+    // const startDate = dayjs(record.startDate);
+    // const endDate = dayjs(record.endDate);
+    // editForm.setFieldsValue({
+    //   sessionId: record._id,
+    //   name: record.name,
+    //   year: record.year,
+    //   startDate: startDate,
+    //   endDate: endDate,
+    // });
+
+    console.log("in season page :", record);
 
     setTimeout(() => {
       setSeason({
@@ -49,7 +51,7 @@ const Season = () => {
         edit: true,
         openModal: true,
       });
-    }, 1000);
+    }, 3000);
   };
 
   useEffect(() => {
