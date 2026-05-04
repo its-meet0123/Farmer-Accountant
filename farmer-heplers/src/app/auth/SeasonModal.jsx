@@ -106,9 +106,11 @@ const SeasonModal = ({ season, setSeason, userId }) => {
             onFinish={onSubmit}
             style={{ gap: "15px" }} // Spacing maintain karne ke liye
           >
-            <Form.Item name="userId" initialValue={userId} hidden>
-              <Input />
-            </Form.Item>
+            {userId && (
+              <Form.Item name="userId" initialValue={userId} hidden>
+                <Input />
+              </Form.Item>
+            )}
 
             <Form.Item
               label="Select Season"

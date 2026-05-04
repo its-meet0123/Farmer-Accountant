@@ -369,9 +369,11 @@ const Season = () => {
             onFinish={onSubmit}
             style={{ gap: "15px" }} // Spacing maintain karne ke liye
           >
-            <Form.Item name="sessionId" hidden>
-              <Input />
-            </Form.Item>
+            {modal.isEdit && (
+              <Form.Item name="sessionId" hidden>
+                <Input />
+              </Form.Item>
+            )}
 
             <Form.Item
               label="Select Season"
