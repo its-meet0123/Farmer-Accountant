@@ -37,8 +37,9 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
       try {
         const editValue = form.getFieldsValue();
         const { id, ...editedValues } = editValue;
+        const IDs = { shopeId: Id.shopeId, accountId: id };
 
-        const res = await updateIndShopeAccount(Id.shopeId, id, editedValues);
+        const res = await updateIndShopeAccount(IDs, editedValues);
         if (res.status === 200) {
           const text = `${t("indDrawer.submitFunction.successMessageforEdit")}`;
           onClose();

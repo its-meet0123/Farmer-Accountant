@@ -88,7 +88,7 @@ const AppLayout = ({ children }) => {
         />
 
         <div style={{ marginLeft: "auto", color: "#fff", fontWeight: 500 }}>
-          {season?.name || "No Session"}[{season?.year || ""}]
+          {season?.name || "No Session"} [{season?.year || ""}]
         </div>
       </Header>
       <Content

@@ -20,7 +20,8 @@ export async function deleteIndDataByIds(ids) {
   return await axiosInstance.post(`/intshope/delete-many`, ids);
 }
 
-export async function deleteIndShopeAccountData(shopeId, transactionIds) {
+export async function deleteIndShopeAccountData(ids) {
+  const { shopeId, transactionIds } = ids;
   return await axiosInstance.patch(
     `/intshope/${shopeId}/delete-many`,
     transactionIds,

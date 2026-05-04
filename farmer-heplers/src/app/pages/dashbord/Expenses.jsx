@@ -1,5 +1,8 @@
 import { ConfigProvider, Table } from "antd";
 import { useAuth } from "../../auth/AuthContext";
+import { FaGasPump, FaUser } from "react-icons/fa";
+import { GiFarmTractor, GiPlantSeed } from "react-icons/gi";
+import { MdEngineering } from "react-icons/md";
 
 const Expense = ({ data }) => {
   const { t } = useAuth();
@@ -7,27 +10,52 @@ const Expense = ({ data }) => {
   const dataSource = [
     {
       no: "1",
-      label: t("dashbord.cards.table.lt1"),
+      label: (
+        <>
+          <FaGasPump style={{ marginRight: 6 }} />
+          {t("dashbord.cards.table.lt1")}
+        </>
+      ),
       value: data?.totalOfDiesel,
     },
     {
       no: "2",
-      label: t("dashbord.cards.table.lt2"),
+      label: (
+        <>
+          <GiPlantSeed style={{ marginRight: 6 }} />
+          {t("dashbord.cards.table.lt2")}
+        </>
+      ),
       value: data?.totalOfSeedsAndFertilizer,
     },
     {
       no: "3",
-      label: t("dashbord.cards.table.lt3"),
+      label: (
+        <>
+          <MdEngineering style={{ marginRight: 6 }} />
+          {t("dashbord.cards.table.lt3")}
+        </>
+      ),
       value: data?.totalOfPermanentWorker,
     },
     {
       no: "4",
-      label: t("dashbord.cards.table.lt4"),
+      label: (
+        <>
+          <GiFarmTractor style={{ marginRight: 6 }} />
+          {t("dashbord.cards.table.lt4")}
+        </>
+      ),
       value: data?.totalOfHarvest,
     },
     {
       no: "5",
-      label: t("dashbord.cards.table.lt5"),
+      label: (
+        <>
+          <FaUser style={{ marginRight: 6 }} />
+          {t("dashbord.cards.table.lt5")}
+        </>
+      ),
       value: data?.totalOfCasualLabor,
     },
   ];
