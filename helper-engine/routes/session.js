@@ -22,6 +22,6 @@ router
   .route("/:sessionId")
   .get(authMiddleware, handleGetSessionById)
   .delete(authMiddleware, handleDeleteSession)
-  .put(authMiddleware, handleUpdateSession);
+  .patch(authMiddleware, handleUpdateSession);
 
 module.exports = router;

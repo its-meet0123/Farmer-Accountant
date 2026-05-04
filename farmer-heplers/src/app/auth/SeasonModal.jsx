@@ -40,7 +40,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
   };
   const handleCancel = () => {
     setSeason({
-      data: season?.data || null,
+      ...(season?.data || null),
       openModal: false,
     });
   };
@@ -77,7 +77,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
           }
           open={season.openModal}
           onOk={onSubmit}
-          //onCancel={handleCancel}
+          onCancel={handleCancel}
           styles={{
             content: {
               backgroundImage: modalBackground,
@@ -141,12 +141,12 @@ const SeasonModal = ({ season, setSeason, userId }) => {
               <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
-            <Form.Item label="Status" name="isActive">
+            {/* <Form.Item label="Status" name="isActive">
               <Select style={{ width: 100 }}>
                 <Option value="true">Active</Option>
                 <Option value="false">Inactive</Option>
               </Select>
-            </Form.Item>
+            </Form.Item> */}
 
             {/* Submit button wrapper */}
             <div

@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   });
   const [season, setSeason] = useState({
     ...null,
+    edit: false,
     openModal: true,
   });
   const { t, i18n } = useTranslation();

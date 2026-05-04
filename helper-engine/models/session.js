@@ -19,7 +19,7 @@ const sessionSchema = new mongoose.Schema({
   endDate: Date,
   isActive: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 });
 
