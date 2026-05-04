@@ -7,19 +7,18 @@ import {
   message,
   Modal,
   Popconfirm,
-  Space,
+  Select,
   Table,
-  Tooltip,
 } from "antd";
 import { useEffect, useState } from "react";
 import { deleteSeason, getAllSeason } from "../../service/season";
 import { PageContainer } from "../../component/PageContainer";
 import { useAuth } from "../../auth/AuthContext";
-import SeasonModal from "../../auth/SeasonModal";
+
 import dayjs from "dayjs";
 import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
 import AlertText from "../../component/Text";
-import { Select } from "react-i18next/icu.macro";
+const { Option } = Select;
 
 const formattedDate = (date) => {
   const rawDate = date ? new Date(date) : new Date();
