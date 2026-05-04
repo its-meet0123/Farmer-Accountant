@@ -10,6 +10,7 @@ const otherExpenseRouter = require("./routes/otherexpense");
 const dashBordRouter = require("./routes/dashbord");
 const authRouter = require("./routes/auth");
 const sessionRouter = require("./routes/session");
+const sessionExpireJob = require("./cronJobs/sessionCron");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
@@ -41,6 +42,8 @@ connectMongoDB(`${process.env.MONGO_URI}`).then(() =>
 app.get("/health-check", (req, res) => {
   res.status(200).send("Server is Up and Running");
 });
+
+sessionExpireJob();
 
 app.use("/user", userRouter);
 app.use("/season", sessionRouter);
