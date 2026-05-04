@@ -4,7 +4,6 @@ const Session = require("../models/session"); // apna path adjust karo
 const sessionExpireJob = () => {
   cron.schedule("0 0 * * *", async () => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
 
     await Session.updateMany(
       {

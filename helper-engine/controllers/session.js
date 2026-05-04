@@ -38,7 +38,22 @@ async function handlePostSession(req, res) {
     return res.json({ status: "error", message: "All fields are required" });
   }
 
-  const result = await Sessions.create(sessionInfo);
+  let { startDate, endDate } = sessionInfo;
+
+  const today = new Date();
+
+  let isActive = false;
+
+  if (startDate <= today && endDate >= today) {
+    isActive = true;
+  }
+
+  const result = await Sessions.create({
+    ...sessionInfo,
+    startDate,
+    endDate,
+    isActive,
+  });
 
   res.status(201).json({
     status: "success",
