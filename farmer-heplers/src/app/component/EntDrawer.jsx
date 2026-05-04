@@ -95,6 +95,7 @@ const EntDrawer = ({
           allValues.aShopes.map((shope) => {
             const shopeDataObj = {
               userId: user.userId,
+              sessionId: season?._id,
               nameInd: allValues.aNameInd,
               shopeNumber: shope.shopeNumber,
               shopeAccount: [],
