@@ -1,4 +1,3 @@
-import { ArrowsAltOutlined } from "@ant-design/icons";
 import {
   Button,
   ConfigProvider,
@@ -10,7 +9,7 @@ import {
   Select,
 } from "antd";
 import dayjs from "dayjs";
-import { postSeason, updateSeasonById } from "../service/season";
+import { postSeason } from "../service/season";
 const { Option } = Select;
 
 const modalBackground = `
@@ -18,50 +17,30 @@ const modalBackground = `
     radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
   `;
 
-const SeasonModal = ({ season, setSeason, userId, editForm }) => {
+const SeasonModal = ({ season, setSeason, userId }) => {
   const [form] = Form.useForm();
   const today = dayjs();
   const onSubmit = async () => {
-    if (season.edit) {
-      const editValues = editForm.getFieldsValue();
-      const formattedValues = {
-        ...editValues,
-        year: editValues.year ? editValues.year.year() : null,
-      };
-      console.log("edit season values from edit form :", formattedValues);
-      // try {
-      //   const res = await updateSeasonById(formattedValues);
-      //   const data = res.data;
-      //   if (data.status == "success") {
-      //     message.success(data.message);
-      //     setSeason({ ...data.data, openModal: false });
-      //   }
-      // } catch (err) {
-      //   console.log(err.message);
-      //   message.error("Season not created");
-      // }
-    }
+    const values = form.getFieldsValue();
+    const formattedValues = {
+      ...values,
+      startDate: new Date(values.startDate),
+      endDate: new Date(values.endDate),
+      year: values.year ? values.year.year() : null,
+    };
 
-    if (!season.edit) {
-      const values = form.getFieldsValue();
-      const formattedValues = {
-        ...values,
-        year: values.year ? values.year.year() : null,
-      };
+    console.log("add season value from form :", formattedValues);
 
-      console.log("add season value from form :", formattedValues);
-
-      // try {
-      //   const res = await postSeason(formattedValues);
-      //   const data = res.data;
-      //   if (data.status == "success") {
-      //     message.success(data.message);
-      //     setSeason({ ...data.data, openModal: false });
-      //   }
-      // } catch (err) {
-      //   console.log(err.message);
-      //   message.error("Season not created");
-      // }
+    try {
+      const res = await postSeason(formattedValues);
+      const data = res.data;
+      if (data.status == "success") {
+        message.success(data.message);
+        setSeason({ ...data.data, openModal: false });
+      }
+    } catch (err) {
+      console.log(err.message);
+      message.error("Season not created");
     }
   };
   const handleCancel = () => {
@@ -121,147 +100,74 @@ const SeasonModal = ({ season, setSeason, userId, editForm }) => {
             Configure your seasonal settings below.
           </p>
 
-          {!season.edit && (
-            <Form
-              layout="inline"
-              form={form}
-              onFinish={onSubmit}
-              style={{ gap: "15px" }} // Spacing maintain karne ke liye
-            >
-              <Form.Item name="userId" initialValue={userId} hidden>
-                <Input />
-              </Form.Item>
+          <Form
+            layout="inline"
+            form={form}
+            onFinish={onSubmit}
+            style={{ gap: "15px" }} // Spacing maintain karne ke liye
+          >
+            <Form.Item name="userId" initialValue={userId} hidden>
+              <Input />
+            </Form.Item>
 
-              <Form.Item
-                label="Select Season"
-                name="name"
-                rules={[{ required: true }]}>
-                <Select placeholder="Select" style={{ width: 200 }}>
-                  <Option value="Rabi" label="Rabi">
-                    <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
-                      Rabi
-                    </span>
-                    <span style={{ fontSize: "12px", color: "#475569" }}>
-                      Dec/Jan to April/May
-                    </span>
-                  </Option>
-                  <Option value="Kharif" label="Kharif">
-                    <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
-                      Kharif
-                    </span>
-                    <span style={{ fontSize: "12px", color: "#475569" }}>
-                      May/Jun to Nov/Dec.
-                    </span>
-                  </Option>
-                </Select>
-              </Form.Item>
+            <Form.Item
+              label="Select Season"
+              name="name"
+              rules={[{ required: true }]}>
+              <Select placeholder="Select" style={{ width: 200 }}>
+                <Option value="Rabi" label="Rabi">
+                  <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+                    Rabi
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                    Dec/Jan to April/May
+                  </span>
+                </Option>
+                <Option value="Kharif" label="Kharif">
+                  <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+                    Kharif
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                    May/Jun to Nov/Dec.
+                  </span>
+                </Option>
+              </Select>
+            </Form.Item>
 
-              <Form.Item label="Year" name="year" initialValue={today.year()}>
-                <DatePicker picker="year" placeholder="select year" />
-              </Form.Item>
+            <Form.Item label="Year" name="year" initialValue={today.year()}>
+              <DatePicker picker="year" placeholder="select year" />
+            </Form.Item>
 
-              <Form.Item label="Start" name="startDate" initialValue={today}>
-                <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
-              </Form.Item>
+            <Form.Item label="Start" name="startDate" initialValue={today}>
+              <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
+            </Form.Item>
 
-              <Form.Item label="End" name="endDate">
-                <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
-              </Form.Item>
+            <Form.Item label="End" name="endDate">
+              <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
+            </Form.Item>
 
-              {/* <Form.Item label="Status" name="isActive">
+            {/* <Form.Item label="Status" name="isActive">
               <Select style={{ width: 100 }}>
                 <Option value="true">Active</Option>
                 <Option value="false">Inactive</Option>
               </Select>
             </Form.Item> */}
 
-              {/* Submit button wrapper */}
-              <div
-                style={{
-                  marginTop: "20px",
-                  width: "100%",
-                  textAlign: "right",
-                }}>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ backgroundColor: "#0499A9" }}>
-                  Submit
-                </Button>
-              </div>
-            </Form>
-          )}
-
-          {season.edit && (
-            <Form
-              layout="inline"
-              form={editForm}
-              onFinish={onSubmit}
-              style={{ gap: "15px" }} // Spacing maintain karne ke liye
-            >
-              <Form.Item name="sessionId" hidden>
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                label="Select Season"
-                name="name"
-                rules={[{ required: true }]}>
-                <Select placeholder="Select" style={{ width: 200 }}>
-                  <Option value="Rabi" label="Rabi">
-                    <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
-                      Rabi
-                    </span>
-                    <span style={{ fontSize: "12px", color: "#475569" }}>
-                      Dec/Jan to April/May
-                    </span>
-                  </Option>
-                  <Option value="Kharif" label="Kharif">
-                    <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
-                      Kharif
-                    </span>
-                    <span style={{ fontSize: "12px", color: "#475569" }}>
-                      May/Jun to Nov/Dec.
-                    </span>
-                  </Option>
-                </Select>
-              </Form.Item>
-
-              <Form.Item label="Year" name="year">
-                <DatePicker picker="year" placeholder="select year" />
-              </Form.Item>
-
-              <Form.Item label="Start" name="startDate">
-                <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
-              </Form.Item>
-
-              <Form.Item label="End" name="endDate">
-                <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
-              </Form.Item>
-
-              {/* <Form.Item label="Status" name="isActive">
-              <Select style={{ width: 100 }}>
-                <Option value="true">Active</Option>
-                <Option value="false">Inactive</Option>
-              </Select>
-            </Form.Item> */}
-
-              {/* Submit button wrapper */}
-              <div
-                style={{
-                  marginTop: "20px",
-                  width: "100%",
-                  textAlign: "right",
-                }}>
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  style={{ backgroundColor: "#0499A9" }}>
-                  Submit
-                </Button>
-              </div>
-            </Form>
-          )}
+            {/* Submit button wrapper */}
+            <div
+              style={{
+                marginTop: "20px",
+                width: "100%",
+                textAlign: "right",
+              }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ backgroundColor: "#0499A9" }}>
+                Submit
+              </Button>
+            </div>
+          </Form>
         </Modal>
       </ConfigProvider>
     </>

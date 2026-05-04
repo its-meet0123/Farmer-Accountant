@@ -1,11 +1,25 @@
-import { Button, Form, message, Space, Table, Tooltip } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  DatePicker,
+  Dropdown,
+  Form,
+  message,
+  Modal,
+  Popconfirm,
+  Space,
+  Table,
+  Tooltip,
+} from "antd";
 import { useEffect, useState } from "react";
-import { getAllSeason } from "../../service/season";
+import { deleteSeason, getAllSeason } from "../../service/season";
 import { PageContainer } from "../../component/PageContainer";
 import { useAuth } from "../../auth/AuthContext";
 import SeasonModal from "../../auth/SeasonModal";
 import dayjs from "dayjs";
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, EllipsisOutlined } from "@ant-design/icons";
+import AlertText from "../../component/Text";
+import { Select } from "react-i18next/icu.macro";
 
 const formattedDate = (date) => {
   const rawDate = date ? new Date(date) : new Date();
@@ -19,16 +33,60 @@ const formattedDate = (date) => {
   return DateTimeFormat;
 };
 
+const modalBackground = `
+    radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
+    radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
+  `;
+
 const Season = () => {
   const { authState, t, season, setSeason } = useAuth();
   const [seasonList, setSeasonList] = useState([]);
-  const [editForm] = Form.useForm();
+  const [modal, setModal] = useState({
+    isOpen: false,
+    isEdit: false,
+    isSelect: false,
+  });
+  const [seasonForm] = Form.useForm();
 
-  const addSeason = () => {
-    setSeason({
-      ...season,
-      edit: false,
-      openModal: true,
+  const onSubmit = () => {
+    if (modal.isEdit) {
+      const editValues = seasonForm.getFieldsValue();
+      const formattedValues = {
+        ...editValues,
+        startDate: new Date(editValues.startDate),
+        endDate: new Date(editValues.endDate),
+        year: editValues.year ? editValues.year.year() : null,
+      };
+      console.log("edit season values from season form :", formattedValues);
+      // try {
+      //   const res = await updateSeasonById(formattedValues);
+      //   const data = res.data;
+      //   if (data.status == "success") {
+      //     message.success(data.message);
+      //     setSeason({ ...data.data, openModal: false });
+      //   }
+      // } catch (err) {
+      //   console.log(err.message);
+      //   message.error("Season not created");
+      // }
+    }
+
+    if (!modal.isEdit) {
+      const values = seasonForm.getFieldsValue();
+      const formattedValues = {
+        ...values,
+        startDate: new Date(values.startDate),
+        endDate: new Date(values.endDate),
+        year: values.year ? values.year.year() : null,
+      };
+
+      console.log("add season value from season form :", formattedValues);
+    }
+  };
+
+  const handleCancel = () => {
+    setModal({
+      isOpen: false,
     });
   };
 
@@ -37,7 +95,7 @@ const Season = () => {
     const startDate = dayjs(record?.startDate);
     const endDate = dayjs(record?.endDate);
 
-    editForm.setFieldsValue({
+    seasonForm.setFieldsValue({
       sessionId: record?._id,
       name: record?.name,
       year: year,
@@ -48,12 +106,34 @@ const Season = () => {
     console.log("in season page :", record, "year :", year);
 
     setTimeout(() => {
-      setSeason({
-        ...season,
-        edit: true,
-        openModal: true,
+      setModal({
+        isOpen: true,
+        isEdit: true,
       });
     }, 1000);
+  };
+
+  const handleSelectSeason = (record) => {
+    setModal({
+      isSelect: true,
+    });
+    setSeason({
+      ...record,
+      openModal: false,
+    });
+  };
+
+  const handleDeleteSeason = async (record) => {
+    try {
+      const res = await deleteSeason(record?._id);
+      const seasondata = res.data;
+      if (seasondata.status === "success") {
+        message.success(seasondata.message);
+      }
+    } catch (err) {
+      console.log(err.message);
+      message.error("Season not deleted");
+    }
   };
 
   useEffect(() => {
@@ -134,20 +214,57 @@ const Season = () => {
     {
       title: "Action",
       key: "a",
-      render: (_, record) => {
-        return (
-          <Space size="middle">
-            {/* Edit Button */}
-            <Tooltip title="Edit">
-              <Button
-                type="primary"
-                icon={<EditOutlined />}
-                onClick={() => editSeason(record)}
-              />
-            </Tooltip>
-          </Space>
-        );
-      },
+      render: (_, record) => (
+        <Dropdown
+          menu={{
+            items: [
+              {
+                key: "1",
+                label: "add",
+                icon: modal.isSelect ? (
+                  <CheckSquareOutlined />
+                ) : (
+                  <BorderOutlined />
+                ),
+                onClick: () => handleSelectSeason(record),
+              },
+              // {
+              //   key: "2",
+              //   label: "view",
+              //   icon: <StopOutlined />,
+              //   onClick: () => calcView(record),
+              // },
+              {
+                key: "3",
+                label: "edit",
+                icon: <EditOutlined />,
+                onClick: () => editSeason(record),
+              },
+              {
+                key: "4",
+                icon: <DeleteOutlined />,
+                danger: true,
+                label: (
+                  <Popconfirm
+                    title={
+                      <AlertText
+                        text={`${t("workerPage.tableColumns.actionPopAlertText")}`}
+                      />
+                    }
+                    onConfirm={() => handleDeleteSeason(record)}
+                    okText="Yes"
+                    cancelText="No"
+                    placement="left">
+                    delete
+                  </Popconfirm>
+                ),
+              },
+            ],
+          }}
+          trigger={["click"]}>
+          <Button type="text" icon={<EllipsisOutlined />} />
+        </Dropdown>
+      ),
     },
   ];
 
@@ -156,18 +273,138 @@ const Season = () => {
       <PageContainer
         title="Season List"
         extra={
-          <Button type="primary" onClick={() => addSeason()}>
+          <Button
+            type="primary"
+            onClick={() =>
+              setModal({
+                isOpen: true,
+                isEdit: false,
+              })
+            }>
             Add season
           </Button>
         }>
         <Table dataSource={tableData} columns={columns} rowKey="_id" />
       </PageContainer>
-      <SeasonModal
-        season={season}
-        setSeason={setSeason}
-        userId={authState.user.userId}
-        editForm={editForm}
-      />
+
+      <ConfigProvider
+        theme={{
+          components: {
+            Modal: {
+              headerBg: "transparent", // Header background clear rakha hai gradient dikhne ke liye
+              contentBg: "#023F55", // Gradient ka dominant base color fallback ke liye
+              titleColor: "#0F172A", // Aapka specific title color
+            },
+            Form: {
+              labelColor: "#FFFFFF", // Saara label white
+            },
+            Input: {
+              colorText: "#FFFFFF",
+              colorBgContainer: "rgba(255, 255, 255, 0.05)", // Subtle transparent look
+              colorTextPlaceholder: "#475569", // Subtitle color as placeholder
+            },
+            Select: {
+              colorText: "#FFFFFF",
+              colorBgContainer: "rgba(255, 255, 255, 0.05)",
+              colorBgElevated: "#023F55", // Dropdown ka background
+            },
+          },
+        }}>
+        <Modal
+          title={
+            <span style={{ color: "#0F172A", fontWeight: "bold" }}>
+              Season Modal
+            </span>
+          }
+          open={modal.isOpen || modal.isEdit}
+          onOk={onSubmit}
+          onCancel={handleCancel}
+          styles={{
+            content: {
+              backgroundImage: modalBackground,
+              border: "1px solid rgba(255, 255, 255, 0.1)",
+              color: "#FFFFFF",
+            },
+            header: {
+              marginBottom: "20px",
+              borderBottom: "1px solid rgba(15, 23, 42, 0.1)",
+            },
+          }}
+          width={800} // Inline layout ke liye width thodi zyada rakhi hai
+        >
+          <p style={{ color: "#475569", marginBottom: "20px" }}>
+            Configure your seasonal settings below.
+          </p>
+          <Form
+            layout="inline"
+            form={seasonForm}
+            onFinish={onSubmit}
+            style={{ gap: "15px" }} // Spacing maintain karne ke liye
+          >
+            <Form.Item name="sessionId" hidden>
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Select Season"
+              name="name"
+              rules={[{ required: true }]}>
+              <Select placeholder="Select" style={{ width: 200 }}>
+                <Option value="Rabi" label="Rabi">
+                  <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+                    Rabi
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                    Dec/Jan to April/May
+                  </span>
+                </Option>
+                <Option value="Kharif" label="Kharif">
+                  <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+                    Kharif
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                    May/Jun to Nov/Dec.
+                  </span>
+                </Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item label="Year" name="year">
+              <DatePicker picker="year" placeholder="select year" />
+            </Form.Item>
+
+            <Form.Item label="Start" name="startDate">
+              <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
+            </Form.Item>
+
+            <Form.Item label="End" name="endDate">
+              <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
+            </Form.Item>
+
+            {/* <Form.Item label="Status" name="isActive">
+              <Select style={{ width: 100 }}>
+                <Option value="true">Active</Option>
+                <Option value="false">Inactive</Option>
+              </Select>
+            </Form.Item> */}
+
+            {/* Submit button wrapper */}
+            <div
+              style={{
+                marginTop: "20px",
+                width: "100%",
+                textAlign: "right",
+              }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                style={{ backgroundColor: "#0499A9" }}>
+                Submit
+              </Button>
+            </div>
+          </Form>
+        </Modal>
+      </ConfigProvider>
     </>
   );
 };
