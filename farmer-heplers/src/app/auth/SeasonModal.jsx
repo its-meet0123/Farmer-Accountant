@@ -128,10 +128,6 @@ const SeasonModal = ({ season, setSeason, userId, editForm }) => {
               onFinish={onSubmit}
               style={{ gap: "15px" }} // Spacing maintain karne ke liye
             >
-              <Form.Item name="sessionId" hidden>
-                <Input />
-              </Form.Item>
-
               <Form.Item name="userId" initialValue={userId} hidden>
                 <Input />
               </Form.Item>
@@ -160,7 +156,7 @@ const SeasonModal = ({ season, setSeason, userId, editForm }) => {
                 </Select>
               </Form.Item>
 
-              <Form.Item label="Year" name="year" initialValue={today}>
+              <Form.Item label="Year" name="year" initialValue={today.year()}>
                 <DatePicker picker="year" placeholder="select year" />
               </Form.Item>
 
@@ -229,11 +225,11 @@ const SeasonModal = ({ season, setSeason, userId, editForm }) => {
                 </Select>
               </Form.Item>
 
-              <Form.Item label="Year" name="year" initialValue={today}>
+              <Form.Item label="Year" name="year">
                 <DatePicker picker="year" placeholder="select year" />
               </Form.Item>
 
-              <Form.Item label="Start" name="startDate" initialValue={today}>
+              <Form.Item label="Start" name="startDate">
                 <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
               </Form.Item>
 
