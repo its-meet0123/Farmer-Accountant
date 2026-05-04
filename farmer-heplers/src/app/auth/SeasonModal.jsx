@@ -121,7 +121,7 @@ const SeasonModal = ({ season, setSeason, userId, editForm }) => {
             Configure your seasonal settings below.
           </p>
 
-          {!season.edit ? (
+          {!season.edit && (
             <Form
               layout="inline"
               form={form}
@@ -190,7 +190,9 @@ const SeasonModal = ({ season, setSeason, userId, editForm }) => {
                 </Button>
               </div>
             </Form>
-          ) : (
+          )}
+
+          {season.edit && (
             <Form
               layout="inline"
               form={editForm}

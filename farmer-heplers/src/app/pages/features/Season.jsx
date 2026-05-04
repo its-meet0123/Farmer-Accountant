@@ -33,19 +33,19 @@ const Season = () => {
   };
 
   const editSeason = (record) => {
-    const year = dayjs(record.year);
-    const startDate = dayjs(record.startDate);
-    const endDate = dayjs(record.endDate);
+    const year = dayjs(record?.year);
+    const startDate = dayjs(record?.startDate);
+    const endDate = dayjs(record?.endDate);
 
     editForm.setFieldsValue({
-      sessionId: record._id,
-      name: record.name,
+      sessionId: record?._id,
+      name: record?.name,
       year: year,
       startDate: startDate,
       endDate: endDate,
     });
 
-    console.log("in season page :", record);
+    console.log("in season page :", record, "year :", year);
 
     setTimeout(() => {
       setSeason({
@@ -160,7 +160,7 @@ const Season = () => {
             Add season
           </Button>
         }>
-        <Table dataSource={tableData} columns={columns} rowKey={"_id"} />
+        <Table dataSource={tableData} columns={columns} rowKey="_id" />
       </PageContainer>
       <SeasonModal
         season={season}
