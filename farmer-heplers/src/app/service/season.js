@@ -16,6 +16,10 @@ export async function getActiveSeason() {
   return await axiosInstance.get(`/season/active-session`);
 }
 
+export async function updateSeasonById(sessionId, sessionInfo) {
+  return await axiosInstance.patch(`/season/${sessionId}`, sessionInfo);
+}
+
 export async function deleteSeason(sessionId) {
   return await axiosInstance.delete(`/season/${sessionId}`);
 }

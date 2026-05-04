@@ -1,9 +1,10 @@
-import { Button, message, Space, Table, Tooltip } from "antd";
+import { Button, Form, message, Space, Table, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { getAllSeason } from "../../service/season";
 import { PageContainer } from "../../component/PageContainer";
 import { useAuth } from "../../auth/AuthContext";
 import SeasonModal from "../../auth/SeasonModal";
+import dayjs from "dayjs";
 
 const formattedDate = (date) => {
   const rawDate = date ? new Date(date) : new Date();
@@ -20,15 +21,35 @@ const formattedDate = (date) => {
 const Season = () => {
   const { authState, t, season, setSeason } = useAuth();
   const [seasonList, setSeasonList] = useState([]);
+  const [editForm] = Form.useForm();
 
   const addSeason = () => {
     setSeason({
       ...season,
+      edit: false,
       openModal: true,
     });
   };
 
-  const editSeason = () => {};
+  const editSeason = (record) => {
+    const startDate = dayjs(record.startDate);
+    const endDate = dayjs(record.endDate);
+    editForm.setFieldsValue({
+      sessionId: record._id,
+      name: record.name,
+      year: record.year,
+      startDate: startDate,
+      endDate: endDate,
+    });
+
+    setTimeout(() => {
+      setSeason({
+        ...season,
+        edit: true,
+        openModal: true,
+      });
+    }, []);
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -110,18 +131,16 @@ const Season = () => {
       key: "a",
       render: (_, record) => {
         return (
-          //   <Space size="middle">
-
-          //     {/* Edit Button */}
-          //     <Tooltip title="Edit">
-          //       <Button
-          //         type="primary"
-          //         icon={<EditOutlined />}
-          //         onClick={() => addSeason()}
-          //       />
-          //     </Tooltip>
-          //     </Space>
-          null
+          <Space size="middle">
+            {/* Edit Button */}
+            <Tooltip title="Edit">
+              <Button
+                type="primary"
+                icon={<EditOutlined />}
+                onClick={() => editSeason(record)}
+              />
+            </Tooltip>
+          </Space>
         );
       },
     },
@@ -142,6 +161,7 @@ const Season = () => {
         season={season}
         setSeason={setSeason}
         userId={authState.user.userId}
+        editForm={editForm}
       />
     </>
   );

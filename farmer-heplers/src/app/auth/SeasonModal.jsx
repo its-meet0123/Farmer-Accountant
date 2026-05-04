@@ -10,7 +10,7 @@ import {
   Select,
 } from "antd";
 import dayjs from "dayjs";
-import { postSeason } from "../service/season";
+import { postSeason, updateSeasonById } from "../service/season";
 const { Option } = Select;
 
 const modalBackground = `
@@ -18,24 +18,51 @@ const modalBackground = `
     radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.4) 0%, rgba(30, 27, 75, 1) 100%)
   `;
 
-const SeasonModal = ({ season, setSeason, userId }) => {
+const SeasonModal = ({ season, setSeason, userId, editForm }) => {
   const [form] = Form.useForm();
+  const usedForm = editForm || form;
   const today = dayjs();
   const onSubmit = async () => {
-    const values = form.getFieldsValue();
-    const formattedValues = {
-      ...values,
-      year: values.year ? values.year.year() : null,
-    };
+    if (season.edit) {
+      const editValues = usedForm.getFieldsValue();
+      const formattedValues = {
+        ...editValues,
+        year: editValues.year ? editValues.year.year() : null,
+      };
+      console.log("edit season values from edit form :", formattedValues);
+      // try {
+      //   const res = await updateSeasonById(formattedValues);
+      //   const data = res.data;
+      //   if (data.status == "success") {
+      //     message.success(data.message);
+      //     setSeason({ ...data.data, openModal: false });
+      //   }
+      // } catch (err) {
+      //   console.log(err.message);
+      //   message.error("Season not created");
+      // }
+    }
 
-    try {
-      const res = await postSeason(formattedValues);
-      const data = res.data;
-      data.status == "success" && message.success(data.message);
-      setSeason(data.data);
-    } catch (err) {
-      console.log(err.message);
-      message.error("Season not created");
+    if (!season.edit) {
+      const values = usedForm.getFieldsValue();
+      const formattedValues = {
+        ...values,
+        year: values.year ? values.year.year() : null,
+      };
+
+      console.log("add season value from form :", formattedValues);
+
+      // try {
+      //   const res = await postSeason(formattedValues);
+      //   const data = res.data;
+      //   if (data.status == "success") {
+      //     message.success(data.message);
+      //     setSeason({ ...data.data, openModal: false });
+      //   }
+      // } catch (err) {
+      //   console.log(err.message);
+      //   message.error("Season not created");
+      // }
     }
   };
   const handleCancel = () => {
@@ -97,19 +124,25 @@ const SeasonModal = ({ season, setSeason, userId }) => {
 
           <Form
             layout="inline"
-            form={form}
+            form={usedForm}
             onFinish={onSubmit}
             style={{ gap: "15px" }} // Spacing maintain karne ke liye
           >
-            <Form.Item name="userId" initialValue={userId} hidden>
-              <Input />
-            </Form.Item>
+            {season.edit ? (
+              <Form.Item name="sessionId" hidden>
+                <Input />
+              </Form.Item>
+            ) : (
+              <Form.Item name="userId" initialValue={userId} hidden>
+                <Input />
+              </Form.Item>
+            )}
 
             <Form.Item
               label="Select Season"
               name="name"
               rules={[{ required: true }]}>
-              <Select placeholder="Select" style={{ width: 120 }}>
+              <Select placeholder="Select" style={{ width: 200 }}>
                 <Option value="Rabi" label="Rabi">
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
                     Rabi
