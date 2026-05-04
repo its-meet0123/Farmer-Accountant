@@ -108,7 +108,7 @@ const Season = () => {
       try {
         const res = postSeason(formattedValues);
         const data = res.data;
-        if (data.status === "success") {
+        if (data.status == "success") {
           message.success(data.message);
           handleCancel();
         }
@@ -249,11 +249,12 @@ const Season = () => {
               {
                 key: "1",
                 label: "select",
-                icon: modal.isSelect ? (
-                  <CheckSquareOutlined />
-                ) : (
-                  <BorderOutlined />
-                ),
+                icon:
+                  modal.isSelect || record?.isActive ? (
+                    <CheckSquareOutlined />
+                  ) : (
+                    <BorderOutlined />
+                  ),
                 onClick: () => handleSelectSeason(record),
               },
               // {

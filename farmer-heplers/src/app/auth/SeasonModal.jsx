@@ -20,6 +20,15 @@ const modalBackground = `
 const SeasonModal = ({ season, setSeason, userId }) => {
   const [form] = Form.useForm();
   const today = dayjs();
+
+  const handleCancel = () => {
+    form.resetFields();
+    setSeason({
+      ...(season?.data || null),
+      openModal: false,
+    });
+  };
+
   const onSubmit = async () => {
     const values = form.getFieldsValue();
     const formattedValues = {
@@ -37,18 +46,14 @@ const SeasonModal = ({ season, setSeason, userId }) => {
       if (data.status == "success") {
         message.success(data.message);
         setSeason({ ...data.data, openModal: false });
+        handleCancel();
       }
     } catch (err) {
       console.log(err.message);
       message.error("Season not created");
     }
   };
-  const handleCancel = () => {
-    setSeason({
-      ...(season?.data || null),
-      openModal: false,
-    });
-  };
+
   return (
     <>
       <ConfigProvider
