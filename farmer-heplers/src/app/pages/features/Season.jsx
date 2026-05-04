@@ -49,7 +49,7 @@ const Season = () => {
         edit: true,
         openModal: true,
       });
-    }, []);
+    }, 1000);
   };
 
   useEffect(() => {
