@@ -79,18 +79,18 @@ const Season = () => {
       const { sessionId, ...values } = formattedValues;
 
       console.log("edit season values from season form :", sessionId, values);
-      // try {
-      //   const res = await updateSeasonById(sessionId,values);
-      //   const data = res.data;
-      //   if (data.status == "success") {
-      //     message.success(data.message);
-      //     setSeason({ ...data.data, openModal: false });
-      //     handleCancel();
-      //   }
-      // } catch (err) {
-      //   console.log(err.message);
-      //   message.error("Season not created");
-      // }
+      try {
+        const res = await updateSeasonById(sessionId, values);
+        const data = res.data;
+        if (data.status == "success") {
+          message.success(data.message);
+          setSeason({ ...data.data, openModal: false });
+          handleCancel();
+        }
+      } catch (err) {
+        console.log(err.message);
+        message.error("Season not created");
+      }
     }
 
     if (!modal.isEdit) {
@@ -105,16 +105,16 @@ const Season = () => {
 
       console.log("add season value from season form :", formattedValues);
 
-      // try {
-      //   const res = postSeason(formattedValues);
-      //   const data = res.data;
-      //   if (data.status === "success") {
-      //     message.success(data.message);
-      //     handleCancel();
-      //   }
-      // } catch (err) {
-      //   console.log(err.message);
-      // }
+      try {
+        const res = postSeason(formattedValues);
+        const data = res.data;
+        if (data.status === "success") {
+          message.success(data.message);
+          handleCancel();
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
     }
   };
 
@@ -360,7 +360,7 @@ const Season = () => {
           }}
           width={800} // Inline layout ke liye width thodi zyada rakhi hai
         >
-          <p style={{ color: "#475569", marginBottom: "20px" }}>
+          <p style={{ color: "#ffffff", marginBottom: "20px" }}>
             Configure your seasonal settings below.
           </p>
           <Form
@@ -384,7 +384,7 @@ const Season = () => {
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
                     Rabi
                   </span>
-                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                  <span style={{ fontSize: "12px", color: "#ffffff" }}>
                     Dec/Jan to April/May
                   </span>
                 </Option>
@@ -392,7 +392,7 @@ const Season = () => {
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
                     Kharif
                   </span>
-                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                  <span style={{ fontSize: "12px", color: "#ffffff" }}>
                     May/Jun to Nov/Dec.
                   </span>
                 </Option>

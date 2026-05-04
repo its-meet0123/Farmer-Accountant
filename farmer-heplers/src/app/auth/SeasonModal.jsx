@@ -96,7 +96,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
           }}
           width={800} // Inline layout ke liye width thodi zyada rakhi hai
         >
-          <p style={{ color: "#475569", marginBottom: "20px" }}>
+          <p style={{ color: "#fff", marginBottom: "20px" }}>
             Configure your seasonal settings below.
           </p>
 
@@ -121,7 +121,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
                     Rabi
                   </span>
-                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                  <span style={{ fontSize: "12px", color: "#fff" }}>
                     Dec/Jan to April/May
                   </span>
                 </Option>
@@ -129,14 +129,14 @@ const SeasonModal = ({ season, setSeason, userId }) => {
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
                     Kharif
                   </span>
-                  <span style={{ fontSize: "12px", color: "#475569" }}>
+                  <span style={{ fontSize: "12px", color: "#fff" }}>
                     May/Jun to Nov/Dec.
                   </span>
                 </Option>
               </Select>
             </Form.Item>
 
-            <Form.Item label="Year" name="year" initialValue={today.year()}>
+            <Form.Item label="Year" name="year" initialValue={today}>
               <DatePicker picker="year" placeholder="select year" />
             </Form.Item>
 
