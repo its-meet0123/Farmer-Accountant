@@ -86,6 +86,7 @@ const CalcPage = () => {
       const data = {
         endDate: dateValue,
         userId: authState.user.userId,
+        sessionId: state?._id,
         dateType: "view",
       };
       try {
@@ -105,10 +106,12 @@ const CalcPage = () => {
         const data = {
           endDate: dateValue,
           userId: authState.user.userId,
+          sessionId: state?._id,
           dateType: "view",
         };
+        const ids = { sessionId: state?._id, id: id };
         try {
-          const res = await editEndDate(id, data);
+          const res = await editEndDate(ids, data);
           setEndDate(res.data.data);
           showMessage(res.data);
           setFetch("patch");
@@ -119,7 +122,7 @@ const CalcPage = () => {
       }
       if (fetch === "delete") {
         try {
-          const res = await deleteEndDate(id);
+          const res = await deleteEndDate(state?._id, id);
           setId(null);
           form.setFieldsValue({
             endDate: null,
@@ -162,7 +165,7 @@ const CalcPage = () => {
       try {
         if (fetch != "del") {
           setIsLoanding(true);
-          const dateRes = await getEndDate();
+          const dateRes = await getEndDate(state?._id);
           const data = await dateRes.data.data;
           setIsLoanding(false);
           const viewEndDate =
@@ -185,7 +188,7 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [fetch]);
+  }, [fetch, state?._id]);
 
   const BASE_COLUMNS = getColumnsForCalulationPage(t);
 

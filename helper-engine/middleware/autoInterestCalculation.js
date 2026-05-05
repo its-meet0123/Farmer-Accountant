@@ -106,6 +106,7 @@ async function autoInterestCalculationForShopes(req, res, next) {
 async function autoInterestCalculationForWorker(req, res, next) {
   try {
     const body = req.body;
+    const sessionId = req.params.id || req.params.workerId;
     const decoded = req.user;
     const currentUserId = decoded.id;
     if (!body) {
@@ -116,7 +117,10 @@ async function autoInterestCalculationForWorker(req, res, next) {
       });
     }
 
-    const Dates = InterestDate.find({ userId: currentUserId });
+    const Dates = InterestDate.findOne({
+      userId: currentUserId,
+      sessionId: sessionId,
+    });
     if (!Dates) {
       return res.status(400).json({
         status: "Fail",
@@ -125,7 +129,7 @@ async function autoInterestCalculationForWorker(req, res, next) {
     }
     const startDate = body?.date;
     const rate = body?.interestRate || 0;
-    const endDate = Dates[1]?.endDate || new Date();
+    const endDate = Dates?.endDate || new Date();
     const giveAmount = body?.amount || 0;
     const takePayment = body?.payment || 0;
 

@@ -41,13 +41,10 @@ async function handleGetIndShopeAccountById(req, res) {
         message: "ID is required",
       });
     }
-    const indDataBySNo = await Industries.findById({
+    const indDataBySNo = await Industries.findOne({
       _id: id,
       userId: currentUserId,
     });
-    const dates = await InterestDate.find({ userId: currentUserId });
-    const endDate = dates[0]?.endDate;
-
     if (!indDataBySNo) {
       return res
         .status(404)

@@ -230,7 +230,9 @@ const WorkersData = () => {
                     okText="Yes"
                     cancelText="No"
                     placement="left">
-                    delete
+                    <span style={{ color: "red", cursor: "pointer" }}>
+                      delete
+                    </span>
                   </Popconfirm>
                 ),
               },

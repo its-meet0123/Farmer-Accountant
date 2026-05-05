@@ -40,7 +40,7 @@ async function handlePostInterestDate(req, res) {
 
   const result = await InterestDate.create({
     userId: data.userId,
-    sessionId: data.sessionId,
+    sessionId: data.workerId || data.shopeId,
     endDate: data.endDate,
     dateType: data.dateType,
   });
