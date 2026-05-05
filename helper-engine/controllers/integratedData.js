@@ -34,6 +34,7 @@ async function handleGetIndShopeAccountById(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
     const { id } = req.params;
+    console.log("fetching shope account by id and userid :", id, currentUserId);
     if (!id) {
       res.status(404).json({
         status: "fail",
