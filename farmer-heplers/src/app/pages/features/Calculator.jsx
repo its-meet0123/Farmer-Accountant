@@ -158,7 +158,7 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [state?.id]);
+  }, [state]);
 
   useEffect(() => {
     async function getData() {
@@ -180,10 +180,12 @@ const CalcPage = () => {
         }
       } catch (err) {
         if (endDate.length > 0) {
-          setIsLoanding(true);
           message.error(t("calculationPage.fetchDateErrorMessage"));
           console.log(err.message);
           setFetch("del");
+          if (err.code === "ERR_CANCELED") {
+            return;
+          }
         }
       }
     }

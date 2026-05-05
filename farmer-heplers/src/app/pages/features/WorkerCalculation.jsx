@@ -160,6 +160,9 @@ const WorkerCalculation = () => {
           console.error(err.message);
         }
         setFetch("del");
+        if (err.code === "ERR_CANCELED") {
+          return;
+        }
       }
     }
     getData();
