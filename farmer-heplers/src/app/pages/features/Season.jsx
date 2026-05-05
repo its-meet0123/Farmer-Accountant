@@ -314,9 +314,12 @@ const Season = () => {
           dataSource={tableData}
           columns={columns}
           rowKey="_id"
-          rowClassName={(record) =>
-            record.isActive || season.isSelect ? "active-row" : ""
-          }
+          onRow={(record) => ({
+            style: {
+              backgroundColor:
+                record.isActive || season.isSelect ? "#e6f7ff" : "white",
+            },
+          })}
         />
       </PageContainer>
 
