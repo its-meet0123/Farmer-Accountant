@@ -28,7 +28,6 @@ import {
   DeleteOutlined,
   EditOutlined,
   EllipsisOutlined,
-  SearchOutlined,
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
 const { Option } = Select;
@@ -149,7 +148,6 @@ const Season = () => {
     setSeason({
       ...record,
       openModal: false,
-      isSelect: true,
     });
   };
 
@@ -284,7 +282,9 @@ const Season = () => {
                     okText="Yes"
                     cancelText="No"
                     placement="left">
-                    delete
+                    <span style={{ color: "red", cursor: "pointer" }}>
+                      delete
+                    </span>
                   </Popconfirm>
                 ),
               },
