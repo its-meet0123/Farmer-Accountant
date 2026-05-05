@@ -28,6 +28,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   EllipsisOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
 const { Option } = Select;
@@ -251,7 +252,7 @@ const Season = () => {
                 key: "1",
                 label: "select",
                 icon:
-                  modal.isSelect || record?.isActive ? (
+                  season?._id == record?._id || record?.isActive ? (
                     <CheckSquareOutlined />
                   ) : (
                     <BorderOutlined />
@@ -274,7 +275,9 @@ const Season = () => {
                 key: "4",
                 icon: <DeleteOutlined />,
                 danger: true,
-                label: (
+                label: record?.isActive ? (
+                  "not deleted"
+                ) : (
                   <Popconfirm
                     title={<AlertText text={`${t("season.table.sdw")}`} />}
                     onConfirm={() => handleDeleteSeason(record)}
@@ -316,7 +319,10 @@ const Season = () => {
           rowKey="_id"
           onRow={(record) => ({
             style: {
-              backgroundColor: record.isActive ? "#e6f7ff" : "white",
+              backgroundColor:
+                season?._id == record._id || record.isActive
+                  ? "#e6f7ff"
+                  : "white",
             },
           })}
         />

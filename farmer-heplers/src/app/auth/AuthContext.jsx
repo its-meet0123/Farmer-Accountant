@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
   const [season, setSeason] = useState({
     ...null,
     openModal: true,
-    isSelect: false,
   });
   const { t, i18n } = useTranslation();
 
@@ -66,7 +65,6 @@ export const AuthProvider = ({ children }) => {
           setSeason({
             ...data.data,
             openModal: false,
-            isSelect: true,
           });
         }
       } catch (err) {
