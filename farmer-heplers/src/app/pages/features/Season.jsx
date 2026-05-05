@@ -148,6 +148,7 @@ const Season = () => {
     setSeason({
       ...record,
       openModal: false,
+      isSelect: true,
     });
   };
 
