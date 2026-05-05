@@ -62,7 +62,7 @@ const WorkerCalculation = () => {
       const data = {
         endDate: dateValue,
         userId: authState.user.userId,
-        sessionId: state?._id,
+        sessionId: state?.id,
         dateType: "worker",
       };
       try {
@@ -82,10 +82,10 @@ const WorkerCalculation = () => {
         const data = {
           endDate: dateValue,
           userId: authState.user.userId,
-          sessionId: state?._id,
+          sessionId: state?.id,
           dateType: "worker",
         };
-        const ids = { sessionId: state?._id, id: id };
+        const ids = { sessionId: state?.id, id: id };
         try {
           const res = await editEndDate(ids, data);
           setEndDate(res.data.data);
@@ -98,7 +98,7 @@ const WorkerCalculation = () => {
       }
       if (fetch === "delete") {
         try {
-          const res = await deleteEndDate(state?._id, id);
+          const res = await deleteEndDate(state?.id, id);
           setId(null);
           form.setFieldsValue({
             endDate: null,
@@ -143,7 +143,7 @@ const WorkerCalculation = () => {
     async function getData() {
       try {
         if (fetch != "del") {
-          const dateRes = await getEndDate(state?._id);
+          const dateRes = await getEndDate(state?.id);
           const data = await dateRes.data.data;
 
           const workerEndDate =
@@ -163,7 +163,7 @@ const WorkerCalculation = () => {
       }
     }
     getData();
-  }, [fetch, state?._id]);
+  }, [fetch, state?.id]);
 
   const WORKER_TRANSACTION_CALC_COLUMNS = getColumnsForWorkerCalcPage(t);
 

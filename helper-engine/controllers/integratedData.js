@@ -1,5 +1,4 @@
 const Industries = require("../models/integratedData");
-const InterestDate = require("../models/endDate");
 
 async function handleGetAllIndData(req, res) {
   try {

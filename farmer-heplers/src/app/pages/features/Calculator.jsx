@@ -86,7 +86,7 @@ const CalcPage = () => {
       const data = {
         endDate: dateValue,
         userId: authState.user.userId,
-        sessionId: state?._id,
+        sessionId: state?.id,
         dateType: "view",
       };
       try {
@@ -106,10 +106,10 @@ const CalcPage = () => {
         const data = {
           endDate: dateValue,
           userId: authState.user.userId,
-          sessionId: state?._id,
+          sessionId: state?.id,
           dateType: "view",
         };
-        const ids = { sessionId: state?._id, id: id };
+        const ids = { sessionId: state?.id, id: id };
         try {
           const res = await editEndDate(ids, data);
           setEndDate(res.data.data);
@@ -122,7 +122,7 @@ const CalcPage = () => {
       }
       if (fetch === "delete") {
         try {
-          const res = await deleteEndDate(state?._id, id);
+          const res = await deleteEndDate(state?.id, id);
           setId(null);
           form.setFieldsValue({
             endDate: null,
@@ -147,7 +147,7 @@ const CalcPage = () => {
     async function getData() {
       try {
         setIsLoanding(true);
-        const res = await getIndShopeAccountById(state.id);
+        const res = await getIndShopeAccountById(state?.id);
         const allData = await res.data.data;
         setIsLoanding(false);
         setShope(allData);
@@ -158,14 +158,14 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [state]);
+  }, [state?.id]);
 
   useEffect(() => {
     async function getData() {
       try {
         if (fetch != "del") {
           setIsLoanding(true);
-          const dateRes = await getEndDate(state?._id);
+          const dateRes = await getEndDate(state?.id);
           const data = await dateRes.data.data;
           setIsLoanding(false);
           const viewEndDate =
@@ -188,7 +188,7 @@ const CalcPage = () => {
       }
     }
     getData();
-  }, [fetch, state?._id]);
+  }, [fetch, state?.id]);
 
   const BASE_COLUMNS = getColumnsForCalulationPage(t);
 
