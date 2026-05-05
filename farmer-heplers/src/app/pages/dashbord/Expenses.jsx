@@ -22,7 +22,7 @@ const Expense = ({ data }) => {
       no: "2",
       label: (
         <>
-          <GiPlantSeed style={{ marginRight: 6 }} />
+          <GiPlantSeed style={{ marginRight: 6 }} size={4} />
           {t("dashbord.cards.table.lt2")}
         </>
       ),
@@ -32,7 +32,7 @@ const Expense = ({ data }) => {
       no: "3",
       label: (
         <>
-          <MdEngineering style={{ marginRight: 6 }} />
+          <MdEngineering style={{ marginRight: 6 }} size={3} />
           {t("dashbord.cards.table.lt3")}
         </>
       ),
@@ -42,7 +42,7 @@ const Expense = ({ data }) => {
       no: "4",
       label: (
         <>
-          <GiFarmTractor style={{ marginRight: 6 }} />
+          <GiFarmTractor style={{ marginRight: 6 }} size={5} />
           {t("dashbord.cards.table.lt4")}
         </>
       ),
