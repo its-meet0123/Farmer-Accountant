@@ -316,8 +316,7 @@ const Season = () => {
           rowKey="_id"
           onRow={(record) => ({
             style: {
-              backgroundColor:
-                record.isActive || season.isSelect ? "#e6f7ff" : "white",
+              backgroundColor: record.isActive ? "#e6f7ff" : "white",
             },
           })}
         />
