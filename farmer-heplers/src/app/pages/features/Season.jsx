@@ -309,7 +309,14 @@ const Season = () => {
             {t("season.bt")}
           </Button>
         }>
-        <Table dataSource={tableData} columns={columns} rowKey="_id" />
+        <Table
+          dataSource={tableData}
+          columns={columns}
+          rowKey="_id"
+          rowClassName={(record) =>
+            record.isActive || season.isSelect ? "active-row" : ""
+          }
+        />
       </PageContainer>
 
       <ConfigProvider
