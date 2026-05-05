@@ -708,6 +708,33 @@
       "omt": "Measurement"
     }
   },
+  "season": {
+    "text": "Season",
+    "pt": "Season List",
+    "bt": "Add Season",
+    "table": {
+      "sntt": "S.No.",
+      "sn": "Name",
+      "sy": "Year",
+      "st": "Start Date",
+      "et": "End Date",
+      "at1": "Active",
+      "at2": "Action",
+      "sdw": "Are you sure you want to delete this season? All associated data and records within this season will be permanently removed."
+    },
+    "modal": {
+      "tt1": "Season Modal",
+      "tt2": "Configure your seasonal settings below.",
+      "tt3": "Modify your existing seasonal settings below.",
+      "fist": "Select Season",
+      "sort": "Rabi",
+      "sokt": "Kharif",
+      "fiyt": "Year",
+      "fisdt": "Start",
+      "fiedt": "End",
+      "fisbt": "Submit"
+    }
+  },
   "layout": {
     "footer": {
       "tt1": "FARMER",

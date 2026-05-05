@@ -187,22 +187,22 @@ const Season = () => {
 
   const columns = [
     {
-      title: "S.No.",
+      title: t("season.table.sntt"),
       dataIndex: "serialNo",
       key: "serialNo",
     },
     {
-      title: "Name",
+      title: t("season.table.sn"),
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Year",
+      title: t("season.table.sy"),
       dataIndex: "year",
       key: "year",
     },
     {
-      title: "Start Date",
+      title: t("season.table.st"),
       dataIndex: "startDate",
       key: "startDate",
       render: (startDate) => {
@@ -212,7 +212,7 @@ const Season = () => {
       },
     },
     {
-      title: "End Date",
+      title: t("season.table.et"),
       dataIndex: "endDate",
       key: "endDate",
       render: (endDate) => {
@@ -222,7 +222,7 @@ const Season = () => {
       },
     },
     {
-      title: "Active",
+      title: t("season.table.at1"),
       dataIndex: "isActive",
       key: "isActive",
       render: (_, record) => {
@@ -240,7 +240,7 @@ const Season = () => {
       },
     },
     {
-      title: "Action",
+      title: t("season.table.at2"),
       key: "a",
       render: (_, record) => (
         <Dropdown
@@ -275,11 +275,7 @@ const Season = () => {
                 danger: true,
                 label: (
                   <Popconfirm
-                    title={
-                      <AlertText
-                        text={`${t("workerPage.tableColumns.actionPopAlertText")}`}
-                      />
-                    }
+                    title={<AlertText text={`${t("season.table.sdw")}`} />}
                     onConfirm={() => handleDeleteSeason(record)}
                     okText="Yes"
                     cancelText="No"
@@ -300,7 +296,7 @@ const Season = () => {
   return (
     <>
       <PageContainer
-        title="Season List"
+        title={t("season.pt")}
         extra={
           <Button
             type="primary"
@@ -310,7 +306,7 @@ const Season = () => {
                 isEdit: false,
               })
             }>
-            Add season
+            {t("season.bt")}
           </Button>
         }>
         <Table dataSource={tableData} columns={columns} rowKey="_id" />
@@ -342,7 +338,7 @@ const Season = () => {
         <Modal
           title={
             <span style={{ color: "#0F172A", fontWeight: "bold" }}>
-              Season Modal
+              {t("season.modal.tt1")}
             </span>
           }
           open={modal.isOpen || modal.isEdit}
@@ -362,7 +358,7 @@ const Season = () => {
           width={800} // Inline layout ke liye width thodi zyada rakhi hai
         >
           <p style={{ color: "#ffffff", marginBottom: "20px" }}>
-            Configure your seasonal settings below.
+            {modal.isEdit ? t("season.modal.tt3") : t("season.modal.tt2")}
           </p>
           <Form
             layout="inline"
@@ -377,21 +373,21 @@ const Season = () => {
             )}
 
             <Form.Item
-              label="Select Season"
+              label={t("season.modal.fist")}
               name="name"
               rules={[{ required: true }]}>
               <Select placeholder="Select" style={{ width: 200 }}>
-                <Option value="Rabi" label="Rabi">
+                <Option value="Rabi" label={t("season.modal.sort")}>
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
-                    Rabi
+                    {t("season.modal.sort")}
                   </span>
                   <span style={{ fontSize: "12px", color: "#ffffff" }}>
                     Dec/Jan to April/May
                   </span>
                 </Option>
-                <Option value="Kharif" label="Kharif">
+                <Option value="Kharif" label={t("season.modal.sokt")}>
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
-                    Kharif
+                    {t("season.modal.sokt")}
                   </span>
                   <span style={{ fontSize: "12px", color: "#ffffff" }}>
                     May/Jun to Nov/Dec.
@@ -400,15 +396,15 @@ const Season = () => {
               </Select>
             </Form.Item>
 
-            <Form.Item label="Year" name="year">
+            <Form.Item label={t("season.modal.fiyt")} name="year">
               <DatePicker picker="year" placeholder="select year" />
             </Form.Item>
 
-            <Form.Item label="Start" name="startDate">
+            <Form.Item label={t("season.modal.fisdt")} name="startDate">
               <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
-            <Form.Item label="End" name="endDate">
+            <Form.Item label={t("season.modal.fiedt")} name="endDate">
               <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
@@ -430,7 +426,7 @@ const Season = () => {
                 type="primary"
                 htmlType="submit"
                 style={{ backgroundColor: "#0499A9" }}>
-                Submit
+                {t("season.modal.fisbt")}
               </Button>
             </div>
           </Form>

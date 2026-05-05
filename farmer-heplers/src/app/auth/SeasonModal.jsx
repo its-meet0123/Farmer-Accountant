@@ -10,6 +10,7 @@ import {
 } from "antd";
 import dayjs from "dayjs";
 import { postSeason } from "../service/season";
+import { useAuth } from "./AuthContext";
 const { Option } = Select;
 
 const modalBackground = `
@@ -19,6 +20,7 @@ const modalBackground = `
 
 const SeasonModal = ({ season, setSeason, userId }) => {
   const [form] = Form.useForm();
+  const { t } = useAuth();
   const today = dayjs();
 
   const handleCancel = () => {
@@ -82,7 +84,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
         <Modal
           title={
             <span style={{ color: "#0F172A", fontWeight: "bold" }}>
-              Season Modal
+              {t("season.modal.tt1")}
             </span>
           }
           open={season.openModal}
@@ -102,7 +104,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
           width={800} // Inline layout ke liye width thodi zyada rakhi hai
         >
           <p style={{ color: "#fff", marginBottom: "20px" }}>
-            Configure your seasonal settings below.
+            {t("season.modal.tt2")}dddd
           </p>
 
           <Form
@@ -118,21 +120,21 @@ const SeasonModal = ({ season, setSeason, userId }) => {
             )}
 
             <Form.Item
-              label="Select Season"
+              label={t("season.modal.fist")}
               name="name"
               rules={[{ required: true }]}>
               <Select placeholder="Select" style={{ width: 200 }}>
-                <Option value="Rabi" label="Rabi">
+                <Option value="Rabi" label={t("season.modal.sort")}>
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
-                    Rabi
+                    {t("season.modal.sort")}
                   </span>
                   <span style={{ fontSize: "12px", color: "#fff" }}>
                     Dec/Jan to April/May
                   </span>
                 </Option>
-                <Option value="Kharif" label="Kharif">
+                <Option value="Kharif" label={t("season.modal.sokt")}>
                   <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
-                    Kharif
+                    {t("season.modal.sokt")}
                   </span>
                   <span style={{ fontSize: "12px", color: "#fff" }}>
                     May/Jun to Nov/Dec.
@@ -141,15 +143,26 @@ const SeasonModal = ({ season, setSeason, userId }) => {
               </Select>
             </Form.Item>
 
-            <Form.Item label="Year" name="year" initialValue={today}>
+            <Form.Item
+              label={t("season.modal.fiyt")}
+              name="year"
+              initialValue={today}
+              rules={[{ required: true }]}>
               <DatePicker picker="year" placeholder="select year" />
             </Form.Item>
 
-            <Form.Item label="Start" name="startDate" initialValue={today}>
+            <Form.Item
+              label={t("season.modal.fisdt")}
+              name="startDate"
+              initialValue={today}
+              rules={[{ required: true }]}>
               <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
-            <Form.Item label="End" name="endDate">
+            <Form.Item
+              label={t("season.modal.fiedt")}
+              name="endDate"
+              rules={[{ required: true }]}>
               <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
@@ -171,7 +184,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
                 type="primary"
                 htmlType="submit"
                 style={{ backgroundColor: "#0499A9" }}>
-                Submit
+                {t("season.modal.fisbt")}
               </Button>
             </div>
           </Form>
