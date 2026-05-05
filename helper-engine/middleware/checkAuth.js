@@ -6,6 +6,7 @@ const authMiddleware = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization || "";
     const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+    console.log("Received token :", token);
     const decoded = jwt.verify(token, JWT_SECRET);
 
     req.user = decoded;
