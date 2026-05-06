@@ -110,6 +110,9 @@ const LaborTransForm = ({
           <Form.Item label="Labor ID" name="laborId" hidden>
             <Input />
           </Form.Item>
+          <Form.Item label="Trans No" name="transactionNumber" hidden>
+            <Input />
+          </Form.Item>
           <Form.Item
             label={t("casualDrawer.acltf.df")}
             name="startDate"

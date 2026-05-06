@@ -123,6 +123,7 @@ const CasualLabor = () => {
     transactionForm.setFieldsValue({
       laborId: workerId,
       transId: record._id,
+      transactionNumber: record.transactionNumber,
       startDate: startDate,
       duration: record.duration,
       salary: record.salary,
@@ -145,7 +146,7 @@ const CasualLabor = () => {
       );
     });
 
-    const length = filterFieldWorkers.transactions.length;
+    //const length = filterFieldWorkers.transactions.length;
 
     const sepcificTransaction = filterFieldWorkers.transactions.find(
       (transaction) => {
@@ -155,19 +156,20 @@ const CasualLabor = () => {
       },
     );
 
-    if (record.transactionNumber !== length) {
-      setOpenType(null);
-      setTimeout(() => {
-        notification.warning({
-          message: t("casualLabor.card.dtm"),
-          description: t("casualLabor.card.dtd"),
-          placement: "topRight",
-        });
-        setIsLoading(null);
-      }, 1000);
+    // if (record.transactionNumber !== length) {
+    //   setOpenType(null);
+    //   setTimeout(() => {
+    //     notification.warning({
+    //       message: t("casualLabor.card.dtm"),
+    //       description: t("casualLabor.card.dtd"),
+    //       placement: "topRight",
+    //     });
+    //     setIsLoading(null);
+    //   }, 1000);
 
-      return;
-    }
+    //   return;
+    // }
+
     try {
       const ids = {
         workerId: filterFieldWorkers?._id,
