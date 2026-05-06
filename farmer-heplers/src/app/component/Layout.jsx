@@ -95,24 +95,29 @@ const AppLayout = ({ children }) => {
             textAlign: "right",
           }}>
           {!season.name && "No Season"}
-          {/* Dates Section */}
-          {season?.name &&
-            season?.startDate &&
-            season?.endDate(
-              season?.name === "Rabi"
+
+          {season?.name && season?.startDate && season?.endDate && (
+            <>
+              {/* Season Name (Rabi/Sauni) */}
+              {season?.name === "Rabi"
                 ? t("season.modal.sort")
-                : t("season.modal.sokt"),
-              (new Date(season?.startDate).toLocaleDateString("en-GB", {
+                : t("season.modal.sokt")}
+
+              {" ("}
+              {/* Start Date */}
+              {new Date(season.startDate).toLocaleDateString("en-GB", {
                 day: "2-digit",
                 month: "short",
-              }),
-              season?.year -
-                new Date(season?.endDate).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                }),
-              season?.year),
-            )}
+              })}
+              {" - "}
+              {/* End Date */}
+              {new Date(season.endDate).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+              })}
+              {`, ${season?.year || ""})`}
+            </>
+          )}
         </div>
       </Header>
       <Content
