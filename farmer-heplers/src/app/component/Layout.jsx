@@ -102,21 +102,20 @@ const AppLayout = ({ children }) => {
             : t("season.modal.sokt")}
 
           {/* Dates Section */}
-          {season?.startDate && (
-            <div style={{ fontSize: "12px", opacity: 0.9 }}>
-              {new Date(season.startDate).toLocaleDateString("en-GB", {
+          {season?.startDate &&
+            season?.endDate(
+              new Date(season.startDate).toLocaleDateString("en-GB", {
                 day: "2-digit",
                 month: "short",
-              })}
-              , ({season?.year || ""}){season?.endDate && " - "}
-              {season?.endDate &&
-                new Date(season.endDate).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                })}
-              , ({season?.year || ""})
-            </div>
-          )}
+              }),
+              season?.year ||
+                "" -
+                  new Date(season.endDate).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                  }),
+              season?.year || "",
+            )}
         </div>
       </Header>
       <Content
