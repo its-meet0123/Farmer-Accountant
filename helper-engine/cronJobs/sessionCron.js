@@ -2,7 +2,7 @@ const cron = require("node-cron");
 const Session = require("../models/session"); // apna path adjust karo
 
 const sessionExpireJob = () => {
-  cron.schedule("0 0 * * *", async () => {
+  cron.schedule("* * * * *", async () => {
     try {
       const today = new Date();
 
