@@ -32,7 +32,7 @@ const CalcPage = () => {
   const { authState, t } = useAuth();
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [isLoanding, setIsLoanding] = useState(false);
+  const [isLoanding, setIsLoanding] = useState(null);
   const [shope, setShope] = useState({});
   const [endDate, setEndDate] = useState();
   const [selectMonth, setSelectMonth] = useState(dayjs());
@@ -151,7 +151,6 @@ const CalcPage = () => {
         setIsLoanding(false);
         setShope(allData);
       } catch (err) {
-        setIsLoanding(true);
         message.error(t("calculationPage.fetchDataErrorMessage"));
         console.log(err.message);
       }
@@ -248,7 +247,7 @@ const CalcPage = () => {
             </Flex>
           </>
         }>
-        {isLoanding ? (
+        {isLoanding == null ? (
           <div
             style={{
               width: "100%",

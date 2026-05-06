@@ -9,6 +9,7 @@ import {
   Modal,
   Popconfirm,
   Select,
+  Spin,
   Table,
 } from "antd";
 import { useEffect, useState } from "react";
@@ -88,7 +89,7 @@ const Season = () => {
         const data = res.data;
         if (data.status == "success") {
           message.success(data.message);
-          setIsLoanding(null);
+          setIsLoanding(false);
           setSeason({ ...data.data, openModal: false });
           setFetch(data.status);
           handleCancel();
@@ -117,7 +118,7 @@ const Season = () => {
         if (data.status == "success") {
           message.success(data.message);
           setFetch(data.status);
-          setIsLoanding(null);
+          setIsLoanding(false);
           handleCancel();
         }
       } catch (err) {
@@ -143,7 +144,7 @@ const Season = () => {
     console.log("in season page :", record, "year :", year);
 
     setTimeout(() => {
-      setIsLoanding(null);
+      setIsLoanding(false);
       setModal({
         isOpen: true,
         isEdit: true,
@@ -178,11 +179,13 @@ const Season = () => {
   useEffect(() => {
     const getData = async () => {
       try {
+        setIsLoanding(true);
         const res = await getAllSeason();
         const list = await res.data;
         if (list.status == "success") {
           setSeasonList(list.data);
           message.success("Season list fetched successfully");
+          setIsLoanding(false);
         }
       } catch (err) {
         console.log(err.message);
@@ -327,19 +330,30 @@ const Season = () => {
             {t("season.bt")}
           </Button>
         }>
-        <Table
-          dataSource={tableData}
-          columns={columns}
-          rowKey="_id"
-          onRow={(record) => ({
-            style: {
-              backgroundColor:
-                season?._id == record._id || record.isActive
-                  ? "#e6f7ff"
-                  : "white",
-            },
-          })}
-        />
+        {isLoanding == null ? (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}>
+            <Spin size="large" styles={{ indicator: { color: "#00E5FF" } }} />
+          </div>
+        ) : (
+          <Table
+            dataSource={tableData}
+            columns={columns}
+            rowKey="_id"
+            onRow={(record) => ({
+              style: {
+                backgroundColor:
+                  season?._id == record._id || record.isActive
+                    ? "#e6f7ff"
+                    : "white",
+              },
+            })}
+          />
+        )}
       </PageContainer>
 
       <ConfigProvider

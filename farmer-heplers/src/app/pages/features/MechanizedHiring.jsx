@@ -47,7 +47,7 @@ const HarvesterData = () => {
     });
     setTimeout(() => {
       setOpenType("addTrans");
-      setIsLoading(null);
+      setIsLoading(false);
     }, 1000);
   };
 
@@ -69,7 +69,7 @@ const HarvesterData = () => {
     });
     setTimeout(() => {
       setOpenType("editDetail");
-      setIsLoading(null);
+      setIsLoading(false);
     }, 2000);
   };
 
@@ -98,27 +98,11 @@ const HarvesterData = () => {
         ),
       );
     });
-    //console.log("edit transaction data", forHarvesterId);
-    //const length = forHarvesterId?.transactions?.length;
+
     const harvesterId = forHarvesterId?._id;
     const transId = record?._id;
     const date = dayjs(record?.startDate);
 
-    // console.log("length :", length);
-    // console.log("record :", record?.serialNo);
-
-    // if (length !== record.serialNo) {
-    //   setOpenType(null);
-    //   setTimeout(() => {
-    //     notification.warning({
-    //       message: t("mechanizedHiring.card.etm"),
-    //       description: t("mechanizedHiring.card.etd"),
-    //       placement: "topRight",
-    //     });
-    //     setIsLoading(null);
-    //   }, 1000);
-    //   return;
-    // }
     if (record?.duration > 0) {
       setBaseOfRate("duration");
     }
@@ -140,7 +124,7 @@ const HarvesterData = () => {
     });
 
     setTimeout(() => {
-      setIsLoading(null);
+      setIsLoading(false);
       setOpenType("editTrans");
     }, 1000);
   };
@@ -205,7 +189,7 @@ const HarvesterData = () => {
         if (data.status == "Success") {
           setHarvestList(data.data);
           message.success(t(data.Code));
-          setIsLoading(null);
+          setIsLoading(false);
         }
       } catch (err) {
         console.log(err.message);
@@ -326,7 +310,7 @@ const HarvesterData = () => {
             {t("mechanizedHiring.card.bt")}
           </Button>
         }>
-        {isLoading == "loading" ? (
+        {isLoading == null ? (
           <div
             style={{
               width: "100%",

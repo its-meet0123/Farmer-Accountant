@@ -32,7 +32,7 @@ const WorkerCalculation = () => {
   const navigate = useNavigate();
   const today = dayjs();
   const { authState, t } = useAuth();
-  const [isLoanding, setIsLoanding] = useState(false);
+  const [isLoanding, setIsLoanding] = useState(null);
   const [worker, setWorker] = useState({});
   const [id, setId] = useState();
   const [endDate, setEndDate] = useState();
@@ -221,7 +221,7 @@ const WorkerCalculation = () => {
             </Flex>
           </>
         }>
-        {isLoanding ? (
+        {isLoanding == null ? (
           <div
             style={{
               width: "100%",

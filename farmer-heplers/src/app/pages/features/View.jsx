@@ -98,7 +98,7 @@ const ViewPage = () => {
       shopeNumber: record.shopeNumber,
     });
     setTimeout(() => {
-      setIsLoanding(null);
+      setIsLoanding(false);
       setOpenType("edit");
     }, 1000);
   };
@@ -123,7 +123,7 @@ const ViewPage = () => {
         const text = `${t("ViewPage.deleteTransFunctionMessages.successMessage1")}`;
         showSuccess(text);
         setFetch(res.data);
-        setIsLoanding(null);
+        setIsLoanding(false);
       }
     } catch (err) {
       message.error(t("ViewPage.deleteTransFunctionMessages.errorMessage1"));
@@ -174,7 +174,7 @@ const ViewPage = () => {
         const res = await getAllIndShopes(season?._id);
         const data = await res.data.data;
         setAllInd(data);
-        setIsLoanding(null);
+        setIsLoanding(false);
       } catch (err) {
         message.error(t("ViewPage.fetchDataErrorMessage"));
         console.log(err.message);
@@ -339,7 +339,7 @@ const ViewPage = () => {
     <>
       {contextHolder}
       <PageContainer title={t("ViewPage.cardTitle")} extra={""}>
-        {isLoanding == "loadData" ? (
+        {isLoanding == null ? (
           <div
             style={{
               width: "100%",

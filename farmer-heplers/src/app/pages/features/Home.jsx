@@ -74,7 +74,7 @@ const HomePage = () => {
         const text = `${record.nameInd} ${t("homePage.deleteFunctionMessages.successMessage")}`;
         showSuccess(text);
         setFetch({ res1: entRes.data, res2: indRes.data });
-        setIsLoanding(null);
+        setIsLoanding(false);
       } else {
         message.error(t("homePage.deleteFunctionMessages.errorMessage"));
         console.log(indRes.data.message);
@@ -102,7 +102,7 @@ const HomePage = () => {
         setTimeout(() => {
           setFetch(data);
           setOpenType("edit");
-          setIsLoanding(null);
+          setIsLoanding(false);
         }, 1000);
       }
     } catch (err) {
@@ -132,7 +132,7 @@ const HomePage = () => {
       try {
         setIsLoanding("loadData");
         await Promise.all([fetchEntData(), fetchIndData()]);
-        setIsLoanding(null);
+        setIsLoanding(false);
         message.success("data fetched successfully");
       } catch (err) {
         message.error(t("homePage.fetchDataErrorMessage"));
@@ -244,7 +244,7 @@ const HomePage = () => {
           </Button>
         }
         size={20}>
-        {isLoanding === "loadData" ? (
+        {isLoanding == null ? (
           <div
             style={{
               width: "100%",

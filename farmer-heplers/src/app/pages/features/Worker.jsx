@@ -25,6 +25,7 @@ import {
   EllipsisOutlined,
   EyeOutlined,
   FileAddOutlined,
+  LoadingOutlined,
   StopOutlined,
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
@@ -53,12 +54,13 @@ const WorkersData = () => {
   };
 
   const addWorkerTransaction = (record) => {
+    setIsLoanding("at");
     transactionForm.setFieldsValue({
       workerId: record?._id,
     });
 
     setTimeout(() => {
-      setIsLoanding(null);
+      setIsLoanding(false);
       setOpenType("at");
     }, 1000);
   };
@@ -95,7 +97,7 @@ const WorkersData = () => {
     });
 
     setTimeout(() => {
-      setIsLoanding(null);
+      setIsLoanding(false);
       setOpenType("ew");
     }, 1000);
   };
@@ -131,7 +133,7 @@ const WorkersData = () => {
       date: date,
     });
     setTimeout(() => {
-      setIsLoanding(null);
+      setIsLoanding(false);
       setOpenType("ewt");
     }, 1000);
   };
@@ -188,11 +190,11 @@ const WorkersData = () => {
         const res = await getAllWorkers(season?._id);
         const data = await res.data.data;
         setWorkerList(data);
-        setIsLoanding(null);
+        setIsLoanding(false);
       } catch (err) {
         message.error(t("workerPage.fetchDataErrorMessage"));
         console.log(err.message);
-        setIsLoanding(true);
+        setIsLoanding(null);
       }
     }
     getData();
@@ -222,7 +224,12 @@ const WorkersData = () => {
               {
                 key: "1",
                 label: "add",
-                icon: <FileAddOutlined />,
+                icon:
+                  isLoanding == "at" ? (
+                    <LoadingOutlined />
+                  ) : (
+                    <FileAddOutlined />
+                  ),
                 onClick: () => addWorkerTransaction(record),
               },
               {
@@ -234,7 +241,8 @@ const WorkersData = () => {
               {
                 key: "3",
                 label: "edit",
-                icon: <EditOutlined />,
+                icon:
+                  isLoanding == "ewt" ? <LoadingOutlined /> : <EditOutlined />,
                 onClick: () => editWorker(record),
               },
               {
@@ -334,7 +342,7 @@ const WorkersData = () => {
             {t("workerPage.cardButtonText")}
           </Button>
         }>
-        {isLoanding == "loadData" ? (
+        {isLoanding == null ? (
           <div
             style={{
               width: "100%",
