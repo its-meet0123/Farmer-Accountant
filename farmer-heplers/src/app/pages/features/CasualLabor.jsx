@@ -44,7 +44,7 @@ const CasualLabor = () => {
   const [laborForm] = Form.useForm();
   const [transactionForm] = Form.useForm();
   const [additonalWorker, setAdditonalWorker] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(null);
   const [fetch, setFetch] = useState();
   const [openType, setOpenType] = useState(null);
   const [buttonLoading, setButtonLoanding] = useState(null);
@@ -204,19 +204,11 @@ const CasualLabor = () => {
     getData();
   }, [fetch, season?._id]);
 
-  const tableData = useMemo(() => {
-    if (!additonalWorker) return [];
-    return additonalWorker.map((list, index) => ({
-      ...list,
-      serialNo: index + 1,
-    }));
-  }, [additonalWorker]);
-
   const columns = [
     {
       title: t("casualLabor.wtc.sntt"),
-      dataIndex: "serialNo",
-      key: "serialNo",
+      dataIndex: "transactionNumber",
+      key: "transactionNumber",
       width: 50,
     },
     {
@@ -351,7 +343,7 @@ const CasualLabor = () => {
             {t("casualLabor.card.bt")}
           </Button>
         }>
-        {isLoading ? (
+        {isLoading == null ? (
           <div
             style={{
               width: "100%",
@@ -362,7 +354,7 @@ const CasualLabor = () => {
           </div>
         ) : (
           <Table
-            dataSource={tableData}
+            dataSource={additonalWorker}
             columns={columns}
             rowKey="_id"
             expandable={{ expandedRowRender: (record) => ExpandedRow(record) }}
