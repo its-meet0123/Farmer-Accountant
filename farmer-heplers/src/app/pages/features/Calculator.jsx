@@ -34,7 +34,7 @@ const CalcPage = () => {
   const navigate = useNavigate();
   const [isLoanding, setIsLoanding] = useState(false);
   const [shope, setShope] = useState({});
-  const [endDate, setEndDate] = useState([]);
+  const [endDate, setEndDate] = useState();
   const [selectMonth, setSelectMonth] = useState(dayjs());
   const [id, setId] = useState();
   const [fetch, setFetch] = useState("");
@@ -90,6 +90,7 @@ const CalcPage = () => {
       };
       try {
         const res = await postEndDate(data);
+        setEndDate(res.data.data);
         showMessage(res.data.message);
         setFetch("post");
       } catch (err) {
@@ -166,7 +167,7 @@ const CalcPage = () => {
           const dateRes = await getEndDate(state?.id);
           const data = await dateRes.data.data;
           setIsLoanding(false);
-          setEndDate([data]);
+          setEndDate(data);
           setId(data._id);
           form.setFieldsValue({
             endDate: dayjs(data.endDate) || today,

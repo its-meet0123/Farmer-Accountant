@@ -105,13 +105,13 @@ const AppLayout = ({ children }) => {
 
               {" ("}
               {/* Start Date */}
-              {new Date(season.startDate).toLocaleDateString("en-GB", {
+              {new Date(season?.startDate).toLocaleDateString("en-GB", {
                 day: "2-digit",
                 month: "short",
               })}
               {" - "}
               {/* End Date */}
-              {new Date(season.endDate).toLocaleDateString("en-GB", {
+              {new Date(season?.endDate).toLocaleDateString("en-GB", {
                 day: "2-digit",
                 month: "short",
               })}

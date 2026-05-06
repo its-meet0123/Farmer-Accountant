@@ -35,7 +35,7 @@ const WorkerCalculation = () => {
   const [isLoanding, setIsLoanding] = useState(false);
   const [worker, setWorker] = useState({});
   const [id, setId] = useState();
-  const [endDate, setEndDate] = useState([]);
+  const [endDate, setEndDate] = useState();
   const [selectMonth, setSelectMonth] = useState(dayjs());
   const [form] = Form.useForm();
   const [fetch, setFetch] = useState();

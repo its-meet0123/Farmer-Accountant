@@ -224,7 +224,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                       {formatCurrency(account.loan.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {formattedDate(endDate[0]?.endDate)}
+                      {formattedDate(endDate?.endDate)}
                     </td>
                   </tr>
                 )}
@@ -248,7 +248,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                       {formatCurrency(account.indBuy.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {formattedDate(endDate[0]?.endDate)}
+                      {formattedDate(endDate?.endDate)}
                     </td>
                   </tr>
                 )}
@@ -271,7 +271,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                       {formatCurrency(account.diesel.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {formattedDate(endDate[0]?.endDate)}
+                      {formattedDate(endDate?.endDate)}
                     </td>
                   </tr>
                 )}
@@ -294,7 +294,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                       {formatCurrency(account.indSell.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {formattedDate(endDate[0]?.endDate)}
+                      {formattedDate(endDate?.endDate)}
                     </td>
                   </tr>
                 )}
@@ -518,7 +518,7 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                       {formatCurrency(account.give.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {formattedDate(endDate[1]?.endDate)}
+                      {formattedDate(endDate?.endDate)}
                     </td>
                   </tr>
                 )}
@@ -544,7 +544,7 @@ const DownloadTable2 = ({ modelOpen, setModelOpen, worker, endDate }) => {
                       {formatCurrency(account.take.totalAmount)}
                     </td>
                     <td style={{ padding: "5px" }}>
-                      {formattedDate(endDate[1]?.endDate)}
+                      {formattedDate(endDate?.endDate)}
                     </td>
                   </tr>
                 )}
