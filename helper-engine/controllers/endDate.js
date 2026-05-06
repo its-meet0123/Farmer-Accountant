@@ -4,12 +4,12 @@ const InterestDate = require("../models/endDate");
 async function handleGetInterestDate(req, res) {
   //const token = req.cookies.token;
   try {
-    const { sessionId } = req.params;
+    const { dataId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const interestDate = await InterestDate.find({
+    const interestDate = await InterestDate.findOne({
       userId: currentUserId,
-      sessionId: sessionId,
+      dataId: dataId,
     });
 
     if (!interestDate) {
@@ -37,12 +37,23 @@ async function handlePostInterestDate(req, res) {
   if (!data) {
     return res.json({ status: "error", message: "All fields are required" });
   }
+  const findDate = await InterestDate.find({
+    userId: data.userId,
+    dataId: data.dataId,
+  });
+
+  if (findDate) {
+    return res.status(200).json({
+      status: "success",
+      message: "endDate already exist",
+      data: findDate,
+    });
+  }
 
   const result = await InterestDate.create({
     userId: data.userId,
-    sessionId: data.workerId || data.shopeId,
+    dataId: data.dataId,
     endDate: data.endDate,
-    dateType: data.dateType,
   });
 
   res.status(201).json({
@@ -56,7 +67,7 @@ async function handleUpdateInterestDate(req, res) {
   //const token = req.cookies.token;
 
   try {
-    const { sessionId } = req.params;
+    const { dataId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
 
@@ -67,7 +78,7 @@ async function handleUpdateInterestDate(req, res) {
     }
 
     const updateInterestDate = await InterestDate.findByIdAndUpdate(
-      { _id: id, userId: currentUserId, sessionId: sessionId },
+      { _id: id, userId: currentUserId, dataId: dataId },
       body,
       {
         new: true,
@@ -95,12 +106,12 @@ async function handleDeleteInterestDate(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { sessionId, id } = req.params;
+    const { dataId, id } = req.params;
 
     const interestDate = await InterestDate.findByIdAndDelete({
       _id: id,
       userId: currentUserId,
-      sessionId: sessionId,
+      dataId: dataId,
     });
 
     if (!interestDate) {

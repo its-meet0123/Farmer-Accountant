@@ -1,9 +1,27 @@
 const cron = require("node-cron");
 const Shopes = require("../models/integratedData");
 const Workers = require("../models/worker");
+const Season = require("../models/session");
+const EndDate = require("../models/endDate");
 const { calculateAutoInterst } = require("../components/calculator");
 
-const autoCalculationJob = () => {
+const getEndDate = (insertdate, seasondate, today) => {
+  let endDate;
+  if (insertdate?.endDate) {
+    endDate = new Date(insertdate?.endDate);
+  } else {
+    const seasonEnd = new Date(seasondate?.endDate);
+
+    if (seasonEnd > today) {
+      endDate = today;
+    } else {
+      endDate = seasonEnd;
+    }
+  }
+  return endDate;
+};
+
+const autoCalculationJob = async () => {
   cron.schedule("0 0 * * *", async () => {
     try {
       const today = new Date();
@@ -19,11 +37,26 @@ const autoCalculationJob = () => {
       ]);
 
       for (let shope of shopes) {
+        const [seasondate, insertdate] = await Promise.all([
+          Season.findOne({
+            userId: shope.userId,
+            _id: shope.sessionId,
+          }),
+          await EndDate.findOne({
+            userId: shope.userId,
+            dataId: shope._id,
+          }),
+        ]);
+
         shope.shopeAccount.forEach((transaction, index) => {
           const startDate = new Date(transaction?.startDate);
           const loanAmount = transaction?.loan?.amount || 0;
           const rate = transaction?.rate;
-          const endDate = today;
+          const endDate = getEndDate(
+            insertdate.endDate,
+            seasondate.endDate,
+            today,
+          );
 
           const loanCalculation = calculateAutoInterst(
             loanAmount,
@@ -85,10 +118,25 @@ const autoCalculationJob = () => {
       }
 
       for (let worker of workers) {
+        const [insertDate, seasonEndDate] = await Promise.all([
+          EndDate.findOne({
+            userId: worker?.userId,
+            dataId: worker?._id,
+          }),
+          await Season.findOne({
+            userId: worker?.userId,
+            sessionId: worker?.sessionId,
+          }),
+        ]);
+
         worker.account.forEach((trans, index) => {
           const startDate = new Date(trans?.date);
-          const endDate = today;
           const rate = trans?.rate || 0;
+          const endDate = getEndDate(
+            insertDate?.endDate,
+            seasonEndDate?.endDate,
+            today,
+          );
 
           const giveAmount = trans?.give?.amount || 0;
           const giveCalculation = calculateAutoInterst(

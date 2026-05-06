@@ -25,12 +25,14 @@ import {
   EllipsisOutlined,
   EyeOutlined,
   FileAddOutlined,
+  StopOutlined,
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { PageContainer } from "../../component/PageContainer";
 import dayjs from "dayjs";
+import { postEndDate } from "../../service/ind";
 
 const WorkersData = () => {
   const { season, t } = useAuth();
@@ -158,6 +160,26 @@ const WorkersData = () => {
       message.error("Worker not deleted");
     }
   };
+
+  const stopCalculation = async (record) => {
+    const date = new Date();
+    const forenddate = {
+      userId: record?.userId,
+      dataId: record?._id,
+      endDate: date,
+    };
+    const res = await postEndDate(forenddate);
+    if (res.status == 201) {
+      message.success(
+        `Calculation stop for ${record?.workerDetail?.workerName?.nickName}`,
+      );
+    }
+    if (res.status == 200) {
+      message.success(
+        `Calculation already stoped for ${record?.workerDetail?.workerName?.nickName}`,
+      );
+    }
+  };
   useEffect(() => {
     if (!season._id) return;
     async function getData() {
@@ -217,6 +239,12 @@ const WorkersData = () => {
               },
               {
                 key: "4",
+                label: "stop",
+                icon: <StopOutlined />,
+                onClick: () => stopCalculation(record),
+              },
+              {
+                key: "5",
                 icon: <DeleteOutlined />,
                 danger: true,
                 label: (

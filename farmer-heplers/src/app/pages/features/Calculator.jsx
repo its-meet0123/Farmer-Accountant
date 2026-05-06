@@ -86,8 +86,7 @@ const CalcPage = () => {
       const data = {
         endDate: dateValue,
         userId: authState.user.userId,
-        sessionId: state?.id,
-        dateType: "view",
+        dataId: state?.id,
       };
       try {
         const res = await postEndDate(data);
@@ -106,10 +105,9 @@ const CalcPage = () => {
         const data = {
           endDate: dateValue,
           userId: authState.user.userId,
-          sessionId: state?.id,
-          dateType: "view",
+          dataId: state?.id,
         };
-        const ids = { sessionId: state?.id, id: id };
+        const ids = { dataId: state?.id, id: id };
         try {
           const res = await editEndDate(ids, data);
           setEndDate(res.data.data);
@@ -168,24 +166,18 @@ const CalcPage = () => {
           const dateRes = await getEndDate(state?.id);
           const data = await dateRes.data.data;
           setIsLoanding(false);
-          const viewEndDate =
-            data.filter((date) => date.dateType === "view") || [];
-          console.log(viewEndDate);
-          setEndDate(viewEndDate);
-          setId(viewEndDate[0]._id);
+          setEndDate([data]);
+          setId(data._id);
           form.setFieldsValue({
-            endDate:
-              viewEndDate?.length > 0 ? dayjs(viewEndDate[0]?.endDate) : today,
+            endDate: dayjs(data.endDate) || today,
           });
         }
       } catch (err) {
-        if (endDate.length > 0) {
-          message.error(t("calculationPage.fetchDateErrorMessage"));
-          console.log(err.message);
-          setFetch("del");
-          if (err.code === "ERR_CANCELED") {
-            return;
-          }
+        message.error(t("calculationPage.fetchDateErrorMessage"));
+        console.log(err.message);
+        setFetch("del");
+        if (err.code === "ERR_CANCELED") {
+          return;
         }
       }
     }

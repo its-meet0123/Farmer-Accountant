@@ -10,7 +10,7 @@ import {
   Table,
 } from "antd";
 import { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { data, useLocation, useNavigate } from "react-router-dom";
 import { getWorkerTransaction } from "../../service/worker";
 import { getColumnsForWorkerCalcPage } from "../../constant/Extracolumns";
 import { TableFooterForWorkerCalc } from "../../component/TableFooter";
@@ -62,8 +62,7 @@ const WorkerCalculation = () => {
       const data = {
         endDate: dateValue,
         userId: authState.user.userId,
-        sessionId: state?.id,
-        dateType: "worker",
+        dataId: state?.id,
       };
       try {
         const res = await postEndDate(data);
@@ -82,10 +81,9 @@ const WorkerCalculation = () => {
         const data = {
           endDate: dateValue,
           userId: authState.user.userId,
-          sessionId: state?.id,
-          dateType: "worker",
+          dataId: state?.id,
         };
-        const ids = { sessionId: state?.id, id: id };
+        const ids = { dataId: state?.id, id: id };
         try {
           const res = await editEndDate(ids, data);
           setEndDate(res.data.data);
@@ -145,20 +143,14 @@ const WorkerCalculation = () => {
         if (fetch != "del") {
           const dateRes = await getEndDate(state?.id);
           const data = await dateRes.data.data;
-
-          const workerEndDate =
-            data.filter((date) => date.dateType === "worker") || [];
-          setEndDate(workerEndDate);
-          setId(workerEndDate[0]._id);
+          setId(data._id);
+          form.setFieldsValue({
+            endDate: dayjs(data.endDate) || today,
+          });
         }
-        form.setFieldsValue({
-          endDate: endDate.length > 0 ? dayjs(endDate[0].endDate) : today,
-        });
       } catch (err) {
-        if (endDate.length > 0) {
-          message.error(t("workerCalcPage.fetchDateErrorMessage"));
-          console.error(err.message);
-        }
+        message.error(t("workerCalcPage.fetchDateErrorMessage"));
+        console.error(err.message);
         setFetch("del");
         if (err.code === "ERR_CANCELED") {
           return;

@@ -44,15 +44,18 @@ export async function postEndDate(date) {
   return await axiosInstance.post(`/intdate`, date);
 }
 
-export async function getEndDate(sessionId) {
-  return await axiosInstance.get(`/intdate/${sessionId}`);
+export async function getEndDate(dataId) {
+  return await axiosInstance.get(`/intdate/${dataId}`);
 }
 
 export async function editEndDate(ids, date) {
-  const { sessionId, id } = ids;
-  return await axiosInstance.patch(`/intdate/${sessionId}/${id}`, date);
+  const { dataId, id } = ids;
+  return await axiosInstance.patch(
+    `/intdate/dataId/${dataId}/date/${id}`,
+    date,
+  );
 }
 
-export async function deleteEndDate(sessionId, id) {
-  return await axiosInstance.delete(`/intdate/${sessionId}/${id}`);
+export async function deleteEndDate(dataId, id) {
+  return await axiosInstance.delete(`/intdate/dataId/${dataId}/date/${id}`);
 }

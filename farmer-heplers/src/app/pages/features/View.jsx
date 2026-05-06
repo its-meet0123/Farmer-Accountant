@@ -1,11 +1,27 @@
-import { Button, Flex, Form, message, Popconfirm, Spin, Table } from "antd";
+import {
+  Button,
+  Dropdown,
+  Flex,
+  Form,
+  message,
+  Popconfirm,
+  Spin,
+  Table,
+} from "antd";
 import { useEffect, useMemo, useState } from "react";
-import { deleteIndShopeAccountData, getAllIndShopes } from "../../service/ind";
+import {
+  deleteIndShopeAccountData,
+  getAllIndShopes,
+  postEndDate,
+} from "../../service/ind";
 import {
   DeleteOutlined,
   EditOutlined,
+  EllipsisOutlined,
   EyeOutlined,
   FileAddOutlined,
+  LoadingOutlined,
+  StopOutlined,
 } from "@ant-design/icons";
 import { getColumnsForViewPage } from "../../constant/Extracolumns";
 import { useNavigate } from "react-router-dom";
@@ -134,6 +150,22 @@ const ViewPage = () => {
     }
   };
 
+  const stopCalculation = async (record) => {
+    const date = new Date();
+    const forenddate = {
+      userId: record?.userId,
+      dataId: record?._id,
+      endDate: date,
+    };
+    const res = await postEndDate(forenddate);
+    if (res.status == 201) {
+      message.success(`Calculation stop for ${record?.shopeNumber}`);
+    }
+    if (res.status == 200) {
+      message.success(`Calculation already stoped for ${record?.shopeNumber}`);
+    }
+  };
+
   useEffect(() => {
     if (!season?._id) return null;
     async function getData() {
@@ -186,40 +218,61 @@ const ViewPage = () => {
       width: "40%",
       key: "a",
       fixed: "end",
-      render: (_, record) => {
-        return (
-          <Flex gap={2} horizontal>
-            <Button
-              type="link"
-              icon={<FileAddOutlined />}
-              onClick={() => handleAddShopeTransaction(record)}
-              loading={isLoanding == "at" && true}
-            />
-            <Button
-              type="link"
-              icon={<EyeOutlined />}
-              onClick={() => calcView(record)}
-            />
-            <Popconfirm
-              title={
-                <AlertText
-                  text={`${t("ViewPage.tableColumns.actionPopAlertText")}`}
-                />
-              }
-              onConfirm={() => deleteAllTransaction(record)}
-              okText="Yes"
-              cancelText="No"
-              placement="left">
-              <Button
-                color="danger"
-                variant="text"
-                icon={<DeleteOutlined />}
-                size="small"
-              />
-            </Popconfirm>
-          </Flex>
-        );
-      },
+      render: (_, record) => (
+        <Dropdown
+          menu={{
+            items: [
+              {
+                key: "1",
+                label: "add",
+                icon:
+                  isLoanding == "at" ? (
+                    <LoadingOutlined />
+                  ) : (
+                    <FileAddOutlined />
+                  ),
+                onClick: () => handleAddShopeTransaction(record),
+              },
+              {
+                key: "2",
+                label: "view",
+                icon: <EyeOutlined />,
+                onClick: () => calcView(record),
+              },
+              {
+                key: "3",
+                label: (
+                  <Popconfirm
+                    title={
+                      <AlertText
+                        text={`${t("ViewPage.tableColumns.actionPopAlertText")}`}
+                      />
+                    }
+                    onConfirm={() => deleteAllTransaction(record)}
+                    okText="Yes"
+                    cancelText="No"
+                    placement="left">
+                    <Button
+                      color="danger"
+                      variant="text"
+                      icon={<DeleteOutlined />}
+                      size="small"
+                    />
+                  </Popconfirm>
+                ),
+              },
+              {
+                key: "4",
+                label: "stop",
+                icon: <StopOutlined />,
+                onClick: () => stopCalculation(record),
+              },
+            ],
+          }}
+          trigger={["click"]}>
+          <Button type="text" icon={<EllipsisOutlined />} />
+        </Dropdown>
+      ),
     },
   ];
 
