@@ -256,8 +256,9 @@ const ViewPage = () => {
                       color="danger"
                       variant="text"
                       icon={<DeleteOutlined />}
-                      size="small"
-                    />
+                      size="small">
+                      delete
+                    </Button>
                   </Popconfirm>
                 ),
               },

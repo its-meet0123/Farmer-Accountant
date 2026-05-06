@@ -28,6 +28,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   EllipsisOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
 const { Option } = Select;
@@ -52,6 +53,8 @@ const modalBackground = `
 const Season = () => {
   const { authState, t, season, setSeason } = useAuth();
   const [seasonList, setSeasonList] = useState([]);
+  const [isLoanding, setIsLoanding] = useState(null);
+  const [fetch, setFetch] = useState();
   const [modal, setModal] = useState({
     isOpen: false,
     isEdit: false,
@@ -67,6 +70,7 @@ const Season = () => {
   };
 
   const onSubmit = async () => {
+    setIsLoanding("sbl");
     if (modal.isEdit) {
       const editValues = seasonForm.getFieldsValue();
       const formattedValues = {
@@ -84,7 +88,9 @@ const Season = () => {
         const data = res.data;
         if (data.status == "success") {
           message.success(data.message);
+          setIsLoanding(null);
           setSeason({ ...data.data, openModal: false });
+          setFetch(data.status);
           handleCancel();
         }
       } catch (err) {
@@ -110,6 +116,8 @@ const Season = () => {
         const data = res.data;
         if (data.status == "success") {
           message.success(data.message);
+          setFetch(data.status);
+          setIsLoanding(null);
           handleCancel();
         }
       } catch (err) {
@@ -119,6 +127,7 @@ const Season = () => {
   };
 
   const editSeason = (record) => {
+    setIsLoanding("ebl");
     const year = dayjs(record?.year);
     const startDate = dayjs(record?.startDate);
     const endDate = dayjs(record?.endDate);
@@ -134,6 +143,7 @@ const Season = () => {
     console.log("in season page :", record, "year :", year);
 
     setTimeout(() => {
+      setIsLoanding(null);
       setModal({
         isOpen: true,
         isEdit: true,
@@ -157,6 +167,7 @@ const Season = () => {
       const seasondata = res.data;
       if (seasondata.status === "success") {
         message.success(seasondata.message);
+        setFetch(res.status);
       }
     } catch (err) {
       console.log(err.message);
@@ -178,7 +189,7 @@ const Season = () => {
       }
     };
     getData();
-  }, [season]);
+  }, [season, fetch]);
 
   const tableData = seasonList.map((item, index) => ({
     ...item,
@@ -195,6 +206,14 @@ const Season = () => {
       title: t("season.table.sn"),
       dataIndex: "name",
       key: "name",
+      render: (name) => {
+        if (name == "Rabi") {
+          return t("season.modal.sort");
+        }
+        if (name == "Kharif") {
+          return t("season.modal.sokt");
+        }
+      },
     },
     {
       title: t("season.table.sy"),
@@ -257,16 +276,11 @@ const Season = () => {
                   ),
                 onClick: () => handleSelectSeason(record),
               },
-              // {
-              //   key: "2",
-              //   label: "view",
-              //   icon: <StopOutlined />,
-              //   onClick: () => calcView(record),
-              // },
               {
                 key: "3",
                 label: "edit",
-                icon: <EditOutlined />,
+                icon:
+                  isLoanding == "ebl" ? <LoadingOutlined /> : <EditOutlined />,
                 onClick: () => editSeason(record),
               },
               {
@@ -441,7 +455,8 @@ const Season = () => {
               <Button
                 type="primary"
                 htmlType="submit"
-                style={{ backgroundColor: "#0499A9" }}>
+                style={{ backgroundColor: "#0499A9" }}
+                loading={isLoanding == "sbl"}>
                 {t("season.modal.fisbt")}
               </Button>
             </div>
