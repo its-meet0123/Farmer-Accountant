@@ -26,6 +26,11 @@ const autoCalculationJob = () => {
             endDate,
           );
 
+          transaction.loan = {
+            ...transaction?.loan,
+            ...loanCalculation,
+          };
+
           const indBuyBillAmount = transaction?.indBuy?.billAmount || 0;
 
           const indBuyCalculation = calculateAutoInterst(
@@ -34,6 +39,11 @@ const autoCalculationJob = () => {
             rate,
             endDate,
           );
+
+          transaction.indBuy = {
+            ...transaction?.indBuy,
+            ...indBuyCalculation,
+          };
 
           const indSellBillAmount = transaction?.indSell?.billAmount || 0;
 
@@ -44,6 +54,11 @@ const autoCalculationJob = () => {
             endDate,
           );
 
+          transaction.indSell = {
+            ...transaction?.indSell,
+            ...indSellCalculation,
+          };
+
           const dieselBillAmount = transaction?.diesel?.billAmount || 0;
 
           const dieselCalculation = calculateAutoInterst(
@@ -53,40 +68,10 @@ const autoCalculationJob = () => {
             endDate,
           );
 
-          const newTransaction = {
-            startDate: transaction.startDate,
-            loan: {
-              amount: loanAmount,
-              amountType: transaction?.loan?.amountType,
-              handOver: transaction?.loan?.handOver,
-              ...loanCalculation,
-            },
-            indBuy: {
-              billAmount: indBuyBillAmount,
-              bill: transaction?.indBuy?.bill,
-              brief: transaction?.indBuy?.brief,
-              handOver: transaction?.indBuy?.handOver,
-              ...indBuyCalculation,
-            },
-            indSell: {
-              crop: transaction?.indSell?.crop || [],
-              billAmount: indSellBillAmount,
-              bill: transaction?.indSell?.bill,
-              brief: transaction?.indSell?.brief,
-              handOver: transaction?.indSell?.handOver,
-              ...indSellCalculation,
-            },
-            diesel: {
-              billAmount: dieselBillAmount,
-              qty: transaction?.diesel?.qty,
-              rate: transaction?.diesel?.rate,
-              handOver: transaction?.diesel?.handOver,
-              ...dieselCalculation,
-            },
-            rate: rate,
+          transaction.diesel = {
+            ...transaction?.diesel,
+            ...dieselCalculation,
           };
-
-          shope.shopeAccount[index] = newTransaction;
         });
 
         shope.markModified("shopeAccount");
@@ -107,6 +92,11 @@ const autoCalculationJob = () => {
             endDate,
           );
 
+          trans.give = {
+            ...trans?.give,
+            ...giveCalculation,
+          };
+
           const takeAmount = trans?.take?.payment || 0;
           const takeCalculation = calculateAutoInterst(
             takeAmount,
@@ -114,26 +104,10 @@ const autoCalculationJob = () => {
             rate,
             endDate,
           );
-
-          const newTransaction = {
-            date: startDate,
-            give: {
-              crop: trans?.give?.crop || [],
-              amount: giveAmount,
-              brief: trans?.give?.brief || "",
-              amountType: trans?.give?.amountType || "",
-              ...giveCalculation,
-            },
-            take: {
-              payment: takeAmount,
-              paymentType: trans?.take?.paymentType || "",
-              crop: trans?.take?.crop || [],
-              ...takeCalculation,
-            },
-            rate: rate,
+          trans.take = {
+            ...trans?.take,
+            ...takeCalculation,
           };
-
-          worker.account[index] = newTransaction;
         });
 
         worker.markModified("account");
