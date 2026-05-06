@@ -5,7 +5,7 @@ export async function postIntShopeInitailData(shopeData) {
 }
 
 export async function getAllIndShopes(sessionId) {
-  return await axiosInstance.get(`/intshope/${sessionId}`);
+  return await axiosInstance.get(`/intshope/${sessionId}/shopes`);
 }
 
 export async function getIndShopeAccountById(id) {

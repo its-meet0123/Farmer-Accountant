@@ -16,7 +16,7 @@ const {
 
 const router = express.Router();
 router.post("/", handleCreateIndData);
-router.get("/:sessionId", authMiddleware, handleGetAllIndData);
+router.get("/:sessionId/shopes", authMiddleware, handleGetAllIndData);
 router
   .route("/:id")
   .get(authMiddleware, handleGetIndShopeAccountById)
