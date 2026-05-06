@@ -8,8 +8,6 @@ const authMiddleware = (req, res, next) => {
     const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    console.log("Decoded JWT :", decoded.id);
-
     req.user = decoded;
 
     next();

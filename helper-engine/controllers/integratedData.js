@@ -30,12 +30,10 @@ async function handleGetAllIndData(req, res) {
 }
 
 async function handleGetIndShopeAccountById(req, res) {
-  console.log("Entered in get shope account by id");
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
     const { id } = req.params;
-    console.log("fetching shope account by id and userid :", id, currentUserId);
     if (!id) {
       return res.status(404).json({
         status: "fail",

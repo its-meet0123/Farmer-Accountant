@@ -87,12 +87,36 @@ const AppLayout = ({ children }) => {
           }}
         />
 
-        <div style={{ marginLeft: "auto", color: "#fff", fontWeight: 500 }}>
+        <div
+          style={{
+            marginLeft: "auto",
+            color: "#fff",
+            fontWeight: 500,
+            textAlign: "right",
+          }}>
           {!season.name && "No Season"}
-          {season?.name == "Rabi"
+
+          {/* Season Name Logic */}
+          {season?.name === "Rabi"
             ? t("season.modal.sort")
-            : t("season.modal.sokt")}{" "}
-          ({season?.year || ""})
+            : t("season.modal.sokt")}
+
+          {/* Dates Section */}
+          {season?.startDate && (
+            <div style={{ fontSize: "12px", opacity: 0.9 }}>
+              {new Date(season.startDate).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+              })}
+              , ({season?.year || ""}){season?.endDate && " - "}
+              {season?.endDate &&
+                new Date(season.endDate).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                })}
+              , ({season?.year || ""})
+            </div>
+          )}
         </div>
       </Header>
       <Content
