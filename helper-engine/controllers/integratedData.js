@@ -36,7 +36,7 @@ async function handleGetIndShopeAccountById(req, res) {
     const { id } = req.params;
     console.log("fetching shope account by id and userid :", id, currentUserId);
     if (!id) {
-      res.status(404).json({
+      return res.status(404).json({
         status: "fail",
         message: "ID is required",
       });
