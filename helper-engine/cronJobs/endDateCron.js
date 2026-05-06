@@ -8,8 +8,14 @@ const autoCalculationJob = () => {
     try {
       const today = new Date();
       const [shopes, workers] = await Promise.all([
-        Shopes.find({}),
-        Workers.find({}),
+        Shopes.find({
+          userId: { $exists: true, $ne: null },
+          sessionId: { $exists: true, $ne: null },
+        }),
+        Workers.find({
+          userId: { $exists: true, $ne: null },
+          sessionId: { $exists: true, $ne: null },
+        }),
       ]);
 
       for (let shope of shopes) {
