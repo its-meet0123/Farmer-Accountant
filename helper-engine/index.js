@@ -13,6 +13,7 @@ const sessionRouter = require("./routes/session");
 const sessionExpireJob = require("./cronJobs/sessionCron");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const autoCalculationJob = require("./cronJobs/endDateCron");
 
 const app = express();
 const PORT = process.env.PORT || 4001;
@@ -44,6 +45,7 @@ app.get("/health-check", (req, res) => {
 });
 
 sessionExpireJob();
+autoCalculationJob();
 
 app.use("/user", userRouter);
 app.use("/season", sessionRouter);
