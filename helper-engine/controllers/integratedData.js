@@ -30,6 +30,7 @@ async function handleGetAllIndData(req, res) {
 }
 
 async function handleGetIndShopeAccountById(req, res) {
+  console.log("Entered in get shope account by id");
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
