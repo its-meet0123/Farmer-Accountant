@@ -27,6 +27,18 @@ import {
 import AlertText from "../../component/Text";
 import dayjs from "dayjs";
 
+const formattedDate = (date) => {
+  const rawDate = date ? new Date(date) : new Date();
+  const DateTimeFormat = new Intl.DateTimeFormat("en-GB", {
+    weekday: "long",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(rawDate);
+
+  return DateTimeFormat;
+};
+
 const CasualLabor = () => {
   const { season, t } = useAuth();
   const [laborForm] = Form.useForm();
@@ -94,19 +106,19 @@ const CasualLabor = () => {
       );
     });
     const workerId = filterFieldWorkers?._id;
-    const length = filterFieldWorkers?.transactions.length;
-    if (length !== record.serialNo) {
-      setOpenType(null);
-      setTimeout(() => {
-        setButtonLoanding(null);
-        notification.warning({
-          message: t("casualLabor.card.etm"),
-          description: t("casualLabor.card.etd"),
-          placement: "topRight",
-        });
-      }, 1000);
-      return;
-    }
+    //const length = filterFieldWorkers?.transactions.length;
+    // if (length !== record.serialNo) {
+    //   setOpenType(null);
+    //   setTimeout(() => {
+    //     setButtonLoanding(null);
+    //     notification.warning({
+    //       message: t("casualLabor.card.etm"),
+    //       description: t("casualLabor.card.etd"),
+    //       placement: "topRight",
+    //     });
+    //   }, 1000);
+    //   return;
+    // }
     const startDate = dayjs(record.startDate);
     transactionForm.setFieldsValue({
       laborId: workerId,
@@ -212,6 +224,11 @@ const CasualLabor = () => {
       dataIndex: "date",
       width: 100,
       key: "date",
+      render: (date) => {
+        if (date) {
+          return formattedDate(date);
+        }
+      },
     },
     {
       title: t("casualLabor.wtc.nt"),
