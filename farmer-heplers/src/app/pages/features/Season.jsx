@@ -32,6 +32,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   EllipsisOutlined,
+  InfoCircleOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
