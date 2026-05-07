@@ -1,5 +1,6 @@
 import {
   Button,
+  Collapse,
   ConfigProvider,
   DatePicker,
   Form,
@@ -7,11 +8,15 @@ import {
   message,
   Modal,
   Select,
+  Typography,
 } from "antd";
 import dayjs from "dayjs";
 import { postSeason } from "../service/season";
 import { useAuth } from "./AuthContext";
+import { InfoCircleOutlined } from "@ant-design/icons";
 const { Option } = Select;
+const { Panel } = Collapse;
+const { Text } = Typography;
 
 const modalBackground = `
     radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
@@ -103,6 +108,38 @@ const SeasonModal = ({ season, setSeason, userId }) => {
           }}
           width={800} // Inline layout ke liye width thodi zyada rakhi hai
         >
+          <Collapse
+            ghost
+            style={{
+              marginBottom: "15px",
+              background: "none",
+              color: "#fff",
+              borderRadius: "8px",
+            }}
+            expandIcon={({ isActive }) => (
+              <InfoCircleOutlined spin={isActive} />
+            )}>
+            <Panel
+              header={<Text type="secondary">{t("season.modal.fg")}</Text>}
+              key="1">
+              <ul style={{ paddingLeft: "15px", fontSize: "13px" }}>
+                <li>
+                  <b>{t("season.modal.fist")}:</b> {t("season.modal.fg1")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fiyt")}:</b> {t("season.modal.fg2")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fisdt")}:</b> {t("season.modal.fg3")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fiedt")}:</b> {t("season.modal.fg4")}
+                </li>
+                <li>{t("season.modal.fg5")}</li>
+              </ul>
+            </Panel>
+          </Collapse>
+
           <p style={{ color: "#fff", marginBottom: "20px" }}>
             {t("season.modal.tt2")}dddd
           </p>

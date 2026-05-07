@@ -1,5 +1,6 @@
 import {
   Button,
+  Collapse,
   ConfigProvider,
   DatePicker,
   Dropdown,
@@ -7,10 +8,12 @@ import {
   Input,
   message,
   Modal,
+  notification,
   Popconfirm,
   Select,
   Spin,
   Table,
+  Typography,
 } from "antd";
 import { useEffect, useState } from "react";
 import {
@@ -33,6 +36,8 @@ import {
 } from "@ant-design/icons";
 import AlertText from "../../component/Text";
 const { Option } = Select;
+const { Panel } = Collapse;
+const { Text } = Typography;
 
 const formattedDate = (date) => {
   const rawDate = date ? new Date(date) : new Date();
@@ -81,9 +86,16 @@ const Season = () => {
         year: editValues.year ? editValues.year.year() : null,
       };
 
-      const { sessionId, ...values } = formattedValues;
+      if (formattedDate.startDate > formattedDate.endDate) {
+        notification.warning({
+          message: t("season.modal.wm"),
+          description: t("season.modal.wmd"),
+          placement: "topRight",
+        });
+        return;
+      }
 
-      console.log("edit season values from season form :", sessionId, values);
+      const { sessionId, ...values } = formattedValues;
       try {
         const res = await updateSeasonById(sessionId, values);
         const data = res.data;
@@ -110,7 +122,14 @@ const Season = () => {
         userId: authState.user.userId,
       };
 
-      console.log("add season value from season form :", formattedValues);
+      if (formattedDate.startDate > formattedDate.endDate) {
+        notification.warning({
+          message: t("season.modal.wm"),
+          description: t("season.modal.wmd"),
+          placement: "topRight",
+        });
+        return;
+      }
 
       try {
         const res = await postSeason(formattedValues);
@@ -215,6 +234,9 @@ const Season = () => {
         }
         if (name == "Kharif") {
           return t("season.modal.sokt");
+        }
+        if (name == "Perennial") {
+          return t("season.modal.soat");
         }
       },
     },
@@ -401,6 +423,37 @@ const Season = () => {
           }}
           width={800} // Inline layout ke liye width thodi zyada rakhi hai
         >
+          <Collapse
+            ghost
+            style={{
+              marginBottom: "15px",
+              background: "none",
+              color: "#fff",
+              borderRadius: "8px",
+            }}
+            expandIcon={({ isActive }) => (
+              <InfoCircleOutlined spin={isActive} />
+            )}>
+            <Panel
+              header={<Text type="secondary">{t("season.modal.fg")}</Text>}
+              key="1">
+              <ul style={{ paddingLeft: "15px", fontSize: "13px" }}>
+                <li>
+                  <b>{t("season.modal.fist")}:</b> {t("season.modal.fg1")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fiyt")}:</b> {t("season.modal.fg2")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fisdt")}:</b> {t("season.modal.fg3")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fiedt")}:</b> {t("season.modal.fg4")}
+                </li>
+                <li>{t("season.modal.fg5")}</li>
+              </ul>
+            </Panel>
+          </Collapse>
           <p style={{ color: "#ffffff", marginBottom: "20px" }}>
             {modal.isEdit ? t("season.modal.tt3") : t("season.modal.tt2")}
           </p>
@@ -435,6 +488,14 @@ const Season = () => {
                   </span>
                   <span style={{ fontSize: "12px", color: "#ffffff" }}>
                     May/Jun to Nov/Dec.
+                  </span>
+                </Option>
+                <Option value="Perennial" label={t("season.modal.soat")}>
+                  <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+                    {t("season.modal.soat")}
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#ffffff" }}>
+                    12 Months.
                   </span>
                 </Option>
               </Select>

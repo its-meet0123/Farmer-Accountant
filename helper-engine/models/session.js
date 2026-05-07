@@ -9,7 +9,7 @@ const sessionSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    enum: ["Rabi", "Kharif"],
+    enum: ["Rabi", "Kharif", "Perennial"],
   },
   year: {
     type: String,
