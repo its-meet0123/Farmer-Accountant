@@ -113,8 +113,8 @@ const Season = () => {
       console.log("add season value from season form :", formattedValues);
 
       try {
-        const res = postSeason(formattedValues);
-        const data = res.data;
+        const res = await postSeason(formattedValues);
+        const data = await res.data;
         if (data.status == "success") {
           message.success(data.message);
           setFetch(data.status);
