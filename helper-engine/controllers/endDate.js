@@ -32,35 +32,48 @@ async function handleGetInterestDate(req, res) {
 }
 
 async function handlePostInterestDate(req, res) {
-  const data = req.body;
+  try {
+    const { userId, dataId, endDate } = req.body;
 
-  if (!data) {
-    return res.json({ status: "error", message: "All fields are required" });
-  }
-  const findDate = await InterestDate.find({
-    userId: data.userId,
-    dataId: data.dataId,
-  });
+    if (!userId || !dataId || !endDate) {
+      return res.status(400).json({
+        status: "error",
+        message: "All fields are required",
+      });
+    }
 
-  if (findDate) {
-    return res.status(200).json({
+    const findDate = await InterestDate.findOne({
+      userId,
+      dataId,
+    });
+
+    if (findDate) {
+      return res.status(200).json({
+        status: "success",
+        message: "endDate already exist",
+        data: findDate,
+      });
+    }
+
+    const result = await InterestDate.create({
+      userId,
+      dataId,
+      endDate,
+    });
+
+    return res.status(201).json({
       status: "success",
-      message: "endDate already exist",
-      data: findDate,
+      message: "Interest Date created successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.log("Interest Date Error:", error);
+
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
     });
   }
-
-  const result = await InterestDate.create({
-    userId: data.userId,
-    dataId: data.dataId,
-    endDate: data.endDate,
-  });
-
-  res.status(201).json({
-    status: "success",
-    message: "Interest Date created successfully",
-    data: result,
-  });
 }
 
 async function handleUpdateInterestDate(req, res) {

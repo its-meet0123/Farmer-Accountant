@@ -248,7 +248,8 @@ const WorkerCalculation = () => {
                   style={{ width: isMobile ? "100%" : "auto" }}>
                   <Form.Item
                     label={t("workerCalcPage.form.inputLabel")}
-                    name="endDate">
+                    name="endDate"
+                    initialValue={today}>
                     <DatePicker
                       disabled={id && fetch !== "edit"}
                       format={"DD/MM/YYYY"}
