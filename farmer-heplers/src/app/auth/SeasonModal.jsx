@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import { postSeason } from "../service/season";
 import { useAuth } from "./AuthContext";
 import { InfoCircleOutlined } from "@ant-design/icons";
+import { useState } from "react";
 const { Option } = Select;
 const { Panel } = Collapse;
 const { Text } = Typography;
@@ -28,6 +29,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
   const [form] = Form.useForm();
   const { t } = useAuth();
   const today = dayjs();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCancel = () => {
     form.resetFields();
@@ -38,6 +40,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
   };
 
   const onSubmit = async () => {
+    setIsLoading(true);
     const values = form.getFieldsValue();
     const formattedValues = {
       ...values,
@@ -52,6 +55,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
         description: t("season.modal.wmd"),
         placement: "topRight",
       });
+      setIsLoading(false);
       return;
     }
 
@@ -61,11 +65,13 @@ const SeasonModal = ({ season, setSeason, userId }) => {
       if (data.status == "success") {
         message.success(data.message);
         setSeason({ ...data.data, openModal: false });
+        setIsLoading(false);
         handleCancel();
       }
     } catch (err) {
       console.log(err.message);
       message.error("Season not created");
+      setIsLoading(false);
     }
   };
 
@@ -130,7 +136,12 @@ const SeasonModal = ({ season, setSeason, userId }) => {
             <Panel
               header={<Text type="secondary">{t("season.modal.fg")}</Text>}
               key="1">
-              <ul style={{ paddingLeft: "15px", fontSize: "13px" }}>
+              <ul
+                style={{
+                  paddingLeft: "15px",
+                  fontSize: "13px",
+                  color: "#fff",
+                }}>
                 <li>
                   <b>{t("season.modal.fist")}:</b> {t("season.modal.fg1")}
                 </li>
@@ -228,7 +239,8 @@ const SeasonModal = ({ season, setSeason, userId }) => {
               <Button
                 type="primary"
                 htmlType="submit"
-                style={{ backgroundColor: "#0499A9" }}>
+                style={{ backgroundColor: "#0499A9" }}
+                loading={isLoading}>
                 {t("season.modal.fisbt")}
               </Button>
             </div>

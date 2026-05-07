@@ -93,6 +93,7 @@ const Season = () => {
           description: t("season.modal.wmd"),
           placement: "topRight",
         });
+        setIsLoanding(false);
         return;
       }
 
