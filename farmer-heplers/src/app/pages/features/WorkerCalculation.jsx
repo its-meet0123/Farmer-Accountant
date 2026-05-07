@@ -144,7 +144,7 @@ const WorkerCalculation = () => {
           const dateRes = await getEndDate(state?.id);
           const data = await dateRes.data.data;
           setId(data._id);
-          setEndDate(data.endDate);
+          setEndDate(data);
           form.setFieldsValue({
             endDate: dayjs(data.endDate) || today,
           });
