@@ -466,6 +466,7 @@
       "successMessageforEdit": "ਲੈਣ-ਦੇਣ ਅਪਡੇਟ ਹੋ ਗਿਆ",
       "errorMessageforEdit": "ਲੈਣ-ਦੇਣ ਦਾ ਵੇਰਵਾ ਅਪਡੇਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ।"
     },
+    "drawerTitle": "ਕਾਮੇ ਦਾ ਫਾਰਮ",
     "detailInput": {
       "fnt": "ਪਹਿਲਾ ਨਾਮ",
       "fnrm": "ਕਿਰਪਾ ਕਰਕੇ ਕਾਮੇ ਦਾ ਨਾਮ ਦਰਜ ਕਰੋ",
