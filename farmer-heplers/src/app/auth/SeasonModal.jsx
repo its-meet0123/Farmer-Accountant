@@ -54,8 +54,9 @@ const SeasonModal = ({ season, setSeason, userId }) => {
         message: t("season.modal.wm"),
         description: t("season.modal.wmd"),
         placement: "topRight",
+        duration: 5,
       });
-      setIsLoading(false);
+      setIsLoading("nslc");
       return;
     }
 

@@ -92,8 +92,9 @@ const Season = () => {
           message: t("season.modal.wm"),
           description: t("season.modal.wmd"),
           placement: "topRight",
+          duration: 5,
         });
-        setIsLoanding(false);
+        setIsLoanding("nslf");
         return;
       }
 
