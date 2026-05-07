@@ -131,6 +131,7 @@ const Season = () => {
           description: t("season.modal.wmd"),
           placement: "topRight",
         });
+        setIsLoanding("nslc");
         return;
       }
 
@@ -539,7 +540,7 @@ const Season = () => {
                 type="primary"
                 htmlType="submit"
                 style={{ backgroundColor: "#0499A9" }}
-                loading={isLoanding == "sbl"}>
+                loading={isLoanding === "sbl" && true}>
                 {t("season.modal.fisbt")}
               </Button>
             </div>
