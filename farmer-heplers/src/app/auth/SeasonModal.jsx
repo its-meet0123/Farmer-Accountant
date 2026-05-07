@@ -7,6 +7,7 @@ import {
   Input,
   message,
   Modal,
+  notification,
   Select,
   Typography,
 } from "antd";
@@ -45,7 +46,14 @@ const SeasonModal = ({ season, setSeason, userId }) => {
       year: values.year ? values.year.year() : null,
     };
 
-    console.log("add season value from form :", formattedValues);
+    if (formattedValues.startDate > formattedValues.endDate) {
+      notification.warning({
+        message: t("season.modal.wm"),
+        description: t("season.modal.wmd"),
+        placement: "topRight",
+      });
+      return;
+    }
 
     try {
       const res = await postSeason(formattedValues);

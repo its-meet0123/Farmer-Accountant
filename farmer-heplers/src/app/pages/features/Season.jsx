@@ -87,7 +87,7 @@ const Season = () => {
         year: editValues.year ? editValues.year.year() : null,
       };
 
-      if (formattedDate.startDate > formattedDate.endDate) {
+      if (formattedValues.startDate > formattedValues.endDate) {
         notification.warning({
           message: t("season.modal.wm"),
           description: t("season.modal.wmd"),
@@ -123,7 +123,7 @@ const Season = () => {
         userId: authState.user.userId,
       };
 
-      if (formattedDate.startDate > formattedDate.endDate) {
+      if (formattedValues.startDate > formattedValues.endDate) {
         notification.warning({
           message: t("season.modal.wm"),
           description: t("season.modal.wmd"),
@@ -438,7 +438,12 @@ const Season = () => {
             <Panel
               header={<Text type="secondary">{t("season.modal.fg")}</Text>}
               key="1">
-              <ul style={{ paddingLeft: "15px", fontSize: "13px" }}>
+              <ul
+                style={{
+                  paddingLeft: "15px",
+                  fontSize: "13px",
+                  color: "#fff",
+                }}>
                 <li>
                   <b>{t("season.modal.fist")}:</b> {t("season.modal.fg1")}
                 </li>
