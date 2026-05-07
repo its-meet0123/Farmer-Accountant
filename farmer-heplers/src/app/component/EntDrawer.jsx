@@ -78,6 +78,7 @@ const EntDrawer = ({
           allValues?.aShopes[1]?.shopeNumber
       ) {
         message.error(t("entDrawer.submitFunction.sameShopeNoError"));
+        return;
       } else {
         const newEntData = {
           userId: user.userId,

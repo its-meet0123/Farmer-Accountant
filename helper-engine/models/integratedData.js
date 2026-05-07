@@ -1,10 +1,16 @@
 const mongoose = require("mongoose");
 
 const shopeAccountSchema = new mongoose.Schema({
+  //comman fields
   startDate: {
     type: Date,
     default: new Date(),
   },
+  rate: {
+    type: Number,
+    default: 0,
+  },
+  // Grain market fields
   loan: {
     amount: {
       type: Number,
@@ -64,10 +70,6 @@ const shopeAccountSchema = new mongoose.Schema({
     interest: { type: Number, default: 0 },
     totalAmount: { type: Number, default: 0 },
   },
-  rate: {
-    type: Number,
-    default: 0,
-  },
 });
 
 const indShopeSchema = new mongoose.Schema({
@@ -83,6 +85,11 @@ const indShopeSchema = new mongoose.Schema({
   },
   nameInd: {
     type: String,
+  },
+  marketType: {
+    type: String,
+    required: true,
+    enum: ["grain", "genral"],
   },
   shopeNumber: {
     type: String,

@@ -113,7 +113,7 @@ const Season = () => {
       console.log("add season value from season form :", formattedValues);
 
       try {
-        const res = postSeason(formattedValues);
+        const res = await postSeason(formattedValues);
         const data = res.data;
         if (data.status == "success") {
           message.success(data.message);

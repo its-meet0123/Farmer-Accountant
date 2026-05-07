@@ -161,21 +161,18 @@ const CalcPage = () => {
   useEffect(() => {
     async function getData() {
       try {
-        if (fetch != "del") {
-          setIsLoanding(true);
-          const dateRes = await getEndDate(state?.id);
-          const data = await dateRes.data.data;
-          setIsLoanding(false);
-          setEndDate(data);
-          setId(data._id);
-          form.setFieldsValue({
-            endDate: dayjs(data.endDate) || today,
-          });
-        }
+        setIsLoanding(true);
+        const dateRes = await getEndDate(state?.id);
+        const data = await dateRes.data.data;
+        setIsLoanding(false);
+        setEndDate(data);
+        setId(data._id);
+        form.setFieldsValue({
+          endDate: dayjs(data.endDate) || today,
+        });
       } catch (err) {
         message.error(t("calculationPage.fetchDateErrorMessage"));
         console.log(err.message);
-        setFetch("del");
         if (err.code === "ERR_CANCELED") {
           return;
         }

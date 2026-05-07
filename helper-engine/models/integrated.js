@@ -5,6 +5,11 @@ const shopeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  marketType: {
+    type: String,
+    required: true,
+    enum: ["grain", "genral"],
+  },
   shopeAddress: String,
 });
 

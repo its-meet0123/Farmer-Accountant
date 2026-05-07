@@ -140,15 +140,13 @@ const WorkerCalculation = () => {
   useEffect(() => {
     async function getData() {
       try {
-        if (fetch != "del") {
-          const dateRes = await getEndDate(state?.id);
-          const data = await dateRes.data.data;
-          setId(data._id);
-          setEndDate(data);
-          form.setFieldsValue({
-            endDate: dayjs(data.endDate) || today,
-          });
-        }
+        const dateRes = await getEndDate(state?.id);
+        const data = await dateRes.data.data;
+        setId(data._id);
+        setEndDate(data);
+        form.setFieldsValue({
+          endDate: dayjs(data.endDate) || today,
+        });
       } catch (err) {
         message.error(t("workerCalcPage.fetchDateErrorMessage"));
         console.error(err.message);
