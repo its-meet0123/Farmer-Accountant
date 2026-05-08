@@ -888,5 +888,6 @@
   "USER_NOT_FOUND": "User not found",
   "USER_FOUND": "User found",
   "PASSWORD_UPDATED": "Password updated",
-  "USER_DELETED": "User account deleted successfully"
+  "USER_DELETED": "User account deleted successfully",
+  "CONFLICT_MSG": "The selected date range overlaps with an existin season. Please choose different dates."
 }

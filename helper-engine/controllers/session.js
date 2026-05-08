@@ -38,10 +38,30 @@ async function handlePostSession(req, res) {
     return res.json({ status: "error", message: "All fields are required" });
   }
 
+  const { userId } = sessionInfo;
+
   let { startDate, endDate } = sessionInfo;
 
   startDate = new Date(startDate);
   endDate = new Date(endDate);
+
+  const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+  const allowedOverLapPoint = new Date(startDate.getTime() + thirtyDaysInMs);
+
+  const overlappingSeason = await Sessions.findOne({
+    $and: [
+      { userId: userId },
+      { endDate: { $gt: allowedOverLapPoint } },
+      { startDate: { $lt: endDate } },
+    ],
+  });
+
+  if (overlappingSeason) {
+    return res.status(409).json({
+      status: "conflict",
+      message: "CONFLICT_MSG",
+    });
+  }
 
   const today = new Date();
 
