@@ -31,7 +31,7 @@ const WorkerCalculation = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const today = dayjs();
-  const { authState, t } = useAuth();
+  const { authState, t, season } = useAuth();
   const [isLoanding, setIsLoanding] = useState(null);
   const [worker, setWorker] = useState({});
   const [id, setId] = useState();
@@ -137,29 +137,36 @@ const WorkerCalculation = () => {
     getData();
   }, [state]);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        if (fetch != "del") {
-          const dateRes = await getEndDate(state?.id);
-          const data = await dateRes.data.data;
-          setId(data._id);
-          setEndDate(data);
-          form.setFieldsValue({
-            endDate: dayjs(data.endDate) || today,
-          });
-        }
-      } catch (err) {
-        message.error(t("workerCalcPage.fetchDateErrorMessage"));
-        console.error(err.message);
-        setFetch("del");
-        if (err.code === "ERR_CANCELED") {
-          return;
-        }
+  const setendDateLogic = async () => {
+    let calculatedEndDate = today;
+    if (season?.endDate) {
+      const seasonDate = dayjs(season.endDate);
+      calculatedEndDate = seasonDate.isAfter(today) ? today : seasonDate;
+    }
+    try {
+      if (fetch != "del") {
+        const dateRes = await getEndDate(state?.id);
+        const data = await dateRes.data.data;
+        setId(data._id);
+        setEndDate(data);
+        form.setFieldsValue({
+          endDate: data?.endDate ? dayjs(data.endDate) : calculatedEndDate,
+        });
+        !season.isActive && setFetch("disable");
+      }
+    } catch (err) {
+      message.error(t("workerCalcPage.fetchDateErrorMessage"));
+      console.error(err.message);
+      setFetch("del");
+      if (err.code === "ERR_CANCELED") {
+        return;
       }
     }
-    getData();
-  }, [fetch, state?.id]);
+  };
+
+  useEffect(() => {
+    setendDateLogic();
+  }, [fetch, state?.id, season?.endDate]);
 
   const WORKER_TRANSACTION_CALC_COLUMNS = getColumnsForWorkerCalcPage(t);
 
@@ -249,10 +256,9 @@ const WorkerCalculation = () => {
                   style={{ width: isMobile ? "100%" : "auto" }}>
                   <Form.Item
                     label={t("workerCalcPage.form.inputLabel")}
-                    name="endDate"
-                    initialValue={today}>
+                    name="endDate">
                     <DatePicker
-                      disabled={id && fetch !== "edit"}
+                      disabled={(id && fetch !== "edit") || fetch == "disable"}
                       format={"DD/MM/YYYY"}
                     />
                   </Form.Item>

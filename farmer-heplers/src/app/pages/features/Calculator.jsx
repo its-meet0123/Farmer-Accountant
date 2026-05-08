@@ -29,7 +29,7 @@ import { PageContainer } from "../../component/PageContainer";
 
 const CalcPage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const { authState, t } = useAuth();
+  const { authState, t, season } = useAuth();
   const { state } = useLocation();
   const navigate = useNavigate();
   const [isLoanding, setIsLoanding] = useState(null);
@@ -158,31 +158,40 @@ const CalcPage = () => {
     getData();
   }, [state]);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        if (fetch != "del") {
-          setIsLoanding(true);
-          const dateRes = await getEndDate(state?.id);
-          const data = await dateRes.data.data;
-          setIsLoanding(false);
-          setEndDate(data);
-          setId(data._id);
-          form.setFieldsValue({
-            endDate: dayjs(data.endDate) || today,
-          });
-        }
-      } catch (err) {
-        message.error(t("calculationPage.fetchDateErrorMessage"));
-        console.log(err.message);
-        setFetch("del");
-        if (err.code === "ERR_CANCELED") {
-          return;
-        }
+  const setendDateLogic = async () => {
+    let calculatedEndDate = today;
+
+    if (season?.endDate) {
+      const seasonDate = dayjs(season.endDate);
+      calculatedEndDate = seasonDate.isAfter(today) ? today : seasonDate;
+    }
+
+    try {
+      if (fetch != "del") {
+        setIsLoanding(true);
+        const dateRes = await getEndDate(state?.id);
+        const data = await dateRes.data.data;
+        setIsLoanding(false);
+        setEndDate(data);
+        setId(data._id);
+        form.setFieldsValue({
+          endDate: data?.endDate ? dayjs(data.endDate) : calculatedEndDate,
+        });
+        !season?.isActive && setFetch("disable");
+      }
+    } catch (err) {
+      message.error(t("calculationPage.fetchDateErrorMessage"));
+      console.log(err.message);
+      setFetch("del");
+      if (err.code === "ERR_CANCELED") {
+        return;
       }
     }
-    getData();
-  }, [fetch, state?.id]);
+  };
+
+  useEffect(() => {
+    setendDateLogic();
+  }, [fetch, state?.id, season?.endDate]);
 
   const BASE_COLUMNS = getColumnsForCalulationPage(t);
 
@@ -277,7 +286,7 @@ const CalcPage = () => {
                     name="endDate"
                     style={{ marginBottom: isMobile ? "12px" : "0", flex: 1 }}>
                     <DatePicker
-                      disabled={id && fetch !== "edit"}
+                      disabled={(id && fetch !== "edit") || fetch == "disable"}
                       format={"DD/MM/YYYY"}
                       style={{ width: "100%" }}
                     />
