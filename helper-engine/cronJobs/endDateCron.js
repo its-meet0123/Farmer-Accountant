@@ -6,19 +6,17 @@ const EndDate = require("../models/endDate");
 const { calculateAutoInterst } = require("../components/calculator");
 
 const getEndDate = (insertdate, seasondate, today) => {
-  let endDate;
   if (insertdate?.endDate) {
-    endDate = new Date(insertdate?.endDate);
-  } else {
-    const seasonEnd = new Date(seasondate?.endDate);
-
-    if (seasonEnd > today) {
-      endDate = today;
-    } else {
-      endDate = seasonEnd;
-    }
+    return new Date(insertdate?.endDate);
   }
-  return endDate;
+  if (seasondate?.endDate) {
+    const seasonEnd = new Date(seasondate?.endDate);
+    if (isNaN(seasonEnd.getTime())) {
+      return today;
+    }
+    return seasonEnd > today ? today : seasonEnd;
+  }
+  return today;
 };
 
 const autoCalculationJob = async () => {
@@ -56,9 +54,9 @@ const autoCalculationJob = async () => {
         );
 
         shope.shopeAccount.forEach((transaction) => {
-          const startDate = new Date(transaction?.startDate);
+          const startDate = transaction?.startDate;
           const loanAmount = transaction?.loan?.amount || 0;
-          const rate = transaction?.rate;
+          const rate = transaction?.rate || 0;
           const endDate = getEndDate(
             insertdate?.endDate,
             seasondate?.endDate,
@@ -141,7 +139,7 @@ const autoCalculationJob = async () => {
         ]);
 
         worker.account.forEach((trans, index) => {
-          const startDate = new Date(trans?.date);
+          const startDate = trans?.date;
           const rate = trans?.rate || 0;
           const endDate = getEndDate(
             insertDate?.endDate,
@@ -185,26 +183,3 @@ const autoCalculationJob = async () => {
 };
 
 module.exports = autoCalculationJob;
-
-// for (let record of records) {
-//   record.transactions.forEach((trans, index) => {
-//     const startDate = new Date(trans.startDate);
-//     const today = new Date();
-
-//     // Din calculate karein
-//     const diffDays = Math.ceil((today - startDate) / (1000 * 60 * 60 * 24));
-
-//     // Direct 'trans' object ki fields ko update karein
-//     trans.totalCalculated = diffDays * 50;
-//     trans.lastSync = today; // Aap extra field bhi update kar sakte hain
-
-//     // Agar aap pura object hi replace karna chahte hain:
-//     // record.transactions[index] = { ...trans, someNewField: 'value' };
-//   });
-
-//   // CRITICAL STEP: Mongoose ko batayein ki array ke andar changes huye hain
-//   record.markModified('transactions');
-
-//   // Ab save karein
-//   await record.save();
-// }
