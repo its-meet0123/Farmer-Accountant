@@ -281,7 +281,7 @@ const Season = () => {
         const startDate = new Date(record.startDate);
         const endDate = new Date(record.endDate);
 
-        if (today >= startDate && today <= endDate) {
+        if (record.isActive == "true") {
           return "Active Now";
         } else if (today < startDate) {
           return "Upcoming";
