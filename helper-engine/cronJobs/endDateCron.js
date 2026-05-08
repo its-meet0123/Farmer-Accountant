@@ -22,7 +22,7 @@ const getEndDate = (insertdate, seasondate, today) => {
 };
 
 const autoCalculationJob = async () => {
-  cron.schedule("0 0 * * *", async () => {
+  cron.schedule("* * * * *", async () => {
     try {
       const today = new Date();
       const [shopes, workers] = await Promise.all([
@@ -48,7 +48,14 @@ const autoCalculationJob = async () => {
           }),
         ]);
 
-        shope.shopeAccount.forEach((transaction, index) => {
+        console.log(
+          "Season with userId :",
+          seasondate,
+          "Insert date with userId :",
+          insertdate,
+        );
+
+        shope.shopeAccount.forEach((transaction) => {
           const startDate = new Date(transaction?.startDate);
           const loanAmount = transaction?.loan?.amount || 0;
           const rate = transaction?.rate;
@@ -56,6 +63,10 @@ const autoCalculationJob = async () => {
             insertdate.endDate,
             seasondate.endDate,
             today,
+          );
+
+          console.log(
+            `End date logic for every calculation for ${shope.userId} and every shope : ${shope._id} final caculation date: ${endDate};`,
           );
 
           const loanCalculation = calculateAutoInterst(
