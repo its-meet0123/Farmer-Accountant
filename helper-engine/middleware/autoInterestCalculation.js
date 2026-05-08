@@ -1,33 +1,35 @@
 const { calculateAutoInterst } = require("../components/calculator");
-const InterestDate = require("../models/endDate");
+const Session = require("../models/session");
+const FinalDate = require("../models/endDate");
 
-//const endDate = Dates[1]?.endDate;
 async function autoInterestCalculationForShopes(req, res, next) {
   try {
     const body = req.body;
     const decoded = req.user;
     const currentUserId = decoded.id;
-    console.log(
-      "auto interest middleware for add and edit shope transaction :",
-      body,
-    );
-    if (!body) {
+    const shopeId = req.params.id || req.params.shopeId;
+
+    if (Object.keys(body).length === 0 || !shopeId) {
       return res
         .status(404)
         .json({ status: "Error", msg: "All fields are required" });
     }
-    const Dates = await InterestDate.find({ userId: currentUserId });
 
-    if (!Dates) {
-      res.status(500).json({
-        status: "fail",
-        message: "Data not found in DB",
-      });
-    }
+    const date = await FinalDate.findOne({
+      userId: currentUserId,
+      dataId: shopeId,
+    });
 
+    const today = new Date();
     const startDate = body?.startDate;
     const rate = body?.rate || 0;
-    const endDate = Dates[0]?.endDate || new Date();
+    let endDate;
+    if (date?.endDate) {
+      endDate = date.endDate;
+    } else {
+      endDate = today;
+    }
+
     const loanAmount = body?.amount || 0;
     const buyBillAmount = body?.bBillAmount || 0;
     const sellBillAmount = body?.sBillAmount || 0;
@@ -106,10 +108,11 @@ async function autoInterestCalculationForShopes(req, res, next) {
 async function autoInterestCalculationForWorker(req, res, next) {
   try {
     const body = req.body;
-    const sessionId = req.params.id || req.params.workerId;
     const decoded = req.user;
     const currentUserId = decoded.id;
-    if (!body) {
+    const workerId = req.params.id || req.params.workerId;
+
+    if (Object.keys(body).length === 0) {
       return res.status(400).json({
         status: "Error",
         Code: "Transaction not find",
@@ -117,19 +120,20 @@ async function autoInterestCalculationForWorker(req, res, next) {
       });
     }
 
-    const Dates = InterestDate.findOne({
+    const date = await FinalDate.findOne({
       userId: currentUserId,
-      sessionId: sessionId,
+      dataId: workerId,
     });
-    if (!Dates) {
-      return res.status(400).json({
-        status: "Fail",
-        message: "Date not found in DB",
-      });
-    }
+
     const startDate = body?.date;
     const rate = body?.interestRate || 0;
-    const endDate = Dates?.endDate || new Date();
+    let endDate;
+    const today = new Date();
+    if (date?.endDate) {
+      endDate = date.endDate > today ? today : date.endDate;
+    } else {
+      endDate = today;
+    }
     const giveAmount = body?.amount || 0;
     const takePayment = body?.payment || 0;
 

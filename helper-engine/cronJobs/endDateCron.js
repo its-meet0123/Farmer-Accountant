@@ -46,13 +46,6 @@ const autoCalculationJob = async () => {
           }),
         ]);
 
-        console.log(
-          "Season with userId :",
-          seasondate,
-          "Insert date with userId :",
-          insertdate,
-        );
-
         shope.shopeAccount.forEach((transaction) => {
           const startDate = transaction?.startDate;
           const loanAmount = transaction?.loan?.amount || 0;
@@ -61,10 +54,6 @@ const autoCalculationJob = async () => {
             insertdate?.endDate,
             seasondate?.endDate,
             today,
-          );
-
-          console.log(
-            `End date logic for every calculation for ${shope.userId} and every shope : ${shope._id} final caculation date: ${endDate};`,
           );
 
           const loanCalculation = calculateAutoInterst(
