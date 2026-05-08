@@ -177,7 +177,6 @@ const CalcPage = () => {
         form.setFieldsValue({
           endDate: data?.endDate ? dayjs(data.endDate) : calculatedEndDate,
         });
-        !season?.isActive && setFetch("disable");
       }
     } catch (err) {
       message.error(t("calculationPage.fetchDateErrorMessage"));
@@ -286,7 +285,7 @@ const CalcPage = () => {
                     name="endDate"
                     style={{ marginBottom: isMobile ? "12px" : "0", flex: 1 }}>
                     <DatePicker
-                      disabled={(id && fetch !== "edit") || fetch == "disable"}
+                      disabled={(id && fetch !== "edit") || !season?.isActive}
                       format={"DD/MM/YYYY"}
                       style={{ width: "100%" }}
                     />

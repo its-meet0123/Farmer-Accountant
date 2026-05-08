@@ -152,7 +152,6 @@ const WorkerCalculation = () => {
         form.setFieldsValue({
           endDate: data?.endDate ? dayjs(data.endDate) : calculatedEndDate,
         });
-        !season.isActive && setFetch("disable");
       }
     } catch (err) {
       message.error(t("workerCalcPage.fetchDateErrorMessage"));
@@ -258,7 +257,7 @@ const WorkerCalculation = () => {
                     label={t("workerCalcPage.form.inputLabel")}
                     name="endDate">
                     <DatePicker
-                      disabled={(id && fetch !== "edit") || fetch == "disable"}
+                      disabled={(id && fetch !== "edit") || !season?.isActive}
                       format={"DD/MM/YYYY"}
                     />
                   </Form.Item>
