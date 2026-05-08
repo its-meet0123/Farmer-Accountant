@@ -34,16 +34,28 @@ async function handleGetAllSessions(req, res) {
 async function handlePostSession(req, res) {
   const sessionInfo = req.body;
 
-  if (!sessionInfo) {
+  if (Object.keys(sessionInfo).length === 0) {
     return res.json({ status: "error", message: "All fields are required" });
   }
 
   const { userId } = sessionInfo;
-
   let { startDate, endDate } = sessionInfo;
-
   startDate = new Date(startDate);
   endDate = new Date(endDate);
+
+  if (isNaN(startDate) || isNaN(endDate)) {
+    return res.status(400).json({
+      status: "error",
+      message: "Invalid date format",
+    });
+  }
+
+  if (startDate > endDate) {
+    return res.status(400).json({
+      status: "error",
+      message: "Start date cannot be greater than end date",
+    });
+  }
 
   const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
   const allowedOverLapPoint = new Date(startDate.getTime() + thirtyDaysInMs);
@@ -165,13 +177,64 @@ async function handleUpdateSession(req, res) {
 
     const { sessionId } = req.params;
     const body = req.body;
-    if (!sessionId || !body) {
+    if (!sessionId || Object.keys(body).length === 0) {
       return res.json({ status: "error", message: "Id and body are required" });
     }
 
-    const updateSession = await Sessions.findByIdAndUpdate(
+    let { startDate, endDate } = body;
+
+    startDate = new Date(startDate);
+    endDate = new Date(endDate);
+
+    if (startDate > endDate) {
+      return res.status(400).json({
+        status: "error",
+        message: "Start date cannot be greater than end date",
+      });
+    }
+
+    if (isNaN(startDate) || isNaN(endDate)) {
+      return res.status(400).json({
+        status: "error",
+        message: "Invalid date format",
+      });
+    }
+
+    const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+    const allowedOverLapPoint = new Date(startDate.getTime() + thirtyDaysInMs);
+
+    const overlappingSeason = await Sessions.findOne({
+      $and: [
+        { userId: currentUserId },
+        { _id: { $ne: sessionId } },
+        { endDate: { $gt: allowedOverLapPoint } },
+        { startDate: { $lt: endDate } },
+      ],
+    });
+
+    if (overlappingSeason) {
+      return res.status(409).json({
+        status: "conflict",
+        message: "CONFLICT_MSG",
+      });
+    }
+
+    const today = new Date();
+    let isActive = false;
+    if (startDate <= today && endDate >= today) {
+      isActive = true;
+    }
+
+    const updateSessionInfo = {
+      ...body,
+      startDate,
+      endDate,
+      isActive,
+    };
+
+    const updateSession = await Sessions.findOneAndUpdate(
       { _id: sessionId, userId: currentUserId },
-      body,
+      updateSessionInfo,
       {
         new: true,
       },
