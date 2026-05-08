@@ -265,7 +265,11 @@ const WorkerCalculation = () => {
                   {(id == null || fetch === "edit" || fetch === "delete") && (
                     <Form.Item
                       style={{ marginBottom: isMobile ? "12px" : "0" }}>
-                      <Button htmlType="submit" block={isMobile} type="primary">
+                      <Button
+                        htmlType="submit"
+                        block={isMobile}
+                        type="primary"
+                        disabled={!season?.isActive}>
                         {t("workerCalcPage.form.setButtonText")}
                       </Button>
                     </Form.Item>
