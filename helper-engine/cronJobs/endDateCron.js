@@ -60,8 +60,8 @@ const autoCalculationJob = async () => {
           const loanAmount = transaction?.loan?.amount || 0;
           const rate = transaction?.rate;
           const endDate = getEndDate(
-            insertdate.endDate,
-            seasondate.endDate,
+            insertdate?.endDate,
+            seasondate?.endDate,
             today,
           );
 
