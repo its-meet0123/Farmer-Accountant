@@ -149,9 +149,6 @@ const WorkerCalculation = () => {
         const data = await dateRes.data.data;
         setId(data._id);
         setEndDate(data);
-        form.setFieldsValue({
-          endDate: data?.endDate ? dayjs(data.endDate) : calculatedEndDate,
-        });
       }
     } catch (err) {
       message.error(t("workerCalcPage.fetchDateErrorMessage"));
@@ -161,6 +158,9 @@ const WorkerCalculation = () => {
         return;
       }
     }
+    form.setFieldsValue({
+      endDate: endDate?.endDate ? dayjs(endDate.endDate) : calculatedEndDate,
+    });
   };
 
   useEffect(() => {

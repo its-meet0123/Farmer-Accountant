@@ -174,9 +174,6 @@ const CalcPage = () => {
         setIsLoanding(false);
         setEndDate(data);
         setId(data._id);
-        form.setFieldsValue({
-          endDate: data?.endDate ? dayjs(data.endDate) : calculatedEndDate,
-        });
       }
     } catch (err) {
       message.error(t("calculationPage.fetchDateErrorMessage"));
@@ -186,6 +183,9 @@ const CalcPage = () => {
         return;
       }
     }
+    form.setFieldsValue({
+      endDate: endDate?.endDate ? dayjs(endDate.endDate) : calculatedEndDate,
+    });
   };
 
   useEffect(() => {
