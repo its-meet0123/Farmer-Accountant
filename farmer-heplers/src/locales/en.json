@@ -729,10 +729,19 @@
       "fist": "Select Season",
       "sort": "Rabi",
       "sokt": "Kharif",
+      "soat": "Perennial",
       "fiyt": "Year",
       "fisdt": "Start",
       "fiedt": "End",
-      "fisbt": "Submit"
+      "fisbt": "Submit",
+      "wm": "Wrong date selected",
+      "wmd": "The end date must always be later than the start date.",
+      "fg": "Form Guidelines",
+      "fg1": "Select 'Rabi' for the first 6 months of the year, 'Kharif' for the last 6 months, and 'Perennial' for the entire year.",
+      "fg2": "Select the current ongoing year.",
+      "fg3": "The date on which transactions started after the previous settlement.",
+      "fg4": "The date of the month when the final settlement takes place. (Initially, you may select a date approximately 6 months after the start date; you can edit it later).",
+      "fg5": "All calculations for this season will stope once the season's end date is reached. If you wish to extend or shorten the season, do so before its end date."
     }
   },
   "layout": {
@@ -879,5 +888,6 @@
   "USER_NOT_FOUND": "User not found",
   "USER_FOUND": "User found",
   "PASSWORD_UPDATED": "Password updated",
-  "USER_DELETED": "User account deleted successfully"
+  "USER_DELETED": "User account deleted successfully",
+  "CONFLICT_MSG": "The selected date range overlaps with an existin season. Please choose different dates."
 }

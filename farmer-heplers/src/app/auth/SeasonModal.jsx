@@ -1,17 +1,24 @@
 import {
   Button,
+  Collapse,
   ConfigProvider,
   DatePicker,
   Form,
   Input,
   message,
   Modal,
+  notification,
   Select,
+  Typography,
 } from "antd";
 import dayjs from "dayjs";
 import { postSeason } from "../service/season";
 import { useAuth } from "./AuthContext";
+import { InfoCircleOutlined } from "@ant-design/icons";
+import { useState } from "react";
 const { Option } = Select;
+const { Panel } = Collapse;
+const { Text } = Typography;
 
 const modalBackground = `
     radial-gradient(circle at 10% 20%, rgba(4, 153, 169, 0.6) 0%, rgba(2, 63, 85, 0.9) 90%),
@@ -22,6 +29,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
   const [form] = Form.useForm();
   const { t } = useAuth();
   const today = dayjs();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCancel = () => {
     form.resetFields();
@@ -32,6 +40,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
   };
 
   const onSubmit = async () => {
+    setIsLoading(true);
     const values = form.getFieldsValue();
     const formattedValues = {
       ...values,
@@ -40,7 +49,16 @@ const SeasonModal = ({ season, setSeason, userId }) => {
       year: values.year ? values.year.year() : null,
     };
 
-    console.log("add season value from form :", formattedValues);
+    if (formattedValues.startDate > formattedValues.endDate) {
+      notification.warning({
+        message: t("season.modal.wm"),
+        description: t("season.modal.wmd"),
+        placement: "topRight",
+        duration: 5,
+      });
+      setIsLoading("nslc");
+      return;
+    }
 
     try {
       const res = await postSeason(formattedValues);
@@ -48,11 +66,13 @@ const SeasonModal = ({ season, setSeason, userId }) => {
       if (data.status == "success") {
         message.success(data.message);
         setSeason({ ...data.data, openModal: false });
+        setIsLoading(false);
         handleCancel();
       }
     } catch (err) {
       console.log(err.message);
       message.error("Season not created");
+      setIsLoading(false);
     }
   };
 
@@ -103,6 +123,43 @@ const SeasonModal = ({ season, setSeason, userId }) => {
           }}
           width={800} // Inline layout ke liye width thodi zyada rakhi hai
         >
+          <Collapse
+            ghost
+            style={{
+              marginBottom: "15px",
+              background: "none",
+              color: "#fff",
+              borderRadius: "8px",
+            }}
+            expandIcon={({ isActive }) => (
+              <InfoCircleOutlined spin={isActive} />
+            )}>
+            <Panel
+              header={<Text type="secondary">{t("season.modal.fg")}</Text>}
+              key="1">
+              <ul
+                style={{
+                  paddingLeft: "15px",
+                  fontSize: "13px",
+                  color: "#fff",
+                }}>
+                <li>
+                  <b>{t("season.modal.fist")}:</b> {t("season.modal.fg1")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fiyt")}:</b> {t("season.modal.fg2")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fisdt")}:</b> {t("season.modal.fg3")}
+                </li>
+                <li>
+                  <b>{t("season.modal.fiedt")}:</b> {t("season.modal.fg4")}
+                </li>
+                <li>{t("season.modal.fg5")}</li>
+              </ul>
+            </Panel>
+          </Collapse>
+
           <p style={{ color: "#fff", marginBottom: "20px" }}>
             {t("season.modal.tt2")}dddd
           </p>
@@ -183,7 +240,8 @@ const SeasonModal = ({ season, setSeason, userId }) => {
               <Button
                 type="primary"
                 htmlType="submit"
-                style={{ backgroundColor: "#0499A9" }}>
+                style={{ backgroundColor: "#0499A9" }}
+                loading={isLoading}>
                 {t("season.modal.fisbt")}
               </Button>
             </div>
