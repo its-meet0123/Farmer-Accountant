@@ -19,6 +19,8 @@ const FeatureCard = ({ item, isLoading, season }) => {
     return days > 0 ? days : 180;
   };
 
+  console.log("calculate season total days :", totalDays);
+
   useEffect(() => {
     if (hasMultipleDesc) {
       const timer = setInterval(() => {
