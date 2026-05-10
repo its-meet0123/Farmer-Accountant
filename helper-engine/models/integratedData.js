@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const shopeAccountSchema = new mongoose.Schema({
+const grainMarketSchema = new mongoose.Schema({
   //comman fields
   startDate: {
     type: Date,
@@ -72,6 +72,42 @@ const shopeAccountSchema = new mongoose.Schema({
   },
 });
 
+const generalMarketSchema = new mongoose.Schema({
+  startDate: { type: Date, default: new Date() },
+  rate: { type: Number, default: 0 },
+  buyItems: {
+    billAmount: { type: Number },
+    bill: String,
+    items: [
+      {
+        name: String,
+        qty: Number,
+        rate: Number,
+        total: Number,
+      },
+    ],
+    handOver: String,
+  },
+  pay: {
+    payment: { type: Number },
+    method: String,
+    handOver: String,
+  },
+  returnItems: {
+    billAmount: { type: Number },
+    bill: String,
+    items: [
+      {
+        name: String,
+        qty: Number,
+        rate: Number,
+        total: Number,
+      },
+    ],
+    handOver: String,
+  },
+});
+
 const indShopeSchema = new mongoose.Schema({
   userId: {
     type: String,
@@ -89,13 +125,38 @@ const indShopeSchema = new mongoose.Schema({
   marketType: {
     type: String,
     required: true,
-    enum: ["grain", "genral"],
+    enum: ["grain", "general"],
   },
   shopeNumber: {
     type: String,
     uppercase: true,
   },
-  shopeAccount: [shopeAccountSchema],
+  shopeAccount: {
+    type: [grainMarketSchema],
+    default: [],
+    validate: {
+      validator: function (value) {
+        if (this.marketType === "grain") {
+          return true;
+        }
+        return value.length === 0;
+      },
+      message: "shopeAccount allowed only for grain market.",
+    },
+  },
+  generalShopeAccount: {
+    type: [generalMarketSchema],
+    default: [],
+    validate: {
+      validator: function (value) {
+        if (this.marketTyp === "general") {
+          return true;
+        }
+        return value.length === 0;
+      },
+      message: "generalShopeAccount allowed only for genral market.",
+    },
+  },
 });
 
 const Industries = mongoose.model("inddata", indShopeSchema);

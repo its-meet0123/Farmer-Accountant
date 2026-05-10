@@ -36,10 +36,11 @@ const ViewPage = () => {
   const [isLoanding, setIsLoanding] = useState(null);
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [generalForm] = Form.useForm();
   const [allInd, setAllInd] = useState([]);
   const [Id, setId] = useState();
   const [fetch, setFetch] = useState();
-  const [openType, setOpenType] = useState(null);
+  const [openType, setOpenType] = useState({ marketType: null, open: null });
   const [messageApi, contextHolder] = message.useMessage();
 
   const calcView = (account) => {
@@ -99,13 +100,13 @@ const ViewPage = () => {
     });
     setTimeout(() => {
       setIsLoanding(false);
-      setOpenType("edit");
+      setOpenType({ marketType: record?.marketType, open: "edit" });
     }, 1000);
   };
 
   const handleAddShopeTransaction = (record) => {
     setId({ shopeId: record._id, shopeNumber: record.shopeNumber });
-    setOpenType("add");
+    setOpenType({ marketType: record?.marketType, open: "add" });
   };
 
   const deleteTransaction = async (record) => {
@@ -205,6 +206,15 @@ const ViewPage = () => {
       dataIndex: "nameInd",
       width: "60%",
       key: "nameInd",
+    },
+    {
+      title: t("ViewPage.tableColumns.marketTypeTitleText"),
+      dataIndex: "marketType",
+      width: "50%",
+      key: "marketType",
+      render: (marketType) =>
+        (marketType === "grain" && "Grain Market") ||
+        (marketType === "general" && "General Market"),
     },
     {
       title: t("ViewPage.tableColumns.ShopeNoText"),
@@ -361,6 +371,7 @@ const ViewPage = () => {
             style={{ minWidth: "100%" }}
           />
         )}
+
         <IndDrawer
           open={openType}
           setOpen={setOpenType}
@@ -370,6 +381,7 @@ const ViewPage = () => {
           showSuccess={showSuccess}
           t={t}
           season={season}
+          generalForm={generalForm}
         />
       </PageContainer>
     </>

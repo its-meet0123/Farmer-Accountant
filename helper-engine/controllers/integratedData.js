@@ -216,6 +216,7 @@ async function handleCreateIndData(req, res) {
         userId: item.userId,
         sessionId: item.sessionId,
         nameInd: item.nameInd,
+        marketType: item.marketType,
         shopeNumber: item.shopeNumber,
         shopeAccount: item.shopeAccount,
       })),

@@ -16,6 +16,7 @@ import {
   Input,
   message,
   Row,
+  Select,
   Space,
 } from "antd";
 import { useState } from "react";
@@ -25,6 +26,7 @@ import dayjs from "dayjs";
 
 const { useBreakpoint } = Grid;
 const { Panel } = Collapse;
+const { Option } = Select;
 
 const EntDrawer = ({
   open,
@@ -325,6 +327,36 @@ const EntDrawer = ({
                                     disabled={!isEditable}
                                   />
                                 </Form.Item>
+                                <Form.Item
+                                  label={t(
+                                    "entDrawer.drawerForm.shopeInputs.ms",
+                                  )}
+                                  name={[name, "marketType"]}
+                                  rules={[{ required: true }]}>
+                                  <Select
+                                    placeholder={t(
+                                      "entDrawer.drawerForm.shopeInputs.mspt",
+                                    )}>
+                                    <Option
+                                      value="grain"
+                                      label={t(
+                                        "entDrawer.drawerForm.shopeInputs.msogt",
+                                      )}>
+                                      {t(
+                                        "entDrawer.drawerForm.shopeInputs.msogt",
+                                      )}
+                                    </Option>
+                                    <Option
+                                      value="general"
+                                      label={t(
+                                        "entDrawer.drawerForm.shopeInputs.msoget",
+                                      )}>
+                                      {t(
+                                        "entDrawer.drawerForm.shopeInputs.msoget",
+                                      )}
+                                    </Option>
+                                  </Select>
+                                </Form.Item>
                               </Flex>
                               {isEditable ? (
                                 <Button
@@ -499,6 +531,30 @@ const EntDrawer = ({
                                   "entDrawer.drawerForm.shopeInputs.apt",
                                 )}
                               />
+                            </Form.Item>
+                            <Form.Item
+                              label={t("entDrawer.drawerForm.shopeInputs.ms")}
+                              name={[name, "marketType"]}
+                              rules={[{ required: true }]}>
+                              <Select
+                                placeholder={t(
+                                  "entDrawer.drawerForm.shopeInputs.mspt",
+                                )}>
+                                <Option
+                                  value="grain"
+                                  label={t(
+                                    "entDrawer.drawerForm.shopeInputs.msogt",
+                                  )}>
+                                  {t("entDrawer.drawerForm.shopeInputs.msogt")}
+                                </Option>
+                                <Option
+                                  value="general"
+                                  label={t(
+                                    "entDrawer.drawerForm.shopeInputs.msoget",
+                                  )}>
+                                  {t("entDrawer.drawerForm.shopeInputs.msoget")}
+                                </Option>
+                              </Select>
                             </Form.Item>
                           </Flex>
                           <Flex vertical align="bottom">
