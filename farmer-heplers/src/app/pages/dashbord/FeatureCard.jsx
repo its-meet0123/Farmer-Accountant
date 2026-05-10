@@ -12,11 +12,11 @@ const FeatureCard = ({ item, isLoading, season }) => {
 
   const totalDays = () => {
     let diffTime = 0;
-    const start = new Date(season?.startDate);
-    const end = new Date(season?.endDate);
+    const start = season?.startDate ? new Date(season?.startDate) : new Date();
+    const end = season?.endDate ? new Date(season?.endDate) : new Date();
     diffTime = end - start;
     const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    return days || 180;
+    return days > 0 ? days : 180;
   };
 
   useEffect(() => {
