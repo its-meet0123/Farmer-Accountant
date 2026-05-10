@@ -3,6 +3,7 @@ const WorkerData = require("../../models/worker");
 const { FieldWorker, Harvest } = require("../../models/otherexpense");
 const Industries = require("../../models/integratedData");
 const Sessions = require("../../models/session");
+const CalcEndDates = require("../../models/endDate");
 const { calculateAccountDuration } = require("./dashbordInterestCalc");
 const {
   overAllTotalOfAllShopes,
@@ -36,24 +37,33 @@ async function dashBordData(req, res) {
       });
     }
     const sessionId = req.params.sessionId || session._id;
-    const [Ind, workers, allCasualLabor, allHarvests] = await Promise.all([
-      Industries.find({ userId: currentUserId, sessionId: sessionId }),
-      WorkerData.find({ userId: currentUserId, sessionId: sessionId }),
-      FieldWorker.find({ userId: currentUserId, sessionId: sessionId }),
-      Harvest.find({ userId: currentUserId, sessionId: sessionId }),
-    ]);
+    const [Ind, workers, allCasualLabor, allHarvests, selectSession] =
+      await Promise.all([
+        Industries.find({ userId: currentUserId, sessionId: sessionId }),
+        WorkerData.find({ userId: currentUserId, sessionId: sessionId }),
+        FieldWorker.find({ userId: currentUserId, sessionId: sessionId }),
+        Harvest.find({ userId: currentUserId, sessionId: sessionId }),
+        Sessions.findOne({ userId: currentUserId, sessionId: sessionId }),
+      ]);
 
     const allShopes = Ind.map((shopes) => {
       if (!shopes?.shopeAccount) return null;
       const shopeNumber = shopes?.shopeNumber;
-      const effectiveDate =
-        shopes?.shopeAccount?.at(0)?.startDate || new Date();
+      const calcend = CalcEndDates.findOne({
+        userId: currentUserId,
+        dataId: shopes?._id,
+      });
+      const effectiveDate = shopes?.shopeAccount?.at(0)?.startDate;
       const shopeData = shopes.shopeAccount.map((transaction) => {
         return transaction;
       });
 
       const shopesTotal = overAllTotalOfAllShopes(shopeData);
-      const duration = calculateAccountDuration(effectiveDate);
+      const duration = calculateAccountDuration(
+        effectiveDate,
+        calcend?.endDate,
+        selectSession?.endDate,
+      );
       return {
         shopeNumber: shopeNumber,
         overAllTotal: shopesTotal,
@@ -64,13 +74,21 @@ async function dashBordData(req, res) {
     const workersList = workers
       .map((worker) => {
         if (!worker?.account) return null;
+        const calcend = CalcEndDates.findOne({
+          userId: currentUserId,
+          dataId: worker?._id,
+        });
         const workerName = worker?.workerDetail?.workerName?.nickName;
-        const effectiveDate = worker?.account?.at(0)?.date || new Date();
+        const effectiveDate = worker?.account?.at(0)?.date;
         const workerAccounts = worker?.account.map((transactions) => {
           return transactions;
         });
         const Returns = overAllTotalOfAllWorkers(workerAccounts);
-        const duration = calculateAccountDuration(effectiveDate);
+        const duration = calculateAccountDuration(
+          effectiveDate,
+          calcend?.endDate,
+          selectSession?.endDate,
+        );
         return {
           workerName: workerName,
           overAllTotal: Returns,
@@ -82,11 +100,14 @@ async function dashBordData(req, res) {
     const casualLaborList = allCasualLabor
       .map((labors) => {
         const laborName = labors?.serviceProvider?.nickName;
-        const effectiveDate =
-          labors?.transactions?.at(0)?.startDate || new Date();
+        const effectiveDate = labors?.transactions?.at(0)?.startDate;
         const lastTransaction = labors?.transactions.at(-1);
         const oAt = formatCurrency(lastTransaction?.remaining || 0);
-        const duration = calculateAccountDuration(effectiveDate);
+        const duration = calculateAccountDuration(
+          effectiveDate,
+          lastTransaction?.startDate,
+          selectSession?.endDate,
+        );
         return {
           laborName: laborName,
           pending: oAt,
@@ -102,7 +123,11 @@ async function dashBordData(req, res) {
           harvester?.transactions?.at(0)?.startDate || new Date();
         const lastTransaction = harvester?.transactions.at(-1);
         const oAt = formatCurrency(lastTransaction?.remaining || 0);
-        const duration = calculateAccountDuration(effectiveDate);
+        const duration = calculateAccountDuration(
+          effectiveDate,
+          lastTransaction?.startDate,
+          selectSession?.endDate,
+        );
         return {
           opratorName: opratorName,
           pending: oAt,

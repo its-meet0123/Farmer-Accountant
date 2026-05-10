@@ -4,11 +4,20 @@ import { Progress, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { styles } from "./DasnbordStyle";
 
-const FeatureCard = ({ item, isLoading }) => {
+const FeatureCard = ({ item, isLoading, season }) => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const descArray = Array.isArray(item?.desc) ? item.desc : [];
   const hasMultipleDesc = descArray.length > 1;
+
+  const totalDays = () => {
+    let diffTime = 0;
+    const start = new Date(season?.startDate);
+    const end = new Date(season?.endDate);
+    diffTime = end - start;
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return days || 180;
+  };
 
   useEffect(() => {
     if (hasMultipleDesc) {
@@ -50,7 +59,10 @@ const FeatureCard = ({ item, isLoading }) => {
             }}>
             {descArray.map((data, i) => {
               const days = data?.accountAge;
-              const percent = Math.min(Math.round((days / 180) * 100), 100);
+              const percent = Math.min(
+                Math.round((days / totalDays) * 100),
+                100,
+              );
               return (
                 <div
                   key={i}

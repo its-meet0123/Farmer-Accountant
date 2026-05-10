@@ -170,7 +170,12 @@ const DashBord = () => {
           {" "}
           <div style={styles.mainGrid}>
             {features.map((item, index) => (
-              <FeatureCard key={index} item={item} isLoading={isLoading} />
+              <FeatureCard
+                key={index}
+                item={item}
+                isLoading={isLoading}
+                season={season}
+              />
             ))}
           </div>
           {!isLoading && (
