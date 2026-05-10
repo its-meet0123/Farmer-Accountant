@@ -19,7 +19,9 @@ const FeatureCard = ({ item, isLoading, season }) => {
     return days > 0 ? days : 180;
   };
 
-  console.log("calculate season total days :", totalDays);
+  const seasonDays = totalDays();
+
+  console.log("calculate season total days :", seasonDays);
 
   useEffect(() => {
     if (hasMultipleDesc) {
@@ -62,7 +64,7 @@ const FeatureCard = ({ item, isLoading, season }) => {
             {descArray.map((data, i) => {
               const days = data?.accountAge;
               const percent = Math.min(
-                Math.round((days / totalDays) * 100),
+                Math.round((days / seasonDays) * 100),
                 100,
               );
               return (
