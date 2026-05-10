@@ -151,6 +151,7 @@ const WorkerCalculation = () => {
         setEndDate(data);
       }
     } catch (err) {
+      setEndDate({ endDate: calculatedEndDate });
       message.error(t("workerCalcPage.fetchDateErrorMessage"));
       console.error(err.message);
       setFetch("del");

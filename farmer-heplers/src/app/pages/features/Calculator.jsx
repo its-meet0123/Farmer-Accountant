@@ -176,6 +176,7 @@ const CalcPage = () => {
         setId(data._id);
       }
     } catch (err) {
+      setEndDate({ endDate: calculatedEndDate });
       message.error(t("calculationPage.fetchDateErrorMessage"));
       console.log(err.message);
       setFetch("del");
