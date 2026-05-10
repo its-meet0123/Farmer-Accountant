@@ -161,7 +161,7 @@ const SeasonModal = ({ season, setSeason, userId }) => {
           </Collapse>
 
           <p style={{ color: "#fff", marginBottom: "20px" }}>
-            {t("season.modal.tt2")}dddd
+            {t("season.modal.tt2")}
           </p>
 
           <Form
