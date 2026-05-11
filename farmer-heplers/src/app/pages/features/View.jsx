@@ -162,7 +162,7 @@ const ViewPage = () => {
       message.success(`Calculation stop for ${record?.shopeNumber}`);
     }
     if (res.status == 200) {
-      message.success(`Calculation already stoped for ${record?.shopeNumber}`);
+      message.info(`Calculation already stoped for ${record?.shopeNumber}`);
     }
   };
 

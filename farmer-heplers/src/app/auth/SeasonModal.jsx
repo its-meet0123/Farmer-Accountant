@@ -197,6 +197,14 @@ const SeasonModal = ({ season, setSeason, userId }) => {
                     May/Jun to Nov/Dec.
                   </span>
                 </Option>
+                <Option value="Perennial" label={t("season.modal.soat")}>
+                  <span style={{ fontWeight: "bold", color: "#FFFFFF" }}>
+                    {t("season.modal.soat")}
+                  </span>
+                  <span style={{ fontSize: "12px", color: "#ffffff" }}>
+                    12 Months.
+                  </span>
+                </Option>
               </Select>
             </Form.Item>
 
