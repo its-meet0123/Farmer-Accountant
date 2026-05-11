@@ -97,7 +97,7 @@ const HarvesterTransactionForm = ({
                   border: "1px solid #2196f3",
                   backgroundColor: "#E3F2FD",
                 }}>
-                {t("casualDrawer.acltf.colps.hli")}
+                {t("casualDrawer.acltf.colps.li6")}
               </li>
               <li>{t("casualDrawer.acltf.colps.li1")}</li>
               <li>{t("casualDrawer.acltf.colps.li2")}</li>
