@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
     checkSeason();
-  }, []);
+  }, [season.openModal]);
 
   const signupComplete = () => {
     localStorage.setItem("hasAccount", "true");
