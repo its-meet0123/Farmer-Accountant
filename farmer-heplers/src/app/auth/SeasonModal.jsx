@@ -64,8 +64,9 @@ const SeasonModal = ({ season, setSeason, userId }) => {
       const res = await postSeason(formattedValues);
       const data = res.data;
       if (data.status == "success") {
+        console.log("frond side open season modal set season :", data.data);
         message.success(data.message);
-        setSeason({ ...data.data, openModal: false });
+        setSeason({ ...data?.data, openModal: false });
         setIsLoading(false);
         handleCancel();
       }
