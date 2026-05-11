@@ -799,6 +799,17 @@
   },
   "infoDashboard": {
     "title": "Please read the following descriptions carefully.",
+    "season": {
+      "title": "Season",
+      "desc1": "Initial Setup: When the web app starts, a 'Season Modal' appears for initial setup. If skipped, you can always add seasons via the Season Tab.",
+      "desc2": "Season Status Logic :  Active: If today's date falls within the start and end date of a season. Upcoming: If the start date is in the future. Expired: If the end date has already passed today's date.",
+      "desc3": "Advance Creation : You can add multiple season, but a new season must be created at least '30 days before' the current season ends.",
+      "desc4": "Automatic Selection : By default, all data entires go into the Active Season. To modify data in an expired or upcoming season, you must manually select that season from the Season Tab first.",
+      "desc5": "Page Refresh : Upon reloading the page, the system will automatically revert the selection back to the Active Season.",
+      "desc6": "Data Integrity : Deleting a season will permanently remove all data associated with that spicific season.",
+      "desc7": "Auto-Transition : Season statuses update automatically based on the clock. A season will expire or become active on its own as per the current date.",
+      "desc8": "Conflict Resolution : If two seasons are active simultaneously, the one 'added first' remains the default active season. The second one must be manually selected if needed."
+    },
     "arhatiya": {
       "title": "Arhatiya (Bahi-Khata)",
       "desc1": "An easy way to maintain Arhatiya accounts with interest calculation.",

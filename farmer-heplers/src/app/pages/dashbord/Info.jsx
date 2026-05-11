@@ -31,6 +31,35 @@ const DashbordInfo = () => {
                 color: "#ffd700",
               }}
             />
+            <h3 style={{ color: "#fff" }}>{t("infoDashboard.season.title")}</h3>
+            <ul>
+              <li>{t("infoDashboard.season.desc1")}</li>
+              <li>{t("infoDashboard.season.desc2")}</li>
+
+              <li>{t("infoDashboard.season.desc3")}</li>
+              <li>{t("infoDashboard.season.desc4")}</li>
+              <li>{t("infoDashboard.season.desc5")}</li>
+
+              <li>{t("infoDashboard.season.desc6")}</li>
+              <li>{t("infoDashboard.season.desc7")}</li>
+              <li>
+                {t("infoDashboard.season.desc8")}{" "}
+                <Link to="/season" style={{ fontSize: "16px" }}>
+                  Seasons
+                </Link>
+              </li>
+            </ul>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} md={8}>
+          <Card style={glassStyle} hoverable>
+            <Store
+              style={{
+                fontSize: "32px",
+                marginBottom: "15px",
+                color: "#ffd700",
+              }}
+            />
             <h3 style={{ color: "#fff" }}>
               {t("infoDashboard.arhatiya.title")}
             </h3>
