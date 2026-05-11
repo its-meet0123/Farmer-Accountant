@@ -82,33 +82,23 @@ const HomePage = () => {
     }
   };
 
-  const editFunction = async (id) => {
+  const editFunction = async (record) => {
     setIsLoanding("edit");
-    try {
-      const res = await getEntDataById(id);
-      if (res.status === 200) {
-        const data = await res.data.data;
-        const date = dayjs(data.startDate);
-
-        form.setFieldsValue({
-          id: data._id,
-          nameInd: data?.nameInd,
-          firstName: data.indFounder?.firstName,
-          lastName: data.indFounder?.lastName,
-          indContact: data.indContact,
-          shopes: data.shopes,
-          startDate: date,
-        });
-        setTimeout(() => {
-          setFetch(data);
-          setOpenType("edit");
-          setIsLoanding(false);
-        }, 1000);
-      }
-    } catch (err) {
-      message.error(t("homePage.editFunctionMessages.errorMessage"));
-      console.log(err.message);
-    }
+    const date = dayjs(record.startDate);
+    form.setFieldsValue({
+      id: record._id,
+      nameInd: record?.nameInd,
+      firstName: record.indFounder?.firstName,
+      lastName: record.indFounder?.lastName,
+      indContact: record.indContact,
+      shopes: record.shopes,
+      startDate: date,
+    });
+    setTimeout(() => {
+      setFetch(record);
+      setOpenType("edit");
+      setIsLoanding(false);
+    }, 1000);
   };
 
   const handleAddData = () => {
@@ -201,7 +191,7 @@ const HomePage = () => {
             type="link"
             icon={<EditOutlined />}
             size="small"
-            onClick={() => editFunction(record._id)}
+            onClick={() => editFunction(record)}
             loading={isLoanding == "edit" && true}
           />
           <Popconfirm
