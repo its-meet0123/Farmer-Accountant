@@ -96,7 +96,7 @@ const FarmerLoader = ({ isLoading, user }) => {
           <Card
             bordered={false}
             style={cardStyle}
-            bodyStyle={{ padding: "40px 24px" }}>
+            bodyStyle={{ padding: "40px 24px", background: "transparent" }}>
             <Space
               direction="vertical"
               size="large"
@@ -198,6 +198,8 @@ const overlayStyle = {
 const cardStyle = {
   borderRadius: "24px",
   boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+  height: "100%",
+  width: "100%",
   textAlign: "center",
   backgroundImage: "url('/kisaan_with_calculation.png')",
   backgroundSize: "contain",
