@@ -199,7 +199,7 @@ const cardStyle = {
   borderRadius: "24px",
   boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
   textAlign: "center",
-  backgrountImage: "url('/kisaan_with_calculation')",
+  backgroundImage: "url('/kisaan_with_calculation.png')",
   backgroundSize: "contain",
   backgroundPosition: "center",
   backgroundRepeat: "no-repeat",
