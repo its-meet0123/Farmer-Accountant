@@ -202,7 +202,7 @@ const cardStyle = {
   borderRadius: "24px",
   boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
   textAlign: "center",
-  background: "#ffffff",
+  background: "none",
 };
 
 export default FarmerLoader;
