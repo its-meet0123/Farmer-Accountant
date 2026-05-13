@@ -187,11 +187,8 @@ const overlayStyle = {
   left: 0,
   right: 0,
   bottom: 0,
-  //backgroundColor: "#f4f7f6",
-  backgrountImage: "url('/kisaan_with_calculation')",
-  backgroundSize: "contain",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  backgroundColor: "#f4f7f6",
+
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -202,7 +199,10 @@ const cardStyle = {
   borderRadius: "24px",
   boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
   textAlign: "center",
-  background: "none",
+  backgrountImage: "url('/kisaan_with_calculation')",
+  backgroundSize: "contain",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
 };
 
 export default FarmerLoader;
