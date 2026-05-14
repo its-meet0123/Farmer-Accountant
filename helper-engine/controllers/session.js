@@ -5,6 +5,7 @@ const Industries = require("../models/integrated");
 const Workers = require("../models/worker");
 const InterestDate = require("../models/endDate");
 const { FieldWorker, Harvest } = require("../models/otherexpense");
+const Session = require("../models/session");
 
 async function handleGetAllSessions(req, res) {
   try {
@@ -180,6 +181,31 @@ async function handleUpdateSession(req, res) {
     if (!sessionId || Object.keys(body).length === 0) {
       return res.json({ status: "error", message: "Id and body are required" });
     }
+
+    const session = await Sessions.findById({ _id: sessionId });
+    const sessionStart = session?.startDate;
+    const sessionEnd = session?.endDate;
+
+    const previousSession = await Sessions.findOne({
+      userId: currentUserId,
+      endDate: { $lt: sessionStart },
+    })
+      .sort({ endDate: -1 })
+      .limit(1);
+
+    const nextSession = await Sessions.findOne({
+      userId: currentUserId,
+      startDate: { $gt: sessionEnd },
+    })
+      .sort({ startDate: 1 })
+      .limit(1);
+
+    console.log(
+      "Edit session opration mai previousSession :",
+      previousSession,
+      "and nextSession :",
+      nextSession,
+    );
 
     let { startDate, endDate } = body;
 
