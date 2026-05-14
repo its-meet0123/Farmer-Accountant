@@ -238,21 +238,21 @@ async function handleUpdateSession(req, res) {
 
     const allowedOverLapPoint = new Date(startDate.getTime() - thirtyDaysInMs);
 
-    const overlappingSeason = await Sessions.findOne({
-      $and: [
-        { userId: currentUserId },
-        { _id: { $ne: sessionId } },
-        { endDate: { $gt: allowedOverLapPoint } },
-        { startDate: { $lt: endDate } },
-      ],
-    });
+    // const overlappingSeason = await Sessions.findOne({
+    //   $and: [
+    //     { userId: currentUserId },
+    //     { _id: { $ne: sessionId } },
+    //     { endDate: { $gt: allowedOverLapPoint } },
+    //     { startDate: { $lt: endDate } },
+    //   ],
+    // });
 
-    if (overlappingSeason) {
-      return res.status(409).json({
-        status: "conflict",
-        message: "CONFLICT_MSG",
-      });
-    }
+    // if (overlappingSeason) {
+    //   return res.status(409).json({
+    //     status: "conflict",
+    //     message: "CONFLICT_MSG",
+    //   });
+    // }
 
     const today = new Date();
     let isActive = false;
