@@ -182,20 +182,24 @@ async function handleUpdateSession(req, res) {
       return res.json({ status: "error", message: "Id and body are required" });
     }
 
+    const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+
     const session = await Sessions.findById({ _id: sessionId });
-    const sessionStart = session?.startDate;
-    const sessionEnd = session?.endDate;
+    const sessionStart = new Date(
+      session?.startDate.getTime() - thirtyDaysInMs,
+    );
+    const sessionEnd = new Date(session?.endDate.getTime() + thirtyDaysInMs);
 
     const previousSession = await Sessions.findOne({
       userId: currentUserId,
-      endDate: { $lt: sessionStart },
+      endDate: { $gte: sessionStart },
     })
       .sort({ endDate: -1 })
       .limit(1);
 
     const nextSession = await Sessions.findOne({
       userId: currentUserId,
-      startDate: { $gt: sessionEnd },
+      startDate: { $gte: sessionEnd },
     })
       .sort({ startDate: 1 })
       .limit(1);
@@ -226,7 +230,6 @@ async function handleUpdateSession(req, res) {
       });
     }
 
-    const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
     const allowedOverLapPoint = new Date(startDate.getTime() + thirtyDaysInMs);
 
     const overlappingSeason = await Sessions.findOne({
