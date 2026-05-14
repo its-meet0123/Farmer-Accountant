@@ -208,6 +208,7 @@ async function handleUpdateSession(req, res) {
 
     const nextSession = await Sessions.findOne({
       userId: currentUserId,
+      _id: { $ne: sessionId },
       startDate: { $lt: sessionEnd, $gte: allowedNextEnd },
     })
       .sort({ startDate: 1 })
