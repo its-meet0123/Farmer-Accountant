@@ -184,22 +184,31 @@ async function handleUpdateSession(req, res) {
 
     const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
 
-    const session = await Sessions.findById({ _id: sessionId });
-    const sessionStart = new Date(
+    const session = await Sessions.findOne({
+      _id: sessionId,
+      userId: currentUserId,
+    });
+
+    const sessionStart = session?.startDate;
+    const allowPriousStart = new Date(
       session?.startDate.getTime() - thirtyDaysInMs,
     );
-    const sessionEnd = new Date(session?.endDate.getTime() + thirtyDaysInMs);
+    const sessionEnd = session?.endDate;
+    const allowedNextEnd = new Date(
+      session?.endDate.getTime() + thirtyDaysInMs,
+    );
 
     const previousSession = await Sessions.findOne({
       userId: currentUserId,
-      endDate: { $gte: sessionStart },
+      _id: { $ne: sessionId },
+      endDate: { $lt: sessionStart, $gte: allowPriousStart },
     })
       .sort({ endDate: -1 })
       .limit(1);
 
     const nextSession = await Sessions.findOne({
       userId: currentUserId,
-      startDate: { $gte: sessionEnd },
+      startDate: { $lt: sessionEnd, $gte: allowedNextEnd },
     })
       .sort({ startDate: 1 })
       .limit(1);
