@@ -190,18 +190,14 @@ async function handleUpdateSession(req, res) {
     });
 
     const sessionStart = session?.startDate;
-    const allowPriousStart = new Date(
-      session?.startDate.getTime() - thirtyDaysInMs,
-    );
+    const allowPriousStart = new Date(sessionStart.getTime() - thirtyDaysInMs);
     const sessionEnd = session?.endDate;
-    const allowedNextEnd = new Date(
-      session?.endDate.getTime() + thirtyDaysInMs,
-    );
+    const allowedNextEnd = new Date(sessionEnd.getTime() + thirtyDaysInMs);
 
     const previousSession = await Sessions.findOne({
       userId: currentUserId,
       _id: { $ne: sessionId },
-      endDate: { $lt: sessionStart, $gte: allowPriousStart },
+      endDate: { $gte: allowPriousStart },
     })
       .sort({ endDate: -1 })
       .limit(1);
@@ -209,7 +205,7 @@ async function handleUpdateSession(req, res) {
     const nextSession = await Sessions.findOne({
       userId: currentUserId,
       _id: { $ne: sessionId },
-      startDate: { $lt: sessionEnd, $gte: allowedNextEnd },
+      startDate: { $gte: allowedNextEnd },
     })
       .sort({ startDate: 1 })
       .limit(1);
