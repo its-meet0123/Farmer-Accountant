@@ -190,9 +190,9 @@ async function handleUpdateSession(req, res) {
     });
 
     const sessionStart = session?.startDate;
-    const allowPriousStart = new Date(sessionStart.getTime() - thirtyDaysInMs);
+    const allowPriousStart = new Date(sessionStart.getTime() + thirtyDaysInMs);
     const sessionEnd = session?.endDate;
-    const allowedNextEnd = new Date(sessionEnd.getTime() + thirtyDaysInMs);
+    const allowedNextEnd = new Date(sessionEnd.getTime() - thirtyDaysInMs);
 
     const previousSession = await Sessions.findOne({
       userId: currentUserId,
