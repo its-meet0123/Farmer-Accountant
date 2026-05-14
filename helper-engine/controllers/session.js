@@ -197,7 +197,7 @@ async function handleUpdateSession(req, res) {
     const previousSession = await Sessions.findOne({
       userId: currentUserId,
       _id: { $ne: sessionId },
-      endDate: { $gte: allowPriousStart },
+      endDate: { $gt: sessionStart, $gte: allowPriousStart },
     })
       .sort({ endDate: -1 })
       .limit(1);
@@ -205,7 +205,7 @@ async function handleUpdateSession(req, res) {
     const nextSession = await Sessions.findOne({
       userId: currentUserId,
       _id: { $ne: sessionId },
-      startDate: { $gte: allowedNextEnd },
+      startDate: { $gt: sessionEnd, $gte: allowedNextEnd },
     })
       .sort({ startDate: 1 })
       .limit(1);
