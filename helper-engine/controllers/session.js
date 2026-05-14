@@ -236,7 +236,7 @@ async function handleUpdateSession(req, res) {
       });
     }
 
-    const allowedOverLapPoint = new Date(startDate.getTime() + thirtyDaysInMs);
+    const allowedOverLapPoint = new Date(startDate.getTime() - thirtyDaysInMs);
 
     const overlappingSeason = await Sessions.findOne({
       $and: [
