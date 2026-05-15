@@ -37,12 +37,12 @@ const autoCalculationJob = async () => {
       for (let shope of shopes) {
         const [seasondate, insertdate] = await Promise.all([
           Season.findOne({
-            userId: shope.userId,
-            _id: shope.sessionId,
+            userId: shope?.userId,
+            _id: shope?.sessionId,
           }),
           await EndDate.findOne({
-            userId: shope.userId,
-            dataId: shope._id,
+            userId: shope?.userId,
+            dataId: shope?._id,
           }),
         ]);
 
@@ -57,6 +57,7 @@ const autoCalculationJob = async () => {
           );
 
           console.log(
+            "for shopes",
             "sessionEnd Date :",
             seasondate?.endDate,
             "setEnd Date :",
@@ -146,6 +147,7 @@ const autoCalculationJob = async () => {
           );
 
           console.log(
+            "for worker",
             "sessionEnd Date :",
             seasonEndDate?.endDate,
             "setEnd Date :",
