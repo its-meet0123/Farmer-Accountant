@@ -6,11 +6,11 @@ const EndDate = require("../models/endDate");
 const { calculateAutoInterst } = require("../components/calculator");
 
 const getEndDate = (insertdate, seasondate, today) => {
-  if (insertdate?.endDate) {
-    return new Date(insertdate?.endDate);
+  if (insertdate) {
+    return new Date(insertdate);
   }
-  if (seasondate?.endDate) {
-    const seasonEnd = new Date(seasondate?.endDate);
+  if (seasondate) {
+    const seasonEnd = new Date(seasondate);
     if (isNaN(seasonEnd.getTime())) {
       return today;
     }
