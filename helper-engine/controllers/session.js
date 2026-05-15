@@ -221,6 +221,13 @@ async function handleUpdateSession(req, res) {
     // .sort({ startDate: 1 })
     // .limit(1);
 
+    const previousSessionEnd = previousSession?.endDate
+      ? new Date(previousSession.endDate)
+      : null;
+    const nextSessionStart = nextSession?.startDate
+      ? new Date(nextSession.startDate)
+      : null;
+
     console.log(
       "Edit session opration mai previousSession :",
       previousSession,
@@ -247,18 +254,25 @@ async function handleUpdateSession(req, res) {
       });
     }
 
-    const allowedOverLapPoint = new Date(startDate.getTime() + thirtyDaysInMs);
+    const monthDiff =
+      (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+      (endDate.getMonth() - startDate.getMonth());
 
-    const overlappingSeason = await Sessions.findOne({
-      $and: [
-        { userId: currentUserId },
-        { _id: { $ne: sessionId } },
-        { endDate: { $gt: allowedOverLapPoint } },
-        { startDate: { $lt: endDate } },
-      ],
-    });
+    if (monthDiff < 3) {
+      return res.status(400).json({
+        status: "error",
+        message: "Session duration should be at least 3 months",
+      });
+    }
 
-    if (overlappingSeason) {
+    const previousSessionOverlap = previousSessionEnd
+      ? new Date(previousSessionEnd.getTime() - thirtyDaysInMs)
+      : null;
+    const nextSessionOverlap = nextSessionStart
+      ? new Date(nextSessionStart.getTime() + thirtyDaysInMs)
+      : null;
+
+    if (startDate < previousSessionOverlap && endDate > nextSessionOverlap) {
       return res.status(409).json({
         status: "conflict",
         message: "CONFLICT_MSG",
