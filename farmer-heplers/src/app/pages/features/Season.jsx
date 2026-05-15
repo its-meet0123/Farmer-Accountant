@@ -110,6 +110,10 @@ const Season = () => {
           handleCancel();
         }
       } catch (err) {
+        if (err.response?.status === 409) {
+          message.error(err.response.data.message);
+          setIsLoanding("409");
+        }
         console.log(err.message);
         message.error("Season not created");
       }
@@ -137,9 +141,6 @@ const Season = () => {
 
       try {
         const res = await postSeason(formattedValues);
-        if (res.status == 409) {
-          message.error(res.data.data.message);
-        }
         const data = await res.data;
         if (data.status == "success") {
           message.success(data.message);
@@ -148,6 +149,10 @@ const Season = () => {
           handleCancel();
         }
       } catch (err) {
+        if (err.response?.status === 409) {
+          message.error(err.response.data.message);
+          setIsLoanding("409");
+        }
         console.log(err.message);
       }
     }
@@ -337,7 +342,11 @@ const Season = () => {
             ],
           }}
           trigger={["click"]}>
-          <Button type="text" icon={<EllipsisOutlined />} />
+          <Button
+            type="text"
+            icon={<EllipsisOutlined />}
+            loading={isLoanding == "ebl"}
+          />
         </Dropdown>
       ),
     },
