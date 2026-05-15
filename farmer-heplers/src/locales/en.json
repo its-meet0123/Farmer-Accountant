@@ -900,5 +900,5 @@
   "USER_FOUND": "User found",
   "PASSWORD_UPDATED": "Password updated",
   "USER_DELETED": "User account deleted successfully",
-  "CONFLICT_MSG": "The selected date range overlaps with an existin season. Please choose different dates."
+  "CONFLICT_MSG": "The new session can only be started within 30 days of the old session's end date."
 }

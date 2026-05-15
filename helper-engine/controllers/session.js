@@ -58,18 +58,29 @@ async function handlePostSession(req, res) {
     });
   }
 
+  const monthDiff =
+    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+    (endDate.getMonth() - startDate.getMonth());
+
+  if (monthDiff < 3) {
+    return res.status(400).json({
+      status: "error",
+      message: "Session duration should be at least 3 months",
+    });
+  }
+
+  const sessions = await Sessions.find({ userId: userId });
+  const previousSession = sessions.at(-1);
+  const previousSessionEnd = previousSession?.endDate
+    ? new Date(previousSession.endDate)
+    : null;
+
   const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
-  const allowedOverLapPoint = new Date(startDate.getTime() + thirtyDaysInMs);
+  const allowedOverLapPoint = new Date(
+    previousSessionEnd.getTime() - thirtyDaysInMs,
+  );
 
-  const overlappingSeason = await Sessions.findOne({
-    $and: [
-      { userId: userId },
-      { endDate: { $gt: allowedOverLapPoint } },
-      { startDate: { $lt: endDate } },
-    ],
-  });
-
-  if (overlappingSeason) {
+  if (previousSessionEnd && startDate < allowedOverLapPoint) {
     return res.status(409).json({
       status: "conflict",
       message: "CONFLICT_MSG",
@@ -197,18 +208,18 @@ async function handleUpdateSession(req, res) {
     const previousSession = await Sessions.findOne({
       userId: currentUserId,
       _id: { $ne: sessionId },
-      endDate: { $gt: sessionStart, $gte: allowPriousStart },
-    })
-      .sort({ endDate: -1 })
-      .limit(1);
+      endDate: { $lte: allowPriousStart },
+    });
+    // .sort({ endDate: -1 })
+    // .limit(1);
 
     const nextSession = await Sessions.findOne({
       userId: currentUserId,
       _id: { $ne: sessionId },
-      startDate: { $gt: sessionEnd, $gte: allowedNextEnd },
-    })
-      .sort({ startDate: 1 })
-      .limit(1);
+      startDate: { $gte: allowedNextEnd },
+    });
+    // .sort({ startDate: 1 })
+    // .limit(1);
 
     console.log(
       "Edit session opration mai previousSession :",
@@ -236,23 +247,23 @@ async function handleUpdateSession(req, res) {
       });
     }
 
-    const allowedOverLapPoint = new Date(startDate.getTime() - thirtyDaysInMs);
+    const allowedOverLapPoint = new Date(startDate.getTime() + thirtyDaysInMs);
 
-    // const overlappingSeason = await Sessions.findOne({
-    //   $and: [
-    //     { userId: currentUserId },
-    //     { _id: { $ne: sessionId } },
-    //     { endDate: { $gt: allowedOverLapPoint } },
-    //     { startDate: { $lt: endDate } },
-    //   ],
-    // });
+    const overlappingSeason = await Sessions.findOne({
+      $and: [
+        { userId: currentUserId },
+        { _id: { $ne: sessionId } },
+        { endDate: { $gt: allowedOverLapPoint } },
+        { startDate: { $lt: endDate } },
+      ],
+    });
 
-    // if (overlappingSeason) {
-    //   return res.status(409).json({
-    //     status: "conflict",
-    //     message: "CONFLICT_MSG",
-    //   });
-    // }
+    if (overlappingSeason) {
+      return res.status(409).json({
+        status: "conflict",
+        message: "CONFLICT_MSG",
+      });
+    }
 
     const today = new Date();
     let isActive = false;
