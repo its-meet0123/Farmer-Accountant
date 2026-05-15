@@ -20,7 +20,7 @@ const getEndDate = (insertdate, seasondate, today) => {
 };
 
 const autoCalculationJob = async () => {
-  cron.schedule("0 0 * * *", async () => {
+  cron.schedule("* * * * *", async () => {
     try {
       const today = new Date();
       const [shopes, workers] = await Promise.all([
@@ -54,6 +54,15 @@ const autoCalculationJob = async () => {
             insertdate?.endDate,
             seasondate?.endDate,
             today,
+          );
+
+          console.log(
+            "sessionEnd Date :",
+            seasondate?.endDate,
+            "setEnd Date :",
+            insertdate?.endDate,
+            "find with logic :",
+            endDate,
           );
 
           const loanCalculation = calculateAutoInterst(
@@ -134,6 +143,15 @@ const autoCalculationJob = async () => {
             insertDate?.endDate,
             seasonEndDate?.endDate,
             today,
+          );
+
+          console.log(
+            "sessionEnd Date :",
+            seasonEndDate?.endDate,
+            "setEnd Date :",
+            insertDate?.endDate,
+            "find with logic :",
+            endDate,
           );
 
           const giveAmount = trans?.give?.amount || 0;
