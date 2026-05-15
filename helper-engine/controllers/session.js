@@ -272,7 +272,7 @@ async function handleUpdateSession(req, res) {
       ? new Date(nextSessionStart.getTime() + thirtyDaysInMs)
       : null;
 
-    if (startDate < previousSessionOverlap && endDate > nextSessionOverlap) {
+    if (startDate < previousSessionOverlap || endDate > nextSessionOverlap) {
       return res.status(409).json({
         status: "conflict",
         message: "CONFLICT_MSG",
