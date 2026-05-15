@@ -173,6 +173,7 @@ const CalcPage = () => {
         const data = await dateRes.data.data;
         setIsLoanding(false);
         setEndDate(data);
+        setFetch("get date");
         setId(data._id);
       }
     } catch (err) {
