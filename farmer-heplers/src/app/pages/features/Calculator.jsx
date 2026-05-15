@@ -185,7 +185,7 @@ const CalcPage = () => {
       }
     }
     form.setFieldsValue({
-      endDate: endDate?.endDate ? dayjs(endDate.endDate) : calculatedEndDate,
+      endDate: endDate?.endDate && dayjs(endDate.endDate),
     });
   };
 

@@ -160,7 +160,7 @@ const WorkerCalculation = () => {
       }
     }
     form.setFieldsValue({
-      endDate: endDate?.endDate ? dayjs(endDate.endDate) : calculatedEndDate,
+      endDate: dayjs(endDate?.endDate),
     });
   };
 
