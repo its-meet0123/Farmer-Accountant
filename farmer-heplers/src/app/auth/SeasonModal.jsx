@@ -157,6 +157,9 @@ const SeasonModal = ({ season, setSeason, userId }) => {
                   <b>{t("season.modal.fiedt")}:</b> {t("season.modal.fg4")}
                 </li>
                 <li>{t("season.modal.fg5")}</li>
+                <li>
+                  <b>{t("season.modal.fg6")}</b>
+                </li>
               </ul>
             </Panel>
           </Collapse>

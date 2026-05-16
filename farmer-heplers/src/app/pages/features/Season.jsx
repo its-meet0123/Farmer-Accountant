@@ -111,8 +111,9 @@ const Season = () => {
         }
       } catch (err) {
         if (err.response?.status === 409) {
-          message.error(err.response.data.message);
+          message.error(t(err.response.data.message));
           setIsLoanding("409");
+          return null;
         }
         console.log(err.message);
         message.error("Season not created");
@@ -150,8 +151,9 @@ const Season = () => {
         }
       } catch (err) {
         if (err.response?.status === 409) {
-          message.error(err.response.data.message);
+          message.error(t(err.response.data.message));
           setIsLoanding("409");
+          return null;
         }
         console.log(err.message);
       }
@@ -472,6 +474,9 @@ const Season = () => {
                   <b>{t("season.modal.fiedt")}:</b> {t("season.modal.fg4")}
                 </li>
                 <li>{t("season.modal.fg5")}</li>
+                <li>
+                  <b>{t("season.modal.fg6")}</b>
+                </li>
               </ul>
             </Panel>
           </Collapse>

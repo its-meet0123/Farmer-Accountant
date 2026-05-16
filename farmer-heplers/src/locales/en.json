@@ -741,7 +741,8 @@
       "fg2": "Select the current ongoing year.",
       "fg3": "The date on which transactions started after the previous settlement.",
       "fg4": "The date of the month when the final settlement takes place. (Initially, you may select a date approximately 6 months after the start date; you can edit it later).",
-      "fg5": "All calculations for this season will stope once the season's end date is reached. If you wish to extend or shorten the season, do so before its end date."
+      "fg5": "All calculations for this season will stope once the season's end date is reached. If you wish to extend or shorten the season, do so before its end date.",
+      "fg6": "The new season must start on any date within the last 30 days before the current active season ends."
     }
   },
   "layout": {
