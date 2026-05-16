@@ -61,7 +61,7 @@ const LanguageChangeDropDown = () => {
     <Dropdown menu={{ items }}>
       <Button
         variant="text"
-        color="default"
+        color="purple"
         type="text"
         style={{ color: "#ffffff" }}>
         {buttonText}
