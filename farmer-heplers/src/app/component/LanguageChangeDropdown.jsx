@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Dropdown } from "antd";
 import i18n from "i18next";
-const LanguageChangeDropDown = () => {
+const LanguageChangeDropDown = ({ color }) => {
   const [buttonText, setButtonText] = useState("Lang");
   const lang = localStorage.getItem("lang");
 
@@ -59,11 +59,7 @@ const LanguageChangeDropDown = () => {
   ];
   return (
     <Dropdown menu={{ items }}>
-      <Button
-        variant="text"
-        color="purple"
-        type="text"
-        style={{ color: "#ffffff" }}>
+      <Button variant="text" color={color} type="text">
         {buttonText}
       </Button>
     </Dropdown>

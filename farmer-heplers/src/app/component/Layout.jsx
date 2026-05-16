@@ -44,7 +44,7 @@ const AppLayout = ({ children }) => {
     getItem(`${t("layout.menu.setting")}`, "/setting", [
       getItem(`${t("layout.menu.logout")}`, "/logout"),
       getItem(`${t("layout.menu.delete")}`, "/delete"),
-      getItem(<LanguageChangeDropDown />, "/lang"),
+      getItem(<LanguageChangeDropDown color="purple" />, "/lang"),
     ]),
   ];
 

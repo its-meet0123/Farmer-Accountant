@@ -95,7 +95,7 @@ const AuthContainer = ({
       <div style={styles.card}>
         {showLangButton && (
           <div style={styles.langWrapper}>
-            <LanguageChangeDropDown />
+            <LanguageChangeDropDown color="default" />
           </div>
         )}
         {/* Branding Side - Mobile par chota ya hide ho jayega */}
