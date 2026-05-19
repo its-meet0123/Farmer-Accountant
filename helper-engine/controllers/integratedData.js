@@ -211,6 +211,24 @@ async function handleCreateIndData(req, res) {
         .json({ status: "Error", msg: "All fields are required" });
     }
 
+    const findIndustrybyuser = await Industries.find({
+      userId: body[0].userId,
+      sessionId: body[0].sessionId,
+    });
+    if (findIndustrybyuser) {
+      const shopeNumbers =
+        body.length > 0 ? body.map((item) => item.shopeNumber) : "";
+      const duplicateShopeNumber = findIndustrybyuser.some((shopes) =>
+        shopeNumbers.includes(shopes.shopeNumber),
+      );
+      if (duplicateShopeNumber) {
+        return res.status(409).json({
+          status: "Error",
+          message: `Duplicate shope number found`,
+        });
+      }
+    }
+
     const result = await Industries.insertMany(
       body.map((item) => ({
         userId: item.userId,

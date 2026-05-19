@@ -1,4 +1,5 @@
 const entData = require("../models/integrated");
+const Industries = require("../models/integratedData");
 
 async function handleGetAllEntData(req, res) {
   // const token = req.cookies.token;
@@ -152,6 +153,23 @@ async function handlePostEntData(req, res) {
       status: "Error",
       msg: "All fields are required",
     });
+  }
+  const industriesbyuser = await Industries.find({
+    userId: body.userId,
+    sessionId: body.sessionId,
+  });
+  if (industriesbyuser) {
+    const shopesNumbers = body?.shopes?.map((shope) => shope.shopeNumber) || "";
+    const duplicateExists = industriesbyuser.some((shopes) =>
+      shopesNumbers.includes(shopes.shopeNumber),
+    );
+
+    if (duplicateExists) {
+      return res.status(409).json({
+        status: "Error",
+        message: `Duplicate shope number found`,
+      });
+    }
   }
   const entDataDB = entData.create({
     userId: body.userId,
