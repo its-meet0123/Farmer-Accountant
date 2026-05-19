@@ -94,19 +94,25 @@ async function handlePostSession(req, res) {
   if (startDate <= today && endDate >= today) {
     isActive = true;
   }
+  try {
+    const result = await Sessions.create({
+      ...sessionInfo,
+      startDate,
+      endDate,
+      isActive,
+    });
 
-  const result = await Sessions.create({
-    ...sessionInfo,
-    startDate,
-    endDate,
-    isActive,
-  });
-
-  res.status(201).json({
-    status: "success",
-    message: "Session created successfully",
-    data: result,
-  });
+    return res.status(201).json({
+      status: "success",
+      message: "Session created successfully",
+      data: result,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      status: "Error",
+      message: err.message,
+    });
+  }
 }
 
 async function handleGetActiveSession(req, res) {
