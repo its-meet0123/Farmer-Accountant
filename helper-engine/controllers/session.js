@@ -5,7 +5,6 @@ const Industries = require("../models/integrated");
 const Workers = require("../models/worker");
 const InterestDate = require("../models/endDate");
 const { FieldWorker, Harvest } = require("../models/otherexpense");
-const Session = require("../models/session");
 
 async function handleGetAllSessions(req, res) {
   try {
@@ -43,6 +42,7 @@ async function handlePostSession(req, res) {
   let { startDate, endDate } = sessionInfo;
   startDate = new Date(startDate);
   endDate = new Date(endDate);
+  const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
 
   if (isNaN(startDate) || isNaN(endDate)) {
     return res.status(400).json({
@@ -69,22 +69,24 @@ async function handlePostSession(req, res) {
     });
   }
 
-  const sessions = await Sessions.find({ userId: userId });
-  const previousSession = sessions.at(-1);
-  const previousSessionEnd = previousSession?.endDate
-    ? new Date(previousSession.endDate)
+  const session = await Sessions.findOne({ userId: userId }).sort({
+    endDate: -1,
+  });
+
+  const previousSessionEnd = session?.endDate
+    ? new Date(session.endDate)
     : null;
 
-  const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
-  const allowedOverLapPoint = new Date(
-    previousSessionEnd.getTime() - thirtyDaysInMs,
-  );
-
-  if (previousSessionEnd && startDate < allowedOverLapPoint) {
-    return res.status(409).json({
-      status: "conflict",
-      message: "CONFLICT_MSG",
-    });
+  if (previousSessionEnd) {
+    const allowedOverLapPoint = new Date(
+      previousSessionEnd.getTime() - thirtyDaysInMs,
+    );
+    if (startDate < allowedOverLapPoint) {
+      return res.status(409).json({
+        status: "conflict",
+        message: "CONFLICT_MSG",
+      });
+    }
   }
 
   const today = new Date();
