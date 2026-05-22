@@ -44,7 +44,7 @@ async function autoTotalForCasualWorker(ids, upComingTrans) {
     });
     //console.log("from Shema trans", getTransaction);
     if (!getTransaction) {
-      return null;
+      return upComingTrans;
     }
 
     const transTotal =
@@ -110,7 +110,7 @@ async function autoTotalForHarvesterData(ids, upComingTrans) {
 
     console.log("from Shema trans", getTransaction);
     if (!getTransaction) {
-      return null;
+      return upComingTrans;
     }
 
     const transTotal =

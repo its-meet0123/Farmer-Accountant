@@ -402,7 +402,7 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
     const decoded = req.user;
     const currentUserId = decoded.id;
 
-    if (!workerId && !transactionId && !currentUserId) {
+    if (!workerId || !transactionId || !currentUserId) {
       return res.status(400).json({
         status: "Error",
         Code: "CL.FW.DWTEM",
@@ -423,6 +423,29 @@ async function deleteAdditionalWorkerTransactionByIds(req, res) {
         status: "Error",
         Code: "Transaction not found or already deleted",
       });
+    }
+
+    if (deleteAdditionalWorkerTransaction.modifiedCount > 0) {
+      const remainingWorker = await FieldWorker.findOne({
+        _id: workerId,
+        userId: currentUserId,
+      });
+
+      if (remainingWorker && remainingWorker.transactions.length > 0) {
+        const updatedTransactions = remainingWorker.transactions.map(
+          (trans, index) => {
+            return {
+              ...trans.toObject(),
+              transactionNumber: index + 1,
+            };
+          },
+        );
+
+        await FieldWorker.updateOne(
+          { _id: workerId, userId: currentUserId },
+          { $set: { transactions: updatedTransactions } },
+        );
+      }
     }
     return res.status(200).json({
       status: "Success",
@@ -453,6 +476,39 @@ async function deleteHavresterTransactionByIds(req, res) {
         $pull: { transactions: { _id: transactionId } },
       },
     );
+
+    if (deleteHarvestTransaction.modifiedCount === 0) {
+      return res.status(404).json({
+        status: "Error",
+        Code: "Transaction not found or already deleted",
+      });
+    }
+
+    const remainingHarvester = await Harvest.findOne({
+      _id: harvesterId,
+      userId: currentUserId,
+    });
+
+    if (remainingHarvester && remainingHarvester.transactions.length > 0) {
+      const updatedTransactions = remainingHarvester.transactions.map(
+        (trans, index) => {
+          return {
+            ...trans.toObject(),
+            transactionNumber: index + 1,
+          };
+        },
+      );
+
+      await Harvest.updateOne(
+        {
+          _id: harvesterId,
+          userId: currentUserId,
+        },
+        {
+          $set: { transactions: updatedTransactions },
+        },
+      );
+    }
 
     return res.status(200).json({
       status: "Success",

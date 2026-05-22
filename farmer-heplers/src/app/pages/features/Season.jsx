@@ -150,11 +150,8 @@ const Season = () => {
           handleCancel();
         }
       } catch (err) {
-        if (err.response?.status === 409) {
-          message.error(t(err.response.data.message));
-          setIsLoanding("409");
-          return null;
-        }
+        message.error(t(err.response.data.message));
+        setIsLoanding("409");
         console.log(err.message);
       }
     }
@@ -527,15 +524,24 @@ const Season = () => {
               </Select>
             </Form.Item>
 
-            <Form.Item label={t("season.modal.fiyt")} name="year">
+            <Form.Item
+              label={t("season.modal.fiyt")}
+              name="year"
+              rules={[{ required: true }]}>
               <DatePicker picker="year" placeholder="select year" />
             </Form.Item>
 
-            <Form.Item label={t("season.modal.fisdt")} name="startDate">
+            <Form.Item
+              label={t("season.modal.fisdt")}
+              name="startDate"
+              rules={[{ required: true }]}>
               <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 
-            <Form.Item label={t("season.modal.fiedt")} name="endDate">
+            <Form.Item
+              label={t("season.modal.fiedt")}
+              name="endDate"
+              rules={[{ required: true }]}>
               <DatePicker style={{ width: 130 }} format={"DD/MM/YYYY"} />
             </Form.Item>
 

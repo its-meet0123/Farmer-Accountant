@@ -1,6 +1,5 @@
 const {
   DailyEssentials,
-  CreditDailyEssentials,
 } = require("../models/generalMarket");
 
 // get list
@@ -36,54 +35,26 @@ async function getDailyEssentialsRecords(req, res) {
   }
 }
 
-async function getCreditDailyEssentialsRecords(req, res) {
-  try {
-    const { sessionId } = req.params;
-    const decoded = req.user;
-    const currentUserId = decoded.id;
 
-    const CrediteRecords = CreditDailyEssentials.find({
-      userId: currentUserId,
-      sessionId: sessionId,
-    });
-
-    if (!CrediteRecords) {
-      return res.status(400).json({
-        status: "error",
-        message: "Credite records not founded.",
-      });
-    }
-
-    return res.status(200).json({
-      status: "success",
-      records: CrediteRecords,
-      message: "Records founded successfully.",
-    });
-  } catch (err) {
-    return res.status(500).json({
-      status: "error",
-      message: err.message,
-    });
-  }
-}
 
 async function handleUpdateDailyEssential(req, res) {
   try {
-    const { id } = req.params;
+    const {sessionId, shopeId } = req.params;
     const body = req.body;
     const decoded = req.user;
     const currentUserId = decoded.id;
-    if (!id || !body) {
+    if (!sessionId || !shopeId || Object.keys(body).length === 0) {
       return res.status(400).json({
         status: "error",
-        message: "Body or Id is required",
+        message: `${!sessionId && "Session Id" || !shopeId && "Shope Id" || Object.keys(body).length === 0 && "Body"} is required}`,
       });
     }
 
     const dailyEssential = DailyEssentials.findOneAndUpdate(
       {
         userId: currentUserId,
-        _id: id,
+        sessionId: sessionId,
+        _id: shopeId,
       },
       { $set: body },
       { new: true },
@@ -109,49 +80,31 @@ async function handleUpdateDailyEssential(req, res) {
   }
 }
 
-async function handleUpdateCreditEssential(req, res) {
-  try {
-    const { id } = req.params;
-    const body = req.body;
-    const decoded = req.user;
-    const currentUserId = decoded.id;
-
-    if (!id || !body) {
+async function handleDeleteDailyEssential(req, res){
+  
+    const {sessionId, shopeId} = req.params;
+    if(!sessionId || !shopeId){
       return res.status(400).json({
         status: "error",
-        message: "Id and body required",
+        message: `${!sessionId ? "Season Id" : "Shope Id"} is required`,
       });
     }
+    try {
+      const decoded = req.user;
+    const currentUserId = decoded.id;
+      const deletedRecord = await DailyEssentials.findOneAndDelete({_id: shopeId, userId: currentUserId, sessionId: sessionId });
 
-    const updateCreditEssential = CreditDailyEssentials.findOneAndUpdate(
-      {
-        userId: currentUserId,
-        _id: id,
-      },
-      {
-        $set: body,
-      },
-      { new: true },
-    );
+      return res.status(200).json({
+        status: "success",
+        record: deletedRecord,
+        message: "Record deleted successfully.",
+      });
 
-    if (!updateCreditEssential) {
-      return res
-        .status(400)
-        .json({
-          status: "error",
-          message: "Credit record not founded and updated",
-        });
+  }catch(err) {
+      return res.status(500).json({
+        status: "error",
+        message: err.message,
+      })
     }
-
-    return res.status(200).json({
-      status: "success",
-      record: updateCreditEssential,
-      message: "record update successfully.",
-    });
-  } catch (err) {
-    return res.status(500).json({
-      status: "error",
-      message: err.message,
-    });
   }
-}
+
