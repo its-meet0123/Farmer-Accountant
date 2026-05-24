@@ -205,28 +205,34 @@ async function handleCreateIndData(req, res) {
   try {
     const body = req.body;
     console.log(body);
-    if (!body) {
+    if (body.length == 0) {
       return res
         .status(404)
         .json({ status: "Error", msg: "All fields are required" });
     }
 
+    const conditions = body.map((shopes) => ({
+      userId: shopes.userId,
+      sessionId: shopes.sessionId,
+      shopeNumber: shopes.shopeNumber,
+    }));
+
     const findIndustrybyuser = await Industries.find({
-      userId: body[0].userId,
-      sessionId: body[0].sessionId,
+      $or: conditions,
     });
+
+    console.log(
+      "Conditions:-",
+      conditions,
+      "Find Industry by user:-",
+      findIndustrybyuser,
+    );
+
     if (findIndustrybyuser) {
-      const shopeNumbers =
-        body.length > 0 ? body.map((item) => item.shopeNumber) : "";
-      const duplicateShopeNumber = findIndustrybyuser.some((shopes) =>
-        shopeNumbers.includes(shopes.shopeNumber),
-      );
-      if (duplicateShopeNumber) {
-        return res.status(409).json({
-          status: "Error",
-          message: `Duplicate shope number found`,
-        });
-      }
+      return res.status(409).json({
+        status: "Confilct",
+        message: `Duplicate shope number found`,
+      });
     }
 
     const result = await Industries.insertMany(

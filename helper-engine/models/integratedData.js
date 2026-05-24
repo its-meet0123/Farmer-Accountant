@@ -87,9 +87,15 @@ const indShopeSchema = new mongoose.Schema({
   shopeNumber: {
     type: String,
     uppercase: true,
+    required: true,
   },
   shopeAccount: [shopeAccountSchema],
 });
+
+indShopeSchema.index(
+  { userId: 1, sessionId: 1, shopeNumber: 1 },
+  { unique: true },
+);
 
 const Industries = mongoose.model("inddata", indShopeSchema);
 

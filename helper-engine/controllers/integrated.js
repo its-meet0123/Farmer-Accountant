@@ -154,22 +154,20 @@ async function handlePostEntData(req, res) {
       msg: "All fields are required",
     });
   }
-  const industriesbyuser = await Industries.find({
+  const condition = body.shopes.map((shope) => ({
     userId: body.userId,
     sessionId: body.sessionId,
+    shopeNumber: shope.shopeNumber,
+  }));
+  const duplicateExists = await Industries.find({
+    $or: condition,
   });
-  if (industriesbyuser) {
-    const shopesNumbers = body?.shopes?.map((shope) => shope.shopeNumber) || "";
-    const duplicateExists = industriesbyuser.some((shopes) =>
-      shopesNumbers.includes(shopes.shopeNumber),
-    );
-
-    if (duplicateExists) {
-      return res.status(409).json({
-        status: "Error",
-        message: `Duplicate shope number found`,
-      });
-    }
+  console.log("condition:-", condition, "duplicateExists:- ", duplicateExists);
+  if (duplicateExists) {
+    return res.status(409).json({
+      status: "Error",
+      message: `Duplicate shope number found`,
+    });
   }
   const entDataDB = entData.create({
     userId: body.userId,
