@@ -465,15 +465,20 @@ const EntDrawer = ({
                                     if (!value) {
                                       Promise.resolve();
                                     }
+                                    const formattedValue = value
+                                      .trim()
+                                      .toUpperCase();
                                     const isEntDuplicate = data.entData.some(
                                       (obj) =>
                                         obj.shopes.some(
                                           (shope) =>
-                                            shope.shopeNumber === value,
+                                            shope.shopeNumber ===
+                                            formattedValue,
                                         ),
                                     );
                                     const isIndDuplicate = data.indData.some(
-                                      (obj) => obj.shopeNumber === value,
+                                      (obj) =>
+                                        obj.shopeNumber === formattedValue,
                                     );
                                     if (isEntDuplicate || isIndDuplicate) {
                                       return Promise.reject(
