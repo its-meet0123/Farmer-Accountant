@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const entData = require("../models/integrated");
 const Industries = require("../models/integratedData");
 
@@ -155,15 +156,15 @@ async function handlePostEntData(req, res) {
     });
   }
   const condition = body.shopes.map((shope) => ({
-    userId: body.userId,
-    sessionId: body.sessionId,
-    shopeNumber: shope.shopeNumber,
+    userId: new mongoose.Types.ObjectId(body.userId),
+    sessionId: new mongoose.Types.ObjectId(body.sessionId),
+    shopeNumber: String(shope.shopeNumber).toUpperCase(),
   }));
   const duplicateExists = await Industries.find({
     $or: condition,
   });
   console.log("condition:-", condition, "duplicateExists:- ", duplicateExists);
-  if (duplicateExists) {
+  if (duplicateExists.length > 0) {
     return res.status(409).json({
       status: "Error",
       message: `Duplicate shope number found`,

@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Industries = require("../models/integratedData");
 
 async function handleGetAllIndData(req, res) {
@@ -212,9 +213,9 @@ async function handleCreateIndData(req, res) {
     }
 
     const conditions = body.map((shopes) => ({
-      userId: shopes.userId,
-      sessionId: shopes.sessionId,
-      shopeNumber: shopes.shopeNumber,
+      userId: new mongoose.Types.ObjectId(shopes.userId),
+      sessionId: new mongoose.Types.ObjectId(shopes.sessionId),
+      shopeNumber: String(shopes.shopeNumber).toUpperCase(),
     }));
 
     const findIndustrybyuser = await Industries.find({
@@ -228,7 +229,7 @@ async function handleCreateIndData(req, res) {
       findIndustrybyuser,
     );
 
-    if (findIndustrybyuser) {
+    if (findIndustrybyuser.length > 0) {
       return res.status(409).json({
         status: "Confilct",
         message: `Duplicate shope number found`,

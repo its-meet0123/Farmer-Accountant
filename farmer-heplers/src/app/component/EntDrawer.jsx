@@ -109,6 +109,10 @@ const EntDrawer = ({
           setFetch(shopeDataArray);
           onClose();
         } else {
+          if (entRes.status == 409 || indRes.status == 409) {
+            message.error("Shope number already exist in your data base.");
+            setBtnLoad(false);
+          }
           message.error(t("entDrawer.submitFunction.errorMessageforCreate"));
         }
       }
