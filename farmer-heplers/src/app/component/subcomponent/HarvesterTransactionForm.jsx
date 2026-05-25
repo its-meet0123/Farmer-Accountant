@@ -21,6 +21,7 @@ import {
 } from "../../service/other";
 
 const { Panel } = Collapse;
+const { Option } = Select;
 
 const HarvesterTransactionForm = ({
   form,
@@ -38,7 +39,7 @@ const HarvesterTransactionForm = ({
     { label: t("harvestDrawer.ahtf.odt"), value: "duration" },
     { label: t("harvestDrawer.ahtf.omt"), value: "measurment" },
   ];
-
+  console.log("vehical list for selector", option);
   const onFinish = async () => {
     if (openType === "addTrans") {
       try {
@@ -147,7 +148,13 @@ const HarvesterTransactionForm = ({
           </Form.Item>
 
           <Form.Item label={t("harvestDrawer.ahtf.vid")} name="vehical">
-            <Select placeholder="vehical ID" options={option} />
+            <Select placeholder="vehical ID">
+              {option.map((value) => {
+                <Option value={value.vehicalID} label={value.vehicalID}>
+                  {value.vehicalID}
+                </Option>;
+              })}
+            </Select>
           </Form.Item>
         </Row>
 
