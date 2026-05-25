@@ -21,7 +21,6 @@ import {
 } from "../../service/other";
 
 const { Panel } = Collapse;
-const { Option } = Select;
 
 const HarvesterTransactionForm = ({
   form,
@@ -149,11 +148,15 @@ const HarvesterTransactionForm = ({
 
           <Form.Item label={t("harvestDrawer.ahtf.vid")} name="vehical">
             <Select placeholder="vehical ID">
-              {option.map((value) => {
-                <Option value={value.vehicalID} label={value.vehicalID}>
-                  {value.vehicalID}
-                </Option>;
-              })}
+              {option.map((value) => (
+                <>
+                  <Select.Option
+                    value={value.vehicalID}
+                    label={value.vehicalID}>
+                    {value.vehicalID}
+                  </Select.Option>
+                </>
+              ))}
             </Select>
           </Form.Item>
         </Row>
