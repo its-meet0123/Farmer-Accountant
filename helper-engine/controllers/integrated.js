@@ -157,7 +157,7 @@ async function handlePostEntData(req, res) {
   }
   try {
     const condition = body.shopes.map((shope) => ({
-      userId: new mongoose.Types.ObjectId(body.userId),
+      userId: body.userId,
       sessionId: new mongoose.Types.ObjectId(body.sessionId),
       shopeNumber: String(shope.shopeNumber).toUpperCase(),
     }));

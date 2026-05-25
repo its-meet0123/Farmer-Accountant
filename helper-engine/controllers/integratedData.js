@@ -213,7 +213,7 @@ async function handleCreateIndData(req, res) {
     }
 
     const conditions = body.map((shopes) => ({
-      userId: new mongoose.Types.ObjectId(shopes.userId),
+      userId: shopes.userId,
       sessionId: new mongoose.Types.ObjectId(shopes.sessionId),
       shopeNumber: String(shopes.shopeNumber).toUpperCase(),
     }));
