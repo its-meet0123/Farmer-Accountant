@@ -155,38 +155,50 @@ async function handlePostEntData(req, res) {
       msg: "All fields are required",
     });
   }
-  const condition = body.shopes.map((shope) => ({
-    userId: new mongoose.Types.ObjectId(body.userId),
-    sessionId: new mongoose.Types.ObjectId(body.sessionId),
-    shopeNumber: String(shope.shopeNumber).toUpperCase(),
-  }));
-  const duplicateExists = await Industries.find({
-    $or: condition,
-  });
-  console.log("condition:-", condition, "duplicateExists:- ", duplicateExists);
-  if (duplicateExists.length > 0) {
-    return res.status(409).json({
+  try {
+    const condition = body.shopes.map((shope) => ({
+      userId: new mongoose.Types.ObjectId(body.userId),
+      sessionId: new mongoose.Types.ObjectId(body.sessionId),
+      shopeNumber: String(shope.shopeNumber).toUpperCase(),
+    }));
+    const duplicateExists = await Industries.find({
+      $or: condition,
+    });
+    console.log(
+      "condition:-",
+      condition,
+      "duplicateExists:- ",
+      duplicateExists,
+    );
+    if (duplicateExists.length > 0) {
+      return res.status(409).json({
+        status: "Error",
+        message: `Duplicate shope number found`,
+      });
+    }
+    const entDataDB = entData.create({
+      userId: body.userId,
+      sessionId: body.sessionId,
+      startDate: body.startDate,
+      nameInd: body.nameInd,
+      indFounder: {
+        firstName: body.firstName,
+        lastName: body.lastName,
+      },
+      indContact: body.contact,
+      shopes: body.shopes,
+    });
+
+    return res.status(201).json({
+      status: "Success",
+      msg: `Ent data create successfully for ${entDataDB._id} id`,
+    });
+  } catch (err) {
+    return res.status(500).json({
       status: "Error",
-      message: `Duplicate shope number found`,
+      message: err.message,
     });
   }
-  const entDataDB = entData.create({
-    userId: body.userId,
-    sessionId: body.sessionId,
-    startDate: body.startDate,
-    nameInd: body.nameInd,
-    indFounder: {
-      firstName: body.firstName,
-      lastName: body.lastName,
-    },
-    indContact: body.contact,
-    shopes: body.shopes,
-  });
-
-  return res.status(201).json({
-    status: "Success",
-    msg: `Ent data create successfully for ${entDataDB._id} id`,
-  });
 }
 
 module.exports = {
