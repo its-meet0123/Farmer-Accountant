@@ -11,6 +11,7 @@ import {
   Radio,
   Alert,
   Collapse,
+  Select,
 } from "antd";
 import { useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
@@ -25,6 +26,7 @@ const HarvesterTransactionForm = ({
   form,
   openType,
   harvesterList,
+  option,
   setFetch,
   baseOfRate,
   setBaseOfRate,
@@ -145,7 +147,7 @@ const HarvesterTransactionForm = ({
           </Form.Item>
 
           <Form.Item label={t("harvestDrawer.ahtf.vid")} name="vehical">
-            <Input />
+            <Select placeholder="vehical ID" options={option} />
           </Form.Item>
         </Row>
 

@@ -7,11 +7,7 @@ import { deleteIndDataByIds, getAllIndShopes } from "../../service/ind";
 import dayjs from "dayjs";
 import AlertText from "../../component/Text";
 import { useAuth } from "../../auth/AuthContext";
-import {
-  deleteEntDataById,
-  getAllEntData,
-  getEntDataById,
-} from "../../service/ent";
+import { deleteEntDataById, getAllEntData } from "../../service/ent";
 import { PageContainer } from "../../component/PageContainer";
 
 const HomePage = () => {

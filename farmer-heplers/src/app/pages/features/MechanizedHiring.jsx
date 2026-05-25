@@ -36,6 +36,7 @@ const HarvesterData = () => {
   const [fetch, setFetch] = useState();
   const [isLoading, setIsLoading] = useState(null);
   const [openType, setOpenType] = useState(null);
+  const [options, setOptions] = useState([]);
   const [detailForm] = Form.useForm();
   const [transactionForm] = Form.useForm();
   const [baseOfRate, setBaseOfRate] = useState("duration");
@@ -45,6 +46,8 @@ const HarvesterData = () => {
     transactionForm.setFieldsValue({
       harvesterId: record._id,
     });
+    setOptions(record?.vehicalDetails);
+
     setTimeout(() => {
       setOpenType("addTrans");
       setIsLoading(false);
@@ -339,6 +342,7 @@ const HarvesterData = () => {
           baseOfRate={baseOfRate}
           setBaseOfRate={setBaseOfRate}
           t={t}
+          options={options}
         />
       </PageContainer>
     </>

@@ -12,6 +12,7 @@ const HarvestDrawer = ({
   baseOfRate,
   setBaseOfRate,
   t,
+  options,
 }) => {
   const onClose = () => {
     setOpenType(null);
@@ -40,6 +41,7 @@ const HarvestDrawer = ({
             form={transactionForm}
             openType={openType}
             harvesterList={harvesterList}
+            option={options}
             setFetch={setFetch}
             onClose={onClose}
             baseOfRate={baseOfRate}
