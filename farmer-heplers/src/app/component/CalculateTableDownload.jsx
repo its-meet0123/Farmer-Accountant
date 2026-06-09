@@ -69,6 +69,8 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
 
+  const eightMiti = (totalOfSellBillAmount * 0.52) / 100;
+
   const amount = Number(
     totalOfSellBillAmount -
       (totalOfLoanAmount + totalOfBuyBillAmount + totalOfDieselBillAmount),
@@ -83,7 +85,8 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
     totalOfReturnSellBillAmount -
     (totalOfReturnLoanAmount +
       totalOfReturnBuyBillAmount +
-      totalOfReturnDieselBillAmount);
+      totalOfReturnDieselBillAmount) -
+    eightMiti;
 
   const grandTotal = formatCurrency(oAt);
 
@@ -310,7 +313,9 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
                 <td style={{ padding: "5px" }}>Total</td>
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}>{formatCurrency(amount)}</td>
-                <td style={{ padding: "5px" }}></td>
+                <td style={{ padding: "5px" }}>
+                  8 Miti: {formatCurrency(eightMiti)}
+                </td>
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}></td>
                 <td style={{ padding: "5px" }}>{formatCurrency(interest)}</td>
