@@ -69,7 +69,7 @@ const DownloadTable1 = ({ isModalOpen, setIsModalOpen, shope, endDate }) => {
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
 
-  const eightMiti = (totalOfSellBillAmount * 0.52) / 100;
+  const eightMiti = (totalOfSellBillAmount * 0.305) / 100;
 
   const amount = Number(
     totalOfSellBillAmount -

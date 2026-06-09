@@ -121,7 +121,7 @@ const TableFooterForViewCalc = ({ data }) => {
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
 
-  const eightMiti = (totalOfSellBillAmount * 0.54) / 100;
+  const eightMiti = (totalOfSellBillAmount * 0.305) / 100;
 
   const oAT =
     totalOfReturnSellBillAmount -
