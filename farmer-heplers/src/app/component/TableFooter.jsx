@@ -121,11 +121,14 @@ const TableFooterForViewCalc = ({ data }) => {
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
 
+  const eightMiti = (totalOfSellBillAmount * 0.54) / 100;
+
   const oAT =
     totalOfReturnSellBillAmount -
     totalOfReturnLoanAmount -
     totalOfReturnBuyBillAmount -
-    totalOfReturnDieselBillAmount;
+    totalOfReturnDieselBillAmount -
+    eightMiti;
   const grandTotal = formatCurrency(oAT);
   return (
     <>
@@ -174,7 +177,11 @@ const TableFooterForViewCalc = ({ data }) => {
               {formatCurrency(totalOfSellBillAmount)}
             </h4>
           </Table.Summary.Cell>
-          <Table.Summary.Cell index={13}></Table.Summary.Cell>
+          <Table.Summary.Cell index={13}>
+            <h4 style={{ color: "#D73535" }}>
+              8 Miti: {formatCurrency(eightMiti)}
+            </h4>
+          </Table.Summary.Cell>
           <Table.Summary.Cell index={14}></Table.Summary.Cell>
           <Table.Summary.Cell index={15}>
             <h4 style={{ color: "#8ABB6C" }}>
