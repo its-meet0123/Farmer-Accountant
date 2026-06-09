@@ -8,21 +8,26 @@ function overAllTotalOfAllShopes(data) {
   };
   let totalOfReturnLoanAmount = 0;
   let totalOfReturnBuyBillAmount = 0;
+  let totalOfSellBillAmount = 0;
   let totalOfReturnSellBillAmount = 0;
   let totalOfReturnDieselBillAmount = 0;
 
   data.forEach(({ loan, indBuy, indSell, diesel }) => {
+    totalOfSellBillAmount += Number(indSell.billAmount || 0);
     totalOfReturnLoanAmount += Number(loan.totalAmount || 0);
     totalOfReturnSellBillAmount += Number(indSell.totalAmount || 0);
     totalOfReturnBuyBillAmount += Number(indBuy.totalAmount || 0);
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
 
+  const eightMiti = (totalOfSellBillAmount * 0.305) / 100;
+
   const oAT =
     totalOfReturnSellBillAmount -
     totalOfReturnLoanAmount -
     totalOfReturnBuyBillAmount -
-    totalOfReturnDieselBillAmount;
+    totalOfReturnDieselBillAmount -
+    eightMiti;
   const grandTotal = formatCurrency(oAT);
   return grandTotal;
 }
