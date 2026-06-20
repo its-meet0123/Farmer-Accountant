@@ -8,11 +8,14 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
       interest: 0,
       totalAmount: 0,
     };
-  const start = new Date(startDate) || new Date();
+  const start = startDate ? new Date(startDate) : new Date();
   const today = endDate ? new Date(endDate) : new Date();
 
-  const diffTime = today - start;
-  const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  start.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+
+  const diffTime = today.getTime() - start.getTime();
+  const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   const months =
     (today.getFullYear() - start.getFullYear()) * 12 +
