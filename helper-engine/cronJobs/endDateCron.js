@@ -46,6 +46,8 @@ const autoCalculationJob = async () => {
           }),
         ]);
 
+        console.log("Season end date : ", seasondate);
+
         shope.shopeAccount.forEach((transaction) => {
           const startDate = transaction?.startDate;
           const loanAmount = transaction?.loan?.amount || 0;
