@@ -56,15 +56,15 @@ const autoCalculationJob = async () => {
             today,
           );
 
-          console.log(
-            "for shopes",
-            "sessionEnd Date :",
-            seasondate?.endDate,
-            "setEnd Date :",
-            insertdate?.endDate,
-            "find with logic :",
-            endDate,
-          );
+          // console.log(
+          //   "for shopes",
+          //   "sessionEnd Date :",
+          //   seasondate?.endDate,
+          //   "setEnd Date :",
+          //   insertdate?.endDate,
+          //   "find with logic :",
+          //   endDate,
+          // );
 
           const loanCalculation = calculateAutoInterst(
             loanAmount,
@@ -146,15 +146,15 @@ const autoCalculationJob = async () => {
             today,
           );
 
-          console.log(
-            "for worker",
-            "sessionEnd Date :",
-            seasonEndDate?.endDate,
-            "setEnd Date :",
-            insertDate?.endDate,
-            "find with logic :",
-            endDate,
-          );
+          // console.log(
+          //   "for worker",
+          //   "sessionEnd Date :",
+          //   seasonEndDate?.endDate,
+          //   "setEnd Date :",
+          //   insertDate?.endDate,
+          //   "find with logic :",
+          //   endDate,
+          // );
 
           const giveAmount = trans?.give?.amount || 0;
           const giveCalculation = calculateAutoInterst(
