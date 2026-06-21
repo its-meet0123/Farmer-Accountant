@@ -7,18 +7,23 @@ async function autoInterestCalculationForShopes(req, res, next) {
     const body = req.body;
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const shopeId = req.params.id || req.params.shopeId;
+    const shopeId = req.params.id ? req.params.id : req.params.shopeId;
 
     if (Object.keys(body).length === 0 || !shopeId) {
       return res
         .status(404)
         .json({ status: "Error", msg: "All fields are required" });
     }
-
+    console.log("shopeId ya dataId in middleware for shopes : ", shopeId);
     const date = await FinalDate.findOne({
       userId: currentUserId,
       dataId: shopeId,
     });
+
+    console.log(
+      "end date set krne ke baad fetch in middleware for shopes :",
+      date,
+    );
 
     const today = new Date();
     const startDate = body?.startDate;
