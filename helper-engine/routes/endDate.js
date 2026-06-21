@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/", handlePostInterestDate);
 router.get("/:dataId", authMiddleware, handleGetInterestDate);
 router
-  .route("/dataId/:dataId/date/:id")
+  .route("/dataId/:dataId/date/:id/sessionId/:sessionId")
   .patch(authMiddleware, handleUpdateInterestDate)
   .delete(authMiddleware, handleDeleteInterestDate);
 

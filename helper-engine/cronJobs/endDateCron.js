@@ -20,7 +20,7 @@ const getEndDate = (insertdate, seasondate, today) => {
 };
 
 const autoCalculationJob = async () => {
-  cron.schedule("0 0 * * *", async () => {
+  cron.schedule("* * * * *", async () => {
     try {
       const today = new Date();
       const [shopes, workers] = await Promise.all([
