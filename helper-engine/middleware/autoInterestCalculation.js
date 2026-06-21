@@ -29,7 +29,7 @@ async function autoInterestCalculationForShopes(req, res, next) {
     } else {
       endDate = today;
     }
-
+    console.log("End date in middleware for shopes : ", endDate);
     const loanAmount = body?.amount || 0;
     const buyBillAmount = body?.bBillAmount || 0;
     const sellBillAmount = body?.sBillAmount || 0;

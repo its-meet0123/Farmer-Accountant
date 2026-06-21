@@ -1,6 +1,13 @@
 const { FieldWorker, Harvest } = require("../models/otherexpense");
 
 function calculateAutoInterst(amount, startDate, rate, endDate) {
+  console.log(
+    "calculation ke liye aayi huyi dates : ",
+    "startDate : ",
+    startDate,
+    "endDate :",
+    endDate,
+  );
   if (amount === 0 || !amount)
     return {
       days: 0,
@@ -14,7 +21,13 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   start.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
 
-  console.log("start date : ", start, "end date : ", today);
+  console.log(
+    "data ke liye end date logic in calculation",
+    "start date : ",
+    start,
+    "end date : ",
+    today,
+  );
 
   const diffTime = today.getTime() - start.getTime();
   const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
