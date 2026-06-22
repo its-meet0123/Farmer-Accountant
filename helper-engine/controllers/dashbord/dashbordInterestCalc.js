@@ -9,9 +9,9 @@ const calculateAccountDuration = (effectiveDate, setEndDate, seasonEndDate) => {
 
   let diffTime = 0;
   if (seasonEnd > endDate) {
-    diffTime = endDate - start;
+    diffTime = endDate - start + 1;
   } else {
-    diffTime = seasonEnd - start;
+    diffTime = seasonEnd - start + 1;
   }
 
   //const diffTime = today - start;
