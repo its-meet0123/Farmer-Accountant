@@ -29,7 +29,7 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
     today,
   );
 
-  const diffTime = today.getTime() - start.getTime();
+  const diffTime = today.getTime() - start.getTime() + 1;
   const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   const months =
