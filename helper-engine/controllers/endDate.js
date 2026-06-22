@@ -4,13 +4,12 @@ const InterestDate = require("../models/endDate");
 async function handleGetInterestDate(req, res) {
   //const token = req.cookies.token;
   try {
-    const { dataId, sessionId } = req.params;
+    const { dataId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
     const interestDate = await InterestDate.findOne({
       userId: currentUserId,
       dataId: dataId,
-      sessionId: sessionId,
     });
 
     if (!interestDate) {
@@ -34,9 +33,9 @@ async function handleGetInterestDate(req, res) {
 
 async function handlePostInterestDate(req, res) {
   try {
-    const { userId, sessionId, dataId, endDate } = req.body;
+    const { userId, dataId, endDate } = req.body;
 
-    if (!userId || !sessionId || !dataId || !endDate) {
+    if (!userId || !dataId || !endDate) {
       return res.status(400).json({
         status: "error",
         message: "All fields are required",
@@ -46,7 +45,6 @@ async function handlePostInterestDate(req, res) {
     const findDate = await InterestDate.findOne({
       userId,
       dataId,
-      sessionId,
     });
 
     if (findDate) {
@@ -59,7 +57,7 @@ async function handlePostInterestDate(req, res) {
 
     const result = await InterestDate.create({
       userId,
-      sessionId,
+
       dataId,
       endDate,
     });
@@ -83,7 +81,7 @@ async function handleUpdateInterestDate(req, res) {
   //const token = req.cookies.token;
 
   try {
-    const { dataId, sessionId } = req.params;
+    const { dataId } = req.params;
     const decoded = req.user;
     const currentUserId = decoded.id;
 
@@ -94,7 +92,7 @@ async function handleUpdateInterestDate(req, res) {
     }
 
     const updateInterestDate = await InterestDate.findByIdAndUpdate(
-      { _id: id, userId: currentUserId, sessionId: sessionId, dataId: dataId },
+      { _id: id, userId: currentUserId, dataId: dataId },
       body,
       {
         new: true,
@@ -122,12 +120,11 @@ async function handleDeleteInterestDate(req, res) {
   try {
     const decoded = req.user;
     const currentUserId = decoded.id;
-    const { dataId, id, sessionId } = req.params;
+    const { dataId, id } = req.params;
 
     const interestDate = await InterestDate.findByIdAndDelete({
       _id: id,
       userId: currentUserId,
-      sessionId: sessionId,
       dataId: dataId,
     });
 
