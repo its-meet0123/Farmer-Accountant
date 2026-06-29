@@ -1,4 +1,4 @@
-import { Form, InputNumber, Modal } from "antd";
+import { Form, InputNumber, Modal, Table } from "antd";
 
 const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm }) => {
   return (
