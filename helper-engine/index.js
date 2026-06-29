@@ -10,6 +10,7 @@ const otherExpenseRouter = require("./routes/otherexpense");
 const dashBordRouter = require("./routes/dashbord");
 const authRouter = require("./routes/auth");
 const sessionRouter = require("./routes/session");
+const taxRouter = require("./routes/marketTax");
 const sessionExpireJob = require("./cronJobs/sessionCron");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -56,6 +57,7 @@ app.use("/worker", workerRouter);
 app.use("/other", otherExpenseRouter);
 app.use("/dashbord", dashBordRouter);
 app.use("/auth", authRouter);
+app.use("/marketTax", taxRouter);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on Port ${PORT}`);

@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     ...null,
     openModal: true,
   });
+  const [marketCharge, setMarketCharge] = useState(0);
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
@@ -132,6 +133,8 @@ export const AuthProvider = ({ children }) => {
           i18n,
           season,
           setSeason,
+          marketCharge,
+          setMarketCharge,
         }}>
         {isLoading ? (
           <FarmerLoader isLoading={isLoading} user={authState.user} />

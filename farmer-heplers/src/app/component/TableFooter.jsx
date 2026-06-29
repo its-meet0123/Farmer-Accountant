@@ -1,4 +1,7 @@
-import { Table } from "antd";
+import { Button, Form, Table } from "antd";
+import { useAuth } from "../auth/AuthContext";
+import { useState } from "react";
+import TaxCalculatingModal from "./subcomponent/TaxCalculatingModal";
 
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
@@ -87,6 +90,9 @@ const TableFooterForWorkerCalc = ({ data }) => {
 };
 
 const TableFooterForViewCalc = ({ data }) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [taxForm] = Form.useForm();
+
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
   let totalOfReturnLoanAmount = 0;
@@ -121,15 +127,13 @@ const TableFooterForViewCalc = ({ data }) => {
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
 
-  const eightMiti = (totalOfSellBillAmount * 0.305) / 100;
-
   const oAT =
     totalOfReturnSellBillAmount -
     totalOfReturnLoanAmount -
     totalOfReturnBuyBillAmount -
-    totalOfReturnDieselBillAmount -
-    eightMiti;
-  const grandTotal = formatCurrency(oAT);
+    totalOfReturnDieselBillAmount;
+
+  const grandTotal1 = formatCurrency(oAT);
   return (
     <>
       <Table.Summary fixed="bottom">
@@ -177,11 +181,16 @@ const TableFooterForViewCalc = ({ data }) => {
               {formatCurrency(totalOfSellBillAmount)}
             </h4>
           </Table.Summary.Cell>
+
           <Table.Summary.Cell index={13}>
-            <h4 style={{ color: "#D73535" }}>
-              8 Miti: {formatCurrency(eightMiti)}
-            </h4>
+            <Button
+              color="danger"
+              variant="filled"
+              onClick={() => setOpenModal(true)}>
+              Tax:
+            </Button>
           </Table.Summary.Cell>
+
           <Table.Summary.Cell index={14}></Table.Summary.Cell>
           <Table.Summary.Cell index={15}>
             <h4 style={{ color: "#8ABB6C" }}>
@@ -211,10 +220,15 @@ const TableFooterForViewCalc = ({ data }) => {
             </h4>
           </Table.Summary.Cell>
           <Table.Summary.Cell index={22}>
-            <h4 style={{ color: "#4da3ff" }}>{grandTotal}</h4>
+            <h4 style={{ color: "#4da3ff" }}>{grandTotal1}</h4>
           </Table.Summary.Cell>
         </Table.Summary.Row>
       </Table.Summary>
+      <TaxCalculatingModal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        taxForm={taxForm}
+      />
     </>
   );
 };
