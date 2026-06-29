@@ -8,7 +8,8 @@ const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm }) => {
         centered
         open={openModal}
         onOk={() => setOpenModal(false)}
-        onCancel={() => setOpenModal(false)}>
+        onCancel={() => setOpenModal(false)}
+        width={600}>
         <Form
           form={taxForm}
           initialValues={{
@@ -84,6 +85,7 @@ const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm }) => {
                     columns={columns}
                     dataSource={fields}
                     rowKey="key"
+                    scroll={{ x: 500 }}
                   />
 
                   {/* <Button
@@ -98,7 +100,6 @@ const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm }) => {
             }}
           </Form.List>
         </Form>
-        );
       </Modal>
     </>
   );
