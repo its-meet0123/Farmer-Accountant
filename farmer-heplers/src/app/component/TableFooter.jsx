@@ -95,6 +95,7 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
   const [taxForm] = Form.useForm();
   const { season } = useAuth();
   const [total, setTotalTax] = useState(0);
+  const [fetch, setFetch] = useState();
 
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
@@ -153,7 +154,7 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
 
           message.success("data fetched successfully");
         } else {
-          taxForm.setFieldValue({
+          taxForm.setFieldsValue({
             taxs: aOD,
           });
           message.info("data not availabel in api");
@@ -164,7 +165,7 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
       }
     }
     getData();
-  }, [season._id, shopeId]);
+  }, [season._id, shopeId, fetch]);
 
   const oAT =
     totalOfReturnSellBillAmount -
@@ -269,6 +270,7 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
         setOpenModal={setOpenModal}
         taxForm={taxForm}
         shopeId={shopeId}
+        setFetch={setFetch}
       />
     </>
   );

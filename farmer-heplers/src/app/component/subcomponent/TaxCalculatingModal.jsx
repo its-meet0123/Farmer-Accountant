@@ -3,7 +3,13 @@ import { calculateMarketTax, updateMarketTax } from "../../service/tax";
 import { useAuth } from "../../auth/AuthContext";
 import { useEffect, useState } from "react";
 
-const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm, shopeId }) => {
+const TaxCalculatingModal = ({
+  openModal,
+  setOpenModal,
+  taxForm,
+  shopeId,
+  setFetch,
+}) => {
   const { authState, season } = useAuth();
   const [edit, setEdit] = useState(false);
 
@@ -24,6 +30,7 @@ const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm, shopeId }) => {
       const res = await calculateMarketTax(value);
       if (res.data.status == "Success") {
         message.success("tax data submited ");
+        setFetch("add");
         setOpenModal(false);
       }
     } catch (err) {
@@ -42,11 +49,8 @@ const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm, shopeId }) => {
     };
     try {
       const res = await updateMarketTax(Ids, values);
-
       if (res.data.status == "Success") {
-        taxForm.setFieldsValue({
-          taxs: values,
-        });
+        setFetch("edit");
         message.success("data edit successfully");
       }
     } catch (err) {
