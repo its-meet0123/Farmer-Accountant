@@ -1,22 +1,87 @@
-import { Form, InputNumber, Modal, Table } from "antd";
+import { Form, InputNumber, message, Modal, Table } from "antd";
+import { calculateMarketTax, updateMarketTax } from "../../service/tax";
+import { useAuth } from "../../auth/AuthContext";
+import { useEffect, useState } from "react";
 
-const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm }) => {
+const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm, shopeId }) => {
+  const { authState, season } = useAuth();
+  const [edit, setEdit] = useState(false);
+
+  const addData = async () => {
+    const formValues = taxForm.getFieldsValue();
+    const value = {
+      userId: authState.user.userId,
+      sessionId: season._id,
+      shopeId: shopeId,
+      tosc: formValues.taxs[0].tosc,
+      rfe: formValues.taxs[0].rfe,
+      em: formValues.taxs[0].em,
+      rfc: formValues.taxs[0].rfc,
+      com: formValues.taxs[0].com,
+    };
+
+    try {
+      const res = await calculateMarketTax(value);
+      if (res.data.status == "Success") {
+        message.success("tax data submited ");
+        setOpenModal(false);
+      }
+    } catch (err) {
+      message.error("tax data not submited");
+      console.log(err.message);
+    }
+  };
+
+  const editData = async () => {
+    const formValues = taxForm.getFieldsValue();
+    const { _id, values } = formValues.taxs[0];
+    const Ids = {
+      sessionId: season?._id,
+      shopeId: shopeId,
+      dataId: _id,
+    };
+    try {
+      const res = await updateMarketTax(Ids, values);
+
+      if (res.data.status == "Success") {
+        taxForm.setFieldsValue({
+          taxs: values,
+        });
+        message.success("data edit successfully");
+      }
+    } catch (err) {
+      message.error("Data not edited");
+      console.log(err.message);
+    }
+  };
+
+  const onSubmit = () => {
+    if (edit === true) {
+      editData();
+    } else {
+      addData();
+    }
+  };
+
   return (
     <>
       <Modal
         title="Tax Calculating Modal"
         centered
         open={openModal}
-        onOk={() => setOpenModal(false)}
+        onOk={() => onSubmit()}
         onCancel={() => setOpenModal(false)}
         width={600}>
         <Form
           form={taxForm}
           initialValues={{
-            taxs: [{ tosc: "", rfe: "", em: "", rfc: "", com: "" }],
+            taxs: [{ tosc: 0, rfe: 0, em: 0, rfc: 0, com: 0, dataId: "" }],
           }}>
           <Form.List name="taxs">
             {(fields, { add, remove }) => {
+              <Form.Item name="_id" label="Data ID" hidden>
+                <Input />
+              </Form.Item>;
               const columns = [
                 {
                   title: "Total Crop",
@@ -68,14 +133,14 @@ const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm }) => {
                     </Form.Item>
                   ),
                 },
-                // {
-                //   title: "Action",
-                //   render: (_, field) => (
-                //     <Button danger onClick={() => remove(field.name)}>
-                //       Delete
-                //     </Button>
-                //   ),
-                // },
+                {
+                  title: "Action",
+                  render: (_, field) => (
+                    <Button primary onClick={() => setEdit(true)}>
+                      Edit
+                    </Button>
+                  ),
+                },
               ];
 
               return (

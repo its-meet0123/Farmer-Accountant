@@ -36,7 +36,7 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
     (today.getFullYear() - start.getFullYear()) * 12 +
     (today.getMonth() - start.getMonth());
 
-  const interest = (amount * rate * days) / (100 * 360);
+  const interest = (amount * rate * days) / (100 * 365);
 
   return {
     days,

@@ -209,7 +209,7 @@ const CalcPage = () => {
 
   const setFooter = (currentData) => {
     const summeryData = tableData || currentData;
-    return <TableFooterForViewCalc data={summeryData} />;
+    return <TableFooterForViewCalc data={summeryData} shopeId={state?.id} />;
   };
 
   const monthlyTotal = useMemo(() => {

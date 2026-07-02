@@ -57,7 +57,7 @@ app.use("/worker", workerRouter);
 app.use("/other", otherExpenseRouter);
 app.use("/dashbord", dashBordRouter);
 app.use("/auth", authRouter);
-app.use("/marketTax", taxRouter);
+app.use("/market-tax", taxRouter);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on Port ${PORT}`);

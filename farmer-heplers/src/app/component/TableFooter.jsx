@@ -1,7 +1,8 @@
-import { Button, Form, Table } from "antd";
+import { Button, Form, message, Table } from "antd";
 import { useAuth } from "../auth/AuthContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TaxCalculatingModal from "./subcomponent/TaxCalculatingModal";
+import { getMarketTax } from "../service/tax";
 
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
@@ -89,9 +90,10 @@ const TableFooterForWorkerCalc = ({ data }) => {
   );
 };
 
-const TableFooterForViewCalc = ({ data }) => {
+const TableFooterForViewCalc = ({ data, shopeId }) => {
   const [openModal, setOpenModal] = useState(false);
   const [taxForm] = Form.useForm();
+  const { season } = useAuth();
 
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
@@ -126,6 +128,38 @@ const TableFooterForViewCalc = ({ data }) => {
     totalOfDieselBillAmountInterest += Number(diesel.interest || 0);
     totalOfReturnDieselBillAmount += Number(diesel.totalAmount || 0);
   });
+  const aOD = [
+    {
+      tosc: totalOfSellBillAmount,
+    },
+  ];
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const res = await getMarketTax(season._id, shopeId);
+        const data = res.data.data;
+
+        if (data && Object.keys(data).length > 0) {
+          const arrayOfData = [data];
+          taxForm.setFieldsValue({
+            taxs: arrayOfData,
+          });
+
+          message.success("data fetched successfully");
+        } else {
+          taxForm.setFieldValue({
+            taxs: aOD,
+          });
+          message.info("data not availabel in api");
+        }
+      } catch (err) {
+        message.error("Tax data not fetching");
+        console.log(err.message);
+      }
+    }
+    getData();
+  }, [season._id, shopeId]);
 
   const oAT =
     totalOfReturnSellBillAmount -
@@ -228,6 +262,7 @@ const TableFooterForViewCalc = ({ data }) => {
         openModal={openModal}
         setOpenModal={setOpenModal}
         taxForm={taxForm}
+        shopeId={shopeId}
       />
     </>
   );
