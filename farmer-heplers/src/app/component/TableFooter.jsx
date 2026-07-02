@@ -238,7 +238,7 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
               color="danger"
               variant="filled"
               onClick={() => setOpenModal(true)}>
-              Tax:{total}
+              Charges:- {total}
             </Button>
           </Table.Summary.Cell>
 
