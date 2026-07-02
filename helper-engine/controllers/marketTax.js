@@ -186,6 +186,7 @@ async function handleUpdateDataForMarketTaxCalculating(req, res) {
       status: "Error",
       message: err.message,
     });
+    console.log("Market tax update error :", err.message);
   }
 }
 

@@ -15,7 +15,7 @@ router.get(
   handleGetDataForMarketTaxCalculating,
 );
 router.patch(
-  "/:sessionId/:shopeId/:dataId",
+  "sessionId/:sessionId/shopeId/:shopeId/dataId/:dataId",
   authMiddleware,
   handleUpdateDataForMarketTaxCalculating,
 );

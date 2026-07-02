@@ -11,7 +11,7 @@ export async function getMarketTax(sessionId, shopeId) {
 export async function updateMarketTax(Ids, taxData) {
   const { sessionId, shopeId, dataId } = Ids;
   return await axiosInstance.patch(
-    `/market-tax/${sessionId}/${shopeId}/${dataId}`,
+    `/market-tax/sessionId/${sessionId}shopeId/${shopeId}/dataId/${dataId}`,
     taxData,
   );
 }
