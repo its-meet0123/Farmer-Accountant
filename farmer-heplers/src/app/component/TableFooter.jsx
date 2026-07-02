@@ -145,7 +145,8 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
           const totalTax = data?.em + data?.com;
           setTotalTax(totalTax);
 
-          const arrayOfData = [data, totalTax];
+          const arrayOfData = [{ ...data, totalTax }];
+          console.log("tax modal console", arrayOfData);
           taxForm.setFieldsValue({
             taxs: arrayOfData,
           });
@@ -226,7 +227,7 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
               color="danger"
               variant="filled"
               onClick={() => setOpenModal(true)}>
-              Tax:
+              Tax:{total}
             </Button>
           </Table.Summary.Cell>
 
