@@ -143,10 +143,20 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
         const data = res.data.data;
 
         if (data && Object.keys(data).length > 0) {
-          const totalTax = data?.em + data?.com;
+          const totalTax = data?.eightMiti + data?.commission;
           setTotalTax(totalTax);
 
-          const arrayOfData = [{ ...data, totalTax }];
+          const arrayOfData = [
+            {
+              tosc: data?.totalOfSellCrop,
+              _id: data?._id,
+              rfe: data?.rateForEightMiti,
+              em: data?.eightMiti,
+              rfc: data?.rateForCommission,
+              com: data?.commission,
+              total: totalTax,
+            },
+          ];
           console.log("tax modal console", arrayOfData);
           taxForm.setFieldsValue({
             taxs: arrayOfData,

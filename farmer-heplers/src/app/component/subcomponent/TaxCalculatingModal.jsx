@@ -79,7 +79,7 @@ const TaxCalculatingModal = ({
         <Form
           form={taxForm}
           initialValues={{
-            taxs: [{ tosc: 0, rfe: 0, em: 0, rfc: 0, com: 0, dataId: "" }],
+            taxs: [{ tosc: 0, rfe: 0, em: 0, rfc: 0, com: 0, _id: "" }],
           }}>
           <Form.List name="taxs">
             {(fields, { add, remove }) => {
