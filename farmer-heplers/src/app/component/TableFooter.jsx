@@ -94,6 +94,7 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
   const [openModal, setOpenModal] = useState(false);
   const [taxForm] = Form.useForm();
   const { season } = useAuth();
+  const [total, setTotalTax] = useState(0);
 
   let totalOfLoanAmount = 0;
   let totalOfLoanAmountInterest = 0;
@@ -141,7 +142,10 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
         const data = res.data.data;
 
         if (data && Object.keys(data).length > 0) {
-          const arrayOfData = [data];
+          const totalTax = data?.em + data?.com;
+          setTotalTax(totalTax);
+
+          const arrayOfData = [data, totalTax];
           taxForm.setFieldsValue({
             taxs: arrayOfData,
           });
@@ -165,7 +169,8 @@ const TableFooterForViewCalc = ({ data, shopeId }) => {
     totalOfReturnSellBillAmount -
     totalOfReturnLoanAmount -
     totalOfReturnBuyBillAmount -
-    totalOfReturnDieselBillAmount;
+    totalOfReturnDieselBillAmount -
+    total;
 
   const grandTotal1 = formatCurrency(oAT);
   return (

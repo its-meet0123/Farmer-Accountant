@@ -34,7 +34,7 @@ const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm, shopeId }) => {
 
   const editData = async () => {
     const formValues = taxForm.getFieldsValue();
-    const { _id, values } = formValues.taxs[0];
+    const { _id, total, values } = formValues.taxs[0];
     const Ids = {
       sessionId: season?._id,
       shopeId: shopeId,
@@ -128,6 +128,16 @@ const TaxCalculatingModal = ({ openModal, setOpenModal, taxForm, shopeId }) => {
                   render: (_, field) => (
                     <Form.Item
                       name={[field.name, "com"]}
+                      style={{ marginBottom: 0 }}>
+                      <InputNumber />
+                    </Form.Item>
+                  ),
+                },
+                {
+                  title: "Total",
+                  render: (_, field) => (
+                    <Form.Item
+                      name={[field.name, "total"]}
                       style={{ marginBottom: 0 }}>
                       <InputNumber />
                     </Form.Item>
