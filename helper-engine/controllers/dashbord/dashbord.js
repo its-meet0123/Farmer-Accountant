@@ -4,6 +4,7 @@ const { FieldWorker, Harvest } = require("../../models/otherexpense");
 const Industries = require("../../models/integratedData");
 const Sessions = require("../../models/session");
 const CalcEndDates = require("../../models/endDate");
+const MarketTax = require("../../models/marketTax");
 const { calculateAccountDuration } = require("./dashbordInterestCalc");
 const {
   overAllTotalOfAllShopes,
@@ -37,14 +38,21 @@ async function dashBordData(req, res) {
       });
     }
     const sessionId = req.params.sessionId || session._id;
-    const [Ind, workers, allCasualLabor, allHarvests, selectSession] =
-      await Promise.all([
-        Industries.find({ userId: currentUserId, sessionId: sessionId }),
-        WorkerData.find({ userId: currentUserId, sessionId: sessionId }),
-        FieldWorker.find({ userId: currentUserId, sessionId: sessionId }),
-        Harvest.find({ userId: currentUserId, sessionId: sessionId }),
-        Sessions.findOne({ userId: currentUserId, sessionId: sessionId }),
-      ]);
+    const [
+      Ind,
+      workers,
+      allCasualLabor,
+      allHarvests,
+      selectSession,
+      marketTaxs,
+    ] = await Promise.all([
+      Industries.find({ userId: currentUserId, sessionId: sessionId }),
+      WorkerData.find({ userId: currentUserId, sessionId: sessionId }),
+      FieldWorker.find({ userId: currentUserId, sessionId: sessionId }),
+      Harvest.find({ userId: currentUserId, sessionId: sessionId }),
+      Sessions.findOne({ userId: currentUserId, sessionId: sessionId }),
+      MarketTax.findOne({ userId: currentUserId, sessionId: sessionId }),
+    ]);
 
     const allShopes = Ind.map((shopes) => {
       if (!shopes?.shopeAccount) return null;
@@ -190,12 +198,16 @@ async function dashBordData(req, res) {
       return total + harvestSum;
     }, 0);
 
+    const totalMarketCharges =
+      (marketTaxs?.eightMiti || 0) + (marketTaxs?.commission || 0);
+
     const totalExpense =
       getTotalOfDiesel +
       getTotalOfSeedsFertilizer +
       getAllTotalOfPermanentWorkers +
       getTotalOfCasualLabor +
-      getTotalOfHarvest;
+      getTotalOfHarvest +
+      totalMarketCharges;
 
     if (
       allShopes.length > 0 ||

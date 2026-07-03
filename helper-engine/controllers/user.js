@@ -6,6 +6,7 @@ const Sessions = require("../models/session");
 const EndDate = require("../models/endDate");
 const WorkerData = require("../models/worker");
 const { FieldWorker, Harvest } = require("../models/otherexpense");
+const MarketTax = require("../models/marketTax");
 //const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -179,6 +180,7 @@ async function handleSignUpUserDeleteAccount(req, res) {
       FieldWorker.deleteMany({ userId: userId }),
       Harvest.deleteMany({ userId: userId }),
       Sessions.deleteMany({ userId: userId }),
+      MarketTax.deleteMany({ userId: userId }),
     ]);
 
     await User.findOneAndDelete({

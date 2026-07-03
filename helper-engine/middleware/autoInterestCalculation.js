@@ -36,7 +36,9 @@ async function autoInterestCalculationForShopes(req, res, next) {
     }
     console.log("End date in middleware for shopes : ", endDate);
     const loanAmount = body?.amount || 0;
+
     const buyBillAmount = body?.bBillAmount || 0;
+    const buyBillPayment = body?.bPayment || 0;
     const sellBillAmount = body?.sBillAmount || 0;
     const dieselBillAmount = body?.dBillAmount || 0;
 
@@ -46,12 +48,14 @@ async function autoInterestCalculationForShopes(req, res, next) {
       rate,
       endDate,
     );
+
     const interestOfBuyBillAmount = calculateAutoInterst(
       buyBillAmount,
       startDate,
       rate,
       endDate,
     );
+
     const interestOfSellBillAmount = calculateAutoInterst(
       sellBillAmount,
       startDate,
@@ -77,6 +81,7 @@ async function autoInterestCalculationForShopes(req, res, next) {
       indBuy: {
         billAmount: buyBillAmount,
         ...interestOfBuyBillAmount,
+        payment: buyBillPayment,
         bill: body?.bBill || "",
         brief: body?.bBrief || "",
         handOver: body?.bHandOver || "",

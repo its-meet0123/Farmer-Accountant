@@ -5,6 +5,7 @@ const Industries = require("../models/integrated");
 const Workers = require("../models/worker");
 const InterestDate = require("../models/endDate");
 const { FieldWorker, Harvest } = require("../models/otherexpense");
+const MarketTax = require("../models/marketTax");
 
 async function handleGetAllSessions(req, res) {
   try {
@@ -203,50 +204,98 @@ async function handleUpdateSession(req, res) {
 
     const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
 
-    const session = await Sessions.findOne({
+    const sessions = await Sessions.find({
       _id: sessionId,
       userId: currentUserId,
     });
-
-    const sessionStart = session?.startDate;
-    const allowPriousStart = new Date(sessionStart.getTime() + thirtyDaysInMs);
-    const sessionEnd = session?.endDate;
-    const allowedNextEnd = new Date(sessionEnd.getTime() - thirtyDaysInMs);
-
-    const previousSession = await Sessions.findOne({
-      userId: currentUserId,
-      _id: { $ne: sessionId },
-      endDate: { $lte: allowPriousStart },
-    });
-    // .sort({ endDate: -1 })
-    // .limit(1);
-
-    const nextSession = await Sessions.findOne({
-      userId: currentUserId,
-      _id: { $ne: sessionId },
-      startDate: { $gte: allowedNextEnd },
-    });
-    // .sort({ startDate: 1 })
-    // .limit(1);
-
-    const previousSessionEnd = previousSession?.endDate
-      ? new Date(previousSession.endDate)
-      : null;
-    const nextSessionStart = nextSession?.startDate
-      ? new Date(nextSession.startDate)
-      : null;
-
-    console.log(
-      "Edit session opration mai previousSession :",
-      previousSession,
-      "and nextSession :",
-      nextSession,
-    );
 
     let { startDate, endDate } = body;
 
     startDate = new Date(startDate);
     endDate = new Date(endDate);
+
+    const index = sessions.findIndex(
+      (session) => session._id.toString() === sessionId.toString(),
+    );
+
+    if (index > 0) {
+      const previousSession = sessions[index - 1];
+      const nextSession = sessions[index + 1];
+      if (
+        Object.keys(previousSession).length > 0 &&
+        Object.keys(nextSession).length > 0
+      ) {
+        const previousSessionEnd = new Date(previousSession?.endDate);
+        const previousSessionOverLap = previousSessionEnd - thirtyDaysInMs;
+        const nextSessionStart = new Date(nextSession?.startDate);
+        const nextSessionOverLap = new Date(
+          nextSessionStart.getTime() + thirtyDaysInMs,
+        );
+
+        if (
+          startDate > previousSessionEnd ||
+          startDate < previousSessionOverLap ||
+          endDate < nextSessionStart ||
+          endDate > nextSessionOverLap
+        ) {
+          return res.status(409).json({
+            status: "conflict",
+            message: "CONFLICT_MSG",
+          });
+        }
+      }
+
+      if (Object.keys(previousSession).length > 0) {
+        const previousSessionEnd = new Date(previousSession?.endDate);
+        const previousSessionOverLap = new Date(
+          previousSessionEnd.getTime() - thirtyDaysInMs,
+        );
+        if (
+          startDate > previousSessionEnd ||
+          startDate < previousSessionOverLap
+        ) {
+          return res.status(409).json({
+            status: "conflict",
+            message: "CONFLICT_MSG",
+          });
+        }
+      }
+    }
+
+    //const sessionStart = session?.startDate;
+    // const allowPriousStart = new Date(sessionStart.getTime() + thirtyDaysInMs);
+    //const sessionEnd = session?.endDate;
+    //const allowedNextEnd = new Date(sessionEnd.getTime() - thirtyDaysInMs);
+
+    // const previousSession = await Sessions.findOne({
+    //   userId: currentUserId,
+    //   _id: { $ne: sessionId },
+    //   endDate: { $lte: allowPriousStart },
+    // });
+    // .sort({ endDate: -1 })
+    // .limit(1);
+
+    // const nextSession = await Sessions.findOne({
+    //   userId: currentUserId,
+    //   _id: { $ne: sessionId },
+    //   startDate: { $gte: allowedNextEnd },
+    // });
+    // // .sort({ startDate: 1 })
+    // // .limit(1);
+
+    // const previousSessionEnd = previousSession?.endDate
+    //   ? new Date(previousSession.endDate)
+    //   : null;
+    // const nextSessionStart = nextSession?.startDate
+    //   ? new Date(nextSession.startDate)
+    //   : null;
+
+    // console.log(
+    //   "Edit session opration mai previousSession :",
+    //   previousSession,
+    //   "and nextSession :",
+    //   nextSession,
+    // );
 
     if (startDate > endDate) {
       return res.status(400).json({
@@ -273,19 +322,19 @@ async function handleUpdateSession(req, res) {
       });
     }
 
-    const previousSessionOverlap = previousSessionEnd
-      ? new Date(previousSessionEnd.getTime() - thirtyDaysInMs)
-      : null;
-    const nextSessionOverlap = nextSessionStart
-      ? new Date(nextSessionStart.getTime() + thirtyDaysInMs)
-      : null;
+    // const previousSessionOverlap = previousSessionEnd
+    //   ? new Date(previousSessionEnd.getTime() - thirtyDaysInMs)
+    //   : null;
+    // const nextSessionOverlap = nextSessionStart
+    //   ? new Date(nextSessionStart.getTime() + thirtyDaysInMs)
+    //   : null;
 
-    if (startDate < previousSessionOverlap || endDate > nextSessionOverlap) {
-      return res.status(409).json({
-        status: "conflict",
-        message: "CONFLICT_MSG",
-      });
-    }
+    // if (startDate < previousSessionOverlap || endDate > nextSessionOverlap) {
+    //   return res.status(409).json({
+    //     status: "conflict",
+    //     message: "CONFLICT_MSG",
+    //   });
+    // }
 
     const today = new Date();
     let isActive = false;
@@ -338,6 +387,7 @@ async function handleDeleteSession(req, res) {
       FieldWorker.deleteMany({ userId: currentUserId, sessionId: sessionId }),
       Harvest.deleteMany({ userId: currentUserId, sessionId: sessionId }),
       InterestDate.deleteMany({ userId: currentUserId, sessionId: sessionId }),
+      MarketTax.deleteMany({ userId: currentUserId, sessionId: sessionId }),
     ]);
 
     const session = await Sessions.findByIdAndDelete({
