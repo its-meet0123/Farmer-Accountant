@@ -121,7 +121,8 @@ const AppLayout = ({ children }) => {
                 day: "2-digit",
                 month: "short",
               })}
-              ,{sessionYear}
+              , {sessionYear}
+              {") "}
             </>
           )}
         </div>
