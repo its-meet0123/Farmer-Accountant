@@ -69,6 +69,13 @@ const AppLayout = ({ children }) => {
       navigate(key);
     }
   };
+  const startYear = new Date(season?.startDate).getFullYear();
+  const endYear = new Date(season?.endDate).getFullYear();
+
+  const sessionYear =
+    startYear == endYear
+      ? season?.year
+      : `${startYear}-${String(endYear).slice(-2)}`;
 
   return (
     <Layout style={{ width: "100%", minHeight: "100vh" }}>
@@ -102,7 +109,6 @@ const AppLayout = ({ children }) => {
               {season?.name === "Rabi"
                 ? t("season.modal.sort")
                 : t("season.modal.sokt")}
-
               {" ("}
               {/* Start Date */}
               {new Date(season?.startDate).toLocaleDateString("en-GB", {
@@ -115,7 +121,7 @@ const AppLayout = ({ children }) => {
                 day: "2-digit",
                 month: "short",
               })}
-              {`, ${season?.year || ""})`}
+              ,{sessionYear}
             </>
           )}
         </div>
