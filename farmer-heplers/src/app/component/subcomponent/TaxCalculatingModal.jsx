@@ -10,7 +10,7 @@ const TaxCalculatingModal = ({
   shopeId,
   setFetch,
 }) => {
-  const { authState, season } = useAuth();
+  const { authState, season, t } = useAuth();
   const [edit, setEdit] = useState(false);
 
   const addData = async () => {
@@ -70,7 +70,7 @@ const TaxCalculatingModal = ({
   return (
     <>
       <Modal
-        title="Tax Calculating Modal"
+        title={t("calculationPage.tableFooter.mt")}
         centered
         open={openModal}
         onOk={() => onSubmit()}
@@ -88,7 +88,7 @@ const TaxCalculatingModal = ({
               </Form.Item>;
               const columns = [
                 {
-                  title: "Total Crop",
+                  title: t("calculationPage.tableFooter.tosc"),
                   render: (_, field) => (
                     <Form.Item
                       name={[field.name, "tosc"]}
@@ -98,7 +98,7 @@ const TaxCalculatingModal = ({
                   ),
                 },
                 {
-                  title: "Rate For 8 Miti",
+                  title: t("calculationPage.tableFooter.rfo"),
                   render: (_, field) => (
                     <Form.Item
                       name={[field.name, "rfe"]}
@@ -108,7 +108,7 @@ const TaxCalculatingModal = ({
                   ),
                 },
                 {
-                  title: "EightMiti",
+                  title: t("calculationPage.tableFooter.other"),
                   render: (_, field) => (
                     <Form.Item
                       name={[field.name, "em"]}
@@ -118,7 +118,7 @@ const TaxCalculatingModal = ({
                   ),
                 },
                 {
-                  title: "Rate for Commission",
+                  title: t("calculationPage.tableFooter.rfc"),
                   render: (_, field) => (
                     <Form.Item
                       name={[field.name, "rfc"]}
@@ -128,7 +128,7 @@ const TaxCalculatingModal = ({
                   ),
                 },
                 {
-                  title: "Commission",
+                  title: t("calculationPage.tableFooter.com"),
                   render: (_, field) => (
                     <Form.Item
                       name={[field.name, "com"]}

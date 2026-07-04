@@ -204,6 +204,14 @@
       "grandTotalText": "Grand Total",
       "actionTitleText": "Action",
       "actionPopAlertText": "Do you want to clear Transaction No."
+    },
+    "tableFooter": {
+      "mt": "Tax Calculation Modal",
+      "tosc": "Taxable Crop Total",
+      "rfo": "Other Tax Rate",
+      "other": "Other Tax",
+      "rfc": "Commission Rate",
+      "com": "Commission"
     }
   },
 
@@ -760,7 +768,7 @@
     "menu": {
       "home": "Traders",
       "view": "Vendors",
-      "worker": "Permanent Worker",
+      "worker": "Fractional Partner",
       "setting": "Setting",
       "logout": "Logout",
       "delete": "Delete Account",
