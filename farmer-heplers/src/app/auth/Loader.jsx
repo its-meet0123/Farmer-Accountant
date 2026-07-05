@@ -25,10 +25,12 @@ const FarmerLoader = ({ isLoading, user }) => {
   const [show, setShow] = useState(true);
   const [showReload, setShowReload] = useState(false);
 
+  // हर प्रोमो के लिए अलग बैकग्राउंड इमेज यहाँ सेट की गई है
   const promoData = [
     {
       title: "सटीक डिजिटल डायरी",
       desc: "अब बीज से लेकर बाजार तक का हर हिसाब आपकी जेब में।",
+      bgImage: "url('/digital_dairy.png')", // अपनी इमेज का पाथ डालें
       icon: (
         <LineChartOutlined style={{ fontSize: "42px", color: "#2ecc71" }} />
       ),
@@ -36,11 +38,13 @@ const FarmerLoader = ({ isLoading, user }) => {
     {
       title: "मजदूरी और खाद का हिसाब",
       desc: "लेबर और खाद के खर्चों को ट्रैक करें और फिजूलखर्ची रोकें।",
+      bgImage: "url('/calculating.png')", // अपनी इमेज का पाथ डालें
       icon: <WalletOutlined style={{ fontSize: "42px", color: "#3498db" }} />,
     },
     {
       title: "हार्वेस्टिंग ट्रैकर",
       desc: "फसल कटाई के समय का मैनेजमेंट अब और भी आसान।",
+      bgImage: "url('/harvesting_tracker.png')", // अपनी इमेज का पाथ डालें
       icon: (
         <DashboardOutlined style={{ fontSize: "42px", color: "#f1c40f" }} />
       ),
@@ -48,6 +52,7 @@ const FarmerLoader = ({ isLoading, user }) => {
     {
       title: "सुरक्षित डेटा",
       desc: "आपका डेटा पूरी तरह एन्क्रिप्टेड और सुरक्षित है।",
+      bgImage: "url('/secure_data.png')", // अपनी इमेज का पाथ डालें
       icon: <SafetyOutlined style={{ fontSize: "42px", color: "#e74c3c" }} />,
     },
   ];
@@ -103,21 +108,44 @@ const FarmerLoader = ({ isLoading, user }) => {
               style={{ width: "100%", textAlign: "center" }}>
               {!showReload && <Spin size="large" tip="लोड हो रहा है..." />}
 
+              {/* यहाँ डायनामिक बैकग्राउंड स्टाइल लागू किया गया है।
+                टेक्स्ट साफ़ दिखे इसलिए 'linear-gradient' का इस्तेमाल करके 
+                इमेज के ऊपर एक हल्का सफ़ेद ओवरले दिया गया है।
+              */}
               <div
                 style={{
-                  minHeight: "180px",
+                  minHeight: "220px",
+                  padding: "20px",
+                  borderRadius: "16px",
                   transition: "all 0.5s ease-in-out",
+                  backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), ${promoData[index].bgImage}`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}>
-                <div style={{ marginBottom: "20px" }}>
+                <div style={{ marginBottom: "15px" }}>
                   {promoData[index].icon}
                 </div>
                 <Title
                   level={3}
-                  style={{ color: "#1b5e20", marginBottom: "10px" }}>
+                  style={{
+                    color: "#1b5e20",
+                    marginBottom: "10px",
+                    marginTop: 0,
+                  }}>
                   {promoData[index].title}
                 </Title>
                 <Text
-                  style={{ fontSize: "16px", color: "#666", display: "block" }}>
+                  style={{
+                    fontSize: "16px",
+                    color: "#333",
+                    fontWeight: "500",
+                    display: "block",
+                  }}>
                   {promoData[index].desc}
                 </Text>
               </div>
@@ -179,7 +207,7 @@ const FarmerLoader = ({ isLoading, user }) => {
   );
 };
 
-// --- Inline Styles (For Cleanliness) ---
+// --- Inline Styles ---
 
 const overlayStyle = {
   position: "fixed",
@@ -188,7 +216,6 @@ const overlayStyle = {
   right: 0,
   bottom: 0,
   backgroundColor: "#f4f7f6",
-
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -201,10 +228,7 @@ const cardStyle = {
   height: "100%",
   width: "100%",
   textAlign: "center",
-  backgroundImage: "url('/kisaan_with_calculation.png')",
-  backgroundSize: "contain",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
+  backgroundColor: "#ffffff", // यहाँ से पुरानी इमेज हटा कर सिंपल वाइट बैकग्राउंड कर दिया है
 };
 
 export default FarmerLoader;
