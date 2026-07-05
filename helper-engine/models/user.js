@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema(
       },
       lastName: { type: String },
     },
+    whatsAppNumber: {
+      type: String,
+      match: /^[6-9]\d{9}$/,
+    },
     userId: {
       type: String,
       required: true,

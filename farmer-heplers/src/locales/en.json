@@ -53,6 +53,11 @@
       "requiredText": "Please set your Password!",
       "patternCheckText": "Lowercase letters only"
     },
+    "formUserWhNumber": {
+      "text": "WhatsApp Number",
+      "validText": "Enter a valid 10-digit WhatsApp number",
+      "requiredText": "Please enter WhatsApp number only!"
+    },
     "formValidateMessage": "${label} is required!",
     "formSubmitButtonText": "Submit",
     "formGoToLogInButtonText": "Log In"
@@ -211,7 +216,9 @@
       "rfo": "Other Tax Rate",
       "other": "Other Tax",
       "rfc": "Commission Rate",
-      "com": "Commission"
+      "com": "Commission",
+      "tt": "Total",
+      "at": "Action"
     }
   },
 

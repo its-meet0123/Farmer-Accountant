@@ -15,7 +15,7 @@ const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
 async function handleUserSignUp(req, res) {
   try {
-    const { userName, userId, password } = req.body;
+    const { userName, whatsAppNumber, userId, password } = req.body;
     const existingUser = await User.findOne({ userId });
     if (existingUser) {
       res.json({
@@ -31,6 +31,7 @@ async function handleUserSignUp(req, res) {
 
     await User.create({
       userName,
+      whatsAppNumber,
       userId,
       password: hashedPassword,
     });

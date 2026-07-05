@@ -80,6 +80,28 @@ const SignUp = () => {
             <Input />
           </Form.Item>
           <Form.Item
+            name="whatsAppNumber"
+            label={t("singUpPage.formUserWhNumber.text")}
+            rules={[
+              {
+                required: true,
+                message: t("singUpPage.formUserWhNumber.requiredText"),
+              },
+              {
+                pattern: /^[6-9]\d{9}$/,
+                message: t("singUpPage.formUserWhNumber.validText"),
+              },
+            ]}>
+            <Input
+              maxLength={10}
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+            />
+          </Form.Item>
+          <Form.Item
             name="userId"
             label={t("signUpPage.formUserIdInput.text")}
             rules={[
