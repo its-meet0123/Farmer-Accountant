@@ -224,10 +224,10 @@
 
   "workerPage": {
     "deleteFunctionMessage": {
-      "errorMessage1": "Worker not found from table",
+      "errorMessage1": "Partner not found from table",
       "errorMessage2": "Oops! We couldn't complete the deletion right now. We're working to fix this."
     },
-    "fetchDataErrorMessage": "Worker list not found.",
+    "fetchDataErrorMessage": "Partners list not found.",
     "tableColumns": {
       "serialNoTextTitle": "Sr. No.",
       "dateText": "Date",
@@ -274,7 +274,7 @@
         "actionPopAlertText": "Are you sure you want to delete this Transaction?"
       }
     },
-    "cardTitle": "Worker List",
+    "cardTitle": "Partner List",
     "cardButtonText": "Add Worker"
   },
 
@@ -284,7 +284,7 @@
       "editError": "The date has not changed",
       "deleteError": "The date field cannot be deleted"
     },
-    "fetchDataErrorMessage": "Worker Transactions not fteched by Id ",
+    "fetchDataErrorMessage": "Partner Transactions not fteched by Id ",
     "fetchDateErrorMessage": "Date not fetching by Id in workerCalc page.",
     "form": {
       "inputLabel": "End Date",
@@ -489,16 +489,16 @@
   },
   "workerDrawer": {
     "submitFunction": {
-      "successMessageforCreate1": "Worker data created Successfully",
+      "successMessageforCreate1": " data created Successfully",
       "errorMessageforCreate1": "Failed to upload the Worker data.",
-      "successMessageforCreate2": "Worker transaction added Successfully",
+      "successMessageforCreate2": "Partner transaction added Successfully",
       "errorMessageforCreate2": "Failed to upload the Worker transaction",
-      "successMessageforEdit": "Worker transaction updated Successfully",
+      "successMessageforEdit": "Partner transaction updated Successfully",
       "errorMessageforEdit": "Failed to update transaction details."
     },
     "detailInput": {
       "fnt": "First Name",
-      "fnrm": "Please enter worker name",
+      "fnrm": "Please enter partner name",
       "fnpt": "enter first name",
       "lnt": "Last Name",
       "lnpt": "enter last name",
@@ -789,11 +789,11 @@
   "dashbord": {
     "features": {
       "tfs": "Shopes & Inventory",
-      "tfpw": "Permanent Worker",
+      "tfpw": "Fractional Partner",
       "tfcl": "Casual Labor",
       "tfhl": "Harvests & Tools",
       "dtfs2": "Track your traders' daily accounts here. [ Traders(nav) > Add Industry(button) > Vendors(nav) > + Icon button (Action Columns) ].",
-      "dtfpw2": "Track your permanent workers' daily accounts here. [Permanent Worker(nav) > Add Worker(button) > +Icon button(Action Columns) ]",
+      "dtfpw2": "Track your fractional partner' daily accounts here. [Permanent Worker(nav) > Add Worker(button) > +Icon button(Action Columns) ]",
       "dtfcl2": "Manage your casual labor payments easily. [ OtherExpense(nav) > CasualLabor(nav) > Add Labor(button) > +Icon button(Action Columns) ]",
       "dtfhl2": "Manage your harvester's payments easily. [ OtherExpense(nav) > Mechanized Hiring(nav) > New Harvester Entry(button) > +Icon button (Action Columns) ]",
       "tfdh1": "FARMER",
@@ -806,7 +806,7 @@
       "table": {
         "lt1": "Faul",
         "lt2": "Seeds & Fertilizer",
-        "lt3": "Permanent Worker",
+        "lt3": "Fractional Partner",
         "lt4": "Machinery",
         "lt5": "Casual Labor",
         "lt6": "TOTAL EXPENSE"
@@ -835,9 +835,9 @@
       "flexibility": "Form fields are designed for different transaction types; fill them according to your needs."
     },
     "permanent_worker": {
-      "title": "Permanent Worker/Bantaidar",
+      "title": "Fractional Partner/Bantaidar",
       "desc1": "For managing records of Bantaidars (workers on 1/4th or 1/5th share).",
-      "desc2": "Go to 'Permanent Worker', click 'Add Worker', and fill in their details.",
+      "desc2": "Go to 'Fractional Partner', click 'Add Worker', and fill in their details.",
       "desc3": "Click the 'FileAdd' icon in the worker list to open the transaction form. Follow the guidelines provided on the form.",
       "advance_note": "If advance payment is given with interest, use the same rates as Arhatiya; otherwise, enter '0'."
     },

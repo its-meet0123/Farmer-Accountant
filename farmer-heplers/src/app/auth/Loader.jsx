@@ -117,7 +117,7 @@ const FarmerLoader = ({ isLoading, user }) => {
                   minHeight: "220px",
                   padding: "20px",
                   borderRadius: "16px",
-                  transition: "all 0.5s ease-in-out",
+                  transition: "all 1s ease-in-out",
                   backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), ${promoData[index].bgImage}`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
