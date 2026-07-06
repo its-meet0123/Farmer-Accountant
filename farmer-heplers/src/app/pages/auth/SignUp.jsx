@@ -85,11 +85,11 @@ const SignUp = () => {
             rules={[
               {
                 required: true,
-                message: t("singUpPage.formUserWhNumber.requiredText"),
+                message: t("signUpPage.formUserWhNumber.requiredText"),
               },
               {
                 pattern: /^[6-9]\d{9}$/,
-                message: t("singUpPage.formUserWhNumber.validText"),
+                message: t("signUpPage.formUserWhNumber.validText"),
               },
             ]}>
             <Input
