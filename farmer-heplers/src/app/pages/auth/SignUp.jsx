@@ -81,7 +81,7 @@ const SignUp = () => {
           </Form.Item>
           <Form.Item
             name="whatsAppNumber"
-            label={t("singUpPage.formUserWhNumber.text")}
+            label={t("signUpPage.formUserWhNumber.text")}
             rules={[
               {
                 required: true,
