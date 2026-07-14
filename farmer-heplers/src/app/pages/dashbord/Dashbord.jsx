@@ -249,11 +249,23 @@ const DashBord = () => {
                 }}>
                 <TurnoverGraph turnover={monthlyTotal} />
               </Card>
+              <Card
+                title={
+                  <span style={{ color: "#4da3ff" }}>
+                    {t("dashbord.cards.card3title")}
+                  </span>
+                }
+                style={{
+                  width: "100%",
+                  backgroundColor: "#161d2f",
+                  marginTop: "20px",
+                  color: "#ffffff",
+                  overflow: "hidden",
+                }}>
+                <DashboardHeadline />
+              </Card>
             </>
           )}
-          <div style={styles.footerBar}>
-            <DashboardHeadline />
-          </div>
         </>
       )}
     </div>
