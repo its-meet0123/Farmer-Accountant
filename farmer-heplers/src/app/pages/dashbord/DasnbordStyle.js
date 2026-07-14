@@ -119,7 +119,6 @@ export const styles = {
     height: "6px",
     backgroundColor: "#1b75ff", // Login button blue
     position: "fixed",
-    bottom: 0,
     width: "100%",
     zIndex: 100,
   },
