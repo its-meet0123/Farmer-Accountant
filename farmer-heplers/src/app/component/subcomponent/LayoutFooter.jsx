@@ -99,13 +99,13 @@ const LayoutFooter = ({ t }) => {
                 <WhatsAppOutlined size={22} />
               </a>
               <a
-                href="https://www.instagram.com/itz_sukh_z/"
+                href="https://www.instagram.com/farmers_accountant?igsh=MTh1eGcyb21yNjN4eA=="
                 style={footerstyles.socialIconInstagram}
                 className="instagram">
                 <InstagramFilled size={22} />
               </a>
               <a
-                href="https://www.facebook.com/share/1B2rH44Vcr/"
+                href="https://www.facebook.com/share/1CvzgoB5pn/"
                 style={footerstyles.socialIconFacebook}
                 className="facebook">
                 <FacebookFilled size={22} />

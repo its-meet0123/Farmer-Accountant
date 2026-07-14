@@ -45,6 +45,8 @@ const AuthContainer = ({
       top: "20px",
       right: "20px",
       zIndex: 10,
+      backgroundColor: "#fff",
+      padding: "1px",
     },
     card: {
       display: "flex",
