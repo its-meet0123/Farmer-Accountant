@@ -32,7 +32,7 @@ const TurnoverGraph = ({ turnover }) => {
             />
 
             <YAxis
-              domain={[-600000, 600000]}
+              domain={["auto", "auto"]}
               tick={{ fill: "#ffffff" }}
               axisLine={{ stroke: "#ffffff" }}
               tickFormatter={(value) => {
