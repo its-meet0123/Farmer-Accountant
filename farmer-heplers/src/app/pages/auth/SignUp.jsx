@@ -109,7 +109,7 @@ const SignUp = () => {
                 required: true,
                 message: t("signUpPage.formUserIdInput.requiredText"),
               },
-              { min: 5, message: t("signUpPage.formUserIdInput.miniText") },
+              { min: 5, message: t("signUpPage.formUserIdInput.minText") },
               { max: 15, message: t("signUpPage.formUserIdInput.maxText") },
               {
                 pattern: /^@[a-z0-9_]+$/,
