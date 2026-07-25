@@ -13,6 +13,7 @@ const formatCurrency = (amount) => {
 };
 
 const Expense = ({ data }) => {
+  console.log("Expense table : ", data);
   const { t } = useAuth();
   const formattedTotal = data?.totalExpense || 0;
   const dataSource = [
