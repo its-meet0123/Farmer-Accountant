@@ -9,7 +9,6 @@ import FeatureCard from "./FeatureCard";
 import TurnoverGraph from "../graph/MonthlyTurnover";
 import DashbordInfo from "./Info";
 import Expense from "./Expenses";
-import DashboardHeadline from "./DashboardHeadline";
 
 const formatCurrency = (amount) => {
   return new Intl.NumberFormat("en-IN", {
@@ -249,8 +248,6 @@ const DashBord = () => {
                 }}>
                 <TurnoverGraph turnover={monthlyTotal} />
               </Card>
-
-              <DashboardHeadline />
             </>
           )}
         </>
