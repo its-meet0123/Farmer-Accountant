@@ -24,7 +24,7 @@ const Expense = ({ data }) => {
           {t("dashbord.cards.table.lt1")}
         </>
       ),
-      value: data?.totalOfDiesel,
+      value: data?.totalOfDiesel || 0,
     },
     {
       no: "2",
@@ -37,7 +37,7 @@ const Expense = ({ data }) => {
           {t("dashbord.cards.table.lt2")}
         </>
       ),
-      value: data?.totalOfSeedsAndFertilizer,
+      value: data?.totalOfSeedsAndFertilizer || 0,
     },
     {
       no: "3",
@@ -50,7 +50,7 @@ const Expense = ({ data }) => {
           {t("dashbord.cards.table.lt3")}
         </>
       ),
-      value: data?.totalOfPermanentWorker,
+      value: data?.totalOfPermanentWorker || 0,
     },
     {
       no: "4",
@@ -63,7 +63,7 @@ const Expense = ({ data }) => {
           {t("dashbord.cards.table.lt4")}
         </>
       ),
-      value: data?.totalOfHarvest,
+      value: data?.totalOfHarvest || 0,
     },
     {
       no: "5",
@@ -73,7 +73,7 @@ const Expense = ({ data }) => {
           {t("dashbord.cards.table.lt5")}
         </>
       ),
-      value: data?.totalOfCasualLabor,
+      value: data?.totalOfCasualLabor || 0,
     },
   ];
 
@@ -114,7 +114,7 @@ const Expense = ({ data }) => {
             minWidth: "90px",
             textAlign: "center",
           }}>
-          {formatCurrency(value || 0)}
+          {formatCurrency(Number(value) || 0)}
         </span>
       ),
     },
