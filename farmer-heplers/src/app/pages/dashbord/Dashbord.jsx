@@ -182,22 +182,62 @@ const DashBord = () => {
             <>
               <Card
                 title={
-                  <span style={{ color: "#4da3ff" }}>
+                  <span
+                    style={{
+                      color: "#F8FAFC",
+                      fontSize: "1.15rem",
+                      fontWeight: 700,
+                      letterSpacing: "0.5px",
+                    }}>
                     {t("dashbord.cards.card1title")}
                   </span>
                 }
                 style={{
                   width: "100%",
-                  backgroundColor: "#161d2f",
-                  marginTop: "20px",
-                  color: "#ffffff",
+                  marginTop: "24px",
+
+                  background:
+                    "linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03))",
+
+                  border: "1px solid rgba(255,255,255,.12)",
+
+                  borderRadius: "24px",
+
+                  backdropFilter: "blur(18px)",
+                  WebkitBackdropFilter: "blur(18px)",
+
+                  boxShadow:
+                    "0 12px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05)",
+
                   overflow: "hidden",
+
+                  color: "#fff",
+                }}
+                styles={{
+                  header: {
+                    background:
+                      "linear-gradient(90deg, rgba(59,130,246,.12), rgba(6,182,212,.10))",
+
+                    borderBottom: "1px solid rgba(255,255,255,.08)",
+
+                    minHeight: 65,
+                  },
+
+                  body: {
+                    padding: 20,
+                  },
                 }}>
                 <Expense data={dashbordData} />
               </Card>
               <Card
                 title={
-                  <span style={{ color: "#4da3ff" }}>
+                  <span
+                    style={{
+                      color: "#F8FAFC",
+                      fontSize: "1.15rem",
+                      fontWeight: 700,
+                      letterSpacing: ".5px",
+                    }}>
                     {t("dashbord.cards.card2title")}
                   </span>
                 }
@@ -205,27 +245,38 @@ const DashBord = () => {
                   overAllTotal > 0 ? (
                     <span
                       style={{
-                        color: "green",
-                        fontSize: "1.3rem",
-                        fontWeight: 600,
+                        background: "rgba(34,197,94,.15)",
+                        color: "#22c55e",
+                        padding: "8px 16px",
+                        borderRadius: "30px",
+                        fontWeight: 700,
+                        fontSize: "1rem",
+                        border: "1px solid rgba(34,197,94,.3)",
                       }}>
-                      Profit: {formatCurrency(overAllTotal)}
+                      📈 Profit : {formatCurrency(overAllTotal)}
                     </span>
                   ) : overAllTotal < 0 ? (
                     <span
                       style={{
-                        color: "red",
-                        fontSize: "1.3rem",
-                        fontWeight: 600,
+                        background: "rgba(239,68,68,.15)",
+                        color: "#ef4444",
+                        padding: "8px 16px",
+                        borderRadius: "30px",
+                        fontWeight: 700,
+                        fontSize: "1rem",
+                        border: "1px solid rgba(239,68,68,.3)",
                       }}>
-                      Loss: {formatCurrency(overAllTotal)}
+                      📉 Loss : {formatCurrency(overAllTotal)}
                     </span>
                   ) : (
                     <span
                       style={{
-                        color: "#fff",
-                        fontSize: "1.3rem",
-                        fontWeight: 600,
+                        background: "rgba(255,255,255,.08)",
+                        color: "#F8FAFC",
+                        padding: "8px 16px",
+                        borderRadius: "30px",
+                        fontWeight: 700,
+                        fontSize: "1rem",
                       }}>
                       {formatCurrency(0)}
                     </span>
@@ -234,16 +285,42 @@ const DashBord = () => {
                 style={{
                   width: "100%",
                   height: 600,
-                  backgroundColor: "#161d2f",
-                  marginTop: "20px",
-                  color: "#ffffff",
+                  marginTop: "24px",
+
+                  background:
+                    "linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.03))",
+
+                  border: "1px solid rgba(255,255,255,.12)",
+
+                  borderRadius: "24px",
+
+                  backdropFilter: "blur(18px)",
+                  WebkitBackdropFilter: "blur(18px)",
+
+                  boxShadow:
+                    "0 12px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05)",
+
                   overflow: "hidden",
+
+                  color: "#fff",
                 }}
                 styles={{
+                  header: {
+                    background:
+                      "linear-gradient(90deg, rgba(59,130,246,.12), rgba(6,182,212,.10))",
+
+                    borderBottom: "1px solid rgba(255,255,255,.08)",
+
+                    minHeight: 70,
+
+                    display: "flex",
+                    alignItems: "center",
+                  },
+
                   body: {
                     overflowX: "auto",
-                    width: "100%",
-                    height: "calc(600px-57px)",
+                    height: "calc(600px - 70px)",
+                    padding: 20,
                   },
                 }}>
                 <TurnoverGraph turnover={monthlyTotal} />
