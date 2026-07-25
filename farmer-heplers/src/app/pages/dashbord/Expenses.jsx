@@ -4,14 +4,6 @@ import { FaGasPump, FaUser } from "react-icons/fa";
 import { GiFarmTractor, GiPlantSeed } from "react-icons/gi";
 import { MdEngineering } from "react-icons/md";
 
-const formatCurrency = (amount) => {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 2,
-  }).format(amount);
-};
-
 const Expense = ({ data }) => {
   console.log("Expense table : ", data);
   const { t } = useAuth();
@@ -115,7 +107,7 @@ const Expense = ({ data }) => {
             minWidth: "90px",
             textAlign: "center",
           }}>
-          {formatCurrency(Number(value) || 0)}
+          {value}
         </span>
       ),
     },
@@ -186,7 +178,7 @@ const Expense = ({ data }) => {
                 fontWeight: 800,
                 fontSize: "20px",
               }}>
-              {formatCurrency(formattedTotal)}
+              {formattedTotal}
             </span>
           </div>
         )}
