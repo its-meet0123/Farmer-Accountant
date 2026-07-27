@@ -137,8 +137,8 @@ const AppLayout = ({ children }) => {
     width: "8px",
     height: "8px",
     borderRadius: "50%",
-    backgroundColor: season?.name ? "#10b981" : "#f59e0b", // Green if active, Amber if no season
-    boxShadow: season?.name ? "0 0 8px #10b981" : "0 0 8px #f59e0b",
+    backgroundColor: season?.isActive ? "#10b981" : "#f59e0b", // Green if active, Amber if no season
+    boxShadow: season?.isActive ? "0 0 8px #10b981" : "0 0 8px #f59e0b",
   };
 
   const contentStyle = {
