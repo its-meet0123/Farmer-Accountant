@@ -5,7 +5,6 @@ import { GiFarmTractor, GiPlantSeed } from "react-icons/gi";
 import { MdEngineering } from "react-icons/md";
 
 const Expense = ({ data }) => {
-  console.log("Expense table : ", data);
   const { t } = useAuth();
   const formattedTotal = data?.totalExpense || 0;
   const dataSource = [

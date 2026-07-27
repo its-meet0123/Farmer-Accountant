@@ -7,7 +7,14 @@ import {
   WarningOutlined,
 } from "@ant-design/icons";
 import { Card, Col, Row } from "antd";
-import { ArrowRight, HardHat, Pickaxe, Store, Truck } from "lucide-react";
+import {
+  ArrowRight,
+  HardHat,
+  Pickaxe,
+  Store,
+  Truck,
+  Wheat,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import { useState } from "react";
@@ -166,7 +173,7 @@ const DashbordInfo = () => {
             onMouseEnter={() => setHoveredIndex(0)}
             onMouseLeave={() => setHoveredIndex(null)}>
             <div style={getBadgeStyle("rgba(251, 191, 36, 0.15)", "#fbbf24")}>
-              <Store size={28} />
+              <Wheat size={28} />
             </div>
             <h3 style={cardTitleStyle()}>{t("infoDashboard.season.title")}</h3>
             <ul style={listStyle}>
