@@ -28,6 +28,7 @@ const AppLayout = ({ children }) => {
   const navigate = useNavigate();
   const [openType, setOpenType] = useState(null);
   const [pathname, setPathname] = useState(location.pathname);
+  const [seasonHovered, setSeasonHovered] = useState(false);
   const {
     token: { borderRadiusLG },
   } = theme.useToken();
@@ -77,77 +78,161 @@ const AppLayout = ({ children }) => {
       ? season?.year
       : `${startYear}-${String(endYear).slice(-2)}`;
 
+  //Styles
+
+  const layoutStyle = {
+    width: "100%",
+    minHeight: "100vh",
+    background: "#0f172a", // Dark modern backdrop
+    fontFamily: "'Segoe UI', Roboto, sans-serif",
+  };
+
+  const headerStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "0 24px",
+    background: "rgba(15, 23, 42, 0.85)", // Sleek Dark Glassmorphism
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
+    borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+    position: "sticky",
+    top: 0,
+    zIndex: 1000,
+    height: "68px",
+    gap: "16px",
+    flexWrap: "wrap",
+  };
+
+  const menuStyle = {
+    flex: 1,
+    minWidth: 0,
+    background: "transparent",
+    borderBottom: "none",
+    fontSize: "15px",
+    fontWeight: "500",
+  };
+
+  // Season Pill Badge Styles
+  const seasonBadgeStyle = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "6px 14px",
+    borderRadius: "20px",
+    background: seasonHovered
+      ? "rgba(56, 189, 248, 0.2)"
+      : "rgba(255, 255, 255, 0.06)",
+    border: "1px solid rgba(56, 189, 248, 0.3)",
+    color: "#f8fafc",
+    fontSize: "13px",
+    fontWeight: 500,
+    whiteSpace: "nowrap",
+    transition: "all 0.3s ease",
+    cursor: "default",
+    boxShadow: seasonHovered ? "0 0 12px rgba(56, 189, 248, 0.3)" : "none",
+  };
+
+  const activeDotStyle = {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    backgroundColor: season?.name ? "#10b981" : "#f59e0b", // Green if active, Amber if no season
+    boxShadow: season?.name ? "0 0 8px #10b981" : "0 0 8px #f59e0b",
+  };
+
+  const contentStyle = {
+    minHeight: "calc(100vh - 136px)",
+    padding: "24px",
+  };
+
+  const innerContentStyle = {
+    minHeight: 280,
+    borderRadius: borderRadiusLG || "16px",
+  };
+
   return (
-    <Layout style={{ width: "100%", minHeight: "100vh" }}>
-      <Header style={{ display: "flex", alignItems: "center" }}>
-        {authState.isLoggedIn && (
-          <Profile userName={authState.user.userName} screen={screen} />
+    <Layout style={layoutStyle}>
+      <Header style={headerStyle}>
+        {/* Profile Component */}
+        {authState?.isLoggedIn && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginRight: "12px",
+            }}>
+            <Profile userName={authState.user.userName} screen={screen} />
+          </div>
         )}
+
+        {/* Navigation Menu */}
         <Menu
           theme="dark"
           mode="horizontal"
           defaultSelectedKeys={["/"]}
           items={Menus}
-          style={{ flex: 1, minWidth: 0 }}
+          style={menuStyle}
           onClick={({ key }) => {
             openMenus(key);
           }}
         />
 
+        {/* Season Info Badge */}
         <div
-          style={{
-            marginLeft: "auto",
-            color: "#fff",
-            fontWeight: 500,
-            textAlign: "right",
-          }}>
-          {!season.name && "No Season"}
+          style={seasonBadgeStyle}
+          onMouseEnter={() => setSeasonHovered(true)}
+          onMouseLeave={() => setSeasonHovered(false)}>
+          <span style={activeDotStyle}></span>
+
+          {!season?.name && <span style={{ color: "#cbd5e1" }}>No Season</span>}
 
           {season?.name && season?.startDate && season?.endDate && (
-            <>
-              {/* Season Name (Rabi/Sauni) */}
-              {season?.name === "Rabi"
-                ? t("season.modal.sort")
-                : t("season.modal.sokt")}
-              {" ("}
-              {/* Start Date */}
-              {new Date(season?.startDate).toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-              })}
-              {" - "}
-              {/* End Date */}
-              {new Date(season?.endDate).toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "short",
-              })}
-              , {sessionYear}
-              {") "}
-            </>
+            <span>
+              <strong style={{ color: "#38bdf8", marginRight: "4px" }}>
+                {season?.name === "Rabi"
+                  ? t("season.modal.sort")
+                  : t("season.modal.sokt")}
+              </strong>
+              <span style={{ opacity: 0.9 }}>
+                (
+                {new Date(season?.startDate).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                })}
+                {" - "}
+                {new Date(season?.endDate).toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                })}
+                , {sessionYear})
+              </span>
+            </span>
           )}
         </div>
       </Header>
-      <Content
-        style={{
-          minHeight: "100vh",
-        }}>
-        <div
-          style={{
-            // background: colorBgContainer,
-            minHeight: 280,
-            // padding: 24,
-            borderRadius: borderRadiusLG,
-          }}>
-          {children}
-        </div>
+
+      {/* Main Page Content */}
+      <Content style={contentStyle}>
+        <div style={innerContentStyle}>{children}</div>
       </Content>
-      <Footer style={footerstyles.container}>
+
+      {/* Footer */}
+      <Footer
+        style={
+          footerstyles?.container || {
+            textAlign: "center",
+            background: "#0f172a",
+          }
+        }>
         <LayoutFooter t={t} />
       </Footer>
+
+      {/* User Action Modal */}
       <UserActionModel
         openType={openType}
         setOpenType={setOpenType}
-        user={authState.user}
+        user={authState?.user}
         goToSingUp={goToSingUp}
         t={t}
       />
