@@ -118,7 +118,7 @@ const AppLayout = ({ children }) => {
     display: "inline-flex",
     alignItems: "center",
     gap: "8px",
-    padding: "3px 14px",
+    padding: "2px 14px",
     borderRadius: "20px",
     background: seasonHovered
       ? "rgba(56, 189, 248, 0.2)"
