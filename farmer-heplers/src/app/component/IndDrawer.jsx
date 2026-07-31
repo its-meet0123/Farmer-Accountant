@@ -76,7 +76,8 @@ const IndDrawer = ({ open, form, setOpen, Id, setFetch, showSuccess, t }) => {
         }
         getContainer={false}
         placement="right"
-        size="large"
+        //size="large"
+        width={"100%"}
         onClose={onClose}
         open={open !== null}
         extra={
