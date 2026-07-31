@@ -143,7 +143,7 @@ const AppLayout = ({ children }) => {
 
   const contentStyle = {
     minHeight: "calc(100vh - 136px)",
-    padding: "24px",
+    padding: "15px",
   };
 
   const innerContentStyle = {
