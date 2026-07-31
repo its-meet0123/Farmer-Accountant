@@ -28,7 +28,8 @@ const WorkerDrawer = ({
     <>
       <Drawer
         title={t("workerDrawer.drawerTitle")}
-        size={450}
+        //size={450}
+        width={"100%"}
         placement="right"
         closable={false}
         onClose={onClose}

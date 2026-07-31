@@ -26,7 +26,8 @@ const HarvestDrawer = ({
         closable={{ "aria-label": "Close Button" }}
         onClose={onClose}
         open={openType !== null}
-        size="medium"
+        //size="medium"
+        width={"100%"}
         getContainer={false}>
         {(openType === "addDetail" || openType === "editDetail") && (
           <HarvesterDetailForm
