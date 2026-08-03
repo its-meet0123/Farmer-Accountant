@@ -29,6 +29,7 @@ const AppLayout = ({ children }) => {
   const [openType, setOpenType] = useState(null);
   const [pathname, setPathname] = useState(location.pathname);
   const [seasonHovered, setSeasonHovered] = useState(false);
+  const [activeSeasonBadgeColor, setActiveSeasonBadgeColor] = useState();
   const {
     token: { borderRadiusLG },
   } = theme.useToken();
@@ -51,7 +52,19 @@ const AppLayout = ({ children }) => {
 
   useEffect(() => {
     setPathname(location.pathname);
-  }, [location.pathname]);
+    const today = new Date();
+    const startDate = new Date(season?.startDate);
+    const endDate = new Date(season?.endDate);
+    if (startDate > today) {
+      setActiveSeasonBadgeColor("#f59e0b");
+    }
+    if (today >= startDate && today <= endDate) {
+      setActiveSeasonBadgeColor("#10b981");
+    }
+    if (today > endDate) {
+      setActiveSeasonBadgeColor("#f87171");
+    }
+  }, [location.pathname, season]);
 
   const openMenus = (key) => {
     if (
@@ -137,8 +150,8 @@ const AppLayout = ({ children }) => {
     width: "8px",
     height: "8px",
     borderRadius: "50%",
-    backgroundColor: season?.isActive ? "#10b981" : "#f59e0b", // Green if active, Amber if no season
-    boxShadow: season?.isActive ? "0 0 8px #10b981" : "0 0 8px #f59e0b",
+    backgroundColor: activeSeasonBadgeColor, // Green if active, Amber if no season
+    boxShadow: `0 0 8px ${activeSeasonBadgeColor}`,
   };
 
   const contentStyle = {

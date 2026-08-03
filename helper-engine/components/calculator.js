@@ -21,13 +21,13 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   start.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
 
-  console.log(
-    "data ke liye end date logic in calculation",
-    "start date : ",
-    start,
-    "end date : ",
-    today,
-  );
+  // console.log(
+  //   "data ke liye end date logic in calculation",
+  //   "start date : ",
+  //   start,
+  //   "end date : ",
+  //   today,
+  // );
 
   const diffTime = today.getTime() - start.getTime() + 1;
   const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
