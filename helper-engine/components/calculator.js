@@ -29,8 +29,9 @@ function calculateAutoInterst(amount, startDate, rate, endDate) {
   //   today,
   // );
 
-  const diffTime = today.getTime() - start.getTime() + 1;
-  const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffTime = today.getTime() - start.getTime();
+  const diffdays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const days = diffdays > 0 ? diffdays + 1 : 0;
 
   const months =
     (today.getFullYear() - start.getFullYear()) * 12 +
